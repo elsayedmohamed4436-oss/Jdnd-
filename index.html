@@ -50,7 +50,7 @@ body {
   position: relative;
 }
 
-/* Full Background Cover */
+/* Full Background Cover - Fixed */
 body::before {
   content: '';
   position: fixed;
@@ -1668,7 +1668,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-shadow: 0 0 6px rgba(229, 57, 53, 0.5);
 }
 
-/* Loading Screen */
+/* Loading Screen - New Design */
 #loadingScreen {
   position: fixed;
   inset: 0;
@@ -1693,11 +1693,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 #loadingScreen > * {
   position: relative;
   z-index: 1;
-}
-
-#loadingScreen.hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .ld-logo {
@@ -1728,52 +1723,63 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
 
+/* New Ice Progress Bar */
 .ld-bar-wrap {
+  width: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
 }
 
-.ld-segments {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.ld-seg {
-  width: 12px;
-  height: 36px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(229, 57, 53, 0.2);
-  transition: background 0.3s ease, border-color 0.3s, box-shadow 0.3s;
-  position: relative;
+.ice-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
   overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(229, 57, 53, 0.3);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.ld-seg.active {
-  background: linear-gradient(180deg, #FF6B6B, #E53935);
-  border-color: rgba(229, 57, 53, 0.8);
-  box-shadow: 0 0 10px rgba(229, 57, 53, 0.6);
+.ice-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #4DD0E1, #E53935, #FFD966);
+  border-radius: 20px;
+  position: relative;
+  transition: width 0.3s ease;
+  animation: iceGlow 1.5s ease-in-out infinite;
 }
 
-.ld-seg.active::after {
+@keyframes iceGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(229, 57, 53, 0.8), 0 0 8px rgba(77, 208, 225, 0.8); }
+}
+
+.ice-fill::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 6px 6px 0 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: iceSwipe 2s ease-in-out infinite;
+}
+
+@keyframes iceSwipe {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 .ld-pct {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--gift);
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
 }
 
 /* Modal */
@@ -1854,6 +1860,26 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
   100% {
     transform: translateY(-74px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Heavy Snow Effect */
+.heavy-snow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  font-size: 1.2rem;
+  animation: heavyFall linear forwards;
+}
+
+@keyframes heavyFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
     opacity: 0;
   }
 }
@@ -1997,11 +2023,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   <div class="ld-title">Santa Snow Factory</div>
   <div class="ld-sub" id="ldStatus">Loading...</div>
   <div class="ld-bar-wrap">
-    <div class="ld-segments" id="ldSegs">
-      <div class="ld-seg"></div><div class="ld-seg"></div><div class="ld-seg"></div>
-      <div class="ld-seg"></div><div class="ld-seg"></div><div class="ld-seg"></div>
-      <div class="ld-seg"></div><div class="ld-seg"></div><div class="ld-seg"></div>
-      <div class="ld-seg"></div>
+    <div class="ice-track">
+      <div class="ice-fill" id="iceFill"></div>
     </div>
     <div class="ld-pct" id="ldPct">0%</div>
   </div>
@@ -2343,7 +2366,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     </div>
     <div id="atBotHint" style="background: rgba(255, 193, 7, 0.07); border: 1px solid rgba(255, 193, 7, 0.22); border-radius: 10px; padding: 8px 12px; margin-bottom: 10px; font-size: 11px; color: #FFD740; font-weight: 600">
       ⚠️ <span data-i18n="taskBotHint">Add our bot as admin in your channel first:</span><br>
-      <span style="color: #fff; font-weight: 800; font-size: 13px; letter-spacing: 0.5px">@UfnpBot_bot</span>
+      <span style="color: #fff; font-weight: 800; font-size: 13px; letter-spacing: 0.5px">@SANTASNOWBOT_BOT</span>
     </div>
     <label class="flabel" data-i18n="taskLinkLabel">Telegram Link</label>
     <input type="text" id="atLink" class="finput" data-i18n-ph="taskLinkPh" placeholder="https://t.me/yourchannel">
@@ -2368,11 +2391,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 /* ============================================
-   SANTA SNOW FACTORY - Frontend
+   SANTA SNOW FACTORY - Frontend v5.0
+   Updated: Full background, referrals fixed, 
+   Russian language, heavy snow effects
    ============================================ */
 
 const CFG = {
-  API_URL: 'https://shy-forest-38b9.elsayedmohamed5848-c43.workers.dev',
+  API_URL: 'https://steep-mouse-f0d6.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
   RATE: 10,
   MIN_WD: 200,
@@ -2380,8 +2405,8 @@ const CFG = {
   TON_USD: 3.5,
   FREE_WD_LIMIT: 200,
   REF_BONUS: 20,
-  BOT_USERNAME: 'UfnpBot_bot',
-  BOT_APP_LINK: 'https://t.me/UfnpBot_bot/app',
+  BOT_USERNAME: 'SANTASNOWBOT_BOT',
+  BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/app',
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/7dc79778-482b-4e16-b413-d04ee51abaf9.png';
@@ -2542,6 +2567,23 @@ function updateStorageUI() {
   if (lvEl) lvEl.textContent = lv;
 }
 
+// Heavy snow effect for celebrations
+function triggerHeavySnow() {
+  for (let i = 0; i < 50; i++) {
+    setTimeout(() => {
+      const snow = document.createElement('div');
+      snow.classList.add('heavy-snow');
+      snow.innerHTML = '❄️';
+      snow.style.left = Math.random() * 100 + '%';
+      snow.style.fontSize = Math.random() * 20 + 10 + 'px';
+      snow.style.animationDuration = Math.random() * 2 + 1 + 's';
+      snow.style.animationDelay = Math.random() * 0.5 + 's';
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 3000);
+    }, i * 30);
+  }
+}
+
 async function collectSnow() {
   if (S._collectCooldown) return;
   const now = Date.now();
@@ -2555,6 +2597,7 @@ async function collectSnow() {
   S.user.totalEarned = (S.user.totalEarned || 0) + amt;
   S.storageProgress = 0;
   updateUI(); updateStorageUI(); spawnSnowParticle();
+  triggerHeavySnow(); // Celebrate with heavy snow
   showNotif(`+${fmt(amt)} Snow collected!`, 's');
   api('collect', { amount: amt }).catch(() => { });
 }
@@ -2604,6 +2647,7 @@ async function upgradeStorage() {
   api('upgradeStorage', { newLevel: lv + 1 }).catch(() => { });
   buildUpgradeContent();
   updateUI();
+  triggerHeavySnow(); // Celebrate upgrade
   showNotif(`✅ Storage → Level ${lv + 1}!`, 's');
 }
 
@@ -2672,6 +2716,7 @@ async function buyItem(id) {
   S.user.machines[id] = (S.user.machines[id] || 0) + q;
   S.user.miningRate = (S.user.miningRate || 0) + (it.power * q);
   updateUI();
+  triggerHeavySnow(); // Celebrate purchase
   showNotif(`✅ ${q}x ${esc(it.name)}! +${fmt(it.power * q)} Snow/hr`, 's');
   spawnSnowParticle();
 }
@@ -2750,6 +2795,7 @@ async function claimRefTask(id) {
     S.user.snow = (S.user.snow || 0) + t.snow;
     S.user.gifts = (S.user.gifts || 0) + t.gifts;
     updateUI(); renderTasks();
+    triggerHeavySnow(); // Celebrate task claim
     showNotif(`🎉 +${fmt(t.snow)} Snow +${t.gifts} Gifts`, 's');
     spawnSnowParticle();
   } finally { _taskInFlight.delete(id); }
@@ -2770,6 +2816,7 @@ async function doDbTask(tid, link, type, cat) {
       S.doneTasks.push(tid);
       if (r.snowAdded) S.user.snow = (S.user.snow || 0) + r.snowAdded;
       updateUI(); renderTasks();
+      triggerHeavySnow(); // Celebrate task completion
       showNotif(`🎉 +${fmt(r.snowAdded || 0)} Snow Task done!`, 's');
       spawnSnowParticle();
     } catch (e) {
@@ -2825,6 +2872,7 @@ async function submitAddTask() {
     st.style.color = 'var(--gift)';
     st.textContent = '✅ Task created!';
     updateUI();
+    triggerHeavySnow(); // Celebrate task creation
     setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
   } catch (e) { st.style.color = '#ff8a80'; st.textContent = `❌ ${e.message || 'Failed'}`; }
   finally { _submitInFlight = false; }
@@ -2865,6 +2913,7 @@ async function doExchange() {
     document.getElementById('swapFromAmt').value = '';
     document.getElementById('swapToAmt').textContent = '0';
     updateUI(); renderExchHist();
+    triggerHeavySnow(); // Celebrate exchange
     showNotif(`⚡ ${fmt(a)} Snow → ${fmt(gifts)} Gifts`, 's');
     spawnSnowParticle();
   } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
@@ -2936,6 +2985,7 @@ async function doWithdraw() {
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
     updWdPrev(); updateUI(); renderWdHist();
+    triggerHeavySnow(); // Celebrate withdrawal request
     showNotif(`✅ Withdrawal requested: ${fmt(amt)} Gifts`, 's');
   } catch (e) {
     const msg = e.message || '';
@@ -3087,6 +3137,7 @@ window.initiateDeposit = async function () {
     sd.querySelector('.txsi').innerHTML = '⏳';
     sd.querySelector('.txsm').innerHTML = 'Transaction sent!';
     document.getElementById('depositStatusDetail').textContent = 'Your balance will be added to your account within 3 minutes.';
+    triggerHeavySnow(); // Celebrate deposit
     showNotif('✅ Transaction sent! Balance will be credited within 3 minutes', 's');
     try { await api('deposit', { amount: amt, txHash: result.boc, comment }); } catch (_) { }
   } catch (e) {
@@ -3124,6 +3175,7 @@ function startDepVerify(depId, txHash) {
         sd.querySelector('.txsi').innerHTML = '✅';
         sd.querySelector('.txsm').innerHTML = 'Deposit confirmed!';
         document.getElementById('depositStatusDetail').textContent = `${r.amount} TON added`;
+        triggerHeavySnow(); // Celebrate deposit confirmation
         showNotif(`💰 ${r.amount} TON deposited!`, 's');
         S.user.hasDeposited = true;
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
@@ -3172,6 +3224,7 @@ function santaClick() {
   const p = document.getElementById('santaChar');
   if (p) { p.style.transition = 'transform .12s'; p.style.transform = 'scale(.86) rotate(9deg)'; setTimeout(() => { p.style.transform = ''; }, 220); }
   spawnSnowParticle();
+  triggerHeavySnow(); // Santa click celebration
 }
 
 function createSnowflake() {
@@ -3190,13 +3243,10 @@ function startSnowfall() {
   setInterval(createSnowflake, 300);
 }
 
+// New ice progress bar functions
 function ldProgress(pct, msg) {
-  const segs = document.querySelectorAll('#ldSegs .ld-seg');
-  const filled = Math.round((pct / 100) * segs.length);
-  segs.forEach((s, i) => {
-    if (i < filled) s.classList.add('active');
-    else s.classList.remove('active');
-  });
+  const fill = document.getElementById('iceFill');
+  if (fill) fill.style.width = pct + '%';
   const pctEl = document.getElementById('ldPct');
   if (pctEl) pctEl.textContent = Math.round(pct) + '%';
   const stat = document.getElementById('ldStatus');
@@ -3211,12 +3261,11 @@ function ldHide() {
 function ldError(msg) {
   const stat = document.getElementById('ldStatus');
   if (stat) { stat.textContent = msg; stat.style.color = '#ff8a80'; }
-  document.querySelectorAll('#ldSegs .ld-seg').forEach(s => {
-    s.classList.add('active');
-    s.style.background = 'linear-gradient(180deg,#ef5350,#b71c1c)';
-    s.style.borderColor = 'rgba(239,83,80,.8)';
-    s.style.boxShadow = '0 0 10px rgba(239,83,80,.6)';
-  });
+  const fill = document.getElementById('iceFill');
+  if (fill) {
+    fill.style.background = 'linear-gradient(90deg, #ef5350, #b71c1c)';
+    fill.style.animation = 'none';
+  }
   const pctEl = document.getElementById('ldPct');
   if (pctEl) { pctEl.textContent = 'Error'; pctEl.style.color = '#ff8a80'; }
 }
@@ -3231,7 +3280,7 @@ function preloadImages() {
 }
 
 function ldAnimateTo(targetPct, msg, duration = 600) {
-  const start = parseInt(document.getElementById('ldPct')?.textContent || '0');
+  const start = parseFloat(document.getElementById('iceFill')?.style.width) || 0;
   const steps = 30;
   const stepTime = duration / steps;
   let step = 0;
@@ -3358,6 +3407,27 @@ const TRANSLATIONS = {
     taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
   },
+  ru: {
+    labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
+    friendsTitle: 'Друзья и Рефералы', refProgTitle: 'Реферальная программа', refCommission: '20% комиссия когда друзья покупают на рынке!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями',
+    recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов', marketTitle: 'Рынок подарков',
+    labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
+    important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
+    amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
+    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountGifts: 'Сумма (Подарки)',
+    tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
+    swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 100 Снега = 10 Подарков',
+    exchangeNow: '⚡ Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
+    helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'При первой регистрации вы автоматически получаете:<br><span style="color:#fff;font-weight:800">• 200 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 100 Снега/день</span> — бесплатная мощность майнинга начинается сразу',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте машины на Рынке за <span style="color:var(--snow);font-weight:800">Снег</span><br>⬅ Машины автоматически производят Снег, который собирается в Хранилище<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎',
+    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--gift)">Целевые пользователи × 60 Подарков</strong>',
+    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Подарков', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
+    taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
+    taskLinkPh: 'https://t.me/ваш_канал', taskTargetLabel: 'Целевые пользователи (мин. 100)',
+    taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
+  },
 };
 
 function toggleLangMenu() {
@@ -3386,10 +3456,10 @@ function applyLang(lang, flag, code) {
   document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key] !== undefined) el.innerHTML = t[key]; });
   document.querySelectorAll('[data-i18n-ph]').forEach(el => { const key = el.dataset.i18nPh; if (t[key] !== undefined) el.placeholder = t[key]; });
   const navItems = document.querySelectorAll('.ni .ni-lbl');
-  const navKeys = ['navHome', 'navMarket', 'navTasks', 'navFriends', 'navWallet'];
+  const navKeys = ['Home', 'Market', 'Tasks', 'Friends', 'Wallet'];
   navItems.forEach((el, i) => { if (navKeys[i]) el.textContent = t[navKeys[i]]; });
   const ftabs = document.querySelectorAll('.wtab');
-  const ftabKeys = ['tabDeposit', 'tabWithdraw', 'tabExchange'];
+  const ftabKeys = ['💰 Deposit', '💸 Withdraw', '⚡ Exchange'];
   ftabs.forEach((el, i) => { if (ftabKeys[i]) el.textContent = t[ftabKeys[i]]; });
   document.querySelectorAll('.ttab[data-t]').forEach(el => {
     if (el.dataset.t === 'referral') el.innerHTML = '👥 ' + t.tabReferralTxt;
