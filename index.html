@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Santa Snow Factory 🎁</title>
+<title>Santa Snow Factory 🎅 | Santa Boxes</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -36,9 +36,9 @@
   --cyan: #26C6DA;
   --dark-blue: #0A1428;
   --mid-blue: #1A2A4A;
-  --bronze: #CD7F32;
+  --wood: #CD7F32;
   --silver: #C0C0C0;
-  --golden: #FFD700;
+  --ruby: #E0115F;
   --diamond: #B9F2FF;
 }
 
@@ -54,7 +54,6 @@ body {
   position: relative;
 }
 
-/* Full Background Cover - Fixed */
 .background-fixed {
   position: fixed;
   top: 0;
@@ -77,15 +76,17 @@ body::after {
 }
 
 /* Snowfall Animation */
-.snowflake, .heavy-snow {
+.snowflake, .box-snow {
   position: fixed;
   color: #fff;
   user-select: none;
   pointer-events: none;
   z-index: 999;
-  font-size: 1.5rem;
   animation: fall linear forwards;
 }
+
+.snowflake { font-size: 1.5rem; }
+.box-snow { font-size: 2rem; }
 
 @keyframes fall {
   0% {
@@ -96,6 +97,106 @@ body::after {
     transform: translateY(100vh) rotate(360deg);
     opacity: 0;
   }
+}
+
+/* Box Opening Animation */
+@keyframes boxPop {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes itemReveal {
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.box-open-animation {
+  animation: boxPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.item-reveal {
+  animation: itemReveal 0.4s ease-out forwards;
+}
+
+/* Welcome Box */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.5s ease;
+}
+
+.welcome-box-card {
+  background: linear-gradient(145deg, #1a2a3a, #0a1428);
+  border: 3px solid var(--gift);
+  border-radius: 40px;
+  padding: 30px 20px;
+  max-width: 90%;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(229, 57, 53, 0.5);
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.welcome-box-icon {
+  font-size: 80px;
+  animation: shake 0.8s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.welcome-box-icon:active {
+  transform: scale(0.9);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-5px) rotate(-5deg); }
+  75% { transform: translateY(5px) rotate(5deg); }
+}
+
+.welcome-box-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gift);
+  margin: 15px 0;
+}
+
+.welcome-box-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.welcome-box-btn {
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  border: none;
+  border-radius: 30px;
+  padding: 14px 28px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+  box-shadow: 0 0 20px var(--gift-glow);
+}
+
+.welcome-box-btn:active {
+  transform: scale(0.96);
 }
 
 button, input, select, textarea, span, div, p, h1, h2, h3, a {
@@ -123,134 +224,33 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
 }
 
-/* Welcome Box */
-.welcome-box {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
-  border-radius: 28px;
-  padding: 20px;
-  margin: 15px 0;
-  text-align: center;
-  cursor: pointer;
-  animation: boxGlow 2s ease-in-out infinite;
-  border: 2px solid var(--gold);
-  transition: transform 0.2s;
-}
-
-.welcome-box:active {
-  transform: scale(0.97);
-}
-
-@keyframes boxGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(229, 57, 53, 0.5); }
-  50% { box-shadow: 0 0 40px rgba(229, 57, 53, 0.9), 0 0 60px rgba(255, 217, 102, 0.3); }
-}
-
-.welcome-box-icon {
-  font-size: 80px;
-  animation: bounce 1s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Gift Boxes Market */
-.boxes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.box-card {
-  background: linear-gradient(135deg, var(--card), rgba(229, 57, 53, 0.15));
-  border: 2px solid var(--gift);
-  border-radius: 20px;
-  padding: 15px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  backdrop-filter: blur(10px);
-}
-
-.box-card:active {
-  transform: scale(0.96);
-}
-
-.box-card.bronze { border-color: var(--bronze); box-shadow: 0 0 15px rgba(205, 127, 50, 0.3); }
-.box-card.silver { border-color: var(--silver); box-shadow: 0 0 15px rgba(192, 192, 192, 0.3); }
-.box-card.gold { border-color: var(--golden); box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-.box-card.diamond { border-color: var(--diamond); box-shadow: 0 0 15px rgba(185, 242, 255, 0.4); }
-
-.box-icon {
-  font-size: 55px;
-  margin-bottom: 8px;
-}
-
-.box-name {
-  font-weight: 800;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.box-price {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--gold);
+/* Santa Character */
+.santa-wrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin: 8px 0;
+  padding: 10px 0 4px;
 }
 
-.box-guarantee {
-  font-size: 10px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  padding: 3px 8px;
-  display: inline-block;
-  margin-top: 5px;
+.santa-char {
+  font-size: 104px;
+  animation: santaFloat 3.2s ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.65));
 }
 
-/* Opening Animation */
-.box-open-animation {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  animation: openPop 0.5s ease-out forwards;
-  text-align: center;
-  pointer-events: none;
+@keyframes santaFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(1.5deg);
+  }
 }
 
-@keyframes openPop {
-  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
-}
-
-.reward-toast {
-  position: fixed;
-  bottom: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, #1a2a3a, #0a1428);
-  border: 2px solid var(--gold);
-  border-radius: 20px;
-  padding: 12px 24px;
-  z-index: 1000;
-  animation: toastUp 0.4s ease-out forwards;
-  text-align: center;
-  min-width: 250px;
-  backdrop-filter: blur(10px);
-}
-
-@keyframes toastUp {
-  0% { transform: translateX(-50%) translateY(100px); opacity: 0; }
-  100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+.santa-char:active {
+  transform: scale(0.86) rotate(9deg) !important;
 }
 
 /* Storage Tank */
@@ -391,6 +391,159 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   box-shadow: none;
 }
 
+/* Boxes Section */
+.boxes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.box-card {
+  background: linear-gradient(145deg, rgba(20, 30, 50, 0.9), rgba(10, 20, 35, 0.9));
+  border: 2px solid;
+  border-radius: 20px;
+  padding: 15px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.box-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.box-card:active {
+  transform: scale(0.96);
+}
+
+.box-card:active::before {
+  opacity: 1;
+}
+
+.box-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.box-name {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.box-price {
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.box-price img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Result Modal */
+.result-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(12px);
+}
+
+.result-card {
+  background: linear-gradient(145deg, #1a2a3a, #0a1428);
+  border: 3px solid var(--gold);
+  border-radius: 40px;
+  padding: 25px;
+  max-width: 90%;
+  width: 350px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.result-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.result-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.result-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.result-item-icon {
+  font-size: 36px;
+}
+
+.result-item-info {
+  flex: 1;
+  text-align: left;
+}
+
+.result-item-name {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.result-item-rarity {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.result-item-power {
+  font-size: 12px;
+  color: var(--snow);
+}
+
+.result-close {
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  border: none;
+  border-radius: 30px;
+  padding: 12px 24px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+}
+
 /* Cards */
 .team-card {
   background: var(--card);
@@ -454,7 +607,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/81bf344f-dbc1-41a9-bc52-0fc8cb0a07f1.png') center/contain no-repeat;
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/6dd8b258-c54d-4334-b8bc-48d1bfd1d672.png') center/contain no-repeat;
   z-index: 0;
   background-size: 100% 100%;
 }
@@ -591,31 +744,52 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border: 1px solid rgba(255, 217, 102, 0.4);
 }
 
-/* Box Opening Animation Container */
-#openingOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(8px);
-}
-
-#openingOverlay.active {
+/* Machines List (Inventory) */
+.machines-list {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.opening-content {
-  text-align: center;
-  animation: openBoxAnim 0.6s ease-out;
+.machine-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 11px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(6px);
 }
 
-@keyframes openBoxAnim {
-  0% { transform: scale(0); opacity: 0; }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); opacity: 1; }
+.machine-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.machine-info {
+  flex: 1;
+}
+
+.machine-name {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.machine-power {
+  font-size: 11px;
+  color: var(--snow);
+  font-weight: 700;
+}
+
+.machine-count {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gold);
+  background: rgba(255, 217, 102, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
 /* Tasks */
@@ -948,10 +1122,17 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   justify-content: center;
   box-shadow: 0 0 12px var(--gift-glow);
   transition: transform 0.2s;
+  animation: swapIdle 3s ease-in-out infinite;
+}
+
+@keyframes swapIdle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(15deg) scale(1.05); }
 }
 
 .swap-btn:active {
-  transform: rotate(180deg) scale(0.9);
+  animation: none !important;
+  transform: rotate(180deg) scale(0.9) !important;
 }
 
 .swap-rate {
@@ -1795,6 +1976,46 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
 }
 
+/* Heavy Snow Effect */
+.heavy-snow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  font-size: 1.2rem;
+  animation: heavyFall linear forwards;
+}
+
+@keyframes heavyFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Small Boxes Snow Effect */
+.box-snow-effect {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  font-size: 1.8rem;
+  animation: boxSnowFall 1.2s ease-out forwards;
+}
+
+@keyframes boxSnowFall {
+  0% {
+    transform: translateY(-10vh) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) scale(0.5) rotate(720deg);
+    opacity: 0;
+  }
+}
+
 /* Notification */
 #notif {
   position: fixed;
@@ -1888,6 +2109,33 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transform: scale(0.92);
 }
 
+/* Floating Add Task Button */
+#floatAddTask {
+  position: fixed;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 20px var(--gift-glow);
+  display: none;
+  align-items: center;
+  gap: 8px;
+  z-index: 150;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+#floatAddTask:active {
+  transform: translateX(-50%) scale(0.96);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 3px;
@@ -1959,16 +2207,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         </div>
       </div>
     </div>
-    
-    <!-- WELCOME BOX - Only shows if user hasn't claimed welcome gift -->
-    <div id="welcomeBoxContainer" style="display: none; margin-bottom: 15px;">
-      <div class="welcome-box" onclick="openWelcomeBox()">
-        <div class="welcome-box-icon">🎁✨</div>
-        <div style="font-size: 18px; font-weight: 800; margin: 8px 0;">Free Welcome Gift!</div>
-        <div style="font-size: 12px; opacity: 0.9;">Tap to open your first gift box</div>
-      </div>
-    </div>
-    
     <div class="hero-stats" style="margin-bottom: 12px">
       <div class="hero-stat-box">
         <div class="stat-lbl" data-i18n="statAccrued">Accrued</div>
@@ -1997,17 +2235,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
-<!-- GIFT BOXES (NEW MARKET) -->
-<div class="sec" id="sectionMarket">
-  <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" style="width: 38px; height: 38px; object-fit: contain"> <span data-i18n="marketTitle">Santa's Gift Boxes</span></div>
-  <div style="margin-bottom: 12px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 10px; text-align: center; font-size: 12px;">
-    🎁 <strong>Guaranteed Reward!</strong> Every 10th box of the same type gives a top-tier machine! 🎁
-  </div>
+<!-- BOXES SECTION (New - replaces Market) -->
+<div class="sec" id="sectionBoxes">
+  <div class="sec-title"><span>🎁</span> <span data-i18n="boxesTitle">Santa's Boxes</span></div>
   <div class="boxes-grid" id="boxesGrid"></div>
-  <div style="margin-top: 15px; background: var(--card); border-radius: 12px; padding: 12px;">
-    <div style="font-size: 12px; font-weight: 700; margin-bottom: 8px;">📊 Your Opening Stats</div>
-    <div id="boxStatsDisplay" style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px;"></div>
-  </div>
+  
+  <div class="sec-title" style="margin-top: 20px"><span>🏭</span> <span data-i18n="inventoryTitle">Your Machines</span></div>
+  <div class="machines-list" id="machinesList"></div>
 </div>
 
 <!-- FRIENDS -->
@@ -2016,7 +2250,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   <div class="ref-prog-card">
     <div class="ref-bonus-badge">
       <span class="rbb-pct">20%</span>
-      <span class="rbb-txt" data-i18n="refCommission">Commission when friends open Gift Boxes!</span>
+      <span class="rbb-txt" data-i18n="refCommission">Commission when friends buy boxes!</span>
     </div>
     <div class="ref-link-row">
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
@@ -2033,15 +2267,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
-<!-- TASKS (including Box Opening Tasks) -->
+<!-- TASKS -->
 <div class="sec" id="sectionTasks">
   <div class="task-tabs">
-    <div class="ttab active" data-t="boxes" onclick="switchTTab(this,'boxes')">🎁 <span data-i18n="tabBoxesTxt">Box Tasks</span></div>
-    <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">👥 <span data-i18n="tabReferralTxt">Referral</span></div>
+    <div class="ttab active" data-t="referral" onclick="switchTTab(this,'referral')">👥 <span data-i18n="tabReferralTxt">Referral</span></div>
     <div class="ttab" data-t="social" onclick="switchTTab(this,'social')">📢 <span data-i18n="tabSocialTxt">Social</span></div>
   </div>
-  <div class="tcont active" id="tcBoxes"><div id="boxTasksList"></div></div>
-  <div class="tcont" id="tcReferral"><div id="refTaskList"></div></div>
+  <div class="tcont active" id="tcReferral"><div id="refTaskList"></div></div>
   <div class="tcont" id="tcSocial">
     <div style="display: flex; gap: 6px; margin-bottom: 10px">
       <div class="ttab active" id="stab-partner" style="flex: 1; font-size: 11px" onclick="switchSocTab('partner')">⭐ Partner</div>
@@ -2051,6 +2283,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div id="socCommunityList" style="display: none; padding-bottom: 80px"></div>
   </div>
 </div>
+
+<!-- Floating Add Task Button -->
+<button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none; align-items: center; gap: 8px;">➕ <span data-i18n="floatAdd">Add Task</span></button>
 
 <!-- WALLET -->
 <div class="sec" id="sectionWallet">
@@ -2176,8 +2411,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png" style="width: 52px; height: 52px; object-fit: contain"></div>
     <div class="ni-lbl">Home</div>
   </div>
-  <div class="ni" data-s="sectionMarket" onclick="goNav(this)">
-    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" style="width: 52px; height: 52px; object-fit: contain"></div>
+  <div class="ni" data-s="sectionBoxes" onclick="goNav(this)">
+    <div class="ni-icon"><span style="font-size: 42px;">🎁</span></div>
     <div class="ni-lbl">Boxes</div>
   </div>
   <div class="ni" data-s="sectionTasks" onclick="goNav(this)">
@@ -2194,7 +2429,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </nav>
 
-<!-- HELP MODAL -->
+<!-- HELP MODAL (same as before) -->
 <div class="modal" id="helpModal">
   <div class="modal-box" style="max-height: 88vh; overflow-y: auto; padding: 0; border-radius: 22px 22px 0 0">
     <div style="position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, #0A1428, #0A1A2A); border-bottom: 1px solid rgba(229, 57, 53, 0.18); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 22px 22px 0 0">
@@ -2220,11 +2455,11 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 12px">
       <div style="background: linear-gradient(135deg, rgba(229, 57, 53, 0.08), rgba(0, 0, 0, 0.4)); border: 1px solid rgba(229, 57, 53, 0.25); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you first open the bot you get a free Gift Box!<br><span style="color: #fff; font-weight: 800">• Open it to get 200 Gifts</span><br><span style="color: #fff; font-weight: 800">• Plus a Starter Sleigh (12.5 Snow/hour)</span></div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you open the welcome box you receive:<br><span style="color: #fff; font-weight: 800">• 200 Gifts</span> — main withdrawal currency<br><span style="color: #fff; font-weight: 800">• 300 Snow/day</span> — free mining power starts immediately</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">🎁 Gift Box System</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">Buy and open Santa's Gift Boxes! 🎁<br>⬅ Each box gives you a random Mining Machine<br>⬅ Every 10th box guarantees a top-tier machine!<br>⬅ Complete Box Opening Tasks for extra Snow rewards</div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Santa Boxes with <span style="color: var(--gift); font-weight: 800">Gifts</span><br>⬅ Open boxes to get Mining Machines<br>⬅ Machines auto-produce Snow collected in the Storage<br>⬅ Convert Snow to <span style="color: var(--gift); font-weight: 800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎</div>
       </div>
     </div>
     <div style="height: 12px"></div>
@@ -2239,11 +2474,54 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<div class="modal" id="addTaskModal">
+  <div class="modal-box">
+    <div class="mhdr">
+      <div class="mtitle" data-i18n="addTaskTitle">➕ Add Community Task</div>
+      <button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="background: rgba(229, 57, 53, 0.08); border: 1px solid rgba(229, 57, 53, 0.2); border-radius: 12px; padding: 10px 13px; margin-bottom: 12px; font-size: 12px; color: var(--muted); font-weight: 600">
+      💡 <span data-i18n="taskCostFormula">Cost = <strong style="color: var(--gift)">Target Users × 60 Gifts</strong></span><br>
+      <span style="font-size: 11px" data-i18n="taskCostNote">Min target: 100 users | 100 users = 6,000 Gifts</span>
+    </div>
+    <div style="display: flex; gap: 7px; margin-bottom: 10px">
+      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex: 1; padding: 9px; border-radius: 10px; border: 2px solid var(--gift); background: rgba(229, 57, 53, 0.2); color: var(--gift); font-size: 13px; font-weight: 800; cursor: pointer">
+        📢 <span data-i18n="taskTypeChannel">Channel</span>
+      </button>
+      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex: 1; padding: 9px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 13px; font-weight: 800; cursor: pointer">
+        🤖 <span data-i18n="taskTypeBot">Bot</span>
+      </button>
+    </div>
+    <div id="atBotHint" style="background: rgba(255, 193, 7, 0.07); border: 1px solid rgba(255, 193, 7, 0.22); border-radius: 10px; padding: 8px 12px; margin-bottom: 10px; font-size: 11px; color: #FFD740; font-weight: 600">
+      ⚠️ <span data-i18n="taskBotHint">Add our bot as admin in your channel first:</span><br>
+      <span style="color: #fff; font-weight: 800; font-size: 13px; letter-spacing: 0.5px">@SANTASNOWBOT_BOT</span>
+    </div>
+    <label class="flabel" data-i18n="taskLinkLabel">Telegram Link</label>
+    <input type="text" id="atLink" class="finput" data-i18n-ph="taskLinkPh" placeholder="https://t.me/yourchannel">
+    <label class="flabel" data-i18n="taskTargetLabel">Target Users (min 100)</label>
+    <input type="number" id="atTarget" class="finput" placeholder="100" min="100" oninput="updAtCost()">
+    <div class="preset-row" style="margin-bottom: 10px">
+      <span class="prbtn" onclick="setAtTarget(100)">100</span>
+      <span class="prbtn" onclick="setAtTarget(500)">500</span>
+      <span class="prbtn" onclick="setAtTarget(1000)">1K</span>
+      <span class="prbtn" onclick="setAtTarget(5000)">5K</span>
+    </div>
+    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 10px 13px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center">
+      <span style="font-size: 12px; color: var(--muted); font-weight: 600" data-i18n="taskTotalCost">Total Cost:</span>
+      <span id="atCostPreview" style="font-size: 16px; font-weight: 800; color: var(--gift)">0 Gifts</span>
+    </div>
+    <button class="btn-prim" onclick="submitAddTask()" data-i18n="taskCreateBtn">✅ Create Task</button>
+    <div id="atStatus" style="margin-top: 8px; font-size: 12px; text-align: center; display: none"></div>
+  </div>
+</div>
+
 <div id="notif"></div>
 
 <script>
 /* ============================================
-   SANTA SNOW FACTORY - GIFT BOX SYSTEM v6.0
+   SANTA SNOW FACTORY - Frontend v6.0
+   NEW: Santa Boxes System instead of Market
+   Welcome Box with 200 Gifts + 300 Rate
    ============================================ */
 
 const CFG = {
@@ -2262,79 +2540,29 @@ const CFG = {
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/7dc79778-482b-4e16-b413-d04ee51abaf9.png';
 const GIFT_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a535f64f-3733-4c85-a8f0-e272daa0a4af.png';
 
-// GIFT BOXES CONFIGURATION
-const GIFT_BOXES = {
-  bronze: {
-    name: 'Bronze Gift Box',
-    price: 1000,
-    icon: '🥉',
-    color: 'bronze',
-    machines: [
-      { id: 'candy_cane', name: 'Candy Cane', minPower: 25, maxPower: 45, chance: 35 },
-      { id: 'snowflake', name: 'Snowflake', minPower: 50, maxPower: 70, chance: 30 },
-      { id: 'gift_box', name: 'Gift Box', minPower: 80, maxPower: 110, chance: 25 },
-      { id: 'sledge', name: 'Santa Sledge', minPower: 120, maxPower: 150, chance: 10 }
-    ],
-    guaranteedMachine: { id: 'sledge', name: 'Santa Sledge', minPower: 140, maxPower: 160 }
-  },
-  silver: {
-    name: 'Silver Gift Box',
-    price: 5000,
-    icon: '🥈',
-    color: 'silver',
-    machines: [
-      { id: 'snowflake', name: 'Snowflake', minPower: 70, maxPower: 100, chance: 30 },
-      { id: 'gift_box', name: 'Gift Box', minPower: 110, maxPower: 150, chance: 30 },
-      { id: 'sledge', name: 'Santa Sledge', minPower: 160, maxPower: 210, chance: 25 },
-      { id: 'reindeer', name: 'Flying Reindeer', minPower: 220, maxPower: 280, chance: 15 }
-    ],
-    guaranteedMachine: { id: 'reindeer', name: 'Flying Reindeer', minPower: 260, maxPower: 300 }
-  },
-  gold: {
-    name: 'Gold Gift Box',
-    price: 25000,
-    icon: '🏆',
-    color: 'gold',
-    machines: [
-      { id: 'gift_box', name: 'Gift Box', minPower: 150, maxPower: 210, chance: 30 },
-      { id: 'sledge', name: 'Santa Sledge', minPower: 220, maxPower: 290, chance: 30 },
-      { id: 'reindeer', name: 'Flying Reindeer', minPower: 300, maxPower: 380, chance: 25 },
-      { id: 'santa_workshop', name: 'Santa Workshop', minPower: 400, maxPower: 500, chance: 15 }
-    ],
-    guaranteedMachine: { id: 'santa_workshop', name: 'Santa Workshop', minPower: 480, maxPower: 520 }
-  },
-  diamond: {
-    name: 'Diamond Gift Box',
-    price: 125000,
-    icon: '💎',
-    color: 'diamond',
-    machines: [
-      { id: 'sledge', name: 'Santa Sledge', minPower: 300, maxPower: 400, chance: 25 },
-      { id: 'reindeer', name: 'Flying Reindeer', minPower: 410, maxPower: 520, chance: 30 },
-      { id: 'santa_workshop', name: 'Santa Workshop', minPower: 530, maxPower: 680, chance: 30 },
-      { id: 'magic_snow_engine', name: 'Magic Snow Engine', minPower: 700, maxPower: 900, chance: 15 }
-    ],
-    guaranteedMachine: { id: 'magic_snow_engine', name: 'Magic Snow Engine', minPower: 850, maxPower: 950 }
-  }
-};
-
-// Add new machine definitions
-const EXTRA_MACHINES = {
-  magic_snow_engine: { price: 0, power: 800, name: 'Magic Snow Engine' }
-};
-
-// BOX OPENING TASKS
-const BOX_TASKS = [
-  { id: 'box_10', boxesNeeded: 10, snowReward: 1000, giftsReward: 0 },
-  { id: 'box_25', boxesNeeded: 25, snowReward: 2500, giftsReward: 0 },
-  { id: 'box_50', boxesNeeded: 50, snowReward: 6000, giftsReward: 0 },
-  { id: 'box_100', boxesNeeded: 100, snowReward: 15000, giftsReward: 0 },
-  { id: 'box_250', boxesNeeded: 250, snowReward: 40000, giftsReward: 0 },
-  { id: 'box_500', boxesNeeded: 500, snowReward: 100000, giftsReward: 0 },
-  { id: 'box_1000', boxesNeeded: 1000, snowReward: 250000, giftsReward: 0 }
+// Boxes Data
+const BOXES = [
+  { id: 'wooden', name: 'Wooden Box', price: 500, icon: '📦', color: '#CD7F32', minItems: 1, maxItems: 2 },
+  { id: 'silver', name: 'Silver Box', price: 2500, icon: '🥈', color: '#C0C0C0', minItems: 1, maxItems: 3 },
+  { id: 'gold', name: 'Gold Box', price: 10000, icon: '🌟', color: '#FFD700', minItems: 2, maxItems: 4 },
+  { id: 'ruby', name: 'Ruby Box', price: 50000, icon: '🔴', color: '#E0115F', minItems: 3, maxItems: 5 },
+  { id: 'diamond', name: 'Diamond Box', price: 250000, icon: '💎', color: '#B9F2FF', minItems: 4, maxItems: 6 },
+  { id: 'santa_special', name: "Santa's Special", price: 1000000, icon: '🎅', color: '#FF4444', minItems: 5, maxItems: 8 },
 ];
 
-// REFERRAL TASKS
+// Machines Data (from server)
+const MACHINES = {
+  candy_cane: { name: "🍬 Candy Cane", power: 50, rarity: "common", icon: "🍬" },
+  snowflake: { name: "❄️ Snowflake", power: 200, rarity: "common", icon: "❄️" },
+  gift_box: { name: "🎁 Gift Box", power: 1200, rarity: "rare", icon: "🎁" },
+  sledge: { name: "🛷 Santa Sledge", power: 7500, rarity: "rare", icon: "🛷" },
+  reindeer: { name: "🦌 Flying Reindeer", power: 45000, rarity: "epic", icon: "🦌" },
+  santa_workshop: { name: "🏭 Santa Workshop", power: 110000, rarity: "legendary", icon: "🏭" },
+  ice_phoenix: { name: "🔥 Ice Phoenix", power: 250000, rarity: "mythic", icon: "🐦‍🔥" },
+  frost_dragon: { name: "🐉 Frost Dragon", power: 500000, rarity: "mythic", icon: "🐉" },
+  santa_throne: { name: "👑 Santa's Throne", power: 1200000, rarity: "divine", icon: "👑" },
+};
+
 const REF_TASKS = [
   { id: 'r1', n: 1, snow: 500, gifts: 2 },
   { id: 'r5', n: 5, snow: 2500, gifts: 10 },
@@ -2344,57 +2572,27 @@ const REF_TASKS = [
   { id: 'r70', n: 70, snow: 60000, gifts: 220 },
   { id: 'r100', n: 100, snow: 100000, gifts: 400 },
   { id: 'r200', n: 200, snow: 200000, gifts: 800 },
-  { id: 'r500', n: 500, snow: 500000, gifts: 2000 }
+  { id: 'r500', n: 500, snow: 500000, gifts: 2000 },
 ];
 
-// SOCIAL TASKS
 const SOC_TASKS = [
   { id: 'tg_payouts', name: 'Join Payouts Channel', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 1000 },
   { id: 'tg_news', name: 'Join News Channel', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 500 },
   { id: 'tg_ch', name: 'Join Telegram Channel', icon: '📢', link: 'https://t.me/SantaSnowChannel', snow: 1000 },
   { id: 'tg_grp', name: 'Join Telegram Group', icon: '👥', link: 'https://t.me/SantaSnowGroup', snow: 500 },
-  { id: 'tg_bot', name: 'Start our Bot', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 300 }
+  { id: 'tg_bot', name: 'Start our Bot', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 300 },
 ];
-
-const STORAGE_LVS = {
-  1: { cap: 300, upgCost: 500, label: 'Gift Box' },
-  2: { cap: 900, upgCost: 2000, label: 'Snow Pile' },
-  3: { cap: 2400, upgCost: 8000, label: 'Ice Block' },
-  4: { cap: 6000, upgCost: 25000, label: 'Snowman' },
-  5: { cap: 18000, upgCost: 80000, label: 'Ice Castle' },
-  6: { cap: 60000, upgCost: 250000, label: 'Frozen Palace' },
-  7: { cap: 120000, upgCost: 500000, label: 'North Pole' },
-  8: { cap: 210000, upgCost: 900000, label: 'Arctic Base' },
-  9: { cap: 330000, upgCost: 1500000, label: 'Glacier' },
-  10: { cap: 480000, upgCost: 2500000, label: 'Iceberg' },
-  11: { cap: 660000, upgCost: 4000000, label: 'Frost Zone' },
-  12: { cap: 870000, upgCost: 6000000, label: 'Blizzard' },
-  13: { cap: 1110000, upgCost: 9000000, label: 'Avalanche' },
-  14: { cap: 1380000, upgCost: 13000000, label: 'Crystal Cave' },
-  15: { cap: 1680000, upgCost: 18000000, label: 'Frozen Lake' },
-  16: { cap: 2010000, upgCost: 25000000, label: 'Ice Mountain' },
-  17: { cap: 2400000, upgCost: 33000000, label: 'Snow Peak' },
-  18: { cap: 2850000, upgCost: 43000000, label: 'Frost Giant' },
-  19: { cap: 3360000, upgCost: 55000000, label: 'Winter Realm' },
-  20: { cap: 3930000, upgCost: 70000000, label: 'Eternal Frost' },
-  21: { cap: 4560000, upgCost: 88000000, label: 'Ice Throne' },
-  22: { cap: 5250000, upgCost: 110000000, label: 'Frozen Kingdom' },
-  23: { cap: 6000000, upgCost: 135000000, label: 'Snow Empire' },
-  24: { cap: 6810000, upgCost: 165000000, label: 'Glacial Realm' },
-  25: { cap: 7680000, upgCost: 200000000, label: 'Crystal Kingdom' },
-  26: { cap: 8610000, upgCost: 240000000, label: 'Frost Heaven' },
-  27: { cap: 10000000, upgCost: 300000000, label: 'Santa\'s Realm' },
-};
 
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, gifts: 0, miningRate: 0, totalEarned: 0, machines: {}, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0, welcomeClaimed: false, boxesOpened: { bronze: 0, silver: 0, gold: 0, diamond: 0 } },
+  user: { snow: 0, gifts: 0, miningRate: 0, totalEarned: 0, machines: {}, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0, welcomeBoxOpened: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
   tg: null, tonUI: null, wallet: null, depCheckInt: null,
   _collectCooldown: false,
+  _boxInFlight: false,
 };
 
 let _lastClickTime = 0;
@@ -2431,13 +2629,231 @@ async function loadState() {
     S.doneTasks = d.completedTasks || [];
     S.tasks = d.tasks || { partner: [], community: [] };
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
-    if (d.user && d.user.boxesOpened) S.user.boxesOpened = d.user.boxesOpened;
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
+    
+    // Show welcome box if new user and box not opened
+    if (d.isNewUser === true && !S.user.welcomeBoxOpened) {
+      showWelcomeBox();
+    }
   } catch (e) { console.warn('loadState:', e.message); }
   updateUI();
   renderBoxes();
-  renderBoxTasks();
-  updateWelcomeBox();
+  renderMachines();
+}
+
+function showWelcomeBox() {
+  const overlay = document.createElement('div');
+  overlay.className = 'welcome-overlay';
+  overlay.id = 'welcomeOverlay';
+  overlay.innerHTML = `
+    <div class="welcome-box-card">
+      <div class="welcome-box-icon" id="welcomeBoxIcon">🎁</div>
+      <div class="welcome-box-title">🎅 Santa's Gift!</div>
+      <div class="welcome-box-desc">Open this special box to get your starter pack!</div>
+      <button class="welcome-box-btn" id="openWelcomeBoxBtn">Open Box →</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  
+  const boxIcon = document.getElementById('welcomeBoxIcon');
+  const openBtn = document.getElementById('openWelcomeBoxBtn');
+  
+  const openBox = async () => {
+    openBtn.disabled = true;
+    openBtn.textContent = 'Opening...';
+    boxIcon.style.animation = 'boxPop 0.5s ease';
+    
+    try {
+      const result = await api('openWelcomeBox', {});
+      S.user.gifts = result.rewards.gifts;
+      S.user.miningRate = result.rewards.miningRate;
+      S.user.welcomeBoxOpened = true;
+      
+      updateUI();
+      triggerHeavySnow(30);
+      spawnBoxSnowEffect();
+      
+      // Show rewards
+      boxIcon.innerHTML = '🎉';
+      openBtn.textContent = '🎁 +200 Gifts +300 Snow/day!';
+      
+      showNotif(`🎉 Welcome! +${result.rewards.gifts} Gifts and +${result.rewards.miningRate} Snow/day!`, 's');
+      
+      setTimeout(() => {
+        const overlayEl = document.getElementById('welcomeOverlay');
+        if (overlayEl) overlayEl.remove();
+      }, 2000);
+    } catch (e) {
+      openBtn.disabled = false;
+      openBtn.textContent = 'Try Again';
+      showNotif(`❌ Failed to open box: ${e.message}`, 'e');
+    }
+  };
+  
+  openBtn.onclick = openBox;
+  boxIcon.onclick = openBox;
+}
+
+function spawnBoxSnowEffect() {
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const boxSnow = document.createElement('div');
+      boxSnow.classList.add('box-snow-effect');
+      boxSnow.innerHTML = ['🎁', '🎄', '❄️', '🎅'][Math.floor(Math.random() * 4)];
+      boxSnow.style.left = Math.random() * 100 + '%';
+      boxSnow.style.fontSize = Math.random() * 30 + 20 + 'px';
+      boxSnow.style.animationDuration = Math.random() * 1 + 0.8 + 's';
+      document.body.appendChild(boxSnow);
+      setTimeout(() => boxSnow.remove(), 1200);
+    }, i * 50);
+  }
+}
+
+function renderBoxes() {
+  const grid = document.getElementById('boxesGrid');
+  if (!grid) return;
+  
+  grid.innerHTML = BOXES.map(box => `
+    <div class="box-card" style="border-color: ${box.color}" onclick="openBox('${box.id}')">
+      <div class="box-icon">${box.icon}</div>
+      <div class="box-name">${box.name}</div>
+      <div class="box-price">
+        <img src="${GIFT_IMG}" style="width: 20px; height: 20px; object-fit: contain">
+        ${box.price.toLocaleString()}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMachines() {
+  const container = document.getElementById('machinesList');
+  if (!container) return;
+  
+  const machines = S.user.machines || {};
+  const hasMachines = Object.keys(machines).length > 0;
+  
+  if (!hasMachines) {
+    container.innerHTML = `<div class="hist-empty">No machines yet. Open boxes to get mining machines! 🎁</div>`;
+    return;
+  }
+  
+  const sorted = Object.entries(machines)
+    .filter(([_, count]) => count > 0)
+    .sort((a, b) => {
+      const powerA = MACHINES[a[0]]?.power || 0;
+      const powerB = MACHINES[b[0]]?.power || 0;
+      return powerB - powerA;
+    });
+  
+  container.innerHTML = sorted.map(([id, count]) => {
+    const m = MACHINES[id];
+    if (!m) return '';
+    const rarityColor = {
+      common: '#aaa',
+      rare: '#4CAF50',
+      epic: '#9C27B0',
+      legendary: '#FF9800',
+      mythic: '#E91E63',
+      divine: '#FFD700'
+    }[m.rarity] || '#fff';
+    
+    return `
+      <div class="machine-item">
+        <div class="machine-icon">${m.icon}</div>
+        <div class="machine-info">
+          <div class="machine-name" style="color: ${rarityColor}">${m.name}</div>
+          <div class="machine-power">⚡ +${m.power} Snow/hour</div>
+        </div>
+        <div class="machine-count">x${count}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function openBox(boxId) {
+  const now = Date.now();
+  if (now - _lastClickTime < 2000) { showNotif('Please wait 2 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  if (S._boxInFlight) { showNotif('Opening box...', 'i'); return; }
+  
+  const box = BOXES.find(b => b.id === boxId);
+  if (!box) return;
+  
+  if ((S.user.gifts || 0) < box.price) {
+    showNotif(`Need ${box.price} Gifts!`, 'e');
+    return;
+  }
+  
+  S._boxInFlight = true;
+  
+  // Animate box opening
+  const boxCards = document.querySelectorAll('.box-card');
+  const targetCard = Array.from(boxCards).find(card => card.textContent.includes(box.name));
+  if (targetCard) {
+    targetCard.style.animation = 'boxPop 0.4s ease';
+    setTimeout(() => { if (targetCard) targetCard.style.animation = ''; }, 400);
+  }
+  
+  triggerHeavySnow(15);
+  spawnBoxSnowEffect();
+  
+  try {
+    const result = await api('openBox', { boxType: boxId });
+    
+    // Update user data
+    S.user.gifts = result.giftsLeft;
+    S.user.miningRate = result.miningRate;
+    
+    // Add machines to local
+    for (const item of result.rewards) {
+      S.user.machines = S.user.machines || {};
+      S.user.machines[item.id] = (S.user.machines[item.id] || 0) + 1;
+    }
+    
+    updateUI();
+    renderMachines();
+    
+    // Show result modal
+    showBoxResult(box, result.rewards);
+    
+    showNotif(result.message, 's');
+    
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to open box'}`, 'e');
+  } finally {
+    S._boxInFlight = false;
+  }
+}
+
+function showBoxResult(box, rewards) {
+  const modal = document.createElement('div');
+  modal.className = 'result-modal';
+  modal.innerHTML = `
+    <div class="result-card">
+      <div class="result-title">🎁 ${box.name} Opened!</div>
+      <div class="result-items">
+        ${rewards.map(r => `
+          <div class="result-item item-reveal">
+            <div class="result-item-icon">${r.icon}</div>
+            <div class="result-item-info">
+              <div class="result-item-name">${r.name}</div>
+              <div class="result-item-rarity">${r.rarity.toUpperCase()}</div>
+              <div class="result-item-power">⚡ +${r.power} Snow/hour</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <button class="result-close" onclick="this.closest('.result-modal').remove()">Awesome! 🎄</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  
+  // Add animation delays to items
+  const items = modal.querySelectorAll('.result-item');
+  items.forEach((item, i) => {
+    item.style.animationDelay = `${i * 0.1}s`;
+  });
 }
 
 function updateUI() {
@@ -2447,399 +2863,6 @@ function updateUI() {
   const rateDay = Math.round((u.miningRate || 0) * 24);
   document.getElementById('heroRateDay').textContent = fmt(rateDay);
   updateSwapBals();
-  updateBoxStatsDisplay();
-}
-
-function updateBoxStatsDisplay() {
-  const boxes = S.user.boxesOpened || { bronze: 0, silver: 0, gold: 0, diamond: 0 };
-  const el = document.getElementById('boxStatsDisplay');
-  if (el) {
-    el.innerHTML = `
-      <span>🥉 Bronze: ${boxes.bronze || 0}</span>
-      <span>🥈 Silver: ${boxes.silver || 0}</span>
-      <span>🏆 Gold: ${boxes.gold || 0}</span>
-      <span>💎 Diamond: ${boxes.diamond || 0}</span>
-    `;
-  }
-}
-
-function updateWelcomeBox() {
-  const container = document.getElementById('welcomeBoxContainer');
-  if (container && !S.user.welcomeClaimed) {
-    container.style.display = 'block';
-  } else if (container) {
-    container.style.display = 'none';
-  }
-}
-
-function renderBoxes() {
-  const grid = document.getElementById('boxesGrid');
-  if (!grid) return;
-  
-  grid.innerHTML = Object.entries(GIFT_BOXES).map(([key, box]) => `
-    <div class="box-card ${box.color}" onclick="openGiftBox('${key}')">
-      <div class="box-icon">${box.icon}</div>
-      <div class="box-name">${esc(box.name)}</div>
-      <div class="box-price">
-        <img src="${GIFT_IMG}" style="width: 18px; height: 18px; object-fit: contain"> ${fmt(box.price)} Gifts
-      </div>
-      <div class="box-guarantee">🎁 Every 10th box = Guaranteed Top Machine!</div>
-    </div>
-  `).join('');
-}
-
-async function openGiftBox(boxType) {
-  const now = Date.now();
-  if (now - _lastClickTime < 2000) { showNotif('Please wait 2 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  
-  const box = GIFT_BOXES[boxType];
-  if (!box) return;
-  
-  const currentGifts = S.user.gifts || 0;
-  if (currentGifts < box.price) {
-    showNotif(`❌ You need ${fmt(box.price)} Gifts to open this box!`, 'e');
-    return;
-  }
-  
-  // Deduct Gifts first
-  S.user.gifts -= box.price;
-  updateUI();
-  
-  // Show opening animation
-  showOpeningAnimation();
-  triggerHeavySnow();
-  
-  // Get current box count for this type
-  const currentCount = (S.user.boxesOpened?.[boxType] || 0);
-  const isGuaranteed = (currentCount + 1) % 10 === 0;
-  
-  let machine;
-  if (isGuaranteed) {
-    machine = box.guaranteedMachine;
-    showNotif(`✨ GUARANTEED REWARD! Opening your ${currentCount + 1}th box! ✨`, 's');
-  } else {
-    // Random machine based on chances
-    const rand = Math.random() * 100;
-    let cumulative = 0;
-    for (const m of box.machines) {
-      cumulative += m.chance;
-      if (rand <= cumulative) {
-        machine = m;
-        break;
-      }
-    }
-    if (!machine) machine = box.machines[0];
-  }
-  
-  // Calculate actual power (random between min and max)
-  const power = Math.floor(Math.random() * (machine.maxPower - machine.minPower + 1) + machine.minPower);
-  
-  // Add machine to user's inventory
-  const machineId = machine.id;
-  S.user.machines = S.user.machines || {};
-  S.user.machines[machineId] = (S.user.machines[machineId] || 0) + 1;
-  
-  // Update mining rate
-  S.user.miningRate = recalcRate(S.user.machines);
-  
-  // Update box count
-  S.user.boxesOpened = S.user.boxesOpened || { bronze: 0, silver: 0, gold: 0, diamond: 0 };
-  S.user.boxesOpened[boxType] = (S.user.boxesOpened[boxType] || 0) + 1;
-  
-  // Send to server
-  try {
-    await api('openGiftBox', { 
-      boxType, 
-      machineId, 
-      machinePower: power,
-      isGuaranteed,
-      boxCount: S.user.boxesOpened[boxType]
-    });
-  } catch (e) {
-    console.error('Failed to save box opening:', e);
-  }
-  
-  // Show reward toast
-  showRewardToast(machine.name, power);
-  
-  // Update UI
-  updateUI();
-  updateBoxStatsDisplay();
-  
-  // Check box opening tasks
-  checkBoxTasks();
-  
-  // Send referral commission if user has referrer
-  if (S.user.referredBy && box.price > 0) {
-    const commission = Math.floor(box.price * CFG.REF_BONUS / 100);
-    if (commission > 0) {
-      try {
-        await api('addReferralCommission', { toUserId: S.user.referredBy, amount: commission, fromAction: 'box_open' });
-      } catch (e) {}
-    }
-  }
-}
-
-function recalcRate(machines) {
-  const allMachines = { ...GIFT_BOXES, ...EXTRA_MACHINES };
-  let rate = 0;
-  for (const [id, count] of Object.entries(machines)) {
-    // Find machine power from boxes config
-    for (const box of Object.values(GIFT_BOXES)) {
-      const found = box.machines.find(m => m.id === id);
-      if (found) {
-        rate += (found.minPower + found.maxPower) / 2 * count;
-        break;
-      }
-      const foundGuaranteed = box.guaranteedMachine?.id === id;
-      if (foundGuaranteed) {
-        rate += (box.guaranteedMachine.minPower + box.guaranteedMachine.maxPower) / 2 * count;
-        break;
-      }
-    }
-    if (EXTRA_MACHINES[id]) {
-      rate += EXTRA_MACHINES[id].power * count;
-    }
-  }
-  // Add welcome machine if claimed
-  if (S.user.welcomeClaimed && S.user.machines?.starter_sleigh) {
-    rate += 12.5 * (S.user.machines.starter_sleigh || 0);
-  }
-  return rate;
-}
-
-async function openWelcomeBox() {
-  if (S.user.welcomeClaimed) {
-    showNotif('You already claimed your welcome gift!', 'w');
-    return;
-  }
-  
-  const now = Date.now();
-  if (now - _lastClickTime < 2000) { showNotif('Please wait 2 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  
-  showOpeningAnimation();
-  triggerHeavySnow();
-  
-  // Add welcome rewards
-  S.user.gifts = (S.user.gifts || 0) + 200;
-  S.user.machines = S.user.machines || {};
-  S.user.machines.starter_sleigh = (S.user.machines.starter_sleigh || 0) + 1;
-  S.user.miningRate = (S.user.miningRate || 0) + 12.5;
-  S.user.welcomeClaimed = true;
-  
-  // Send to server
-  try {
-    await api('claimWelcomeGift', {});
-  } catch (e) {
-    console.error('Failed to save welcome gift:', e);
-  }
-  
-  showRewardToast('Starter Sleigh + 200 Gifts', 12.5);
-  updateUI();
-  updateWelcomeBox();
-  
-  showNotif('🎁 Welcome! You received 200 Gifts and a Starter Sleigh (12.5 Snow/hour)!', 's');
-}
-
-function checkBoxTasks() {
-  const totalBoxes = Object.values(S.user.boxesOpened || {}).reduce((a, b) => a + b, 0);
-  for (const task of BOX_TASKS) {
-    if (!S.doneTasks.includes(task.id) && totalBoxes >= task.boxesNeeded) {
-      // Auto-claim task
-      claimBoxTask(task.id, task.snowReward);
-    }
-  }
-  renderBoxTasks();
-}
-
-async function claimBoxTask(taskId, snowReward) {
-  if (S.doneTasks.includes(taskId)) return;
-  
-  try {
-    await api('claimTask', { taskId });
-    S.doneTasks.push(taskId);
-    S.user.snow = (S.user.snow || 0) + snowReward;
-    updateUI();
-    showNotif(`🎉 +${fmt(snowReward)} Snow from Box Opening Milestone!`, 's');
-    triggerHeavySnow();
-  } catch (e) {
-    console.error('Failed to claim box task:', e);
-  }
-}
-
-function renderBoxTasks() {
-  const totalBoxes = Object.values(S.user.boxesOpened || {}).reduce((a, b) => a + b, 0);
-  const el = document.getElementById('boxTasksList');
-  if (!el) return;
-  
-  el.innerHTML = BOX_TASKS.map(task => {
-    const done = S.doneTasks.includes(task.id);
-    const canClaim = totalBoxes >= task.boxesNeeded && !done;
-    return `
-      <div class="task-item">
-        <div class="ticon">🎁</div>
-        <div class="tinfo">
-          <div class="tname">Open ${task.boxesNeeded} Gift Boxes</div>
-          <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> +${fmt(task.snowReward)} Snow</div>
-          <div class="tstat">Progress: ${totalBoxes}/${task.boxesNeeded} boxes</div>
-        </div>
-        ${done ? `<button class="tbtn done">✅ Done</button>` : 
-          canClaim ? `<button class="tbtn claim" onclick="claimBoxTaskManually('${task.id}', ${task.snowReward})">Claim</button>` :
-          `<button class="tbtn done" style="background: rgba(255,255,255,.05)">${totalBoxes}/${task.boxesNeeded}</button>`}
-      </div>
-    `;
-  }).join('');
-}
-
-async function claimBoxTaskManually(taskId, snowReward) {
-  const now = Date.now();
-  if (now - _lastClickTime < 2000) { showNotif('Please wait 2 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  
-  const totalBoxes = Object.values(S.user.boxesOpened || {}).reduce((a, b) => a + b, 0);
-  const task = BOX_TASKS.find(t => t.id === taskId);
-  if (!task || totalBoxes < task.boxesNeeded) {
-    showNotif('Not enough boxes opened yet!', 'e');
-    return;
-  }
-  if (S.doneTasks.includes(taskId)) {
-    showNotif('Task already claimed!', 'w');
-    return;
-  }
-  
-  try {
-    await api('claimTask', { taskId });
-    S.doneTasks.push(taskId);
-    S.user.snow = (S.user.snow || 0) + snowReward;
-    updateUI();
-    renderBoxTasks();
-    showNotif(`🎉 +${fmt(snowReward)} Snow!`, 's');
-    triggerHeavySnow();
-  } catch (e) {
-    showNotif(`❌ ${e.message}`, 'e');
-  }
-}
-
-function renderReferralTasks() {
-  const referralCount = S.user.referralCount || 0;
-  const el = document.getElementById('refTaskList');
-  if (!el) return;
-  
-  el.innerHTML = REF_TASKS.map(t => {
-    const done = S.doneTasks.includes(t.id);
-    const can = referralCount >= t.n && !done;
-    return `<div class="task-item">
-      <div class="ticon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 48px; height: 48px; object-fit: contain"></div>
-      <div class="tinfo">
-        <div class="tname">Invite ${t.n} Friend${t.n > 1 ? 's' : ''}</div>
-        <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(t.snow)} Snow + <img src="${GIFT_IMG}" style="width: 20px; height: 20px; object-fit: contain; vertical-align: middle; border-radius: 50%"> ${t.gifts} Gifts</div>
-        <div class="tstat">Progress: ${referralCount}/${t.n} friends</div>
-      </div>
-      ${done ? `<button class="tbtn done">✅ Done</button>` : can ? `<button class="tbtn claim" onclick="claimRefTask('${t.id}')">Claim</button>` : `<button class="tbtn done" style="background: rgba(255,255,255,.05)">${referralCount}/${t.n}</button>`}
-    </div>`;
-  }).join('');
-}
-
-async function claimRefTask(id) {
-  const now = Date.now();
-  if (now - _lastClickTime < 2000) { showNotif('Please wait 2 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  if (_taskInFlight.has(id)) return;
-  _taskInFlight.add(id);
-  try {
-    const t = REF_TASKS.find(x => x.id === id);
-    if (!t) return;
-    const result = await api('claimTask', { taskId: id });
-    S.doneTasks.push(id);
-    S.user.snow = (S.user.snow || 0) + (result.snow || t.snow);
-    S.user.gifts = (S.user.gifts || 0) + (result.gifts || t.gifts);
-    updateUI();
-    renderReferralTasks();
-    triggerHeavySnow();
-    showNotif(`🎉 +${fmt(t.snow)} Snow +${t.gifts} Gifts`, 's');
-    spawnSnowParticle();
-  } catch (e) {
-    showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
-  } finally { _taskInFlight.delete(id); }
-}
-
-function renderSocTasks() {
-  const p = S.tasks?.partner || [], c = S.tasks?.community || [];
-  const partnerEl = document.getElementById('socPartnerList');
-  const communityEl = document.getElementById('socCommunityList');
-  if (partnerEl) partnerEl.innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : `<div class="hist-empty">No partner tasks yet</div>`;
-  if (communityEl) communityEl.innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : `<div class="hist-empty">No community tasks yet</div>`;
-}
-
-function buildTaskCard(t, cat) {
-  const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
-  const icon = t.type === 'channel' ? '📢' : '🤖';
-  const name = esc(t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task')));
-  const snow = t.snowReward || 500;
-  const link = esc(t.link || '');
-  return `<div class="task-item">
-    <div class="ticon" style="font-size: 28px">${icon}</div>
-    <div class="tinfo">
-      <div class="tname">${name}</div>
-      <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(snow)} Snow</div>
-      ${t.completions !== undefined ? `<div class="tstat">${t.completions || 0}/${t.targetUsers || 0} completed</div>` : ''}
-    </div>
-    ${done ? `<button class="tbtn done">✅ Done</button>`
-      : inFlight ? `<button class="tbtn done" style="opacity: .6">⏳</button>`
-        : `<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type || 'bot'}','${cat}')">Go →</button>`}
-  </div>`;
-}
-
-let _socTab = 'partner';
-const _taskInFlight = new Set();
-
-function switchSocTab(tab) {
-  _socTab = tab;
-  const pBtn = document.getElementById('stab-partner');
-  const cBtn = document.getElementById('stab-community');
-  const pList = document.getElementById('socPartnerList');
-  const cList = document.getElementById('socCommunityList');
-  if (pBtn) pBtn.className = 'ttab' + (tab === 'partner' ? ' active' : '');
-  if (cBtn) cBtn.className = 'ttab' + (tab === 'community' ? ' active' : '');
-  if (pList) pList.style.display = tab === 'partner' ? 'block' : 'none';
-  if (cList) cList.style.display = tab === 'community' ? 'block' : 'none';
-}
-
-function switchTTab(el, t) {
-  document.querySelectorAll('.ttab').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.tcont').forEach(x => x.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(`tc${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('active');
-}
-
-async function doDbTask(tid, link, type, cat) {
-  const now = Date.now();
-  if (now - _lastClickTime < 2000) { showNotif('Please wait 2 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  if (_taskInFlight.has(tid)) { showNotif('⏳ Already processing...', 'w'); return; }
-  _taskInFlight.add(tid);
-  renderSocTasks();
-  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank', 'noopener');
-  showNotif('⏳ Verifying...', 'i');
-  setTimeout(async () => {
-    try {
-      const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
-      S.doneTasks.push(tid);
-      if (r.snowAdded) S.user.snow = (S.user.snow || 0) + r.snowAdded;
-      updateUI();
-      renderSocTasks();
-      triggerHeavySnow();
-      showNotif(`🎉 +${fmt(r.snowAdded || 0)} Snow Task done!`, 's');
-      spawnSnowParticle();
-    } catch (e) {
-      showNotif(`❌ ${e.message || 'Verification failed'}`, 'e');
-    } finally {
-      _taskInFlight.delete(tid);
-      renderSocTasks();
-    }
-  }, 3000);
 }
 
 function startStorage() {
@@ -2852,6 +2875,37 @@ function startStorage() {
     updateStorageUI();
   }, 1000);
 }
+
+// Storage Levels (same as before)
+const STORAGE_LVS = {
+  1: { cap: 300, upgCost: 500, label: 'Gift Box' },
+  2: { cap: 900, upgCost: 2000, label: 'Snow Pile' },
+  3: { cap: 2400, upgCost: 8000, label: 'Ice Block' },
+  4: { cap: 6000, upgCost: 25000, label: 'Snowman' },
+  5: { cap: 18000, upgCost: 80000, label: 'Ice Castle' },
+  6: { cap: 60000, upgCost: 250000, label: 'Frozen Palace' },
+  7: { cap: 120000, upgCost: 500000, label: 'North Pole' },
+  8: { cap: 210000, upgCost: 900000, label: 'Arctic Base' },
+  9: { cap: 330000, upgCost: 1500000, label: 'Glacier' },
+  10: { cap: 480000, upgCost: 2500000, label: 'Iceberg' },
+  11: { cap: 660000, upgCost: 4000000, label: 'Frost Zone' },
+  12: { cap: 870000, upgCost: 6000000, label: 'Blizzard' },
+  13: { cap: 1110000, upgCost: 9000000, label: 'Avalanche' },
+  14: { cap: 1380000, upgCost: 13000000, label: 'Crystal Cave' },
+  15: { cap: 1680000, upgCost: 18000000, label: 'Frozen Lake' },
+  16: { cap: 2010000, upgCost: 25000000, label: 'Ice Mountain' },
+  17: { cap: 2400000, upgCost: 33000000, label: 'Snow Peak' },
+  18: { cap: 2850000, upgCost: 43000000, label: 'Frost Giant' },
+  19: { cap: 3360000, upgCost: 55000000, label: 'Winter Realm' },
+  20: { cap: 3930000, upgCost: 70000000, label: 'Eternal Frost' },
+  21: { cap: 4560000, upgCost: 88000000, label: 'Ice Throne' },
+  22: { cap: 5250000, upgCost: 110000000, label: 'Frozen Kingdom' },
+  23: { cap: 6000000, upgCost: 135000000, label: 'Snow Empire' },
+  24: { cap: 6810000, upgCost: 165000000, label: 'Glacial Realm' },
+  25: { cap: 7680000, upgCost: 200000000, label: 'Crystal Kingdom' },
+  26: { cap: 8610000, upgCost: 240000000, label: 'Frost Heaven' },
+  27: { cap: 10000000, upgCost: 300000000, label: 'Santa\'s Realm' },
+};
 
 function updateStorageUI() {
   const u = S.user, lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1];
@@ -2871,6 +2925,22 @@ function updateStorageUI() {
   if (lvEl) lvEl.textContent = lv;
 }
 
+function triggerHeavySnow(count = 25) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const snow = document.createElement('div');
+      snow.classList.add('heavy-snow');
+      snow.innerHTML = ['❄️', '🎁', '🎄'][Math.floor(Math.random() * 3)];
+      snow.style.left = Math.random() * 100 + '%';
+      snow.style.fontSize = Math.random() * 20 + 10 + 'px';
+      snow.style.animationDuration = Math.random() * 2 + 1 + 's';
+      snow.style.animationDelay = Math.random() * 0.5 + 's';
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 3000);
+    }, i * 30);
+  }
+}
+
 async function collectSnow() {
   if (S._collectCooldown) return;
   const now = Date.now();
@@ -2884,7 +2954,7 @@ async function collectSnow() {
   S.user.totalEarned = (S.user.totalEarned || 0) + amt;
   S.storageProgress = 0;
   updateUI(); updateStorageUI(); spawnSnowParticle();
-  triggerHeavySnow();
+  triggerHeavySnow(20);
   showNotif(`+${fmt(amt)} Snow collected!`, 's');
   api('collect', { amount: amt }).catch(() => { });
 }
@@ -2934,7 +3004,7 @@ async function upgradeStorage() {
   api('upgradeStorage', { newLevel: lv + 1 }).catch(() => { });
   buildUpgradeContent();
   updateUI();
-  triggerHeavySnow();
+  triggerHeavySnow(15);
   showNotif(`✅ Storage → Level ${lv + 1}!`, 's');
 }
 
@@ -2943,40 +3013,126 @@ function goNav(el) {
   document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(el.dataset.s).classList.add('active');
+  hideFab();
 }
 
-function updateRefUI() {
-  const link = `${CFG.BOT_APP_LINK}?startapp=${encodeURIComponent(S.userId || '000')}`;
-  const inp = document.getElementById('refLinkInp');
-  if (inp) inp.value = link;
-  const uidEl = document.getElementById('depositUserIdDisplay');
-  if (uidEl) uidEl.textContent = esc(S.userId || '...');
-  const cntEl = document.getElementById('totalRefsDisp');
-  if (cntEl) cntEl.textContent = `${S.refs.length} Friends`;
-  const listEl = document.getElementById('recentRefsList');
-  if (listEl) {
-    if (!S.refs.length) {
-      listEl.innerHTML = `<div class="hist-empty">No referrals yet</div>`;
-    } else {
-      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
-        <div class="ref-list-item">
-          <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">` : '🎅'}</div>
-          <div class="rli-info">
-            <div class="rli-name">${esc(r.name || 'Friend')}</div>
-            <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
-          </div>
-          <div class="rli-earn">+${fmt(r.earned || 0)} <img src="${SNOW_IMG}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle"></div>
-        </div>`).join('');
+function hideFab() { const f = document.getElementById('floatAddTask'); if (f) f.style.display = 'none'; }
+function showFab() { const f = document.getElementById('floatAddTask'); if (f) f.style.display = 'flex'; }
+
+// Tasks functions (same as before)
+function switchSocTab(tab) {
+  _socTab = tab;
+  document.getElementById('stab-partner').className = 'ttab' + (tab === 'partner' ? ' active' : '');
+  document.getElementById('stab-community').className = 'ttab' + (tab === 'community' ? ' active' : '');
+  document.getElementById('socPartnerList').style.display = tab === 'partner' ? 'block' : 'none';
+  document.getElementById('socCommunityList').style.display = tab === 'community' ? 'block' : 'none';
+  if (tab === 'community') showFab(); else hideFab();
+}
+
+let _socTab = 'partner';
+const _taskInFlight = new Set();
+
+function buildTaskCard(t, cat) {
+  const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
+  const icon = t.type === 'channel' ? '📢' : '🤖';
+  const name = esc(t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task')));
+  const snow = t.snowReward || 500;
+  const link = esc(t.link || '');
+  return `<div class="task-item">
+    <div class="ticon" style="font-size: 28px">${icon}</div>
+    <div class="tinfo">
+      <div class="tname">${name}</div>
+      <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(snow)} Snow</div>
+      ${t.completions !== undefined ? `<div class="tstat">${t.completions || 0}/${t.targetUsers || 0} completed</div>` : ''}
+    </div>
+    ${done ? `<button class="tbtn done">✅ Done</button>`
+      : inFlight ? `<button class="tbtn done" style="opacity: .6">⏳</button>`
+        : `<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type || 'bot'}','${cat}')">Go →</button>`}
+  </div>`;
+}
+
+function renderSocTasks() {
+  const p = S.tasks?.partner || [], c = S.tasks?.community || [];
+  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : `<div class="hist-empty">No partner tasks yet</div>`;
+  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : `<div class="hist-empty">No community tasks yet</div>`;
+}
+
+function renderTasks() {
+  const referralCount = S.user.referralCount || 0;
+  document.getElementById('refTaskList').innerHTML = REF_TASKS.map(t => {
+    const done = S.doneTasks.includes(t.id);
+    const can = referralCount >= t.n && !done;
+    return `<div class="task-item">
+      <div class="ticon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 48px; height: 48px; object-fit: contain"></div>
+      <div class="tinfo">
+        <div class="tname">Invite ${t.n} Friend${t.n > 1 ? 's' : ''}</div>
+        <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(t.snow)} Snow + <img src="${GIFT_IMG}" style="width: 20px; height: 20px; object-fit: contain; vertical-align: middle; border-radius: 50%"> ${t.gifts} Gifts</div>
+        <div class="tstat">Progress: ${referralCount}/${t.n} friends</div>
+      </div>
+      ${done ? `<button class="tbtn done">✅ Done</button>` : can ? `<button class="tbtn claim" onclick="claimRefTask('${t.id}')">Claim</button>` : `<button class="tbtn done" style="background: rgba(255,255,255,.05)">${referralCount}/${t.n}</button>`}
+    </div>`;
+  }).join('');
+  renderSocTasks();
+}
+
+function switchTTab(el, t) {
+  document.querySelectorAll('.ttab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.tcont').forEach(x => x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(`tc${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('active');
+  hideFab();
+}
+
+async function claimRefTask(id) {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_taskInFlight.has(id)) return;
+  _taskInFlight.add(id);
+  try {
+    const t = REF_TASKS.find(x => x.id === id);
+    if (!t) return;
+    const result = await api('claimTask', { taskId: id });
+    S.doneTasks.push(id);
+    S.user.snow = result.snow || (S.user.snow + t.snow);
+    S.user.gifts = result.gifts || (S.user.gifts + t.gifts);
+    updateUI(); renderTasks();
+    triggerHeavySnow(15);
+    showNotif(`🎉 +${fmt(t.snow)} Snow +${t.gifts} Gifts`, 's');
+    spawnSnowParticle();
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
+  } finally { _taskInFlight.delete(id); }
+}
+
+async function doDbTask(tid, link, type, cat) {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_taskInFlight.has(tid)) { showNotif('⏳ Already processing...', 'w'); return; }
+  _taskInFlight.add(tid);
+  renderSocTasks();
+  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank', 'noopener');
+  showNotif('⏳ Verifying...', 'i');
+  setTimeout(async () => {
+    try {
+      const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
+      S.doneTasks.push(tid);
+      if (r.snowAdded) S.user.snow = (S.user.snow || 0) + r.snowAdded;
+      updateUI(); renderTasks();
+      triggerHeavySnow(15);
+      showNotif(`🎉 +${fmt(r.snowAdded || 0)} Snow Task done!`, 's');
+      spawnSnowParticle();
+    } catch (e) {
+      showNotif(`❌ ${e.message || 'Verification failed'}`, 'e');
+    } finally {
+      _taskInFlight.delete(tid);
+      renderSocTasks();
     }
-  }
+  }, 3000);
 }
 
-function copyRefLink() {
-  const v = document.getElementById('refLinkInp')?.value;
-  if (!v) return;
-  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp')?.select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
-}
-
+// Exchange functions
 function swapMax() {
   document.getElementById('swapFromAmt').value = Math.floor(S.user.snow || 0);
   updSwapCalc();
@@ -3012,7 +3168,7 @@ async function doExchange() {
     document.getElementById('swapFromAmt').value = '';
     document.getElementById('swapToAmt').textContent = '0';
     updateUI(); renderExchHist();
-    triggerHeavySnow();
+    triggerHeavySnow(15);
     showNotif(`⚡ ${fmt(a)} Snow → ${fmt(gifts)} Gifts`, 's');
     spawnSnowParticle();
   } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
@@ -3043,9 +3199,22 @@ function renderExchHist() {
   }).join('');
 }
 
+// Withdrawal functions
 function updWdPrev() {
   const a = parseFloat(document.getElementById('wdAmt').value) || 0;
   document.getElementById('wdTonVal').textContent = (a * CFG.TON_PER_GIFT).toFixed(4);
+}
+
+function goToTasksPartner() {
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  const tn = document.querySelector('.ni[data-s="sectionTasks"]');
+  if (tn) tn.classList.add('active');
+  document.getElementById('sectionTasks').classList.add('active');
+  const stab = document.querySelector('.ttab[data-t="social"]');
+  if (stab) switchTTab(stab, 'social');
+  switchSocTab('partner');
+  hideFab();
 }
 
 async function doWithdraw() {
@@ -3062,6 +3231,7 @@ async function doWithdraw() {
   const missingPartner = partnerTasks.filter(t => t.status === 'active' && !S.doneTasks.includes(t.id));
   if (missingPartner.length > 0) {
     showNotif(`❌ Complete all Partner tasks first (${missingPartner.length} remaining)`, 'e');
+    setTimeout(() => goToTasksPartner(), 5000);
     return;
   }
   try {
@@ -3071,11 +3241,14 @@ async function doWithdraw() {
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
     updWdPrev(); updateUI(); renderWdHist();
-    triggerHeavySnow();
+    triggerHeavySnow(15);
     showNotif(`✅ Withdrawal requested: ${fmt(amt)} Gifts`, 's');
   } catch (e) {
     const msg = e.message || '';
     showNotif(`❌ ${msg}`, 'e');
+    if (msg.includes('partner tasks') || msg.includes('PARTNER_TASKS')) {
+      setTimeout(() => goToTasksPartner(), 5000);
+    }
   }
 }
 
@@ -3102,7 +3275,46 @@ function switchWalletTab(el, t) {
   document.getElementById(`wt-${t}`).classList.add('active');
 }
 
-// TON Wallet Functions
+function goToWalletDeposit() {
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  const fn = document.querySelector('.ni[data-s="sectionWallet"]');
+  if (fn) fn.classList.add('active');
+  document.getElementById('sectionWallet').classList.add('active');
+  const dt = document.querySelector('.wtab[data-wt="deposit"]');
+  if (dt) switchWalletTab(dt, 'deposit');
+  document.getElementById('depositUserIdDisplay').textContent = S.userId || '???';
+}
+
+function updateRefUI() {
+  const link = `${CFG.BOT_APP_LINK}?startapp=${encodeURIComponent(S.userId || '000')}`;
+  document.getElementById('refLinkInp').value = link;
+  document.getElementById('depositUserIdDisplay').textContent = esc(S.userId || '...');
+  const cntEl = document.getElementById('totalRefsDisp');
+  if (cntEl) cntEl.textContent = `${S.refs.length} Friends`;
+  const listEl = document.getElementById('recentRefsList');
+  if (listEl) {
+    if (!S.refs.length) {
+      listEl.innerHTML = `<div class="hist-empty">No referrals yet</div>`;
+    } else {
+      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
+        <div class="ref-list-item">
+          <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">` : '🎅'}</div>
+          <div class="rli-info">
+            <div class="rli-name">${esc(r.name || 'Friend')}</div>
+            <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
+          </div>
+          <div class="rli-earn">+${fmt(r.earned || 0)} <img src="${SNOW_IMG}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle"></div>
+        </div>`).join('');
+    }
+  }
+}
+
+function copyRefLink() {
+  const v = document.getElementById('refLinkInp').value;
+  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
+}
+
 const TON_TO_SNOW = 10000;
 function setDepAmt(v) { document.getElementById('depositAmountInput').value = Math.max(1, v); updDepPreview(); }
 function updDepPreview() {
@@ -3128,22 +3340,18 @@ async function initTON() {
 function onWConn(w) {
   S.wallet = { address: w.account.address, chain: w.account.chain, appName: w.device.appName };
   const sh = `${S.wallet.address.substring(0, 6)}...${S.wallet.address.slice(-4)}`;
-  const addrEl = document.getElementById('walletAddressDisplay');
-  const connBtn = document.getElementById('connectWalletBtn');
-  const depBtn = document.getElementById('submitDepositBtn');
-  if (addrEl) addrEl.textContent = `${sh} · ${S.wallet.appName}`;
-  if (connBtn) { connBtn.innerHTML = '<i class="fas fa-unlink"></i> Disconnect'; connBtn.onclick = disconnectWallet; }
-  if (depBtn) depBtn.disabled = false;
+  document.getElementById('walletAddressDisplay').textContent = `${sh} · ${S.wallet.appName}`;
+  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-unlink"></i> Disconnect';
+  document.getElementById('connectWalletBtn').onclick = disconnectWallet;
+  document.getElementById('submitDepositBtn').disabled = false;
 }
 
 function onWDisc() {
   S.wallet = null;
-  const addrEl = document.getElementById('walletAddressDisplay');
-  const connBtn = document.getElementById('connectWalletBtn');
-  const depBtn = document.getElementById('submitDepositBtn');
-  if (addrEl) addrEl.textContent = 'Not connected';
-  if (connBtn) { connBtn.innerHTML = '<i class="fas fa-plug"></i> Connect'; connBtn.onclick = connectWallet; }
-  if (depBtn) depBtn.disabled = true;
+  document.getElementById('walletAddressDisplay').textContent = 'Not connected';
+  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-plug"></i> Connect';
+  document.getElementById('connectWalletBtn').onclick = connectWallet;
+  document.getElementById('submitDepositBtn').disabled = true;
 }
 
 async function connectWallet() { if (S.tonUI) await S.tonUI.openModal(); }
@@ -3169,29 +3377,19 @@ window.initiateDeposit = async function () {
     const tx = { validUntil: Math.floor(Date.now() / 1000) + 600, messages: [{ address: CFG.DEPOSIT_WALLET, amount: nano, payload }] };
     const result = await S.tonUI.sendTransaction(tx);
     const sd = document.getElementById('depositStatus');
-    if (sd) {
-      sd.classList.add('visible');
-      const si = sd.querySelector('.txsi');
-      const sm = sd.querySelector('.txsm');
-      const sdDetail = document.getElementById('depositStatusDetail');
-      if (si) si.innerHTML = '⏳';
-      if (sm) sm.innerHTML = 'Transaction sent!';
-      if (sdDetail) sdDetail.textContent = 'Your balance will be added to your account within 3 minutes.';
-    }
-    triggerHeavySnow();
+    sd.classList.add('visible');
+    sd.querySelector('.txsi').innerHTML = '⏳';
+    sd.querySelector('.txsm').innerHTML = 'Transaction sent!';
+    document.getElementById('depositStatusDetail').textContent = 'Your balance will be added to your account within 3 minutes.';
+    triggerHeavySnow(15);
     showNotif('✅ Transaction sent! Balance will be credited within 3 minutes', 's');
     try { await api('deposit', { amount: amt, txHash: result.boc, comment }); } catch (_) { }
   } catch (e) {
     const sd = document.getElementById('depositStatus');
-    if (sd) {
-      sd.classList.add('visible');
-      const si = sd.querySelector('.txsi');
-      const sm = sd.querySelector('.txsm');
-      const sdDetail = document.getElementById('depositStatusDetail');
-      if (si) si.innerHTML = '❌';
-      if (sm) sm.innerHTML = e.message?.includes('rejected') ? 'Transaction rejected' : 'Transaction failed';
-      if (sdDetail) sdDetail.textContent = e.message || 'Please try again';
-    }
+    sd.classList.add('visible');
+    sd.querySelector('.txsi').innerHTML = '❌';
+    sd.querySelector('.txsm').innerHTML = e.message?.includes('rejected') ? 'Transaction rejected' : 'Transaction failed';
+    document.getElementById('depositStatusDetail').textContent = e.message || 'Please try again';
   }
 };
 
@@ -3206,99 +3404,18 @@ function startDepVerify(depId, txHash) {
       if (r.status === 'completed') {
         clearInterval(S.depCheckInt);
         const sd = document.getElementById('depositStatus');
-        if (sd) {
-          const si = sd.querySelector('.txsi');
-          const sm = sd.querySelector('.txsm');
-          const sdDetail = document.getElementById('depositStatusDetail');
-          if (si) si.innerHTML = '✅';
-          if (sm) sm.innerHTML = 'Deposit confirmed!';
-          if (sdDetail) sdDetail.textContent = `${r.amount} TON added`;
-        }
-        triggerHeavySnow();
+        sd.querySelector('.txsi').innerHTML = '✅';
+        sd.querySelector('.txsm').innerHTML = 'Deposit confirmed!';
+        document.getElementById('depositStatusDetail').textContent = `${r.amount} TON added`;
+        triggerHeavySnow(15);
         showNotif(`💰 ${r.amount} TON deposited!`, 's');
         S.user.hasDeposited = true;
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
         loadState();
-        setTimeout(() => { if (sd) sd.classList.remove('visible'); }, 3000);
+        setTimeout(() => sd.classList.remove('visible'), 3000);
       }
     } catch (e) { if (attempts >= 18) clearInterval(S.depCheckInt); }
   }, 10000);
-}
-
-// Effects
-function triggerHeavySnow() {
-  for (let i = 0; i < 80; i++) {
-    setTimeout(() => {
-      const snow = document.createElement('div');
-      snow.classList.add('heavy-snow');
-      snow.innerHTML = '🎁';
-      snow.style.left = Math.random() * 100 + '%';
-      snow.style.fontSize = Math.random() * 24 + 12 + 'px';
-      snow.style.animationDuration = Math.random() * 2 + 1 + 's';
-      snow.style.animationDelay = Math.random() * 0.5 + 's';
-      document.body.appendChild(snow);
-      setTimeout(() => snow.remove(), 3000);
-    }, i * 20);
-  }
-}
-
-function showOpeningAnimation() {
-  const overlay = document.createElement('div');
-  overlay.id = 'openingOverlayTemp';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);';
-  const content = document.createElement('div');
-  content.style.cssText = 'text-align:center;animation:openBoxAnim 0.5s ease-out;font-size:80px;';
-  content.innerHTML = '🎁✨';
-  overlay.appendChild(content);
-  document.body.appendChild(overlay);
-  setTimeout(() => overlay.remove(), 600);
-}
-
-function showRewardToast(machineName, power) {
-  const toast = document.createElement('div');
-  toast.className = 'reward-toast';
-  toast.innerHTML = `
-    <div style="font-size: 18px; margin-bottom: 5px;">🎁 GIFT OPENED! 🎁</div>
-    <div style="font-size: 16px; font-weight: 800; color: var(--gold);">+ ${esc(machineName)}</div>
-    <div style="font-size: 12px;">+${power} Snow/hour!</div>
-  `;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
-}
-
-function spawnSnowParticle() {
-  const p = document.createElement('img');
-  p.src = SNOW_IMG;
-  p.className = 'ptc';
-  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain; font-size: 0`;
-  document.body.appendChild(p);
-  setTimeout(() => p.remove(), 960);
-}
-
-function santaClick() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  const p = document.getElementById('santaChar');
-  if (p) { p.style.transition = 'transform .12s'; p.style.transform = 'scale(.86) rotate(9deg)'; setTimeout(() => { p.style.transform = ''; }, 220); }
-  spawnSnowParticle();
-  triggerHeavySnow();
-}
-
-function createSnowflake() {
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  snowflake.innerHTML = '❄️';
-  snowflake.style.left = Math.random() * 100 + '%';
-  snowflake.style.fontSize = Math.random() * 20 + 10 + 'px';
-  snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-  snowflake.style.animationDelay = Math.random() * 5 + 's';
-  document.body.appendChild(snowflake);
-  setTimeout(() => snowflake.remove(), 5000);
-}
-
-function startSnowfall() {
-  setInterval(createSnowflake, 300);
 }
 
 function openModal(id) {
@@ -3323,78 +3440,41 @@ function showNotif(msg, type = 'i') {
   clearTimeout(_nt); _nt = setTimeout(() => el.classList.remove('show'), 3200);
 }
 
-// Translations
-const TRANSLATIONS = {
-  en: {
-    labelGifts: 'Gifts', labelSnow: 'Snow', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '20% commission when friends open Gift Boxes!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends',
-    recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet', marketTitle: "Santa's Gift Boxes",
-    labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
-    important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
-    amountTON: 'Amount (TON)', rateLabel: 'Rate:', youWillReceive: 'You will receive:', depositBtn: 'Deposit TON',
-    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountGifts: 'Amount (Gifts)',
-    tonValue: 'TON Value', withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
-    swapFrom: 'FROM', swapTo: 'TO', balance: 'Balance:', maxBtn: 'MAX', swapRate: '📊 100 Snow = 10 Gifts',
-    exchangeNow: '⚡ Exchange Now', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
-    helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
-    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'When you first open the bot you get a free Gift Box!<br><span style="color:#fff;font-weight:800">• Open it to get 200 Gifts</span><br><span style="color:#fff;font-weight:800">• Plus a Starter Sleigh (12.5 Snow/hour)</span>',
-    helpIdeaTitle: '🎁 Gift Box System', helpIdeaBody: 'Buy and open Santa\'s Gift Boxes! 🎁<br>⬅ Each box gives you a random Mining Machine<br>⬅ Every 10th box guarantees a top-tier machine!<br>⬅ Complete Box Opening Tasks for extra Snow rewards',
-    upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social', tabBoxesTxt: 'Box Tasks',
-    Home: 'Home', Boxes: 'Boxes', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
-  },
-  ru: {
-    labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: '20% комиссия когда друзья открывают Подарочные Коробки!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями',
-    recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов', marketTitle: 'Подарочные Коробки Санты',
-    labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
-    important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
-    amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
-    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountGifts: 'Сумма (Подарки)',
-    tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
-    swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 100 Снега = 10 Подарков',
-    exchangeNow: '⚡ Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
-    helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
-    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'При первом открытии бота вы получаете бесплатную Подарочную Коробку!<br><span style="color:#fff;font-weight:800">• Откройте её чтобы получить 200 Подарков</span><br><span style="color:#fff;font-weight:800">• Плюс Starter Sleigh (12.5 Снега/час)</span>',
-    helpIdeaTitle: '🎁 Система Подарочных Коробок', helpIdeaBody: 'Покупайте и открывайте Подарочные Коробки Санты! 🎁<br>⬅ Каждая коробка дает случайную Майнинг Машину<br>⬅ Каждая 10-я коробка гарантирует топовую машину!<br>⬅ Выполняйте задания на открытие коробок для дополнительного Снега',
-    upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети', tabBoxesTxt: 'Задания Коробок',
-    Home: 'Главная', Boxes: 'Коробки', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
-  },
-};
-
-function toggleLangMenu() {
-  const m = document.getElementById('langMenu');
-  if (m) m.style.display = m.style.display === 'none' ? 'block' : 'none';
-}
-function setLang(lang, flag, code) {
-  localStorage.setItem('santaLang', lang);
-  applyLang(lang, flag, code);
-  const menu = document.getElementById('langMenu');
-  if (menu) menu.style.display = 'none';
-}
-function applyLang(lang, flag, code) {
-  const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-  const flagEl = document.getElementById('langFlag');
-  const codeEl = document.getElementById('langCode');
-  if (flagEl) flagEl.textContent = flag;
-  if (codeEl) codeEl.textContent = code;
-  document.querySelectorAll('.lang-opt').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
-  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key] !== undefined) el.innerHTML = t[key]; });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const key = el.dataset.i18nPh; if (t[key] !== undefined) el.placeholder = t[key]; });
-  const navItems = document.querySelectorAll('.ni .ni-lbl');
-  const navKeys = ['Home', 'Boxes', 'Tasks', 'Friends', 'Wallet'];
-  navItems.forEach((el, i) => { if (navKeys[i] && t[navKeys[i]]) el.textContent = t[navKeys[i]]; });
-  const ftabs = document.querySelectorAll('.wtab');
-  const ftabKeys = ['💰 Deposit', '💸 Withdraw', '⚡ Exchange'];
-  ftabs.forEach((el, i) => { if (ftabKeys[i]) el.textContent = ftabKeys[i]; });
-  const tabs = document.querySelectorAll('.ttab');
-  if (tabs[0]) tabs[0].innerHTML = '🎁 ' + t.tabBoxesTxt;
-  if (tabs[1]) tabs[1].innerHTML = '👥 ' + t.tabReferralTxt;
-  if (tabs[2]) tabs[2].innerHTML = '📢 ' + t.tabSocialTxt;
+function spawnSnowParticle() {
+  const p = document.createElement('img');
+  p.src = SNOW_IMG;
+  p.className = 'ptc';
+  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain; font-size: 0`;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 960);
 }
 
-// Loading Animation
+function santaClick() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const p = document.getElementById('santaChar');
+  if (p) { p.style.transition = 'transform .12s'; p.style.transform = 'scale(.86) rotate(9deg)'; setTimeout(() => { p.style.transform = ''; }, 220); }
+  spawnSnowParticle();
+  triggerHeavySnow(10);
+}
+
+function createSnowflake() {
+  const snowflake = document.createElement('div');
+  snowflake.classList.add('snowflake');
+  snowflake.innerHTML = '❄️';
+  snowflake.style.left = Math.random() * 100 + '%';
+  snowflake.style.fontSize = Math.random() * 20 + 10 + 'px';
+  snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+  snowflake.style.animationDelay = Math.random() * 5 + 's';
+  document.body.appendChild(snowflake);
+  setTimeout(() => snowflake.remove(), 5000);
+}
+
+function startSnowfall() {
+  setInterval(createSnowflake, 300);
+}
+
 function ldProgress(pct, msg) {
   const fill = document.getElementById('iceFill');
   if (fill) fill.style.width = pct + '%';
@@ -3409,7 +3489,7 @@ function ldHide() {
   if (s) { s.classList.add('hidden'); setTimeout(() => s.remove(), 700); }
 }
 
-async function preloadImages() {
+function preloadImages() {
   const urls = [
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png',
     SNOW_IMG, GIFT_IMG,
@@ -3430,6 +3510,164 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
       if (step >= steps) { clearInterval(iv); ldProgress(targetPct, msg); resolve(); }
     }, stepTime);
   });
+}
+
+// Translations
+const TRANSLATIONS = {
+  en: {
+    labelGifts: 'Gifts', labelSnow: 'Snow', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
+    friendsTitle: 'Friends & Referrals', refCommission: '20% commission when friends buy boxes!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends',
+    recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
+    boxesTitle: "Santa's Boxes", inventoryTitle: 'Your Machines',
+    labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
+    important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
+    amountTON: 'Amount (TON)', rateLabel: 'Rate:', youWillReceive: 'You will receive:', depositBtn: 'Deposit TON',
+    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountGifts: 'Amount (Gifts)',
+    tonValue: 'TON Value', withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
+    swapFrom: 'FROM', swapTo: 'TO', balance: 'Balance:', maxBtn: 'MAX', swapRate: '📊 100 Snow = 10 Gifts',
+    exchangeNow: '⚡ Exchange Now', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
+    helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
+    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'When you open the welcome box you receive:<br><span style="color:#fff;font-weight:800">• 200 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 300 Snow/day</span> — free mining power starts immediately',
+    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Santa Boxes with <span style="color:var(--gift);font-weight:800">Gifts</span><br>⬅ Open boxes to get Mining Machines<br>⬅ Machines auto-produce Snow collected in the Storage<br>⬅ Convert Snow to <span style="color:var(--gift);font-weight:800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎',
+    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--gift)">Target Users × 60 Gifts</strong>',
+    taskCostNote: 'Min target: 100 users | 100 users = 6,000 Gifts', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
+    taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
+    taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
+    taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
+    upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
+    floatAdd: 'Add Task', Home: 'Home', Boxes: 'Boxes', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
+  },
+  ru: {
+    labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
+    friendsTitle: 'Друзья и Рефералы', refCommission: '20% комиссия когда друзья покупают боксы!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями',
+    recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
+    boxesTitle: 'Боксы Санты', inventoryTitle: 'Ваши машины',
+    labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
+    important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
+    amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
+    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountGifts: 'Сумма (Подарки)',
+    tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
+    swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 100 Снега = 10 Подарков',
+    exchangeNow: '⚡ Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
+    helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'При открытии приветственного бокса вы получаете:<br><span style="color:#fff;font-weight:800">• 200 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 300 Снега/день</span> — бесплатная мощность майнинга начинается сразу',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Боксы Санты за <span style="color:var(--gift);font-weight:800">Подарки</span><br>⬅ Открывайте боксы чтобы получить Машины для майнинга<br>⬅ Машины автоматически производят Снег, который собирается в Хранилище<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎',
+    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--gift)">Целевые пользователи × 60 Подарков</strong>',
+    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Подарков', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
+    taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
+    taskLinkPh: 'https://t.me/ваш_канал', taskTargetLabel: 'Целевые пользователи (мин. 100)',
+    taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
+    upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети',
+    floatAdd: 'Добавить задачу', Home: 'Главная', Boxes: 'Боксы', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
+  },
+};
+
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+  if (m.style.display === 'block') {
+    setTimeout(() => document.addEventListener('click', closeLangMenuOutside, { once: true }), 10);
+  }
+}
+function closeLangMenuOutside(e) {
+  const m = document.getElementById('langMenu');
+  const btn = document.getElementById('langBtn');
+  if (m && !m.contains(e.target) && !btn.contains(e.target)) m.style.display = 'none';
+}
+function setLang(lang, flag, code) {
+  localStorage.setItem('santaLang', lang);
+  applyLang(lang, flag, code);
+  document.getElementById('langMenu').style.display = 'none';
+}
+function applyLang(lang, flag, code) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+  document.getElementById('langFlag').textContent = flag;
+  document.getElementById('langCode').textContent = code;
+  document.querySelectorAll('.lang-opt').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key] !== undefined) el.innerHTML = t[key]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const key = el.dataset.i18nPh; if (t[key] !== undefined) el.placeholder = t[key]; });
+  const navItems = document.querySelectorAll('.ni .ni-lbl');
+  const navKeys = ['Home', 'Boxes', 'Tasks', 'Friends', 'Wallet'];
+  navItems.forEach((el, i) => { if (navKeys[i] && t[navKeys[i]]) el.textContent = t[navKeys[i]]; });
+  const ftabs = document.querySelectorAll('.wtab');
+  const ftabKeys = ['💰 Deposit', '💸 Withdraw', '⚡ Exchange'];
+  ftabs.forEach((el, i) => { if (ftabKeys[i]) el.textContent = ftabKeys[i]; });
+  document.querySelectorAll('.ttab[data-t]').forEach(el => {
+    if (el.dataset.t === 'referral') el.innerHTML = '👥 ' + t.tabReferralTxt;
+    if (el.dataset.t === 'social') el.innerHTML = '📢 ' + t.tabSocialTxt;
+  });
+  const stP = document.getElementById('stab-partner'); if (stP) stP.innerHTML = '⭐ Partner';
+  const stC = document.getElementById('stab-community'); if (stC) stC.innerHTML = '🌍 Community';
+  const claimTxt = document.getElementById('claimBtnTxt');
+  if (claimTxt && !claimTxt.innerHTML.includes('Storage Empty')) {
+    const img = claimTxt.querySelector('img');
+    claimTxt.innerHTML = t.claimBtn || 'Claim Snow';
+    if (img) claimTxt.prepend(img);
+  }
+  const depBtn = document.getElementById('submitDepositBtn');
+  if (depBtn) depBtn.innerHTML = `<i class="fas fa-arrow-down"></i> ${t.depositBtn}`;
+  const connBtn = document.getElementById('connectWalletBtn');
+  if (connBtn && connBtn.innerHTML.includes('Connect')) connBtn.innerHTML = `<i class="fas fa-plug"></i> ${t.connectBtn}`;
+  if (connBtn && connBtn.innerHTML.includes('Disconnect')) connBtn.innerHTML = `<i class="fas fa-unlink"></i> Disconnect`;
+  const wdBtn = document.getElementById('wdBtn');
+  if (wdBtn) { const img = wdBtn.querySelector('img'); wdBtn.innerHTML = t.withdrawBtn; if (img) wdBtn.prepend(img); }
+  document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
+  const floatBtn = document.getElementById('floatAddTask');
+  if (floatBtn) floatBtn.innerHTML = `➕ ${t.floatAdd}`;
+}
+
+// Task creation functions
+let _atType = 'channel';
+const TASK_GIFTS_PER_USER = 60;
+const MIN_TASK_TARGET = 100;
+let _submitInFlight = false;
+
+function setTaskType(t) {
+  _atType = t;
+  const sel = 'flex:1;padding:9px;border-radius:10px;border:2px solid var(--gift);background:rgba(229,57,53,0.2);color:var(--gift);font-size:13px;font-weight:800;cursor:pointer';
+  const unsel = 'flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:13px;font-weight:800;cursor:pointer';
+  document.getElementById('atTypeChannel').style.cssText = t === 'channel' ? sel : unsel;
+  document.getElementById('atTypeBot').style.cssText = t === 'bot' ? sel : unsel;
+  const hint = document.getElementById('atBotHint');
+  if (hint) hint.style.display = t === 'channel' ? 'block' : 'none';
+  updAtCost();
+}
+
+function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
+function updAtCost() {
+  const tgt = parseInt(document.getElementById('atTarget').value) || 0;
+  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_GIFTS_PER_USER) + ' Gifts';
+}
+
+async function submitAddTask() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_submitInFlight) return;
+  const link = (document.getElementById('atLink').value || '').trim();
+  const target = parseInt(document.getElementById('atTarget').value) || 0;
+  const st = document.getElementById('atStatus');
+  st.style.display = 'block';
+  st.style.color = 'var(--muted)';
+  st.textContent = '⏳ Creating...';
+  if (!link.includes('t.me/')) { st.style.color = '#ff8a80'; st.textContent = '❌ Invalid Telegram link'; return; }
+  if (target < MIN_TASK_TARGET) { st.style.color = '#ff8a80'; st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; return; }
+  const cost = target * TASK_GIFTS_PER_USER;
+  if ((S.user.gifts || 0) < cost) { st.style.color = '#ff8a80'; st.textContent = `❌ Need ${fmt(cost)} Gifts (have ${fmt(S.user.gifts || 0)})`; return; }
+  _submitInFlight = true;
+  try {
+    await api('createTask', { type: _atType, link, targetUsers: target });
+    S.user.gifts = (S.user.gifts || 0) - cost;
+    st.style.color = 'var(--gift)';
+    st.textContent = '✅ Task created!';
+    updateUI();
+    triggerHeavySnow(15);
+    setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
+  } catch (e) { st.style.color = '#ff8a80'; st.textContent = `❌ ${e.message || 'Failed'}`; }
+  finally { _submitInFlight = false; }
 }
 
 async function init() {
@@ -3482,8 +3720,7 @@ async function init() {
   await new Promise(r => setTimeout(r, 300));
   await ldAnimateTo(80, 'Building interface...', 400);
   renderBoxes();
-  renderReferralTasks();
-  renderSocTasks();
+  renderTasks();
   await new Promise(r => setTimeout(r, 300));
   await ldAnimateTo(90, 'Setting up wallet...', 400);
   setTimeout(() => initTON(), 600);
