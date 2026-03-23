@@ -41,7 +41,7 @@
 body {
   font-family: 'Fredoka', cursive;
   font-weight: 600;
-  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png') center center / cover no-repeat fixed;
+  background: #0A1428;
   color: var(--text);
   min-height: 100vh;
   padding-bottom: 85px;
@@ -51,17 +51,13 @@ body {
 }
 
 /* Full Background Cover - Fixed */
-body::before {
-  content: '';
+.background-fixed {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: inherit;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png') center center / cover no-repeat;
   z-index: -2;
 }
 
@@ -100,11 +96,6 @@ body::after {
 
 button, input, select, textarea, span, div, p, h1, h2, h3, a {
   font-family: 'Fredoka', cursive !important;
-}
-
-@keyframes soft-shine {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
 }
 
 .sec {
@@ -155,30 +146,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 .santa-char:active {
   transform: scale(0.86) rotate(9deg) !important;
-}
-
-.mine-rate-pill {
-  margin-top: 7px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(0, 0, 0, 0.38);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 7px 18px;
-  backdrop-filter: blur(6px);
-}
-
-.rate-lbl {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.rate-val {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--snow);
 }
 
 /* Storage Tank */
@@ -1485,12 +1452,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   top: 0;
   z-index: 100;
   border-bottom: 1px solid rgba(229, 57, 53, 0.12);
-  animation: topbarGlow 3s ease-in-out infinite;
-}
-
-@keyframes topbarGlow {
-  0%, 100% { box-shadow: 0 2px 18px rgba(229, 57, 53, 0.12); }
-  50% { box-shadow: 0 2px 28px rgba(229, 57, 53, 0.35); }
 }
 
 .uavatar {
@@ -1576,30 +1537,29 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-overflow: ellipsis;
 }
 
-/* Deposit Button */
-.deposit-button {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
-  border: none;
-  border-radius: 28px;
-  padding: 6px 14px;
-  color: #fff;
+/* Language Button */
+.lang-btn {
+  background: linear-gradient(135deg, rgba(229, 57, 53, 0.2), rgba(0, 0, 0, 0.5));
+  border: 1px solid rgba(229, 57, 53, 0.4);
+  border-radius: 30px;
+  padding: 6px 12px;
+  color: var(--gift);
+  font-size: 13px;
   font-weight: 800;
-  font-size: 12px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px var(--gift-glow);
+  gap: 6px;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
   white-space: nowrap;
-  transition: 0.2s;
-  flex-shrink: 0;
 }
 
-.deposit-button:active {
-  transform: scale(0.96);
+.lang-btn:active {
+  transform: scale(0.95);
 }
 
-/* Bottom Navigation - Updated Design */
+/* Bottom Navigation */
 .bnav {
   position: fixed;
   bottom: 0;
@@ -1668,12 +1628,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-shadow: 0 0 6px rgba(229, 57, 53, 0.5);
 }
 
-/* Loading Screen - New Design */
+/* Loading Screen */
 #loadingScreen {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png') center/cover no-repeat;
+  background: #0A1428;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1682,17 +1642,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: opacity 0.7s ease;
 }
 
-#loadingScreen::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 20, 40, 0.75);
-  backdrop-filter: blur(3px);
-}
-
-#loadingScreen > * {
-  position: relative;
-  z-index: 1;
+#loadingScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .ld-logo {
@@ -1723,7 +1675,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
 
-/* New Ice Progress Bar */
 .ld-bar-wrap {
   width: 280px;
   display: flex;
@@ -2017,6 +1968,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 </head>
 <body>
 
+<div class="background-fixed"></div>
+
 <!-- LOADING SCREEN -->
 <div id="loadingScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Santa">
@@ -2049,25 +2002,17 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       </div>
     </div>
   </div>
-  <div style="display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; align-items: center">
-    <div style="display: flex; gap: 6px; align-items: center">
-      <button onclick="goToWalletDeposit()" style="background: none; border: none; color: #E53935; font-size: 28px; font-weight: 800; cursor: pointer; line-height: 1; padding: 0 3px; animation: plusThrob 2s ease-in-out infinite;">+</button>
-      <button onclick="goToWalletWithdraw()" style="background: none; border: none; color: #FFD966; font-size: 28px; font-weight: 800; cursor: pointer; line-height: 1; padding: 0 3px; animation: minusThrob 2s ease-in-out infinite 0.6s;">−</button>
-    </div>
-    <button id="langBtn" onclick="toggleLangMenu()" style="background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(229, 57, 53, 0.35); border-radius: 14px; padding: 3px 8px; color: var(--gift); font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; backdrop-filter: blur(8px)">
-      <span id="langFlag">🌐</span><span id="langCode">EN</span><span style="font-size: 9px; opacity: 0.7">▾</span>
-    </button>
-  </div>
+  <button id="langBtn" class="lang-btn" onclick="toggleLangMenu()">
+    <span id="langFlag">🇬🇧</span>
+    <span id="langCode">EN</span>
+  </button>
 </div>
 
 <!-- LANGUAGE MENU -->
-<div id="langMenu" style="display: none; position: fixed; top: 64px; right: 12px; z-index: 300; background: rgba(10, 20, 35, 0.97); border: 1px solid rgba(229, 57, 53, 0.35); border-radius: 16px; overflow: hidden; min-width: 160px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);">
+<div id="langMenu" style="display: none; position: fixed; top: 64px; right: 12px; z-index: 300; background: rgba(10, 20, 35, 0.97); border: 1px solid rgba(229, 57, 53, 0.35); border-radius: 16px; overflow: hidden; min-width: 140px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);">
   <div style="padding: 6px 0">
-    <div class="lang-opt" data-lang="ar" data-flag="🇸🇦" data-label="العربية" onclick="setLang('ar','🇸🇦','AR')">🇸🇦 &nbsp;العربية</div>
     <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')">🇬🇧 &nbsp;English</div>
     <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')">🇷🇺 &nbsp;Русский</div>
-    <div class="lang-opt" data-lang="es" data-flag="🇪🇸" data-label="Español" onclick="setLang('es','🇪🇸','ES')">🇪🇸 &nbsp;Español</div>
-    <div class="lang-opt" data-lang="fr" data-flag="🇫🇷" data-label="Français" onclick="setLang('fr','🇫🇷','FR')">🇫🇷 &nbsp;Français</div>
   </div>
 </div>
 
@@ -2113,7 +2058,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <div class="sec" id="sectionFriends">
   <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="friendsTitle">Friends & Referrals</span></div>
   <div class="ref-prog-card">
-    <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="refProgTitle">Referral Program</span></div>
     <div class="ref-bonus-badge">
       <span class="rbb-pct">20%</span>
       <span class="rbb-txt" data-i18n="refCommission">Commission when friends buy from Market!</span>
@@ -2277,7 +2221,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <!-- HELP BUTTON -->
 <button id="helpBtn" onclick="openModal('helpModal')">?</button>
 
-<!-- NAVIGATION - Updated with proper names -->
+<!-- NAVIGATION -->
 <nav class="bnav">
   <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png" style="width: 52px; height: 52px; object-fit: contain"></div>
@@ -2391,9 +2335,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 /* ============================================
-   SANTA SNOW FACTORY - Frontend v5.0
-   Updated: Full background, referrals fixed, 
-   Russian language, heavy snow effects
+   SANTA SNOW FACTORY - Frontend v5.1
+   Fixed: Background full, referrals working, only EN/RU
    ============================================ */
 
 const CFG = {
@@ -2474,7 +2417,7 @@ const SOC_TASKS = [
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, gifts: 0, miningRate: 0, totalEarned: 0, machines: {}, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0 },
+  user: { snow: 0, gifts: 0, miningRate: 0, totalEarned: 0, machines: {}, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0 },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2567,7 +2510,6 @@ function updateStorageUI() {
   if (lvEl) lvEl.textContent = lv;
 }
 
-// Heavy snow effect for celebrations
 function triggerHeavySnow() {
   for (let i = 0; i < 50; i++) {
     setTimeout(() => {
@@ -2597,7 +2539,7 @@ async function collectSnow() {
   S.user.totalEarned = (S.user.totalEarned || 0) + amt;
   S.storageProgress = 0;
   updateUI(); updateStorageUI(); spawnSnowParticle();
-  triggerHeavySnow(); // Celebrate with heavy snow
+  triggerHeavySnow();
   showNotif(`+${fmt(amt)} Snow collected!`, 's');
   api('collect', { amount: amt }).catch(() => { });
 }
@@ -2647,7 +2589,7 @@ async function upgradeStorage() {
   api('upgradeStorage', { newLevel: lv + 1 }).catch(() => { });
   buildUpgradeContent();
   updateUI();
-  triggerHeavySnow(); // Celebrate upgrade
+  triggerHeavySnow();
   showNotif(`✅ Storage → Level ${lv + 1}!`, 's');
 }
 
@@ -2716,7 +2658,7 @@ async function buyItem(id) {
   S.user.machines[id] = (S.user.machines[id] || 0) + q;
   S.user.miningRate = (S.user.miningRate || 0) + (it.power * q);
   updateUI();
-  triggerHeavySnow(); // Celebrate purchase
+  triggerHeavySnow();
   showNotif(`✅ ${q}x ${esc(it.name)}! +${fmt(it.power * q)} Snow/hr`, 's');
   spawnSnowParticle();
 }
@@ -2759,15 +2701,18 @@ function renderSocTasks() {
 }
 
 function renderTasks() {
+  const referralCount = S.user.referralCount || 0;
   document.getElementById('refTaskList').innerHTML = REF_TASKS.map(t => {
-    const done = S.doneTasks.includes(t.id), can = S.refs.length >= t.n && !done;
+    const done = S.doneTasks.includes(t.id);
+    const can = referralCount >= t.n && !done;
     return `<div class="task-item">
       <div class="ticon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 48px; height: 48px; object-fit: contain"></div>
       <div class="tinfo">
         <div class="tname">Invite ${t.n} Friend${t.n > 1 ? 's' : ''}</div>
         <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(t.snow)} Snow + <img src="${GIFT_IMG}" style="width: 20px; height: 20px; object-fit: contain; vertical-align: middle; border-radius: 50%"> ${t.gifts} Gifts</div>
+        <div class="tstat">Progress: ${referralCount}/${t.n} friends</div>
       </div>
-      ${done ? `<button class="tbtn done">✅ Done</button>` : can ? `<button class="tbtn claim" onclick="claimRefTask('${t.id}')">Claim</button>` : `<button class="tbtn done" style="background: rgba(255,255,255,.05)">${S.refs.length}/${t.n}</button>`}
+      ${done ? `<button class="tbtn done">✅ Done</button>` : can ? `<button class="tbtn claim" onclick="claimRefTask('${t.id}')">Claim</button>` : `<button class="tbtn done" style="background: rgba(255,255,255,.05)">${referralCount}/${t.n}</button>`}
     </div>`;
   }).join('');
   renderSocTasks();
@@ -2790,14 +2735,16 @@ async function claimRefTask(id) {
   try {
     const t = REF_TASKS.find(x => x.id === id);
     if (!t) return;
-    api('claimTask', { taskId: id }).catch(() => { });
+    const result = await api('claimTask', { taskId: id });
     S.doneTasks.push(id);
-    S.user.snow = (S.user.snow || 0) + t.snow;
-    S.user.gifts = (S.user.gifts || 0) + t.gifts;
+    S.user.snow = result.snow || (S.user.snow + t.snow);
+    S.user.gifts = result.gifts || (S.user.gifts + t.gifts);
     updateUI(); renderTasks();
-    triggerHeavySnow(); // Celebrate task claim
+    triggerHeavySnow();
     showNotif(`🎉 +${fmt(t.snow)} Snow +${t.gifts} Gifts`, 's');
     spawnSnowParticle();
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
   } finally { _taskInFlight.delete(id); }
 }
 
@@ -2816,7 +2763,7 @@ async function doDbTask(tid, link, type, cat) {
       S.doneTasks.push(tid);
       if (r.snowAdded) S.user.snow = (S.user.snow || 0) + r.snowAdded;
       updateUI(); renderTasks();
-      triggerHeavySnow(); // Celebrate task completion
+      triggerHeavySnow();
       showNotif(`🎉 +${fmt(r.snowAdded || 0)} Snow Task done!`, 's');
       spawnSnowParticle();
     } catch (e) {
@@ -2872,7 +2819,7 @@ async function submitAddTask() {
     st.style.color = 'var(--gift)';
     st.textContent = '✅ Task created!';
     updateUI();
-    triggerHeavySnow(); // Celebrate task creation
+    triggerHeavySnow();
     setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
   } catch (e) { st.style.color = '#ff8a80'; st.textContent = `❌ ${e.message || 'Failed'}`; }
   finally { _submitInFlight = false; }
@@ -2913,7 +2860,7 @@ async function doExchange() {
     document.getElementById('swapFromAmt').value = '';
     document.getElementById('swapToAmt').textContent = '0';
     updateUI(); renderExchHist();
-    triggerHeavySnow(); // Celebrate exchange
+    triggerHeavySnow();
     showNotif(`⚡ ${fmt(a)} Snow → ${fmt(gifts)} Gifts`, 's');
     spawnSnowParticle();
   } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
@@ -2985,7 +2932,7 @@ async function doWithdraw() {
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
     updWdPrev(); updateUI(); renderWdHist();
-    triggerHeavySnow(); // Celebrate withdrawal request
+    triggerHeavySnow();
     showNotif(`✅ Withdrawal requested: ${fmt(amt)} Gifts`, 's');
   } catch (e) {
     const msg = e.message || '';
@@ -3137,7 +3084,7 @@ window.initiateDeposit = async function () {
     sd.querySelector('.txsi').innerHTML = '⏳';
     sd.querySelector('.txsm').innerHTML = 'Transaction sent!';
     document.getElementById('depositStatusDetail').textContent = 'Your balance will be added to your account within 3 minutes.';
-    triggerHeavySnow(); // Celebrate deposit
+    triggerHeavySnow();
     showNotif('✅ Transaction sent! Balance will be credited within 3 minutes', 's');
     try { await api('deposit', { amount: amt, txHash: result.boc, comment }); } catch (_) { }
   } catch (e) {
@@ -3148,18 +3095,6 @@ window.initiateDeposit = async function () {
     document.getElementById('depositStatusDetail').textContent = e.message || 'Please try again';
   }
 };
-
-async function handleDepOk(result, amt, comment) {
-  try {
-    const d = await api('deposit', { amount: amt, txHash: result.boc, comment });
-    const sd = document.getElementById('depositStatus');
-    sd.classList.add('visible');
-    sd.querySelector('.txsi').innerHTML = '⏳';
-    sd.querySelector('.txsm').innerHTML = 'Transaction sent!';
-    document.getElementById('depositStatusDetail').textContent = 'Waiting for confirmation (~1 min)...';
-    startDepVerify(d.depositId, result.boc);
-  } catch (e) { console.error(e); }
-}
 
 function startDepVerify(depId, txHash) {
   if (S.depCheckInt) clearInterval(S.depCheckInt);
@@ -3175,7 +3110,7 @@ function startDepVerify(depId, txHash) {
         sd.querySelector('.txsi').innerHTML = '✅';
         sd.querySelector('.txsm').innerHTML = 'Deposit confirmed!';
         document.getElementById('depositStatusDetail').textContent = `${r.amount} TON added`;
-        triggerHeavySnow(); // Celebrate deposit confirmation
+        triggerHeavySnow();
         showNotif(`💰 ${r.amount} TON deposited!`, 's');
         S.user.hasDeposited = true;
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
@@ -3224,7 +3159,7 @@ function santaClick() {
   const p = document.getElementById('santaChar');
   if (p) { p.style.transition = 'transform .12s'; p.style.transform = 'scale(.86) rotate(9deg)'; setTimeout(() => { p.style.transform = ''; }, 220); }
   spawnSnowParticle();
-  triggerHeavySnow(); // Santa click celebration
+  triggerHeavySnow();
 }
 
 function createSnowflake() {
@@ -3243,7 +3178,6 @@ function startSnowfall() {
   setInterval(createSnowflake, 300);
 }
 
-// New ice progress bar functions
 function ldProgress(pct, msg) {
   const fill = document.getElementById('iceFill');
   if (fill) fill.style.width = pct + '%';
@@ -3256,18 +3190,6 @@ function ldProgress(pct, msg) {
 function ldHide() {
   const s = document.getElementById('loadingScreen');
   if (s) { s.classList.add('hidden'); setTimeout(() => s.remove(), 700); }
-}
-
-function ldError(msg) {
-  const stat = document.getElementById('ldStatus');
-  if (stat) { stat.textContent = msg; stat.style.color = '#ff8a80'; }
-  const fill = document.getElementById('iceFill');
-  if (fill) {
-    fill.style.background = 'linear-gradient(90deg, #ef5350, #b71c1c)';
-    fill.style.animation = 'none';
-  }
-  const pctEl = document.getElementById('ldPct');
-  if (pctEl) { pctEl.textContent = 'Error'; pctEl.style.color = '#ff8a80'; }
 }
 
 function preloadImages() {
@@ -3292,6 +3214,111 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
       if (step >= steps) { clearInterval(iv); ldProgress(targetPct, msg); resolve(); }
     }, stepTime);
   });
+}
+
+// Translations
+const TRANSLATIONS = {
+  en: {
+    labelGifts: 'Gifts', labelSnow: 'Snow', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
+    friendsTitle: 'Friends & Referrals', refCommission: '20% commission when friends buy from Market!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends',
+    recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet', marketTitle: 'Gift Market',
+    labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
+    important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
+    amountTON: 'Amount (TON)', rateLabel: 'Rate:', youWillReceive: 'You will receive:', depositBtn: 'Deposit TON',
+    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountGifts: 'Amount (Gifts)',
+    tonValue: 'TON Value', withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
+    swapFrom: 'FROM', swapTo: 'TO', balance: 'Balance:', maxBtn: 'MAX', swapRate: '📊 100 Snow = 10 Gifts',
+    exchangeNow: '⚡ Exchange Now', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
+    helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
+    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'When you register for the first time you automatically receive:<br><span style="color:#fff;font-weight:800">• 200 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 100 Snow/day</span> — free mining power starts immediately',
+    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy machines from the Market with <span style="color:var(--snow);font-weight:800">Snow</span><br>⬅ Machines auto-produce Snow collected in the Storage<br>⬅ Convert Snow to <span style="color:var(--gift);font-weight:800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎',
+    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--gift)">Target Users × 60 Gifts</strong>',
+    taskCostNote: 'Min target: 100 users | 100 users = 6,000 Gifts', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
+    taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
+    taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
+    taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
+    upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
+    floatAdd: 'Add Task', Home: 'Home', Market: 'Market', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
+  },
+  ru: {
+    labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
+    friendsTitle: 'Друзья и Рефералы', refCommission: '20% комиссия когда друзья покупают на рынке!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями',
+    recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов', marketTitle: 'Рынок подарков',
+    labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
+    important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
+    amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
+    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountGifts: 'Сумма (Подарки)',
+    tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
+    swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 100 Снега = 10 Подарков',
+    exchangeNow: '⚡ Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
+    helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'При первой регистрации вы автоматически получаете:<br><span style="color:#fff;font-weight:800">• 200 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 100 Снега/день</span> — бесплатная мощность майнинга начинается сразу',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте машины на Рынке за <span style="color:var(--snow);font-weight:800">Снег</span><br>⬅ Машины автоматически производят Снег, который собирается в Хранилище<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎',
+    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--gift)">Целевые пользователи × 60 Подарков</strong>',
+    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Подарков', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
+    taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
+    taskLinkPh: 'https://t.me/ваш_канал', taskTargetLabel: 'Целевые пользователи (мин. 100)',
+    taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
+    upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети',
+    floatAdd: 'Добавить задачу', Home: 'Главная', Market: 'Рынок', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
+  },
+};
+
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+  if (m.style.display === 'block') {
+    setTimeout(() => document.addEventListener('click', closeLangMenuOutside, { once: true }), 10);
+  }
+}
+function closeLangMenuOutside(e) {
+  const m = document.getElementById('langMenu');
+  const btn = document.getElementById('langBtn');
+  if (m && !m.contains(e.target) && !btn.contains(e.target)) m.style.display = 'none';
+}
+function setLang(lang, flag, code) {
+  localStorage.setItem('santaLang', lang);
+  applyLang(lang, flag, code);
+  document.getElementById('langMenu').style.display = 'none';
+}
+function applyLang(lang, flag, code) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+  document.getElementById('langFlag').textContent = flag;
+  document.getElementById('langCode').textContent = code;
+  document.querySelectorAll('.lang-opt').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key] !== undefined) el.innerHTML = t[key]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const key = el.dataset.i18nPh; if (t[key] !== undefined) el.placeholder = t[key]; });
+  const navItems = document.querySelectorAll('.ni .ni-lbl');
+  const navKeys = ['Home', 'Market', 'Tasks', 'Friends', 'Wallet'];
+  navItems.forEach((el, i) => { if (navKeys[i] && t[navKeys[i]]) el.textContent = t[navKeys[i]]; });
+  const ftabs = document.querySelectorAll('.wtab');
+  const ftabKeys = ['💰 Deposit', '💸 Withdraw', '⚡ Exchange'];
+  ftabs.forEach((el, i) => { if (ftabKeys[i]) el.textContent = ftabKeys[i]; });
+  document.querySelectorAll('.ttab[data-t]').forEach(el => {
+    if (el.dataset.t === 'referral') el.innerHTML = '👥 ' + t.tabReferralTxt;
+    if (el.dataset.t === 'social') el.innerHTML = '📢 ' + t.tabSocialTxt;
+  });
+  const stP = document.getElementById('stab-partner'); if (stP) stP.innerHTML = '⭐ Partner';
+  const stC = document.getElementById('stab-community'); if (stC) stC.innerHTML = '🌍 Community';
+  const claimTxt = document.getElementById('claimBtnTxt');
+  if (claimTxt && !claimTxt.innerHTML.includes('Storage Empty')) {
+    const img = claimTxt.querySelector('img');
+    claimTxt.innerHTML = t.claimBtn || 'Claim Snow';
+    if (img) claimTxt.prepend(img);
+  }
+  const depBtn = document.getElementById('submitDepositBtn');
+  if (depBtn) depBtn.innerHTML = `<i class="fas fa-arrow-down"></i> ${t.depositBtn}`;
+  const connBtn = document.getElementById('connectWalletBtn');
+  if (connBtn && connBtn.innerHTML.includes('Connect')) connBtn.innerHTML = `<i class="fas fa-plug"></i> ${t.connectBtn}`;
+  if (connBtn && connBtn.innerHTML.includes('Disconnect')) connBtn.innerHTML = `<i class="fas fa-unlink"></i> Disconnect`;
+  const wdBtn = document.getElementById('wdBtn');
+  if (wdBtn) { const img = wdBtn.querySelector('img'); wdBtn.innerHTML = t.withdrawBtn; if (img) wdBtn.prepend(img); }
+  document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
+  const floatBtn = document.getElementById('floatAddTask');
+  if (floatBtn) floatBtn.innerHTML = `➕ ${t.floatAdd}`;
 }
 
 async function init() {
@@ -3337,7 +3364,7 @@ async function init() {
     }
   }
   if (!loaded) {
-    ldError('Connection failed. Please restart the app.');
+    ldProgress(100, 'Connection failed. Please restart.');
     return;
   }
   await ldAnimateTo(70, 'Account loaded!', 500);
@@ -3358,129 +3385,11 @@ async function init() {
   }
   setTimeout(() => ldHide(), 700);
   const savedLang = localStorage.getItem('santaLang');
-  if (savedLang) {
-    const meta = { ar: ['🇸🇦', 'AR'], en: ['🇬🇧', 'EN'], ru: ['🇷🇺', 'RU'], es: ['🇪🇸', 'ES'], fr: ['🇫🇷', 'FR'] };
-    if (meta[savedLang]) applyLang(savedLang, meta[savedLang][0], meta[savedLang][1]);
-  }
-}
-
-const TRANSLATIONS = {
-  ar: {
-    labelGifts: 'هدايا', labelSnow: 'ثلج', statAccrued: 'المتراكم', statRateDay: 'المعدل/يوم', statSnowDay: 'ثلج/يوم',
-    friendsTitle: 'الأصدقاء والإحالات', refProgTitle: 'برنامج الإحالة', refCommission: 'عمولة 20% عند شراء أصدقائك من السوق!',
-    refLinkPh: 'رابط الإحالة الخاص بك...', copyBtn: 'نسخ', refNote: '📤 شارك هذا الرابط مع أصدقائك',
-    recentRefs: 'أحدث الإحالات', noReferrals: 'لا إحالات بعد', marketTitle: 'سوق الهدايا',
-    labelWallet: 'المحفظة', notConnected: 'غير متصل', connectBtn: 'ربط',
-    important: 'مهم:', depositWarning1: 'معرف المستخدم الخاص بك', depositWarning2: 'يجب أن يكون التعليق الوحيد في المعاملة.',
-    amountTON: 'المبلغ (TON)', rateLabel: 'السعر:', youWillReceive: 'ستستلم:', depositBtn: 'إيداع TON',
-    processingDeposit: 'جارٍ معالجة الإيداع...', tonWalletAddr: 'عنوان محفظة TON', amountGifts: 'المبلغ (هدايا)',
-    tonValue: 'قيمة TON', withdrawBtn: 'طلب سحب', withdrawHist: '📋 سجل السحب', noWithdrawals: 'لا سحوبات بعد',
-    swapFrom: 'من', swapTo: 'إلى', balance: 'الرصيد:', maxBtn: 'أقصى', swapRate: '📊 100 ثلج = 10 هدايا',
-    exchangeNow: '⚡ تحويل الآن', exchangeHist: '📋 سجل التحويل', noConversions: 'لا تحويلات بعد',
-    helpTitle: '🎅 دليل Santa Snow', helpPayCh: 'قناة\nالمدفوعات', helpNewsCh: 'أخبار\nالبوت', helpSupport: 'الدعم\nالفني',
-    helpWelcomeTitle: '🎁 هدية الترحيب المجانية', helpWelcomeBody: 'عند التسجيل لأول مرة تحصل تلقائياً على:<br><span style="color:#fff;font-weight:800">• 200 هدية</span> — عملة السحب الأساسية<br><span style="color:#fff;font-weight:800">• 100 ثلج/يوم</span> — طاقة تعدين مجانية تبدأ فوراً',
-    helpIdeaTitle: '💡 الفكرة الرئيسية', helpIdeaBody: 'البوت مصنع ثلج افتراضي ❄️<br>⬅ تشتري آلات من السوق بـ <span style="color:var(--snow);font-weight:800">ثلج</span><br>⬅ الآلات تنتج ثلج تلقائياً في المخزن<br>⬅ تحوّل ثلج إلى <span style="color:var(--gift);font-weight:800">هدايا</span> من صفحة Wallet<br>⬅ تسحب هدايا إلى محفظة TON 💎',
-    addTaskTitle: '➕ إضافة مهمة مجتمعية', taskCostFormula: 'التكلفة = <strong style="color:var(--gift)">عدد المستخدمين × 60 هدية</strong>',
-    taskCostNote: 'الحد الأدنى: 100 مستخدم | 100 مستخدم = 6,000 هدية', taskTypeChannel: 'قناة', taskTypeBot: 'بوت',
-    taskBotHint: 'أضف البوت الخاص بنا كمشرف في قناتك أولاً:', taskLinkLabel: 'رابط تيليجرام',
-    taskLinkPh: 'https://t.me/قناتك', taskTargetLabel: 'عدد المستخدمين المستهدف (الحد الأدنى 100)',
-    taskTotalCost: 'التكلفة الإجمالية:', taskCreateBtn: '✅ إنشاء المهمة',
-  },
-  en: {
-    labelGifts: 'Gifts', labelSnow: 'Snow', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refProgTitle: 'Referral Program', refCommission: 'Commission when friends buy from Market!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends',
-    recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet', marketTitle: 'Gift Market',
-    labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
-    important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
-    amountTON: 'Amount (TON)', rateLabel: 'Rate:', youWillReceive: 'You will receive:', depositBtn: 'Deposit TON',
-    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountGifts: 'Amount (Gifts)',
-    tonValue: 'TON Value', withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
-    swapFrom: 'FROM', swapTo: 'TO', balance: 'Balance:', maxBtn: 'MAX', swapRate: '📊 100 Snow = 10 Gifts',
-    exchangeNow: '⚡ Exchange Now', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
-    helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
-    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'When you register for the first time you automatically receive:<br><span style="color:#fff;font-weight:800">• 200 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 100 Snow/day</span> — free mining power starts immediately',
-    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy machines from the Market with <span style="color:var(--snow);font-weight:800">Snow</span><br>⬅ Machines auto-produce Snow collected in the Storage<br>⬅ Convert Snow to <span style="color:var(--gift);font-weight:800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎',
-    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--gift)">Target Users × 60 Gifts</strong>',
-    taskCostNote: 'Min target: 100 users | 100 users = 6,000 Gifts', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
-    taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
-    taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
-    taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
-  },
-  ru: {
-    labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refProgTitle: 'Реферальная программа', refCommission: '20% комиссия когда друзья покупают на рынке!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями',
-    recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов', marketTitle: 'Рынок подарков',
-    labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
-    important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
-    amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
-    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountGifts: 'Сумма (Подарки)',
-    tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
-    swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 100 Снега = 10 Подарков',
-    exchangeNow: '⚡ Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
-    helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
-    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'При первой регистрации вы автоматически получаете:<br><span style="color:#fff;font-weight:800">• 200 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 100 Снега/день</span> — бесплатная мощность майнинга начинается сразу',
-    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте машины на Рынке за <span style="color:var(--snow);font-weight:800">Снег</span><br>⬅ Машины автоматически производят Снег, который собирается в Хранилище<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎',
-    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--gift)">Целевые пользователи × 60 Подарков</strong>',
-    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Подарков', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
-    taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
-    taskLinkPh: 'https://t.me/ваш_канал', taskTargetLabel: 'Целевые пользователи (мин. 100)',
-    taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
-  },
-};
-
-function toggleLangMenu() {
-  const m = document.getElementById('langMenu');
-  m.style.display = m.style.display === 'none' ? 'block' : 'none';
-  if (m.style.display === 'block') {
-    setTimeout(() => document.addEventListener('click', closeLangMenuOutside, { once: true }), 10);
-  }
-}
-function closeLangMenuOutside(e) {
-  const m = document.getElementById('langMenu');
-  const btn = document.getElementById('langBtn');
-  if (m && !m.contains(e.target) && !btn.contains(e.target)) m.style.display = 'none';
-}
-function setLang(lang, flag, code) {
-  localStorage.setItem('santaLang', lang);
-  applyLang(lang, flag, code);
-  document.getElementById('langMenu').style.display = 'none';
-}
-function applyLang(lang, flag, code) {
-  const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-  document.getElementById('langFlag').textContent = flag;
-  document.getElementById('langCode').textContent = code;
-  document.querySelectorAll('.lang-opt').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
-  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key] !== undefined) el.innerHTML = t[key]; });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const key = el.dataset.i18nPh; if (t[key] !== undefined) el.placeholder = t[key]; });
-  const navItems = document.querySelectorAll('.ni .ni-lbl');
-  const navKeys = ['Home', 'Market', 'Tasks', 'Friends', 'Wallet'];
-  navItems.forEach((el, i) => { if (navKeys[i]) el.textContent = t[navKeys[i]]; });
-  const ftabs = document.querySelectorAll('.wtab');
-  const ftabKeys = ['💰 Deposit', '💸 Withdraw', '⚡ Exchange'];
-  ftabs.forEach((el, i) => { if (ftabKeys[i]) el.textContent = t[ftabKeys[i]]; });
-  document.querySelectorAll('.ttab[data-t]').forEach(el => {
-    if (el.dataset.t === 'referral') el.innerHTML = '👥 ' + t.tabReferralTxt;
-    if (el.dataset.t === 'social') el.innerHTML = '📢 ' + t.tabSocialTxt;
-  });
-  const stP = document.getElementById('stab-partner'); if (stP) stP.innerHTML = '⭐ ' + (t.tabPartner || 'Partner');
-  const stC = document.getElementById('stab-community'); if (stC) stC.innerHTML = '🌍 ' + (t.tabCommunity || 'Community');
-  const claimTxt = document.getElementById('claimBtnTxt');
-  if (claimTxt) { const img = claimTxt.querySelector('img'); claimTxt.textContent = t.claimBtn; if (img) claimTxt.prepend(img); }
-  const depBtn = document.getElementById('submitDepositBtn');
-  if (depBtn) depBtn.innerHTML = `<i class="fas fa-arrow-down"></i> ${t.depositBtn}`;
-  const connBtn = document.getElementById('connectWalletBtn');
-  if (connBtn) connBtn.innerHTML = `<i class="fas fa-plug"></i> ${t.connectBtn}`;
-  const wdBtn = document.getElementById('wdBtn');
-  if (wdBtn) { const img = wdBtn.querySelector('img'); wdBtn.textContent = t.withdrawBtn; if (img) wdBtn.prepend(img); }
-  document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
-  const floatBtn = document.getElementById('floatAddTask');
-  if (floatBtn) floatBtn.innerHTML = `➕ ${t.floatAdd}`;
-  const wadEl = document.getElementById('walletAddressDisplay');
-  if (wadEl && (wadEl.textContent === 'Not connected' || wadEl.textContent === TRANSLATIONS['en'].notConnected || wadEl.dataset.defaultShown === '1')) {
-    wadEl.textContent = t.notConnected; wadEl.dataset.defaultShown = '1';
+  if (savedLang && (savedLang === 'en' || savedLang === 'ru')) {
+    const meta = { en: ['🇬🇧', 'EN'], ru: ['🇷🇺', 'RU'] };
+    applyLang(savedLang, meta[savedLang][0], meta[savedLang][1]);
+  } else {
+    applyLang('en', '🇬🇧', 'EN');
   }
 }
 
