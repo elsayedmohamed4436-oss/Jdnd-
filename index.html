@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Santa Snow Factory ❄️</title>
+<title>Santa Snow ❄️</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -413,6 +413,57 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   font-weight: 700;
 }
 
+/* Welcome Gift Box */
+.welcome-gift-box {
+  position: relative;
+  text-align: center;
+  margin: 20px auto;
+  cursor: pointer;
+  z-index: 20;
+  animation: giftFloat 1.5s ease-in-out infinite;
+}
+
+@keyframes giftFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.gift-container {
+  position: relative;
+  display: inline-block;
+}
+
+.gift-container img {
+  filter: drop-shadow(0 0 20px rgba(229, 57, 53, 0.8));
+  transition: transform 0.2s ease;
+}
+
+.gift-container:active img {
+  transform: scale(0.95);
+}
+
+.gift-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 30px;
+  padding: 8px 18px;
+  white-space: nowrap;
+  font-weight: 800;
+  font-size: 12px;
+  color: #FFD966;
+  border: 1px solid rgba(229, 57, 53, 0.5);
+  backdrop-filter: blur(8px);
+  animation: labelPulse 1s infinite;
+}
+
+@keyframes labelPulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(229, 57, 53, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(229, 57, 53, 0.8); }
+}
+
 /* Claim Wrap */
 .claim-wrap {
   width: 100%;
@@ -456,34 +507,41 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   padding: 3px 9px;
 }
 
-.storage-upg-btn {
-  width: 100%;
-  padding: 9px 14px;
-  background: rgba(255, 217, 102, 0.1);
-  border: 1px solid rgba(255, 217, 102, 0.3);
-  border-radius: 12px;
-  color: var(--gold);
-  font-size: 13px;
+/* Upgrade Button - New Style (Moved to bottom right corner) */
+.upgrade-fab {
+  position: fixed;
+  bottom: 95px;
+  right: 16px;
+  z-index: 180;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #FFD966, #FFB347);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #2C1A00;
+  font-size: 24px;
   font-weight: 800;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  transition: background 0.2s;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(255, 217, 102, 0.5);
+  transition: all 0.2s;
 }
 
-.storage-upg-btn:active {
-  background: rgba(255, 217, 102, 0.2);
+.upgrade-fab:active {
+  transform: scale(0.92);
 }
 
-.sug-lv {
-  font-size: 11px;
-  background: rgba(255, 217, 102, 0.25);
-  border-radius: 8px;
-  padding: 3px 10px;
-  color: var(--gold);
+.upgrade-fab span {
+  font-size: 20px;
   font-weight: 800;
-  border: 1px solid rgba(255, 217, 102, 0.4);
+}
+
+/* Storage Upgrade Button (hidden, replaced by FAB) */
+.storage-upg-btn {
+  display: none;
 }
 
 /* Market Items */
@@ -1633,7 +1691,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #0A1428;
+  background: rgba(10, 20, 40, 0.92);
+  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1905,7 +1964,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 #helpBtn {
   position: fixed;
   bottom: 84px;
-  right: 14px;
+  left: 16px;
   z-index: 190;
   width: 44px;
   height: 44px;
@@ -1973,7 +2032,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <!-- LOADING SCREEN -->
 <div id="loadingScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Santa">
-  <div class="ld-title">Santa Snow Factory</div>
+  <div class="ld-title">Santa Snow</div>
   <div class="ld-sub" id="ldStatus">Loading...</div>
   <div class="ld-bar-wrap">
     <div class="ice-track">
@@ -2040,15 +2099,19 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       </div>
     </div>
     <div class="claim-wrap">
-      <div style="display: flex; align-items: center; gap: 8px; width: 100%">
-        <button class="claim-btn" id="collectBtn" onclick="collectSnow()" disabled style="flex: 1">
-          <span id="claimBtnTxt"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/7dc79778-482b-4e16-b413-d04ee51abaf9.png" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 5px"> Claim Snow</span>
-          <span class="claim-pct" id="claimPct">0%</span>
-        </button>
-        <button onclick="openModal('upgradeModal')" style="width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 217, 102, 0.12); border: 2px solid rgba(255, 217, 102, 0.38); color: var(--gold); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; gap: 1px; transition: background 0.2s" title="Upgrade Storage">
-          <span style="font-size: 20px; line-height: 1">↑</span>
-          <span style="font-size: 8px; font-weight: 800; line-height: 1"><span data-i18n="lvLabel">Lv.</span><span id="storageLvDisp">1</span></span>
-        </button>
+      <button class="claim-btn" id="collectBtn" onclick="collectSnow()" disabled style="width: 100%">
+        <span id="claimBtnTxt"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/7dc79778-482b-4e16-b413-d04ee51abaf9.png" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 5px"> Claim Snow</span>
+        <span class="claim-pct" id="claimPct">0%</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Welcome Gift Box -->
+  <div id="welcomeGiftBox" class="welcome-gift-box" style="display: none;" onclick="claimWelcomeGift()">
+    <div class="gift-container">
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" style="width: 100px; height: auto; object-fit: contain;">
+      <div class="gift-label">
+        🎁 CLAIM WELCOME BONUS! 🎁
       </div>
     </div>
   </div>
@@ -2103,6 +2166,11 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <!-- Floating Add Task Button -->
 <button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none; align-items: center; gap: 8px;">➕ <span data-i18n="floatAdd">Add Task</span></button>
 
+<!-- Upgrade Floating Action Button -->
+<div class="upgrade-fab" onclick="openModal('upgradeModal')" title="Upgrade Storage">
+  <span>⬆️</span>
+</div>
+
 <!-- WALLET -->
 <div class="sec" id="sectionWallet">
   <div class="wallet-tabs">
@@ -2154,7 +2222,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     </div>
   </div>
 
-  <!-- WITHDRAW -->
+  <!-- WITHDRAW - Image removed -->
   <div class="wtcont" id="wt-withdraw">
     <div class="wd-form">
       <label class="flabel" data-i18n="tonWalletAddr">TON Wallet Address</label>
@@ -2163,12 +2231,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <input type="number" class="finput" id="wdAmt" placeholder="200" min="200" oninput="updWdPrev()">
       <div class="ton-row">
         <div class="ton-chip">
-          <div class="tcl"><img src="https://i.ibb.co/WNfvBK9h/toncoin-1.webp" alt="TON"> <span data-i18n="tonValue">TON Value</span></div>
+          <div class="tcl">💎 <span data-i18n="tonValue">TON Value</span></div>
           <div class="tcv" id="wdTonVal">0.0000</div>
         </div>
       </div>
       <button class="btn-wd" id="wdBtn" onclick="doWithdraw()">
-        <img src="https://i.ibb.co/WNfvBK9h/toncoin-1.webp" style="width: 18px; height: 18px; object-fit: contain"> <span data-i18n="withdrawBtn">Request Withdrawal</span>
+        <span data-i18n="withdrawBtn">Request Withdrawal</span>
       </button>
     </div>
     <div class="hist-box">
@@ -2271,7 +2339,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 12px">
       <div style="background: linear-gradient(135deg, rgba(229, 57, 53, 0.08), rgba(0, 0, 0, 0.4)); border: 1px solid rgba(229, 57, 53, 0.25); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 200 Gifts</span> — main withdrawal currency<br><span style="color: #fff; font-weight: 800">• 100 Snow/day</span> — free mining power starts immediately</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">Click the red gift box on the home screen to claim:<br><span style="color: #fff; font-weight: 800">• 200 Gifts</span> — main withdrawal currency<br><span style="color: #fff; font-weight: 800">• 100 Snow/day</span> — free mining power starts immediately</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
@@ -2335,12 +2403,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 /* ============================================
-   SANTA SNOW FACTORY - Frontend v5.1
-   Fixed: Background full, referrals working, only EN/RU
+   SANTA SNOW - Frontend v5.2
+   Updates: Welcome gift box, upgrade FAB, background fixed
    ============================================ */
 
 const CFG = {
-  API_URL: 'https://cold-disk-738c.elsayedmohamed5848-c43.workers.dev',
+  API_URL: 'https://frosty-term-f870.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
   RATE: 10,
   MIN_WD: 200,
@@ -2417,7 +2485,7 @@ const SOC_TASKS = [
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, gifts: 0, miningRate: 0, totalEarned: 0, machines: {}, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0 },
+  user: { snow: 0, gifts: 0, miningRate: 0, totalEarned: 0, machines: {}, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0, welcomeGiftClaimed: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2460,8 +2528,45 @@ async function loadState() {
     S.tasks = d.tasks || { partner: [], community: [] };
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
+    
+    // Show welcome gift box if not claimed
+    const giftBox = document.getElementById('welcomeGiftBox');
+    if (giftBox) {
+      if (!S.user.welcomeGiftClaimed) {
+        giftBox.style.display = 'block';
+      } else {
+        giftBox.style.display = 'none';
+      }
+    }
   } catch (e) { console.warn('loadState:', e.message); }
   updateUI();
+}
+
+async function claimWelcomeGift() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  if (S.user.welcomeGiftClaimed) {
+    showNotif('Gift already claimed!', 'w');
+    document.getElementById('welcomeGiftBox').style.display = 'none';
+    return;
+  }
+  
+  try {
+    const result = await api('claimWelcomeGift', {});
+    S.user.snow = result.snow;
+    S.user.gifts = result.gifts;
+    S.user.miningRate = result.miningRate;
+    S.user.welcomeGiftClaimed = true;
+    updateUI();
+    document.getElementById('welcomeGiftBox').style.display = 'none';
+    triggerHeavySnow();
+    showNotif(`🎉 Welcome! +${result.snowAdded} Snow +${result.giftsAdded} Gifts!`, 's');
+    spawnSnowParticle();
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to claim gift'}`, 'e');
+  }
 }
 
 function updateUI() {
@@ -3231,7 +3336,7 @@ const TRANSLATIONS = {
     swapFrom: 'FROM', swapTo: 'TO', balance: 'Balance:', maxBtn: 'MAX', swapRate: '📊 100 Snow = 10 Gifts',
     exchangeNow: '⚡ Exchange Now', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
     helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
-    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'When you register for the first time you automatically receive:<br><span style="color:#fff;font-weight:800">• 200 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 100 Snow/day</span> — free mining power starts immediately',
+    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Click the red gift box on the home screen to claim:<br><span style="color:#fff;font-weight:800">• 200 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 100 Snow/day</span> — free mining power starts immediately',
     helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy machines from the Market with <span style="color:var(--snow);font-weight:800">Snow</span><br>⬅ Machines auto-produce Snow collected in the Storage<br>⬅ Convert Snow to <span style="color:var(--gift);font-weight:800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎',
     addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--gift)">Target Users × 60 Gifts</strong>',
     taskCostNote: 'Min target: 100 users | 100 users = 6,000 Gifts', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
@@ -3254,7 +3359,7 @@ const TRANSLATIONS = {
     swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 100 Снега = 10 Подарков',
     exchangeNow: '⚡ Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
     helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
-    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'При первой регистрации вы автоматически получаете:<br><span style="color:#fff;font-weight:800">• 200 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 100 Снега/день</span> — бесплатная мощность майнинга начинается сразу',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Нажмите на красную подарочную коробку на главном экране, чтобы получить:<br><span style="color:#fff;font-weight:800">• 200 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 100 Снега/день</span> — бесплатная мощность майнинга начинается сразу',
     helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте машины на Рынке за <span style="color:var(--snow);font-weight:800">Снег</span><br>⬅ Машины автоматически производят Снег, который собирается в Хранилище<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎',
     addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--gift)">Целевые пользователи × 60 Подарков</strong>',
     taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Подарков', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
@@ -3315,7 +3420,7 @@ function applyLang(lang, flag, code) {
   if (connBtn && connBtn.innerHTML.includes('Connect')) connBtn.innerHTML = `<i class="fas fa-plug"></i> ${t.connectBtn}`;
   if (connBtn && connBtn.innerHTML.includes('Disconnect')) connBtn.innerHTML = `<i class="fas fa-unlink"></i> Disconnect`;
   const wdBtn = document.getElementById('wdBtn');
-  if (wdBtn) { const img = wdBtn.querySelector('img'); wdBtn.innerHTML = t.withdrawBtn; if (img) wdBtn.prepend(img); }
+  if (wdBtn) wdBtn.innerHTML = t.withdrawBtn;
   document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
   const floatBtn = document.getElementById('floatAddTask');
   if (floatBtn) floatBtn.innerHTML = `➕ ${t.floatAdd}`;
