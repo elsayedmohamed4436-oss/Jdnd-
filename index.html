@@ -52,7 +52,6 @@ body {
   position: relative;
 }
 
-/* Full Background Cover - Fixed - Visible Immediately */
 .background-fixed {
   position: fixed;
   top: 0;
@@ -121,6 +120,7 @@ body::after {
   height: 120px;
   margin: 0 auto 15px;
   animation: chestWobble 0.5s ease-in-out infinite;
+  cursor: pointer;
 }
 
 @keyframes chestWobble {
@@ -187,33 +187,42 @@ body::after {
   transform: scale(0.96);
 }
 
-/* Machine Card Styles */
+/* Mining Machine Card */
 .machine-card {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
-  border-radius: 28px;
-  padding: 20px;
+  border-radius: 24px;
+  padding: 16px;
+  margin-top: 12px;
+  border: 1px solid rgba(77, 208, 225, 0.3);
   backdrop-filter: blur(12px);
-  margin-bottom: 16px;
-  border: 1px solid rgba(255, 217, 102, 0.3);
+}
+
+.machine-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.machine-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .machine-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
-  color: var(--gold);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  color: var(--ice);
 }
 
 .machine-stats {
   display: flex;
   justify-content: space-between;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   border-radius: 16px;
   padding: 12px;
-  margin: 12px 0;
+  margin-bottom: 12px;
 }
 
 .machine-stat {
@@ -225,6 +234,7 @@ body::after {
   font-size: 11px;
   color: var(--muted);
   font-weight: 600;
+  margin-bottom: 4px;
 }
 
 .machine-stat-value {
@@ -233,39 +243,220 @@ body::after {
   color: var(--snow);
 }
 
-.buy-machine-btn {
+.machine-buy-btn {
   width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 0 12px var(--gift-glow);
+}
+
+.machine-buy-btn:active {
+  transform: scale(0.98);
+}
+
+.machine-buy-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+/* Mining Upgrade Button - Replace with Machine Buy */
+.mining-upgrade-btn {
+  width: 100%;
+  margin-top: 12px;
   padding: 14px;
   background: linear-gradient(135deg, #FFD966, #FFB347);
   border: none;
-  border-radius: 16px;
+  border-radius: 14px;
   color: #2C1A00;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: all 0.2s;
-  margin-top: 12px;
+  box-shadow: 0 0 12px rgba(255, 217, 102, 0.4);
 }
 
-.buy-machine-btn:active {
+.mining-upgrade-btn:active {
   transform: scale(0.98);
 }
 
-.buy-machine-btn:disabled {
+.mining-upgrade-btn:disabled {
   opacity: 0.5;
   cursor: default;
 }
 
-.machine-price {
+.machines-count-badge {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--gold);
+}
+
+.machine-cost {
   display: flex;
   align-items: center;
   gap: 4px;
   background: rgba(0, 0, 0, 0.3);
-  padding: 6px 14px;
-  border-radius: 30px;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* Hero Card */
+.hero-card {
+  width: 92%;
+  margin: auto;
+  padding: 20px 12px;
+  border-radius: 25px;
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png') center/cover no-repeat;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 20, 40, 0.45);
+  border-radius: 25px;
+}
+
+.hero-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.santa-frame-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.santa-frame-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/6dd8b258-c54d-4334-b8bc-48d1bfd1d672.png') center/contain no-repeat;
+  z-index: 0;
+  background-size: 100% 100%;
+}
+
+.santa-frame-inner {
+  position: relative;
+  z-index: 1;
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(229, 57, 53, 0.25);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  backdrop-filter: blur(6px);
+}
+
+.hero-stat-box {
+  flex: 1;
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.hero-stat-sep {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.stat-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.stat-val {
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.stat-unit {
+  font-size: 10px;
+  color: var(--snow);
+  font-weight: 700;
+}
+
+.claim-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.collect-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 12px var(--gift-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.collect-btn:active {
+  transform: scale(0.98);
+}
+
+.collect-btn:disabled {
+  opacity: 0.38;
+  cursor: default;
+  box-shadow: none;
 }
 
 /* Storage Tank */
@@ -377,151 +568,6 @@ body::after {
   pointer-events: none;
 }
 
-.collect-btn {
-  width: 100%;
-  margin-top: 8px;
-  padding: 12px;
-  background: linear-gradient(135deg, #E53935, #B71C1C);
-  border: none;
-  border-radius: 14px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 0 12px var(--gift-glow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.2s;
-}
-
-.collect-btn:active {
-  transform: scale(0.98);
-}
-
-.collect-btn:disabled {
-  opacity: 0.38;
-  cursor: default;
-  box-shadow: none;
-}
-
-/* Hero Card */
-.hero-card {
-  width: 92%;
-  margin: auto;
-  padding: 20px 12px;
-  border-radius: 25px;
-  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png') center/cover no-repeat;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 20, 40, 0.45);
-  border-radius: 25px;
-}
-
-.hero-card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.santa-frame-wrap {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.santa-frame-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/6dd8b258-c54d-4334-b8bc-48d1bfd1d672.png') center/contain no-repeat;
-  z-index: 0;
-  background-size: 100% 100%;
-}
-
-.santa-frame-inner {
-  position: relative;
-  z-index: 1;
-  width: 175px;
-  height: 175px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Stats */
-.hero-stats {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.65);
-  border: 1px solid rgba(229, 57, 53, 0.25);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 12px;
-  backdrop-filter: blur(6px);
-}
-
-.hero-stat-box {
-  flex: 1;
-  padding: 12px 14px;
-  text-align: center;
-}
-
-.hero-stat-sep {
-  width: 1px;
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.stat-lbl {
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 4px;
-}
-
-.stat-val {
-  font-size: 19px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-  margin-bottom: 2px;
-}
-
-.stat-unit {
-  font-size: 10px;
-  color: var(--snow);
-  font-weight: 700;
-}
-
-/* Claim Wrap */
-.claim-wrap {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
 /* Task Items */
 .task-item {
   background: var(--card);
@@ -617,629 +663,42 @@ body::after {
   cursor: default;
 }
 
-/* Finance/Wallet */
-.wallet-balance-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  backdrop-filter: blur(8px);
-}
-
-/* Modern Wallet Tabs */
-.wallet-modern {
-  margin-bottom: 16px;
-}
-
-.modern-tabs {
+/* Task Tabs */
+.task-tabs {
   display: flex;
-  gap: 12px;
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 60px;
-  padding: 6px;
-  margin-bottom: 20px;
-}
-
-.modern-tab {
-  flex: 1;
-  padding: 12px 8px;
-  text-align: center;
-  background: transparent;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.modern-tab i {
-  font-size: 18px;
-}
-
-.modern-tab.active {
-  background: linear-gradient(135deg, var(--gift), #B71C1C);
-  color: white;
-  box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
-}
-
-.modern-content {
-  display: none;
-  animation: fadeSlideUp 0.3s ease;
-}
-
-.modern-content.active {
-  display: block;
-}
-
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Modern Cards */
-.modern-card {
-  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
-  border-radius: 28px;
-  padding: 20px;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.modern-card.deposit {
-  border-top: 3px solid var(--ice);
-}
-.modern-card.withdraw {
-  border-top: 3px solid var(--gold);
-}
-.modern-card.exchange {
-  border-top: 3px solid var(--gift);
-}
-
-.modern-card-title {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.modern-card-title i {
-  font-size: 24px;
-}
-
-.modern-input-group {
-  margin-bottom: 16px;
-}
-
-.modern-label {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 6px;
-  display: block;
-}
-
-.modern-input {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 12px 16px;
-  color: var(--text);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.modern-input:focus {
-  outline: none;
-  border-color: var(--gift);
-}
-
-.modern-preset {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.modern-preset-btn {
-  flex: 1;
-  padding: 8px;
-  text-align: center;
-  background: rgba(229, 57, 53, 0.15);
-  border: 1px solid rgba(229, 57, 53, 0.3);
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  color: var(--gift);
-  transition: all 0.2s;
-}
-
-.modern-preset-btn:active {
-  transform: scale(0.96);
-  background: rgba(229, 57, 53, 0.3);
-}
-
-.modern-rate-info {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 16px;
-  padding: 12px;
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.modern-rate-value {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--gold);
-}
-
-.modern-btn {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.modern-btn.primary {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
-  color: white;
-  box-shadow: 0 0 20px var(--gift-glow);
-}
-
-.modern-btn.secondary {
-  background: linear-gradient(135deg, #FFD966, #FFB347);
-  color: #2C1A00;
-  box-shadow: 0 0 20px var(--gold-glow);
-}
-
-.modern-btn:active {
-  transform: scale(0.98);
-}
-
-.modern-btn:disabled {
-  opacity: 0.5;
-  transform: none;
-}
-
-/* Swap Section */
-.swap-section-modern {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.swap-row {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 20px;
-  padding: 16px;
-}
-
-.swap-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 7px;
   margin-bottom: 12px;
 }
 
-.swap-currency {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 800;
-  font-size: 16px;
-}
-
-.swap-currency img {
-  width: 32px;
-  height: 32px;
-}
-
-.swap-balance {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.swap-input-area {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.swap-input-area input {
+.ttab {
   flex: 1;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  font-weight: 800;
-  color: white;
-  text-align: right;
-  outline: none;
-}
-
-.swap-max {
-  background: rgba(229, 57, 53, 0.2);
-  border: 1px solid rgba(229, 57, 53, 0.4);
-  border-radius: 12px;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--gift);
-  cursor: pointer;
-}
-
-.swap-divider-modern {
+  padding: 9px;
   text-align: center;
-  position: relative;
-  margin: 8px 0;
-}
-
-.swap-arrow {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #E53935, #B71C1C);
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  transition: transform 0.2s;
-  box-shadow: 0 0 12px var(--gift-glow);
-}
-
-.swap-arrow:active {
-  transform: rotate(180deg) scale(0.9);
-}
-
-.swap-output-area {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-.swap-output-value {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--gold);
-}
-
-/* History */
-.hist-box {
-  background: var(--card);
+  background: var(--glass);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  backdrop-filter: blur(6px);
-}
-
-.hist-hdr {
-  padding: 11px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  font-weight: 800;
+  border-radius: 12px;
   font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.hist-row {
-  padding: 9px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.hist-row:last-child {
-  border-bottom: none;
-}
-
-.hist-l {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.hist-r {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--gold);
-}
-
-.hist-empty {
-  padding: 18px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* Withdrawal Form */
-.wd-form {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 13px;
-  margin-bottom: 10px;
-  backdrop-filter: blur(6px);
-}
-
-.flabel {
-  font-size: 12px;
   font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
   color: var(--muted);
-  margin-bottom: 5px;
-  display: block;
 }
 
-.finput {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 12px;
-  color: var(--text);
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 7px;
-}
-
-.finput:focus {
-  outline: none;
+.ttab.active {
+  background: rgba(229, 57, 53, 0.2);
   border-color: var(--gift);
-}
-
-.preset-row {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 9px;
-}
-
-.prbtn {
-  flex: 1;
-  padding: 7px;
-  text-align: center;
-  background: rgba(229, 57, 53, 0.1);
-  border: 1px solid rgba(229, 57, 53, 0.2);
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
   color: var(--gift);
-  transition: all 0.1s;
 }
 
-.prbtn:active {
-  background: rgba(229, 57, 53, 0.28);
-  transform: scale(0.96);
-}
-
-.ton-row {
-  display: flex;
-  gap: 7px;
-  margin-bottom: 11px;
-}
-
-.ton-chip {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 8px 12px;
-  text-align: center;
-}
-
-.ton-chip .tcl {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-weight: 500;
-}
-
-.ton-chip .tcv {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--cyan);
-}
-
-.btn-prim {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #E53935, #B71C1C);
-  border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 0 14px var(--gift-glow);
-  transition: all 0.1s;
-  animation: primGlow 2.2s ease-in-out infinite;
-}
-
-@keyframes primGlow {
-  0%, 100% { box-shadow: 0 0 14px var(--gift-glow); }
-  50% { box-shadow: 0 0 28px rgba(229, 57, 53, 0.75), 0 0 50px rgba(229, 57, 53, 0.25); }
-}
-
-.btn-prim:active {
-  transform: scale(0.98);
-}
-
-.btn-prim:disabled {
-  opacity: 0.42;
-  cursor: default;
-  box-shadow: none;
-  animation: none;
-}
-
-.btn-wd {
-  width: 100%;
-  padding: 13px;
-  background: linear-gradient(135deg, #FFD966, #FFB347);
-  border: none;
-  border-radius: 12px;
-  color: #2C1A00;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 0 14px var(--gold-glow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  transition: all 0.1s;
-  animation: wdGlow 2.2s ease-in-out infinite;
-}
-
-@keyframes wdGlow {
-  0%, 100% { box-shadow: 0 0 14px var(--gold-glow); }
-  50% { box-shadow: 0 0 28px rgba(255, 217, 102, 0.7), 0 0 50px rgba(255, 217, 102, 0.2); }
-}
-
-.btn-wd:active {
-  transform: scale(0.98);
-}
-
-.btn-wd:disabled {
-  opacity: 0.42;
-  cursor: default;
-  box-shadow: none;
-  animation: none;
-}
-
-.wal-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
-  padding: 10px 12px;
-  background: rgba(0, 0, 0, 0.28);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-
-.wl-inf .wll {
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 3px;
-}
-
-.wl-inf .wla {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--cyan);
-  max-width: 180px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.btn-conn {
-  background: linear-gradient(135deg, var(--ice), #0097B2);
-  border: none;
-  border-radius: 10px;
-  padding: 7px 14px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.1s;
-}
-
-.btn-conn:active {
-  transform: scale(0.96);
-}
-
-.dep-warn {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 8px 11px;
-  background: rgba(255, 193, 7, 0.07);
-  border: 1px solid rgba(255, 193, 7, 0.2);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  font-size: 11px;
-  color: #FFD740;
-  font-weight: 600;
-}
-
-.tx-status {
+.tcont {
   display: none;
-  margin-top: 10px;
-  padding: 11px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  text-align: center;
 }
 
-.tx-status.visible {
+.tcont.active {
   display: block;
 }
 
-/* Status Badges */
-.stat-badge {
-  padding: 2px 9px;
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.sb-pending {
-  background: rgba(255, 202, 40, 0.12);
-  color: #FFD740;
-  border: 1px solid rgba(255, 202, 40, 0.25);
-}
-
-.sb-approved {
-  background: rgba(0, 242, 122, 0.12);
-  color: #00F27A;
-  border: 1px solid rgba(0, 242, 122, 0.25);
-}
-
-.sb-rejected {
-  background: rgba(239, 83, 80, 0.12);
-  color: #FF8A80;
-  border: 1px solid rgba(239, 83, 80, 0.25);
-}
-
-/* Referral Section */
+/* Referral Bonus Card */
 .ref-prog-card {
   background: linear-gradient(145deg, rgba(229, 57, 53, 0.1), var(--card));
   border: 1px solid var(--border);
@@ -1267,10 +726,19 @@ body::after {
 }
 
 .rbb-pct {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   color: var(--gift);
   line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rbb-pct img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .rbb-txt {
@@ -1327,6 +795,7 @@ body::after {
   color: #00F27A;
 }
 
+/* Referral List */
 .ref-list-item {
   display: flex;
   align-items: center;
@@ -1739,6 +1208,343 @@ body::after {
   transform: scale(0.9);
 }
 
+/* Wallet Modern */
+.wallet-modern {
+  margin-bottom: 16px;
+}
+
+.modern-tabs {
+  display: flex;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 60px;
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.modern-tab {
+  flex: 1;
+  padding: 12px 8px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modern-tab i {
+  font-size: 18px;
+}
+
+.modern-tab.active {
+  background: linear-gradient(135deg, var(--gift), #B71C1C);
+  color: white;
+  box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+}
+
+.modern-content {
+  display: none;
+  animation: fadeSlideUp 0.3s ease;
+}
+
+.modern-content.active {
+  display: block;
+}
+
+.modern-card {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
+  border-radius: 28px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modern-card.deposit {
+  border-top: 3px solid var(--ice);
+}
+.modern-card.withdraw {
+  border-top: 3px solid var(--gold);
+}
+.modern-card.exchange {
+  border-top: 3px solid var(--gift);
+}
+
+.modern-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modern-input-group {
+  margin-bottom: 16px;
+}
+
+.modern-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.modern-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: var(--gift);
+}
+
+.modern-preset {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.modern-preset-btn {
+  flex: 1;
+  padding: 8px;
+  text-align: center;
+  background: rgba(229, 57, 53, 0.15);
+  border: 1px solid rgba(229, 57, 53, 0.3);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--gift);
+  transition: all 0.2s;
+}
+
+.modern-preset-btn:active {
+  transform: scale(0.96);
+  background: rgba(229, 57, 53, 0.3);
+}
+
+.modern-rate-info {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.modern-rate-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.modern-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modern-btn.primary {
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  color: white;
+  box-shadow: 0 0 20px var(--gift-glow);
+}
+
+.modern-btn.secondary {
+  background: linear-gradient(135deg, #FFD966, #FFB347);
+  color: #2C1A00;
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.modern-btn:active {
+  transform: scale(0.98);
+}
+
+.modern-btn:disabled {
+  opacity: 0.5;
+  transform: none;
+}
+
+/* Swap Section */
+.swap-section-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.swap-row {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 16px;
+}
+
+.swap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.swap-currency {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.swap-currency img {
+  width: 32px;
+  height: 32px;
+}
+
+.swap-balance {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.swap-input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.swap-input-area input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  text-align: right;
+  outline: none;
+}
+
+.swap-max {
+  background: rgba(229, 57, 53, 0.2);
+  border: 1px solid rgba(229, 57, 53, 0.4);
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gift);
+  cursor: pointer;
+}
+
+.swap-divider-modern {
+  text-align: center;
+  position: relative;
+  margin: 8px 0;
+}
+
+.swap-arrow {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 0 12px var(--gift-glow);
+}
+
+.swap-arrow:active {
+  transform: rotate(180deg) scale(0.9);
+}
+
+.swap-output-area {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.swap-output-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+/* History */
+.hist-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+}
+
+.hist-hdr {
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hist-row {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hist-row:last-child {
+  border-bottom: none;
+}
+
+.hist-l {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.hist-r {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.hist-empty {
+  padding: 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
 /* Particles */
 .ptc {
   position: fixed;
@@ -1895,6 +1701,105 @@ body::after {
   transform: translateX(-50%) scale(0.96);
 }
 
+/* Sections */
+.sec {
+  display: none;
+  padding: 10px 12px;
+  animation: fadeIn 0.26s ease;
+}
+
+.sec.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sec-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gift);
+}
+
+/* Welcome Chest */
+.welcome-chest {
+  position: relative;
+  margin: 10px auto 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.chest-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.chest-image {
+  transition: transform 0.2s ease;
+  width: 110px;
+  height: 110px;
+  filter: drop-shadow(0 0 20px rgba(229, 57, 53, 0.7));
+}
+
+.chest-image:active {
+  transform: scale(0.95);
+}
+
+@keyframes chestFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.chest-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(229, 57, 53, 0.5), transparent);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.chest-text {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #E53935;
+  text-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
+  animation: textPulse 1s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; text-shadow: 0 0 15px rgba(229, 57, 53, 0.8); }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 3px;
@@ -1910,10 +1815,10 @@ body::after {
 
 <div class="background-fixed"></div>
 
-<!-- WELCOME MODAL (Appears for new users) -->
+<!-- WELCOME MODAL -->
 <div id="welcomeModal" class="welcome-modal">
   <div class="welcome-modal-box">
-    <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" alt="Gift Box">
+    <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" alt="Gift Box" onclick="openWelcomeChestFromModal()">
     <div class="welcome-modal-title">🎄 Welcome! 🎄</div>
     <div class="welcome-rewards-list">
       <div class="welcome-reward-item">
@@ -1924,9 +1829,9 @@ body::after {
       </div>
       <div class="welcome-reward-item">
         <div class="welcome-reward-label">
-          <i class="fas fa-cogs" style="font-size: 24px; color: var(--gold);"></i> Starting Bonus
+          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px;"> Mining Machine
         </div>
-        <div class="welcome-reward-value">1 Free Machine!</div>
+        <div class="welcome-reward-value">+1 Machine (1042 Snow/hour)</div>
       </div>
     </div>
     <button class="welcome-open-btn" onclick="openWelcomeChestFromModal()">🎁 Open Your Gift! 🎁</button>
@@ -1979,12 +1884,12 @@ body::after {
   </div>
 </div>
 
-<!-- HOME -->
+<!-- HOME SECTION -->
 <div class="sec active" id="sectionHome" style="padding: 10px 10px 24px">
   
-  <!-- Welcome Chest - Shows for users who haven't opened it yet -->
+  <!-- Welcome Chest -->
   <div id="welcomeChest" class="welcome-chest" style="display: none; margin: 10px auto 20px;">
-    <div class="chest-container" onclick="openWelcomeChest()" style="cursor: pointer;">
+    <div class="chest-container" onclick="openWelcomeChest()">
       <div class="chest-wrapper" style="position: relative; display: inline-block;">
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" 
              alt="Gift" 
@@ -1996,7 +1901,7 @@ body::after {
         🎁 OPEN YOUR WELCOME GIFT! 🎁
       </div>
       <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">
-        ⭐ 100 Gifts + 1 Free Machine! ⭐
+        ⭐ 100 Gifts + 1 Mining Machine (1042 Snow/hour) ⭐
       </div>
     </div>
   </div>
@@ -2022,6 +1927,23 @@ body::after {
         <div class="stat-unit" data-i18n="statSnowDay">Snow/day</div>
       </div>
     </div>
+    
+    <div class="storage-outer">
+      <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Upgrade Storage">
+        <i class="fas fa-arrow-up"></i>
+      </div>
+      <div class="storage-main">
+        <div class="storage-head">
+          <div class="storage-title"><i class="fas fa-warehouse"></i> <span data-i18n="storageTitle">Storage</span></div>
+          <div class="storage-pct" id="storagePct">0%</div>
+        </div>
+        <div class="storage-track">
+          <div class="storage-fill" id="storageFill" style="width:0%"></div>
+          <div class="storage-lbl" id="storageLbl">0 / 0</div>
+        </div>
+      </div>
+    </div>
+    
     <div class="claim-wrap">
       <div style="display: flex; align-items: center; gap: 8px; width: 100%">
         <button class="collect-btn" id="collectBtn" onclick="collectSnow()" disabled style="flex: 1">
@@ -2034,42 +1956,23 @@ body::after {
         </button>
       </div>
       
-      <!-- Machine Card -->
-      <div class="machine-card">
-        <div class="machine-title">
-          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" style="width: 32px; height: 32px;">
-          <span>Snow Machine</span>
-        </div>
-        <div class="machine-stats">
-          <div class="machine-stat">
-            <div class="machine-stat-label">Production Rate</div>
-            <div class="machine-stat-value">1,042 Snow/hour</div>
-          </div>
-          <div class="machine-stat">
-            <div class="machine-stat-label">Your Machines</div>
-            <div class="machine-stat-value" id="machineCount">0</div>
-          </div>
-          <div class="machine-stat">
-            <div class="machine-stat-label">Total Rate</div>
-            <div class="machine-stat-value" id="totalRateDisp">0 Snow/h</div>
-          </div>
-        </div>
-        <button class="buy-machine-btn" id="buyMachineBtn" onclick="buyMachine()">
-          <span><i class="fas fa-cogs"></i> Buy New Machine</span>
-          <span class="machine-price"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 20px; height: 20px;"> 30,000 Snow</span>
-        </button>
-      </div>
+      <!-- Mining Machine Buy Button -->
+      <button class="mining-upgrade-btn" id="miningUpgradeBtn" onclick="buyMachine()">
+        <span><i class="fas fa-microchip"></i> <span data-i18n="buyMachine">Buy Machine</span></span>
+        <span class="machines-count-badge"><span data-i18n="machinesCount">Machines</span> <span id="machinesCount">0</span></span>
+        <span class="machine-cost" id="machineCostDisplay"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 16px; height: 16px; object-fit: contain;"> <span id="machineCost">30000</span></span>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- FRIENDS -->
+<!-- FRIENDS SECTION -->
 <div class="sec" id="sectionFriends">
   <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="friendsTitle">Friends & Referrals</span></div>
   <div class="ref-prog-card">
     <div class="ref-bonus-badge">
-      <span class="rbb-pct">1000❄️</span>
-      <span class="rbb-txt" data-i18n="refCommission">Bonus when your friend makes their first deposit!</span>
+      <span class="rbb-pct"><span style="color: var(--gift); font-size: 32px; font-weight: 800;">1000</span> <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px; object-fit: contain;"></span>
+      <span class="rbb-txt" data-i18n="refCommission">Snow bonus when your friend makes their first deposit!</span>
     </div>
     <div class="ref-link-row">
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
@@ -2086,7 +1989,7 @@ body::after {
   </div>
 </div>
 
-<!-- TASKS - Social tab first (Left), Referral tab second (Right) -->
+<!-- TASKS SECTION -->
 <div class="sec" id="sectionTasks">
   <div class="task-tabs">
     <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">📢 <span data-i18n="tabSocialTxt">Social</span></div>
@@ -2106,7 +2009,7 @@ body::after {
 <!-- Floating Add Task Button -->
 <button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none; align-items: center; gap: 8px;">➕ <span data-i18n="floatAdd">Add Task</span></button>
 
-<!-- WALLET - Modern Design -->
+<!-- WALLET SECTION -->
 <div class="sec" id="sectionWallet">
   <div class="wallet-modern">
     <div class="modern-tabs">
@@ -2280,55 +2183,7 @@ body::after {
   </div>
 </nav>
 
-<!-- HELP MODAL -->
-<div class="modal" id="helpModal">
-  <div class="modal-box" style="max-height: 88vh; overflow-y: auto; padding: 0; border-radius: 22px 22px 0 0">
-    <div style="position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, #0A1428, #0A1A2A); border-bottom: 1px solid rgba(229, 57, 53, 0.18); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 22px 22px 0 0">
-      <div style="font-size: 17px; font-weight: 800; color: var(--gift); display: flex; align-items: center; gap: 8px" data-i18n="helpTitle">🎅 Santa Snow Guide</div>
-      <button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button>
-    </div>
-    <div style="padding: 14px 14px 0">
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-bottom: 4px">
-        <a href="https://t.me/SantaSnowPayouts" target="_blank" style="text-decoration: none; background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
-          <span style="font-size: 20px">💸</span>
-          <span style="font-size: 10px; font-weight: 800; color: #00D4FF; line-height: 1.2" data-i18n="helpPayCh">Payouts<br>Channel</span>
-        </a>
-        <a href="https://t.me/SantaSnowNews" target="_blank" style="text-decoration: none; background: rgba(229, 57, 53, 0.1); border: 1px solid rgba(229, 57, 53, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
-          <span style="font-size: 20px">📢</span>
-          <span style="font-size: 10px; font-weight: 800; color: var(--gift); line-height: 1.2" data-i18n="helpNewsCh">Bot<br>News</span>
-        </a>
-        <a href="https://t.me/SantaSupport01" target="_blank" style="text-decoration: none; background: rgba(255, 217, 102, 0.1); border: 1px solid rgba(255, 217, 102, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
-          <span style="font-size: 20px">🛟</span>
-          <span style="font-size: 10px; font-weight: 800; color: var(--gold); line-height: 1.2" data-i18n="helpSupport">Technical<br>Support</span>
-        </a>
-      </div>
-    </div>
-    <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 12px">
-      <div style="background: linear-gradient(135deg, rgba(229, 57, 53, 0.08), rgba(0, 0, 0, 0.4)); border: 1px solid rgba(229, 57, 53, 0.25); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 100 Gifts</span> — main withdrawal currency<br><span style="color: #fff; font-weight: 800">• 1 Free Snow Machine</span> — produces 1,042 Snow/hour</div>
-      </div>
-      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Snow Machines with <span style="color: var(--snow); font-weight: 800">Snow</span><br>⬅ Each machine produces 1,042 Snow per hour<br>⬅ Machines auto-produce Snow collected in the Storage<br>⬅ Convert Snow to <span style="color: var(--gift); font-weight: 800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎<br>📊 1 Gifts = 0.0001 TON (10,000 Gifts = 1 TON)</div>
-      </div>
-      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Bonuses</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends and earn Snow rewards:<br>
-          • 10 referrals: 3,000 Snow<br>
-          • 20 referrals: 7,500 Snow<br>
-          • 50 referrals: 20,000 Snow<br>
-          • 100 referrals: 50,000 Snow<br>
-          • 200 referrals: 100,000 Snow<br>
-          • 500 referrals: 250,000 Snow<br>
-          Plus when they make their <span style="color: var(--gold); font-weight: 800">first deposit</span>, you get <span style="color: var(--snow); font-weight: 800">1000 Snow</span> instantly!</div>
-      </div>
-    </div>
-    <div style="height: 12px"></div>
-  </div>
-</div>
-
-<!-- MODALS -->
+<!-- UPGRADE STORAGE MODAL -->
 <div class="modal" id="upgradeModal">
   <div class="modal-box">
     <div class="mhdr"><div class="mtitle" data-i18n="upgTitle">⬆️ Upgrade Storage</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div>
@@ -2336,6 +2191,18 @@ body::after {
   </div>
 </div>
 
+<!-- BUY MACHINE MODAL (Confirmation) -->
+<div class="modal" id="buyMachineModal">
+  <div class="modal-box" style="max-width: 320px;">
+    <div class="mhdr">
+      <div class="mtitle">❄️ Buy Snow Machine</div>
+      <button class="mclose" onclick="closeModal('buyMachineModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="buyMachineContent" style="padding: 8px 0;"></div>
+  </div>
+</div>
+
+<!-- ADD TASK MODAL -->
 <div class="modal" id="addTaskModal">
   <div class="modal-box">
     <div class="mhdr">
@@ -2377,15 +2244,57 @@ body::after {
   </div>
 </div>
 
+<!-- HELP MODAL -->
+<div class="modal" id="helpModal">
+  <div class="modal-box" style="max-height: 88vh; overflow-y: auto; padding: 0; border-radius: 22px 22px 0 0">
+    <div style="position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, #0A1428, #0A1A2A); border-bottom: 1px solid rgba(229, 57, 53, 0.18); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 22px 22px 0 0">
+      <div style="font-size: 17px; font-weight: 800; color: var(--gift); display: flex; align-items: center; gap: 8px" data-i18n="helpTitle">🎅 Santa Snow Guide</div>
+      <button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="padding: 14px 14px 0">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-bottom: 4px">
+        <a href="https://t.me/SantaSnowPayouts" target="_blank" style="text-decoration: none; background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
+          <span style="font-size: 20px">💸</span>
+          <span style="font-size: 10px; font-weight: 800; color: #00D4FF; line-height: 1.2" data-i18n="helpPayCh">Payouts<br>Channel</span>
+        </a>
+        <a href="https://t.me/SantaSnowNews" target="_blank" style="text-decoration: none; background: rgba(229, 57, 53, 0.1); border: 1px solid rgba(229, 57, 53, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
+          <span style="font-size: 20px">📢</span>
+          <span style="font-size: 10px; font-weight: 800; color: var(--gift); line-height: 1.2" data-i18n="helpNewsCh">Bot<br>News</span>
+        </a>
+        <a href="https://t.me/SantaSupport01" target="_blank" style="text-decoration: none; background: rgba(255, 217, 102, 0.1); border: 1px solid rgba(255, 217, 102, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
+          <span style="font-size: 20px">🛟</span>
+          <span style="font-size: 10px; font-weight: 800; color: var(--gold); line-height: 1.2" data-i18n="helpSupport">Technical<br>Support</span>
+        </a>
+      </div>
+    </div>
+    <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 12px">
+      <div style="background: linear-gradient(135deg, rgba(229, 57, 53, 0.08), rgba(0, 0, 0, 0.4)); border: 1px solid rgba(229, 57, 53, 0.25); border-radius: 16px; padding: 13px">
+        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 100 Gifts</span> — main withdrawal currency<br><span style="color: #fff; font-weight: 800">• 1 Mining Machine (1042 Snow/hour)</span> — free mining power starts immediately</div>
+      </div>
+      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
+        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Snow Machines with <span style="color: var(--snow); font-weight: 800">Snow</span><br>⬅ Each machine produces 1042 Snow/hour<br>⬅ Machines auto-produce Snow collected in the Storage<br>⬅ Convert Snow to <span style="color: var(--gift); font-weight: 800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎<br>📊 1 Gifts = 0.0001 TON (10,000 Gifts = 1 TON)</div>
+      </div>
+      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
+        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Bonus</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Share your referral link with friends. When they make their <span style="color: var(--gold); font-weight: 800">first deposit</span>, you get <span style="color: var(--snow); font-weight: 800">1000 Snow</span> instantly! 🎁</div>
+      </div>
+    </div>
+    <div style="height: 12px"></div>
+  </div>
+</div>
+
 <div id="notif"></div>
 
 <script>
 /* ============================================
    SANTA SNOW FACTORY - Frontend v9.0
    UPDATES:
-   1. Machine System - Buy unlimited machines
-   2. Referral Tasks - 6 levels with Snow rewards
-   3. Updated Welcome Chest with 1 free machine
+   1. Referral Tasks: 10,20,50,100,200,500 referrals
+   2. Mining Machine System: Single machine, 30000 Snow, 1042 Snow/hour, unlimited
+   3. Welcome Chest: Red Santa box, rewards: 100 Gifts + 1 Machine
+   4. Referral Bonus Display: 1000 with Snow icon
    ============================================ */
 
 const CFG = {
@@ -2399,20 +2308,29 @@ const CFG = {
   REF_BONUS: 1000,
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
   BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/app',
-  MACHINE_PRICE: 30000,
+  MACHINE_COST: 30000,
   MACHINE_RATE: 1042,
 };
 
-// REFERRAL TASKS - New!
+// Mining Machine Config
+const MACHINE_CONFIG = {
+  cost: 30000,
+  rate: 1042,
+  name: '❄️ Snow Machine',
+  icon: 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png'
+};
+
+// Referral Tasks
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 3000, name: "10 Referrals" },
-  { id: 'ref_20', n: 20, snow: 7500, name: "20 Referrals" },
-  { id: 'ref_50', n: 50, snow: 20000, name: "50 Referrals" },
-  { id: 'ref_100', n: 100, snow: 50000, name: "100 Referrals" },
-  { id: 'ref_200', n: 200, snow: 100000, name: "200 Referrals" },
-  { id: 'ref_500', n: 500, snow: 250000, name: "500 Referrals" },
+  { id: 'ref_10', name: '10 Referrals', target: 10, snow: 3000 },
+  { id: 'ref_20', name: '20 Referrals', target: 20, snow: 7500 },
+  { id: 'ref_50', name: '50 Referrals', target: 50, snow: 20000 },
+  { id: 'ref_100', name: '100 Referrals', target: 100, snow: 50000 },
+  { id: 'ref_200', name: '200 Referrals', target: 200, snow: 100000 },
+  { id: 'ref_500', name: '500 Referrals', target: 500, snow: 250000 },
 ];
 
+// Social Tasks
 const SOC_TASKS = [
   { id: 'tg_payouts', name: 'Join Payouts Channel', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 1000 },
   { id: 'tg_news', name: 'Join News Channel', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 500 },
@@ -2451,10 +2369,13 @@ const STORAGE_LVS = {
   27: { cap: 10000000, upgCost: 300000000, label: 'Santa\'s Realm' },
 };
 
+const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
+const GIFT_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png';
+
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, gifts: 0, machineCount: 0, totalRate: 0, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false },
+  user: { snow: 0, gifts: 0, machines: 0, totalEarned: 0, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2499,17 +2420,12 @@ async function loadState() {
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     
-    // Calculate total rate from machines
-    S.user.totalRate = (S.user.machineCount || 0) * CFG.MACHINE_RATE;
-    
-    // Check if user is new (just registered and chest not opened)
-    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.gifts === 0 && (S.user.machineCount || 0) === 0) {
+    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.gifts === 0 && S.user.machines === 0) {
       S.isNewUser = true;
       showWelcomeModal();
     } else {
       S.isNewUser = false;
       hideWelcomeModal();
-      // Show welcome chest in home page for users who haven't opened it
       const chestEl = document.getElementById('welcomeChest');
       if (chestEl && !S.user.welcomeChestOpened) {
         chestEl.style.display = 'block';
@@ -2523,16 +2439,12 @@ async function loadState() {
 
 function showWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) {
-    modal.classList.add('active');
-  }
+  if (modal) modal.classList.add('active');
 }
 
 function hideWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
+  if (modal) modal.classList.remove('active');
 }
 
 async function openWelcomeChestFromModal() {
@@ -2544,19 +2456,14 @@ async function openWelcomeChestFromModal() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.gifts = (S.user.gifts || 0) + result.gifts;
-    
-    // Give 1 free machine
-    S.user.machineCount = 1;
-    S.user.totalRate = CFG.MACHINE_RATE;
+    S.user.machines = (S.user.machines || 0) + result.machines;
     
     hideWelcomeModal();
     updateUI();
     triggerHeavySnow();
-    showNotif(`🎁 +${fmt(result.gifts)} Gifts! +1 Free Snow Machine!`, 's');
+    showNotif(`🎁 +${fmt(result.gifts)} Gifts! +1 Mining Machine (${CFG.MACHINE_RATE} Snow/hour)`, 's');
     spawnSnowParticle();
-    
-    // Show success modal with rewards
-    showRewardsModal(result.gifts, 1);
+    showRewardsModal(result.gifts, result.machines);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
@@ -2569,15 +2476,12 @@ function showRewardsModal(gifts, machines) {
       <div style="font-size: 20px; font-weight: 800; color: var(--gift); margin-bottom: 15px;">Congratulations!</div>
       <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 15px; margin: 10px 0;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-          <span><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png" style="width: 24px; height: 24px;"> Gifts:</span>
+          <span><img src="${GIFT_IMG}" style="width: 24px; height: 24px;"> Gifts:</span>
           <span style="font-weight: 800; color: var(--gold);">+${fmt(gifts)}</span>
         </div>
         <div style="display: flex; justify-content: space-between;">
-          <span><i class="fas fa-cogs" style="color: var(--gold); font-size: 20px;"></i> Snow Machines:</span>
-          <span style="font-weight: 800; color: var(--snow);">+${machines} Free Machine!</span>
-        </div>
-        <div style="margin-top: 10px; font-size: 12px; color: var(--muted);">
-          Each machine produces ${CFG.MACHINE_RATE} Snow/hour
+          <span><img src="${MACHINE_CONFIG.icon}" style="width: 24px; height: 24px;"> Mining Machine:</span>
+          <span style="font-weight: 800; color: var(--snow);">+1 (${CFG.MACHINE_RATE} Snow/hour)</span>
         </div>
       </div>
       <button onclick="closeModal('rewardsModal')" class="btn-prim" style="margin-top: 10px;">Start Mining! ⛏️</button>
@@ -2608,19 +2512,88 @@ async function openWelcomeChest() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.gifts = (S.user.gifts || 0) + result.gifts;
-    
-    // Give 1 free machine
-    S.user.machineCount = 1;
-    S.user.totalRate = CFG.MACHINE_RATE;
+    S.user.machines = (S.user.machines || 0) + result.machines;
     
     document.getElementById('welcomeChest').style.display = 'none';
     updateUI();
     triggerHeavySnow();
-    showNotif(`🎁 +${fmt(result.gifts)} Gifts! +1 Free Snow Machine!`, 's');
+    showNotif(`🎁 +${fmt(result.gifts)} Gifts! +1 Mining Machine (${CFG.MACHINE_RATE} Snow/hour)`, 's');
     spawnSnowParticle();
-    showRewardsModal(result.gifts, 1);
+    showRewardsModal(result.gifts, result.machines);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
+  }
+}
+
+async function buyMachine() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  const currentMachines = S.user.machines || 0;
+  const cost = CFG.MACHINE_COST;
+  const userSnow = S.user.snow || 0;
+  
+  if (userSnow < cost) {
+    showNotif(`❌ Need ${fmt(cost)} Snow to buy a machine!`, 'e');
+    return;
+  }
+  
+  const modalContent = `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div style="font-size: 48px; margin-bottom: 8px;">❄️✨</div>
+      <div style="background: linear-gradient(135deg, rgba(229,57,53,0.2), rgba(0,0,0,0.3)); border-radius: 16px; padding: 12px; margin: 10px 0;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Current Machines:</span>
+          <span style="font-weight: 800; color: var(--gold);">${currentMachines}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Current Rate:</span>
+          <span style="font-weight: 800; color: var(--snow);">${currentMachines * CFG.MACHINE_RATE} Snow/hour</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">After Purchase:</span>
+          <span style="font-weight: 800; color: var(--gold);">${currentMachines + 1} Machines</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">New Rate:</span>
+          <span style="font-weight: 800; color: var(--snow);">${(currentMachines + 1) * CFG.MACHINE_RATE} Snow/hour</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
+          <span style="color: var(--muted);">Cost:</span>
+          <span style="font-weight: 800; color: var(--gift);">${fmt(cost)} ❄️ Snow</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 6px;">
+          <span style="color: var(--muted);">Your Balance:</span>
+          <span style="font-weight: 800; color: ${userSnow >= cost ? '#4CAF50' : '#EF5350'};">${fmt(userSnow)} ❄️</span>
+        </div>
+      </div>
+      <button onclick="confirmBuyMachine()" class="btn-prim" style="width: 100%; margin-top: 8px;">❄️ Buy Machine (${fmt(cost)} Snow)</button>
+    </div>
+  `;
+  
+  const modal = document.getElementById('buyMachineModal');
+  const content = document.getElementById('buyMachineContent');
+  if (content) content.innerHTML = modalContent;
+  openModal('buyMachineModal');
+}
+
+async function confirmBuyMachine() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  try {
+    const result = await api('buyMachine', {});
+    S.user.snow = result.snow;
+    S.user.machines = result.machines;
+    updateUI();
+    closeModal('buyMachineModal');
+    triggerHeavySnow();
+    showNotif(`❄️ Machine purchased! +1 Machine (${CFG.MACHINE_RATE} Snow/hour)`, 's');
+    spawnSnowParticle();
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to buy machine'}`, 'e');
   }
 }
 
@@ -2628,32 +2601,34 @@ function updateUI() {
   const u = S.user;
   document.getElementById('tbGifts').textContent = fmt(u.gifts || 0);
   document.getElementById('tbSnow').textContent = fmt(u.snow || 0);
-  const rateDay = Math.round((u.totalRate || 0) * 24);
+  
+  const machines = u.machines || 0;
+  const rateHour = machines * CFG.MACHINE_RATE;
+  const rateDay = rateHour * 24;
   document.getElementById('heroRateDay').textContent = fmt(rateDay);
+  document.getElementById('machinesCount').textContent = machines;
   
-  // Update machine display
-  document.getElementById('machineCount').textContent = u.machineCount || 0;
-  document.getElementById('totalRateDisp').textContent = fmt(u.totalRate || 0) + ' Snow/h';
-  
-  const btn = document.getElementById('buyMachineBtn');
-  if (btn) {
-    btn.disabled = (u.snow || 0) < CFG.MACHINE_PRICE;
-  }
+  const costEl = document.getElementById('machineCost');
+  const btn = document.getElementById('miningUpgradeBtn');
+  if (costEl) costEl.textContent = fmt(CFG.MACHINE_COST);
+  if (btn) btn.disabled = (u.snow || 0) < CFG.MACHINE_COST;
   
   updateSwapBals();
   updateRefUI();
   renderExchHist();
   renderWdHist();
   renderTasks();
+  updateStorageUI();
 }
 
 function startStorage() {
   if (S.storageInt) clearInterval(S.storageInt);
   S.storageInt = setInterval(() => {
     const u = S.user, lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1];
-    const rate = u.totalRate || 0;
+    const machines = u.machines || 0;
+    const rate = machines * CFG.MACHINE_RATE / 3600;
     if (rate <= 0) { updateStorageUI(); return; }
-    S.storageProgress += (rate / 3600);
+    S.storageProgress += rate;
     if (S.storageProgress > cfg.cap) S.storageProgress = cfg.cap;
     updateStorageUI();
   }, 1000);
@@ -2664,6 +2639,10 @@ function updateStorageUI() {
   const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
   const accruedExact = S.storageProgress.toFixed(6);
   document.getElementById('heroAccrued').textContent = accruedExact;
+  document.getElementById('storagePct').textContent = pct + '%';
+  document.getElementById('storageFill').style.width = pct + '%';
+  document.getElementById('storageLbl').textContent = `${Math.floor(S.storageProgress)} / ${fmt(cfg.cap)}`;
+  
   const btn = document.getElementById('collectBtn');
   const pctEl = document.getElementById('claimPct');
   const txtEl = document.getElementById('claimBtnTxt');
@@ -2671,8 +2650,8 @@ function updateStorageUI() {
   btn.disabled = !has;
   if (pctEl) pctEl.textContent = pct + '%';
   if (txtEl) txtEl.innerHTML = has
-    ? `<img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 5px"> Claim ${fmt(Math.floor(S.storageProgress))} Snow`
-    : `<img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 5px"> Storage Empty...`;
+    ? `<img src="${SNOW_IMG}" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 5px"> Claim ${fmt(Math.floor(S.storageProgress))} Snow`
+    : `<img src="${SNOW_IMG}" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 5px"> Storage Empty...`;
   const lvEl = document.getElementById('storageLvDisp');
   if (lvEl) lvEl.textContent = lv;
 }
@@ -2693,33 +2672,6 @@ function triggerHeavySnow() {
   }
 }
 
-async function buyMachine() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  
-  const price = CFG.MACHINE_PRICE;
-  const currentSnow = S.user.snow || 0;
-  
-  if (currentSnow < price) {
-    showNotif(`Need ${fmt(price)} Snow to buy a machine!`, 'e');
-    return;
-  }
-  
-  try {
-    const result = await api('buyMachine', {});
-    S.user.snow = result.snow;
-    S.user.machineCount = result.machineCount;
-    S.user.totalRate = result.totalRate;
-    updateUI();
-    triggerHeavySnow();
-    showNotif(`⚙️ +1 Snow Machine! Now producing ${fmt(result.totalRate)} Snow/hour`, 's');
-    spawnSnowParticle();
-  } catch (e) {
-    showNotif(`❌ ${e.message || 'Failed to buy machine'}`, 'e');
-  }
-}
-
 async function collectSnow() {
   if (S._collectCooldown) return;
   const now = Date.now();
@@ -2732,7 +2684,7 @@ async function collectSnow() {
   S.user.snow = (S.user.snow || 0) + amt;
   S.user.totalEarned = (S.user.totalEarned || 0) + amt;
   S.storageProgress = 0;
-  updateUI(); updateStorageUI(); spawnSnowParticle();
+  updateUI(); spawnSnowParticle();
   triggerHeavySnow();
   showNotif(`+${fmt(amt)} Snow collected!`, 's');
   api('collect', { amount: amt }).catch(() => { });
@@ -2741,29 +2693,29 @@ async function collectSnow() {
 function buildUpgradeContent() {
   const u = S.user, lv = u.storageLevel || 1, cur = STORAGE_LVS[lv], next = STORAGE_LVS[lv + 1];
   let h = `<div style="background: rgba(0, 0, 0, 0.28); border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin-bottom: 10px">
-    <div class="upg-levels" style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px">
-      <div class="upg-lv" style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 12px; text-align: center">
-        <div class="lvn" style="font-size: 16px; font-weight: 800; color: var(--gift)">Lv.${lv}</div>
-        <div class="lvl" style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(cur.label)}</div>
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px">
+      <div style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 12px; text-align: center">
+        <div style="font-size: 16px; font-weight: 800; color: var(--gift)">Lv.${lv}</div>
+        <div style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(cur.label)}</div>
         <div style="font-size: 10px; color: var(--muted); margin-top: 2px">Cap: ${fmt(cur.cap)}</div>
       </div>
-      <div class="upg-arrow" style="font-size: 20px; color: var(--gift)">→</div>`;
+      <div style="font-size: 20px; color: var(--gift)">→</div>`;
   if (next) {
-    h += `<div class="upg-lv" style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--gift); border-radius: 12px; text-align: center">
-      <div class="lvn" style="font-size: 16px; font-weight: 800; color: var(--gold)">Lv.${lv + 1}</div>
-      <div class="lvl" style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(next.label)}</div>
+    h += `<div style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--gift); border-radius: 12px; text-align: center">
+      <div style="font-size: 16px; font-weight: 800; color: var(--gold)">Lv.${lv + 1}</div>
+      <div style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(next.label)}</div>
       <div style="font-size: 10px; color: var(--muted); margin-top: 2px">Cap: ${fmt(next.cap)}</div>
     </div>`;
   } else {
-    h += `<div class="upg-lv" style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 12px; text-align: center"><div class="lvn">MAX</div><div class="lvl">Max Level</div></div>`;
+    h += `<div style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 12px; text-align: center"><div>MAX</div><div>Max Level</div></div>`;
   }
   h += `</div>`;
   if (next) {
-    h += `<div class="upg-det" style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9; margin-bottom: 10px; padding: 9px; background: rgba(0, 0, 0, 0.28); border-radius: 10px">
+    h += `<div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9; margin-bottom: 10px; padding: 9px; background: rgba(0, 0, 0, 0.28); border-radius: 10px">
       📦 Capacity: <span style="color: #fff; font-weight: 800">${fmt(cur.cap)} → ${fmt(next.cap)} Snow</span><br>
-      💰 Cost: <span style="color: #fff; font-weight: 800">${fmt(next.upgCost)} <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 14px; height: 14px; object-fit: contain; vertical-align: middle"></span>
+      💰 Cost: <span style="color: #fff; font-weight: 800">${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width: 14px; height: 14px; object-fit: contain; vertical-align: middle"></span>
     </div>
-    <button class="btn-upg" onclick="upgradeStorage()" style="width: 100%; padding: 11px; background: linear-gradient(135deg, #E53935, #B71C1C); border: none; border-radius: 12px; color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 0 12px var(--gift-glow); transition: all 0.1s">⬆️ Upgrade for ${fmt(next.upgCost)} <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 16px; height: 16px; object-fit: contain; vertical-align: middle"></button>`;
+    <button onclick="upgradeStorage()" style="width: 100%; padding: 11px; background: linear-gradient(135deg, #E53935, #B71C1C); border: none; border-radius: 12px; color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 0 12px var(--gift-glow); transition: all 0.1s">⬆️ Upgrade for ${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width: 16px; height: 16px; object-fit: contain; vertical-align: middle"></button>`;
   } else {
     h += `<div style="text-align: center; padding: 12px; color: var(--gift); font-weight: 800">🏆 Maximum Level!</div>`;
   }
@@ -2799,25 +2751,26 @@ function hideFab() { const f = document.getElementById('floatAddTask'); if (f) f
 function showFab() { const f = document.getElementById('floatAddTask'); if (f) f.style.display = 'flex'; }
 
 function renderTasks() {
-  // Render referral tasks
   const referralCount = S.user.referralCount || 0;
-  const refTasksHtml = REF_TASKS.map(t => {
-    const completed = S.doneTasks.includes(t.id);
-    const canClaim = referralCount >= t.n && !completed;
-    return `<div class="task-item">
-      <div class="ticon" style="font-size: 32px;">👥</div>
-      <div class="tinfo">
-        <div class="tname">${t.name}</div>
-        <div class="trew"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 18px; height: 18px;"> ${fmt(t.snow)} Snow</div>
-        <div class="tstat">Progress: ${referralCount}/${t.n} referrals</div>
+  let refTasksHtml = '';
+  for (const task of REF_TASKS) {
+    const completed = S.doneTasks.includes(task.id);
+    const canClaim = referralCount >= task.target && !completed;
+    refTasksHtml += `
+      <div class="task-item">
+        <div class="ticon">👥</div>
+        <div class="tinfo">
+          <div class="tname">${task.name}</div>
+          <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(task.snow)} Snow</div>
+          <div class="tstat">You have ${referralCount}/${task.target} referrals</div>
+        </div>
+        ${completed ? '<button class="tbtn done">✅ Done</button>' : 
+          (canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 Claim</button>` : 
+          `<button class="tbtn go" disabled style="opacity:0.5">🔒 Locked</button>`)}
       </div>
-      ${completed ? `<button class="tbtn done">✅ Done</button>` :
-        canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${t.id}')">🎁 Claim</button>` :
-        `<button class="tbtn done" style="opacity: 0.5;">🔒 Locked</button>`}
-    </div>`;
-  }).join('');
-  
-  document.getElementById('refTaskList').innerHTML = refTasksHtml || `<div class="hist-empty">Complete referral tasks to earn Snow!</div>`;
+    `;
+  }
+  document.getElementById('refTaskList').innerHTML = refTasksHtml || '<div class="hist-empty">No referral tasks available</div>';
   renderSocTasks();
 }
 
@@ -2825,18 +2778,16 @@ async function claimRefTask(taskId) {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
-  
   try {
     const result = await api('claimTask', { taskId });
-    S.doneTasks.push(taskId);
     S.user.snow = result.snow;
+    S.doneTasks.push(taskId);
     updateUI();
-    renderTasks();
     triggerHeavySnow();
-    showNotif(`🎉 +${fmt(result.snow)} Snow from ${taskId.replace('_', ' ')}!`, 's');
+    showNotif(`🎉 +${fmt(result.snow)} Snow from referral task!`, 's');
     spawnSnowParticle();
   } catch (e) {
-    showNotif(`❌ ${e.message || 'Failed to claim reward'}`, 'e');
+    showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
   }
 }
 
@@ -2850,7 +2801,7 @@ function buildTaskCard(t, cat) {
     <div class="ticon" style="font-size: 28px">${icon}</div>
     <div class="tinfo">
       <div class="tname">${name}</div>
-      <div class="trew"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(snow)} Snow</div>
+      <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(snow)} Snow</div>
       ${t.completions !== undefined ? `<div class="tstat">${t.completions || 0}/${t.targetUsers || 0} completed</div>` : ''}
     </div>
     ${done ? `<button class="tbtn done">✅ Done</button>`
@@ -3016,8 +2967,8 @@ function renderExchHist() {
     const date = h.d || (h.ts ? new Date(h.ts).toLocaleDateString() : '');
     const fromAmt = isS2G ? fmt(snowAmt) : fmt(giftAmt);
     const toAmt = isS2G ? fmt(giftAmt) : fmt(snowAmt);
-    const fromLbl = isS2G ? `<img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Snow` : 'Gifts';
-    const toLbl = isS2G ? 'Gifts' : `<img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Snow`;
+    const fromLbl = isS2G ? `<img src="${SNOW_IMG}" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Snow` : 'Gifts';
+    const toLbl = isS2G ? 'Gifts' : `<img src="${SNOW_IMG}" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Snow`;
     return `<div class="hist-row" style="flex-direction:column;align-items:flex-start;gap:2px">
       <div style="display:flex;justify-content:space-between;width:100%">
         <span class="hist-l">${esc(dir)} · ${esc(date)}</span>
@@ -3141,7 +3092,7 @@ function updateRefUI() {
             <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
             ${r.depositBonusPaid ? '<div style="font-size: 10px; color: var(--gold);">✅ Bonus paid</div>' : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for deposit</div>'}
           </div>
-          <div class="rli-earn">${r.earned ? `+${fmt(r.earned)} <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">` : '0'}</div>
+          <div class="rli-earn">${r.earned ? `+${fmt(r.earned)} <img src="${SNOW_IMG}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">` : '0'}</div>
         </div>`).join('');
     }
   }
@@ -3158,7 +3109,7 @@ function updDepPreview() {
   const ton = parseFloat(document.getElementById('depositAmountInput').value) || 0;
   const snow = Math.floor(ton * TON_TO_SNOW);
   const el = document.getElementById('depSnowPreview');
-  if (el) el.innerHTML = `<img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:20px;height:20px;object-fit:contain"> ${fmt(snow)} Snow`;
+  if (el) el.innerHTML = `<img src="${SNOW_IMG}" style="width:20px;height:20px;object-fit:contain"> ${fmt(snow)} Snow`;
 }
 
 async function initTON() {
@@ -3279,7 +3230,7 @@ function showNotif(msg, type = 'i') {
 
 function spawnSnowParticle() {
   const p = document.createElement('img');
-  p.src = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
+  p.src = SNOW_IMG;
   p.className = 'ptc';
   p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain; font-size: 0`;
   document.body.appendChild(p);
@@ -3333,8 +3284,7 @@ function ldHide() {
 function preloadImages() {
   const urls = [
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
-    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png',
-    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png',
+    SNOW_IMG, GIFT_IMG, MACHINE_CONFIG.icon,
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
@@ -3361,7 +3311,7 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 const TRANSLATIONS = {
   en: {
     labelGifts: 'Gifts', labelSnow: 'Snow', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '1000 Snow bonus when friend deposits!',
+    friendsTitle: 'Friends & Referrals', refCommission: 'Snow bonus when your friend makes their first deposit!',
     refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they deposit, you get 1000 Snow!',
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
@@ -3372,8 +3322,8 @@ const TRANSLATIONS = {
     swapFrom: 'FROM', swapTo: 'TO', balance: 'Balance:', maxBtn: 'MAX', swapRate: '📊 100 Snow = 10 Gifts',
     exchangeNow: 'Exchange Now', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
     helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
-    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the red chest to receive:<br><span style="color:#fff;font-weight:800">• 100 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 1 Free Snow Machine</span> — produces 1,042 Snow/hour',
-    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Snow Machines with <span style="color:var(--snow);font-weight:800">Snow</span><br>⬅ Each machine produces 1,042 Snow per hour<br>⬅ Convert Snow to <span style="color:var(--gift);font-weight:800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎<br>📊 1 Gifts = 0.0001 TON (10,000 Gifts = 1 TON)',
+    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the red chest to receive:<br><span style="color:#fff;font-weight:800">• 100 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (1042 Snow/hour)</span> — free mining power starts immediately',
+    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Snow Machines with <span style="color:var(--snow);font-weight:800">Snow</span><br>⬅ Each machine produces 1042 Snow/hour<br>⬅ Convert Snow to <span style="color:var(--gift);font-weight:800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎<br>📊 1 Gifts = 0.0001 TON (10,000 Gifts = 1 TON)',
     addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--gift)">Target Users × 60 Gifts</strong>',
     taskCostNote: 'Min target: 100 users | 100 users = 6,000 Gifts', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
     taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
@@ -3381,10 +3331,11 @@ const TRANSLATIONS = {
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
     upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
     floatAdd: 'Add Task', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
+    buyMachine: 'Buy Machine', machinesCount: 'Machines', storageTitle: 'Storage',
   },
   ru: {
     labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: '1000 Снега бонус когда друг делает депозит!',
+    friendsTitle: 'Друзья и Рефералы', refCommission: 'Бонус снега когда друг делает депозит!',
     refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они сделают депозит, вы получите 1000 Снега!',
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
@@ -3395,8 +3346,8 @@ const TRANSLATIONS = {
     swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 100 Снега = 10 Подарков',
     exchangeNow: 'Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
     helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
-    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте красный сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 100 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 1 Бесплатная Снежная Машина</span> — производит 1,042 Снега/час',
-    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Снежные Машины за <span style="color:var(--snow);font-weight:800">Снег</span><br>⬅ Каждая машина производит 1,042 Снега в час<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎<br>📊 1 Подарок = 0.0001 TON (10,000 Подарков = 1 TON)',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте красный сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 100 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (1042 Снега/час)</span> — бесплатная мощность майнинга начинается сразу',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Снежные Машины за <span style="color:var(--snow);font-weight:800">Снег</span><br>⬅ Каждая машина производит 1042 Снега/час<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎<br>📊 1 Подарок = 0.0001 TON (10,000 Подарков = 1 TON)',
     addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--gift)">Целевые пользователи × 60 Подарков</strong>',
     taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Подарков', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
     taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
@@ -3404,6 +3355,7 @@ const TRANSLATIONS = {
     taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
     upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети',
     floatAdd: 'Добавить задачу', Home: 'Главная', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
+    buyMachine: 'Купить машину', machinesCount: 'Машин', storageTitle: 'Хранилище',
   },
 };
 
@@ -3460,10 +3412,10 @@ function applyLang(lang, flag, code) {
   document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
   const floatBtn = document.getElementById('floatAddTask');
   if (floatBtn) floatBtn.innerHTML = `➕ ${t.floatAdd}`;
-  const buyBtn = document.getElementById('buyMachineBtn');
-  if (buyBtn) {
-    const span = buyBtn.querySelector('span:first-child');
-    if (span) span.innerHTML = `<i class="fas fa-cogs"></i> Buy New Machine`;
+  const miningBtn = document.getElementById('miningUpgradeBtn');
+  if (miningBtn) {
+    const span = miningBtn.querySelector('span:first-child');
+    if (span) span.innerHTML = `<i class="fas fa-microchip"></i> ${t.buyMachine}`;
   }
 }
 
