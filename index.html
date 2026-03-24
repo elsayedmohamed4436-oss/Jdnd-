@@ -50,6 +50,7 @@ body {
   position: relative;
 }
 
+/* Full Background Cover - Fixed - Visible Immediately */
 .background-fixed {
   position: fixed;
   top: 0;
@@ -73,6 +74,110 @@ body::after {
   z-index: -1;
 }
 
+/* Welcome Page Styles - For New Users */
+.welcome-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  background: linear-gradient(135deg, #0A1428, #1A2A4A);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  transition: opacity 0.5s ease;
+}
+
+.welcome-page.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.welcome-chest-big {
+  position: relative;
+  margin: 20px auto;
+  cursor: pointer;
+  animation: chestFloatBig 2s ease-in-out infinite;
+}
+
+.welcome-chest-big img {
+  width: 180px;
+  height: 180px;
+  filter: drop-shadow(0 0 30px rgba(229, 57, 53, 0.8));
+  transition: transform 0.2s ease;
+}
+
+.welcome-chest-big img:active {
+  transform: scale(0.95);
+}
+
+@keyframes chestFloatBig {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gift);
+  margin-top: 20px;
+  text-shadow: 0 0 15px rgba(229, 57, 53, 0.5);
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 10px 0 20px;
+  font-weight: 600;
+}
+
+.welcome-rewards {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(229, 57, 53, 0.3);
+  border-radius: 20px;
+  padding: 15px 25px;
+  margin: 15px 0;
+}
+
+.welcome-reward-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 8px 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.welcome-reward-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.welcome-btn {
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+  border: none;
+  border-radius: 40px;
+  padding: 14px 40px;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--gift-glow);
+  transition: transform 0.2s;
+}
+
+.welcome-btn:active {
+  transform: scale(0.96);
+}
+
+/* Loading Screen */
 #loadingScreen {
   position: fixed;
   inset: 0;
@@ -87,6 +192,7 @@ body::after {
   transition: opacity 0.7s ease;
 }
 
+/* Snowfall Animation */
 .snowflake {
   position: fixed;
   color: #fff;
@@ -133,6 +239,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
 }
 
+/* Welcome Chest Styles - Enhanced Red Gift Box */
 .welcome-chest {
   position: relative;
   margin: 10px auto 20px;
@@ -199,6 +306,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   50% { opacity: 1; text-shadow: 0 0 15px rgba(229, 57, 53, 0.8); }
 }
 
+/* Santa Character */
 .santa-wrap {
   display: flex;
   flex-direction: column;
@@ -227,6 +335,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transform: scale(0.86) rotate(9deg) !important;
 }
 
+/* Storage Tank */
 .storage-outer {
   width: 100%;
   margin: 11px 0;
@@ -364,6 +473,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   box-shadow: none;
 }
 
+/* Mining Upgrade Button */
 .mining-upgrade-btn {
   width: 100%;
   margin-top: 12px;
@@ -408,6 +518,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border-radius: 20px;
 }
 
+/* Hero Card */
 .hero-card {
   width: 92%;
   margin: auto;
@@ -468,6 +579,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   justify-content: center;
 }
 
+/* Stats */
 .hero-stats {
   display: flex;
   align-items: stretch;
@@ -514,6 +626,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   font-weight: 700;
 }
 
+/* Claim Wrap */
 .claim-wrap {
   width: 100%;
   display: flex;
@@ -521,6 +634,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   gap: 7px;
 }
 
+/* Tasks */
 .task-tabs {
   display: flex;
   gap: 7px;
@@ -649,6 +763,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   cursor: default;
 }
 
+/* Finance/Wallet */
 .wallet-balance-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -874,6 +989,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   font-weight: 600;
 }
 
+/* History */
 .hist-box {
   background: var(--card);
   border: 1px solid var(--border);
@@ -924,6 +1040,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   font-weight: 500;
 }
 
+/* Withdrawal Form */
 .wd-form {
   background: var(--card);
   border: 1px solid var(--border);
@@ -1156,6 +1273,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   display: block;
 }
 
+/* Status Badges */
 .stat-badge {
   padding: 2px 9px;
   border-radius: 20px;
@@ -1181,6 +1299,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border: 1px solid rgba(239, 83, 80, 0.25);
 }
 
+/* Referral Section */
 .ref-prog-card {
   background: linear-gradient(145deg, rgba(229, 57, 53, 0.1), var(--card));
   border: 1px solid var(--border);
@@ -1323,6 +1442,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   white-space: nowrap;
 }
 
+/* Top Bar */
 .topbar-main {
   display: flex;
   align-items: center;
@@ -1420,6 +1540,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-overflow: ellipsis;
 }
 
+/* Language Button */
 .lang-btn {
   background: linear-gradient(135deg, rgba(229, 57, 53, 0.2), rgba(0, 0, 0, 0.5));
   border: 1px solid rgba(229, 57, 53, 0.4);
@@ -1441,6 +1562,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transform: scale(0.95);
 }
 
+/* Bottom Navigation */
 .bnav {
   position: fixed;
   bottom: 0;
@@ -1509,6 +1631,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-shadow: 0 0 6px rgba(229, 57, 53, 0.5);
 }
 
+/* Loading Screen */
 #loadingScreen {
   position: fixed;
   inset: 0;
@@ -1614,6 +1737,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
 }
 
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -1675,6 +1799,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transform: scale(0.9);
 }
 
+/* Particles */
 .ptc {
   position: fixed;
   pointer-events: none;
@@ -1694,6 +1819,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
 }
 
+/* Heavy Snow Effect */
 .heavy-snow {
   position: fixed;
   pointer-events: none;
@@ -1713,6 +1839,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
 }
 
+/* Notification */
 #notif {
   position: fixed;
   top: 18px;
@@ -1756,6 +1883,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   color: #FFD740;
 }
 
+/* Language Menu */
 .lang-opt {
   padding: 10px 16px;
   font-size: 13px;
@@ -1777,17 +1905,26 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   background: rgba(229, 57, 53, 0.1);
 }
 
+/* Help Button - Changed to Support */
 #helpBtn {
   position: fixed;
   bottom: 84px;
   right: 14px;
   z-index: 190;
-  width: 52px;
-  height: 52px;
-  background: none;
-  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(229, 57, 53, 0.25), rgba(0, 0, 0, 0.7));
+  border: 2px solid rgba(229, 57, 53, 0.6);
+  color: var(--gift);
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 0;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 14px rgba(229, 57, 53, 0.4), 0 4px 16px rgba(0, 0, 0, 0.5);
   transition: all 0.2s;
 }
 
@@ -1795,14 +1932,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transform: scale(0.92);
 }
 
-#helpBtn img {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 12px rgba(229, 57, 53, 0.5));
-  transition: all 0.2s;
-}
-
+/* Floating Add Task Button */
 #floatAddTask {
   position: fixed;
   bottom: 110px;
@@ -1829,6 +1959,30 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transform: translateX(-50%) scale(0.96);
 }
 
+/* Support Image Button */
+.support-img-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 14px;
+  z-index: 190;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.support-img-btn:active {
+  transform: scale(0.92);
+}
+
+.support-img-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(229, 57, 53, 0.5));
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 3px;
 }
@@ -1837,89 +1991,34 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   background: var(--gift);
   border-radius: 2px;
 }
-
-/* Mining Upgrade Modal Styling */
-.mining-upgrade-preview {
-  background: linear-gradient(135deg, rgba(255, 217, 102, 0.15), rgba(0, 0, 0, 0.4));
-  border-radius: 20px;
-  padding: 18px;
-  margin: 12px 0;
-  border: 1px solid rgba(255, 217, 102, 0.3);
-}
-
-.mining-stat-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.mining-stat-label {
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 600;
-  font-size: 13px;
-}
-
-.mining-stat-value {
-  font-weight: 800;
-  font-size: 16px;
-  color: #FFD966;
-}
-
-.mining-cost-value {
-  color: #FF6B6B;
-  font-size: 18px;
-}
-
-.mining-upgrade-btn-glow {
-  background: linear-gradient(135deg, #FFD966, #FFB347);
-  border: none;
-  border-radius: 40px;
-  padding: 14px 24px;
-  font-weight: 800;
-  font-size: 16px;
-  color: #2C1A00;
-  cursor: pointer;
-  width: 100%;
-  transition: all 0.2s ease;
-  box-shadow: 0 0 20px rgba(255, 217, 102, 0.4);
-}
-
-.mining-upgrade-btn-glow:active {
-  transform: scale(0.97);
-}
-
-.mining-upgrade-btn-glow:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-@keyframes fadeOutUp {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0.8);
-  }
-  20% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-  80% {
-    opacity: 1;
-    transform: translate(-50%, -70%) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -100%) scale(0.9);
-    visibility: hidden;
-  }
-}
 </style>
 </head>
 <body>
 
 <div class="background-fixed"></div>
 
+<!-- WELCOME PAGE FOR NEW USERS -->
+<div id="welcomePage" class="welcome-page" style="display: none;">
+  <div class="welcome-chest-big" onclick="openWelcomeChestFromPage()">
+    <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" alt="Gift Box">
+    <div class="chest-glow" style="width: 200px; height: 200px;"></div>
+  </div>
+  <div class="welcome-title">🎄 Welcome to Santa Snow Factory! 🎄</div>
+  <div class="welcome-subtitle">Your magical snow mining adventure begins!</div>
+  <div class="welcome-rewards">
+    <div class="welcome-reward-item">
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png" alt="Gifts">
+      <span>+100 Gifts</span>
+    </div>
+    <div class="welcome-reward-item">
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
+      <span>+10 Snow/hour Mining Power</span>
+    </div>
+  </div>
+  <button class="welcome-btn" onclick="openWelcomeChestFromPage()">🎁 Open Your Gift! 🎁</button>
+</div>
+
+<!-- LOADING SCREEN -->
 <div id="loadingScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="Santa">
   <div class="ld-title">Santa Snow Factory</div>
@@ -1932,6 +2031,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- TOPBAR -->
 <div class="topbar-main">
   <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
   <div class="tb-bals">
@@ -1956,6 +2056,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </button>
 </div>
 
+<!-- LANGUAGE MENU -->
 <div id="langMenu" style="display: none; position: fixed; top: 64px; right: 12px; z-index: 300; background: rgba(10, 20, 35, 0.97); border: 1px solid rgba(229, 57, 53, 0.35); border-radius: 16px; overflow: hidden; min-width: 140px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);">
   <div style="padding: 6px 0">
     <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')">🇬🇧 &nbsp;English</div>
@@ -1963,8 +2064,10 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- HOME -->
 <div class="sec active" id="sectionHome" style="padding: 10px 10px 24px">
   
+  <!-- Welcome Chest - Shows for users who haven't opened it yet -->
   <div id="welcomeChest" class="welcome-chest" style="display: none; margin: 10px auto 20px;">
     <div class="chest-container" onclick="openWelcomeChest()" style="cursor: pointer;">
       <div class="chest-wrapper" style="position: relative; display: inline-block;">
@@ -1978,7 +2081,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         🎁 OPEN YOUR WELCOME GIFT! 🎁
       </div>
       <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">
-        ⭐ 100 Gifts + 10 Snow/hour ⭐
+        ⭐ 100 Gifts + 10 Snow/hour Mining ⭐
       </div>
     </div>
   </div>
@@ -2016,6 +2119,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         </button>
       </div>
       
+      <!-- Mining Upgrade Button -->
       <button class="mining-upgrade-btn" id="miningUpgradeBtn" onclick="upgradeMining()">
         <span><i class="fas fa-chart-line"></i> <span data-i18n="upgradeMining">Upgrade Level</span></span>
         <span class="mining-level-badge"><span data-i18n="miningLv">Level</span> <span id="miningLvDisp">1</span></span>
@@ -2025,12 +2129,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- FRIENDS -->
 <div class="sec" id="sectionFriends">
   <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="friendsTitle">Friends & Referrals</span></div>
   <div class="ref-prog-card">
     <div class="ref-bonus-badge">
       <span class="rbb-pct">20%</span>
-      <span class="rbb-txt" data-i18n="refCommission">Commission when friends deposit!</span>
+      <span class="rbb-txt" data-i18n="refCommission">Commission when friends buy from Market!</span>
     </div>
     <div class="ref-link-row">
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
@@ -2047,15 +2152,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- TASKS - Referrals tab first, Social tab second -->
 <div class="sec" id="sectionTasks">
   <div class="task-tabs">
-    <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">👥 <span data-i18n="tabReferralTxt">Referrals</span></div>
-    <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">📢 <span data-i18n="tabSocialTxt">Social</span></div>
+    <div class="ttab active" data-t="referral" onclick="switchTTab(this,'referral')">👥 <span data-i18n="tabReferralTxt">Referral</span></div>
+    <div class="ttab" data-t="social" onclick="switchTTab(this,'social')">📢 <span data-i18n="tabSocialTxt">Social</span></div>
   </div>
-  <div class="tcont active" id="tcSocial">
-    <div id="refTaskList"></div>
-  </div>
-  <div class="tcont" id="tcReferral">
+  <div class="tcont active" id="tcReferral"><div id="refTaskList"></div></div>
+  <div class="tcont" id="tcSocial">
     <div style="display: flex; gap: 6px; margin-bottom: 10px">
       <div class="ttab active" id="stab-partner" style="flex: 1; font-size: 11px" onclick="switchSocTab('partner')">⭐ Partner</div>
       <div class="ttab" id="stab-community" style="flex: 1; font-size: 11px" onclick="switchSocTab('community')">🌍 Community</div>
@@ -2065,8 +2169,10 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- Floating Add Task Button -->
 <button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none; align-items: center; gap: 8px;">➕ <span data-i18n="floatAdd">Add Task</span></button>
 
+<!-- WALLET -->
 <div class="sec" id="sectionWallet">
   <div class="wallet-tabs">
     <div class="wtab active" data-wt="deposit" onclick="switchWalletTab(this,'deposit')">💰 Deposit</div>
@@ -2074,6 +2180,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div class="wtab" data-wt="exchange" onclick="switchWalletTab(this,'exchange')">⚡ Exchange</div>
   </div>
 
+  <!-- DEPOSIT -->
   <div class="wtcont active" id="wt-deposit">
     <div class="wd-form">
       <div class="wal-row">
@@ -2116,6 +2223,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     </div>
   </div>
 
+  <!-- WITHDRAW -->
   <div class="wtcont" id="wt-withdraw">
     <div class="wd-form">
       <label class="flabel" data-i18n="tonWalletAddr">TON Wallet Address</label>
@@ -2138,6 +2246,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     </div>
   </div>
 
+  <!-- EXCHANGE -->
   <div class="wtcont" id="wt-exchange">
     <div class="swap-card">
       <div class="swap-section">
@@ -2178,10 +2287,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
-<button id="helpBtn" onclick="openSupport()">
+<!-- SUPPORT BUTTON - New image button -->
+<div id="supportBtn" class="support-img-btn" onclick="openSupport()">
   <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" alt="Support">
-</button>
+</div>
 
+<!-- NAVIGATION -->
 <nav class="bnav">
   <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png" style="width: 52px; height: 52px; object-fit: contain"></div>
@@ -2201,6 +2312,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </nav>
 
+<!-- HELP MODAL -->
 <div class="modal" id="helpModal">
   <div class="modal-box" style="max-height: 88vh; overflow-y: auto; padding: 0; border-radius: 22px 22px 0 0">
     <div style="position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, #0A1428, #0A1A2A); border-bottom: 1px solid rgba(229, 57, 53, 0.18); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 22px 22px 0 0">
@@ -2237,6 +2349,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- MODALS -->
 <div class="modal" id="upgradeModal">
   <div class="modal-box">
     <div class="mhdr"><div class="mtitle" data-i18n="upgTitle">⬆️ Upgrade Storage</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div>
@@ -2244,6 +2357,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- Mining Upgrade Modal -->
 <div class="modal" id="miningUpgradeModal">
   <div class="modal-box" style="max-width: 320px;">
     <div class="mhdr">
@@ -2298,6 +2412,15 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <div id="notif"></div>
 
 <script>
+/* ============================================
+   SANTA SNOW FACTORY - Frontend v7.1
+   Updated: Welcome page for new users
+   Mining rate: 10 Snow/hour for new users
+   Referral tasks rewards HALVED
+   Referrals tab first, Social tab second
+   Support button with new image
+   ============================================ */
+
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
@@ -2311,6 +2434,10 @@ const CFG = {
   BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/app',
 };
 
+// Mining Levels Configuration - BALANCED (Cost in Snow, Rate in Snow/hour)
+// Level 1: 10 Snow/hour (free)
+// Level 2: 8,000 Snow -> 350 Snow/hour
+// Level 3: 22,000 Snow -> 1,050 Snow/hour
 const MINING_LEVELS = {
   1: { rate: 10, cost: 0, nextCost: 8000 },
   2: { rate: 350, cost: 8000, nextCost: 22000 },
@@ -2337,6 +2464,7 @@ const MINING_LEVELS = {
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
 const GIFT_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png';
 
+// REFERRAL TASKS - REWARDS HALVED
 const REF_TASKS = [
   { id: 'r1', n: 1, snow: 250, gifts: 1 },
   { id: 'r5', n: 5, snow: 1250, gifts: 5 },
@@ -2396,6 +2524,7 @@ const S = {
   storageProgress: 0, storageInt: null,
   tg: null, tonUI: null, wallet: null, depCheckInt: null,
   _collectCooldown: false,
+  isNewUser: false,
 };
 
 let _lastClickTime = 0;
@@ -2434,14 +2563,94 @@ async function loadState() {
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     
-    const chestEl = document.getElementById('welcomeChest');
-    if (chestEl && !S.user.welcomeChestOpened) {
-      chestEl.style.display = 'block';
-    } else if (chestEl) {
-      chestEl.style.display = 'none';
+    // Check if user is new (just registered and chest not opened)
+    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.gifts === 0) {
+      S.isNewUser = true;
+      showWelcomePage();
+    } else {
+      S.isNewUser = false;
+      hideWelcomePage();
+      // Show welcome chest in home page for users who haven't opened it
+      const chestEl = document.getElementById('welcomeChest');
+      if (chestEl && !S.user.welcomeChestOpened) {
+        chestEl.style.display = 'block';
+      } else if (chestEl) {
+        chestEl.style.display = 'none';
+      }
     }
   } catch (e) { console.warn('loadState:', e.message); }
   updateUI();
+}
+
+function showWelcomePage() {
+  const welcomePage = document.getElementById('welcomePage');
+  if (welcomePage) {
+    welcomePage.style.display = 'flex';
+    // Hide main content temporarily
+    document.querySelector('.topbar-main').style.opacity = '0.3';
+    document.querySelector('.bnav').style.opacity = '0.3';
+    document.getElementById('sectionHome').style.opacity = '0.3';
+    document.getElementById('sectionTasks').style.opacity = '0.3';
+    document.getElementById('sectionFriends').style.opacity = '0.3';
+    document.getElementById('sectionWallet').style.opacity = '0.3';
+  }
+}
+
+function hideWelcomePage() {
+  const welcomePage = document.getElementById('welcomePage');
+  if (welcomePage) {
+    welcomePage.style.display = 'none';
+    document.querySelector('.topbar-main').style.opacity = '1';
+    document.querySelector('.bnav').style.opacity = '1';
+    document.getElementById('sectionHome').style.opacity = '1';
+    document.getElementById('sectionTasks').style.opacity = '1';
+    document.getElementById('sectionFriends').style.opacity = '1';
+    document.getElementById('sectionWallet').style.opacity = '1';
+  }
+}
+
+async function openWelcomeChestFromPage() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  try {
+    const result = await api('openWelcomeChest', {});
+    S.user.welcomeChestOpened = true;
+    S.user.gifts = (S.user.gifts || 0) + result.gifts;
+    S.user.miningRate = result.miningRate;
+    S.user.miningLevel = result.miningLevel;
+    
+    hideWelcomePage();
+    updateUI();
+    triggerHeavySnow();
+    showNotif(`🎁 +${fmt(result.gifts)} Gifts! Mining rate: ${result.miningRate} Snow/hour`, 's');
+    spawnSnowParticle();
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
+  }
+}
+
+async function openWelcomeChest() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  try {
+    const result = await api('openWelcomeChest', {});
+    S.user.welcomeChestOpened = true;
+    S.user.gifts = (S.user.gifts || 0) + result.gifts;
+    S.user.miningRate = result.miningRate;
+    S.user.miningLevel = result.miningLevel;
+    
+    document.getElementById('welcomeChest').style.display = 'none';
+    updateUI();
+    triggerHeavySnow();
+    showNotif(`🎁 +${fmt(result.gifts)} Gifts! Mining rate: ${result.miningRate} Snow/hour`, 's');
+    spawnSnowParticle();
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
+  }
 }
 
 function updateUI() {
@@ -2517,28 +2726,6 @@ function triggerHeavySnow() {
   }
 }
 
-async function openWelcomeChest() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  
-  try {
-    const result = await api('openWelcomeChest', {});
-    S.user.welcomeChestOpened = true;
-    S.user.gifts = (S.user.gifts || 0) + 100;
-    S.user.miningRate = 10;
-    S.user.miningLevel = 1;
-    
-    document.getElementById('welcomeChest').style.display = 'none';
-    updateUI();
-    triggerHeavySnow();
-    showNotif(`🎁 +100 Gifts! Mining rate: 10 Snow/hour`, 's');
-    spawnSnowParticle();
-  } catch (e) {
-    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
-  }
-}
-
 async function upgradeMining() {
   const currentLevel = S.user.miningLevel || 1;
   const nextLevel = MINING_LEVELS[currentLevel + 1];
@@ -2554,40 +2741,39 @@ async function upgradeMining() {
   const userSnow = S.user.snow || 0;
   
   const modalContent = `
-    <div class="mining-upgrade-preview">
-      <div class="mining-stat-row">
-        <span class="mining-stat-label">Current Level</span>
-        <span class="mining-stat-value">${currentLevel}</span>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div style="font-size: 48px; margin-bottom: 8px;">⛏️➡️✨</div>
+      <div style="background: linear-gradient(135deg, rgba(229,57,53,0.2), rgba(0,0,0,0.3)); border-radius: 16px; padding: 12px; margin: 10px 0;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Current Level:</span>
+          <span style="font-weight: 800; color: var(--gold);">${currentLevel}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Current Rate:</span>
+          <span style="font-weight: 800; color: var(--snow);">${currentRate} Snow/hour</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Next Level:</span>
+          <span style="font-weight: 800; color: var(--gold);">${currentLevel + 1}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">New Rate:</span>
+          <span style="font-weight: 800; color: var(--snow);">${nextRate} Snow/hour</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
+          <span style="color: var(--muted);">Upgrade Cost:</span>
+          <span style="font-weight: 800; color: var(--gift);">${fmt(cost)} ❄️ Snow</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 6px;">
+          <span style="color: var(--muted);">Your Balance:</span>
+          <span style="font-weight: 800; color: ${userSnow >= cost ? '#4CAF50' : '#EF5350'};">${fmt(userSnow)} ❄️</span>
+        </div>
       </div>
-      <div class="mining-stat-row">
-        <span class="mining-stat-label">Current Rate</span>
-        <span class="mining-stat-value">${currentRate} Snow/hour</span>
-      </div>
-      <div class="mining-stat-row">
-        <span class="mining-stat-label">Next Level</span>
-        <span class="mining-stat-value" style="color: #FFD966;">${currentLevel + 1}</span>
-      </div>
-      <div class="mining-stat-row">
-        <span class="mining-stat-label">New Rate</span>
-        <span class="mining-stat-value" style="color: #4CAF50;">+${nextRate - currentRate} Snow/hour</span>
-      </div>
-      <div class="mining-stat-row">
-        <span class="mining-stat-label">Total Rate After</span>
-        <span class="mining-stat-value">${nextRate} Snow/hour</span>
-      </div>
-      <div class="mining-stat-row">
-        <span class="mining-stat-label">Upgrade Cost</span>
-        <span class="mining-cost-value">${fmt(cost)} Snow</span>
-      </div>
-      <div class="mining-stat-row">
-        <span class="mining-stat-label">Your Balance</span>
-        <span class="mining-stat-value" style="color: ${userSnow >= cost ? '#4CAF50' : '#EF5350'};">${fmt(userSnow)} Snow</span>
-      </div>
+      ${userSnow >= cost ? 
+        `<button onclick="confirmUpgrade()" class="btn-prim" style="width: 100%; margin-top: 8px;">⬆️ Upgrade Now</button>` :
+        `<div style="background: rgba(239,83,80,0.2); border-radius: 12px; padding: 10px; text-align: center; font-size: 12px; color: #FF8A80;">❄️ Need ${fmt(cost - userSnow)} more Snow to upgrade</div>`
+      }
     </div>
-    ${userSnow >= cost ? 
-      `<button onclick="confirmUpgrade()" class="mining-upgrade-btn-glow">Upgrade Now</button>` :
-      `<div style="background: rgba(239,83,80,0.2); border-radius: 12px; padding: 12px; text-align: center; font-size: 13px; color: #FF8A80;">Need ${fmt(cost - userSnow)} more Snow to upgrade</div>`
-    }
   `;
   
   document.getElementById('miningUpgradeContent').innerHTML = modalContent;
@@ -2617,30 +2803,8 @@ async function confirmUpgrade() {
     updateUI();
     closeModal('miningUpgradeModal');
     triggerHeavySnow();
-    
-    showNotif(`✨ Mining upgraded to Level ${result.miningLevel}! ✨`, 's');
-    
-    const upgradeMsg = document.createElement('div');
-    upgradeMsg.style.cssText = `
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #FFD966, #FFB347);
-      color: #2C1A00;
-      padding: 16px 28px;
-      border-radius: 60px;
-      font-weight: 800;
-      font-size: 18px;
-      z-index: 2000;
-      box-shadow: 0 0 40px rgba(255, 217, 102, 0.6);
-      animation: fadeOutUp 1.5s ease forwards;
-      white-space: nowrap;
-    `;
-    upgradeMsg.innerHTML = `⬆️ LEVEL ${result.miningLevel} REACHED! +${(result.miningRate - MINING_LEVELS[currentLevel].rate).toFixed(0)} Snow/hour`;
-    document.body.appendChild(upgradeMsg);
-    setTimeout(() => upgradeMsg.remove(), 1500);
-    
+    showNotif(`⬆️ Mining upgraded to Level ${result.miningLevel}! +${(result.miningRate - MINING_LEVELS[currentLevel].rate).toFixed(1)} Snow/hour`, 's');
+    spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Upgrade failed'}`, 'e');
   }
@@ -2964,8 +3128,8 @@ function goToTasksPartner() {
   const tn = document.querySelector('.ni[data-s="sectionTasks"]');
   if (tn) tn.classList.add('active');
   document.getElementById('sectionTasks').classList.add('active');
-  const stab = document.querySelector('.ttab[data-t="referral"]');
-  if (stab) switchTTab(stab, 'referral');
+  const stab = document.querySelector('.ttab[data-t="social"]');
+  if (stab) switchTTab(stab, 'social');
   switchSocTab('partner');
   hideFab();
 }
@@ -3254,6 +3418,7 @@ function preloadImages() {
     SNOW_IMG, GIFT_IMG,
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
   ];
   return Promise.all(urls.map(u => new Promise(res => { const img = new Image(); img.onload = img.onerror = res; img.src = u; })));
 }
@@ -3273,10 +3438,11 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
   });
 }
 
+// Translations
 const TRANSLATIONS = {
   en: {
     labelGifts: 'Gifts', labelSnow: 'Snow', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '20% commission when friends deposit!',
+    friendsTitle: 'Friends & Referrals', refCommission: '20% commission when friends buy upgrades!',
     refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends',
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
@@ -3294,14 +3460,14 @@ const TRANSLATIONS = {
     taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
     taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
-    upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referrals', tabSocialTxt: 'Social',
+    upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
     floatAdd: 'Add Task', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
     upgradeMining: 'Upgrade Level', miningLv: 'Level', openChest: '🎁 Open Your Welcome Gift! 🎁',
     miningUpgradeTitle: '⛏️ Upgrade Mining Level',
   },
   ru: {
     labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: '20% комиссия когда друзья вносят депозит!',
+    friendsTitle: 'Друзья и Рефералы', refCommission: '20% комиссия когда друзья покупают улучшения!',
     refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями',
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
@@ -3358,8 +3524,8 @@ function applyLang(lang, flag, code) {
   const ftabKeys = ['💰 Deposit', '💸 Withdraw', '⚡ Exchange'];
   ftabs.forEach((el, i) => { if (ftabKeys[i]) el.textContent = ftabKeys[i]; });
   document.querySelectorAll('.ttab[data-t]').forEach(el => {
-    if (el.dataset.t === 'social') el.innerHTML = '👥 ' + t.tabReferralTxt;
-    if (el.dataset.t === 'referral') el.innerHTML = '📢 ' + t.tabSocialTxt;
+    if (el.dataset.t === 'referral') el.innerHTML = '👥 ' + t.tabReferralTxt;
+    if (el.dataset.t === 'social') el.innerHTML = '📢 ' + t.tabSocialTxt;
   });
   const stP = document.getElementById('stab-partner'); if (stP) stP.innerHTML = '⭐ Partner';
   const stC = document.getElementById('stab-community'); if (stC) stC.innerHTML = '🌍 Community';
