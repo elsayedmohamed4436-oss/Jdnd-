@@ -50,7 +50,7 @@ body {
   position: relative;
 }
 
-/* Full Background Cover - Fixed */
+/* Full Background Cover - Fixed - Visible Immediately */
 .background-fixed {
   position: fixed;
   top: 0;
@@ -59,6 +59,8 @@ body {
   bottom: 0;
   background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png') center center / cover no-repeat;
   z-index: -2;
+  opacity: 1;
+  visibility: visible;
 }
 
 body::after {
@@ -70,6 +72,21 @@ body::after {
   bottom: 0;
   background: rgba(0, 0, 0, 0.45);
   z-index: -1;
+}
+
+/* Loading Screen Background */
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 20, 40, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  transition: opacity 0.7s ease;
 }
 
 /* Snowfall Animation */
@@ -119,10 +136,10 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
 }
 
-/* Welcome Chest Styles */
+/* Welcome Chest Styles - Enhanced Red Gift Box */
 .welcome-chest {
   position: relative;
-  margin: 15px auto;
+  margin: 10px auto 20px;
   cursor: pointer;
   text-align: center;
 }
@@ -130,13 +147,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 .chest-container {
   position: relative;
   display: inline-block;
-  filter: drop-shadow(0 0 20px rgba(229, 57, 53, 0.7));
+  cursor: pointer;
 }
 
 .chest-image {
   transition: transform 0.2s ease;
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
+  filter: drop-shadow(0 0 20px rgba(229, 57, 53, 0.7));
 }
 
 .chest-image:active {
@@ -153,9 +171,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 140px;
-  height: 140px;
-  background: radial-gradient(circle, rgba(229, 57, 53, 0.4), transparent);
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(229, 57, 53, 0.5), transparent);
   border-radius: 50%;
   animation: pulse 1.5s ease-in-out infinite;
   pointer-events: none;
@@ -167,16 +185,21 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .chest-text {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 14px;
   font-weight: 800;
-  color: var(--gift);
+  color: #E53935;
   text-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
   animation: textPulse 1s ease-in-out infinite;
 }
 
 @keyframes textPulse {
-  0%, 100% { opacity: 0.7; }
+  0%, 100% { opacity: 0.8; }
   50% { opacity: 1; text-shadow: 0 0 15px rgba(229, 57, 53, 0.8); }
 }
 
@@ -982,17 +1005,17 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 .ton-chip {
   flex: 1;
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 9px;
+  border-radius: 12px;
+  padding: 8px 12px;
   text-align: center;
 }
 
 .ton-chip .tcl {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1001,7 +1024,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .ton-chip .tcv {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--cyan);
 }
@@ -1510,7 +1533,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #0A1428;
+  background: rgba(10, 20, 40, 0.92);
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1896,12 +1920,22 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <!-- HOME -->
 <div class="sec active" id="sectionHome" style="padding: 10px 10px 24px">
   
-  <!-- Welcome Chest -->
-  <div id="welcomeChest" class="welcome-chest" style="display: none;">
-    <div class="chest-container" onclick="openWelcomeChest()">
-      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" alt="Gift" class="chest-image" style="animation: chestFloat 1.5s ease-in-out infinite;">
-      <div class="chest-glow"></div>
-      <div class="chest-text" data-i18n="openChest">🎁 Open Your Welcome Gift! 🎁</div>
+  <!-- Welcome Chest - Enhanced Red Gift Box -->
+  <div id="welcomeChest" class="welcome-chest" style="display: none; margin: 10px auto 20px;">
+    <div class="chest-container" onclick="openWelcomeChest()" style="cursor: pointer;">
+      <div class="chest-wrapper" style="position: relative; display: inline-block;">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" 
+             alt="Gift" 
+             class="chest-image" 
+             style="width: 110px; height: 110px; filter: drop-shadow(0 0 20px rgba(229,57,53,0.7)); transition: transform 0.2s ease; animation: chestFloat 1.5s ease-in-out infinite;">
+        <div class="chest-glow"></div>
+      </div>
+      <div class="chest-text">
+        🎁 OPEN YOUR WELCOME GIFT! 🎁
+      </div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">
+        ⭐ 200 Gifts + Mining Power ⭐
+      </div>
     </div>
   </div>
   
@@ -1938,9 +1972,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         </button>
       </div>
       
-      <!-- Mining Upgrade Button -->
+      <!-- Mining Upgrade Button - Updated Text -->
       <button class="mining-upgrade-btn" id="miningUpgradeBtn" onclick="upgradeMining()">
-        <span><i class="fas fa-chart-line"></i> <span data-i18n="upgradeMining">Upgrade Mining</span></span>
+        <span><i class="fas fa-chart-line"></i> <span data-i18n="upgradeMining">Upgrade Level</span></span>
         <span class="mining-level-badge"><span data-i18n="miningLv">Level</span> <span id="miningLvDisp">1</span></span>
         <span class="mining-cost" id="miningCostDisplay"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/7dc79778-482b-4e16-b413-d04ee51abaf9.png" style="width: 16px; height: 16px; object-fit: contain;"> <span id="miningCost">0</span></span>
       </button>
@@ -2042,7 +2076,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     </div>
   </div>
 
-  <!-- WITHDRAW -->
+  <!-- WITHDRAW - Updated (TON image removed) -->
   <div class="wtcont" id="wt-withdraw">
     <div class="wd-form">
       <label class="flabel" data-i18n="tonWalletAddr">TON Wallet Address</label>
@@ -2050,13 +2084,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <label class="flabel" data-i18n="amountGifts">Amount (Gifts)</label>
       <input type="number" class="finput" id="wdAmt" placeholder="200" min="200" oninput="updWdPrev()">
       <div class="ton-row">
-        <div class="ton-chip">
-          <div class="tcl"><img src="https://i.ibb.co/WNfvBK9h/toncoin-1.webp" alt="TON"> <span data-i18n="tonValue">TON Value</span></div>
-          <div class="tcv" id="wdTonVal">0.0000</div>
+        <div class="ton-chip" style="background: rgba(0, 0, 0, 0.35); border-radius: 12px; padding: 8px 12px; text-align: center;">
+          <div class="tcl" style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">💎 TON Value</div>
+          <div class="tcv" id="wdTonVal" style="font-size: 16px; font-weight: 800; color: var(--cyan);">0.0000</div>
         </div>
       </div>
       <button class="btn-wd" id="wdBtn" onclick="doWithdraw()">
-        <img src="https://i.ibb.co/WNfvBK9h/toncoin-1.webp" style="width: 18px; height: 18px; object-fit: contain"> <span data-i18n="withdrawBtn">Request Withdrawal</span>
+        <span data-i18n="withdrawBtn">Request Withdrawal</span>
       </button>
     </div>
     <div class="hist-box">
@@ -2109,7 +2143,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <!-- HELP BUTTON -->
 <button id="helpBtn" onclick="openModal('helpModal')">?</button>
 
-<!-- NAVIGATION (Market removed) -->
+<!-- NAVIGATION -->
 <nav class="bnav">
   <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png" style="width: 52px; height: 52px; object-fit: contain"></div>
@@ -2174,6 +2208,19 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </div>
 </div>
 
+<!-- Mining Upgrade Modal - New Modal for Mining Upgrade -->
+<div class="modal" id="miningUpgradeModal">
+  <div class="modal-box" style="max-width: 320px;">
+    <div class="mhdr">
+      <div class="mtitle" data-i18n="miningUpgradeTitle">⛏️ Upgrade Mining Level</div>
+      <button class="mclose" onclick="closeModal('miningUpgradeModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="miningUpgradeContent" style="padding: 8px 0;">
+      <!-- سيتم تعبئتها بواسطة JavaScript -->
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="addTaskModal">
   <div class="modal-box">
     <div class="mhdr">
@@ -2220,7 +2267,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <script>
 /* ============================================
    SANTA SNOW FACTORY - Frontend v6.0
-   Removed Market, Added Welcome Chest & Mining Upgrade
+   Updated: Mining Prices (Lvl2: 5000, Lvl3: 25000 = 30000 total)
+   Enhanced Welcome Chest, Mining Upgrade Modal, Removed TON Image
    ============================================ */
 
 const CFG = {
@@ -2236,28 +2284,28 @@ const CFG = {
   BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/app',
 };
 
-// Mining Levels Configuration
+// Mining Levels Configuration - UPDATED PRICES
 const MINING_LEVELS = {
-  1: { rate: 12.5, cost: 0, nextCost: 500 },
-  2: { rate: 14.0, cost: 500, nextCost: 1200 },
-  3: { rate: 16.0, cost: 1200, nextCost: 2500 },
-  4: { rate: 18.5, cost: 2500, nextCost: 5000 },
-  5: { rate: 21.5, cost: 5000, nextCost: 8500 },
-  6: { rate: 25.0, cost: 8500, nextCost: 14000 },
-  7: { rate: 29.0, cost: 14000, nextCost: 22000 },
-  8: { rate: 33.5, cost: 22000, nextCost: 33000 },
-  9: { rate: 38.5, cost: 33000, nextCost: 48000 },
-  10: { rate: 44.0, cost: 48000, nextCost: 68000 },
-  11: { rate: 50.0, cost: 68000, nextCost: 93000 },
-  12: { rate: 56.5, cost: 93000, nextCost: 125000 },
-  13: { rate: 63.5, cost: 125000, nextCost: 165000 },
-  14: { rate: 71.0, cost: 165000, nextCost: 215000 },
-  15: { rate: 79.0, cost: 215000, nextCost: 275000 },
-  16: { rate: 87.5, cost: 275000, nextCost: 350000 },
-  17: { rate: 96.5, cost: 350000, nextCost: 440000 },
-  18: { rate: 106.0, cost: 440000, nextCost: 550000 },
-  19: { rate: 116.0, cost: 550000, nextCost: 680000 },
-  20: { rate: 126.5, cost: 680000, nextCost: 0 },
+  1: { rate: 12.5, cost: 0, nextCost: 5000 },
+  2: { rate: 14.0, cost: 5000, nextCost: 25000 },
+  3: { rate: 16.0, cost: 25000, nextCost: 50000 },
+  4: { rate: 18.5, cost: 50000, nextCost: 85000 },
+  5: { rate: 21.5, cost: 85000, nextCost: 130000 },
+  6: { rate: 25.0, cost: 130000, nextCost: 190000 },
+  7: { rate: 29.0, cost: 190000, nextCost: 260000 },
+  8: { rate: 33.5, cost: 260000, nextCost: 340000 },
+  9: { rate: 38.5, cost: 340000, nextCost: 430000 },
+  10: { rate: 44.0, cost: 430000, nextCost: 530000 },
+  11: { rate: 50.0, cost: 530000, nextCost: 640000 },
+  12: { rate: 56.5, cost: 640000, nextCost: 760000 },
+  13: { rate: 63.5, cost: 760000, nextCost: 890000 },
+  14: { rate: 71.0, cost: 890000, nextCost: 1030000 },
+  15: { rate: 79.0, cost: 1030000, nextCost: 1180000 },
+  16: { rate: 87.5, cost: 1180000, nextCost: 1340000 },
+  17: { rate: 96.5, cost: 1340000, nextCost: 1510000 },
+  18: { rate: 106.0, cost: 1510000, nextCost: 1690000 },
+  19: { rate: 116.0, cost: 1690000, nextCost: 1880000 },
+  20: { rate: 126.5, cost: 1880000, nextCost: 0 },
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/7dc79778-482b-4e16-b413-d04ee51abaf9.png';
@@ -2467,7 +2515,63 @@ async function openWelcomeChest() {
   }
 }
 
+// Updated upgradeMining function with modal
 async function upgradeMining() {
+  const currentLevel = S.user.miningLevel || 1;
+  const nextLevel = MINING_LEVELS[currentLevel + 1];
+  
+  if (!nextLevel) {
+    showNotif('🎉 Max level reached! You are a master miner!', 'w');
+    return;
+  }
+  
+  // Show upgrade modal with details
+  const currentRate = MINING_LEVELS[currentLevel].rate;
+  const nextRate = nextLevel.rate;
+  const cost = nextLevel.cost;
+  const userSnow = S.user.snow || 0;
+  
+  const modalContent = `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div style="font-size: 48px; margin-bottom: 8px;">⛏️➡️✨</div>
+      <div style="background: linear-gradient(135deg, rgba(229,57,53,0.2), rgba(0,0,0,0.3)); border-radius: 16px; padding: 12px; margin: 10px 0;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Current Level:</span>
+          <span style="font-weight: 800; color: var(--gold);">${currentLevel}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Current Rate:</span>
+          <span style="font-weight: 800; color: var(--snow);">${currentRate} Snow/hour</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">Next Level:</span>
+          <span style="font-weight: 800; color: var(--gold);">${currentLevel + 1}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="color: var(--muted);">New Rate:</span>
+          <span style="font-weight: 800; color: var(--snow);">${nextRate} Snow/hour</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
+          <span style="color: var(--muted);">Upgrade Cost:</span>
+          <span style="font-weight: 800; color: var(--gift);">${fmt(cost)} ❄️ Snow</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 6px;">
+          <span style="color: var(--muted);">Your Balance:</span>
+          <span style="font-weight: 800; color: ${userSnow >= cost ? '#4CAF50' : '#EF5350'};">${fmt(userSnow)} ❄️</span>
+        </div>
+      </div>
+      ${userSnow >= cost ? 
+        `<button onclick="confirmUpgrade()" class="btn-prim" style="width: 100%; margin-top: 8px;">⬆️ Upgrade Now</button>` :
+        `<div style="background: rgba(239,83,80,0.2); border-radius: 12px; padding: 10px; text-align: center; font-size: 12px; color: #FF8A80;">❄️ Need ${fmt(cost - userSnow)} more Snow to upgrade</div>`
+      }
+    </div>
+  `;
+  
+  document.getElementById('miningUpgradeContent').innerHTML = modalContent;
+  openModal('miningUpgradeModal');
+}
+
+async function confirmUpgrade() {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
@@ -2478,6 +2582,7 @@ async function upgradeMining() {
   
   if ((S.user.snow || 0) < nextLevel.cost) {
     showNotif(`Need ${fmt(nextLevel.cost)} Snow!`, 'e');
+    closeModal('miningUpgradeModal');
     return;
   }
   
@@ -2487,8 +2592,9 @@ async function upgradeMining() {
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
     updateUI();
+    closeModal('miningUpgradeModal');
     triggerHeavySnow();
-    showNotif(`⬆️ Mining upgraded to Level ${result.miningLevel}! +${(result.miningRate - (currentLevel === 1 ? 0 : MINING_LEVELS[currentLevel].rate)).toFixed(1)} Snow/hour`, 's');
+    showNotif(`⬆️ Mining upgraded to Level ${result.miningLevel}! +${(result.miningRate - MINING_LEVELS[currentLevel].rate).toFixed(1)} Snow/hour`, 's');
     spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Upgrade failed'}`, 'e');
@@ -3140,7 +3246,8 @@ const TRANSLATIONS = {
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
     upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
     floatAdd: 'Add Task', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
-    upgradeMining: 'Upgrade Mining', miningLv: 'Level', openChest: '🎁 Open Your Welcome Gift! 🎁',
+    upgradeMining: 'Upgrade Level', miningLv: 'Level', openChest: '🎁 Open Your Welcome Gift! 🎁',
+    miningUpgradeTitle: '⛏️ Upgrade Mining Level',
   },
   ru: {
     labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
@@ -3164,7 +3271,8 @@ const TRANSLATIONS = {
     taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
     upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети',
     floatAdd: 'Добавить задачу', Home: 'Главная', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
-    upgradeMining: 'Улучшить майнинг', miningLv: 'Уровень', openChest: '🎁 Откройте приветственный подарок! 🎁',
+    upgradeMining: 'Улучшить уровень', miningLv: 'Уровень', openChest: '🎁 Откройте приветственный подарок! 🎁',
+    miningUpgradeTitle: '⛏️ Улучшить уровень майнинга',
   },
 };
 
