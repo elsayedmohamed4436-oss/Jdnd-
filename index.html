@@ -75,6 +75,7 @@ body::after {
   z-index: -1;
 }
 
+/* Welcome Modal - Red Santa Chest Style */
 .welcome-modal {
   position: fixed;
   top: 0;
@@ -98,14 +99,14 @@ body::after {
 }
 
 .welcome-modal-box {
-  background: linear-gradient(145deg, #1a2a3a, #0f1a24);
+  background: linear-gradient(145deg, #8B0000, #5A0000);
   border-radius: 40px;
   padding: 30px 25px;
   max-width: 320px;
   width: 85%;
   text-align: center;
-  border: 2px solid rgba(229, 57, 53, 0.6);
-  box-shadow: 0 0 50px rgba(229, 57, 53, 0.5);
+  border: 3px solid #FFD700;
+  box-shadow: 0 0 50px rgba(255, 0, 0, 0.6);
   animation: modalPop 0.4s ease-out;
 }
 
@@ -115,10 +116,11 @@ body::after {
 }
 
 .welcome-chest-img {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   margin: 0 auto 15px;
   animation: chestWobble 0.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7));
 }
 
 @keyframes chestWobble {
@@ -128,63 +130,113 @@ body::after {
 }
 
 .welcome-modal-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 800;
-  color: var(--gift);
+  color: #FFD700;
   margin-bottom: 15px;
-}
-
-.welcome-rewards-list {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 20px;
-  padding: 15px;
-  margin: 15px 0;
-}
-
-.welcome-reward-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.welcome-reward-item:last-child {
-  border-bottom: none;
-}
-
-.welcome-reward-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.welcome-reward-value {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--gold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .welcome-open-btn {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #FFD700, #FFA500);
   border: none;
   border-radius: 50px;
   padding: 14px 35px;
-  color: white;
-  font-size: 18px;
+  color: #5A0000;
+  font-size: 20px;
   font-weight: 800;
   margin-top: 15px;
   cursor: pointer;
   transition: transform 0.2s;
-  box-shadow: 0 0 20px var(--gift-glow);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
 .welcome-open-btn:active {
   transform: scale(0.96);
 }
 
+/* Notification Style - Fixed to bottom */
+#notif {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(10, 20, 35, 0.97);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1000;
+  transition: transform 0.28s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+  max-width: 84vw;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
+}
+
+#notif.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+#notif.s {
+  border-color: var(--gift-glow);
+  color: var(--gift);
+}
+
+#notif.e {
+  border-color: rgba(239, 83, 80, 0.5);
+  color: #FF8A80;
+}
+
+#notif.i {
+  border-color: rgba(66, 165, 245, 0.4);
+  color: #90CAF9;
+}
+
+#notif.w {
+  border-color: rgba(255, 193, 7, 0.4);
+  color: #FFD740;
+}
+
+/* Swap MAX button style - moved left */
+.swap-input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.swap-input-area input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  text-align: left;
+  outline: none;
+}
+
+.swap-max {
+  background: rgba(229, 57, 53, 0.2);
+  border: 1px solid rgba(229, 57, 53, 0.4);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gift);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.swap-max:active {
+  transform: scale(0.95);
+}
+
+/* Rest of CSS remains the same */
 .wallet-modern-card {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
@@ -1098,35 +1150,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   color: var(--muted);
 }
 
-.swap-input-area {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.swap-input-area input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  font-weight: 800;
-  color: white;
-  text-align: right;
-  outline: none;
-}
-
-.swap-max {
-  background: rgba(229, 57, 53, 0.2);
-  border: 1px solid rgba(229, 57, 53, 0.4);
-  border-radius: 12px;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--gift);
-  cursor: pointer;
-}
-
 .swap-divider-modern {
   text-align: center;
   position: relative;
@@ -2005,49 +2028,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   }
 }
 
-#notif {
-  position: fixed;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-80px);
-  background: rgba(10, 20, 35, 0.97);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 10px 18px;
-  font-size: 13px;
-  font-weight: 700;
-  z-index: 1000;
-  transition: transform 0.28s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
-  max-width: 84vw;
-  text-align: center;
-  backdrop-filter: blur(12px);
-}
-
-#notif.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-#notif.s {
-  border-color: var(--gift-glow);
-  color: var(--gift);
-}
-
-#notif.e {
-  border-color: rgba(239, 83, 80, 0.5);
-  color: #FF8A80;
-}
-
-#notif.i {
-  border-color: rgba(66, 165, 245, 0.4);
-  color: #90CAF9;
-}
-
-#notif.w {
-  border-color: rgba(255, 193, 7, 0.4);
-  color: #FFD740;
-}
-
 .lang-opt {
   padding: 10px 16px;
   font-size: 13px;
@@ -2131,24 +2111,11 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <div class="background-fixed"></div>
 
+<!-- Welcome Modal - Red Santa Chest without rewards preview -->
 <div id="welcomeModal" class="welcome-modal">
   <div class="welcome-modal-box">
-    <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" alt="Gift Box">
+    <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" alt="Santa Chest">
     <div class="welcome-modal-title">🎄 Welcome! 🎄</div>
-    <div class="welcome-rewards-list">
-      <div class="welcome-reward-item">
-        <div class="welcome-reward-label">
-          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png" style="width: 28px; height: 28px;"> Gifts
-        </div>
-        <div class="welcome-reward-value">+100</div>
-      </div>
-      <div class="welcome-reward-item">
-        <div class="welcome-reward-label">
-          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px;"> Mining Power
-        </div>
-        <div class="welcome-reward-value">+10 Snow/hour</div>
-      </div>
-    </div>
     <button class="welcome-open-btn" onclick="openWelcomeChestFromModal()">🎁 Open Your Gift! 🎁</button>
   </div>
 </div>
@@ -2209,9 +2176,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       </div>
       <div class="chest-text">
         🎁 OPEN YOUR WELCOME GIFT! 🎁
-      </div>
-      <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">
-        ⭐ 100 Gifts + 10 Snow/hour Mining ⭐
       </div>
     </div>
   </div>
@@ -2579,13 +2543,14 @@ const CFG = {
   MACHINE_RATE: 1042,
 };
 
+// Referral tasks data
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 3000, name: "Invite 10 Friends", icon: "👥" },
-  { id: 'ref_20', n: 20, snow: 7500, name: "Invite 20 Friends", icon: "👥👥" },
-  { id: 'ref_50', n: 50, snow: 20000, name: "Invite 50 Friends", icon: "🌟" },
-  { id: 'ref_100', n: 100, snow: 50000, name: "Invite 100 Friends", icon: "💎" },
-  { id: 'ref_200', n: 200, snow: 100000, name: "Invite 200 Friends", icon: "👑" },
-  { id: 'ref_500', n: 500, snow: 250000, name: "Invite 500 Friends", icon: "🏆" },
+  { id: 'ref_10', n: 10, snow: 3000, name: "10 Referrals", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 7500, name: "20 Referrals", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 20000, name: "50 Referrals", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 50000, name: "100 Referrals", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 100000, name: "200 Referrals", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 250000, name: "500 Referrals", icon: "🏆" },
 ];
 
 const SOC_TASKS = [
@@ -2643,6 +2608,7 @@ const S = {
 
 let _lastClickTime = 0;
 let _apiInFlight = 0;
+let _notifTimeout = null;
 
 function esc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -2717,9 +2683,8 @@ async function openWelcomeChestFromModal() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.gifts = (S.user.gifts || 0) + result.gifts;
-    S.user.miningRate = result.miningRate;
-    S.user.miningLevel = result.miningLevel;
-    S.user.miningMachines = result.miningMachines || 0;
+    S.user.miningRate = (S.user.miningRate || 0) + result.miningRate;
+    S.user.miningLevel = result.miningLevel || 1;
     
     hideWelcomeModal();
     updateUI();
@@ -2775,9 +2740,8 @@ async function openWelcomeChest() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.gifts = (S.user.gifts || 0) + result.gifts;
-    S.user.miningRate = result.miningRate;
-    S.user.miningLevel = result.miningLevel;
-    S.user.miningMachines = result.miningMachines || 0;
+    S.user.miningRate = (S.user.miningRate || 0) + result.miningRate;
+    S.user.miningLevel = result.miningLevel || 1;
     
     document.getElementById('welcomeChest').style.display = 'none';
     updateUI();
@@ -3438,12 +3402,23 @@ function fmt(n) {
   return n.toString();
 }
 
-let _nt;
+// Improved notification function - appears at bottom and disappears after 3 seconds
 function showNotif(msg, type = 'i') {
   const el = document.getElementById('notif');
   if (!el) return;
-  el.innerHTML = msg; el.className = `notif show ${type}`;
-  clearTimeout(_nt); _nt = setTimeout(() => el.classList.remove('show'), 3200);
+  el.innerHTML = msg;
+  el.className = '';
+  el.classList.add('show');
+  if (type === 's') el.classList.add('s');
+  else if (type === 'e') el.classList.add('e');
+  else if (type === 'w') el.classList.add('w');
+  else el.classList.add('i');
+  
+  if (_notifTimeout) clearTimeout(_notifTimeout);
+  _notifTimeout = setTimeout(() => {
+    el.classList.remove('show');
+    _notifTimeout = null;
+  }, 3000);
 }
 
 function spawnSnowParticle() {
