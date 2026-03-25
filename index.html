@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +21,6 @@
 :root {
   --snow: #E8F0FF;
   --snow-glow: rgba(232, 240, 255, 0.5);
-  --gift: #E53935;
-  --gift-glow: rgba(229, 57, 53, 0.5);
   --gold: #FFD966;
   --gold-glow: rgba(255, 217, 102, 0.4);
   --ice: #4DD0E1;
@@ -66,12 +65,8 @@ body {
 }
 
 @keyframes subtleZoom {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 body::after {
@@ -114,8 +109,8 @@ body::after {
   max-width: 320px;
   width: 85%;
   text-align: center;
-  border: 2px solid rgba(229, 57, 53, 0.6);
-  box-shadow: 0 0 50px rgba(229, 57, 53, 0.5);
+  border: 2px solid rgba(77, 208, 225, 0.6);
+  box-shadow: 0 0 50px rgba(77, 208, 225, 0.5);
   animation: modalPop 0.4s ease-out;
 }
 
@@ -140,12 +135,12 @@ body::after {
 .welcome-modal-title {
   font-size: 24px;
   font-weight: 800;
-  color: var(--gift);
+  color: var(--ice);
   margin-bottom: 15px;
 }
 
 .welcome-open-btn {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
   border-radius: 50px;
   padding: 14px 35px;
@@ -155,14 +150,13 @@ body::after {
   margin-top: 15px;
   cursor: pointer;
   transition: transform 0.2s;
-  box-shadow: 0 0 20px var(--gift-glow);
+  box-shadow: 0 0 20px var(--ice-glow);
 }
 
 .welcome-open-btn:active {
   transform: scale(0.96);
 }
 
-/* Notifications */
 #notif {
   position: fixed;
   top: 18px;
@@ -186,27 +180,11 @@ body::after {
   transform: translateX(-50%) translateY(0);
 }
 
-#notif.s {
-  border-color: var(--gift-glow);
-  color: var(--gift);
-}
+#notif.s { border-color: var(--ice-glow); color: var(--ice); }
+#notif.e { border-color: rgba(239, 83, 80, 0.5); color: #FF8A80; }
+#notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; }
+#notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; }
 
-#notif.e {
-  border-color: rgba(239, 83, 80, 0.5);
-  color: #FF8A80;
-}
-
-#notif.i {
-  border-color: rgba(66, 165, 245, 0.4);
-  color: #90CAF9;
-}
-
-#notif.w {
-  border-color: rgba(255, 193, 7, 0.4);
-  color: #FFD740;
-}
-
-/* Swap Section */
 .swap-input-area {
   display: flex;
   align-items: center;
@@ -229,23 +207,22 @@ body::after {
 
 .swap-max {
   cursor: pointer;
-  background: rgba(229, 57, 53, 0.2);
-  border: 1px solid rgba(229, 57, 53, 0.4);
+  background: rgba(77, 208, 225, 0.2);
+  border: 1px solid rgba(77, 208, 225, 0.4);
   border-radius: 12px;
   padding: 8px 16px;
   font-size: 13px;
   font-weight: 800;
-  color: var(--gift);
+  color: var(--ice);
   white-space: nowrap;
   transition: all 0.2s;
 }
 
 .swap-max:active {
   transform: scale(0.95);
-  background: rgba(229, 57, 53, 0.4);
+  background: rgba(77, 208, 225, 0.4);
 }
 
-/* Progress Bar */
 .progress-bar {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -254,11 +231,8 @@ body::after {
   overflow: hidden;
 }
 
-.progress-bar > div {
-  transition: width 0.3s ease;
-}
+.progress-bar > div { transition: width 0.3s ease; }
 
-/* Other Styles */
 .wallet-modern-card {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
@@ -294,14 +268,12 @@ body::after {
   gap: 8px;
 }
 
-.wtab-modern i {
-  font-size: 18px;
-}
+.wtab-modern i { font-size: 18px; }
 
 .wtab-modern.active {
-  background: linear-gradient(135deg, var(--gift), #B71C1C);
+  background: linear-gradient(135deg, var(--ice), #0097B2);
   color: white;
-  box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+  box-shadow: 0 4px 15px rgba(77, 208, 225, 0.4);
 }
 
 .wtcont-modern {
@@ -309,41 +281,22 @@ body::after {
   animation: fadeSlideUp 0.3s ease;
 }
 
-.wtcont-modern.active {
-  display: block;
-}
+.wtcont-modern.active { display: block; }
 
 @keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.deposit-card {
+.deposit-card, .withdraw-card, .exchange-card {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
   border-radius: 24px;
   padding: 20px;
-  border: 1px solid rgba(77, 208, 225, 0.3);
 }
 
-.withdraw-card {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
-  border-radius: 24px;
-  padding: 20px;
-  border: 1px solid rgba(255, 217, 102, 0.3);
-}
-
-.exchange-card {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
-  border-radius: 24px;
-  padding: 20px;
-  border: 1px solid rgba(229, 57, 53, 0.3);
-}
+.deposit-card { border: 1px solid rgba(77, 208, 225, 0.3); }
+.withdraw-card { border: 1px solid rgba(255, 217, 102, 0.3); }
+.exchange-card { border: 1px solid rgba(77, 208, 225, 0.3); }
 
 .task-tabs {
   display: flex;
@@ -366,18 +319,13 @@ body::after {
 }
 
 .ttab.active {
-  background: rgba(229, 57, 53, 0.2);
-  border-color: var(--gift);
-  color: var(--gift);
+  background: rgba(77, 208, 225, 0.2);
+  border-color: var(--ice);
+  color: var(--ice);
 }
 
-.tcont {
-  display: none;
-}
-
-.tcont.active {
-  display: block;
-}
+.tcont { display: none; }
+.tcont.active { display: block; }
 
 .snowflake {
   position: fixed;
@@ -390,14 +338,8 @@ body::after {
 }
 
 @keyframes fall {
-  0% {
-    transform: translateY(-10vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
 button, input, select, textarea, span, div, p, h1, h2, h3, a {
@@ -410,19 +352,11 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   animation: fadeIn 0.26s ease;
 }
 
-.sec.active {
-  display: block;
-}
+.sec.active { display: block; }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .welcome-chest {
@@ -442,12 +376,10 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: transform 0.2s ease;
   width: 110px;
   height: 110px;
-  filter: drop-shadow(0 0 20px rgba(229, 57, 53, 0.7));
+  filter: drop-shadow(0 0 20px rgba(77, 208, 225, 0.7));
 }
 
-.chest-image:active {
-  transform: scale(0.95);
-}
+.chest-image:active { transform: scale(0.95); }
 
 @keyframes chestFloat {
   0%, 100% { transform: translateY(0px); }
@@ -461,7 +393,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transform: translate(-50%, -50%);
   width: 130px;
   height: 130px;
-  background: radial-gradient(circle, rgba(229, 57, 53, 0.5), transparent);
+  background: radial-gradient(circle, rgba(77, 208, 225, 0.5), transparent);
   border-radius: 50%;
   animation: pulse 1.5s ease-in-out infinite;
   pointer-events: none;
@@ -476,8 +408,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   margin-top: 12px;
   font-size: 14px;
   font-weight: 800;
-  color: #E53935;
-  text-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
+  color: #4DD0E1;
+  text-shadow: 0 0 10px rgba(77, 208, 225, 0.5);
   background: rgba(0, 0, 0, 0.5);
   display: inline-block;
   padding: 6px 16px;
@@ -488,7 +420,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 @keyframes textPulse {
   0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; text-shadow: 0 0 15px rgba(229, 57, 53, 0.8); }
+  50% { opacity: 1; text-shadow: 0 0 15px rgba(77, 208, 225, 0.8); }
 }
 
 .santa-wrap {
@@ -507,12 +439,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 @keyframes santaFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(-1.5deg);
-  }
-  50% {
-    transform: translateY(-9px) rotate(1.5deg);
-  }
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-9px) rotate(1.5deg); }
 }
 
 .santa-char:active {
@@ -545,7 +473,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 .storage-side-btn:active {
   transform: scale(0.88);
-  background: rgba(229, 57, 53, 0.18);
+  background: rgba(77, 208, 225, 0.18);
 }
 
 .storage-main {
@@ -584,13 +512,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   background: rgba(0, 0, 0, 0.42);
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(229, 57, 53, 0.13);
+  border: 1px solid rgba(77, 208, 225, 0.13);
   position: relative;
 }
 
 .storage-fill {
   height: 100%;
-  background: linear-gradient(90deg, #E53935, #FF6B6B, #FFA5A5);
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA, #B2EBF2);
   border-radius: 12px;
   transition: width 0.5s ease;
   position: relative;
@@ -631,14 +559,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   width: 100%;
   margin-top: 8px;
   padding: 12px;
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
   border-radius: 14px;
   color: #fff;
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 0 12px var(--gift-glow);
+  box-shadow: 0 0 12px var(--ice-glow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -646,15 +574,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: all 0.2s;
 }
 
-.collect-btn:active {
-  transform: scale(0.98);
-}
-
-.collect-btn:disabled {
-  opacity: 0.38;
-  cursor: default;
-  box-shadow: none;
-}
+.collect-btn:active { transform: scale(0.98); }
+.collect-btn:disabled { opacity: 0.38; cursor: default; box-shadow: none; }
 
 .machine-purchase-btn {
   width: 100%;
@@ -674,14 +595,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   box-shadow: 0 0 12px rgba(76, 175, 80, 0.4);
 }
 
-.machine-purchase-btn:active {
-  transform: scale(0.98);
-}
-
-.machine-purchase-btn:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
+.machine-purchase-btn:active { transform: scale(0.98); }
+.machine-purchase-btn:disabled { opacity: 0.5; cursor: default; }
 
 .machine-badge {
   background: rgba(0, 0, 0, 0.3);
@@ -723,10 +638,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border-radius: 25px;
 }
 
-.hero-card > * {
-  position: relative;
-  z-index: 1;
-}
+.hero-card > * { position: relative; z-index: 1; }
 
 .santa-frame-wrap {
   position: relative;
@@ -765,7 +677,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   align-items: stretch;
   width: 100%;
   background: rgba(0, 0, 0, 0.65);
-  border: 1px solid rgba(229, 57, 53, 0.25);
+  border: 1px solid rgba(77, 208, 225, 0.25);
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 12px;
@@ -827,14 +739,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 @keyframes taskIn {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .ticon {
@@ -846,28 +752,10 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   min-width: 44px;
 }
 
-.tinfo {
-  flex: 1;
-}
-
-.tname {
-  font-weight: 800;
-  font-size: 13px;
-  margin-bottom: 2px;
-}
-
-.trew {
-  font-size: 11px;
-  color: var(--snow);
-  font-weight: 700;
-}
-
-.tstat {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 2px;
-  font-weight: 500;
-}
+.tinfo { flex: 1; }
+.tname { font-weight: 800; font-size: 13px; margin-bottom: 2px; }
+.trew { font-size: 11px; color: var(--snow); font-weight: 700; }
+.tstat { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 500; }
 
 .tbtn {
   border: none;
@@ -881,9 +769,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: all 0.1s;
 }
 
-.tbtn:active {
-  transform: scale(0.95);
-}
+.tbtn:active { transform: scale(0.95); }
 
 .tbtn.go {
   background: linear-gradient(135deg, #1976D2, #0D47A1);
@@ -891,14 +777,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .tbtn.claim {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   color: #fff;
   animation: claimGlow 1.8s ease-in-out infinite;
 }
 
 @keyframes claimGlow {
-  0%, 100% { box-shadow: 0 0 6px rgba(229, 57, 53, 0.3); }
-  50% { box-shadow: 0 0 16px rgba(229, 57, 53, 0.8); }
+  0%, 100% { box-shadow: 0 0 6px rgba(77, 208, 225, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(77, 208, 225, 0.8); }
 }
 
 .tbtn.done {
@@ -948,10 +834,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   color: #fff;
 }
 
-.wallet-modern {
-  margin-bottom: 16px;
-}
-
 .modern-tabs {
   display: flex;
   gap: 12px;
@@ -979,14 +861,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   gap: 8px;
 }
 
-.modern-tab i {
-  font-size: 18px;
-}
+.modern-tab i { font-size: 18px; }
 
 .modern-tab.active {
-  background: linear-gradient(135deg, var(--gift), #B71C1C);
+  background: linear-gradient(135deg, var(--ice), #0097B2);
   color: white;
-  box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+  box-shadow: 0 4px 15px rgba(77, 208, 225, 0.4);
 }
 
 .modern-content {
@@ -994,9 +874,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   animation: fadeSlideUp 0.3s ease;
 }
 
-.modern-content.active {
-  display: block;
-}
+.modern-content.active { display: block; }
 
 .modern-card {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
@@ -1006,15 +884,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.modern-card.deposit {
-  border-top: 3px solid var(--ice);
-}
-.modern-card.withdraw {
-  border-top: 3px solid var(--gold);
-}
-.modern-card.exchange {
-  border-top: 3px solid var(--gift);
-}
+.modern-card.deposit { border-top: 3px solid var(--ice); }
+.modern-card.withdraw { border-top: 3px solid var(--gold); }
+.modern-card.exchange { border-top: 3px solid var(--ice); }
 
 .modern-card-title {
   font-size: 18px;
@@ -1025,13 +897,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   gap: 8px;
 }
 
-.modern-card-title i {
-  font-size: 24px;
-}
+.modern-card-title i { font-size: 24px; }
 
-.modern-input-group {
-  margin-bottom: 16px;
-}
+.modern-input-group { margin-bottom: 16px; }
 
 .modern-label {
   font-size: 12px;
@@ -1054,7 +922,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 .modern-input:focus {
   outline: none;
-  border-color: var(--gift);
+  border-color: var(--ice);
 }
 
 .modern-preset {
@@ -1067,19 +935,19 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   flex: 1;
   padding: 8px;
   text-align: center;
-  background: rgba(229, 57, 53, 0.15);
-  border: 1px solid rgba(229, 57, 53, 0.3);
+  background: rgba(77, 208, 225, 0.15);
+  border: 1px solid rgba(77, 208, 225, 0.3);
   border-radius: 12px;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  color: var(--gift);
+  color: var(--ice);
   transition: all 0.2s;
 }
 
 .modern-preset-btn:active {
   transform: scale(0.96);
-  background: rgba(229, 57, 53, 0.3);
+  background: rgba(77, 208, 225, 0.3);
 }
 
 .modern-rate-info {
@@ -1112,9 +980,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .modern-btn.primary {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   color: white;
-  box-shadow: 0 0 20px var(--gift-glow);
+  box-shadow: 0 0 20px var(--ice-glow);
 }
 
 .modern-btn.secondary {
@@ -1123,14 +991,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   box-shadow: 0 0 20px var(--gold-glow);
 }
 
-.modern-btn:active {
-  transform: scale(0.98);
-}
-
-.modern-btn:disabled {
-  opacity: 0.5;
-  transform: none;
-}
+.modern-btn:active { transform: scale(0.98); }
+.modern-btn:disabled { opacity: 0.5; transform: none; }
 
 .swap-section-modern {
   display: flex;
@@ -1178,7 +1040,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 .swap-arrow {
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -1187,7 +1049,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   font-size: 20px;
   cursor: pointer;
   transition: transform 0.2s;
-  box-shadow: 0 0 12px var(--gift-glow);
+  box-shadow: 0 0 12px var(--ice-glow);
 }
 
 .swap-arrow:active {
@@ -1233,9 +1095,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   align-items: center;
 }
 
-.hist-row:last-child {
-  border-bottom: none;
-}
+.hist-row:last-child { border-bottom: none; }
 
 .hist-l {
   font-size: 12px;
@@ -1288,7 +1148,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 .finput:focus {
   outline: none;
-  border-color: var(--gift);
+  border-color: var(--ice);
 }
 
 .preset-row {
@@ -1301,18 +1161,18 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   flex: 1;
   padding: 7px;
   text-align: center;
-  background: rgba(229, 57, 53, 0.1);
-  border: 1px solid rgba(229, 57, 53, 0.2);
+  background: rgba(77, 208, 225, 0.1);
+  border: 1px solid rgba(77, 208, 225, 0.2);
   border-radius: 8px;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  color: var(--gift);
+  color: var(--ice);
   transition: all 0.1s;
 }
 
 .prbtn:active {
-  background: rgba(229, 57, 53, 0.28);
+  background: rgba(77, 208, 225, 0.28);
   transform: scale(0.96);
 }
 
@@ -1351,33 +1211,25 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 .btn-prim {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
   border-radius: 12px;
   color: #fff;
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 0 14px var(--gift-glow);
+  box-shadow: 0 0 14px var(--ice-glow);
   transition: all 0.1s;
   animation: primGlow 2.2s ease-in-out infinite;
 }
 
 @keyframes primGlow {
-  0%, 100% { box-shadow: 0 0 14px var(--gift-glow); }
-  50% { box-shadow: 0 0 28px rgba(229, 57, 53, 0.75), 0 0 50px rgba(229, 57, 53, 0.25); }
+  0%, 100% { box-shadow: 0 0 14px var(--ice-glow); }
+  50% { box-shadow: 0 0 28px rgba(77, 208, 225, 0.75), 0 0 50px rgba(77, 208, 225, 0.25); }
 }
 
-.btn-prim:active {
-  transform: scale(0.98);
-}
-
-.btn-prim:disabled {
-  opacity: 0.42;
-  cursor: default;
-  box-shadow: none;
-  animation: none;
-}
+.btn-prim:active { transform: scale(0.98); }
+.btn-prim:disabled { opacity: 0.42; cursor: default; box-shadow: none; animation: none; }
 
 .btn-wd {
   width: 100%;
@@ -1403,16 +1255,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   50% { box-shadow: 0 0 28px rgba(255, 217, 102, 0.7), 0 0 50px rgba(255, 217, 102, 0.2); }
 }
 
-.btn-wd:active {
-  transform: scale(0.98);
-}
-
-.btn-wd:disabled {
-  opacity: 0.42;
-  cursor: default;
-  box-shadow: none;
-  animation: none;
-}
+.btn-wd:active { transform: scale(0.98); }
+.btn-wd:disabled { opacity: 0.42; cursor: default; box-shadow: none; animation: none; }
 
 .wal-row {
   display: flex;
@@ -1457,9 +1301,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: all 0.1s;
 }
 
-.btn-conn:active {
-  transform: scale(0.96);
-}
+.btn-conn:active { transform: scale(0.96); }
 
 .dep-warn {
   display: flex;
@@ -1485,9 +1327,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   text-align: center;
 }
 
-.tx-status.visible {
-  display: block;
-}
+.tx-status.visible { display: block; }
 
 .stat-badge {
   padding: 2px 9px;
@@ -1515,7 +1355,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .ref-prog-card {
-  background: linear-gradient(145deg, rgba(229, 57, 53, 0.1), var(--card));
+  background: linear-gradient(145deg, rgba(77, 208, 225, 0.1), var(--card));
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 14px;
@@ -1528,8 +1368,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(229, 57, 53, 0.08);
-  border: 1px solid rgba(229, 57, 53, 0.18);
+  background: rgba(77, 208, 225, 0.08);
+  border: 1px solid rgba(77, 208, 225, 0.18);
   border-radius: 12px;
   padding: 12px;
   margin-bottom: 11px;
@@ -1537,14 +1377,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 @keyframes badgePulse {
-  0%, 100% { border-color: rgba(229, 57, 53, 0.18); }
-  50% { border-color: rgba(229, 57, 53, 0.5); }
+  0%, 100% { border-color: rgba(77, 208, 225, 0.18); }
+  50% { border-color: rgba(77, 208, 225, 0.5); }
 }
 
 .rbb-pct {
   font-size: 32px;
   font-weight: 800;
-  color: var(--gift);
+  color: var(--ice);
   line-height: 1;
 }
 
@@ -1573,7 +1413,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .btn-copy {
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
   border-radius: 10px;
   padding: 8px 13px;
@@ -1588,9 +1428,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: all 0.1s;
 }
 
-.btn-copy:active {
-  transform: scale(0.96);
-}
+.btn-copy:active { transform: scale(0.96); }
 
 .ref-count-badge {
   background: rgba(0, 242, 122, 0.12);
@@ -1610,16 +1448,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.ref-list-item:last-child {
-  border-bottom: none;
-}
+.ref-list-item:last-child { border-bottom: none; }
 
 .rli-av {
   width: 34px;
   height: 34px;
   border-radius: 50%;
   background: var(--glass);
-  border: 2px solid var(--gift);
+  border: 2px solid var(--ice);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1634,28 +1470,10 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   object-fit: cover;
 }
 
-.rli-info {
-  flex: 1;
-}
-
-.rli-name {
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.rli-date {
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 600;
-  margin-top: 1px;
-}
-
-.rli-earn {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--snow);
-  white-space: nowrap;
-}
+.rli-info { flex: 1; }
+.rli-name { font-size: 13px; font-weight: 800; }
+.rli-date { font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 1px; }
+.rli-earn { font-size: 12px; font-weight: 800; color: var(--snow); white-space: nowrap; }
 
 .topbar-main {
   display: flex;
@@ -1664,11 +1482,10 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   padding: 9px 12px 7px;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(229, 57, 53, 0.12);
+  border-bottom: 1px solid rgba(77, 208, 225, 0.12);
 }
 
 .uavatar {
@@ -1717,7 +1534,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   display: flex;
   align-items: center;
   gap: 5px;
-  background: linear-gradient(105deg, rgba(0, 0, 0, 0.6) 0%, rgba(229, 57, 53, 0.12) 50%, rgba(0, 0, 0, 0.6) 100%) !important;
+  background: linear-gradient(105deg, rgba(0, 0, 0, 0.6) 0%, rgba(77, 208, 225, 0.12) 50%, rgba(0, 0, 0, 0.6) 100%) !important;
   background-size: 200% auto !important;
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -1737,14 +1554,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   100% { background-position: 200% center; }
 }
 
-.tb-chip.gift {
-  border-color: rgba(229, 57, 53, 0.35);
-  color: var(--gift);
-}
-
 .tb-chip.snow {
   border-color: rgba(232, 240, 255, 0.3);
   color: var(--snow);
+}
+
+.tb-chip.ton {
+  border-color: rgba(255, 217, 102, 0.3);
+  color: var(--gold);
 }
 
 .tb-chip-num {
@@ -1755,11 +1572,11 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .lang-btn {
-  background: linear-gradient(135deg, rgba(229, 57, 53, 0.2), rgba(0, 0, 0, 0.5));
-  border: 1px solid rgba(229, 57, 53, 0.4);
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.5));
+  border: 1px solid rgba(77, 208, 225, 0.4);
   border-radius: 30px;
   padding: 6px 12px;
-  color: var(--gift);
+  color: var(--ice);
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
@@ -1771,9 +1588,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   white-space: nowrap;
 }
 
-.lang-btn:active {
-  transform: scale(0.95);
-}
+.lang-btn:active { transform: scale(0.95); }
 
 .bnav {
   position: fixed;
@@ -1782,7 +1597,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   right: 0;
   z-index: 200;
   background: rgba(0, 0, 0, 0.92);
-  border-top: 1px solid rgba(229, 57, 53, 0.3);
+  border-top: 1px solid rgba(77, 208, 225, 0.3);
   display: flex;
   backdrop-filter: blur(20px);
   padding-bottom: env(safe-area-inset-bottom, 0);
@@ -1820,13 +1635,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: all 0.25s ease;
 }
 
-.ni.active .ni-icon {
-  transform: translateY(-3px);
-}
-
-.ni.active .ni-icon img {
-  filter: drop-shadow(0 0 8px rgba(229, 57, 53, 0.8));
-}
+.ni.active .ni-icon { transform: translateY(-3px); }
+.ni.active .ni-icon img { filter: drop-shadow(0 0 8px rgba(77, 208, 225, 0.8)); }
 
 .ni-lbl {
   font-size: 11px;
@@ -1839,8 +1649,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 .ni.active .ni-lbl {
-  color: var(--gift);
-  text-shadow: 0 0 6px rgba(229, 57, 53, 0.5);
+  color: var(--ice);
+  text-shadow: 0 0 6px rgba(77, 208, 225, 0.5);
 }
 
 #loadingScreen {
@@ -1866,7 +1676,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   width: 130px;
   height: 130px;
   animation: ldBounce 1.6s ease-in-out infinite;
-  filter: drop-shadow(0 0 24px rgba(229, 57, 53, 0.7));
+  filter: drop-shadow(0 0 24px rgba(77, 208, 225, 0.7));
 }
 
 @keyframes ldBounce {
@@ -1905,14 +1715,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(229, 57, 53, 0.3);
+  border: 1px solid rgba(77, 208, 225, 0.3);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .ice-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #4DD0E1, #E53935, #FFD966);
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA, #B2EBF2);
   border-radius: 20px;
   position: relative;
   transition: width 0.3s ease;
@@ -1921,7 +1731,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 @keyframes iceGlow {
   0%, 100% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.5); }
-  50% { box-shadow: 0 0 15px rgba(229, 57, 53, 0.8), 0 0 8px rgba(77, 208, 225, 0.8); }
+  50% { box-shadow: 0 0 15px rgba(77, 208, 225, 0.8), 0 0 8px rgba(77, 208, 225, 0.8); }
 }
 
 .ice-fill::after {
@@ -1943,9 +1753,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 .ld-pct {
   font-size: 14px;
   font-weight: 800;
-  color: var(--gift);
+  color: var(--ice);
   letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
+  text-shadow: 0 0 10px rgba(77, 208, 225, 0.5);
 }
 
 .modal {
@@ -1959,9 +1769,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   backdrop-filter: blur(6px);
 }
 
-.modal.active {
-  display: flex;
-}
+.modal.active { display: flex; }
 
 .modal-box {
   background: linear-gradient(160deg, #0A1428, #0A1A2A);
@@ -1976,14 +1784,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 @keyframes scaleIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .mhdr {
@@ -1996,7 +1798,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 .mtitle {
   font-size: 16px;
   font-weight: 800;
-  color: var(--gift);
+  color: var(--ice);
 }
 
 .mclose {
@@ -2011,9 +1813,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: all 0.1s;
 }
 
-.mclose:active {
-  transform: scale(0.9);
-}
+.mclose:active { transform: scale(0.9); }
 
 .ptc {
   position: fixed;
@@ -2024,14 +1824,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 @keyframes particleUp {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-74px) scale(0.4);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-74px) scale(0.4); opacity: 0; }
 }
 
 .heavy-snow {
@@ -2043,14 +1837,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 }
 
 @keyframes heavyFall {
-  0% {
-    transform: translateY(-10vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
 .support-img-btn {
@@ -2064,15 +1852,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: transform 0.2s;
 }
 
-.support-img-btn:active {
-  transform: scale(0.92);
-}
+.support-img-btn:active { transform: scale(0.92); }
 
 .support-img-btn img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(229, 57, 53, 0.5));
+  filter: drop-shadow(0 0 10px rgba(77, 208, 225, 0.5));
 }
 
 #floatAddTask {
@@ -2080,7 +1866,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   bottom: 110px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #E53935, #B71C1C);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
   border-radius: 30px;
   padding: 12px 28px;
@@ -2088,7 +1874,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   font-size: 14px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 20px var(--gift-glow);
+  box-shadow: 0 4px 20px var(--ice-glow);
   display: none;
   align-items: center;
   gap: 8px;
@@ -2097,22 +1883,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   transition: all 0.2s;
 }
 
-#floatAddTask:active {
-  transform: translateX(-50%) scale(0.96);
-}
+#floatAddTask:active { transform: translateX(-50%) scale(0.96); }
 
-::-webkit-scrollbar {
-  width: 3px;
-}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--ice); border-radius: 2px; }
 
-::-webkit-scrollbar-thumb {
-  background: var(--gift);
-  border-radius: 2px;
-}
-
-.referral-tasks-section {
-  margin-top: 15px;
-}
+.referral-tasks-section { margin-top: 15px; }
 </style>
 </head>
 <body>
@@ -2122,8 +1898,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <div id="welcomeModal" class="welcome-modal">
   <div class="welcome-modal-box">
     <div class="welcome-chest-container" style="position: relative; margin-bottom: 15px;">
-      <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Red Santa Chest" style="width: 120px; height: 120px; animation: chestWobble 0.8s ease-in-out infinite;">
-      <div style="position: absolute; top: -10px; right: -10px; background: #E53935; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
+      <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest" style="width: 120px; height: 120px; animation: chestWobble 0.8s ease-in-out infinite;">
+      <div style="position: absolute; top: -10px; right: -10px; background: #4DD0E1; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
     </div>
     <div class="welcome-modal-title">🎄 Santa's Gift! 🎄</div>
     <div class="welcome-modal-subtitle" style="font-size: 14px; color: var(--gold); margin-bottom: 15px;">Open to receive your rewards!</div>
@@ -2146,18 +1922,18 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <div class="topbar-main">
   <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
   <div class="tb-bals">
-    <div class="tb-chip gift">
-      <span><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png" style="width: 42px; height: 42px; object-fit: contain; vertical-align: middle;"></span>
-      <div style="display: flex; flex-direction: column; line-height: 1.1">
-        <span data-i18n="labelGifts" style="font-size: 9px; opacity: 0.7; font-weight: 600">Gifts</span>
-        <span class="tb-chip-num" id="tbGifts">0</span>
-      </div>
-    </div>
     <div class="tb-chip snow">
       <span><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 42px; height: 42px; object-fit: contain; vertical-align: middle;"></span>
       <div style="display: flex; flex-direction: column; line-height: 1.1">
         <span data-i18n="labelSnow" style="font-size: 9px; opacity: 0.7; font-weight: 600">Snow</span>
         <span class="tb-chip-num" id="tbSnow">0</span>
+      </div>
+    </div>
+    <div class="tb-chip ton">
+      <span><i class="fas fa-coins" style="font-size: 28px; color: var(--gold);"></i></span>
+      <div style="display: flex; flex-direction: column; line-height: 1.1">
+        <span data-i18n="labelTON" style="font-size: 9px; opacity: 0.7; font-weight: 600">TON</span>
+        <span class="tb-chip-num" id="tbTON">0</span>
       </div>
     </div>
   </div>
@@ -2167,7 +1943,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   </button>
 </div>
 
-<div id="langMenu" style="display: none; position: fixed; top: 64px; right: 12px; z-index: 300; background: rgba(10, 20, 35, 0.97); border: 1px solid rgba(229, 57, 53, 0.35); border-radius: 16px; overflow: hidden; min-width: 140px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);">
+<div id="langMenu" style="display: none; position: fixed; top: 64px; right: 12px; z-index: 300; background: rgba(10, 20, 35, 0.97); border: 1px solid rgba(77, 208, 225, 0.35); border-radius: 16px; overflow: hidden; min-width: 140px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);">
   <div style="padding: 6px 0">
     <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')">🇬🇧 &nbsp;English</div>
     <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')">🇷🇺 &nbsp;Русский</div>
@@ -2182,14 +1958,14 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" 
              alt="Gift" 
              class="chest-image" 
-             style="width: 110px; height: 110px; filter: drop-shadow(0 0 20px rgba(229,57,53,0.7)); transition: transform 0.2s ease; animation: chestFloat 1.5s ease-in-out infinite;">
+             style="width: 110px; height: 110px; filter: drop-shadow(0 0 20px rgba(77,208,225,0.7)); transition: transform 0.2s ease; animation: chestFloat 1.5s ease-in-out infinite;">
         <div class="chest-glow"></div>
       </div>
       <div class="chest-text">
         🎁 OPEN YOUR WELCOME GIFT! 🎁
       </div>
       <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">
-        ⭐ 100 Gifts + 10 Snow/hour Mining ⭐
+        ⭐ 100 Snow + 1 Mining Machine (100 Snow/hour) ⭐
       </div>
     </div>
   </div>
@@ -2198,7 +1974,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div class="santa-frame-wrap">
       <div class="santa-frame-inner">
         <div id="santaChar" onclick="santaClick()" style="cursor: pointer; user-select: none; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" style="width: 170px; height: auto; object-fit: contain; display: block; animation: santaFloat 3.2s ease-in-out infinite; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 18px rgba(229, 57, 53, 0.35))" draggable="false">
+          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" style="width: 170px; height: auto; object-fit: contain; display: block; animation: santaFloat 3.2s ease-in-out infinite; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 18px rgba(77, 208, 225, 0.35))" draggable="false">
         </div>
       </div>
     </div>
@@ -2230,7 +2006,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <button class="machine-purchase-btn" id="machinePurchaseBtn" onclick="purchaseMachine()">
         <span><i class="fas fa-microchip"></i> Buy Mining Machine</span>
         <span class="machine-badge"><span id="machineCount">0</span> Machines</span>
-        <span class="machine-cost"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 16px; height: 16px; object-fit: contain;"> <span id="machineCost">30000</span></span>
+        <span class="machine-cost"><i class="fas fa-coins"></i> <span id="machineCost">3</span> TON</span>
       </button>
     </div>
   </div>
@@ -2240,7 +2016,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="friendsTitle">Friends & Referrals</span></div>
   <div class="ref-prog-card">
     <div class="ref-bonus-badge">
-      <span class="rbb-pct">1000</span>
+      <span class="rbb-pct">200</span>
       <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
       <span class="rbb-txt" data-i18n="refCommission">Snow bonus when friend deposits!</span>
     </div>
@@ -2248,7 +2024,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
       <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
     </div>
-    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they deposit, you get 1000 Snow!</div>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they deposit, you get 200 Snow!</div>
   </div>
   <div class="hist-box" style="margin-bottom: 10px">
     <div class="hist-hdr" style="justify-content: space-between">
@@ -2344,25 +2120,26 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div class="modern-content" id="wt-withdraw-modern">
       <div class="modern-card withdraw">
         <div class="modern-card-title">
-          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span data-i18n="withdrawBtn">Withdraw Gifts</span>
+          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span data-i18n="withdrawBtn">Withdraw Snow</span>
         </div>
         <div class="modern-input-group">
           <label class="modern-label" data-i18n="tonWalletAddr">TON Wallet Address</label>
           <input type="text" class="modern-input" id="wdAddr" placeholder="UQ...">
         </div>
         <div class="modern-input-group">
-          <label class="modern-label" data-i18n="amountGifts">Amount (Gifts)</label>
-          <input type="number" class="modern-input" id="wdAmt" placeholder="200" min="200" oninput="updWdPrev()">
+          <label class="modern-label" data-i18n="amountSnow">Amount (Snow)</label>
+          <input type="number" class="modern-input" id="wdAmt" placeholder="2000" min="2000" oninput="updWdPrev()">
         </div>
         <div class="modern-preset">
-          <span class="modern-preset-btn" onclick="setWdAmt(200)">200</span>
-          <span class="modern-preset-btn" onclick="setWdAmt(500)">500</span>
-          <span class="modern-preset-btn" onclick="setWdAmt(1000)">1K</span>
+          <span class="modern-preset-btn" onclick="setWdAmt(2000)">2K</span>
           <span class="modern-preset-btn" onclick="setWdAmt(5000)">5K</span>
+          <span class="modern-preset-btn" onclick="setWdAmt(10000)">10K</span>
+          <span class="modern-preset-btn" onclick="setWdAmt(50000)">50K</span>
         </div>
         <div class="modern-rate-info" style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 12px; margin-bottom: 16px;">
           <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">💎 TON Value</div>
           <div class="modern-rate-value" id="wdTonVal">0.0000 TON</div>
+          <div style="font-size: 10px; color: var(--muted); margin-top: 4px;">Rate: 10,000 Snow = 1 TON</div>
         </div>
         <button class="modern-btn secondary" id="wdBtn" onclick="doWithdraw()">
           <i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Request Withdrawal</span>
@@ -2377,44 +2154,52 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div class="modern-content" id="wt-exchange-modern">
       <div class="modern-card exchange">
         <div class="modern-card-title">
-          <i class="fas fa-exchange-alt" style="color: var(--gift);"></i> <span data-i18n="exchangeNow">Exchange Snow to Gifts</span>
+          <i class="fas fa-exchange-alt" style="color: var(--ice);"></i> <span data-i18n="exchangeNow">Exchange Snow ↔ TON</span>
         </div>
         <div class="swap-section-modern">
           <div class="swap-row">
             <div class="swap-header">
               <div class="swap-currency">
                 <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
-                <span>Snow</span>
+                <span>Snow → TON</span>
               </div>
-              <div class="swap-balance" id="swapFromBal">0</div>
+              <div class="swap-balance" id="swapFromBalSnow">0 Snow</div>
             </div>
             <div class="swap-input-area">
-              <input type="number" id="swapFromAmt" placeholder="0" oninput="updSwapCalc()">
-              <span class="swap-max" onclick="swapMax()" data-i18n="maxBtn">MAX</span>
+              <input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwapSnowToTon()">
+              <span class="swap-max" onclick="swapSnowMax()" data-i18n="maxBtn">MAX</span>
+            </div>
+            <div class="swap-output-area" style="margin-top: 12px;">
+              <span data-i18n="youGet">You get:</span>
+              <div class="swap-output-value" id="swapTonOut">0</div>
+              <span>TON</span>
             </div>
           </div>
           <div class="swap-divider-modern">
-            <div class="swap-arrow" onclick="doExchange()">↓</div>
+            <div class="swap-arrow" onclick="swapSnowToTon()">↓</div>
           </div>
           <div class="swap-row">
             <div class="swap-header">
               <div class="swap-currency">
-                <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png" alt="Gifts">
-                <span>Gifts</span>
+                <i class="fas fa-coins" style="font-size: 28px; color: var(--gold);"></i>
+                <span>TON → Snow</span>
               </div>
-              <div class="swap-balance" id="swapToBal">0</div>
+              <div class="swap-balance" id="swapFromBalTON">0 TON</div>
             </div>
-            <div class="swap-output-area">
-              <div class="swap-output-value" id="swapToAmt">0</div>
+            <div class="swap-input-area">
+              <input type="number" id="swapTonAmt" placeholder="0" step="0.1" oninput="updSwapTonToSnow()">
+              <span class="swap-max" onclick="swapTonMax()" data-i18n="maxBtn">MAX</span>
+            </div>
+            <div class="swap-output-area" style="margin-top: 12px;">
+              <span data-i18n="youGet">You get:</span>
+              <div class="swap-output-value" id="swapSnowOut">0</div>
+              <span>Snow</span>
             </div>
           </div>
         </div>
         <div class="modern-rate-info" style="margin-top: 16px;">
-          📊 <span data-i18n="swapRate">10 Snow = 1 Gifts</span>
+          📊 <span data-i18n="swapRate">1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON</span>
         </div>
-        <button class="modern-btn primary" style="margin-top: 16px;" onclick="doExchange()">
-          <i class="fas fa-exchange-alt"></i> <span data-i18n="exchangeNow">Exchange Now</span>
-        </button>
       </div>
       <div class="hist-box" style="margin-top: 16px;">
         <div class="hist-hdr" data-i18n="exchangeHist">📋 Exchange History</div>
@@ -2449,8 +2234,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <div class="modal" id="helpModal">
   <div class="modal-box" style="max-height: 88vh; overflow-y: auto; padding: 0; border-radius: 22px 22px 0 0">
-    <div style="position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, #0A1428, #0A1A2A); border-bottom: 1px solid rgba(229, 57, 53, 0.18); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 22px 22px 0 0">
-      <div style="font-size: 17px; font-weight: 800; color: var(--gift); display: flex; align-items: center; gap: 8px" data-i18n="helpTitle">🎅 Santa Snow Guide</div>
+    <div style="position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, #0A1428, #0A1A2A); border-bottom: 1px solid rgba(77, 208, 225, 0.18); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 22px 22px 0 0">
+      <div style="font-size: 17px; font-weight: 800; color: var(--ice); display: flex; align-items: center; gap: 8px" data-i18n="helpTitle">🎅 Santa Snow Guide</div>
       <button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button>
     </div>
     <div style="padding: 14px 14px 0">
@@ -2459,9 +2244,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
           <span style="font-size: 20px">💸</span>
           <span style="font-size: 10px; font-weight: 800; color: #00D4FF; line-height: 1.2" data-i18n="helpPayCh">Payouts<br>Channel</span>
         </a>
-        <a href="https://t.me/SantaSnowNews" target="_blank" style="text-decoration: none; background: rgba(229, 57, 53, 0.1); border: 1px solid rgba(229, 57, 53, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
+        <a href="https://t.me/SantaSnowNews" target="_blank" style="text-decoration: none; background: rgba(77, 208, 225, 0.1); border: 1px solid rgba(77, 208, 225, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
           <span style="font-size: 20px">📢</span>
-          <span style="font-size: 10px; font-weight: 800; color: var(--gift); line-height: 1.2" data-i18n="helpNewsCh">Bot<br>News</span>
+          <span style="font-size: 10px; font-weight: 800; color: var(--ice); line-height: 1.2" data-i18n="helpNewsCh">Bot<br>News</span>
         </a>
         <a href="https://t.me/SantaSupport01" target="_blank" style="text-decoration: none; background: rgba(255, 217, 102, 0.1); border: 1px solid rgba(255, 217, 102, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
           <span style="font-size: 20px">🛟</span>
@@ -2470,23 +2255,23 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       </div>
     </div>
     <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 12px">
-      <div style="background: linear-gradient(135deg, rgba(229, 57, 53, 0.08), rgba(0, 0, 0, 0.4)); border: 1px solid rgba(229, 57, 53, 0.25); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 100 Gifts</span> — main withdrawal currency<br><span style="color: #fff; font-weight: 800">• 10 Snow/hour</span> — free mining power starts immediately</div>
+      <div style="background: linear-gradient(135deg, rgba(77, 208, 225, 0.08), rgba(0, 0, 0, 0.4)); border: 1px solid rgba(77, 208, 225, 0.25); border-radius: 16px; padding: 13px">
+        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 100 Snow</span> — main currency<br><span style="color: #fff; font-weight: 800">• 1 Mining Machine (100 Snow/hour)</span> — free mining power starts immediately</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--snow); font-weight: 800">Snow</span><br>⬅ Each machine produces 1042 Snow per hour<br>⬅ More machines = more Snow per hour!<br>⬅ Convert Snow to <span style="color: var(--gift); font-weight: 800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎<br>📊 1 Gifts = 0.0001 TON (10,000 Gifts = 1 TON)</div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span> (3 TON each)<br>⬅ Each machine produces 100 Snow per hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 10,000 Snow (1,000 Snow = 0.1 TON)</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--gift); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends to earn big Snow rewards!<br>
-        <span style="color: var(--gold); font-weight: 800">10 friends:</span> 3,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">20 friends:</span> 7,500 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">50 friends:</span> 20,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">100 friends:</span> 50,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">200 friends:</span> 100,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 250,000 Snow</div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends to earn Snow rewards!<br>
+        <span style="color: var(--gold); font-weight: 800">10 friends:</span> 300 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">20 friends:</span> 750 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">50 friends:</span> 2,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">100 friends:</span> 5,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">200 friends:</span> 10,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 25,000 Snow</div>
       </div>
     </div>
     <div style="height: 12px"></div>
@@ -2506,12 +2291,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <div class="mtitle" data-i18n="addTaskTitle">➕ Add Community Task</div>
       <button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button>
     </div>
-    <div style="background: rgba(229, 57, 53, 0.08); border: 1px solid rgba(229, 57, 53, 0.2); border-radius: 12px; padding: 10px 13px; margin-bottom: 12px; font-size: 12px; color: var(--muted); font-weight: 600">
-      💡 <span data-i18n="taskCostFormula">Cost = <strong style="color: var(--gift)">Target Users × 60 Gifts</strong></span><br>
-      <span style="font-size: 11px" data-i18n="taskCostNote">Min target: 100 users | 100 users = 6,000 Gifts</span>
+    <div style="background: rgba(77, 208, 225, 0.08); border: 1px solid rgba(77, 208, 225, 0.2); border-radius: 12px; padding: 10px 13px; margin-bottom: 12px; font-size: 12px; color: var(--muted); font-weight: 600">
+      💡 <span data-i18n="taskCostFormula">Cost = <strong style="color: var(--ice)">Target Users × 6 Snow</strong></span><br>
+      <span style="font-size: 11px" data-i18n="taskCostNote">Min target: 100 users | 100 users = 600 Snow</span>
     </div>
     <div style="display: flex; gap: 7px; margin-bottom: 10px">
-      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex: 1; padding: 9px; border-radius: 10px; border: 2px solid var(--gift); background: rgba(229, 57, 53, 0.2); color: var(--gift); font-size: 13px; font-weight: 800; cursor: pointer">
+      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex: 1; padding: 9px; border-radius: 10px; border: 2px solid var(--ice); background: rgba(77, 208, 225, 0.2); color: var(--ice); font-size: 13px; font-weight: 800; cursor: pointer">
         📢 <span data-i18n="taskTypeChannel">Channel</span>
       </button>
       <button id="atTypeBot" onclick="setTaskType('bot')" style="flex: 1; padding: 9px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 13px; font-weight: 800; cursor: pointer">
@@ -2534,7 +2319,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     </div>
     <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 10px 13px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center">
       <span style="font-size: 12px; color: var(--muted); font-weight: 600" data-i18n="taskTotalCost">Total Cost:</span>
-      <span id="atCostPreview" style="font-size: 16px; font-weight: 800; color: var(--gift)">0 Gifts</span>
+      <span id="atCostPreview" style="font-size: 16px; font-weight: 800; color: var(--ice)">0 Snow</span>
     </div>
     <button class="btn-prim" onclick="submitAddTask()" data-i18n="taskCreateBtn">✅ Create Task</button>
     <div id="atStatus" style="margin-top: 8px; font-size: 12px; text-align: center; display: none"></div>
@@ -2547,33 +2332,31 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
-  RATE: 10,
-  MIN_WD: 200,
-  TON_PER_GIFT: 0.0001,
-  TON_USD: 3.5,
-  FREE_WD_LIMIT: 200,
-  REF_BONUS: 1000,
+  TON_TO_SNOW: 10000,
+  SNOW_TO_TON: 0.0001,
+  MIN_WITHDRAW_SNOW: 2000,
+  MACHINE_COST_TON: 3,
+  MACHINE_RATE_SNOW: 100,
+  REF_BONUS_SNOW: 200,
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
   BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow',
-  MACHINE_COST: 30000,
-  MACHINE_RATE: 1042,
 };
 
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 3000, name: "🎁 Invite 10 Friends", icon: "👥" },
-  { id: 'ref_20', n: 20, snow: 7500, name: "🎁 Invite 20 Friends", icon: "👥👥" },
-  { id: 'ref_50', n: 50, snow: 20000, name: "🎁 Invite 50 Friends", icon: "🌟" },
-  { id: 'ref_100', n: 100, snow: 50000, name: "🎁 Invite 100 Friends", icon: "💎" },
-  { id: 'ref_200', n: 200, snow: 100000, name: "🎁 Invite 200 Friends", icon: "👑" },
-  { id: 'ref_500', n: 500, snow: 250000, name: "🎁 Invite 500 Friends", icon: "🏆" },
+  { id: 'ref_10', n: 10, snow: 300, name: "🎁 Invite 10 Friends", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 750, name: "🎁 Invite 20 Friends", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 2000, name: "🎁 Invite 50 Friends", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 5000, name: "🎁 Invite 100 Friends", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 10000, name: "🎁 Invite 200 Friends", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 25000, name: "🎁 Invite 500 Friends", icon: "🏆" },
 ];
 
 const SOC_TASKS = [
-  { id: 'tg_payouts', name: 'Join Payouts Channel', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 1000 },
-  { id: 'tg_news', name: 'Join News Channel', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 500 },
-  { id: 'tg_ch', name: 'Join Telegram Channel', icon: '📢', link: 'https://t.me/SantaSnowChannel', snow: 1000 },
-  { id: 'tg_grp', name: 'Join Telegram Group', icon: '👥', link: 'https://t.me/SantaSnowGroup', snow: 500 },
-  { id: 'tg_bot', name: 'Start our Bot', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 300 },
+  { id: 'tg_payouts', name: 'Join Payouts Channel', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 100 },
+  { id: 'tg_news', name: 'Join News Channel', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 50 },
+  { id: 'tg_ch', name: 'Join Telegram Channel', icon: '📢', link: 'https://t.me/SantaSnowChannel', snow: 100 },
+  { id: 'tg_grp', name: 'Join Telegram Group', icon: '👥', link: 'https://t.me/SantaSnowGroup', snow: 50 },
+  { id: 'tg_bot', name: 'Start our Bot', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 30 },
 ];
 
 const STORAGE_LVS = {
@@ -2607,13 +2390,12 @@ const STORAGE_LVS = {
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
-const GIFT_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png';
 const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, gifts: 0, miningRate: 0, miningLevel: 1, miningMachines: 0, totalEarned: 0, storageLevel: 1, hasDeposited: false, freeWdUsed: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false },
+  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: 0, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2658,7 +2440,7 @@ async function loadState() {
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     
-    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.gifts === 0) {
+    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.miningMachines === 0) {
       S.isNewUser = true;
       showWelcomeModal();
     } else {
@@ -2677,18 +2459,12 @@ async function loadState() {
 
 function showWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) {
-    const rewardsList = modal.querySelector('.welcome-rewards-list');
-    if (rewardsList) rewardsList.style.display = 'none';
-    modal.classList.add('active');
-  }
+  if (modal) modal.classList.add('active');
 }
 
 function hideWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
+  if (modal) modal.classList.remove('active');
 }
 
 async function openWelcomeChestFromModal() {
@@ -2699,49 +2475,54 @@ async function openWelcomeChestFromModal() {
   try {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
-    S.user.gifts = (S.user.gifts || 0) + result.gifts;
+    S.user.snow = (S.user.snow || 0) + result.snow;
+    S.user.miningMachines = result.miningMachines;
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
-    S.user.miningMachines = result.miningMachines || 0;
     
     hideWelcomeModal();
     
     const chestEl = document.getElementById('welcomeChest');
-    if (chestEl) {
-      chestEl.style.display = 'none';
-    }
+    if (chestEl) chestEl.style.display = 'none';
     
     updateUI();
     triggerHeavySnow();
-    showNotif(`🎁 +${fmt(result.gifts)} Gifts! Mining rate: ${result.miningRate} Snow/hour`, 's');
+    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
     spawnSnowParticle();
-    showRewardsModal(result.gifts, result.miningRate);
+    showRewardsModal(result.snow, result.miningMachines, result.miningRate);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
 }
 
-function showRewardsModal(gifts, miningRate) {
+function showRewardsModal(snow, machines, rate) {
   const modalContent = `
     <div style="text-align: center; padding: 15px;">
       <div style="font-size: 56px; margin-bottom: 15px; animation: bounce 0.5s ease;">🎁✨🎄</div>
-      <div style="font-size: 26px; font-weight: 800; color: var(--gift); margin-bottom: 20px; text-shadow: 0 0 10px rgba(229,57,53,0.5);">
+      <div style="font-size: 26px; font-weight: 800; color: var(--ice); margin-bottom: 20px; text-shadow: 0 0 10px rgba(77,208,225,0.5);">
         🎉 CONGRATULATIONS! 🎉
       </div>
-      <div style="background: linear-gradient(135deg, rgba(229,57,53,0.2), rgba(0,0,0,0.4)); border-radius: 24px; padding: 24px; margin: 20px 0; border: 1px solid rgba(229,57,53,0.3);">
+      <div style="background: linear-gradient(135deg, rgba(77,208,225,0.2), rgba(0,0,0,0.4)); border-radius: 24px; padding: 24px; margin: 20px 0; border: 1px solid rgba(77,208,225,0.3);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="${GIFT_IMG}" style="width: 48px; height: 48px; object-fit: contain;">
-            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Gifts Received:</span>
+            <img src="${SNOW_IMG}" style="width: 48px; height: 48px; object-fit: contain;">
+            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Snow Received:</span>
           </div>
-          <span style="font-size: 32px; font-weight: 800; color: var(--gold);">+${fmt(gifts)}</span>
+          <span style="font-size: 32px; font-weight: 800; color: var(--gold);">+${fmt(snow)}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-microchip" style="font-size: 48px; color: var(--ice);"></i>
+            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Mining Machines:</span>
+          </div>
+          <span style="font-size: 32px; font-weight: 800; color: var(--snow);">+${machines}</span>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="${SNOW_IMG}" style="width: 48px; height: 48px; object-fit: contain;">
-            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Mining Power:</span>
+            <i class="fas fa-bolt" style="font-size: 48px; color: var(--gold);"></i>
+            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Mining Rate:</span>
           </div>
-          <span style="font-size: 28px; font-weight: 800; color: var(--snow);">+${miningRate} Snow/hour</span>
+          <span style="font-size: 28px; font-weight: 800; color: var(--ice);">+${rate} Snow/hour</span>
         </div>
       </div>
       <button onclick="closeModal('rewardsModal')" class="btn-prim" style="margin-top: 15px; padding: 14px 32px; font-size: 18px;">
@@ -2773,17 +2554,17 @@ async function openWelcomeChest() {
   try {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
-    S.user.gifts = (S.user.gifts || 0) + result.gifts;
+    S.user.snow = (S.user.snow || 0) + result.snow;
+    S.user.miningMachines = result.miningMachines;
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
-    S.user.miningMachines = result.miningMachines || 0;
     
     document.getElementById('welcomeChest').style.display = 'none';
     updateUI();
     triggerHeavySnow();
-    showNotif(`🎁 +${fmt(result.gifts)} Gifts! Mining rate: ${result.miningRate} Snow/hour`, 's');
+    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
     spawnSnowParticle();
-    showRewardsModal(result.gifts, result.miningRate);
+    showRewardsModal(result.snow, result.miningMachines, result.miningRate);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
@@ -2794,22 +2575,23 @@ async function purchaseMachine() {
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   
-  const cost = CFG.MACHINE_COST;
+  const costTon = CFG.MACHINE_COST_TON;
   const currentMachines = S.user.miningMachines || 0;
+  const currentTon = S.user.tonBalance || 0;
   
-  if ((S.user.snow || 0) < cost) {
-    showNotif(`❌ Need ${fmt(cost)} Snow to buy a machine!`, 'e');
+  if (currentTon < costTon) {
+    showNotif(`❌ Need ${costTon} TON to buy a machine (you have ${currentTon} TON)`, 'e');
     return;
   }
   
   try {
     const result = await api('purchaseMachine', {});
-    S.user.snow = result.snow;
+    S.user.tonBalance = result.tonBalance;
     S.user.miningRate = result.miningRate;
     S.user.miningMachines = result.miningMachines;
     updateUI();
     triggerHeavySnow();
-    showNotif(`🎉 Machine purchased! +${CFG.MACHINE_RATE} Snow/hour. Total: ${result.miningMachines} machines`, 's');
+    showNotif(`🎉 Machine purchased! +${CFG.MACHINE_RATE_SNOW} Snow/hour. Total: ${result.miningMachines} machines`, 's');
     spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e');
@@ -2818,8 +2600,8 @@ async function purchaseMachine() {
 
 function updateUI() {
   const u = S.user;
-  document.getElementById('tbGifts').textContent = fmt(u.gifts || 0);
   document.getElementById('tbSnow').textContent = fmt(u.snow || 0);
+  document.getElementById('tbTON').textContent = fmtTon(u.tonBalance || 0);
   const rateDay = Math.round((u.miningRate || 0) * 24);
   document.getElementById('heroRateDay').textContent = fmt(rateDay);
   
@@ -2827,16 +2609,24 @@ function updateUI() {
   if (machineCount) machineCount.textContent = u.miningMachines || 0;
   
   const machineCostSpan = document.getElementById('machineCost');
-  if (machineCostSpan) machineCostSpan.textContent = fmt(CFG.MACHINE_COST);
+  if (machineCostSpan) machineCostSpan.textContent = CFG.MACHINE_COST_TON;
   
   const machineBtn = document.getElementById('machinePurchaseBtn');
-  if (machineBtn) machineBtn.disabled = (u.snow || 0) < CFG.MACHINE_COST;
+  if (machineBtn) machineBtn.disabled = (u.tonBalance || 0) < CFG.MACHINE_COST_TON;
   
   updateSwapBals();
   updateRefUI();
   renderExchHist();
   renderWdHist();
   renderTasks();
+}
+
+function fmtTon(n) {
+  if (n === undefined || n === null) return '0';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  if (n >= 1) return n.toFixed(2);
+  if (n > 0) return n.toFixed(4);
+  return n.toString();
 }
 
 function startStorage() {
@@ -2908,13 +2698,13 @@ function buildUpgradeContent() {
   let h = `<div style="background: rgba(0, 0, 0, 0.28); border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin-bottom: 10px">
     <div class="upg-levels" style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px">
       <div class="upg-lv" style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 12px; text-align: center">
-        <div class="lvn" style="font-size: 16px; font-weight: 800; color: var(--gift)">Lv.${lv}</div>
+        <div class="lvn" style="font-size: 16px; font-weight: 800; color: var(--ice)">Lv.${lv}</div>
         <div class="lvl" style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(cur.label)}</div>
         <div style="font-size: 10px; color: var(--muted); margin-top: 2px">Cap: ${fmt(cur.cap)}</div>
       </div>
-      <div class="upg-arrow" style="font-size: 20px; color: var(--gift)">→</div>`;
+      <div class="upg-arrow" style="font-size: 20px; color: var(--ice)">→</div>`;
   if (next) {
-    h += `<div class="upg-lv" style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--gift); border-radius: 12px; text-align: center">
+    h += `<div class="upg-lv" style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--ice); border-radius: 12px; text-align: center">
       <div class="lvn" style="font-size: 16px; font-weight: 800; color: var(--gold)">Lv.${lv + 1}</div>
       <div class="lvl" style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(next.label)}</div>
       <div style="font-size: 10px; color: var(--muted); margin-top: 2px">Cap: ${fmt(next.cap)}</div>
@@ -2928,9 +2718,9 @@ function buildUpgradeContent() {
       📦 Capacity: <span style="color: #fff; font-weight: 800">${fmt(cur.cap)} → ${fmt(next.cap)} Snow</span><br>
       💰 Cost: <span style="color: #fff; font-weight: 800">${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width: 14px; height: 14px; object-fit: contain; vertical-align: middle"></span>
     </div>
-    <button class="btn-upg" onclick="upgradeStorage()" style="width: 100%; padding: 11px; background: linear-gradient(135deg, #E53935, #B71C1C); border: none; border-radius: 12px; color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 0 12px var(--gift-glow); transition: all 0.1s">⬆️ Upgrade for ${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width: 16px; height: 16px; object-fit: contain; vertical-align: middle"></button>`;
+    <button class="btn-upg" onclick="upgradeStorage()" style="width: 100%; padding: 11px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 12px; color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 0 12px var(--ice-glow); transition: all 0.1s">⬆️ Upgrade for ${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width: 16px; height: 16px; object-fit: contain; vertical-align: middle"></button>`;
   } else {
-    h += `<div style="text-align: center; padding: 12px; color: var(--gift); font-weight: 800">🏆 Maximum Level!</div>`;
+    h += `<div style="text-align: center; padding: 12px; color: var(--ice); font-weight: 800">🏆 Maximum Level!</div>`;
   }
   h += `</div>`;
   document.getElementById('upgradeContent').innerHTML = h;
@@ -2966,7 +2756,6 @@ function showFab() { const f = document.getElementById('floatAddTask'); if (f) f
 function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refTasksHtml = '';
-  const referralIcon = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
   
   for (const task of REF_TASKS) {
     const completed = S.doneTasks.includes(task.id);
@@ -2976,7 +2765,7 @@ function renderTasks() {
     refTasksHtml += `
       <div class="task-item">
         <div class="ticon">
-          <img src="${referralIcon}" style="width: 52px; height: 52px; object-fit: contain; border-radius: 14px;">
+          <img src="${REF_TASK_ICON}" style="width: 52px; height: 52px; object-fit: contain; border-radius: 14px;">
         </div>
         <div class="tinfo">
           <div class="tname" style="font-size: 14px; font-weight: 800;">${task.name}</div>
@@ -2985,7 +2774,7 @@ function renderTasks() {
             <span style="font-weight: 800; color: var(--snow);">${fmt(task.snow)} Snow</span>
           </div>
           <div class="progress-bar" style="background: rgba(0,0,0,0.3); border-radius: 10px; height: 8px; margin-top: 5px;">
-            <div style="width: ${progress}%; background: linear-gradient(90deg, #E53935, #FF6B6B); height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
+            <div style="width: ${progress}%; background: linear-gradient(90deg, #4DD0E1, #80DEEA); height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
           </div>
           <div class="tstat" style="margin-top: 5px; font-size: 11px; color: var(--muted);">
             ${referralCount}/${task.n} friends invited (${progress}%)
@@ -2995,7 +2784,7 @@ function renderTasks() {
           ${completed ? 
             `<button class="tbtn done" style="background: rgba(255,255,255,0.07); color: var(--muted); padding: 8px 15px; border-radius: 10px;">✅ Completed</button>` :
             canClaim ? 
-            `<button class="tbtn claim" onclick="claimRefTask('${task.id}')" style="background: linear-gradient(135deg, #E53935, #B71C1C); color: white; padding: 8px 15px; border-radius: 10px; font-weight: 800; cursor: pointer;">🎁 Claim →</button>` :
+            `<button class="tbtn claim" onclick="claimRefTask('${task.id}')" style="background: linear-gradient(135deg, #4DD0E1, #0097B2); color: white; padding: 8px 15px; border-radius: 10px; font-weight: 800; cursor: pointer;">🎁 Claim →</button>` :
             `<button class="tbtn go" disabled style="background: rgba(255,255,255,0.1); color: var(--muted); padding: 8px 15px; border-radius: 10px; cursor: not-allowed;">🔒 ${task.n} needed</button>`
           }
         </div>
@@ -3019,7 +2808,7 @@ async function claimRefTask(taskId) {
     updateUI();
     renderTasks();
     triggerHeavySnow();
-    showNotif(`🎉 +${fmt(result.snow)} Snow from referral task!`, 's');
+    showNotif(`🎉 +${fmt(result.snowReward)} Snow from referral task!`, 's');
     spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
@@ -3030,7 +2819,7 @@ function buildTaskCard(t, cat) {
   const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
   const icon = t.type === 'channel' ? '📢' : '🤖';
   const name = esc(t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task')));
-  const snow = t.snowReward || 500;
+  const snow = t.snowReward || 50;
   const link = esc(t.link || '');
   return `<div class="task-item">
     <div class="ticon" style="font-size: 28px">${icon}</div>
@@ -3099,13 +2888,13 @@ async function doDbTask(tid, link, type, cat) {
 }
 
 let _atType = 'channel';
-const TASK_GIFTS_PER_USER = 60;
+const TASK_SNOW_PER_USER = 6;
 const MIN_TASK_TARGET = 100;
 let _submitInFlight = false;
 
 function setTaskType(t) {
   _atType = t;
-  const sel = 'flex:1;padding:9px;border-radius:10px;border:2px solid var(--gift);background:rgba(229,57,53,0.2);color:var(--gift);font-size:13px;font-weight:800;cursor:pointer';
+  const sel = 'flex:1;padding:9px;border-radius:10px;border:2px solid var(--ice);background:rgba(77,208,225,0.2);color:var(--ice);font-size:13px;font-weight:800;cursor:pointer';
   const unsel = 'flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:13px;font-weight:800;cursor:pointer';
   document.getElementById('atTypeChannel').style.cssText = t === 'channel' ? sel : unsel;
   document.getElementById('atTypeBot').style.cssText = t === 'bot' ? sel : unsel;
@@ -3117,7 +2906,7 @@ function setTaskType(t) {
 function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
 function updAtCost() {
   const tgt = parseInt(document.getElementById('atTarget').value) || 0;
-  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_GIFTS_PER_USER) + ' Gifts';
+  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
 }
 
 async function submitAddTask() {
@@ -3133,13 +2922,13 @@ async function submitAddTask() {
   st.textContent = '⏳ Creating...';
   if (!link.includes('t.me/')) { st.style.color = '#ff8a80'; st.textContent = '❌ Invalid Telegram link'; return; }
   if (target < MIN_TASK_TARGET) { st.style.color = '#ff8a80'; st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; return; }
-  const cost = target * TASK_GIFTS_PER_USER;
-  if ((S.user.gifts || 0) < cost) { st.style.color = '#ff8a80'; st.textContent = `❌ Need ${fmt(cost)} Gifts (have ${fmt(S.user.gifts || 0)})`; return; }
+  const cost = target * TASK_SNOW_PER_USER;
+  if ((S.user.snow || 0) < cost) { st.style.color = '#ff8a80'; st.textContent = `❌ Need ${fmt(cost)} Snow (have ${fmt(S.user.snow || 0)})`; return; }
   _submitInFlight = true;
   try {
     await api('createTask', { type: _atType, link, targetUsers: target });
-    S.user.gifts = (S.user.gifts || 0) - cost;
-    st.style.color = 'var(--gift)';
+    S.user.snow = (S.user.snow || 0) - cost;
+    st.style.color = 'var(--ice)';
     st.textContent = '✅ Task created!';
     updateUI();
     triggerHeavySnow();
@@ -3148,43 +2937,82 @@ async function submitAddTask() {
   finally { _submitInFlight = false; }
 }
 
-function swapMax() {
-  document.getElementById('swapFromAmt').value = Math.floor(S.user.snow || 0);
-  updSwapCalc();
-}
-
-function updSwapCalc() {
-  const a = parseInt(document.getElementById('swapFromAmt').value) || 0;
-  document.getElementById('swapToAmt').textContent = fmt(Math.floor(a / CFG.RATE));
-}
-
+// Exchange functions
 function updateSwapBals() {
-  document.getElementById('swapFromBal').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
-  document.getElementById('swapToBal').innerHTML = `Balance: ${fmt(S.user.gifts || 0)} Gifts`;
+  document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
+  document.getElementById('swapFromBalTON').innerHTML = `Balance: ${fmtTon(S.user.tonBalance || 0)} TON`;
+}
+
+function swapSnowMax() {
+  document.getElementById('swapSnowAmt').value = Math.floor(S.user.snow || 0);
+  updSwapSnowToTon();
+}
+
+function swapTonMax() {
+  const tonBalance = S.user.tonBalance || 0;
+  document.getElementById('swapTonAmt').value = tonBalance.toFixed(4);
+  updSwapTonToSnow();
+}
+
+function updSwapSnowToTon() {
+  const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
+  const ton = snow * CFG.SNOW_TO_TON;
+  document.getElementById('swapTonOut').textContent = ton.toFixed(6);
+}
+
+function updSwapTonToSnow() {
+  const ton = parseFloat(document.getElementById('swapTonAmt').value) || 0;
+  const snow = Math.floor(ton * CFG.TON_TO_SNOW);
+  document.getElementById('swapSnowOut').textContent = fmt(snow);
 }
 
 let _exchInFlight = false;
-async function doExchange() {
+async function swapSnowToTon() {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   if (_exchInFlight) return;
-  const a = parseInt(document.getElementById('swapFromAmt').value) || 0;
-  if (a <= 0) { showNotif('Enter amount!', 'e'); return; }
-  if (a < CFG.RATE) { showNotif(`Min ${CFG.RATE} Snow!`, 'e'); return; }
-  if (a > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
-  const gifts = Math.floor(a / CFG.RATE);
+  const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
+  if (snow <= 0) { showNotif('Enter amount!', 'e'); return; }
+  if (snow < 100) { showNotif('Min 100 Snow (0.01 TON)!', 'e'); return; }
+  if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
   _exchInFlight = true;
   try {
-    await api('exchange', { snowAmount: a });
-    S.user.snow -= a;
-    S.user.gifts = (S.user.gifts || 0) + gifts;
-    S.exchHist.unshift({ s: a, g: gifts, dir: 'S→G', ts: Date.now() });
-    document.getElementById('swapFromAmt').value = '';
-    document.getElementById('swapToAmt').textContent = '0';
+    const result = await api('exchange', { snowAmount: snow });
+    S.user.snow = result.snow;
+    S.user.tonBalance = result.tonBalance;
+    S.exchHist.unshift({ snow: snow, ton: snow * CFG.SNOW_TO_TON, dir: 'S→T', ts: Date.now() });
+    document.getElementById('swapSnowAmt').value = '';
+    document.getElementById('swapTonOut').textContent = '0';
     updateUI(); renderExchHist();
     triggerHeavySnow();
-    showNotif(`⚡ ${fmt(a)} Snow → ${fmt(gifts)} Gifts`, 's');
+    showNotif(`⚡ ${fmt(snow)} Snow → ${(snow * CFG.SNOW_TO_TON).toFixed(6)} TON`, 's');
+    spawnSnowParticle();
+  } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
+  finally { _exchInFlight = false; }
+}
+
+async function swapTonToSnow() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_exchInFlight) return;
+  const ton = parseFloat(document.getElementById('swapTonAmt').value) || 0;
+  if (ton <= 0) { showNotif('Enter amount!', 'e'); return; }
+  if (ton < 0.1) { showNotif('Min 0.1 TON!', 'e'); return; }
+  if (ton > (S.user.tonBalance || 0)) { showNotif('Not enough TON!', 'e'); return; }
+  _exchInFlight = true;
+  try {
+    const result = await api('exchange', { tonAmount: ton });
+    S.user.snow = result.snow;
+    S.user.tonBalance = result.tonBalance;
+    const snowReceived = result.snow - (S.user.snow - (ton * CFG.TON_TO_SNOW));
+    S.exchHist.unshift({ ton: ton, snow: Math.floor(ton * CFG.TON_TO_SNOW), dir: 'T→S', ts: Date.now() });
+    document.getElementById('swapTonAmt').value = '';
+    document.getElementById('swapSnowOut').textContent = '0';
+    updateUI(); renderExchHist();
+    triggerHeavySnow();
+    showNotif(`⚡ ${ton} TON → ${fmt(Math.floor(ton * CFG.TON_TO_SNOW))} Snow`, 's');
     spawnSnowParticle();
   } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
   finally { _exchInFlight = false; }
@@ -3195,19 +3023,16 @@ function renderExchHist() {
   if (!el) return;
   if (!S.exchHist.length) { el.innerHTML = '<div class="hist-empty">No conversions yet</div>'; return; }
   el.innerHTML = S.exchHist.slice(0, 30).map(h => {
-    const snowAmt = h.s !== undefined ? h.s : (h.snow || 0);
-    const giftAmt = h.g !== undefined ? h.g : (h.gifts || 0);
-    const dir = h.dir || 'S→G';
-    const isS2G = dir === 'S→G';
-    const date = h.d || (h.ts ? new Date(h.ts).toLocaleDateString() : '');
-    const fromAmt = isS2G ? fmt(snowAmt) : fmt(giftAmt);
-    const toAmt = isS2G ? fmt(giftAmt) : fmt(snowAmt);
-    const fromLbl = isS2G ? `<img src="${SNOW_IMG}" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Snow` : 'Gifts';
-    const toLbl = isS2G ? 'Gifts' : `<img src="${SNOW_IMG}" style="width:13px;height:13px;object-fit:contain;vertical-align:middle"> Snow`;
+    const isS2T = h.dir === 'S→T';
+    const fromAmt = isS2T ? fmt(h.snow) : h.ton.toFixed(4);
+    const toAmt = isS2T ? h.ton.toFixed(6) : fmt(h.snow);
+    const fromLbl = isS2T ? 'Snow' : 'TON';
+    const toLbl = isS2T ? 'TON' : 'Snow';
+    const date = h.ts ? new Date(h.ts).toLocaleDateString() : '';
     return `<div class="hist-row" style="flex-direction:column;align-items:flex-start;gap:2px">
       <div style="display:flex;justify-content:space-between;width:100%">
-        <span class="hist-l">${esc(dir)} · ${esc(date)}</span>
-        <span style="font-size:12px;font-weight:800;color:var(--snow)">${toAmt} ${toLbl}</span>
+        <span class="hist-l">${esc(h.dir)} · ${esc(date)}</span>
+        <span style="font-size:12px;font-weight:800;color:var(--gold)">${toAmt} ${toLbl}</span>
       </div>
       <span style="font-size:11px;color:var(--muted);font-weight:500">From: ${fromAmt} ${fromLbl}</span>
     </div>`;
@@ -3216,8 +3041,8 @@ function renderExchHist() {
 
 function updWdPrev() {
   const a = parseFloat(document.getElementById('wdAmt').value) || 0;
-  const tonValue = a * CFG.TON_PER_GIFT;
-  document.getElementById('wdTonVal').textContent = tonValue.toFixed(4) + ' TON';
+  const tonValue = a * CFG.SNOW_TO_TON;
+  document.getElementById('wdTonVal').textContent = tonValue.toFixed(6) + ' TON';
 }
 
 function setWdAmt(amt) {
@@ -3242,11 +3067,11 @@ async function doWithdraw() {
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const addr = (document.getElementById('wdAddr').value || '').trim();
-  const amt = parseFloat(document.getElementById('wdAmt').value) || 0;
+  const snowAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
   const u = S.user;
   if (!addr || addr.length < 10) { showNotif('Enter valid TON address!', 'e'); return; }
-  if (amt < CFG.MIN_WD) { showNotif(`Min ${CFG.MIN_WD} Gifts!`, 'e'); return; }
-  if (amt > (u.gifts || 0)) { showNotif('Not enough Gifts!', 'e'); return; }
+  if (snowAmt < CFG.MIN_WITHDRAW_SNOW) { showNotif(`Min ${CFG.MIN_WITHDRAW_SNOW} Snow!`, 'e'); return; }
+  if (snowAmt > (u.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
   const partnerTasks = S.tasks?.partner || [];
   const missingPartner = partnerTasks.filter(t => t.status === 'active' && !S.doneTasks.includes(t.id));
   if (missingPartner.length > 0) {
@@ -3255,21 +3080,19 @@ async function doWithdraw() {
     return;
   }
   try {
-    const res = await api('withdraw', { address: addr, amount: amt });
-    u.gifts -= amt;
-    S.wdHist.unshift({ amt, addr, d: new Date().toLocaleDateString(), status: 'pending' });
+    const res = await api('withdraw', { address: addr, amount: snowAmt });
+    u.snow -= snowAmt;
+    S.wdHist.unshift({ snowAmt, addr, d: new Date().toLocaleDateString(), status: 'pending' });
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
     updWdPrev(); updateUI(); renderWdHist();
     triggerHeavySnow();
-    showNotif(`✅ Withdrawal requested: ${fmt(amt)} Gifts`, 's');
+    showNotif(`✅ Withdrawal requested: ${fmt(snowAmt)} Snow (${(snowAmt * CFG.SNOW_TO_TON).toFixed(6)} TON)`, 's');
   } catch (e) {
     const msg = e.message || '';
     showNotif(`❌ ${msg}`, 'e');
     if (msg.includes('partner tasks') || msg.includes('PARTNER_TASKS')) {
       setTimeout(() => goToTasksPartner(), 5000);
-    } else if (msg.includes('Deposit') || msg.includes('DEPOSIT')) {
-      setTimeout(() => goToWalletDeposit(), 5000);
     }
   }
 }
@@ -3280,12 +3103,13 @@ function renderWdHist() {
   if (!S.wdHist.length) { el.innerHTML = '<div class="hist-empty">No withdrawals yet</div>'; return; }
   el.innerHTML = S.wdHist.slice(0, 20).map(h => {
     const sc = { approved: 'sb-approved', pending: 'sb-pending', rejected: 'sb-rejected' }[h.status || 'pending'];
+    const tonValue = (h.snowAmt || 0) * CFG.SNOW_TO_TON;
     return `<div class="hist-row" style="flex-direction:column;gap:4px;align-items:flex-start">
       <div style="display:flex;justify-content:space-between;width:100%">
-        <span style="font-size:13px;font-weight:800;color:var(--gift)">${fmt(h.amt)} Gifts</span>
+        <span style="font-size:13px;font-weight:800;color:var(--ice)">${fmt(h.snowAmt)} Snow</span>
         <span class="stat-badge ${sc}">${esc(h.status || 'Pending')}</span>
       </div>
-      <div style="font-size:10px;color:var(--muted)">${((h.amt || 0) * CFG.TON_PER_GIFT).toFixed(4)} TON · ${esc(h.d || '')} · ${esc((h.addr || '').substring(0, 12))}...</div>
+      <div style="font-size:10px;color:var(--muted)">${tonValue.toFixed(6)} TON · ${esc(h.d || '')} · ${esc((h.addr || '').substring(0, 12))}...</div>
     </div>`;
   }).join('');
 }
@@ -3308,7 +3132,6 @@ function goToWalletDeposit() {
   document.getElementById('depositUserIdDisplay').textContent = S.userId || '???';
 }
 
-// FIXED: Referral link with correct startapp parameter
 function updateRefUI() {
   const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId || ''}`;
   document.getElementById('refLinkInp').value = link;
@@ -3326,7 +3149,7 @@ function updateRefUI() {
           <div class="rli-info">
             <div class="rli-name">${esc(r.name || 'Friend')}</div>
             <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
-            ${r.depositBonusPaid ? '<div style="font-size: 10px; color: var(--gold);">✅ Bonus paid</div>' : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for deposit</div>'}
+            ${r.depositBonusPaid ? '<div style="font-size: 10px; color: var(--gold);">✅ Bonus paid (200 Snow)</div>' : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for deposit</div>'}
           </div>
           <div class="rli-earn">${r.earned ? `+${fmt(r.earned)} <img src="${SNOW_IMG}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">` : '0'}</div>
         </div>`).join('');
@@ -3339,11 +3162,10 @@ function copyRefLink() {
   navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
 }
 
-const TON_TO_SNOW = 10000;
 function setDepAmt(v) { document.getElementById('depositAmountInput').value = Math.max(1, v); updDepPreview(); }
 function updDepPreview() {
   const ton = parseFloat(document.getElementById('depositAmountInput').value) || 0;
-  const snow = Math.floor(ton * TON_TO_SNOW);
+  const snow = Math.floor(ton * CFG.TON_TO_SNOW);
   const el = document.getElementById('depSnowPreview');
   if (el) el.innerHTML = `<img src="${SNOW_IMG}" style="width:20px;height:20px;object-fit:contain"> ${fmt(snow)} Snow`;
 }
@@ -3539,7 +3361,7 @@ function ldHide() {
 function preloadImages() {
   const urls = [
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
-    SNOW_IMG, GIFT_IMG, REF_TASK_ICON,
+    SNOW_IMG, REF_TASK_ICON,
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
@@ -3564,22 +3386,22 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 
 const TRANSLATIONS = {
   en: {
-    labelGifts: 'Gifts', labelSnow: 'Snow', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: 'Snow bonus when friend deposits!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they deposit, you get 1000 Snow!',
+    labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
+    friendsTitle: 'Friends & Referrals', refCommission: '200 Snow bonus when friend deposits!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they deposit, you get 200 Snow!',
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
     amountTON: 'Amount (TON)', rateLabel: 'Rate:', youWillReceive: 'You will receive:', depositBtn: 'Deposit TON',
-    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountGifts: 'Amount (Gifts)',
+    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountSnow: 'Amount (Snow)',
     tonValue: 'TON Value', withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
-    swapFrom: 'FROM', swapTo: 'TO', balance: 'Balance:', maxBtn: 'MAX', swapRate: '📊 10 Snow = 1 Gifts',
-    exchangeNow: 'Exchange Now', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
+    youGet: 'You get:', swapRate: '1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON',
+    exchangeNow: 'Exchange', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
     helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
-    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the red chest to receive:<br><span style="color:#fff;font-weight:800">• 100 Gifts</span> — main withdrawal currency<br><span style="color:#fff;font-weight:800">• 10 Snow/hour</span> — free mining power starts immediately',
-    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--snow);font-weight:800">Snow</span><br>⬅ Each machine produces 1042 Snow per hour<br>⬅ More machines = more Snow per hour!<br>⬅ Convert Snow to <span style="color:var(--gift);font-weight:800">Gifts</span> on the Wallet page<br>⬅ Withdraw Gifts to your TON wallet 💎<br>📊 1 Gifts = 0.0001 TON (10,000 Gifts = 1 TON)',
-    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--gift)">Target Users × 60 Gifts</strong>',
-    taskCostNote: 'Min target: 100 users | 100 users = 6,000 Gifts', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
+    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the chest to receive:<br><span style="color:#fff;font-weight:800">• 100 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (100 Snow/hour)</span> — free mining power starts immediately',
+    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--gold);font-weight:800">TON</span> (3 TON each)<br>⬅ Each machine produces 100 Snow per hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 10,000 Snow (1,000 Snow = 0.1 TON)',
+    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--ice)">Target Users × 6 Snow</strong>',
+    taskCostNote: 'Min target: 100 users | 100 users = 600 Snow', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
     taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
     taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
@@ -3587,22 +3409,22 @@ const TRANSLATIONS = {
     floatAdd: 'Add Task', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
   },
   ru: {
-    labelGifts: 'Подарки', labelSnow: 'Снег', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: 'Бонус 1000 Снега когда друг делает депозит!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они сделают депозит, вы получите 1000 Снега!',
+    labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
+    friendsTitle: 'Друзья и Рефералы', refCommission: 'Бонус 200 Снега когда друг делает депозит!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они сделают депозит, вы получите 200 Снега!',
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
     amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
-    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountGifts: 'Сумма (Подарки)',
+    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountSnow: 'Сумма (Снег)',
     tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
-    swapFrom: 'ОТ', swapTo: 'ДО', balance: 'Баланс:', maxBtn: 'МАКС', swapRate: '📊 10 Снега = 1 Подарок',
-    exchangeNow: 'Обменять сейчас', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
+    youGet: 'Вы получите:', swapRate: '1 TON = 10,000 Снега | 1,000 Снега = 0.1 TON',
+    exchangeNow: 'Обменять', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
     helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
-    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте красный сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 100 Подарков</span> — основная валюта вывода<br><span style="color:#fff;font-weight:800">• 10 Снега/час</span> — бесплатная мощность майнинга начинается сразу',
-    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--snow);font-weight:800">Снег</span><br>⬅ Каждая машина производит 1042 Снега в час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на <span style="color:var(--gift);font-weight:800">Подарки</span> на странице Кошелька<br>⬅ Выводите Подарки на ваш TON кошелек 💎<br>📊 1 Подарок = 0.0001 TON (10,000 Подарков = 1 TON)',
-    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--gift)">Целевые пользователи × 60 Подарков</strong>',
-    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Подарков', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 100 Снега</span> — основная валюта<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (100 Снега/час)</span> — бесплатная мощность майнинга начинается сразу',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span> (3 TON каждая)<br>⬅ Каждая машина производит 100 Снега в час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька<br>⬅ Выводите TON на ваш кошелек 💎<br>📊 1 TON = 10,000 Снега (1,000 Снега = 0.1 TON)',
+    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--ice)">Целевые пользователи × 6 Снега</strong>',
+    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 600 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
     taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
     taskLinkPh: 'https://t.me/ваш_канал', taskTargetLabel: 'Целевые пользователи (мин. 100)',
     taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
@@ -3741,3 +3563,4 @@ window.addEventListener('load', init);
 </script>
 </body>
 </html>
+```
