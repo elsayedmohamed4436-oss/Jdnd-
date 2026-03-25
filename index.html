@@ -326,20 +326,27 @@ body::after {
 .tcont { display: none; }
 .tcont.active { display: block; }
 
-/* Snowflake animation - only snowflakes */
+/* Snowflake Animation - فقط ثلج منظم */
 .snowflake {
   position: fixed;
   color: #fff;
   user-select: none;
   pointer-events: none;
   z-index: 999;
-  font-size: 1rem;
+  font-size: 1.2rem;
   animation: fall linear forwards;
+  text-shadow: 0 0 5px rgba(77, 208, 225, 0.5);
 }
 
 @keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 button, input, select, textarea, span, div, p, h1, h2, h3, a {
@@ -1061,6 +1068,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+  margin-top: 12px;
 }
 
 .swap-output-value {
@@ -1815,22 +1823,37 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 .mclose:active { transform: scale(0.9); }
 
-/* Only snowflakes, no other particles */
-.particle {
-  display: none;
+.ptc {
+  position: fixed;
+  pointer-events: none;
+  z-index: 400;
+  font-size: 17px;
+  animation: particleUp 0.9s ease-out forwards;
 }
 
-.heavy-snow {
+@keyframes particleUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-74px) scale(0.4); opacity: 0; }
+}
+
+/* أنيميشن الثلج المنظم - فقط ثلج */
+.snowflake {
   position: fixed;
   pointer-events: none;
   z-index: 999;
-  font-size: 1rem;
-  animation: heavyFall linear forwards;
+  font-size: 1.2rem;
+  animation: fall linear forwards;
 }
 
-@keyframes heavyFall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 .support-img-btn {
@@ -1881,6 +1904,28 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 ::-webkit-scrollbar-thumb { background: var(--ice); border-radius: 2px; }
 
 .referral-tasks-section { margin-top: 15px; }
+
+/* Fee indicator styles */
+.fee-badge {
+  background: rgba(255, 217, 102, 0.15);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 10px;
+  color: var(--gold);
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.fee-info {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
 </style>
 </head>
 <body>
@@ -2113,6 +2158,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <div class="modern-card withdraw">
         <div class="modern-card-title">
           <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span data-i18n="withdrawBtn">Withdraw Snow</span>
+          <span class="fee-badge">Fee: 4%</span>
         </div>
         <div class="modern-input-group">
           <label class="modern-label" data-i18n="tonWalletAddr">TON Wallet Address</label>
@@ -2147,6 +2193,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <div class="modern-card exchange">
         <div class="modern-card-title">
           <i class="fas fa-exchange-alt" style="color: var(--ice);"></i> <span data-i18n="exchangeNow">Exchange Snow → TON</span>
+          <span class="fee-badge">Fee: 4%</span>
         </div>
         <div class="swap-section-modern">
           <div class="swap-row">
@@ -2161,21 +2208,22 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
               <input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwapSnowToTon()">
               <span class="swap-max" onclick="swapSnowMax()" data-i18n="maxBtn">MAX</span>
             </div>
-            <div class="modern-rate-info" style="margin-top: 12px; background: rgba(0,0,0,0.2); padding: 8px;">
-              <span style="font-size: 11px;">Fee: 4%</span>
+            <div class="fee-info" style="margin-top: 8px;">
+              <i class="fas fa-info-circle"></i> Fee: 4% (<span id="feeAmountDisplay">0</span> Snow)
             </div>
             <div class="swap-output-area" style="margin-top: 12px;">
-              <span data-i18n="youGet">You get:</span>
+              <span data-i18n="youGet">You get (after fee):</span>
               <div class="swap-output-value" id="swapTonOut">0</div>
               <span>TON</span>
             </div>
           </div>
         </div>
         <div class="modern-rate-info" style="margin-top: 16px;">
-          📊 <span data-i18n="swapRate">1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON (4% fee)</span>
+          📊 <span data-i18n="swapRate">1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON</span>
+          <div style="font-size: 10px; color: var(--muted); margin-top: 4px;">4% exchange fee applies</div>
         </div>
         <button class="modern-btn primary" onclick="swapSnowToTon()" style="margin-top: 16px;">
-          <i class="fas fa-exchange-alt"></i> Exchange Snow to TON
+          <i class="fas fa-exchange-alt"></i> Exchange Snow → TON
         </button>
       </div>
       <div class="hist-box" style="margin-top: 16px;">
@@ -2248,7 +2296,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         <span style="color: var(--gold); font-weight: 800">50 friends:</span> 2,000 Snow<br>
         <span style="color: var(--gold); font-weight: 800">100 friends:</span> 5,000 Snow<br>
         <span style="color: var(--gold); font-weight: 800">200 friends:</span> 10,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 25,000 Snow</div>
+        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 25,000 Snow<br>
+        <span style="color: var(--ice); font-weight: 800">➕ Extra: 1000 Snow when friend deposits!</span></div>
       </div>
     </div>
     <div style="height: 12px"></div>
@@ -2349,23 +2398,6 @@ const STORAGE_LVS = {
   8: { cap: 210000, upgCost: 900000, label: 'Arctic Base' },
   9: { cap: 330000, upgCost: 1500000, label: 'Glacier' },
   10: { cap: 480000, upgCost: 2500000, label: 'Iceberg' },
-  11: { cap: 660000, upgCost: 4000000, label: 'Frost Zone' },
-  12: { cap: 870000, upgCost: 6000000, label: 'Blizzard' },
-  13: { cap: 1110000, upgCost: 9000000, label: 'Avalanche' },
-  14: { cap: 1380000, upgCost: 13000000, label: 'Crystal Cave' },
-  15: { cap: 1680000, upgCost: 18000000, label: 'Frozen Lake' },
-  16: { cap: 2010000, upgCost: 25000000, label: 'Ice Mountain' },
-  17: { cap: 2400000, upgCost: 33000000, label: 'Snow Peak' },
-  18: { cap: 2850000, upgCost: 43000000, label: 'Frost Giant' },
-  19: { cap: 3360000, upgCost: 55000000, label: 'Winter Realm' },
-  20: { cap: 3930000, upgCost: 70000000, label: 'Eternal Frost' },
-  21: { cap: 4560000, upgCost: 88000000, label: 'Ice Throne' },
-  22: { cap: 5250000, upgCost: 110000000, label: 'Frozen Kingdom' },
-  23: { cap: 6000000, upgCost: 135000000, label: 'Snow Empire' },
-  24: { cap: 6810000, upgCost: 165000000, label: 'Glacial Realm' },
-  25: { cap: 7680000, upgCost: 200000000, label: 'Crystal Kingdom' },
-  26: { cap: 8610000, upgCost: 240000000, label: 'Frost Heaven' },
-  27: { cap: 10000000, upgCost: 300000000, label: 'Santa\'s Realm' },
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
@@ -2465,8 +2497,9 @@ async function openWelcomeChestFromModal() {
     if (chestEl) chestEl.style.display = 'none';
     
     updateUI();
-    triggerHeavySnow();
+    triggerSnowfall(50);
     showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
+    spawnSnowParticle();
     showRewardsModal(result.snow, result.miningMachines, result.miningRate);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
@@ -2539,8 +2572,9 @@ async function openWelcomeChest() {
     
     document.getElementById('welcomeChest').style.display = 'none';
     updateUI();
-    triggerHeavySnow();
+    triggerSnowfall(50);
     showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
+    spawnSnowParticle();
     showRewardsModal(result.snow, result.miningMachines, result.miningRate);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
@@ -2567,8 +2601,9 @@ async function purchaseMachine() {
     S.user.miningRate = result.miningRate;
     S.user.miningMachines = result.miningMachines;
     updateUI();
-    triggerHeavySnow();
+    triggerSnowfall(30);
     showNotif(`🎉 Machine purchased! +${CFG.MACHINE_RATE_SNOW} Snow/hour. Total: ${result.miningMachines} machines`, 's');
+    spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e');
   }
@@ -2634,21 +2669,40 @@ function updateStorageUI() {
   if (lvEl) lvEl.textContent = lv;
 }
 
-function triggerHeavySnow() {
-  for (let i = 0; i < 50; i++) {
+// Snowfall function - only snowflakes, organized and beautiful
+function triggerSnowfall(count = 40) {
+  for (let i = 0; i < count; i++) {
     setTimeout(() => {
-      const snow = document.createElement('div');
-      snow.classList.add('heavy-snow');
-      snow.innerHTML = '❄️';
-      snow.style.left = Math.random() * 100 + '%';
-      snow.style.fontSize = Math.random() * 20 + 12 + 'px';
-      snow.style.animationDuration = Math.random() * 2 + 1.5 + 's';
-      snow.style.animationDelay = Math.random() * 0.5 + 's';
-      snow.style.opacity = Math.random() * 0.7 + 0.3;
-      document.body.appendChild(snow);
-      setTimeout(() => snow.remove(), 3500);
-    }, i * 30);
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.innerHTML = '❄️';
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.fontSize = Math.random() * 16 + 10 + 'px';
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+      snowflake.style.animationDelay = Math.random() * 0.5 + 's';
+      snowflake.style.opacity = Math.random() * 0.7 + 0.4;
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 5000);
+    }, i * 50);
   }
+}
+
+function startSnowfallLoop() {
+  // Create continuous snowfall
+  setInterval(() => {
+    if (Math.random() > 0.3) {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.innerHTML = '❄️';
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.fontSize = Math.random() * 14 + 8 + 'px';
+      snowflake.style.animationDuration = Math.random() * 4 + 2.5 + 's';
+      snowflake.style.animationDelay = '0s';
+      snowflake.style.opacity = Math.random() * 0.6 + 0.3;
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 5000);
+    }
+  }, 300);
 }
 
 async function collectSnow() {
@@ -2663,8 +2717,8 @@ async function collectSnow() {
   S.user.snow = (S.user.snow || 0) + amt;
   S.user.totalEarned = (S.user.totalEarned || 0) + amt;
   S.storageProgress = 0;
-  updateUI(); updateStorageUI();
-  triggerHeavySnow();
+  updateUI(); updateStorageUI(); spawnSnowParticle();
+  triggerSnowfall(30);
   showNotif(`+${fmt(amt)} Snow collected!`, 's');
   api('collect', { amount: amt }).catch(() => { });
 }
@@ -2714,7 +2768,7 @@ async function upgradeStorage() {
   api('upgradeStorage', { newLevel: lv + 1 }).catch(() => { });
   buildUpgradeContent();
   updateUI();
-  triggerHeavySnow();
+  triggerSnowfall(30);
   showNotif(`✅ Storage → Level ${lv + 1}!`, 's');
 }
 
@@ -2783,8 +2837,9 @@ async function claimRefTask(taskId) {
     S.doneTasks.push(taskId);
     updateUI();
     renderTasks();
-    triggerHeavySnow();
+    triggerSnowfall(30);
     showNotif(`🎉 +${fmt(result.snowReward)} Snow from referral task!`, 's');
+    spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
   }
@@ -2850,8 +2905,9 @@ async function doDbTask(tid, link, type, cat) {
       S.doneTasks.push(tid);
       if (r.snowAdded) S.user.snow = (S.user.snow || 0) + r.snowAdded;
       updateUI(); renderTasks();
-      triggerHeavySnow();
+      triggerSnowfall(30);
       showNotif(`🎉 +${fmt(r.snowAdded || 0)} Snow Task done!`, 's');
+      spawnSnowParticle();
     } catch (e) {
       showNotif(`❌ ${e.message || 'Verification failed'}`, 'e');
     } finally {
@@ -2905,15 +2961,15 @@ async function submitAddTask() {
     st.style.color = 'var(--ice)';
     st.textContent = '✅ Task created!';
     updateUI();
-    triggerHeavySnow();
+    triggerSnowfall(30);
     setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
   } catch (e) { st.style.color = '#ff8a80'; st.textContent = `❌ ${e.message || 'Failed'}`; }
   finally { _submitInFlight = false; }
 }
 
+// Exchange functions - Snow to TON only with fee
 function updateSwapBals() {
   document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
-  document.getElementById('swapFromBalTON').innerHTML = `Balance: ${fmtTon(S.user.tonBalance || 0)} TON`;
 }
 
 function swapSnowMax() {
@@ -2923,10 +2979,11 @@ function swapSnowMax() {
 
 function updSwapSnowToTon() {
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
-  const fee = Math.floor(snow * (CFG.EXCHANGE_FEE_PERCENT / 100));
+  const fee = Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
   const snowAfterFee = snow - fee;
   const ton = snowAfterFee * CFG.SNOW_TO_TON;
   document.getElementById('swapTonOut').textContent = ton.toFixed(6);
+  document.getElementById('feeAmountDisplay').textContent = fmt(fee);
 }
 
 let _exchInFlight = false;
@@ -2937,20 +2994,24 @@ async function swapSnowToTon() {
   if (_exchInFlight) return;
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
   if (snow <= 0) { showNotif('Enter amount!', 'e'); return; }
-  if (snow < 100) { showNotif('Min 100 Snow!', 'e'); return; }
+  if (snow < 100) { showNotif('Min 100 Snow (0.01 TON before fee)!', 'e'); return; }
   if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
   _exchInFlight = true;
   try {
     const result = await api('exchange', { snowAmount: snow });
     S.user.snow = result.snow;
     S.user.tonBalance = result.tonBalance;
-    const fee = Math.floor(snow * (CFG.EXCHANGE_FEE_PERCENT / 100));
-    S.exchHist.unshift({ snow: snow, ton: result.entry.ton, fee: fee, dir: 'S→T', ts: Date.now() });
+    const fee = result.fee || Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
+    const snowAfterFee = snow - fee;
+    const tonReceived = snowAfterFee * CFG.SNOW_TO_TON;
+    S.exchHist.unshift({ snow: snow, fee: fee, ton: tonReceived, dir: 'S→T', ts: Date.now() });
     document.getElementById('swapSnowAmt').value = '';
     document.getElementById('swapTonOut').textContent = '0';
+    document.getElementById('feeAmountDisplay').textContent = '0';
     updateUI(); renderExchHist();
-    triggerHeavySnow();
-    showNotif(`⚡ ${fmt(snow)} Snow → ${result.entry.ton.toFixed(6)} TON (fee: ${fee} Snow)`, 's');
+    triggerSnowfall(30);
+    showNotif(`⚡ ${fmt(snow)} Snow → ${tonReceived.toFixed(6)} TON (Fee: ${fmt(fee)} Snow)`, 's');
+    spawnSnowParticle();
   } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
   finally { _exchInFlight = false; }
 }
@@ -2960,29 +3021,24 @@ function renderExchHist() {
   if (!el) return;
   if (!S.exchHist.length) { el.innerHTML = '<div class="hist-empty">No conversions yet</div>'; return; }
   el.innerHTML = S.exchHist.slice(0, 30).map(h => {
-    const isS2T = h.dir === 'S→T';
-    const fromAmt = isS2T ? fmt(h.snow) : h.ton.toFixed(4);
-    const toAmt = isS2T ? h.ton.toFixed(6) : fmt(h.snow);
-    const fromLbl = isS2T ? 'Snow' : 'TON';
-    const toLbl = isS2T ? 'TON' : 'Snow';
-    const feeText = h.fee ? ` (fee: ${fmt(h.fee)} Snow)` : '';
     const date = h.ts ? new Date(h.ts).toLocaleDateString() : '';
+    const feeText = h.fee ? ` (Fee: ${fmt(h.fee)} Snow)` : '';
     return `<div class="hist-row" style="flex-direction:column;align-items:flex-start;gap:2px">
       <div style="display:flex;justify-content:space-between;width:100%">
-        <span class="hist-l">${esc(h.dir)} · ${esc(date)}${feeText}</span>
-        <span style="font-size:12px;font-weight:800;color:var(--gold)">${toAmt} ${toLbl}</span>
+        <span class="hist-l">${esc(h.dir)} · ${esc(date)}</span>
+        <span style="font-size:12px;font-weight:800;color:var(--gold)">${h.ton.toFixed(6)} TON</span>
       </div>
-      <span style="font-size:11px;color:var(--muted);font-weight:500">From: ${fromAmt} ${fromLbl}</span>
+      <span style="font-size:11px;color:var(--muted);font-weight:500">From: ${fmt(h.snow)} Snow${feeText}</span>
     </div>`;
   }).join('');
 }
 
 function updWdPrev() {
   const a = parseFloat(document.getElementById('wdAmt').value) || 0;
-  const fee = Math.floor(a * (CFG.WITHDRAW_FEE_PERCENT / 100));
+  const fee = Math.floor(a * CFG.WITHDRAW_FEE_PERCENT / 100);
   const snowAfterFee = a - fee;
   const tonValue = snowAfterFee * CFG.SNOW_TO_TON;
-  document.getElementById('wdTonVal').innerHTML = `${tonValue.toFixed(6)} TON <span style="font-size: 10px;">(fee: ${fee} Snow)</span>`;
+  document.getElementById('wdTonVal').textContent = tonValue.toFixed(6) + ' TON';
 }
 
 function setWdAmt(amt) {
@@ -3022,13 +3078,15 @@ async function doWithdraw() {
   try {
     const res = await api('withdraw', { address: addr, amount: snowAmt });
     u.snow -= snowAmt;
-    const fee = Math.floor(snowAmt * (CFG.WITHDRAW_FEE_PERCENT / 100));
+    const fee = res.fee || Math.floor(snowAmt * CFG.WITHDRAW_FEE_PERCENT / 100);
+    const snowAfterFee = snowAmt - fee;
+    const tonValue = snowAfterFee * CFG.SNOW_TO_TON;
     S.wdHist.unshift({ snowAmt, fee, addr, d: new Date().toLocaleDateString(), status: 'pending' });
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
     updWdPrev(); updateUI(); renderWdHist();
-    triggerHeavySnow();
-    showNotif(`✅ Withdrawal requested: ${fmt(snowAmt)} Snow (fee: ${fee} Snow)`, 's');
+    triggerSnowfall(30);
+    showNotif(`✅ Withdrawal requested: ${fmt(snowAmt)} Snow (Fee: ${fmt(fee)} Snow, Receive: ${tonValue.toFixed(6)} TON)`, 's');
   } catch (e) {
     const msg = e.message || '';
     showNotif(`❌ ${msg}`, 'e');
@@ -3044,14 +3102,15 @@ function renderWdHist() {
   if (!S.wdHist.length) { el.innerHTML = '<div class="hist-empty">No withdrawals yet</div>'; return; }
   el.innerHTML = S.wdHist.slice(0, 20).map(h => {
     const sc = { approved: 'sb-approved', pending: 'sb-pending', rejected: 'sb-rejected' }[h.status || 'pending'];
-    const tonValue = (h.snowAmt - (h.fee || 0)) * CFG.SNOW_TO_TON;
+    const snowAfterFee = (h.snowAmt || 0) - (h.fee || 0);
+    const tonValue = snowAfterFee * CFG.SNOW_TO_TON;
     return `<div class="hist-row" style="flex-direction:column;gap:4px;align-items:flex-start">
       <div style="display:flex;justify-content:space-between;width:100%">
         <span style="font-size:13px;font-weight:800;color:var(--ice)">${fmt(h.snowAmt)} Snow</span>
         <span class="stat-badge ${sc}">${esc(h.status || 'Pending')}</span>
       </div>
-      <div style="font-size:10px;color:var(--muted)">Fee: ${h.fee || 0} Snow | ${tonValue.toFixed(6)} TON · ${esc(h.d || '')}</div>
-      <div style="font-size:9px;color:var(--muted);word-break:break-all">${esc((h.addr || '').substring(0, 16))}...</div>
+      <div style="font-size:10px;color:var(--muted)">Fee: ${fmt(h.fee || 0)} Snow · Receive: ${tonValue.toFixed(6)} TON</div>
+      <div style="font-size:10px;color:var(--muted)">${esc(h.d || '')} · ${esc((h.addr || '').substring(0, 12))}...</div>
     </div>`;
   }).join('');
 }
@@ -3169,7 +3228,7 @@ window.initiateDeposit = async function () {
     sd.querySelector('.txsi').innerHTML = '⏳';
     sd.querySelector('.txsm').innerHTML = 'Transaction sent!';
     document.getElementById('depositStatusDetail').textContent = 'Your balance will be added to your account within 3 minutes.';
-    triggerHeavySnow();
+    triggerSnowfall(30);
     showNotif('✅ Transaction sent! Balance will be credited within 3 minutes', 's');
     try { await api('deposit', { amount: amt, txHash: result.boc, comment }); } catch (_) { }
   } catch (e) {
@@ -3195,7 +3254,7 @@ function startDepVerify(depId, txHash) {
         sd.querySelector('.txsi').innerHTML = '✅';
         sd.querySelector('.txsm').innerHTML = 'Deposit confirmed!';
         document.getElementById('depositStatusDetail').textContent = `${r.amount} TON added`;
-        triggerHeavySnow();
+        triggerSnowfall(30);
         showNotif(`💰 ${r.amount} TON deposited!`, 's');
         S.user.hasDeposited = true;
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
@@ -3241,40 +3300,27 @@ function showNotif(msg, type = 'i') {
   }, 3000);
 }
 
+function spawnSnowParticle() {
+  const p = document.createElement('img');
+  p.src = SNOW_IMG;
+  p.className = 'ptc';
+  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain; font-size: 0`;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 960);
+}
+
 function santaClick() {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const p = document.getElementById('santaChar');
   if (p) { p.style.transition = 'transform .12s'; p.style.transform = 'scale(.86) rotate(9deg)'; setTimeout(() => { p.style.transform = ''; }, 220); }
-  triggerHeavySnow();
+  spawnSnowParticle();
+  triggerSnowfall(20);
 }
 
 function openSupport() {
   window.open('https://t.me/SantaSupport01', '_blank');
-}
-
-// Only snowflakes falling
-function createSnowflake() {
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  snowflake.innerHTML = '❄️';
-  snowflake.style.left = Math.random() * 100 + '%';
-  snowflake.style.fontSize = Math.random() * 16 + 8 + 'px';
-  snowflake.style.animationDuration = Math.random() * 4 + 2 + 's';
-  snowflake.style.animationDelay = Math.random() * 5 + 's';
-  snowflake.style.opacity = Math.random() * 0.6 + 0.3;
-  document.body.appendChild(snowflake);
-  setTimeout(() => snowflake.remove(), 5000);
-}
-
-function startSnowfall() {
-  setInterval(createSnowflake, 200);
-  setInterval(() => {
-    if (Math.random() > 0.6) {
-      createSnowflake();
-    }
-  }, 100);
 }
 
 function ldProgress(pct, msg) {
@@ -3327,8 +3373,8 @@ const TRANSLATIONS = {
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
     amountTON: 'Amount (TON)', rateLabel: 'Rate:', youWillReceive: 'You will receive:', depositBtn: 'Deposit TON',
     processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountSnow: 'Amount (Snow)',
-    withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
-    youGet: 'You get:', swapRate: '1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON (4% fee)',
+    tonValue: 'TON Value', withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
+    youGet: 'You get (after fee):', swapRate: '1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON',
     exchangeNow: 'Exchange', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
     helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
     helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the chest to receive:<br><span style="color:#fff;font-weight:800">• 100 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (1 Snow/hour)</span> — free mining power starts immediately',
@@ -3340,7 +3386,6 @@ const TRANSLATIONS = {
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
     upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
     floatAdd: 'Add Task', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
-    maxBtn: 'MAX',
   },
   ru: {
     labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
@@ -3351,12 +3396,12 @@ const TRANSLATIONS = {
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
     amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
     processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountSnow: 'Сумма (Снег)',
-    withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
-    youGet: 'Вы получите:', swapRate: '1 TON = 10,000 Снега | 1,000 Снега = 0.1 TON (4% комиссия)',
+    tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
+    youGet: 'Вы получите (после комиссии):', swapRate: '1 TON = 10,000 Снега | 1,000 Снега = 0.1 TON',
     exchangeNow: 'Обменять', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
     helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
     helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 100 Снега</span> — основная валюта<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (1 Снег/час)</span> — бесплатная мощность майнинга начинается сразу',
-    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span> (3 TON каждая)<br>⬅ Каждая машина производит 1 Снег в час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (4% комиссия)<br>⬅ Выводите TON на ваш кошелек (4% комиссия) 💎<br>📊 1 TON = 10,000 Снега (1,000 Снега = 0.1 TON)',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span> (3 TON каждая)<br>⬅ Каждая машина производит 1 Снег в час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (комиссия 4%)<br>⬅ Выводите TON на ваш кошелек (комиссия 4%) 💎<br>📊 1 TON = 10,000 Снега (1,000 Снега = 0.1 TON)',
     addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--ice)">Целевые пользователи × 6 Снега</strong>',
     taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 600 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
     taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
@@ -3364,7 +3409,6 @@ const TRANSLATIONS = {
     taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
     upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети',
     floatAdd: 'Добавить задачу', Home: 'Главная', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
-    maxBtn: 'МАКС',
   },
 };
 
@@ -3421,13 +3465,12 @@ function applyLang(lang, flag, code) {
   document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
   const floatBtn = document.getElementById('floatAddTask');
   if (floatBtn) floatBtn.innerHTML = `➕ ${t.floatAdd}`;
-  document.querySelectorAll('.swap-max').forEach(el => el.innerHTML = t.maxBtn || 'MAX');
 }
 
 async function init() {
   const startTime = Date.now();
   const MIN_LOADING_MS = 3000;
-  startSnowfall();
+  startSnowfallLoop();
   ldProgress(0, 'Starting...');
   if (window.Telegram?.WebApp) {
     S.tg = window.Telegram.WebApp;
