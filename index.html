@@ -62,6 +62,16 @@ body {
   z-index: -2;
   opacity: 1;
   visibility: visible;
+  animation: subtleZoom 20s ease-in-out infinite;
+}
+
+@keyframes subtleZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 body::after {
@@ -1944,7 +1954,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   inset: 0;
   background: rgba(0, 0, 0, 0.8);
   z-index: 500;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   backdrop-filter: blur(6px);
 }
@@ -1956,18 +1966,24 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 .modal-box {
   background: linear-gradient(160deg, #0A1428, #0A1A2A);
   border: 1px solid var(--border);
-  border-radius: 24px 24px 0 0;
+  border-radius: 24px;
   padding: 18px;
   width: 100%;
   max-width: 480px;
   max-height: 80vh;
   overflow-y: auto;
-  animation: slideUp 0.3s ease;
+  animation: scaleIn 0.3s ease;
 }
 
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .mhdr {
@@ -2106,7 +2122,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 <div id="welcomeModal" class="welcome-modal">
   <div class="welcome-modal-box">
     <div class="welcome-chest-container" style="position: relative; margin-bottom: 15px;">
-      <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" alt="Red Santa Chest" style="width: 120px; height: 120px; animation: chestWobble 0.8s ease-in-out infinite;">
+      <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Red Santa Chest" style="width: 120px; height: 120px; animation: chestWobble 0.8s ease-in-out infinite;">
       <div style="position: absolute; top: -10px; right: -10px; background: #E53935; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
     </div>
     <div class="welcome-modal-title">🎄 Santa's Gift! 🎄</div>
@@ -2163,7 +2179,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   <div id="welcomeChest" class="welcome-chest" style="display: none; margin: 10px auto 20px;">
     <div class="chest-container" onclick="openWelcomeChest()" style="cursor: pointer;">
       <div class="chest-wrapper" style="position: relative; display: inline-block;">
-        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" 
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" 
              alt="Gift" 
              class="chest-image" 
              style="width: 110px; height: 110px; filter: drop-shadow(0 0 20px rgba(229,57,53,0.7)); transition: transform 0.2s ease; animation: chestFloat 1.5s ease-in-out infinite;">
@@ -2707,20 +2723,30 @@ async function openWelcomeChestFromModal() {
 
 function showRewardsModal(gifts, miningRate) {
   const modalContent = `
-    <div style="text-align: center;">
-      <div style="font-size: 48px; margin-bottom: 10px;">🎁✨</div>
-      <div style="font-size: 20px; font-weight: 800; color: var(--gift); margin-bottom: 15px;">Congratulations!</div>
-      <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 15px; margin: 10px 0;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-          <span><img src="${GIFT_IMG}" style="width: 24px; height: 24px;"> Gifts:</span>
-          <span style="font-weight: 800; color: var(--gold);">+${fmt(gifts)}</span>
+    <div style="text-align: center; padding: 15px;">
+      <div style="font-size: 56px; margin-bottom: 15px; animation: bounce 0.5s ease;">🎁✨🎄</div>
+      <div style="font-size: 26px; font-weight: 800; color: var(--gift); margin-bottom: 20px; text-shadow: 0 0 10px rgba(229,57,53,0.5);">
+        🎉 CONGRATULATIONS! 🎉
+      </div>
+      <div style="background: linear-gradient(135deg, rgba(229,57,53,0.2), rgba(0,0,0,0.4)); border-radius: 24px; padding: 24px; margin: 20px 0; border: 1px solid rgba(229,57,53,0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="${GIFT_IMG}" style="width: 48px; height: 48px; object-fit: contain;">
+            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Gifts Received:</span>
+          </div>
+          <span style="font-size: 32px; font-weight: 800; color: var(--gold);">+${fmt(gifts)}</span>
         </div>
-        <div style="display: flex; justify-content: space-between;">
-          <span><img src="${SNOW_IMG}" style="width: 24px; height: 24px;"> Mining Power:</span>
-          <span style="font-weight: 800; color: var(--snow);">+${miningRate} Snow/hour</span>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="${SNOW_IMG}" style="width: 48px; height: 48px; object-fit: contain;">
+            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Mining Power:</span>
+          </div>
+          <span style="font-size: 28px; font-weight: 800; color: var(--snow);">+${miningRate} Snow/hour</span>
         </div>
       </div>
-      <button onclick="closeModal('rewardsModal')" class="btn-prim" style="margin-top: 10px;">Start Mining! ⛏️</button>
+      <button onclick="closeModal('rewardsModal')" class="btn-prim" style="margin-top: 15px; padding: 14px 32px; font-size: 18px;">
+        🎄 Start Mining! 🎄
+      </button>
     </div>
   `;
   
@@ -2729,14 +2755,14 @@ function showRewardsModal(gifts, miningRate) {
     rewardsModal = document.createElement('div');
     rewardsModal.id = 'rewardsModal';
     rewardsModal.className = 'modal';
-    rewardsModal.innerHTML = `<div class="modal-box" style="max-width: 300px;">${modalContent}</div>`;
+    rewardsModal.innerHTML = `<div class="modal-box" style="max-width: 380px; border-radius: 32px;">${modalContent}</div>`;
     document.body.appendChild(rewardsModal);
     rewardsModal.addEventListener('click', e => { if (e.target === rewardsModal) closeModal('rewardsModal'); });
   } else {
     rewardsModal.querySelector('.modal-box').innerHTML = modalContent;
   }
   openModal('rewardsModal');
-  setTimeout(() => closeModal('rewardsModal'), 5000);
+  setTimeout(() => closeModal('rewardsModal'), 6000);
 }
 
 async function openWelcomeChest() {
@@ -2843,18 +2869,19 @@ function updateStorageUI() {
 }
 
 function triggerHeavySnow() {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 70; i++) {
     setTimeout(() => {
       const snow = document.createElement('div');
       snow.classList.add('heavy-snow');
-      snow.innerHTML = '❄️';
+      snow.innerHTML = Math.random() > 0.6 ? '❄️' : '✨';
       snow.style.left = Math.random() * 100 + '%';
-      snow.style.fontSize = Math.random() * 20 + 10 + 'px';
-      snow.style.animationDuration = Math.random() * 2 + 1 + 's';
+      snow.style.fontSize = Math.random() * 24 + 12 + 'px';
+      snow.style.animationDuration = Math.random() * 2.5 + 1.2 + 's';
       snow.style.animationDelay = Math.random() * 0.5 + 's';
+      snow.style.opacity = Math.random() * 0.8 + 0.3;
       document.body.appendChild(snow);
-      setTimeout(() => snow.remove(), 3000);
-    }, i * 30);
+      setTimeout(() => snow.remove(), 3500);
+    }, i * 25);
   }
 }
 
@@ -2939,6 +2966,7 @@ function showFab() { const f = document.getElementById('floatAddTask'); if (f) f
 function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refTasksHtml = '';
+  const referralIcon = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
   
   for (const task of REF_TASKS) {
     const completed = S.doneTasks.includes(task.id);
@@ -2948,9 +2976,7 @@ function renderTasks() {
     refTasksHtml += `
       <div class="task-item">
         <div class="ticon">
-          <div style="width: 42px; height: 42px; background: linear-gradient(135deg, #E53935, #B71C1C); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
-            ${task.icon}
-          </div>
+          <img src="${referralIcon}" style="width: 52px; height: 52px; object-fit: contain; border-radius: 14px;">
         </div>
         <div class="tinfo">
           <div class="tname" style="font-size: 14px; font-weight: 800;">${task.name}</div>
@@ -3476,17 +3502,23 @@ function openSupport() {
 function createSnowflake() {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
-  snowflake.innerHTML = '❄️';
+  snowflake.innerHTML = Math.random() > 0.7 ? '❄️' : '✨';
   snowflake.style.left = Math.random() * 100 + '%';
   snowflake.style.fontSize = Math.random() * 20 + 10 + 'px';
-  snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+  snowflake.style.animationDuration = Math.random() * 4 + 2 + 's';
   snowflake.style.animationDelay = Math.random() * 5 + 's';
+  snowflake.style.opacity = Math.random() * 0.7 + 0.3;
   document.body.appendChild(snowflake);
   setTimeout(() => snowflake.remove(), 5000);
 }
 
 function startSnowfall() {
-  setInterval(createSnowflake, 300);
+  setInterval(createSnowflake, 150);
+  setInterval(() => {
+    if (Math.random() > 0.5) {
+      createSnowflake();
+    }
+  }, 80);
 }
 
 function ldProgress(pct, msg) {
@@ -3507,7 +3539,7 @@ function preloadImages() {
   const urls = [
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
     SNOW_IMG, GIFT_IMG, REF_TASK_ICON,
-    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png',
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
   ];
