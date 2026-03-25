@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Santa Snow Factory ❄️</title>
+<title>Santa Snow ❄️</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -184,7 +184,6 @@ body::after {
 #notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; }
 #notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; }
 
-/* Machine Shop Styles */
 .machine-shop {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
@@ -217,6 +216,7 @@ body::after {
   gap: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.2s;
+  flex-wrap: wrap;
 }
 
 .machine-card:hover {
@@ -235,6 +235,7 @@ body::after {
 
 .machine-card-info {
   flex: 1;
+  min-width: 120px;
 }
 
 .machine-card-name {
@@ -259,6 +260,32 @@ body::after {
   font-weight: 800;
   color: var(--gold);
   margin-top: 4px;
+}
+
+.machine-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 5px 10px;
+}
+
+.machine-quantity input {
+  width: 60px;
+  background: transparent;
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 8px;
+  padding: 6px;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.machine-quantity span {
+  font-size: 12px;
+  color: var(--muted);
 }
 
 .machine-card-btn {
@@ -2001,7 +2028,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <div class="background-fixed"></div>
 
-<div id="welcomeModal" class="welcome-modal" style="display: none;">
+<div id="welcomeModal" class="welcome-modal">
   <div class="welcome-modal-box">
     <div class="welcome-chest-container" style="position: relative; margin-bottom: 15px;">
       <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest" style="width: 120px; height: 120px; animation: chestWobble 0.8s ease-in-out infinite;">
@@ -2015,7 +2042,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <div id="loadingScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="Santa">
-  <div class="ld-title">Santa Snow Factory</div>
+  <div class="ld-title">Santa Snow</div>
   <div class="ld-sub" id="ldStatus">Loading...</div>
   <div class="ld-bar-wrap">
     <div class="ice-track">
@@ -2044,8 +2071,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     </div>
   </div>
   <button id="langBtn" class="lang-btn" onclick="toggleLangMenu()">
-    <span id="langFlag">🇬🇧</span>
-    <span id="langCode">EN</span>
+    <span id="langFlag">🇷🇺</span>
+    <span id="langCode">RU</span>
   </button>
 </div>
 
@@ -2121,7 +2148,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="friendsTitle">Friends & Referrals</span></div>
   <div class="ref-prog-card">
     <div class="ref-bonus-badge">
-      <span class="rbb-pct">1000</span>
+      <span class="rbb-pct">3000</span>
       <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
       <span class="rbb-txt" data-i18n="refCommission">Snow bonus when friend deposits!</span>
     </div>
@@ -2129,7 +2156,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
       <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
     </div>
-    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they deposit, you get 1000 Snow!</div>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they deposit, you get 3000 Snow!</div>
   </div>
   <div class="hist-box" style="margin-bottom: 10px">
     <div class="hist-hdr" style="justify-content: space-between">
@@ -2331,7 +2358,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
           <span style="font-size: 20px">📢</span>
           <span style="font-size: 10px; font-weight: 800; color: var(--ice); line-height: 1.2" data-i18n="helpNewsCh">Bot<br>News</span>
         </a>
-        <a href="https://t.me/SantaSupport01" target="_blank" style="text-decoration: none; background: rgba(255, 217, 102, 0.1); border: 1px solid rgba(255, 217, 102, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
+        <a href="https://t.me/Santa_1_Snow" target="_blank" style="text-decoration: none; background: rgba(255, 217, 102, 0.1); border: 1px solid rgba(255, 217, 102, 0.3); border-radius: 12px; padding: 9px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px">
           <span style="font-size: 20px">🛟</span>
           <span style="font-size: 10px; font-weight: 800; color: var(--gold); line-height: 1.2" data-i18n="helpSupport">Technical<br>Support</span>
         </a>
@@ -2355,7 +2382,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         <span style="color: var(--gold); font-weight: 800">100 friends:</span> 10,000 Snow<br>
         <span style="color: var(--gold); font-weight: 800">200 friends:</span> 20,000 Snow<br>
         <span style="color: var(--gold); font-weight: 800">500 friends:</span> 50,000 Snow<br>
-        <span style="color: var(--ice); font-weight: 800">➕ Extra: 1000 Snow when friend deposits!</span></div>
+        <span style="color: var(--ice); font-weight: 800">➕ Extra: 3000 Snow when friend deposits!</span></div>
       </div>
     </div>
     <div style="height: 12px"></div>
@@ -2433,7 +2460,7 @@ const CFG = {
     2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
     3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   },
-  REF_BONUS_SNOW: 1000,
+  REF_BONUS_SNOW: 3000,
   EXCHANGE_FEE_PERCENT: 4,
   WITHDRAW_FEE_PERCENT: 4,
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
@@ -2523,10 +2550,8 @@ async function loadState() {
     
     if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.miningMachines[1] === 0 && S.user.miningMachines[2] === 0 && S.user.miningMachines[3] === 0) {
       S.isNewUser = true;
-      setTimeout(() => showWelcomeModal(), 500);
     } else {
       S.isNewUser = false;
-      hideWelcomeModal();
       const chestEl = document.getElementById('welcomeChest');
       if (chestEl && !S.user.welcomeChestOpened) {
         chestEl.style.display = 'block';
@@ -2540,12 +2565,12 @@ async function loadState() {
 
 function showWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) modal.style.display = 'flex';
+  if (modal) modal.classList.add('active');
 }
 
 function hideWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) modal.style.display = 'none';
+  if (modal) modal.classList.remove('active');
 }
 
 async function openWelcomeChestFromModal() {
@@ -2671,6 +2696,10 @@ function buildMachineShop() {
           <div class="machine-card-cost">💰 ${machine.cost} TON each</div>
           <div class="machine-count-badge">Owned: ${count}</div>
         </div>
+        <div class="machine-quantity">
+          <input type="number" id="qty_${i}" value="1" min="1" max="99" style="width: 60px;">
+          <span>pcs</span>
+        </div>
         <button class="machine-card-btn" onclick="purchaseMachine(${i})" ${!canAfford ? 'disabled' : ''}>
           ${canAfford ? 'Buy' : 'Need ' + machine.cost + ' TON'}
         </button>
@@ -2687,22 +2716,24 @@ async function purchaseMachine(machineType) {
   _lastClickTime = now;
   
   const machine = CFG.MACHINES[machineType];
+  const quantity = parseInt(document.getElementById(`qty_${machineType}`)?.value) || 1;
+  const totalCost = machine.cost * quantity;
   const currentTon = S.user.tonBalance || 0;
   
-  if (currentTon < machine.cost) {
-    showNotif(`❌ Need ${machine.cost} TON to buy ${machine.name} (you have ${currentTon} TON)`, 'e');
+  if (currentTon < totalCost) {
+    showNotif(`❌ Need ${totalCost} TON to buy ${quantity}x ${machine.name} (you have ${currentTon} TON)`, 'e');
     return;
   }
   
   try {
-    const result = await api('purchaseMachine', { machineType });
+    const result = await api('purchaseMachine', { machineType, quantity });
     S.user.tonBalance = result.tonBalance;
     S.user.miningRate = result.miningRate;
     S.user.miningMachines = result.miningMachines;
     updateUI();
     buildMachineShop();
     triggerSnowfall(30);
-    showNotif(`🎉 ${machine.name} purchased! +${machine.rate} Snow/hour`, 's');
+    showNotif(`🎉 ${quantity}x ${machine.name} purchased! +${result.totalRateAdded} Snow/hour`, 's');
     spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e');
@@ -3229,7 +3260,7 @@ function updateRefUI() {
           <div class="rli-info">
             <div class="rli-name">${esc(r.name || 'Friend')}</div>
             <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
-            ${r.depositBonusPaid ? '<div style="font-size: 10px; color: var(--gold);">✅ Bonus paid (1000 Snow)</div>' : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for deposit</div>'}
+            ${r.depositBonusPaid ? '<div style="font-size: 10px; color: var(--gold);">✅ Bonus paid (3000 Snow)</div>' : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for deposit</div>'}
           </div>
           <div class="rli-earn">${r.earned ? `+${fmt(r.earned)} <img src="${SNOW_IMG}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">` : '0'}</div>
         </div>`).join('');
@@ -3399,7 +3430,7 @@ function santaClick() {
 }
 
 function openSupport() {
-  window.open('https://t.me/SantaSupport01', '_blank');
+  window.open('https://t.me/Santa_1_Snow', '_blank');
 }
 
 function ldProgress(pct, msg) {
@@ -3446,8 +3477,8 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 const TRANSLATIONS = {
   en: {
     labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '1000 Snow bonus when friend deposits!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they deposit, you get 1000 Snow!',
+    friendsTitle: 'Friends & Referrals', refCommission: '3000 Snow bonus when friend deposits!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they deposit, you get 3000 Snow!',
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
@@ -3469,8 +3500,8 @@ const TRANSLATIONS = {
   },
   ru: {
     labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: 'Бонус 1000 Снега когда друг делает депозит!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они сделают депозит, вы получите 1000 Снега!',
+    friendsTitle: 'Друзья и Рефералы', refCommission: 'Бонус 3000 Снега когда друг делает депозит!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они сделают депозит, вы получите 3000 Снега!',
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
@@ -3608,13 +3639,19 @@ async function init() {
   if (elapsed < MIN_LOADING_MS) {
     await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
   }
-  setTimeout(() => ldHide(), 700);
+  ldHide();
+  
+  // Show welcome modal AFTER loading completes
+  if (S.isNewUser) {
+    showWelcomeModal();
+  }
+  
   const savedLang = localStorage.getItem('santaLang');
   if (savedLang && (savedLang === 'en' || savedLang === 'ru')) {
     const meta = { en: ['🇬🇧', 'EN'], ru: ['🇷🇺', 'RU'] };
     applyLang(savedLang, meta[savedLang][0], meta[savedLang][1]);
   } else {
-    applyLang('en', '🇬🇧', 'EN');
+    applyLang('ru', '🇷🇺', 'RU');
   }
 }
 
