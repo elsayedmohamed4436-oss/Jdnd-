@@ -184,6 +184,114 @@ body::after {
 #notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; }
 #notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; }
 
+/* Machine Shop Styles */
+.machine-shop {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
+  border-radius: 28px;
+  padding: 20px;
+  margin-top: 15px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.machine-shop-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--ice);
+}
+
+.machine-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.machine-card {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
+}
+
+.machine-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(77, 208, 225, 0.5);
+}
+
+.machine-card-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+}
+
+.machine-card-info {
+  flex: 1;
+}
+
+.machine-card-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ice);
+}
+
+.machine-card-rate {
+  font-size: 12px;
+  color: var(--snow);
+  margin-top: 4px;
+}
+
+.machine-card-rate span {
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.machine-card-cost {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.machine-card-btn {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.machine-card-btn:active {
+  transform: scale(0.95);
+}
+
+.machine-card-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.machine-count-badge {
+  background: rgba(77, 208, 225, 0.2);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 10px;
+  color: var(--ice);
+  margin-left: 8px;
+}
+
 .swap-input-area {
   display: flex;
   align-items: center;
@@ -326,7 +434,6 @@ body::after {
 .tcont { display: none; }
 .tcont.active { display: block; }
 
-/* Snowflake Animation - فقط ثلج منظم */
 .snowflake {
   position: fixed;
   color: #fff;
@@ -584,7 +691,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 .collect-btn:active { transform: scale(0.98); }
 .collect-btn:disabled { opacity: 0.38; cursor: default; box-shadow: none; }
 
-.machine-purchase-btn {
+.machine-shop-btn {
   width: 100%;
   margin-top: 12px;
   padding: 14px;
@@ -597,30 +704,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 8px;
   transition: all 0.2s;
   box-shadow: 0 0 12px rgba(76, 175, 80, 0.4);
 }
 
-.machine-purchase-btn:active { transform: scale(0.98); }
-.machine-purchase-btn:disabled { opacity: 0.5; cursor: default; }
-
-.machine-badge {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  color: var(--gold);
-}
-
-.machine-cost {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 4px 12px;
-  border-radius: 20px;
-}
+.machine-shop-btn:active { transform: scale(0.98); }
 
 .hero-card {
   width: 92%;
@@ -1836,26 +1926,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   100% { transform: translateY(-74px) scale(0.4); opacity: 0; }
 }
 
-/* أنيميشن الثلج المنظم - فقط ثلج */
-.snowflake {
-  position: fixed;
-  pointer-events: none;
-  z-index: 999;
-  font-size: 1.2rem;
-  animation: fall linear forwards;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-10vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
 .support-img-btn {
   position: fixed;
   bottom: 100px;
@@ -1905,7 +1975,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 .referral-tasks-section { margin-top: 15px; }
 
-/* Fee indicator styles */
 .fee-badge {
   background: rgba(255, 217, 102, 0.15);
   border-radius: 8px;
@@ -1932,7 +2001,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <div class="background-fixed"></div>
 
-<div id="welcomeModal" class="welcome-modal">
+<div id="welcomeModal" class="welcome-modal" style="display: none;">
   <div class="welcome-modal-box">
     <div class="welcome-chest-container" style="position: relative; margin-bottom: 15px;">
       <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest" style="width: 120px; height: 120px; animation: chestWobble 0.8s ease-in-out infinite;">
@@ -2002,7 +2071,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         🎁 OPEN YOUR WELCOME GIFT! 🎁
       </div>
       <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">
-        ⭐ 100 Snow + 1 Mining Machine (1 Snow/hour) ⭐
+        ⭐ 1000 Snow + 1 Mining Machine (10 Snow/hour) ⭐
       </div>
     </div>
   </div>
@@ -2040,10 +2109,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         </button>
       </div>
       
-      <button class="machine-purchase-btn" id="machinePurchaseBtn" onclick="purchaseMachine()">
-        <span><i class="fas fa-microchip"></i> Buy Mining Machine</span>
-        <span class="machine-badge"><span id="machineCount">0</span> Machines</span>
-        <span class="machine-cost"><i class="fas fa-coins"></i> <span id="machineCost">3</span> TON</span>
+      <button class="machine-shop-btn" id="openMachineShopBtn" onclick="openMachineShop()">
+        <i class="fas fa-microchip"></i> Upgrade Mining Machines
+        <i class="fas fa-chevron-right"></i>
       </button>
     </div>
   </div>
@@ -2136,14 +2204,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
           <span class="modern-preset-btn" onclick="setDepAmt(5)">5</span>
           <span class="modern-preset-btn" onclick="setDepAmt(10)">10</span>
         </div>
-        <div class="modern-rate-info">
-          <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">📊 <span data-i18n="rateLabel">Rate:</span></div>
-          <div class="modern-rate-value">1 TON = 10,000 Snow</div>
-          <div style="font-size: 12px; color: var(--muted); margin-top: 8px; display: flex; justify-content: space-between;">
-            <span data-i18n="youWillReceive">You will receive:</span>
-            <span id="depSnowPreview" style="color: var(--snow); font-weight: 800;">0 Snow</span>
-          </div>
-        </div>
         <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="window.initiateDeposit()">
           <i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit TON</span>
         </button>
@@ -2157,30 +2217,28 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div class="modern-content" id="wt-withdraw-modern">
       <div class="modern-card withdraw">
         <div class="modern-card-title">
-          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span data-i18n="withdrawBtn">Withdraw Snow</span>
-          <span class="fee-badge">Fee: 4%</span>
+          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span data-i18n="withdrawBtn">Withdraw TON</span>
         </div>
         <div class="modern-input-group">
           <label class="modern-label" data-i18n="tonWalletAddr">TON Wallet Address</label>
           <input type="text" class="modern-input" id="wdAddr" placeholder="UQ...">
         </div>
         <div class="modern-input-group">
-          <label class="modern-label" data-i18n="amountSnow">Amount (Snow)</label>
-          <input type="number" class="modern-input" id="wdAmt" placeholder="2000" min="2000" oninput="updWdPrev()">
+          <label class="modern-label" data-i18n="amountTON">Amount (TON)</label>
+          <input type="number" class="modern-input" id="wdAmt" placeholder="0.02" min="0.02" step="0.01" oninput="updWdPrev()">
         </div>
         <div class="modern-preset">
-          <span class="modern-preset-btn" onclick="setWdAmt(2000)">2K</span>
-          <span class="modern-preset-btn" onclick="setWdAmt(5000)">5K</span>
-          <span class="modern-preset-btn" onclick="setWdAmt(10000)">10K</span>
-          <span class="modern-preset-btn" onclick="setWdAmt(50000)">50K</span>
+          <span class="modern-preset-btn" onclick="setWdAmt(0.02)">0.02 TON</span>
+          <span class="modern-preset-btn" onclick="setWdAmt(0.05)">0.05 TON</span>
+          <span class="modern-preset-btn" onclick="setWdAmt(0.1)">0.1 TON</span>
+          <span class="modern-preset-btn" onclick="setWdAmt(0.5)">0.5 TON</span>
         </div>
         <div class="modern-rate-info" style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 12px; margin-bottom: 16px;">
-          <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">💎 TON Value (after 4% fee)</div>
-          <div class="modern-rate-value" id="wdTonVal">0.0000 TON</div>
-          <div style="font-size: 10px; color: var(--muted); margin-top: 4px;">Rate: 10,000 Snow = 1 TON | Fee: 4%</div>
+          <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">💰 Your TON Balance</div>
+          <div class="modern-rate-value" id="wdTonBalance">0 TON</div>
         </div>
         <button class="modern-btn secondary" id="wdBtn" onclick="doWithdraw()">
-          <i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Request Withdrawal</span>
+          <i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw TON</span>
         </button>
       </div>
       <div class="hist-box" style="margin-top: 16px;">
@@ -2219,7 +2277,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
           </div>
         </div>
         <div class="modern-rate-info" style="margin-top: 16px;">
-          📊 <span data-i18n="swapRate">1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON</span>
+          📊 <span data-i18n="swapRate">1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON</span>
           <div style="font-size: 10px; color: var(--muted); margin-top: 4px;">4% exchange fee applies</div>
         </div>
         <button class="modern-btn primary" onclick="swapSnowToTon()" style="margin-top: 16px;">
@@ -2282,21 +2340,21 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 12px">
       <div style="background: linear-gradient(135deg, rgba(77, 208, 225, 0.08), rgba(0, 0, 0, 0.4)); border: 1px solid rgba(77, 208, 225, 0.25); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 100 Snow</span> — main currency<br><span style="color: #fff; font-weight: 800">• 1 Mining Machine (1 Snow/hour)</span> — free mining power starts immediately</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 1000 Snow</span> — main currency<br><span style="color: #fff; font-weight: 800">• 1 Mining Machine (10 Snow/hour)</span> — free mining power starts immediately</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span> (3 TON each)<br>⬅ Each machine produces 1 Snow per hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet (4% fee) 💎<br>📊 1 TON = 10,000 Snow (1,000 Snow = 0.1 TON)</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards</div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards (DOUBLED!)</div>
         <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends to earn Snow rewards!<br>
-        <span style="color: var(--gold); font-weight: 800">10 friends:</span> 300 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">20 friends:</span> 750 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">50 friends:</span> 2,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">100 friends:</span> 5,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">200 friends:</span> 10,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 25,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">10 friends:</span> 600 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">20 friends:</span> 1,500 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">50 friends:</span> 4,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">100 friends:</span> 10,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">200 friends:</span> 20,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 50,000 Snow<br>
         <span style="color: var(--ice); font-weight: 800">➕ Extra: 1000 Snow when friend deposits!</span></div>
       </div>
     </div>
@@ -2308,6 +2366,16 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   <div class="modal-box">
     <div class="mhdr"><div class="mtitle" data-i18n="upgTitle">⬆️ Upgrade Storage</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div>
     <div id="upgradeContent"></div>
+  </div>
+</div>
+
+<div class="modal" id="machineShopModal">
+  <div class="modal-box">
+    <div class="mhdr">
+      <div class="mtitle">🤖 Machine Shop</div>
+      <button class="mclose" onclick="closeModal('machineShopModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="machineShopContent"></div>
   </div>
 </div>
 
@@ -2353,16 +2421,18 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 </div>
 
 <div id="notif"></div>
-
 <script>
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
-  TON_TO_SNOW: 10000,
-  SNOW_TO_TON: 0.0001,
-  MIN_WITHDRAW_SNOW: 2000,
-  MACHINE_COST_TON: 3,
-  MACHINE_RATE_SNOW: 1,
+  TON_TO_SNOW: 100000,
+  SNOW_TO_TON: 0.00001,
+  MIN_WITHDRAW_TON: 0.02,
+  MACHINES: {
+    1: { cost: 1, rate: 300, name: "Basic Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
+    2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
+    3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
+  },
   REF_BONUS_SNOW: 1000,
   EXCHANGE_FEE_PERCENT: 4,
   WITHDRAW_FEE_PERCENT: 4,
@@ -2371,12 +2441,12 @@ const CFG = {
 };
 
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 300, name: "🎁 Invite 10 Friends", icon: "👥" },
-  { id: 'ref_20', n: 20, snow: 750, name: "🎁 Invite 20 Friends", icon: "👥👥" },
-  { id: 'ref_50', n: 50, snow: 2000, name: "🎁 Invite 50 Friends", icon: "🌟" },
-  { id: 'ref_100', n: 100, snow: 5000, name: "🎁 Invite 100 Friends", icon: "💎" },
-  { id: 'ref_200', n: 200, snow: 10000, name: "🎁 Invite 200 Friends", icon: "👑" },
-  { id: 'ref_500', n: 500, snow: 25000, name: "🎁 Invite 500 Friends", icon: "🏆" },
+  { id: 'ref_10', n: 10, snow: 600, name: "🎁 Invite 10 Friends", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 1500, name: "🎁 Invite 20 Friends", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 4000, name: "🎁 Invite 50 Friends", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 10000, name: "🎁 Invite 100 Friends", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 20000, name: "🎁 Invite 200 Friends", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 50000, name: "🎁 Invite 500 Friends", icon: "🏆" },
 ];
 
 const SOC_TASKS = [
@@ -2406,7 +2476,7 @@ const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c390
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: 0, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false },
+  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2451,9 +2521,9 @@ async function loadState() {
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     
-    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.miningMachines === 0) {
+    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.miningMachines[1] === 0 && S.user.miningMachines[2] === 0 && S.user.miningMachines[3] === 0) {
       S.isNewUser = true;
-      showWelcomeModal();
+      setTimeout(() => showWelcomeModal(), 500);
     } else {
       S.isNewUser = false;
       hideWelcomeModal();
@@ -2470,12 +2540,12 @@ async function loadState() {
 
 function showWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) modal.classList.add('active');
+  if (modal) modal.style.display = 'flex';
 }
 
 function hideWelcomeModal() {
   const modal = document.getElementById('welcomeModal');
-  if (modal) modal.classList.remove('active');
+  if (modal) modal.style.display = 'none';
 }
 
 async function openWelcomeChestFromModal() {
@@ -2487,7 +2557,7 @@ async function openWelcomeChestFromModal() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.snow = (S.user.snow || 0) + result.snow;
-    S.user.miningMachines = result.miningMachines;
+    S.user.miningMachines = { ...S.user.miningMachines, 1: (S.user.miningMachines[1] || 0) + 1 };
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
     
@@ -2500,7 +2570,7 @@ async function openWelcomeChestFromModal() {
     triggerSnowfall(50);
     showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
     spawnSnowParticle();
-    showRewardsModal(result.snow, result.miningMachines, result.miningRate);
+    showRewardsModal(result.snow, 1, result.miningRate);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
@@ -2566,7 +2636,7 @@ async function openWelcomeChest() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.snow = (S.user.snow || 0) + result.snow;
-    S.user.miningMachines = result.miningMachines;
+    S.user.miningMachines = { ...S.user.miningMachines, 1: (S.user.miningMachines[1] || 0) + 1 };
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
     
@@ -2575,34 +2645,64 @@ async function openWelcomeChest() {
     triggerSnowfall(50);
     showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
     spawnSnowParticle();
-    showRewardsModal(result.snow, result.miningMachines, result.miningRate);
+    showRewardsModal(result.snow, 1, result.miningRate);
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
 }
 
-async function purchaseMachine() {
+function openMachineShop() {
+  buildMachineShop();
+  openModal('machineShopModal');
+}
+
+function buildMachineShop() {
+  let html = '<div class="machine-cards">';
+  for (let i = 1; i <= 3; i++) {
+    const machine = CFG.MACHINES[i];
+    const count = S.user.miningMachines?.[i] || 0;
+    const canAfford = (S.user.tonBalance || 0) >= machine.cost;
+    html += `
+      <div class="machine-card">
+        <img src="${machine.image}" class="machine-card-img" alt="${machine.name}">
+        <div class="machine-card-info">
+          <div class="machine-card-name">${machine.name}</div>
+          <div class="machine-card-rate">⚡ <span>${machine.rate}</span> Snow/hour</div>
+          <div class="machine-card-cost">💰 ${machine.cost} TON each</div>
+          <div class="machine-count-badge">Owned: ${count}</div>
+        </div>
+        <button class="machine-card-btn" onclick="purchaseMachine(${i})" ${!canAfford ? 'disabled' : ''}>
+          ${canAfford ? 'Buy' : 'Need ' + machine.cost + ' TON'}
+        </button>
+      </div>
+    `;
+  }
+  html += '</div>';
+  document.getElementById('machineShopContent').innerHTML = html;
+}
+
+async function purchaseMachine(machineType) {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   
-  const costTon = CFG.MACHINE_COST_TON;
-  const currentMachines = S.user.miningMachines || 0;
+  const machine = CFG.MACHINES[machineType];
   const currentTon = S.user.tonBalance || 0;
   
-  if (currentTon < costTon) {
-    showNotif(`❌ Need ${costTon} TON to buy a machine (you have ${currentTon} TON)`, 'e');
+  if (currentTon < machine.cost) {
+    showNotif(`❌ Need ${machine.cost} TON to buy ${machine.name} (you have ${currentTon} TON)`, 'e');
     return;
   }
   
   try {
-    const result = await api('purchaseMachine', {});
+    const result = await api('purchaseMachine', { machineType });
     S.user.tonBalance = result.tonBalance;
     S.user.miningRate = result.miningRate;
     S.user.miningMachines = result.miningMachines;
     updateUI();
+    buildMachineShop();
     triggerSnowfall(30);
-    showNotif(`🎉 Machine purchased! +${CFG.MACHINE_RATE_SNOW} Snow/hour. Total: ${result.miningMachines} machines`, 's');
+    showNotif(`🎉 ${machine.name} purchased! +${machine.rate} Snow/hour`, 's');
     spawnSnowParticle();
   } catch (e) {
     showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e');
@@ -2615,16 +2715,7 @@ function updateUI() {
   document.getElementById('tbTON').textContent = fmtTon(u.tonBalance || 0);
   const rateDay = Math.round((u.miningRate || 0) * 24);
   document.getElementById('heroRateDay').textContent = fmt(rateDay);
-  
-  const machineCount = document.getElementById('machineCount');
-  if (machineCount) machineCount.textContent = u.miningMachines || 0;
-  
-  const machineCostSpan = document.getElementById('machineCost');
-  if (machineCostSpan) machineCostSpan.textContent = CFG.MACHINE_COST_TON;
-  
-  const machineBtn = document.getElementById('machinePurchaseBtn');
-  if (machineBtn) machineBtn.disabled = (u.tonBalance || 0) < CFG.MACHINE_COST_TON;
-  
+  document.getElementById('wdTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
   updateSwapBals();
   updateRefUI();
   renderExchHist();
@@ -2669,7 +2760,6 @@ function updateStorageUI() {
   if (lvEl) lvEl.textContent = lv;
 }
 
-// Snowfall function - only snowflakes, organized and beautiful
 function triggerSnowfall(count = 40) {
   for (let i = 0; i < count; i++) {
     setTimeout(() => {
@@ -2688,7 +2778,6 @@ function triggerSnowfall(count = 40) {
 }
 
 function startSnowfallLoop() {
-  // Create continuous snowfall
   setInterval(() => {
     if (Math.random() > 0.3) {
       const snowflake = document.createElement('div');
@@ -2967,7 +3056,6 @@ async function submitAddTask() {
   finally { _submitInFlight = false; }
 }
 
-// Exchange functions - Snow to TON only with fee
 function updateSwapBals() {
   document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
 }
@@ -2994,7 +3082,7 @@ async function swapSnowToTon() {
   if (_exchInFlight) return;
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
   if (snow <= 0) { showNotif('Enter amount!', 'e'); return; }
-  if (snow < 100) { showNotif('Min 100 Snow (0.01 TON before fee)!', 'e'); return; }
+  if (snow < 100) { showNotif('Min 100 Snow (0.001 TON before fee)!', 'e'); return; }
   if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
   _exchInFlight = true;
   try {
@@ -3034,11 +3122,8 @@ function renderExchHist() {
 }
 
 function updWdPrev() {
-  const a = parseFloat(document.getElementById('wdAmt').value) || 0;
-  const fee = Math.floor(a * CFG.WITHDRAW_FEE_PERCENT / 100);
-  const snowAfterFee = a - fee;
-  const tonValue = snowAfterFee * CFG.SNOW_TO_TON;
-  document.getElementById('wdTonVal').textContent = tonValue.toFixed(6) + ' TON';
+  const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
+  document.getElementById('wdTonBalance').textContent = fmtTon(S.user.tonBalance || 0) + ' TON';
 }
 
 function setWdAmt(amt) {
@@ -3063,11 +3148,11 @@ async function doWithdraw() {
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const addr = (document.getElementById('wdAddr').value || '').trim();
-  const snowAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
+  const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
   const u = S.user;
   if (!addr || addr.length < 10) { showNotif('Enter valid TON address!', 'e'); return; }
-  if (snowAmt < CFG.MIN_WITHDRAW_SNOW) { showNotif(`Min ${CFG.MIN_WITHDRAW_SNOW} Snow!`, 'e'); return; }
-  if (snowAmt > (u.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
+  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(`Min ${CFG.MIN_WITHDRAW_TON} TON!`, 'e'); return; }
+  if (tonAmt > (u.tonBalance || 0)) { showNotif('Not enough TON balance!', 'e'); return; }
   const partnerTasks = S.tasks?.partner || [];
   const missingPartner = partnerTasks.filter(t => t.status === 'active' && !S.doneTasks.includes(t.id));
   if (missingPartner.length > 0) {
@@ -3076,17 +3161,14 @@ async function doWithdraw() {
     return;
   }
   try {
-    const res = await api('withdraw', { address: addr, amount: snowAmt });
-    u.snow -= snowAmt;
-    const fee = res.fee || Math.floor(snowAmt * CFG.WITHDRAW_FEE_PERCENT / 100);
-    const snowAfterFee = snowAmt - fee;
-    const tonValue = snowAfterFee * CFG.SNOW_TO_TON;
-    S.wdHist.unshift({ snowAmt, fee, addr, d: new Date().toLocaleDateString(), status: 'pending' });
+    const res = await api('withdraw', { address: addr, amount: tonAmt });
+    u.tonBalance -= tonAmt;
+    S.wdHist.unshift({ tonAmt, addr, d: new Date().toLocaleDateString(), status: 'pending' });
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
     updWdPrev(); updateUI(); renderWdHist();
     triggerSnowfall(30);
-    showNotif(`✅ Withdrawal requested: ${fmt(snowAmt)} Snow (Fee: ${fmt(fee)} Snow, Receive: ${tonValue.toFixed(6)} TON)`, 's');
+    showNotif(`✅ Withdrawal requested: ${tonAmt.toFixed(6)} TON`, 's');
   } catch (e) {
     const msg = e.message || '';
     showNotif(`❌ ${msg}`, 'e');
@@ -3102,14 +3184,11 @@ function renderWdHist() {
   if (!S.wdHist.length) { el.innerHTML = '<div class="hist-empty">No withdrawals yet</div>'; return; }
   el.innerHTML = S.wdHist.slice(0, 20).map(h => {
     const sc = { approved: 'sb-approved', pending: 'sb-pending', rejected: 'sb-rejected' }[h.status || 'pending'];
-    const snowAfterFee = (h.snowAmt || 0) - (h.fee || 0);
-    const tonValue = snowAfterFee * CFG.SNOW_TO_TON;
     return `<div class="hist-row" style="flex-direction:column;gap:4px;align-items:flex-start">
       <div style="display:flex;justify-content:space-between;width:100%">
-        <span style="font-size:13px;font-weight:800;color:var(--ice)">${fmt(h.snowAmt)} Snow</span>
+        <span style="font-size:13px;font-weight:800;color:var(--ice)">${h.tonAmt.toFixed(6)} TON</span>
         <span class="stat-badge ${sc}">${esc(h.status || 'Pending')}</span>
       </div>
-      <div style="font-size:10px;color:var(--muted)">Fee: ${fmt(h.fee || 0)} Snow · Receive: ${tonValue.toFixed(6)} TON</div>
       <div style="font-size:10px;color:var(--muted)">${esc(h.d || '')} · ${esc((h.addr || '').substring(0, 12))}...</div>
     </div>`;
   }).join('');
@@ -3344,6 +3423,7 @@ function preloadImages() {
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
+    CFG.MACHINES[1].image, CFG.MACHINES[2].image, CFG.MACHINES[3].image
   ];
   return Promise.all(urls.map(u => new Promise(res => { const img = new Image(); img.onload = img.onerror = res; img.src = u; })));
 }
@@ -3371,14 +3451,14 @@ const TRANSLATIONS = {
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
-    amountTON: 'Amount (TON)', rateLabel: 'Rate:', youWillReceive: 'You will receive:', depositBtn: 'Deposit TON',
-    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address', amountSnow: 'Amount (Snow)',
-    tonValue: 'TON Value', withdrawBtn: 'Request Withdrawal', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
-    youGet: 'You get (after fee):', swapRate: '1 TON = 10,000 Snow | 1,000 Snow = 0.1 TON',
+    amountTON: 'Amount (TON)', depositBtn: 'Deposit TON',
+    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address',
+    withdrawBtn: 'Withdraw TON', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
+    youGet: 'You get (after fee):', swapRate: '1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON',
     exchangeNow: 'Exchange', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
     helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
-    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the chest to receive:<br><span style="color:#fff;font-weight:800">• 100 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (1 Snow/hour)</span> — free mining power starts immediately',
-    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--gold);font-weight:800">TON</span> (3 TON each)<br>⬅ Each machine produces 1 Snow per hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet (4% fee) 💎<br>📊 1 TON = 10,000 Snow (1,000 Snow = 0.1 TON)',
+    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the chest to receive:<br><span style="color:#fff;font-weight:800">• 1000 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (10 Snow/hour)</span> — free mining power starts immediately',
+    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 Machine Types:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)',
     addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--ice)">Target Users × 6 Snow</strong>',
     taskCostNote: 'Min target: 100 users | 100 users = 600 Snow', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
     taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
@@ -3394,14 +3474,14 @@ const TRANSLATIONS = {
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
-    amountTON: 'Сумма (TON)', rateLabel: 'Курс:', youWillReceive: 'Вы получите:', depositBtn: 'Внести TON',
-    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька', amountSnow: 'Сумма (Снег)',
-    tonValue: 'TON стоимость', withdrawBtn: 'Запрос вывода', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
-    youGet: 'Вы получите (после комиссии):', swapRate: '1 TON = 10,000 Снега | 1,000 Снега = 0.1 TON',
+    amountTON: 'Сумма (TON)', depositBtn: 'Внести TON',
+    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька',
+    withdrawBtn: 'Вывести TON', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
+    youGet: 'Вы получите (после комиссии):', swapRate: '1 TON = 100,000 Снега | 1,000 Снега = 0.01 TON',
     exchangeNow: 'Обменять', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
     helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
-    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 100 Снега</span> — основная валюта<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (1 Снег/час)</span> — бесплатная мощность майнинга начинается сразу',
-    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span> (3 TON каждая)<br>⬅ Каждая машина производит 1 Снег в час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (комиссия 4%)<br>⬅ Выводите TON на ваш кошелек (комиссия 4%) 💎<br>📊 1 TON = 10,000 Снега (1,000 Снега = 0.1 TON)',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 1000 Снега</span> — основная валюта<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (10 Снег/час)</span> — бесплатная мощность майнинга начинается сразу',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 типа машин:<br>&nbsp;&nbsp;&nbsp;🔧 Базовая (1 TON): 300 Снег/час<br>&nbsp;&nbsp;&nbsp;⚙️ Продвинутая (2 TON): 650 Снег/час<br>&nbsp;&nbsp;&nbsp;💎 Элитная (3 TON): 1000 Снег/час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (комиссия 4%)<br>⬅ Выводите TON на ваш кошелек 💎<br>📊 1 TON = 100,000 Снега (1,000 Снега = 0.01 TON)',
     addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--ice)">Целевые пользователи × 6 Снега</strong>',
     taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 600 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
     taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
@@ -3461,7 +3541,7 @@ function applyLang(lang, flag, code) {
   if (connBtn && connBtn.innerHTML.includes('Connect')) connBtn.innerHTML = `<i class="fas fa-plug"></i> ${t.connectBtn}`;
   if (connBtn && connBtn.innerHTML.includes('Disconnect')) connBtn.innerHTML = `<i class="fas fa-unlink"></i> Disconnect`;
   const wdBtn = document.getElementById('wdBtn');
-  if (wdBtn) { const img = wdBtn.querySelector('img'); wdBtn.innerHTML = t.withdrawBtn; if (img) wdBtn.prepend(img); }
+  if (wdBtn) wdBtn.innerHTML = `<i class="fas fa-arrow-up"></i> ${t.withdrawBtn}`;
   document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
   const floatBtn = document.getElementById('floatAddTask');
   if (floatBtn) floatBtn.innerHTML = `➕ ${t.floatAdd}`;
