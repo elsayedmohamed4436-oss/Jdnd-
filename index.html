@@ -372,36 +372,6 @@ body::after {
   display: none;
 }
 
-/* Referral Task Styles */
-.referral-task-icon {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(229, 57, 53, 0.5));
-}
-
-.referral-task-item {
-  background: linear-gradient(135deg, rgba(229, 57, 53, 0.1), var(--card));
-  border: 1px solid rgba(229, 57, 53, 0.3);
-}
-
-.referral-task-progress {
-  background: linear-gradient(90deg, #E53935, #FF6B6B);
-  height: 100%;
-  border-radius: 10px;
-  transition: width 0.3s ease;
-}
-
-.referral-task-reward {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 11px;
-}
-
 .snowflake {
   position: fixed;
   color: #fff;
@@ -2127,7 +2097,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border-radius: 2px;
 }
 
-/* Removed referral-tasks-section since it's moved to tasks tab */
+.referral-tasks-section {
+  margin-top: 15px;
+}
 </style>
 </head>
 <body>
@@ -2287,7 +2259,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div id="socPartnerList"></div>
     <div id="socCommunityList" style="display: none; padding-bottom: 80px"></div>
   </div>
-  <div class="tcont" id="tcReferral"><div id="refTaskList"></div></div>
+  <div class="tcont" id="tcReferral">
+    <div id="referralTasksList"></div>
+  </div>
 </div>
 
 <button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none; align-items: center; gap: 8px;">➕ <span data-i18n="floatAdd">Add Task</span></button>
@@ -2621,7 +2595,7 @@ const STORAGE_LVS = {
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
 const GIFT_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/10ec823d-9fa7-47e8-8c58-b6728002ef7f.png';
-const REFERRAL_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
+const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const S = {
   userId: null,
@@ -2975,27 +2949,17 @@ function renderTasks() {
     const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
     
     refTasksHtml += `
-      <div class="task-item referral-task-item">
+      <div class="task-item">
         <div class="ticon">
-          <img src="${REFERRAL_ICON}" 
-               class="referral-task-icon" 
-               alt="Referral"
-               style="width: 40px; height: 40px; object-fit: contain;">
+          <img src="${REF_TASK_ICON}" style="width: 42px; height: 42px; object-fit: contain;">
         </div>
         <div class="tinfo">
           <div class="tname">${task.name}</div>
-          <div class="trew">
-            <span class="referral-task-reward">
-              <img src="${SNOW_IMG}" style="width: 14px; height: 14px; object-fit: contain; vertical-align: middle">
-              ${fmt(task.snow)} Snow
-            </span>
+          <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle"> ${fmt(task.snow)} Snow</div>
+          <div class="progress-bar" style="background: rgba(0,0,0,0.3); border-radius: 10px; height: 6px; margin-top: 5px;">
+            <div style="width: ${progress}%; background: linear-gradient(90deg, #E53935, #FF6B6B); height: 100%; border-radius: 10px;"></div>
           </div>
-          <div class="progress-bar" style="background: rgba(0,0,0,0.3); border-radius: 10px; height: 8px; margin-top: 8px;">
-            <div class="referral-task-progress" style="width: ${progress}%;"></div>
-          </div>
-          <div class="tstat" style="margin-top: 5px;">
-            ${referralCount}/${task.n} referrals (${progress}%)
-          </div>
+          <div class="tstat">${referralCount}/${task.n} referrals (${progress}%)</div>
         </div>
         ${completed ? `<button class="tbtn done">✅ Done</button>` :
           canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">Claim →</button>` :
@@ -3004,7 +2968,7 @@ function renderTasks() {
     `;
   }
   
-  document.getElementById('refTaskList').innerHTML = refTasksHtml || `<div class="hist-empty">Complete referral tasks to earn Snow!</div>`;
+  document.getElementById('referralTasksList').innerHTML = refTasksHtml || `<div class="hist-empty">Complete referral tasks to earn Snow!</div>`;
   renderSocTasks();
 }
 
@@ -3533,7 +3497,7 @@ function ldHide() {
 function preloadImages() {
   const urls = [
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
-    SNOW_IMG, GIFT_IMG, REFERRAL_ICON,
+    SNOW_IMG, GIFT_IMG, REF_TASK_ICON,
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
