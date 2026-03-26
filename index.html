@@ -3391,24 +3391,28 @@ function fmt(n) {
   return n.toString();
 }
 
-let _nt;
+let _notifTimeout = null;
 function showNotif(msg, type = 'i') {
   const el = document.getElementById('notif');
   if (!el) return;
   
-  if (_nt) clearTimeout(_nt);
+  if (_notifTimeout) {
+    clearTimeout(_notifTimeout);
+    _notifTimeout = null;
+  }
   
-  el.classList.remove('show');
+  el.classList.remove('show', 's', 'e', 'i', 'w');
   
   el.innerHTML = msg;
-  el.className = `notif show ${type}`;
+  el.classList.add(type);
   
   setTimeout(() => {
     el.classList.add('show');
   }, 10);
   
-  _nt = setTimeout(() => {
+  _notifTimeout = setTimeout(() => {
     el.classList.remove('show');
+    _notifTimeout = null;
   }, 3000);
 }
 
