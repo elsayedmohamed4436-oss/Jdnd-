@@ -2454,12 +2454,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v14.0
-// UPDATES:
-// - FIXED: Referral system with proper start_param extraction
-// - CHANGED: Referral commission from 15% of purchase to 15% of machine production (one-time)
-// - Fixed notification system (messages disappear after 3 seconds)
-// - Fixed task verification system
+// SANTA SNOW - FRONTEND v14.1
+// FIXED: Referral system with proper start_param extraction
+// FIXED: Start parameter handling in loadState
 // ============================================================
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
@@ -2580,10 +2577,11 @@ function showNotif(msg, type = 'i') {
   }, 3000);
 }
 
-// ✅ FIXED: Use S.startParam directly
+// ✅ FIXED: Improved loadState with proper start_param handling
 async function loadState() {
   try {
     const startParam = S.startParam || '';
+    console.log('[loadState] Sending start_param:', startParam);
     
     const d = await api('getState', { 
       start_param: startParam,
@@ -3360,8 +3358,15 @@ function goToWalletDeposit() {
 }
 
 function updateRefUI() {
-  const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId || ''}`;
-  document.getElementById('refLinkInp').value = link;
+  if (!S.userId) {
+    console.warn('[updateRefUI] No userId available');
+    return;
+  }
+  
+  const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
+  const refInput = document.getElementById('refLinkInp');
+  if (refInput) refInput.value = link;
+  
   document.getElementById('depositUserIdDisplay').textContent = esc(S.userId || '...');
   const cntEl = document.getElementById('totalRefsDisp');
   if (cntEl) cntEl.textContent = `${S.refs.length} Friends`;
@@ -3681,7 +3686,8 @@ async function init() {
   ldProgress(0, 'Starting...');
   if (window.Telegram?.WebApp) {
     S.tg = window.Telegram.WebApp;
-    S.tg.ready(); S.tg.expand();
+    S.tg.ready(); 
+    S.tg.expand();
     const u = S.tg.initDataUnsafe?.user;
     if (u) {
       S.userId = String(u.id);
@@ -3690,7 +3696,18 @@ async function init() {
         if (av) av.innerHTML = `<img src="${esc(u.photo_url)}" onerror="this.parentElement.innerHTML='<div class=ap>🎅</div>'">`;
       }
     }
-    S.startParam = (S.tg.initDataUnsafe?.start_param || S.tg.initDataUnsafe?.startParam || '').toString().replace(/\D/g, '');
+    
+    // ✅ IMPROVED: Better start_param extraction
+    let startParam = '';
+    if (S.tg.initDataUnsafe?.start_param) {
+      startParam = String(S.tg.initDataUnsafe.start_param);
+    } else if (S.tg.initDataUnsafe?.startParam) {
+      startParam = String(S.tg.initDataUnsafe.startParam);
+    }
+    // Remove any non-digit characters (just in case)
+    S.startParam = startParam.replace(/\D/g, '');
+    
+    console.log('[init] Extracted startParam:', S.startParam);
   }
   await ldAnimateTo(10, 'Connecting to Telegram...', 700);
   await new Promise(r => setTimeout(r, 400));
