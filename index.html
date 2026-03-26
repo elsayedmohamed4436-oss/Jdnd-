@@ -2454,10 +2454,11 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v14.1
-// FIXED: Referral system with proper start_param extraction
-// FIXED: Start parameter handling in loadState
+// SANTA SNOW - FRONTEND v15.0
+// COMPLETE FIX: Referral system fully functional
+// FIXED: Start parameter extraction and transmission
 // ============================================================
+
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
@@ -2580,7 +2581,14 @@ function showNotif(msg, type = 'i') {
 // ✅ FIXED: Improved loadState with proper start_param handling
 async function loadState() {
   try {
-    const startParam = S.startParam || '';
+    // Get the start parameter from various sources
+    let startParam = S.startParam || '';
+    
+    // If still empty, try to get from URL if we're in web app mode
+    if (!startParam && S.tg?.initDataUnsafe?.start_param) {
+      startParam = String(S.tg.initDataUnsafe.start_param).replace(/\D/g, '');
+    }
+    
     console.log('[loadState] Sending start_param:', startParam);
     
     const d = await api('getState', { 
