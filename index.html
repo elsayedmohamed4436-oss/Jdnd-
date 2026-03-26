@@ -156,7 +156,7 @@ body::after {
   transform: scale(0.96);
 }
 
-#notif {
+.notif {
   position: fixed;
   top: 18px;
   left: 50%;
@@ -173,16 +173,17 @@ body::after {
   max-width: 84vw;
   text-align: center;
   backdrop-filter: blur(12px);
+  pointer-events: none;
 }
 
-#notif.show {
+.notif.show {
   transform: translateX(-50%) translateY(0);
 }
 
-#notif.s { border-color: var(--ice-glow); color: var(--ice); }
-#notif.e { border-color: rgba(239, 83, 80, 0.5); color: #FF8A80; }
-#notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; }
-#notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; }
+.notif.s { border-color: var(--ice-glow); color: var(--ice); background: rgba(77, 208, 225, 0.2); }
+.notif.e { border-color: rgba(239, 83, 80, 0.5); color: #FF8A80; background: rgba(239, 83, 80, 0.1); }
+.notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; background: rgba(66, 165, 245, 0.1); }
+.notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; background: rgba(255, 193, 7, 0.1); }
 
 .machine-shop {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
@@ -2371,7 +2372,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)<br><br>👥 Referral Rewards (NEW!)<br>⬅ Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases!<br>⬅ Complete referral tasks for bonus Snow!</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards (NEW!)</div>
@@ -2414,8 +2415,8 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       <button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button>
     </div>
     <div style="background: rgba(77, 208, 225, 0.08); border: 1px solid rgba(77, 208, 225, 0.2); border-radius: 12px; padding: 10px 13px; margin-bottom: 12px; font-size: 12px; color: var(--muted); font-weight: 600">
-      💡 <span data-i18n="taskCostFormula">Cost = <strong style="color: var(--ice)">Target Users × 6 Snow</strong></span><br>
-      <span style="font-size: 11px" data-i18n="taskCostNote">Min target: 100 users | 100 users = 600 Snow</span>
+      💡 <span data-i18n="taskCostFormula">Cost = <strong style="color: var(--ice)">Target Users × 60 Snow</strong></span><br>
+      <span style="font-size: 11px" data-i18n="taskCostNote">Min target: 100 users | 100 users = 6,000 Snow</span>
     </div>
     <div style="display: flex; gap: 7px; margin-bottom: 10px">
       <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex: 1; padding: 9px; border-radius: 10px; border: 2px solid var(--ice); background: rgba(77, 208, 225, 0.2); color: var(--ice); font-size: 13px; font-weight: 800; cursor: pointer">
@@ -2449,7 +2450,16 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 </div>
 
 <div id="notif"></div>
+
 <script>
+// ============================================================
+// SANTA SNOW - FRONTEND v13.1
+// UPDATES:
+// - Fixed notification system (messages disappear after 3 seconds)
+// - Fixed referral system with proper start_param extraction
+// - Fixed task verification system
+// - Changed task creation cost from 6 to 60 Snow per user
+// ============================================================
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
@@ -2515,6 +2525,15 @@ const S = {
 
 let _lastClickTime = 0;
 let _apiInFlight = 0;
+let _nt = null;
+let _taskInFlight = new Set();
+let _atType = 'channel';
+let _submitInFlight = false;
+let _socTab = 'partner';
+
+// UPDATED: Task cost from 6 to 60 Snow per user
+const TASK_SNOW_PER_USER = 60;
+const MIN_TASK_TARGET = 100;
 
 function esc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -2537,17 +2556,61 @@ async function api(action, data = {}) {
   } finally { _apiInFlight--; }
 }
 
+// FIXED: Notification function - message disappears after 3 seconds
+function showNotif(msg, type = 'i') {
+  const el = document.getElementById('notif');
+  if (!el) return;
+  
+  if (_nt) {
+    clearTimeout(_nt);
+    _nt = null;
+  }
+  
+  el.classList.remove('show');
+  el.innerHTML = msg;
+  el.className = '';
+  el.classList.add('notif', type);
+  
+  setTimeout(() => {
+    el.classList.add('show');
+  }, 10);
+  
+  _nt = setTimeout(() => {
+    el.classList.remove('show');
+    _nt = null;
+  }, 3000);
+}
+
+// FIXED: Load state with proper start_param extraction
 async function loadState() {
   try {
-    const d = await api('getState', { start_param: S.startParam || '', _initData: S.tg?.initData || '' });
+    let startParam = '';
+    if (S.tg?.initDataUnsafe?.start_param) {
+      startParam = S.tg.initDataUnsafe.start_param;
+    } else if (S.tg?.initDataUnsafe?.startParam) {
+      startParam = S.tg.initDataUnsafe.startParam;
+    } else if (S.startParam) {
+      startParam = S.startParam;
+    }
+    
+    const d = await api('getState', { 
+      start_param: startParam || '', 
+      _initData: S.tg?.initData || '' 
+    });
+    
     S.user = d.user || S.user;
     S.refs = d.referrals || [];
     S.exchHist = d.exchHistory || [];
     S.wdHist = d.wdHistory || [];
     S.doneTasks = d.completedTasks || [];
     S.tasks = d.tasks || { partner: [], community: [] };
-    if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
-    if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
+    
+    if (d.user && d.user.storageAccrued !== undefined) {
+      S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
+    }
+    if (d.pendingDeposit) {
+      startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
+    }
     
     if (!S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine) {
       S.isNewUser = true;
@@ -2560,7 +2623,13 @@ async function loadState() {
         chestEl.style.display = 'none';
       }
     }
-  } catch (e) { console.warn('loadState:', e.message); }
+    
+    updateRefUI();
+    
+  } catch (e) { 
+    console.warn('loadState:', e.message);
+    showNotif('Failed to load data: ' + e.message, 'e');
+  }
   updateUI();
 }
 
@@ -2999,9 +3068,6 @@ function switchTTab(el, t) {
   hideFab();
 }
 
-let _socTab = 'partner';
-const _taskInFlight = new Set();
-
 function switchSocTab(tab) {
   _socTab = tab;
   document.getElementById('stab-partner').className = 'ttab' + (tab === 'partner' ? ' active' : '');
@@ -3011,37 +3077,66 @@ function switchSocTab(tab) {
   if (tab === 'community') showFab(); else hideFab();
 }
 
+// FIXED: Task verification with proper membership check
 async function doDbTask(tid, link, type, cat) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { 
+    showNotif('Please wait 3 seconds!', 'w'); 
+    return; 
+  }
   _lastClickTime = now;
-  if (_taskInFlight.has(tid)) { showNotif('⏳ Already processing...', 'w'); return; }
+  
+  if (_taskInFlight.has(tid)) { 
+    showNotif('⏳ Already processing...', 'w'); 
+    return; 
+  }
+  
   _taskInFlight.add(tid);
   renderSocTasks();
-  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank', 'noopener');
-  showNotif('⏳ Verifying...', 'i');
+  
+  if (link && link.startsWith('https://t.me/')) {
+    window.open(link, '_blank', 'noopener');
+  }
+  
+  showNotif('⏳ Verifying your membership...', 'i');
+  
   setTimeout(async () => {
     try {
-      const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
-      S.doneTasks.push(tid);
-      if (r.snowAdded) S.user.snow = (S.user.snow || 0) + r.snowAdded;
-      updateUI(); renderTasks();
-      triggerSnowfall(30);
-      showNotif(`🎉 +${fmt(r.snowAdded || 0)} Snow Task done!`, 's');
-      spawnSnowParticle();
+      const r = await api('verifyTask', { 
+        taskId: tid, 
+        taskType: type, 
+        taskCategory: cat 
+      });
+      
+      if (!S.doneTasks.includes(tid)) {
+        S.doneTasks.push(tid);
+      }
+      
+      if (r.snowAdded) {
+        S.user.snow = (S.user.snow || 0) + r.snowAdded;
+        updateUI();
+        triggerSnowfall(30);
+        showNotif(`🎉 +${fmt(r.snowAdded)} Snow! Task completed!`, 's');
+        spawnSnowParticle();
+      } else {
+        showNotif(`✅ Task completed!`, 's');
+      }
+      
+      renderTasks();
+      
     } catch (e) {
-      showNotif(`❌ ${e.message || 'Verification failed'}`, 'e');
+      let errorMsg = e.message || 'Verification failed';
+      if (errorMsg.includes('member') || errorMsg.includes('channel')) {
+        showNotif(`❌ Please join the channel first, then try again!`, 'e');
+      } else {
+        showNotif(`❌ ${errorMsg}`, 'e');
+      }
     } finally {
       _taskInFlight.delete(tid);
       renderSocTasks();
     }
   }, 3000);
 }
-
-let _atType = 'channel';
-const TASK_SNOW_PER_USER = 6;
-const MIN_TASK_TARGET = 100;
-let _submitInFlight = false;
 
 function setTaskType(t) {
   _atType = t;
@@ -3055,6 +3150,7 @@ function setTaskType(t) {
 }
 
 function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
+
 function updAtCost() {
   const tgt = parseInt(document.getElementById('atTarget').value) || 0;
   document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
@@ -3062,8 +3158,12 @@ function updAtCost() {
 
 async function submitAddTask() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { 
+    showNotif('Please wait 3 seconds!', 'w'); 
+    return; 
+  }
   _lastClickTime = now;
+  
   if (_submitInFlight) return;
   const link = (document.getElementById('atLink').value || '').trim();
   const target = parseInt(document.getElementById('atTarget').value) || 0;
@@ -3071,10 +3171,25 @@ async function submitAddTask() {
   st.style.display = 'block';
   st.style.color = 'var(--muted)';
   st.textContent = '⏳ Creating...';
-  if (!link.includes('t.me/')) { st.style.color = '#ff8a80'; st.textContent = '❌ Invalid Telegram link'; return; }
-  if (target < MIN_TASK_TARGET) { st.style.color = '#ff8a80'; st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; return; }
+  
+  if (!link.includes('t.me/')) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = '❌ Invalid Telegram link'; 
+    return; 
+  }
+  if (target < MIN_TASK_TARGET) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; 
+    return; 
+  }
+  
   const cost = target * TASK_SNOW_PER_USER;
-  if ((S.user.snow || 0) < cost) { st.style.color = '#ff8a80'; st.textContent = `❌ Need ${fmt(cost)} Snow (have ${fmt(S.user.snow || 0)})`; return; }
+  if ((S.user.snow || 0) < cost) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = `❌ Need ${fmt(cost)} Snow (have ${fmt(S.user.snow || 0)})`; 
+    return; 
+  }
+  
   _submitInFlight = true;
   try {
     await api('createTask', { type: _atType, link, targetUsers: target });
@@ -3083,9 +3198,18 @@ async function submitAddTask() {
     st.textContent = '✅ Task created!';
     updateUI();
     triggerSnowfall(30);
-    setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
-  } catch (e) { st.style.color = '#ff8a80'; st.textContent = `❌ ${e.message || 'Failed'}`; }
-  finally { _submitInFlight = false; }
+    showNotif(`✅ Task created! Cost: ${fmt(cost)} Snow`, 's');
+    setTimeout(() => { 
+      closeModal('addTaskModal'); 
+      loadState(); 
+    }, 1500);
+  } catch (e) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = `❌ ${e.message || 'Failed'}`;
+    showNotif(`❌ ${e.message || 'Failed to create task'}`, 'e');
+  } finally { 
+    _submitInFlight = false; 
+  }
 }
 
 function updateSwapBals() {
@@ -3391,31 +3515,6 @@ function fmt(n) {
   return n.toString();
 }
 
-let _notifTimeout = null;
-function showNotif(msg, type = 'i') {
-  const el = document.getElementById('notif');
-  if (!el) return;
-  
-  if (_notifTimeout) {
-    clearTimeout(_notifTimeout);
-    _notifTimeout = null;
-  }
-  
-  el.classList.remove('show', 's', 'e', 'i', 'w');
-  
-  el.innerHTML = msg;
-  el.classList.add(type);
-  
-  setTimeout(() => {
-    el.classList.add('show');
-  }, 10);
-  
-  _notifTimeout = setTimeout(() => {
-    el.classList.remove('show');
-    _notifTimeout = null;
-  }, 3000);
-}
-
 function spawnSnowParticle() {
   const p = document.createElement('img');
   p.src = SNOW_IMG;
@@ -3496,8 +3595,8 @@ const TRANSLATIONS = {
     helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
     helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the chest to receive:<br><span style="color:#fff;font-weight:800">• 1000 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (10 Snow/hour)</span> — free mining power starts immediately',
     helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 Machine Types:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)',
-    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--ice)">Target Users × 6 Snow</strong>',
-    taskCostNote: 'Min target: 100 users | 100 users = 600 Snow', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
+    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--ice)">Target Users × 60 Snow</strong>',
+    taskCostNote: 'Min target: 100 users | 100 users = 6,000 Snow', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
     taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
     taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
@@ -3519,8 +3618,8 @@ const TRANSLATIONS = {
     helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
     helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 1000 Снега</span> — основная валюта<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (10 Снег/час)</span> — бесплатная мощность майнинга начинается сразу',
     helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 типа машин:<br>&nbsp;&nbsp;&nbsp;🔧 Базовая (1 TON): 300 Снег/час<br>&nbsp;&nbsp;&nbsp;⚙️ Продвинутая (2 TON): 650 Снег/час<br>&nbsp;&nbsp;&nbsp;💎 Элитная (3 TON): 1000 Снег/час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (комиссия 4%)<br>⬅ Выводите TON на ваш кошелек 💎<br>📊 1 TON = 100,000 Снега (1,000 Снега = 0.01 TON)',
-    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--ice)">Целевые пользователи × 6 Снега</strong>',
-    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 600 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
+    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--ice)">Целевые пользователи × 60 Снега</strong>',
+    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
     taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
     taskLinkPh: 'https://t.me/ваш_канал', taskTargetLabel: 'Целевые пользователи (мин. 100)',
     taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
