@@ -2151,13 +2151,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
     <div class="ref-bonus-badge">
       <span class="rbb-pct">15%</span>
       <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
-      <span class="rbb-txt">💰 <strong style="color: var(--gold);">15% commission</strong> when friends buy machines!<br>Earn Snow from every purchase!</span>
+      <span class="rbb-txt">💰 <strong style="color: var(--gold);">15% commission</strong> from friends' machine production!<br>Earn Snow from each machine they buy (one-time)!</span>
     </div>
     <div class="ref-link-row">
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
       <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
     </div>
-    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they buy machines, you get 15% of their purchase in Snow!</div>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they buy machines, you get 15% of their machine production in Snow (one-time)!</div>
   </div>
   <div class="hist-box" style="margin-bottom: 10px">
     <div class="hist-hdr" style="justify-content: space-between">
@@ -2372,12 +2372,13 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)<br><br>👥 Referral Rewards (NEW!)<br>⬅ Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases!<br>⬅ Complete referral tasks for bonus Snow!</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)<br><br>👥 Referral Rewards (NEW!)<br>⬅ Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases (one-time)!<br>⬅ Complete referral tasks for bonus Snow!</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards (NEW!)</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases!<br>
-        When your friend buys any mining machine, you get 15% of the TON value converted to Snow!<br><br>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases (one-time)!<br>
+        When your friend buys any mining machine, you get 15% of the machine's production rate converted to Snow!<br>
+        Example: Friend buys Basic Machine (300 Snow/hour) → You get 45 Snow (one-time)!<br><br>
         <span style="color: var(--ice); font-weight: 800">🎁 Plus Referral Tasks:</span><br>
         <span style="color: var(--gold); font-weight: 800">10 friends:</span> 600 Snow<br>
         <span style="color: var(--gold); font-weight: 800">20 friends:</span> 1,500 Snow<br>
@@ -2453,12 +2454,12 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v13.1
+// SANTA SNOW - FRONTEND v14.0
 // UPDATES:
+// - FIXED: Referral system with proper start_param extraction
+// - CHANGED: Referral commission from 15% of purchase to 15% of machine production (one-time)
 // - Fixed notification system (messages disappear after 3 seconds)
-// - Fixed referral system with proper start_param extraction
 // - Fixed task verification system
-// - Changed task creation cost from 6 to 60 Snow per user
 // ============================================================
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
@@ -2531,7 +2532,6 @@ let _atType = 'channel';
 let _submitInFlight = false;
 let _socTab = 'partner';
 
-// UPDATED: Task cost from 6 to 60 Snow per user
 const TASK_SNOW_PER_USER = 60;
 const MIN_TASK_TARGET = 100;
 
@@ -2556,7 +2556,6 @@ async function api(action, data = {}) {
   } finally { _apiInFlight--; }
 }
 
-// FIXED: Notification function - message disappears after 3 seconds
 function showNotif(msg, type = 'i') {
   const el = document.getElementById('notif');
   if (!el) return;
@@ -2581,20 +2580,13 @@ function showNotif(msg, type = 'i') {
   }, 3000);
 }
 
-// FIXED: Load state with proper start_param extraction
+// ✅ FIXED: Use S.startParam directly
 async function loadState() {
   try {
-    let startParam = '';
-    if (S.tg?.initDataUnsafe?.start_param) {
-      startParam = S.tg.initDataUnsafe.start_param;
-    } else if (S.tg?.initDataUnsafe?.startParam) {
-      startParam = S.tg.initDataUnsafe.startParam;
-    } else if (S.startParam) {
-      startParam = S.startParam;
-    }
+    const startParam = S.startParam || '';
     
     const d = await api('getState', { 
-      start_param: startParam || '', 
+      start_param: startParam,
       _initData: S.tg?.initData || '' 
     });
     
@@ -3077,7 +3069,6 @@ function switchSocTab(tab) {
   if (tab === 'community') showFab(); else hideFab();
 }
 
-// FIXED: Task verification with proper membership check
 async function doDbTask(tid, link, type, cat) {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { 
@@ -3582,8 +3573,8 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 const TRANSLATIONS = {
   en: {
     labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '15% commission when friends buy machines!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they buy machines, you get 15% of their purchase in Snow!',
+    friendsTitle: 'Friends & Referrals', refCommission: '15% commission from machine production!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they buy machines, you get 15% of their machine production in Snow (one-time)!',
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
@@ -3605,8 +3596,8 @@ const TRANSLATIONS = {
   },
   ru: {
     labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: '15% комиссии когда друзья покупают машины!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они покупают машины, вы получаете 15% от их покупки в Снеге!',
+    friendsTitle: 'Друзья и Рефералы', refCommission: '15% комиссии от производства машин!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они покупают машины, вы получаете 15% от их производства в Снеге (одноразово)!',
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
