@@ -2148,15 +2148,15 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="friendsTitle">Friends & Referrals</span></div>
   <div class="ref-prog-card">
     <div class="ref-bonus-badge">
-      <span class="rbb-pct">3000</span>
+      <span class="rbb-pct">15%</span>
       <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
-      <span class="rbb-txt" data-i18n="refCommission">Snow bonus when friend deposits!</span>
+      <span class="rbb-txt">💰 <strong style="color: var(--gold);">15% commission</strong> when friends buy machines!<br>Earn Snow from every purchase!</span>
     </div>
     <div class="ref-link-row">
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
       <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
     </div>
-    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they deposit, you get 3000 Snow!</div>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they buy machines, you get 15% of their purchase in Snow!</div>
   </div>
   <div class="hist-box" style="margin-bottom: 10px">
     <div class="hist-hdr" style="justify-content: space-between">
@@ -2374,15 +2374,16 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
         <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)</div>
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards (DOUBLED!)</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends to earn Snow rewards!<br>
+        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards (NEW!)</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases!<br>
+        When your friend buys any mining machine, you get 15% of the TON value converted to Snow!<br><br>
+        <span style="color: var(--ice); font-weight: 800">🎁 Plus Referral Tasks:</span><br>
         <span style="color: var(--gold); font-weight: 800">10 friends:</span> 600 Snow<br>
         <span style="color: var(--gold); font-weight: 800">20 friends:</span> 1,500 Snow<br>
         <span style="color: var(--gold); font-weight: 800">50 friends:</span> 4,000 Snow<br>
         <span style="color: var(--gold); font-weight: 800">100 friends:</span> 10,000 Snow<br>
         <span style="color: var(--gold); font-weight: 800">200 friends:</span> 20,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 50,000 Snow<br>
-        <span style="color: var(--ice); font-weight: 800">➕ Extra: 3000 Snow when friend deposits!</span></div>
+        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 50,000 Snow</div>
       </div>
     </div>
     <div style="height: 12px"></div>
@@ -2460,7 +2461,7 @@ const CFG = {
     2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
     3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   },
-  REF_BONUS_SNOW: 3000,
+  REF_COMMISSION_PERCENT: 15,
   EXCHANGE_FEE_PERCENT: 4,
   WITHDRAW_FEE_PERCENT: 4,
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
@@ -2503,7 +2504,7 @@ const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c390
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false },
+  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2548,7 +2549,7 @@ async function loadState() {
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     
-    if (!S.user.welcomeChestOpened && S.user.snow === 0 && S.user.miningMachines[1] === 0 && S.user.miningMachines[2] === 0 && S.user.miningMachines[3] === 0) {
+    if (!S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine) {
       S.isNewUser = true;
     } else {
       S.isNewUser = false;
@@ -2582,7 +2583,7 @@ async function openWelcomeChestFromModal() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.snow = (S.user.snow || 0) + result.snow;
-    S.user.miningMachines = { ...S.user.miningMachines, 1: (S.user.miningMachines[1] || 0) + 1 };
+    S.user.hasWelcomeMachine = true;
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
     
@@ -2593,7 +2594,7 @@ async function openWelcomeChestFromModal() {
     
     updateUI();
     triggerSnowfall(50);
-    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
+    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Welcome Machine (${result.miningRate} Snow/hour)`, 's');
     spawnSnowParticle();
     showRewardsModal(result.snow, 1, result.miningRate);
   } catch (e) {
@@ -2619,9 +2620,9 @@ function showRewardsModal(snow, machines, rate) {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
           <div style="display: flex; align-items: center; gap: 12px;">
             <i class="fas fa-microchip" style="font-size: 48px; color: var(--ice);"></i>
-            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Mining Machines:</span>
+            <span style="font-size: 18px; font-weight: 600; color: var(--muted);">Welcome Machine:</span>
           </div>
-          <span style="font-size: 32px; font-weight: 800; color: var(--snow);">+${machines}</span>
+          <span style="font-size: 32px; font-weight: 800; color: var(--snow);">+1</span>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div style="display: flex; align-items: center; gap: 12px;">
@@ -2661,14 +2662,14 @@ async function openWelcomeChest() {
     const result = await api('openWelcomeChest', {});
     S.user.welcomeChestOpened = true;
     S.user.snow = (S.user.snow || 0) + result.snow;
-    S.user.miningMachines = { ...S.user.miningMachines, 1: (S.user.miningMachines[1] || 0) + 1 };
+    S.user.hasWelcomeMachine = true;
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
     
     document.getElementById('welcomeChest').style.display = 'none';
     updateUI();
     triggerSnowfall(50);
-    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Mining Machine (${result.miningRate} Snow/hour)`, 's');
+    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Welcome Machine (${result.miningRate} Snow/hour)`, 's');
     spawnSnowParticle();
     showRewardsModal(result.snow, 1, result.miningRate);
   } catch (e) {
@@ -3260,9 +3261,10 @@ function updateRefUI() {
           <div class="rli-info">
             <div class="rli-name">${esc(r.name || 'Friend')}</div>
             <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
-            ${r.depositBonusPaid ? '<div style="font-size: 10px; color: var(--gold);">✅ Bonus paid (3000 Snow)</div>' : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for deposit</div>'}
+            ${r.totalSpentTon ? `<div style="font-size: 10px; color: var(--gold);">💰 Spent: ${r.totalSpentTon} TON</div>` : ''}
+            ${r.totalCommissionEarned ? `<div style="font-size: 10px; color: var(--ice);">🎁 Commission: +${fmt(r.totalCommissionEarned)} <img src="${SNOW_IMG}" style="width:12px;height:12px;object-fit:contain;vertical-align:middle"></div>` : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for purchases</div>'}
           </div>
-          <div class="rli-earn">${r.earned ? `+${fmt(r.earned)} <img src="${SNOW_IMG}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">` : '0'}</div>
+          <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
         </div>`).join('');
     }
   }
@@ -3477,8 +3479,8 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 const TRANSLATIONS = {
   en: {
     labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '3000 Snow bonus when friend deposits!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they deposit, you get 3000 Snow!',
+    friendsTitle: 'Friends & Referrals', refCommission: '15% commission when friends buy machines!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they buy machines, you get 15% of their purchase in Snow!',
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
@@ -3500,8 +3502,8 @@ const TRANSLATIONS = {
   },
   ru: {
     labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: 'Бонус 3000 Снега когда друг делает депозит!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они сделают депозит, вы получите 3000 Снега!',
+    friendsTitle: 'Друзья и Рефералы', refCommission: '15% комиссии когда друзья покупают машины!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они покупают машины, вы получаете 15% от их покупки в Снеге!',
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
@@ -3641,7 +3643,6 @@ async function init() {
   }
   ldHide();
   
-  // Show welcome modal AFTER loading completes
   if (S.isNewUser) {
     showWelcomeModal();
   }
