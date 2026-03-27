@@ -2454,9 +2454,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v15.0
-// COMPLETE FIX: Referral system fully functional
-// FIXED: Start parameter extraction and transmission
+// SANTA SNOW - FRONTEND v15.0 - COMPLETE REFERRAL SYSTEM FIXED
 // ============================================================
 
 const CFG = {
@@ -2513,7 +2511,7 @@ const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c390
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
+  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false, referredBy: null },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2578,17 +2576,9 @@ function showNotif(msg, type = 'i') {
   }, 3000);
 }
 
-// ✅ FIXED: Improved loadState with proper start_param handling
 async function loadState() {
   try {
-    // Get the start parameter from various sources
-    let startParam = S.startParam || '';
-    
-    // If still empty, try to get from URL if we're in web app mode
-    if (!startParam && S.tg?.initDataUnsafe?.start_param) {
-      startParam = String(S.tg.initDataUnsafe.start_param).replace(/\D/g, '');
-    }
-    
+    const startParam = S.startParam || '';
     console.log('[loadState] Sending start_param:', startParam);
     
     const d = await api('getState', { 
@@ -2623,6 +2613,12 @@ async function loadState() {
     }
     
     updateRefUI();
+    
+    console.log('[loadState] Referral info:', {
+      referredBy: S.user.referredBy,
+      referralCount: S.user.referralCount,
+      referralsCount: S.refs.length
+    });
     
   } catch (e) { 
     console.warn('loadState:', e.message);
@@ -3705,15 +3701,14 @@ async function init() {
       }
     }
     
-    // ✅ IMPROVED: Better start_param extraction
+    // Extract start_param
     let startParam = '';
     if (S.tg.initDataUnsafe?.start_param) {
       startParam = String(S.tg.initDataUnsafe.start_param);
     } else if (S.tg.initDataUnsafe?.startParam) {
       startParam = String(S.tg.initDataUnsafe.startParam);
     }
-    // Remove any non-digit characters (just in case)
-    S.startParam = startParam.replace(/\D/g, '');
+    S.startParam = startParam;
     
     console.log('[init] Extracted startParam:', S.startParam);
   }
