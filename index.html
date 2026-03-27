@@ -185,6 +185,7 @@ body::after {
 .notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; background: rgba(66, 165, 245, 0.1); }
 .notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; background: rgba(255, 193, 7, 0.1); }
 
+/* Machine Shop Styles */
 .machine-shop {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
@@ -320,6 +321,122 @@ body::after {
   margin-left: 8px;
 }
 
+/* Referral Section Styles */
+.ref-code-card {
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.15), rgba(0, 0, 0, 0.4));
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.ref-code-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ice);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ref-code-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ref-code-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 14px;
+  padding: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.ref-code-input:focus {
+  outline: none;
+  border-color: var(--ice);
+}
+
+.ref-code-btn {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 14px;
+  padding: 0 20px;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ref-code-btn:active {
+  transform: scale(0.95);
+}
+
+.ref-code-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ref-badge {
+  background: rgba(77, 208, 225, 0.2);
+  border-radius: 20px;
+  padding: 8px 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.ref-badge-text {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ref-badge-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.ref-bonus-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(77, 208, 225, 0.08);
+  border: 1px solid rgba(77, 208, 225, 0.18);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 11px;
+  animation: badgePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { border-color: rgba(77, 208, 225, 0.18); }
+  50% { border-color: rgba(77, 208, 225, 0.5); }
+}
+
+.rbb-pct {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--ice);
+  line-height: 1;
+}
+
+.rbb-txt {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Other existing styles remain */
 .swap-input-area {
   display: flex;
   align-items: center;
@@ -1480,92 +1597,6 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
   border: 1px solid rgba(239, 83, 80, 0.25);
 }
 
-.ref-prog-card {
-  background: linear-gradient(145deg, rgba(77, 208, 225, 0.1), var(--card));
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 14px;
-  margin-bottom: 10px;
-  backdrop-filter: blur(8px);
-}
-
-.ref-bonus-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: rgba(77, 208, 225, 0.08);
-  border: 1px solid rgba(77, 208, 225, 0.18);
-  border-radius: 12px;
-  padding: 12px;
-  margin-bottom: 11px;
-  animation: badgePulse 2.5s ease-in-out infinite;
-}
-
-@keyframes badgePulse {
-  0%, 100% { border-color: rgba(77, 208, 225, 0.18); }
-  50% { border-color: rgba(77, 208, 225, 0.5); }
-}
-
-.rbb-pct {
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--ice);
-  line-height: 1;
-}
-
-.rbb-txt {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.ref-link-row {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.ref-inp {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 8px 10px;
-  color: var(--text);
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.btn-copy {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  border: none;
-  border-radius: 10px;
-  padding: 8px 13px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.1s;
-}
-
-.btn-copy:active { transform: scale(0.96); }
-
-.ref-count-badge {
-  background: rgba(0, 242, 122, 0.12);
-  border: 1px solid rgba(0, 242, 122, 0.25);
-  border-radius: 20px;
-  padding: 3px 11px;
-  font-size: 11px;
-  font-weight: 800;
-  color: #00F27A;
-}
-
 .ref-list-item {
   display: flex;
   align-items: center;
@@ -2147,22 +2178,48 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <div class="sec" id="sectionFriends">
   <div class="sec-title"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 32px; height: 32px; object-fit: contain"> <span data-i18n="friendsTitle">Friends & Referrals</span></div>
-  <div class="ref-prog-card">
+  
+  <!-- NEW: Referral Code Section -->
+  <div class="ref-code-card">
+    <div class="ref-code-title">
+      <i class="fas fa-gift"></i> <span data-i18n="yourCode">Your Referral Code</span>
+    </div>
+    <div class="ref-code-row">
+      <input class="ref-code-input" id="myReferralCode" readonly value="Loading...">
+      <button class="ref-code-btn" onclick="copyMyCode()"><i class="fas fa-copy"></i></button>
+    </div>
+    <div class="ref-badge">
+      <div class="ref-badge-text" data-i18n="totalFriends">Total Friends Referred</div>
+      <div class="ref-badge-value" id="totalRefsDisp">0</div>
+    </div>
+  </div>
+  
+  <!-- NEW: Use Referral Code Section -->
+  <div class="ref-code-card" id="useCodeSection" style="border-color: rgba(255, 217, 102, 0.3);">
+    <div class="ref-code-title" style="color: var(--gold);">
+      <i class="fas fa-code"></i> <span data-i18n="useCode">Use Friend's Code</span>
+    </div>
+    <div class="ref-code-row">
+      <input class="ref-code-input" id="friendReferralCode" placeholder="Enter friend's code...">
+      <button class="ref-code-btn" id="useCodeBtn" onclick="useReferralCode()" style="background: linear-gradient(135deg, #FFD966, #FFB347); color: #2C1A00;"><i class="fas fa-check"></i> Use</button>
+    </div>
+    <div class="ref-bonus-badge" style="margin-top: 10px;">
+      <span class="rbb-pct">🎁</span>
+      <span class="rbb-txt"><strong style="color: var(--gold);">Get 1000 Snow + 1000 Snow for your friend!</strong><br>Plus 3000 Snow when they buy any machine!</span>
+    </div>
+  </div>
+  
+  <div class="ref-prog-card" style="margin-top: 10px;">
     <div class="ref-bonus-badge">
       <span class="rbb-pct">15%</span>
       <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
       <span class="rbb-txt">💰 <strong style="color: var(--gold);">15% commission</strong> from friends' machine production!<br>Earn Snow from each machine they buy (one-time)!</span>
     </div>
-    <div class="ref-link-row">
-      <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
-      <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
-    </div>
-    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they buy machines, you get 15% of their machine production in Snow (one-time)!</div>
   </div>
+  
   <div class="hist-box" style="margin-bottom: 10px">
     <div class="hist-hdr" style="justify-content: space-between">
       <span><i class="fas fa-history"></i> <span data-i18n="recentRefs">Recent Referrals</span></span>
-      <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
     </div>
     <div id="recentRefsList"><div class="hist-empty" data-i18n="noReferrals">No referrals yet</div></div>
   </div>
@@ -2372,20 +2429,7 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
       </div>
       <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
         <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px" data-i18n="helpIdeaTitle">💡 Main Concept</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)<br><br>👥 Referral Rewards (NEW!)<br>⬅ Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases (one-time)!<br>⬅ Complete referral tasks for bonus Snow!</div>
-      </div>
-      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 16px; padding: 13px">
-        <div style="font-size: 14px; font-weight: 800; color: var(--ice); margin-bottom: 8px; display: flex; align-items: center; gap: 6px">👥 Referral Rewards (NEW!)</div>
-        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.8">Invite friends and earn <strong style="color: var(--gold);">15% commission</strong> from their machine purchases (one-time)!<br>
-        When your friend buys any mining machine, you get 15% of the machine's production rate converted to Snow!<br>
-        Example: Friend buys Basic Machine (300 Snow/hour) → You get 45 Snow (one-time)!<br><br>
-        <span style="color: var(--ice); font-weight: 800">🎁 Plus Referral Tasks:</span><br>
-        <span style="color: var(--gold); font-weight: 800">10 friends:</span> 600 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">20 friends:</span> 1,500 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">50 friends:</span> 4,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">100 friends:</span> 10,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">200 friends:</span> 20,000 Snow<br>
-        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 50,000 Snow</div>
+        <div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)<br><br>👥 Referral Rewards (NEW!)<br>⬅ Share your code with friends!<br>⬅ When a friend uses your code: BOTH get 1000 Snow!<br>⬅ When they buy any machine: YOU get 3000 Snow!<br>⬅ Plus 15% commission from their machine production!</div>
       </div>
     </div>
     <div style="height: 12px"></div>
@@ -2454,11 +2498,9 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v14.2
-// FIXED: Referral system with proper start_param extraction
-// FIXED: Start parameter handling in loadState
-// FIXED: Referral link format to open Web App directly
-// ADDED: Enhanced console logs for referral tracking
+// SANTA SNOW - FRONTEND v15.0
+// NEW REFERRAL SYSTEM: Code-based referral with rewards
+// FIXED: Notification timers (auto-hide after 3 seconds)
 // ============================================================
 
 const CFG = {
@@ -2472,12 +2514,12 @@ const CFG = {
     2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
     3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   },
-  REF_COMMISSION_PERCENT: 15,
+  REFERRAL_REWARD_INVITER: 1000,
+  REFERRAL_REWARD_INVITED: 1000,
+  REFERRAL_PURCHASE_REWARD: 3000,
   EXCHANGE_FEE_PERCENT: 4,
-  WITHDRAW_FEE_PERCENT: 4,
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
-  // ✅ FIXED: Correct Web App link format
-  BOT_APP_LINK: `https://t.me/SANTASNOWBOT_BOT/santasnow`,
+  BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow',
 };
 
 const REF_TASKS = [
@@ -2511,30 +2553,26 @@ const STORAGE_LVS = {
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
-const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
+  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false, referralCode: '', hasUsedReferralCode: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
   tg: null, tonUI: null, wallet: null, depCheckInt: null,
   _collectCooldown: false,
   isNewUser: false,
+  _notificationTimer: null,
 };
 
 let _lastClickTime = 0;
 let _apiInFlight = 0;
-let _nt = null;
 let _taskInFlight = new Set();
 let _atType = 'channel';
 let _submitInFlight = false;
 let _socTab = 'partner';
-
-const TASK_SNOW_PER_USER = 60;
-const MIN_TASK_TARGET = 100;
 
 function esc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -2557,38 +2595,41 @@ async function api(action, data = {}) {
   } finally { _apiInFlight--; }
 }
 
+// FIXED: Notification with guaranteed 3-second auto-hide
 function showNotif(msg, type = 'i') {
   const el = document.getElementById('notif');
   if (!el) return;
   
-  if (_nt) {
-    clearTimeout(_nt);
-    _nt = null;
+  // Clear existing timer
+  if (S._notificationTimer) {
+    clearTimeout(S._notificationTimer);
+    S._notificationTimer = null;
   }
   
+  // Remove show class
   el.classList.remove('show');
+  
+  // Update content
   el.innerHTML = msg;
   el.className = '';
   el.classList.add('notif', type);
   
-  setTimeout(() => {
-    el.classList.add('show');
-  }, 10);
+  // Force reflow
+  void el.offsetHeight;
   
-  _nt = setTimeout(() => {
+  // Show notification
+  el.classList.add('show');
+  
+  // Set timer to hide after exactly 3 seconds
+  S._notificationTimer = setTimeout(() => {
     el.classList.remove('show');
-    _nt = null;
+    S._notificationTimer = null;
   }, 3000);
 }
 
-// ✅ FIXED: Improved loadState with proper start_param handling
 async function loadState() {
   try {
-    const startParam = S.startParam || '';
-    console.log('[loadState] Sending start_param:', startParam);
-    
     const d = await api('getState', { 
-      start_param: startParam,
       _initData: S.tg?.initData || '' 
     });
     
@@ -2598,12 +2639,6 @@ async function loadState() {
     S.wdHist = d.wdHistory || [];
     S.doneTasks = d.completedTasks || [];
     S.tasks = d.tasks || { partner: [], community: [] };
-    
-    // ✅ Check if referral was registered successfully
-    if (startParam && d.user && d.user.referredBy === startParam) {
-      console.log('[SUCCESS] Referral registered! User referred by:', startParam);
-      showNotif('🎉 Welcome! You were invited by a friend! 🎉', 's');
-    }
     
     if (d.user && d.user.storageAccrued !== undefined) {
       S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
@@ -2631,6 +2666,107 @@ async function loadState() {
     showNotif('Failed to load data: ' + e.message, 'e');
   }
   updateUI();
+}
+
+function updateUI() {
+  const u = S.user;
+  document.getElementById('tbSnow').textContent = fmt(u.snow || 0);
+  document.getElementById('tbTON').textContent = fmtTon(u.tonBalance || 0);
+  const rateDay = Math.round((u.miningRate || 0) * 24);
+  document.getElementById('heroRateDay').textContent = fmt(rateDay);
+  document.getElementById('wdTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
+  updateSwapBals();
+  updateRefUI();
+  renderExchHist();
+  renderWdHist();
+  renderTasks();
+  
+  // Update referral code display
+  if (u.referralCode) {
+    const codeInput = document.getElementById('myReferralCode');
+    if (codeInput) codeInput.value = u.referralCode;
+  }
+  
+  // Hide use code section if already used
+  const useCodeSection = document.getElementById('useCodeSection');
+  if (useCodeSection && S.user.hasUsedReferralCode) {
+    useCodeSection.style.display = 'none';
+  } else if (useCodeSection) {
+    useCodeSection.style.display = 'block';
+  }
+}
+
+function updateRefUI() {
+  if (!S.userId) return;
+  
+  const cntEl = document.getElementById('totalRefsDisp');
+  if (cntEl) cntEl.textContent = `${S.refs.length}`;
+  
+  const listEl = document.getElementById('recentRefsList');
+  if (listEl) {
+    if (!S.refs.length) {
+      listEl.innerHTML = `<div class="hist-empty">No referrals yet</div>`;
+    } else {
+      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
+        <div class="ref-list-item">
+          <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">` : '🎅'}</div>
+          <div class="rli-info">
+            <div class="rli-name">${esc(r.name || 'Friend')}</div>
+            <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
+          </div>
+        </div>`).join('');
+    }
+  }
+}
+
+function copyMyCode() {
+  const code = document.getElementById('myReferralCode').value;
+  if (!code || code === 'Loading...') {
+    showNotif('Loading code...', 'w');
+    return;
+  }
+  navigator.clipboard.writeText(code).then(() => {
+    showNotif('✅ Code copied! Share with friends!', 's');
+  }).catch(() => {
+    document.getElementById('myReferralCode').select();
+    document.execCommand('copy');
+    showNotif('✅ Code copied! Share with friends!', 's');
+  });
+}
+
+async function useReferralCode() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  const code = document.getElementById('friendReferralCode').value.trim();
+  if (!code) {
+    showNotif('Please enter a referral code', 'e');
+    return;
+  }
+  
+  if (code === S.user.referralCode) {
+    showNotif('You cannot use your own code!', 'e');
+    return;
+  }
+  
+  try {
+    const result = await api('useReferralCode', { code });
+    S.user.snow = result.snow;
+    S.user.hasUsedReferralCode = true;
+    updateUI();
+    triggerSnowfall(30);
+    showNotif(`🎉 ${result.message}`, 's');
+    spawnSnowParticle();
+    
+    // Hide the use code section
+    const useCodeSection = document.getElementById('useCodeSection');
+    if (useCodeSection) useCodeSection.style.display = 'none';
+    
+    document.getElementById('friendReferralCode').value = '';
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Invalid referral code'}`, 'e');
+  }
 }
 
 function showWelcomeModal() {
@@ -2661,6 +2797,30 @@ async function openWelcomeChestFromModal() {
     const chestEl = document.getElementById('welcomeChest');
     if (chestEl) chestEl.style.display = 'none';
     
+    updateUI();
+    triggerSnowfall(50);
+    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Welcome Machine (${result.miningRate} Snow/hour)`, 's');
+    spawnSnowParticle();
+    showRewardsModal(result.snow, 1, result.miningRate);
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
+  }
+}
+
+async function openWelcomeChest() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  
+  try {
+    const result = await api('openWelcomeChest', {});
+    S.user.welcomeChestOpened = true;
+    S.user.snow = (S.user.snow || 0) + result.snow;
+    S.user.hasWelcomeMachine = true;
+    S.user.miningRate = result.miningRate;
+    S.user.miningLevel = result.miningLevel;
+    
+    document.getElementById('welcomeChest').style.display = 'none';
     updateUI();
     triggerSnowfall(50);
     showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Welcome Machine (${result.miningRate} Snow/hour)`, 's');
@@ -2720,30 +2880,6 @@ function showRewardsModal(snow, machines, rate) {
   }
   openModal('rewardsModal');
   setTimeout(() => closeModal('rewardsModal'), 6000);
-}
-
-async function openWelcomeChest() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
-  _lastClickTime = now;
-  
-  try {
-    const result = await api('openWelcomeChest', {});
-    S.user.welcomeChestOpened = true;
-    S.user.snow = (S.user.snow || 0) + result.snow;
-    S.user.hasWelcomeMachine = true;
-    S.user.miningRate = result.miningRate;
-    S.user.miningLevel = result.miningLevel;
-    
-    document.getElementById('welcomeChest').style.display = 'none';
-    updateUI();
-    triggerSnowfall(50);
-    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Welcome Machine (${result.miningRate} Snow/hour)`, 's');
-    spawnSnowParticle();
-    showRewardsModal(result.snow, 1, result.miningRate);
-  } catch (e) {
-    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
-  }
 }
 
 function openMachineShop() {
@@ -2808,28 +2944,6 @@ async function purchaseMachine(machineType) {
   } catch (e) {
     showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e');
   }
-}
-
-function updateUI() {
-  const u = S.user;
-  document.getElementById('tbSnow').textContent = fmt(u.snow || 0);
-  document.getElementById('tbTON').textContent = fmtTon(u.tonBalance || 0);
-  const rateDay = Math.round((u.miningRate || 0) * 24);
-  document.getElementById('heroRateDay').textContent = fmt(rateDay);
-  document.getElementById('wdTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
-  updateSwapBals();
-  updateRefUI();
-  renderExchHist();
-  renderWdHist();
-  renderTasks();
-}
-
-function fmtTon(n) {
-  if (n === undefined || n === null) return '0';
-  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
-  if (n >= 1) return n.toFixed(2);
-  if (n > 0) return n.toFixed(4);
-  return n.toString();
 }
 
 function startStorage() {
@@ -2985,7 +3099,7 @@ function renderTasks() {
     refTasksHtml += `
       <div class="task-item">
         <div class="ticon">
-          <img src="${REF_TASK_ICON}" style="width: 52px; height: 52px; object-fit: contain; border-radius: 14px;">
+          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 52px; height: 52px; object-fit: contain; border-radius: 14px;">
         </div>
         <div class="tinfo">
           <div class="tname" style="font-size: 14px; font-weight: 800;">${task.name}</div>
@@ -3152,7 +3266,7 @@ function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCo
 
 function updAtCost() {
   const tgt = parseInt(document.getElementById('atTarget').value) || 0;
-  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
+  document.getElementById('atCostPreview').textContent = fmt(tgt * 60) + ' Snow';
 }
 
 async function submitAddTask() {
@@ -3176,13 +3290,13 @@ async function submitAddTask() {
     st.textContent = '❌ Invalid Telegram link'; 
     return; 
   }
-  if (target < MIN_TASK_TARGET) { 
+  if (target < 100) { 
     st.style.color = '#ff8a80'; 
-    st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; 
+    st.textContent = `❌ Min 100 users`; 
     return; 
   }
   
-  const cost = target * TASK_SNOW_PER_USER;
+  const cost = target * 60;
   if ((S.user.snow || 0) < cost) { 
     st.style.color = '#ff8a80'; 
     st.textContent = `❌ Need ${fmt(cost)} Snow (have ${fmt(S.user.snow || 0)})`; 
@@ -3224,7 +3338,7 @@ function updSwapSnowToTon() {
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
   const fee = Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
   const snowAfterFee = snow - fee;
-  const ton = snowAfterFee * CFG.SNOW_TO_TON;
+  const ton = snowAfterFee * 0.00001;
   document.getElementById('swapTonOut').textContent = ton.toFixed(6);
   document.getElementById('feeAmountDisplay').textContent = fmt(fee);
 }
@@ -3246,7 +3360,7 @@ async function swapSnowToTon() {
     S.user.tonBalance = result.tonBalance;
     const fee = result.fee || Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
     const snowAfterFee = snow - fee;
-    const tonReceived = snowAfterFee * CFG.SNOW_TO_TON;
+    const tonReceived = snowAfterFee * 0.00001;
     S.exchHist.unshift({ snow: snow, fee: fee, ton: tonReceived, dir: 'S→T', ts: Date.now() });
     document.getElementById('swapSnowAmt').value = '';
     document.getElementById('swapTonOut').textContent = '0';
@@ -3367,54 +3481,10 @@ function goToWalletDeposit() {
   document.getElementById('depositUserIdDisplay').textContent = S.userId || '???';
 }
 
-// ✅ FIXED: Proper referral link creation - opens Web App directly
-function updateRefUI() {
-  if (!S.userId) {
-    console.warn('[updateRefUI] No userId available');
-    return;
-  }
-  
-  // ✅ CORRECT: Link that opens the Web App directly with startapp parameter
-  const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
-  const refInput = document.getElementById('refLinkInp');
-  if (refInput) refInput.value = link;
-  
-  console.log('[updateRefUI] Referral link created:', link);
-  
-  document.getElementById('depositUserIdDisplay').textContent = esc(S.userId || '...');
-  const cntEl = document.getElementById('totalRefsDisp');
-  if (cntEl) cntEl.textContent = `${S.refs.length} Friends`;
-  const listEl = document.getElementById('recentRefsList');
-  if (listEl) {
-    if (!S.refs.length) {
-      listEl.innerHTML = `<div class="hist-empty">No referrals yet</div>`;
-    } else {
-      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
-        <div class="ref-list-item">
-          <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">` : '🎅'}</div>
-          <div class="rli-info">
-            <div class="rli-name">${esc(r.name || 'Friend')}</div>
-            <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
-            ${r.totalSpentTon ? `<div style="font-size: 10px; color: var(--gold);">💰 Spent: ${r.totalSpentTon} TON</div>` : ''}
-            ${r.totalCommissionEarned ? `<div style="font-size: 10px; color: var(--ice);">🎁 Commission: +${fmt(r.totalCommissionEarned)} <img src="${SNOW_IMG}" style="width:12px;height:12px;object-fit:contain;vertical-align:middle"></div>` : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for purchases</div>'}
-          </div>
-          <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
-        </div>`).join('');
-    }
-  }
-}
-
-function copyRefLink() {
-  const v = document.getElementById('refLinkInp').value;
-  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
-}
-
 function setDepAmt(v) { document.getElementById('depositAmountInput').value = Math.max(1, v); updDepPreview(); }
 function updDepPreview() {
   const ton = parseFloat(document.getElementById('depositAmountInput').value) || 0;
   const snow = Math.floor(ton * CFG.TON_TO_SNOW);
-  const el = document.getElementById('depSnowPreview');
-  if (el) el.innerHTML = `<img src="${SNOW_IMG}" style="width:20px;height:20px;object-fit:contain"> ${fmt(snow)} Snow`;
 }
 
 async function initTON() {
@@ -3525,6 +3595,14 @@ function fmt(n) {
   return n.toString();
 }
 
+function fmtTon(n) {
+  if (n === undefined || n === null) return '0';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  if (n >= 1) return n.toFixed(2);
+  if (n > 0) return n.toFixed(4);
+  return n.toString();
+}
+
 function spawnSnowParticle() {
   const p = document.createElement('img');
   p.src = SNOW_IMG;
@@ -3565,7 +3643,7 @@ function ldHide() {
 function preloadImages() {
   const urls = [
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
-    SNOW_IMG, REF_TASK_ICON,
+    SNOW_IMG,
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
     'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
@@ -3592,9 +3670,8 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 const TRANSLATIONS = {
   en: {
     labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '15% commission from machine production!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they buy machines, you get 15% of their machine production in Snow (one-time)!',
-    recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
+    friendsTitle: 'Friends & Referrals', yourCode: 'Your Referral Code', useCode: 'Use Friend\'s Code',
+    totalFriends: 'Total Friends Referred', recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
     amountTON: 'Amount (TON)', depositBtn: 'Deposit TON',
@@ -3604,7 +3681,7 @@ const TRANSLATIONS = {
     exchangeNow: 'Exchange', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
     helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
     helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the chest to receive:<br><span style="color:#fff;font-weight:800">• 1000 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (10 Snow/hour)</span> — free mining power starts immediately',
-    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 Machine Types:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)',
+    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 Machine Types:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)<br><br>👥 Referral Rewards!<br>⬅ Share your code with friends!<br>⬅ When a friend uses your code: BOTH get 1000 Snow!<br>⬅ When they buy any machine: YOU get 3000 Snow!<br>⬅ Plus 15% commission from their machine production!',
     addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--ice)">Target Users × 60 Snow</strong>',
     taskCostNote: 'Min target: 100 users | 100 users = 6,000 Snow', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
     taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
@@ -3612,12 +3689,12 @@ const TRANSLATIONS = {
     taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
     upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
     floatAdd: 'Add Task', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
+    maxBtn: 'MAX',
   },
   ru: {
     labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: '15% комиссии от производства машин!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они покупают машины, вы получаете 15% от их производства в Снеге (одноразово)!',
-    recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
+    friendsTitle: 'Друзья и Рефералы', yourCode: 'Ваш реферальный код', useCode: 'Использовать код друга',
+    totalFriends: 'Всего приглашено друзей', recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
     amountTON: 'Сумма (TON)', depositBtn: 'Внести TON',
@@ -3627,7 +3704,7 @@ const TRANSLATIONS = {
     exchangeNow: 'Обменять', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
     helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
     helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 1000 Снега</span> — основная валюта<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (10 Снег/час)</span> — бесплатная мощность майнинга начинается сразу',
-    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 типа машин:<br>&nbsp;&nbsp;&nbsp;🔧 Базовая (1 TON): 300 Снег/час<br>&nbsp;&nbsp;&nbsp;⚙️ Продвинутая (2 TON): 650 Снег/час<br>&nbsp;&nbsp;&nbsp;💎 Элитная (3 TON): 1000 Снег/час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (комиссия 4%)<br>⬅ Выводите TON на ваш кошелек 💎<br>📊 1 TON = 100,000 Снега (1,000 Снега = 0.01 TON)',
+    helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 типа машин:<br>&nbsp;&nbsp;&nbsp;🔧 Базовая (1 TON): 300 Снег/час<br>&nbsp;&nbsp;&nbsp;⚙️ Продвинутая (2 TON): 650 Снег/час<br>&nbsp;&nbsp;&nbsp;💎 Элитная (3 TON): 1000 Снег/час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (комиссия 4%)<br>⬅ Выводите TON на ваш кошелек 💎<br>📊 1 TON = 100,000 Снега (1,000 Снега = 0.01 TON)<br><br>👥 Реферальные награды!<br>⬅ Поделитесь своим кодом с друзьями!<br>⬅ Когда друг использует ваш код: ОБА получают 1000 Снега!<br>⬅ Когда он покупает любую машину: ВЫ получаете 3000 Снега!<br>⬅ Плюс 15% комиссии от производства их машин!',
     addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--ice)">Целевые пользователи × 60 Снега</strong>',
     taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
     taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
@@ -3635,6 +3712,7 @@ const TRANSLATIONS = {
     taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
     upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети',
     floatAdd: 'Добавить задачу', Home: 'Главная', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
+    maxBtn: 'МАКС',
   },
 };
 
@@ -3710,18 +3788,6 @@ async function init() {
         if (av) av.innerHTML = `<img src="${esc(u.photo_url)}" onerror="this.parentElement.innerHTML='<div class=ap>🎅</div>'">`;
       }
     }
-    
-    // ✅ IMPROVED: Better start_param extraction
-    let startParam = '';
-    if (S.tg.initDataUnsafe?.start_param) {
-      startParam = String(S.tg.initDataUnsafe.start_param);
-    } else if (S.tg.initDataUnsafe?.startParam) {
-      startParam = String(S.tg.initDataUnsafe.startParam);
-    }
-    // Remove any non-digit characters (just in case)
-    S.startParam = startParam.replace(/\D/g, '');
-    
-    console.log('[init] Extracted startParam:', S.startParam);
   }
   await ldAnimateTo(10, 'Connecting to Telegram...', 700);
   await new Promise(r => setTimeout(r, 400));
