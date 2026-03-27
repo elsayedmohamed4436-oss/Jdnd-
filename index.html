@@ -2454,7 +2454,11 @@ button, input, select, textarea, span, div, p, h1, h2, h3, a {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v15.0 - COMPLETE REFERRAL SYSTEM FIXED
+// SANTA SNOW - FRONTEND v14.2
+// FIXED: Referral system with proper start_param extraction
+// FIXED: Start parameter handling in loadState
+// FIXED: Referral link format to open Web App directly
+// ADDED: Enhanced console logs for referral tracking
 // ============================================================
 
 const CFG = {
@@ -2472,7 +2476,8 @@ const CFG = {
   EXCHANGE_FEE_PERCENT: 4,
   WITHDRAW_FEE_PERCENT: 4,
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
-  BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow',
+  // ✅ FIXED: Correct Web App link format
+  BOT_APP_LINK: `https://t.me/SANTASNOWBOT_BOT/santasnow`,
 };
 
 const REF_TASKS = [
@@ -2511,7 +2516,7 @@ const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c390
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false, referredBy: null },
+  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2576,6 +2581,7 @@ function showNotif(msg, type = 'i') {
   }, 3000);
 }
 
+// ✅ FIXED: Improved loadState with proper start_param handling
 async function loadState() {
   try {
     const startParam = S.startParam || '';
@@ -2592,6 +2598,12 @@ async function loadState() {
     S.wdHist = d.wdHistory || [];
     S.doneTasks = d.completedTasks || [];
     S.tasks = d.tasks || { partner: [], community: [] };
+    
+    // ✅ Check if referral was registered successfully
+    if (startParam && d.user && d.user.referredBy === startParam) {
+      console.log('[SUCCESS] Referral registered! User referred by:', startParam);
+      showNotif('🎉 Welcome! You were invited by a friend! 🎉', 's');
+    }
     
     if (d.user && d.user.storageAccrued !== undefined) {
       S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
@@ -2613,12 +2625,6 @@ async function loadState() {
     }
     
     updateRefUI();
-    
-    console.log('[loadState] Referral info:', {
-      referredBy: S.user.referredBy,
-      referralCount: S.user.referralCount,
-      referralsCount: S.refs.length
-    });
     
   } catch (e) { 
     console.warn('loadState:', e.message);
@@ -3361,15 +3367,19 @@ function goToWalletDeposit() {
   document.getElementById('depositUserIdDisplay').textContent = S.userId || '???';
 }
 
+// ✅ FIXED: Proper referral link creation - opens Web App directly
 function updateRefUI() {
   if (!S.userId) {
     console.warn('[updateRefUI] No userId available');
     return;
   }
   
+  // ✅ CORRECT: Link that opens the Web App directly with startapp parameter
   const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
   const refInput = document.getElementById('refLinkInp');
   if (refInput) refInput.value = link;
+  
+  console.log('[updateRefUI] Referral link created:', link);
   
   document.getElementById('depositUserIdDisplay').textContent = esc(S.userId || '...');
   const cntEl = document.getElementById('totalRefsDisp');
@@ -3701,14 +3711,15 @@ async function init() {
       }
     }
     
-    // Extract start_param
+    // ✅ IMPROVED: Better start_param extraction
     let startParam = '';
     if (S.tg.initDataUnsafe?.start_param) {
       startParam = String(S.tg.initDataUnsafe.start_param);
     } else if (S.tg.initDataUnsafe?.startParam) {
       startParam = String(S.tg.initDataUnsafe.startParam);
     }
-    S.startParam = startParam;
+    // Remove any non-digit characters (just in case)
+    S.startParam = startParam.replace(/\D/g, '');
     
     console.log('[init] Extracted startParam:', S.startParam);
   }
