@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -79,7 +79,7 @@ body::after {
   z-index: -1;
 }
 
-/* ========== LOADING SCREEN WITH NEW BACKGROUND ========== */
+/* ========== LOADING SCREEN ========== */
 #loadingScreen {
   position: fixed;
   inset: 0;
@@ -113,7 +113,7 @@ body::after {
 }
 
 .ld-title {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   color: #fff;
   letter-spacing: 0.5px;
@@ -197,7 +197,7 @@ body::after {
   border-radius: 20px;
 }
 
-/* ========== WELCOME MODAL WITH CHEST ANIMATION ========== */
+/* ========== WELCOME MODAL ========== */
 .welcome-modal {
   position: fixed;
   top: 0;
@@ -256,7 +256,6 @@ body::after {
   75% { transform: rotate(-8deg); }
 }
 
-/* Chest opening animation */
 .chest-opening {
   animation: chestOpen 0.5s ease-out forwards !important;
 }
@@ -267,7 +266,6 @@ body::after {
   100% { transform: scale(0) rotate(180deg); opacity: 0; }
 }
 
-/* Rewards popup animation */
 .rewards-popup {
   animation: rewardsFloat 0.5s ease-out;
 }
@@ -277,49 +275,56 @@ body::after {
   100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-.welcome-modal-title {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--ice);
-  margin-bottom: 15px;
-}
-
 .welcome-open-btn {
   background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
   border-radius: 50px;
-  padding: 14px 35px;
+  padding: 14px 28px;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
-  margin-top: 15px;
   cursor: pointer;
-  transition: transform 0.2s;
-  box-shadow: 0 0 20px var(--ice-glow);
+  margin-top: 10px;
+  transition: all 0.2s;
+  box-shadow: 0 0 20px rgba(77, 208, 225, 0.5);
 }
 
 .welcome-open-btn:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
 }
 
-/* ========== TOP BAR MODERN DESIGN (UPDATED) ========== */
+.welcome-modal-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ice);
+  margin-bottom: 10px;
+}
+
+/* ========== TOP BAR MODERN DESIGN ========== */
 .topbar-main {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   padding: 12px 16px;
-  background: rgba(10, 20, 35, 0.8);
-  backdrop-filter: blur(15px);
+  background: linear-gradient(135deg, rgba(10, 20, 35, 0.95), rgba(20, 35, 55, 0.95));
+  backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(77, 208, 225, 0.4);
-  box-shadow: none;
+  border-bottom: 1px solid rgba(77, 208, 225, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .uavatar {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--ice), #0097B2);
   overflow: hidden;
@@ -339,104 +344,43 @@ body::after {
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  background: rgba(0, 0, 0, 0.3);
 }
 
-.tb-bals {
+.balance-container {
   display: flex;
   gap: 12px;
-  flex: 1;
-  min-width: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
 }
 
-.tb-chip {
+.balance-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(77, 208, 225, 0.2);
-  border-radius: 60px;
-  padding: 8px 16px;
-  backdrop-filter: blur(8px);
-  flex: 1;
-  min-width: 0;
-  transition: all 0.2s;
 }
 
-.tb-chip:hover {
-  border-color: var(--ice);
-  background: rgba(0, 0, 0, 0.6);
-  transform: translateY(-1px);
+.balance-item.snow {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  padding-right: 12px;
 }
 
-.tb-chip.snow {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.tb-chip.ton {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.tb-chip span:first-child {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tb-chip span:first-child img,
-.tb-chip span:first-child i {
-  width: 32px;
-  height: 32px;
+.balance-icon {
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  font-size: 28px;
 }
 
-.tb-chip > div {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-
-.tb-chip > div span:first-child {
-  font-size: 9px;
-  opacity: 0.7;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.tb-chip-num {
-  font-size: 16px;
+.balance-value {
+  font-size: 18px;
   font-weight: 800;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(77, 208, 225, 0.5);
 }
 
-.lang-btn {
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.25), rgba(0, 0, 0, 0.5));
-  border: 1px solid rgba(77, 208, 225, 0.5);
-  border-radius: 40px;
-  padding: 8px 16px;
-  color: var(--ice);
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  backdrop-filter: blur(8px);
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-
-.lang-btn:active {
-  transform: scale(0.95);
-  background: rgba(77, 208, 225, 0.4);
-}
-
-/* ========== HOME PAGE MODERN DESIGN (UPDATED) ========== */
+/* ========== HOME SECTION MODERN ========== */
 .sec {
   display: none;
   padding: 12px 16px;
@@ -457,18 +401,12 @@ body::after {
   margin: 0 auto;
   padding: 24px 20px;
   border-radius: 32px;
-  background: linear-gradient(145deg, rgba(20, 35, 55, 0.95), rgba(10, 20, 35, 0.95));
+  background: linear-gradient(135deg, rgba(30, 45, 65, 0.95), rgba(15, 25, 40, 0.95));
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(77, 208, 225, 0.3);
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.hero-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6);
 }
 
 .hero-card::before {
@@ -571,7 +509,6 @@ body::after {
   font-weight: 700;
 }
 
-/* Storage Section */
 .storage-outer {
   width: 100%;
   margin: 16px 0;
@@ -697,11 +634,11 @@ body::after {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: transform 0.1s, box-shadow 0.2s;
+  transition: all 0.2s;
 }
 
 .collect-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .collect-btn:disabled {
@@ -725,15 +662,325 @@ body::after {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: transform 0.1s, box-shadow 0.2s;
+  transition: all 0.2s;
   box-shadow: 0 0 12px rgba(76, 175, 80, 0.4);
 }
 
 .machine-shop-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
-/* Machine Shop Modal */
+/* ========== TASKS SECTION MODERN ========== */
+.tasks-container {
+  background: linear-gradient(135deg, rgba(30, 45, 65, 0.95), rgba(15, 25, 40, 0.95));
+  border-radius: 32px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.task-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  border-radius: 60px;
+}
+
+.ttab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--muted);
+}
+
+.ttab.active {
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.3), rgba(77, 208, 225, 0.1));
+  color: var(--ice);
+  box-shadow: 0 0 15px rgba(77, 208, 225, 0.3);
+}
+
+.tcont {
+  display: none;
+}
+
+.tcont.active {
+  display: block;
+}
+
+.task-item {
+  background: linear-gradient(135deg, rgba(20, 30, 45, 0.95), rgba(10, 20, 35, 0.95));
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s;
+}
+
+.task-item:hover {
+  border-color: rgba(77, 208, 225, 0.5);
+  transform: translateX(5px);
+}
+
+.ticon {
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.3));
+  border-radius: 50%;
+  font-size: 28px;
+}
+
+.ticon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.tinfo {
+  flex: 1;
+}
+
+.tname {
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.trew {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tstat {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.tbtn {
+  border: none;
+  border-radius: 40px;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.tbtn:active {
+  transform: scale(0.95);
+}
+
+.tbtn.go {
+  background: linear-gradient(135deg, #1976D2, #0D47A1);
+  color: #fff;
+}
+
+.tbtn.claim {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  color: #fff;
+  animation: claimGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes claimGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(77, 208, 225, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(77, 208, 225, 0.8); }
+}
+
+.tbtn.done {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  cursor: default;
+}
+
+.progress-bar {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  height: 6px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.progress-bar > div {
+  transition: width 0.3s ease;
+}
+
+/* ========== FRIENDS SECTION MODERN ========== */
+.friends-container {
+  background: linear-gradient(135deg, rgba(30, 45, 65, 0.95), rgba(15, 25, 40, 0.95));
+  border-radius: 32px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.ref-prog-card {
+  background: linear-gradient(145deg, rgba(77, 208, 225, 0.15), rgba(0, 0, 0, 0.4));
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.ref-bonus-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.3));
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 60px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
+
+.rbb-pct {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--ice);
+  line-height: 1;
+}
+
+.rbb-txt {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ref-link-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.ref-inp {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 16px;
+  padding: 12px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.btn-copy {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 16px;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.btn-copy:active {
+  transform: scale(0.95);
+}
+
+.ref-count-badge {
+  background: rgba(77, 208, 225, 0.2);
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ice);
+}
+
+.ref-list-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+.ref-list-item:hover {
+  background: rgba(77, 208, 225, 0.05);
+}
+
+.ref-list-item:last-child {
+  border-bottom: none;
+}
+
+.rli-av {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ice), #0097B2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.rli-av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rli-info {
+  flex: 1;
+}
+
+.rli-name {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rli-date {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.rli-earn {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ========== MACHINE SHOP ========== */
 .machine-shop {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
@@ -869,7 +1116,7 @@ body::after {
   margin-left: 8px;
 }
 
-/* Welcome Chest on Home */
+/* ========== WELCOME CHEST ========== */
 .welcome-chest {
   position: relative;
   margin: 10px auto 20px;
@@ -936,326 +1183,7 @@ body::after {
   50% { opacity: 1; text-shadow: 0 0 15px rgba(77, 208, 225, 0.8); }
 }
 
-/* Notifications */
-.notif {
-  position: fixed;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-80px);
-  background: rgba(10, 20, 35, 0.97);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 10px 18px;
-  font-size: 13px;
-  font-weight: 700;
-  z-index: 1000;
-  transition: transform 0.28s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
-  max-width: 84vw;
-  text-align: center;
-  backdrop-filter: blur(12px);
-  pointer-events: none;
-}
-
-.notif.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-.notif.s { border-color: var(--ice-glow); color: var(--ice); background: rgba(77, 208, 225, 0.2); }
-.notif.e { border-color: rgba(239, 83, 80, 0.5); color: #FF8A80; background: rgba(239, 83, 80, 0.1); }
-.notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; background: rgba(66, 165, 245, 0.1); }
-.notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; background: rgba(255, 193, 7, 0.1); }
-
-/* Tasks Section (UPDATED) */
-.task-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.ttab {
-  flex: 1;
-  padding: 12px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 60px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--muted);
-}
-
-.ttab.active {
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.3), rgba(77, 208, 225, 0.1));
-  border-color: var(--ice);
-  color: var(--ice);
-  box-shadow: 0 0 15px rgba(77, 208, 225, 0.3);
-}
-
-.tcont {
-  display: none;
-}
-
-.tcont.active {
-  display: block;
-}
-
-.task-item {
-  background: linear-gradient(135deg, rgba(25, 35, 55, 0.9), rgba(15, 25, 45, 0.9));
-  border: 1px solid rgba(77, 208, 225, 0.2);
-  border-radius: 24px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  backdrop-filter: blur(8px);
-  transition: all 0.2s;
-}
-
-.task-item:hover {
-  border-color: var(--ice);
-  transform: translateX(5px);
-}
-
-.ticon {
-  font-size: 40px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 60px;
-  height: 60px;
-  background: rgba(77, 208, 225, 0.1);
-  border-radius: 50%;
-}
-
-.tinfo {
-  flex: 1;
-}
-
-.tname {
-  font-weight: 800;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.trew {
-  font-size: 11px;
-  color: var(--snow);
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-.tstat {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 4px;
-  font-weight: 500;
-}
-
-.tbtn {
-  border: none;
-  border-radius: 40px;
-  padding: 8px 18px;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
-
-.tbtn:active {
-  transform: scale(0.95);
-}
-
-.tbtn.go {
-  background: linear-gradient(135deg, #1976D2, #0D47A1);
-  color: #fff;
-}
-
-.tbtn.claim {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  color: #fff;
-  animation: claimGlow 1.8s ease-in-out infinite;
-}
-
-@keyframes claimGlow {
-  0%, 100% { box-shadow: 0 0 6px rgba(77, 208, 225, 0.3); }
-  50% { box-shadow: 0 0 16px rgba(77, 208, 225, 0.8); }
-}
-
-.tbtn.done {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--muted);
-  cursor: default;
-}
-
-/* Progress Bar */
-.progress-bar {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  height: 6px;
-  margin-top: 5px;
-  overflow: hidden;
-}
-
-.progress-bar > div {
-  transition: width 0.3s ease;
-}
-
-/* Referral Section (UPDATED) */
-.ref-prog-card {
-  background: linear-gradient(145deg, rgba(77, 208, 225, 0.1), rgba(0, 0, 0, 0.4));
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 28px;
-  padding: 20px;
-  margin-bottom: 20px;
-  backdrop-filter: blur(8px);
-  transition: transform 0.2s;
-}
-
-.ref-prog-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--ice);
-}
-
-.ref-bonus-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.15), rgba(0, 0, 0, 0.3));
-  border: 1px solid rgba(77, 208, 225, 0.4);
-  border-radius: 60px;
-  padding: 12px 20px;
-  margin-bottom: 16px;
-}
-
-.rbb-pct {
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--ice);
-  line-height: 1;
-}
-
-.rbb-txt {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.ref-link-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.ref-inp {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 16px;
-  padding: 12px;
-  color: var(--text);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.btn-copy {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  border: none;
-  border-radius: 16px;
-  padding: 10px 20px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
-}
-
-.btn-copy:active {
-  transform: scale(0.95);
-}
-
-.ref-count-badge {
-  background: rgba(77, 208, 225, 0.2);
-  border: 1px solid rgba(77, 208, 225, 0.4);
-  border-radius: 30px;
-  padding: 4px 14px;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--ice);
-}
-
-.ref-list-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background 0.2s;
-}
-
-.ref-list-item:hover {
-  background: rgba(77, 208, 225, 0.05);
-}
-
-.ref-list-item:last-child {
-  border-bottom: none;
-}
-
-.rli-av {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--ice), #0097B2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.rli-av img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.rli-info {
-  flex: 1;
-}
-
-.rli-name {
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.rli-date {
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 600;
-  margin-top: 2px;
-}
-
-.rli-earn {
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--gold);
-  white-space: nowrap;
-}
-
-/* Wallet Section */
+/* ========== WALLET SECTION ========== */
 .wallet-modern {
   margin-top: 8px;
 }
@@ -1438,7 +1366,6 @@ body::after {
   transform: none;
 }
 
-/* Swap Section */
 .swap-section-modern {
   display: flex;
   flex-direction: column;
@@ -1549,7 +1476,6 @@ body::after {
   gap: 6px;
 }
 
-/* History Box */
 .hist-box {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(77, 208, 225, 0.2);
@@ -1602,7 +1528,6 @@ body::after {
   font-weight: 500;
 }
 
-/* Wallet Row */
 .wal-row {
   display: flex;
   align-items: center;
@@ -1678,7 +1603,6 @@ body::after {
   display: block;
 }
 
-/* Status Badges */
 .stat-badge {
   padding: 3px 10px;
   border-radius: 20px;
@@ -1704,7 +1628,7 @@ body::after {
   border: 1px solid rgba(239, 83, 80, 0.3);
 }
 
-/* Bottom Navigation */
+/* ========== BOTTOM NAVIGATION ========== */
 .bnav {
   position: fixed;
   bottom: 0;
@@ -1770,7 +1694,7 @@ body::after {
   text-shadow: 0 0 6px rgba(77, 208, 225, 0.5);
 }
 
-/* Floating Buttons */
+/* ========== FLOATING BUTTON ========== */
 #floatAddTask {
   position: fixed;
   bottom: 100px;
@@ -1819,7 +1743,7 @@ body::after {
   filter: drop-shadow(0 0 10px rgba(77, 208, 225, 0.5));
 }
 
-/* Modal */
+/* ========== MODALS ========== */
 .modal {
   display: none;
   position: fixed;
@@ -1882,7 +1806,7 @@ body::after {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Snowflakes */
+/* ========== SNOWFLAKES ========== */
 .snowflake {
   position: fixed;
   color: #fff;
@@ -1905,7 +1829,6 @@ body::after {
   }
 }
 
-/* Particles */
 .ptc {
   position: fixed;
   pointer-events: none;
@@ -1919,7 +1842,6 @@ body::after {
   100% { transform: translateY(-74px) scale(0.4); opacity: 0; }
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 3px;
 }
@@ -1929,47 +1851,13 @@ body::after {
   border-radius: 2px;
 }
 
-/* Lang Menu */
-#langMenu {
-  position: fixed;
-  top: 70px;
-  right: 12px;
-  z-index: 300;
-  background: rgba(10, 20, 35, 0.98);
-  border: 1px solid rgba(77, 208, 225, 0.4);
-  border-radius: 20px;
-  overflow: hidden;
-  min-width: 150px;
-  backdrop-filter: blur(16px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-}
-
-.lang-opt {
-  padding: 12px 18px;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.lang-opt:hover {
-  background: rgba(77, 208, 225, 0.2);
-}
-
-/* Santa Click Animation */
 @keyframes santaFloat {
   0%, 100% { transform: translateY(0) rotate(-1.5deg); }
   50% { transform: translateY(-9px) rotate(1.5deg); }
 }
 
-/* Responsive */
 @media (max-width: 480px) {
-  .tb-chip {
-    padding: 6px 12px;
-  }
-  
-  .tb-chip-num {
+  .balance-value {
     font-size: 14px;
   }
   
@@ -1994,6 +1882,92 @@ body::after {
   .machine-quantity {
     justify-content: center;
   }
+}
+
+.notif {
+  position: fixed;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  border: 1px solid rgba(77, 208, 225, 0.5);
+  color: #fff;
+}
+
+.notif.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.notif.s {
+  border-color: #4DD0E1;
+  color: #4DD0E1;
+}
+
+.notif.e {
+  border-color: #EF5350;
+  color: #EF5350;
+}
+
+.notif.w {
+  border-color: #FFD966;
+  color: #FFD966;
+}
+
+.flabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.finput {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+  color: white;
+  font-size: 14px;
+}
+
+.prbtn {
+  background: rgba(77, 208, 225, 0.1);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.prbtn:active {
+  transform: scale(0.95);
+  background: rgba(77, 208, 225, 0.3);
+}
+
+.btn-prim {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 50px;
+  padding: 14px;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-prim:active {
+  transform: scale(0.98);
 }
 </style>
 </head>
@@ -2029,32 +2003,19 @@ body::after {
 
 <!-- Top Bar -->
 <div class="topbar-main">
-  <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
-  <div class="tb-bals">
-    <div class="tb-chip snow">
-      <span><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow"></span>
-      <div>
-        <span data-i18n="labelSnow">Snow</span>
-        <span class="tb-chip-num" id="tbSnow">0</span>
-      </div>
+  <div class="user-profile">
+    <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
+  </div>
+  <div class="balance-container">
+    <div class="balance-item snow">
+      <img class="balance-icon" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
+      <span class="balance-value" id="tbSnow">0</span>
     </div>
-    <div class="tb-chip ton">
-      <span><i class="fas fa-coins"></i></span>
-      <div>
-        <span data-i18n="labelTON">TON</span>
-        <span class="tb-chip-num" id="tbTON">0</span>
-      </div>
+    <div class="balance-item">
+      <i class="fas fa-coins" style="color: var(--gold); font-size: 20px;"></i>
+      <span class="balance-value" id="tbTON">0</span>
     </div>
   </div>
-  <button id="langBtn" class="lang-btn" onclick="toggleLangMenu()">
-    <span id="langFlag">🇷🇺</span>
-    <span id="langCode">RU</span>
-  </button>
-</div>
-
-<div id="langMenu" style="display: none;">
-  <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')">🇬🇧 &nbsp;English</div>
-  <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')">🇷🇺 &nbsp;Русский</div>
 </div>
 
 <!-- Home Section -->
@@ -2082,24 +2043,23 @@ body::after {
     </div>
     <div class="hero-stats">
       <div class="hero-stat-box">
-        <div class="stat-lbl" data-i18n="statAccrued">Accrued</div>
+        <div class="stat-lbl">Accrued</div>
         <div class="stat-val" id="heroAccrued">0.000000</div>
         <div class="stat-unit">Snow</div>
       </div>
       <div class="hero-stat-sep"></div>
       <div class="hero-stat-box">
-        <div class="stat-lbl" data-i18n="statRateDay">Rate/Day</div>
+        <div class="stat-lbl">Rate/Day</div>
         <div class="stat-val" id="heroRateDay">0</div>
-        <div class="stat-unit" data-i18n="statSnowDay">Snow/day</div>
+        <div class="stat-unit">Snow/day</div>
       </div>
     </div>
     
-    <!-- Storage Section -->
     <div class="storage-outer">
       <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Upgrade Storage">↑</div>
       <div class="storage-main">
         <div class="storage-head">
-          <div class="storage-title"><i class="fas fa-database"></i> <span data-i18n="storageTitle">Storage</span></div>
+          <div class="storage-title"><i class="fas fa-database"></i> Storage</div>
           <div class="storage-pct" id="storagePct">0%</div>
         </div>
         <div class="storage-track">
@@ -2125,43 +2085,47 @@ body::after {
 
 <!-- Friends Section -->
 <div class="sec" id="sectionFriends">
-  <div class="ref-prog-card">
-    <div class="ref-bonus-badge">
-      <span class="rbb-pct">20%</span>
-      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px;">
-      <span class="rbb-txt">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' machine purchases!<br>Earn TON value in Snow from each machine they buy!</span>
+  <div class="friends-container">
+    <div class="ref-prog-card">
+      <div class="ref-bonus-badge">
+        <span class="rbb-pct">20%</span>
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px;">
+        <span class="rbb-txt">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' machine purchases!<br>Earn TON value in Snow from each machine they buy!</span>
+      </div>
+      <div class="ref-link-row">
+        <input class="ref-inp" id="refLinkInp" readonly placeholder="Your referral link...">
+        <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> Copy</button>
+      </div>
+      <div style="font-size: 11px; color: var(--muted); margin-top: 8px;">📤 Share this link with friends. When they buy machines, you get 20% of their purchase value in Snow!</div>
     </div>
-    <div class="ref-link-row">
-      <input class="ref-inp" id="refLinkInp" readonly placeholder="Your referral link...">
-      <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> Copy</button>
+    <div class="hist-box">
+      <div class="hist-hdr" style="justify-content: space-between">
+        <span><i class="fas fa-users"></i> Recent Referrals</span>
+        <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
+      </div>
+      <div id="recentRefsList"><div class="hist-empty">No referrals yet</div></div>
     </div>
-    <div style="font-size: 11px; color: var(--muted); margin-top: 8px;">📤 Share this link with friends. When they buy machines, you get 20% of their purchase value in Snow!</div>
-  </div>
-  <div class="hist-box">
-    <div class="hist-hdr" style="justify-content: space-between">
-      <span><i class="fas fa-users"></i> Recent Referrals</span>
-      <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
-    </div>
-    <div id="recentRefsList"><div class="hist-empty">No referrals yet</div></div>
   </div>
 </div>
 
 <!-- Tasks Section -->
 <div class="sec" id="sectionTasks">
-  <div class="task-tabs">
-    <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">📢 Social</div>
-    <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">👥 Referral</div>
-  </div>
-  <div class="tcont active" id="tcSocial">
-    <div style="display: flex; gap: 8px; margin-bottom: 12px">
-      <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')">⭐ Partner</div>
-      <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')">🌍 Community</div>
+  <div class="tasks-container">
+    <div class="task-tabs">
+      <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">📢 Social</div>
+      <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">👥 Referral</div>
     </div>
-    <div id="socPartnerList"></div>
-    <div id="socCommunityList" style="display: none;"></div>
-  </div>
-  <div class="tcont" id="tcReferral">
-    <div id="referralTasksList"></div>
+    <div class="tcont active" id="tcSocial">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px">
+        <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')">⭐ Partner</div>
+        <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')">🌍 Community</div>
+      </div>
+      <div id="socPartnerList"></div>
+      <div id="socCommunityList" style="display: none;"></div>
+    </div>
+    <div class="tcont" id="tcReferral">
+      <div id="referralTasksList"></div>
+    </div>
   </div>
 </div>
 
@@ -2423,10 +2387,11 @@ body::after {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v15.0
+// SANTA SNOW - FRONTEND v16.0
 // UPDATED: 20% referral commission
-// UPDATED: Chest opening animation
-// UPDATED: Modern UI design
+// UPDATED: New modern design for all sections
+// UPDATED: Machine purchase button fixed
+// UPDATED: Removed Russian language
 // ============================================================
 
 const CFG = {
@@ -2447,13 +2412,15 @@ const CFG = {
 };
 
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 600, name: "Invite 10 Friends", icon: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" },
-  { id: 'ref_20', n: 20, snow: 1500, name: "Invite 20 Friends", icon: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" },
-  { id: 'ref_50', n: 50, snow: 4000, name: "Invite 50 Friends", icon: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" },
-  { id: 'ref_100', n: 100, snow: 10000, name: "Invite 100 Friends", icon: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" },
-  { id: 'ref_200', n: 200, snow: 20000, name: "Invite 200 Friends", icon: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" },
-  { id: 'ref_500', n: 500, snow: 50000, name: "Invite 500 Friends", icon: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" }
+  { id: 'ref_10', n: 10, snow: 600, name: "Invite 10 Friends", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 1500, name: "Invite 20 Friends", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 4000, name: "Invite 50 Friends", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 10000, name: "Invite 100 Friends", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 20000, name: "Invite 200 Friends", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 50000, name: "Invite 500 Friends", icon: "🏆" }
 ];
+
+const REF_TASK_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const STORAGE_LVS = {
   1: { cap: 300, upgCost: 500, label: 'Gift Box' },
@@ -2469,7 +2436,6 @@ const STORAGE_LVS = {
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
-const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const S = {
   userId: null,
@@ -2642,7 +2608,6 @@ function santaClick() {
   triggerSnowfall(20);
 }
 
-// ========== WELCOME CHEST WITH ANIMATION ==========
 async function openWelcomeChest() {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
@@ -2662,7 +2627,6 @@ async function openWelcomeChest() {
     updateUI();
     triggerSnowfall(50);
     
-    // Show rewards popup (without notification)
     showRewardsPopup(result.snow, 1, result.miningRate);
     
   } catch (e) {
@@ -2743,7 +2707,6 @@ function showWelcomeModal() {
   if (modal) modal.classList.add('active');
 }
 
-// ========== MACHINE SHOP ==========
 function openMachineShop() {
   buildMachineShop();
   openModal('machineShopModal');
@@ -2804,7 +2767,6 @@ async function purchaseMachine(machineType) {
   }
 }
 
-// ========== STORAGE UPGRADE ==========
 function buildUpgradeContent() {
   const lv = S.user.storageLevel || 1;
   const cur = STORAGE_LVS[lv];
@@ -2852,7 +2814,6 @@ async function upgradeStorage() {
   showNotif(`✅ Storage upgraded to Lv.${lv+1}!`, 's');
 }
 
-// ========== EXCHANGE FUNCTIONS ==========
 function updateSwapBals() {
   document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
 }
@@ -2895,7 +2856,6 @@ async function swapSnowToTon() {
   finally { _exchInFlight = false; }
 }
 
-// ========== WITHDRAW FUNCTIONS ==========
 function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
 
 async function doWithdraw() {
@@ -2917,7 +2877,6 @@ async function doWithdraw() {
   } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
 }
 
-// ========== DEPOSIT FUNCTIONS ==========
 function setDepAmt(v) { document.getElementById('depositAmountInput').value = v; }
 
 async function initiateDeposit() {
@@ -2977,7 +2936,6 @@ function startDepVerify(depId, txHash) {
   }, 10000);
 }
 
-// ========== TASKS ==========
 function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refHtml = '';
@@ -2987,7 +2945,7 @@ function renderTasks() {
     const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
     refHtml += `
       <div class="task-item">
-        <div class="ticon"><img src="${task.icon}" style="width: 48px; height: 48px; object-fit: contain;"></div>
+        <div class="ticon"><img src="${REF_TASK_IMG}" alt="Referral"></div>
         <div class="tinfo">
           <div class="tname">${task.name}</div>
           <div class="trew"><img src="${SNOW_IMG}" style="width: 16px; vertical-align: middle;"> ${fmt(task.snow)} Snow</div>
@@ -3083,7 +3041,6 @@ async function doDbTask(tid, link, type, cat) {
   }, 3000);
 }
 
-// ========== TASK CREATION ==========
 function setTaskType(t) {
   _atType = t;
   const sel = 'flex:1; padding: 10px; border-radius: 12px; border: 2px solid var(--ice); background: rgba(77,208,225,0.2); color: var(--ice); font-weight: 800;';
@@ -3129,7 +3086,6 @@ async function submitAddTask() {
   finally { _submitInFlight = false; }
 }
 
-// ========== REFERRAL UI ==========
 function updateRefUI() {
   if (!S.userId) return;
   const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
@@ -3160,7 +3116,6 @@ function copyRefLink() {
   navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
 }
 
-// ========== HISTORY ==========
 function renderExchHist() {
   const el = document.getElementById('exchHist');
   if (!el) return;
@@ -3189,7 +3144,6 @@ function renderWdHist() {
   `).join('');
 }
 
-// ========== WALLET CONNECT ==========
 async function initTON() {
   try {
     if (window.TON_CONNECT_UI) {
@@ -3224,12 +3178,20 @@ function onWDisc() {
 async function connectWallet() { if (S.tonUI) await S.tonUI.openModal(); }
 async function disconnectWallet() { if (S.tonUI) await S.tonUI.disconnect(); }
 
-// ========== UI HELPERS ==========
 function goNav(el) {
   document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(el.dataset.s).classList.add('active');
+  
+  const fab = document.getElementById('floatAddTask');
+  if (fab) {
+    if (el.dataset.s === 'sectionTasks' && _socTab === 'community') {
+      fab.style.display = 'flex';
+    } else {
+      fab.style.display = 'none';
+    }
+  }
 }
 
 function openModal(id) {
@@ -3247,39 +3209,6 @@ function switchWalletModernTab(el, t) {
   document.getElementById(`wt-${t}-modern`).classList.add('active');
 }
 
-// ========== TRANSLATIONS ==========
-const TRANSLATIONS = {
-  en: {
-    labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    storageTitle: 'Storage', depositBtn: 'Deposit TON', withdrawBtn: 'Withdraw TON', exchangeNow: 'Exchange',
-  },
-  ru: {
-    labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    storageTitle: 'Хранилище', depositBtn: 'Внести TON', withdrawBtn: 'Вывести TON', exchangeNow: 'Обменять',
-  }
-};
-
-function setLang(lang, flag, code) {
-  localStorage.setItem('santaLang', lang);
-  applyLang(lang, flag, code);
-  document.getElementById('langMenu').style.display = 'none';
-}
-
-function applyLang(lang, flag, code) {
-  const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
-  document.getElementById('langFlag').textContent = flag;
-  document.getElementById('langCode').textContent = code;
-  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key]) el.innerHTML = t[key]; });
-  const nav = ['Home', 'Tasks', 'Friends', 'Wallet'];
-  document.querySelectorAll('.ni .ni-lbl').forEach((el, i) => { if (nav[i]) el.textContent = t[nav[i].toLowerCase()] || nav[i]; });
-}
-
-function toggleLangMenu() {
-  const m = document.getElementById('langMenu');
-  m.style.display = m.style.display === 'none' ? 'block' : 'none';
-}
-
-// ========== LOADING ANIMATION ==========
 function ldProgress(pct, msg) {
   const fill = document.getElementById('iceFill');
   if (fill) fill.style.width = pct + '%';
@@ -3357,10 +3286,6 @@ async function init() {
   if (ls) { ls.classList.add('hidden'); setTimeout(() => ls.remove(), 700); }
   
   if (S.isNewUser) showWelcomeModal();
-  
-  const savedLang = localStorage.getItem('santaLang');
-  if (savedLang === 'en') applyLang('en', '🇬🇧', 'EN');
-  else applyLang('ru', '🇷🇺', 'RU');
 }
 
 window.addEventListener('load', init);
