@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -77,6 +77,38 @@ body::after {
   bottom: 0;
   background: rgba(0, 0, 0, 0.45);
   z-index: -1;
+}
+
+/* Language Switcher */
+.lang-switcher {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 101;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 6px 12px;
+  display: flex;
+  gap: 8px;
+  border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.lang-btn.active {
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.3), rgba(77, 208, 225, 0.1));
+  color: var(--ice);
 }
 
 /* ========== LOADING SCREEN ========== */
@@ -1975,11 +2007,17 @@ body::after {
 
 <div class="background-fixed"></div>
 
+<!-- Language Switcher -->
+<div class="lang-switcher">
+  <button class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">🇷🇺 RU</button>
+  <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+</div>
+
 <!-- Loading Screen -->
 <div id="loadingScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/76b663ee-bd1e-45b4-96cc-ed86f714c9f3.png" alt="Santa">
   <div class="ld-title">Santa Snow</div>
-  <div class="ld-sub" id="ldStatus">Загрузка...</div>
+  <div class="ld-sub" id="ldStatus">Loading...</div>
   <div class="ld-bar-wrap">
     <div class="ice-track">
       <div class="ice-fill" id="iceFill"></div>
@@ -1995,9 +2033,9 @@ body::after {
       <img class="welcome-chest-img" id="chestToOpen" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest">
       <div style="position: absolute; top: -10px; right: -10px; background: #4DD0E1; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
     </div>
-    <div class="welcome-modal-title">🎄 Подарок Санты! 🎄</div>
-    <div class="welcome-modal-subtitle" style="font-size: 14px; color: var(--gold); margin-bottom: 15px;">Откройте сундук, чтобы получить награду!</div>
-    <button class="welcome-open-btn" id="openChestBtn">🎁 Открыть сундук! 🎁</button>
+    <div class="welcome-modal-title" id="welcomeTitle">🎄 Santa's Gift! 🎄</div>
+    <div class="welcome-modal-subtitle" id="welcomeSubtitle" style="font-size: 14px; color: var(--gold); margin-bottom: 15px;">Open the chest to get your reward!</div>
+    <button class="welcome-open-btn" id="openChestBtn">🎁 Open Chest! 🎁</button>
   </div>
 </div>
 
@@ -2028,8 +2066,8 @@ body::after {
              class="chest-image">
         <div class="chest-glow"></div>
       </div>
-      <div class="chest-text">🎁 ОТКРОЙТЕ ПОДАРОК! 🎁</div>
-      <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">⭐ 1000 Snow + 1 Майнер (10 Snow/час) ⭐</div>
+      <div class="chest-text" id="chestText">🎁 OPEN THE GIFT! 🎁</div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;" id="chestRewardText">⭐ 1000 Snow + 1 Miner (10 Snow/hour) ⭐</div>
     </div>
   </div>
   
@@ -2043,23 +2081,23 @@ body::after {
     </div>
     <div class="hero-stats">
       <div class="hero-stat-box">
-        <div class="stat-lbl">Накоплено</div>
+        <div class="stat-lbl" id="statAccruedLabel">Accumulated</div>
         <div class="stat-val" id="heroAccrued">0.000000</div>
         <div class="stat-unit">Snow</div>
       </div>
       <div class="hero-stat-sep"></div>
       <div class="hero-stat-box">
-        <div class="stat-lbl">В день</div>
+        <div class="stat-lbl" id="statRateLabel">Per day</div>
         <div class="stat-val" id="heroRateDay">0</div>
-        <div class="stat-unit">Snow/день</div>
+        <div class="stat-unit">Snow/day</div>
       </div>
     </div>
     
     <div class="storage-outer">
-      <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Улучшить хранилище">↑</div>
+      <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Upgrade Storage" id="storageUpgradeBtn">↑</div>
       <div class="storage-main">
         <div class="storage-head">
-          <div class="storage-title"><i class="fas fa-database"></i> Хранилище</div>
+          <div class="storage-title"><i class="fas fa-database"></i> <span id="storageTitle">Storage</span></div>
           <div class="storage-pct" id="storagePct">0%</div>
         </div>
         <div class="storage-track">
@@ -2067,16 +2105,16 @@ body::after {
           <div class="storage-lbl" id="storageLbl">0 / 300 Snow</div>
         </div>
       </div>
-      <div class="storage-side-btn" id="storageLvDisp" style="font-size: 12px; font-weight: 800;">Ур.1</div>
+      <div class="storage-side-btn" id="storageLvDisp" style="font-size: 12px; font-weight: 800;">Lv.1</div>
     </div>
     
     <div class="claim-wrap">
       <button class="collect-btn" id="collectBtn" onclick="collectSnow()" disabled>
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
-        <span id="claimBtnTxt">Собрать Snow</span>
+        <span id="claimBtnTxt">Collect Snow</span>
       </button>
       <button class="machine-shop-btn" id="openMachineShopBtn" onclick="openMachineShop()">
-        <i class="fas fa-microchip"></i> Купить майнеры
+        <i class="fas fa-microchip"></i> <span id="buyMinersBtnText">Buy Miners</span>
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
@@ -2090,20 +2128,20 @@ body::after {
       <div class="ref-bonus-badge">
         <span class="rbb-pct">20%</span>
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px;">
-        <span class="rbb-txt">💰 <strong style="color: var(--gold);">20% комиссия</strong> с покупок друзей!<br>Получайте Snow за каждую покупку!</span>
+        <span class="rbb-txt" id="refBonusText">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' purchases!<br>Get Snow for every purchase!</span>
       </div>
       <div class="ref-link-row">
-        <input class="ref-inp" id="refLinkInp" readonly placeholder="Ваша реферальная ссылка...">
-        <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> Копировать</button>
+        <input class="ref-inp" id="refLinkInp" readonly placeholder="Your referral link...">
+        <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span id="copyBtnText">Copy</span></button>
       </div>
-      <div style="font-size: 11px; color: var(--muted); margin-top: 8px;">📤 Поделитесь ссылкой с друзьями. Когда они покупают майнеры, вы получаете 20% от суммы покупки в Snow!</div>
+      <div style="font-size: 11px; color: var(--muted); margin-top: 8px;" id="refInfoText">📤 Share this link with friends. When they buy miners, you get 20% of the purchase amount in Snow!</div>
     </div>
     <div class="hist-box">
       <div class="hist-hdr" style="justify-content: space-between">
-        <span><i class="fas fa-users"></i> Недавние рефералы</span>
-        <span class="ref-count-badge" id="totalRefsDisp">0 Друзей</span>
+        <span><i class="fas fa-users"></i> <span id="recentRefsTitle">Recent Referrals</span></span>
+        <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
       </div>
-      <div id="recentRefsList"><div class="hist-empty">Нет рефералов</div></div>
+      <div id="recentRefsList"><div class="hist-empty" id="noRefsText">No referrals</div></div>
     </div>
   </div>
 </div>
@@ -2112,13 +2150,13 @@ body::after {
 <div class="sec" id="sectionTasks">
   <div class="tasks-container">
     <div class="task-tabs">
-      <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">📢 Соц. сети</div>
-      <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">👥 Рефералы</div>
+      <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')"><span id="socialTabText">📢 Social</span></div>
+      <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')"><span id="referralTabText">👥 Referrals</span></div>
     </div>
     <div class="tcont active" id="tcSocial">
       <div style="display: flex; gap: 8px; margin-bottom: 12px">
-        <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')">⭐ Партнеры</div>
-        <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')">🌍 Сообщество</div>
+        <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')"><span id="partnerTabText">⭐ Partners</span></div>
+        <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')"><span id="communityTabText">🌍 Community</span></div>
       </div>
       <div id="socPartnerList"></div>
       <div id="socCommunityList" style="display: none;"></div>
@@ -2134,36 +2172,36 @@ body::after {
   <div class="wallet-modern">
     <div class="modern-tabs">
       <div class="modern-tab active" data-wt="deposit" onclick="switchWalletModernTab(this,'deposit')">
-        <i class="fas fa-arrow-down"></i> Депозит
+        <i class="fas fa-arrow-down"></i> <span id="depositTabText">Deposit</span>
       </div>
       <div class="modern-tab" data-wt="withdraw" onclick="switchWalletModernTab(this,'withdraw')">
-        <i class="fas fa-arrow-up"></i> Вывод
+        <i class="fas fa-arrow-up"></i> <span id="withdrawTabText">Withdraw</span>
       </div>
       <div class="modern-tab" data-wt="exchange" onclick="switchWalletModernTab(this,'exchange')">
-        <i class="fas fa-exchange-alt"></i> Обмен
+        <i class="fas fa-exchange-alt"></i> <span id="exchangeTabText">Exchange</span>
       </div>
     </div>
 
     <div class="modern-content active" id="wt-deposit-modern">
       <div class="modern-card deposit">
         <div class="modern-card-title">
-          <i class="fas fa-coins" style="color: var(--ice);"></i> Депозит TON
+          <i class="fas fa-coins" style="color: var(--ice);"></i> <span id="depositCardTitle">TON Deposit</span>
         </div>
         <div class="wal-row">
           <div class="wl-inf">
-            <div class="wll">Кошелек</div>
-            <div class="wla" id="walletAddressDisplay">Не подключен</div>
+            <div class="wll" id="walletLabel">Wallet</div>
+            <div class="wla" id="walletAddressDisplay">Not connected</div>
           </div>
-          <button class="btn-conn" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> Подключить</button>
+          <button class="btn-conn" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> <span id="connectBtnText">Connect</span></button>
         </div>
         <div class="dep-warn">
           <i class="fas fa-exclamation-triangle"></i>
           <div>
-            <strong>ВАЖНО:</strong> Ваш ID пользователя <span id="depositUserIdDisplay" style="background: rgba(255,255,255,.2); padding: 2px 8px; border-radius: 12px; font-weight: 800;"></span> должен быть единственным комментарием.
+            <strong id="importantText">IMPORTANT:</strong> <span id="depositUserIdLabel">Your user ID</span> <span id="depositUserIdDisplay" style="background: rgba(255,255,255,.2); padding: 2px 8px; border-radius: 12px; font-weight: 800;"></span> <span id="mustBeCommentText">must be the only comment.</span>
           </div>
         </div>
         <div class="modern-input-group">
-          <label class="modern-label">Сумма (TON)</label>
+          <label class="modern-label" id="amountLabel">Amount (TON)</label>
           <input type="number" id="depositAmountInput" class="modern-input" placeholder="1" step="0.1" min="1">
         </div>
         <div class="modern-preset">
@@ -2173,10 +2211,10 @@ body::after {
           <span class="modern-preset-btn" onclick="setDepAmt(10)">10</span>
         </div>
         <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="initiateDeposit()">
-          <i class="fas fa-arrow-down"></i> Депозит TON
+          <i class="fas fa-arrow-down"></i> <span id="depositBtnText">Deposit TON</span>
         </button>
         <div class="tx-status" id="depositStatus">
-          <div>⏳ Обработка депозита...</div>
+          <div id="depositStatusMsg">⏳ Processing deposit...</div>
           <div id="depositStatusDetail"></div>
         </div>
       </div>
@@ -2185,14 +2223,14 @@ body::after {
     <div class="modern-content" id="wt-withdraw-modern">
       <div class="modern-card withdraw">
         <div class="modern-card-title">
-          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> Вывод TON
+          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span id="withdrawCardTitle">TON Withdrawal</span>
         </div>
         <div class="modern-input-group">
-          <label class="modern-label">TON Адрес кошелька</label>
+          <label class="modern-label" id="walletAddressLabel">TON Wallet Address</label>
           <input type="text" class="modern-input" id="wdAddr" placeholder="UQ...">
         </div>
         <div class="modern-input-group">
-          <label class="modern-label">Сумма (TON)</label>
+          <label class="modern-label" id="amountWithdrawLabel">Amount (TON)</label>
           <input type="number" class="modern-input" id="wdAmt" placeholder="0.02" min="0.02" step="0.01">
         </div>
         <div class="modern-preset">
@@ -2202,24 +2240,24 @@ body::after {
           <span class="modern-preset-btn" onclick="setWdAmt(0.5)">0.5</span>
         </div>
         <div class="modern-rate-info">
-          <div style="font-size: 12px; color: var(--muted);">Ваш баланс TON</div>
+          <div style="font-size: 12px; color: var(--muted);" id="yourTonBalanceLabel">Your TON balance</div>
           <div class="modern-rate-value" id="wdTonBalance">0 TON</div>
         </div>
         <button class="modern-btn secondary" id="wdBtn" onclick="doWithdraw()">
-          <i class="fas fa-arrow-up"></i> Вывести TON
+          <i class="fas fa-arrow-up"></i> <span id="withdrawBtnText">Withdraw TON</span>
         </button>
       </div>
       <div class="hist-box">
-        <div class="hist-hdr">📋 История выводов</div>
-        <div id="wdHist"><div class="hist-empty">Нет выводов</div></div>
+        <div class="hist-hdr" id="withdrawHistoryTitle">📋 Withdrawal History</div>
+        <div id="wdHist"><div class="hist-empty" id="noWithdrawalsText">No withdrawals</div></div>
       </div>
     </div>
 
     <div class="modern-content" id="wt-exchange-modern">
       <div class="modern-card exchange">
         <div class="modern-card-title">
-          <i class="fas fa-exchange-alt"></i> Обмен Snow → TON
-          <span class="fee-badge">Комиссия: 4%</span>
+          <i class="fas fa-exchange-alt"></i> <span id="exchangeCardTitle">Snow → TON Exchange</span>
+          <span class="fee-badge" id="feeBadgeText">Fee: 4%</span>
         </div>
         <div class="swap-section-modern">
           <div class="swap-row">
@@ -2232,29 +2270,29 @@ body::after {
             </div>
             <div class="swap-input-area">
               <input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwapSnowToTon()">
-              <span class="swap-max" onclick="swapSnowMax()">MAX</span>
+              <span class="swap-max" onclick="swapSnowMax()" id="maxBtnText">MAX</span>
             </div>
             <div class="fee-info">
-              <i class="fas fa-info-circle"></i> Комиссия: 4% (<span id="feeAmountDisplay">0</span> Snow)
+              <i class="fas fa-info-circle"></i> <span id="feeInfoText">Fee: 4%</span> (<span id="feeAmountDisplay">0</span> Snow)
             </div>
             <div class="swap-output-area">
-              <span>Вы получите:</span>
+              <span id="youGetText">You will get:</span>
               <div class="swap-output-value" id="swapTonOut">0</div>
               <span>TON</span>
             </div>
           </div>
         </div>
-        <div class="modern-rate-info">
+        <div class="modern-rate-info" id="exchangeRateInfo">
           📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON
-          <div style="font-size: 10px;">Комиссия за обмен 4%</div>
+          <div style="font-size: 10px;" id="exchangeFeeInfo">Exchange fee 4%</div>
         </div>
         <button class="modern-btn primary" onclick="swapSnowToTon()">
-          <i class="fas fa-exchange-alt"></i> Обменять Snow → TON
+          <i class="fas fa-exchange-alt"></i> <span id="exchangeBtnText">Exchange Snow → TON</span>
         </button>
       </div>
       <div class="hist-box">
-        <div class="hist-hdr">📋 История обменов</div>
-        <div id="exchHist"><div class="hist-empty">Нет обменов</div></div>
+        <div class="hist-hdr" id="exchangeHistoryTitle">📋 Exchange History</div>
+        <div id="exchHist"><div class="hist-empty" id="noExchangesText">No exchanges</div></div>
       </div>
     </div>
   </div>
@@ -2265,25 +2303,25 @@ body::after {
   <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" alt="Support">
 </div>
 
-<button id="floatAddTask" onclick="openModal('addTaskModal')">➕ Добавить задание</button>
+<button id="floatAddTask" onclick="openModal('addTaskModal')">➕ <span id="addTaskBtnText">Add Task</span></button>
 
 <!-- Bottom Navigation -->
 <nav class="bnav">
   <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div>
-    <div class="ni-lbl">Главная</div>
+    <div class="ni-lbl" id="navHome">Home</div>
   </div>
   <div class="ni" data-s="sectionTasks" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div>
-    <div class="ni-lbl">Задания</div>
+    <div class="ni-lbl" id="navTasks">Tasks</div>
   </div>
   <div class="ni" data-s="sectionFriends" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div>
-    <div class="ni-lbl">Друзья</div>
+    <div class="ni-lbl" id="navFriends">Friends</div>
   </div>
   <div class="ni" data-s="sectionWallet" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div>
-    <div class="ni-lbl">Кошелек</div>
+    <div class="ni-lbl" id="navWallet">Wallet</div>
   </div>
 </nav>
 
@@ -2291,36 +2329,36 @@ body::after {
 <div class="modal" id="helpModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle">🎅 Гайд Santa Snow</div>
+      <div class="mtitle" id="helpTitle">🎅 Santa Snow Guide</div>
       <button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button>
     </div>
     <div style="padding: 10px 0;">
       <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px;">
         <a href="https://t.me/SantaSnowPayouts" target="_blank" style="background: rgba(77,208,225,0.1); border-radius: 16px; padding: 12px; text-align: center; text-decoration: none;">
           <span style="font-size: 28px;">💸</span>
-          <div style="font-size: 11px; color: var(--ice);">Канал выплат</div>
+          <div style="font-size: 11px; color: var(--ice);" id="helpPayouts">Payouts Channel</div>
         </a>
         <a href="https://t.me/SantaSnowNews" target="_blank" style="background: rgba(77,208,225,0.1); border-radius: 16px; padding: 12px; text-align: center; text-decoration: none;">
           <span style="font-size: 28px;">📢</span>
-          <div style="font-size: 11px; color: var(--ice);">Новостной канал</div>
+          <div style="font-size: 11px; color: var(--ice);" id="helpNews">News Channel</div>
         </a>
         <a href="https://t.me/Santa_1_Snow" target="_blank" style="background: rgba(255,217,102,0.1); border-radius: 16px; padding: 12px; text-align: center; text-decoration: none;">
           <span style="font-size: 28px;">🛟</span>
-          <div style="font-size: 11px; color: var(--gold);">Поддержка</div>
+          <div style="font-size: 11px; color: var(--gold);" id="helpSupport">Support</div>
         </a>
       </div>
       <div style="background: rgba(77,208,225,0.1); border-radius: 16px; padding: 14px; margin-bottom: 12px;">
-        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;">🎁 Приветственный подарок</div>
-        <div style="font-size: 12px;">Откройте сундук, чтобы получить 1000 Snow + 1 Майнер (10 Snow/час)!</div>
+        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;" id="welcomeGiftTitle">🎁 Welcome Gift</div>
+        <div style="font-size: 12px;" id="welcomeGiftText">Open the chest to get 1000 Snow + 1 Miner (10 Snow/hour)!</div>
       </div>
       <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 14px;">
-        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;">💡 Как играть</div>
-        <div style="font-size: 12px; line-height: 1.6;">
-          • Покупайте майнеры за TON, чтобы увеличить скорость добычи<br>
-          • Собирайте Snow из хранилища каждый час<br>
-          • Обменивайте Snow на TON (комиссия 4%)<br>
-          • Приглашайте друзей для 20% комиссии!<br>
-          • Выполняйте задания для бонусных Snow
+        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;" id="howToPlayTitle">💡 How to Play</div>
+        <div style="font-size: 12px; line-height: 1.6;" id="howToPlayText">
+          • Buy miners with TON to increase mining speed<br>
+          • Collect Snow from storage every hour<br>
+          • Exchange Snow for TON (4% fee)<br>
+          • Invite friends for 20% commission!<br>
+          • Complete tasks for bonus Snow
         </div>
       </div>
     </div>
@@ -2330,7 +2368,7 @@ body::after {
 <div class="modal" id="upgradeModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle">⬆️ Улучшить хранилище</div>
+      <div class="mtitle" id="upgradeTitle">⬆️ Upgrade Storage</div>
       <button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button>
     </div>
     <div id="upgradeContent"></div>
@@ -2340,7 +2378,7 @@ body::after {
 <div class="modal" id="machineShopModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle">🤖 Магазин майнеров</div>
+      <div class="mtitle" id="machineShopTitle">🤖 Miner Shop</div>
       <button class="mclose" onclick="closeModal('machineShopModal')"><i class="fas fa-times"></i></button>
     </div>
     <div id="machineShopContent"></div>
@@ -2350,23 +2388,23 @@ body::after {
 <div class="modal" id="addTaskModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle">➕ Добавить задание сообщества</div>
+      <div class="mtitle" id="addTaskTitle">➕ Add Community Task</div>
       <button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button>
     </div>
-    <div style="background: rgba(77,208,225,0.1); border-radius: 12px; padding: 12px; margin-bottom: 12px;">
-      💡 Стоимость = <strong>Цель × 60 Snow</strong><br>
-      <span style="font-size: 11px;">Мин: 100 пользователей = 6,000 Snow</span>
+    <div style="background: rgba(77,208,225,0.1); border-radius: 12px; padding: 12px; margin-bottom: 12px;" id="taskCostInfo">
+      💡 Cost = <strong>Target × 60 Snow</strong><br>
+      <span style="font-size: 11px;">Min: 100 users = 6,000 Snow</span>
     </div>
     <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex:1; padding: 10px; border-radius: 12px; border: 2px solid var(--ice); background: rgba(77,208,225,0.2); color: var(--ice); font-weight: 800;">📢 Канал</button>
-      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex:1; padding: 10px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-weight: 800;">🤖 Бот</button>
+      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex:1; padding: 10px; border-radius: 12px; border: 2px solid var(--ice); background: rgba(77,208,225,0.2); color: var(--ice); font-weight: 800;"><span id="channelTypeText">📢 Channel</span></button>
+      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex:1; padding: 10px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-weight: 800;"><span id="botTypeText">🤖 Bot</span></button>
     </div>
-    <div id="atBotHint" style="background: rgba(255,193,7,0.1); border-radius: 10px; padding: 8px; margin-bottom: 12px; font-size: 11px; color: #FFD740;">
-      ⚠️ Добавьте @SANTASNOWBOT_BOT как администратора в ваш канал!
+    <div id="atBotHint" style="background: rgba(255,193,7,0.1); border-radius: 10px; padding: 8px; margin-bottom: 12px; font-size: 11px; color: #FFD740;" id="botHintText">
+      ⚠️ Add @SANTASNOWBOT_BOT as admin to your channel!
     </div>
-    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;">Ссылка Telegram</label>
+    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;" id="telegramLinkLabel">Telegram Link</label>
     <input type="text" id="atLink" class="finput" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px;" placeholder="https://t.me/yourchannel">
-    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;">Цель (мин 100)</label>
+    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;" id="targetLabel">Target (min 100)</label>
     <input type="number" id="atTarget" class="finput" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px;" placeholder="100" min="100">
     <div class="preset-row" style="display: flex; gap: 8px; margin-bottom: 12px;">
       <span class="prbtn" style="flex:1; text-align: center; padding: 8px; background: rgba(77,208,225,0.1); border-radius: 10px; cursor: pointer;" onclick="setAtTarget(100)">100</span>
@@ -2375,10 +2413,10 @@ body::after {
       <span class="prbtn" style="flex:1; text-align: center; padding: 8px; background: rgba(77,208,225,0.1); border-radius: 10px; cursor: pointer;" onclick="setAtTarget(5000)">5K</span>
     </div>
     <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px; display: flex; justify-content: space-between;">
-      <span>Общая стоимость:</span>
+      <span id="totalCostLabel">Total cost:</span>
       <span id="atCostPreview" style="font-weight: 800; color: var(--ice);">0 Snow</span>
     </div>
-    <button class="btn-prim" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800; cursor: pointer;" onclick="submitAddTask()">✅ Создать задание</button>
+    <button class="btn-prim" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800; cursor: pointer;" onclick="submitAddTask()"><span id="createTaskBtnText">✅ Create Task</span></button>
     <div id="atStatus" style="margin-top: 8px; font-size: 12px; text-align: center; display: none;"></div>
   </div>
 </div>
@@ -2387,12 +2425,430 @@ body::after {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v16.0 (RUSSIAN)
+// SANTA SNOW - FRONTEND v16.2 (BILINGUAL)
 // FIXED: Machine Shop button working
-// FIXED: Claim buttons working
-// ADDED: Russian language support
-// ADDED: New animations
+// FIXED: Collect button working
+// FIXED: Notifications auto-hide after 3 seconds
+// ADDED: English language support
 // ============================================================
+
+// Language translations
+const translations = {
+  ru: {
+    // Loading
+    loading: "Загрузка...",
+    connecting: "Подключение...",
+    loadingResources: "Загрузка ресурсов...",
+    loadingAccount: "Загрузка аккаунта...",
+    accountLoaded: "Аккаунт загружен!",
+    buildingUI: "Построение интерфейса...",
+    settingWallet: "Настройка кошелька...",
+    ready: "Готово! 🎅",
+    
+    // Welcome Modal
+    welcomeTitle: "🎄 Подарок Санты! 🎄",
+    welcomeSubtitle: "Откройте сундук, чтобы получить награду!",
+    openChest: "🎁 Открыть сундук! 🎁",
+    
+    // Home
+    accumulated: "Накоплено",
+    perDay: "В день",
+    storage: "Хранилище",
+    upgrade: "Улучшить",
+    collect: "Собрать",
+    storageEmpty: "Хранилище пусто...",
+    collectX: (amt) => `Собрать ${amt} Snow`,
+    buyMiners: "Купить майнеры",
+    
+    // Chest
+    openGift: "🎁 ОТКРОЙТЕ ПОДАРОК! 🎁",
+    chestReward: "⭐ 1000 Snow + 1 Майнер (10 Snow/час) ⭐",
+    
+    // Friends
+    refBonus: "💰 20% комиссия с покупок друзей! Получайте Snow за каждую покупку!",
+    copy: "Копировать",
+    refInfo: "📤 Поделитесь ссылкой с друзьями. Когда они покупают майнеры, вы получаете 20% от суммы покупки в Snow!",
+    recentRefs: "Недавние рефералы",
+    noRefs: "Нет рефералов",
+    friends: "Друзей",
+    
+    // Tasks
+    social: "📢 Соц. сети",
+    referrals: "👥 Рефералы",
+    partners: "⭐ Партнеры",
+    community: "🌍 Сообщество",
+    
+    // Wallet
+    deposit: "Депозит",
+    withdraw: "Вывод",
+    exchange: "Обмен",
+    tonDeposit: "TON Депозит",
+    tonWithdrawal: "TON Вывод",
+    wallet: "Кошелек",
+    notConnected: "Не подключен",
+    connect: "Подключить",
+    disconnect: "Отключить",
+    important: "ВАЖНО:",
+    yourUserId: "Ваш ID пользователя",
+    mustBeComment: "должен быть единственным комментарием.",
+    amount: "Сумма (TON)",
+    depositTon: "Депозит TON",
+    withdrawTon: "Вывести TON",
+    yourTonBalance: "Ваш баланс TON",
+    withdrawalHistory: "📋 История выводов",
+    noWithdrawals: "Нет выводов",
+    snowToTon: "Snow → TON",
+    fee: "Комиссия: 4%",
+    youWillGet: "Вы получите:",
+    exchangeRate: "📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON",
+    exchangeFee: "Комиссия за обмен 4%",
+    exchangeSnow: "Обменять Snow → TON",
+    exchangeHistory: "📋 История обменов",
+    noExchanges: "Нет обменов",
+    
+    // Machine Shop
+    minerShop: "🤖 Магазин майнеров",
+    basicMiner: "Базовый Майнер",
+    advancedMiner: "Продвинутый Майнер",
+    eliteMiner: "Элитный Майнер",
+    snowPerHour: "Snow/час",
+    tonEach: "TON за шт",
+    inStock: "В наличии:",
+    buy: "Купить",
+    need: "Нужно",
+    
+    // Upgrade
+    upgradeStorage: "⬆️ Улучшить хранилище",
+    maxLevel: "🏆 Максимальный уровень!",
+    upgradeBtn: "⬆️ Улучшить",
+    
+    // Add Task
+    addTask: "➕ Добавить задание",
+    taskCostInfo: "💡 Стоимость = Цель × 60 Snow\nМин: 100 пользователей = 6,000 Snow",
+    channel: "📢 Канал",
+    bot: "🤖 Бот",
+    botHint: "⚠️ Добавьте @SANTASNOWBOT_BOT как администратора в ваш канал!",
+    telegramLink: "Ссылка Telegram",
+    target: "Цель (мин 100)",
+    totalCost: "Общая стоимость:",
+    createTask: "✅ Создать задание",
+    
+    // Notifications
+    wait: "Подождите 3 секунды!",
+    storageEmptyMsg: "Хранилище пусто!",
+    collected: (amt) => `+${amt} Snow собрано!`,
+    purchaseSuccess: (qty, name) => `🎉 ${qty}x ${name} куплен!`,
+    purchaseError: (msg) => `❌ ${msg}`,
+    upgradeSuccess: (lv) => `✅ Хранилище улучшено до Ур.${lv}!`,
+    notEnoughSnow: "Недостаточно Snow!",
+    maxLevelMsg: "Уже максимум!",
+    minSnow: "Минимум 100 Snow",
+    notEnoughSnowMsg: "Недостаточно Snow!",
+    exchangeSuccess: (amt) => `✅ Обменяно ${amt} Snow`,
+    withdrawSuccess: "✅ Заявка на вывод отправлена!",
+    withdrawError: (msg) => `❌ ${msg}`,
+    invalidAddress: "Неверный адрес!",
+    minWithdraw: (min) => `Минимум ${min} TON!`,
+    notEnoughTon: "Недостаточно TON!",
+    depositSent: "✅ Депозит отправлен!",
+    depositConfirmed: (amt) => `💰 ${amt} TON зачислено!`,
+    taskCompleted: (amt) => `🎉 +${amt} Snow!`,
+    taskError: (msg) => `❌ ${msg}`,
+    linkCopied: "✅ Ссылка скопирована!",
+    connectWalletFirst: "Сначала подключите кошелек!",
+    minDeposit: "Минимум 1 TON",
+    
+    // Help
+    helpTitle: "🎅 Гайд Santa Snow",
+    payoutsChannel: "Канал выплат",
+    newsChannel: "Новостной канал",
+    support: "Поддержка",
+    welcomeGift: "🎁 Приветственный подарок",
+    welcomeGiftDesc: "Откройте сундук, чтобы получить 1000 Snow + 1 Майнер (10 Snow/час)!",
+    howToPlay: "💡 Как играть",
+    howToPlayDesc: "• Покупайте майнеры за TON, чтобы увеличить скорость добычи\n• Собирайте Snow из хранилища каждый час\n• Обменивайте Snow на TON (комиссия 4%)\n• Приглашайте друзей для 20% комиссии!\n• Выполняйте задания для бонусных Snow",
+    
+    // Navigation
+    navHome: "Главная",
+    navTasks: "Задания",
+    navFriends: "Друзья",
+    navWallet: "Кошелек",
+    
+    // Other
+    snow: "Snow",
+    ton: "TON",
+    max: "MAX",
+  },
+  en: {
+    // Loading
+    loading: "Loading...",
+    connecting: "Connecting...",
+    loadingResources: "Loading resources...",
+    loadingAccount: "Loading account...",
+    accountLoaded: "Account loaded!",
+    buildingUI: "Building interface...",
+    settingWallet: "Setting up wallet...",
+    ready: "Ready! 🎅",
+    
+    // Welcome Modal
+    welcomeTitle: "🎄 Santa's Gift! 🎄",
+    welcomeSubtitle: "Open the chest to get your reward!",
+    openChest: "🎁 Open Chest! 🎁",
+    
+    // Home
+    accumulated: "Accumulated",
+    perDay: "Per day",
+    storage: "Storage",
+    upgrade: "Upgrade",
+    collect: "Collect",
+    storageEmpty: "Storage empty...",
+    collectX: (amt) => `Collect ${amt} Snow`,
+    buyMiners: "Buy Miners",
+    
+    // Chest
+    openGift: "🎁 OPEN THE GIFT! 🎁",
+    chestReward: "⭐ 1000 Snow + 1 Miner (10 Snow/hour) ⭐",
+    
+    // Friends
+    refBonus: "💰 20% commission from friends' purchases! Get Snow for every purchase!",
+    copy: "Copy",
+    refInfo: "📤 Share this link with friends. When they buy miners, you get 20% of the purchase amount in Snow!",
+    recentRefs: "Recent Referrals",
+    noRefs: "No referrals",
+    friends: "Friends",
+    
+    // Tasks
+    social: "📢 Social",
+    referrals: "👥 Referrals",
+    partners: "⭐ Partners",
+    community: "🌍 Community",
+    
+    // Wallet
+    deposit: "Deposit",
+    withdraw: "Withdraw",
+    exchange: "Exchange",
+    tonDeposit: "TON Deposit",
+    tonWithdrawal: "TON Withdrawal",
+    wallet: "Wallet",
+    notConnected: "Not connected",
+    connect: "Connect",
+    disconnect: "Disconnect",
+    important: "IMPORTANT:",
+    yourUserId: "Your user ID",
+    mustBeComment: "must be the only comment.",
+    amount: "Amount (TON)",
+    depositTon: "Deposit TON",
+    withdrawTon: "Withdraw TON",
+    yourTonBalance: "Your TON balance",
+    withdrawalHistory: "📋 Withdrawal History",
+    noWithdrawals: "No withdrawals",
+    snowToTon: "Snow → TON",
+    fee: "Fee: 4%",
+    youWillGet: "You will get:",
+    exchangeRate: "📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON",
+    exchangeFee: "Exchange fee 4%",
+    exchangeSnow: "Exchange Snow → TON",
+    exchangeHistory: "📋 Exchange History",
+    noExchanges: "No exchanges",
+    
+    // Machine Shop
+    minerShop: "🤖 Miner Shop",
+    basicMiner: "Basic Miner",
+    advancedMiner: "Advanced Miner",
+    eliteMiner: "Elite Miner",
+    snowPerHour: "Snow/hour",
+    tonEach: "TON each",
+    inStock: "In stock:",
+    buy: "Buy",
+    need: "Need",
+    
+    // Upgrade
+    upgradeStorage: "⬆️ Upgrade Storage",
+    maxLevel: "🏆 Maximum level!",
+    upgradeBtn: "⬆️ Upgrade",
+    
+    // Add Task
+    addTask: "➕ Add Task",
+    taskCostInfo: "💡 Cost = Target × 60 Snow\nMin: 100 users = 6,000 Snow",
+    channel: "📢 Channel",
+    bot: "🤖 Bot",
+    botHint: "⚠️ Add @SANTASNOWBOT_BOT as admin to your channel!",
+    telegramLink: "Telegram Link",
+    target: "Target (min 100)",
+    totalCost: "Total cost:",
+    createTask: "✅ Create Task",
+    
+    // Notifications
+    wait: "Wait 3 seconds!",
+    storageEmptyMsg: "Storage is empty!",
+    collected: (amt) => `+${amt} Snow collected!`,
+    purchaseSuccess: (qty, name) => `🎉 ${qty}x ${name} purchased!`,
+    purchaseError: (msg) => `❌ ${msg}`,
+    upgradeSuccess: (lv) => `✅ Storage upgraded to Lv.${lv}!`,
+    notEnoughSnow: "Not enough Snow!",
+    maxLevelMsg: "Already max level!",
+    minSnow: "Minimum 100 Snow",
+    notEnoughSnowMsg: "Not enough Snow!",
+    exchangeSuccess: (amt) => `✅ Exchanged ${amt} Snow`,
+    withdrawSuccess: "✅ Withdrawal request sent!",
+    withdrawError: (msg) => `❌ ${msg}`,
+    invalidAddress: "Invalid address!",
+    minWithdraw: (min) => `Minimum ${min} TON!`,
+    notEnoughTon: "Not enough TON!",
+    depositSent: "✅ Deposit sent!",
+    depositConfirmed: (amt) => `💰 ${amt} TON added!`,
+    taskCompleted: (amt) => `🎉 +${amt} Snow!`,
+    taskError: (msg) => `❌ ${msg}`,
+    linkCopied: "✅ Link copied!",
+    connectWalletFirst: "Connect wallet first!",
+    minDeposit: "Minimum 1 TON",
+    
+    // Help
+    helpTitle: "🎅 Santa Snow Guide",
+    payoutsChannel: "Payouts Channel",
+    newsChannel: "News Channel",
+    support: "Support",
+    welcomeGift: "🎁 Welcome Gift",
+    welcomeGiftDesc: "Open the chest to get 1000 Snow + 1 Miner (10 Snow/hour)!",
+    howToPlay: "💡 How to Play",
+    howToPlayDesc: "• Buy miners with TON to increase mining speed\n• Collect Snow from storage every hour\n• Exchange Snow for TON (4% fee)\n• Invite friends for 20% commission!\n• Complete tasks for bonus Snow",
+    
+    // Navigation
+    navHome: "Home",
+    navTasks: "Tasks",
+    navFriends: "Friends",
+    navWallet: "Wallet",
+    
+    // Other
+    snow: "Snow",
+    ton: "TON",
+    max: "MAX",
+  }
+};
+
+let currentLang = 'ru';
+
+function t(key, ...args) {
+  let text = translations[currentLang][key] || translations['ru'][key] || key;
+  if (args.length) {
+    text = typeof text === 'function' ? text(...args) : text;
+  }
+  return text;
+}
+
+function updateAllTexts() {
+  // Update all elements with data-i18n or ids
+  const elements = {
+    // Loading
+    ldStatus: t('loading'),
+    
+    // Welcome Modal
+    welcomeTitle: t('welcomeTitle'),
+    welcomeSubtitle: t('welcomeSubtitle'),
+    openChestBtn: t('openChest'),
+    
+    // Home
+    statAccruedLabel: t('accumulated'),
+    statRateLabel: t('perDay'),
+    storageTitle: t('storage'),
+    storageUpgradeBtn: t('upgrade'),
+    claimBtnTxt: t('collect'),
+    buyMinersBtnText: t('buyMiners'),
+    chestText: t('openGift'),
+    chestRewardText: t('chestReward'),
+    
+    // Friends
+    refBonusText: t('refBonus'),
+    copyBtnText: t('copy'),
+    refInfoText: t('refInfo'),
+    recentRefsTitle: t('recentRefs'),
+    noRefsText: t('noRefs'),
+    totalRefsDisp: `${S.refs.length} ${t('friends')}`,
+    
+    // Tasks
+    socialTabText: t('social'),
+    referralTabText: t('referrals'),
+    partnerTabText: t('partners'),
+    communityTabText: t('community'),
+    
+    // Wallet
+    depositTabText: t('deposit'),
+    withdrawTabText: t('withdraw'),
+    exchangeTabText: t('exchange'),
+    depositCardTitle: t('tonDeposit'),
+    withdrawCardTitle: t('tonWithdrawal'),
+    walletLabel: t('wallet'),
+    connectBtnText: S.wallet ? t('disconnect') : t('connect'),
+    importantText: t('important'),
+    depositUserIdLabel: t('yourUserId'),
+    mustBeCommentText: t('mustBeComment'),
+    amountLabel: t('amount'),
+    depositBtnText: t('depositTon'),
+    withdrawBtnText: t('withdrawTon'),
+    yourTonBalanceLabel: t('yourTonBalance'),
+    withdrawHistoryTitle: t('withdrawalHistory'),
+    noWithdrawalsText: t('noWithdrawals'),
+    exchangeCardTitle: t('snowToTon'),
+    feeBadgeText: t('fee'),
+    youGetText: t('youWillGet'),
+    exchangeRateInfo: t('exchangeRate'),
+    exchangeFeeInfo: t('exchangeFee'),
+    exchangeBtnText: t('exchangeSnow'),
+    exchangeHistoryTitle: t('exchangeHistory'),
+    noExchangesText: t('noExchanges'),
+    maxBtnText: t('max'),
+    
+    // Machine Shop
+    machineShopTitle: t('minerShop'),
+    
+    // Upgrade
+    upgradeTitle: t('upgradeStorage'),
+    
+    // Add Task
+    addTaskBtnText: t('addTask'),
+    taskCostInfo: t('taskCostInfo'),
+    channelTypeText: t('channel'),
+    botTypeText: t('bot'),
+    botHintText: t('botHint'),
+    telegramLinkLabel: t('telegramLink'),
+    targetLabel: t('target'),
+    totalCostLabel: t('totalCost'),
+    createTaskBtnText: t('createTask'),
+    
+    // Navigation
+    navHome: t('navHome'),
+    navTasks: t('navTasks'),
+    navFriends: t('navFriends'),
+    navWallet: t('navWallet'),
+    
+    // Help
+    helpTitle: t('helpTitle'),
+    helpPayouts: t('payoutsChannel'),
+    helpNews: t('newsChannel'),
+    helpSupport: t('support'),
+    welcomeGiftTitle: t('welcomeGift'),
+    welcomeGiftText: t('welcomeGiftDesc'),
+    howToPlayTitle: t('howToPlay'),
+    howToPlayText: t('howToPlayDesc'),
+  };
+  
+  for (const [id, text] of Object.entries(elements)) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = text;
+  }
+  
+  // Update storage label
+  updateStorageUI();
+  updateSwapBals();
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  updateAllTexts();
+}
 
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
@@ -2405,34 +2861,34 @@ const CFG = {
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
   BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow',
   MACHINES: {
-    1: { cost: 1, rate: 300, name: "Базовый Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
-    2: { cost: 2, rate: 650, name: "Продвинутый Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
-    3: { cost: 3, rate: 1000, name: "Элитный Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
+    1: { cost: 1, rate: 300, name: "Basic Miner", name_ru: "Базовый Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
+    2: { cost: 2, rate: 650, name: "Advanced Miner", name_ru: "Продвинутый Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
+    3: { cost: 3, rate: 1000, name: "Elite Miner", name_ru: "Элитный Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   }
 };
 
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 600, name: "Пригласи 10 друзей", icon: "👥" },
-  { id: 'ref_20', n: 20, snow: 1500, name: "Пригласи 20 друзей", icon: "👥👥" },
-  { id: 'ref_50', n: 50, snow: 4000, name: "Пригласи 50 друзей", icon: "🌟" },
-  { id: 'ref_100', n: 100, snow: 10000, name: "Пригласи 100 друзей", icon: "💎" },
-  { id: 'ref_200', n: 200, snow: 20000, name: "Пригласи 200 друзей", icon: "👑" },
-  { id: 'ref_500', n: 500, snow: 50000, name: "Пригласи 500 друзей", icon: "🏆" }
+  { id: 'ref_10', n: 10, snow: 600, name: "Invite 10 friends", name_ru: "Пригласи 10 друзей", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 1500, name: "Invite 20 friends", name_ru: "Пригласи 20 друзей", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 4000, name: "Invite 50 friends", name_ru: "Пригласи 50 друзей", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 10000, name: "Invite 100 friends", name_ru: "Пригласи 100 друзей", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 20000, name: "Invite 200 friends", name_ru: "Пригласи 200 друзей", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 50000, name: "Invite 500 friends", name_ru: "Пригласи 500 друзей", icon: "🏆" }
 ];
 
 const REF_TASK_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const STORAGE_LVS = {
-  1: { cap: 300, upgCost: 500, label: 'Подарочная коробка' },
-  2: { cap: 900, upgCost: 2000, label: 'Сугроб' },
-  3: { cap: 2400, upgCost: 8000, label: 'Ледяной блок' },
-  4: { cap: 6000, upgCost: 25000, label: 'Снеговик' },
-  5: { cap: 18000, upgCost: 80000, label: 'Ледяной замок' },
-  6: { cap: 60000, upgCost: 250000, label: 'Замороженный дворец' },
-  7: { cap: 120000, upgCost: 500000, label: 'Северный полюс' },
-  8: { cap: 210000, upgCost: 900000, label: 'Арктическая база' },
-  9: { cap: 330000, upgCost: 1500000, label: 'Ледник' },
-  10: { cap: 480000, upgCost: 2500000, label: 'Айсберг' }
+  1: { cap: 300, upgCost: 500, label: "Gift Box", label_ru: "Подарочная коробка" },
+  2: { cap: 900, upgCost: 2000, label: "Snowdrift", label_ru: "Сугроб" },
+  3: { cap: 2400, upgCost: 8000, label: "Ice Block", label_ru: "Ледяной блок" },
+  4: { cap: 6000, upgCost: 25000, label: "Snowman", label_ru: "Снеговик" },
+  5: { cap: 18000, upgCost: 80000, label: "Ice Castle", label_ru: "Ледяной замок" },
+  6: { cap: 60000, upgCost: 250000, label: "Frozen Palace", label_ru: "Замороженный дворец" },
+  7: { cap: 120000, upgCost: 500000, label: "North Pole", label_ru: "Северный полюс" },
+  8: { cap: 210000, upgCost: 900000, label: "Arctic Base", label_ru: "Арктическая база" },
+  9: { cap: 330000, upgCost: 1500000, label: "Glacier", label_ru: "Ледник" },
+  10: { cap: 480000, upgCost: 2500000, label: "Iceberg", label_ru: "Айсберг" }
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
@@ -2446,10 +2902,10 @@ const S = {
   storageProgress: 0, storageInt: null,
   tg: null, tonUI: null, wallet: null, depCheckInt: null,
   _collectCooldown: false,
-  isNewUser: false
+  isNewUser: false,
+  _lastClickTime: 0
 };
 
-let _lastClickTime = 0;
 let _apiInFlight = 0;
 let _nt = null;
 let _taskInFlight = new Set();
@@ -2462,14 +2918,14 @@ const MIN_TASK_TARGET = 100;
 function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
 async function api(action, data = {}) {
-  if (_apiInFlight > 8) throw new Error('Слишком много запросов');
+  if (_apiInFlight > 8) throw new Error('Too many requests');
   _apiInFlight++;
   try {
     const h = { 'Content-Type': 'application/json' };
     if (S.tg?.initData) h.Authorization = `Telegram ${S.tg.initData}`;
     const r = await fetch(`${CFG.API_URL}/api`, { method: 'POST', headers: h, body: JSON.stringify({ action, data }) });
     const j = await r.json();
-    if (!j.success) throw new Error(j.error || 'Ошибка API');
+    if (!j.success) throw new Error(j.error || 'API Error');
     return j.data;
   } finally { _apiInFlight--; }
 }
@@ -2482,7 +2938,10 @@ function showNotif(msg, type = 'i') {
   el.innerHTML = msg;
   el.className = 'notif ' + type;
   setTimeout(() => el.classList.add('show'), 10);
-  _nt = setTimeout(() => el.classList.remove('show'), 3000);
+  // Auto-hide after 3 seconds
+  _nt = setTimeout(() => {
+    el.classList.remove('show');
+  }, 3000);
 }
 
 async function loadState() {
@@ -2498,7 +2957,7 @@ async function loadState() {
     if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     S.isNewUser = !S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine;
     updateRefUI();
-  } catch (e) { console.warn('loadState:', e.message); showNotif('Не удалось загрузить данные', 'e'); }
+  } catch (e) { console.warn('loadState:', e.message); showNotif('Failed to load data', 'e'); }
   updateUI();
 }
 
@@ -2524,12 +2983,12 @@ function updateStorageUI() {
   document.getElementById('storagePct').textContent = pct + '%';
   document.getElementById('storageFill').style.width = pct + '%';
   document.getElementById('storageLbl').textContent = `${Math.floor(S.storageProgress)} / ${fmt(cfg.cap)} Snow`;
-  document.getElementById('storageLvDisp').textContent = `Ур.${lv}`;
+  document.getElementById('storageLvDisp').textContent = `Lv.${lv}`;
   const btn = document.getElementById('collectBtn');
   const has = S.storageProgress >= 1;
   btn.disabled = !has;
   const claimSpan = document.getElementById('claimBtnTxt');
-  if (claimSpan) claimSpan.innerHTML = has ? `Собрать ${fmt(Math.floor(S.storageProgress))} Snow` : 'Хранилище пусто...';
+  if (claimSpan) claimSpan.innerHTML = has ? t('collectX', fmt(Math.floor(S.storageProgress))) : t('storageEmpty');
 }
 
 function fmt(n) {
@@ -2561,17 +3020,17 @@ function startStorage() {
 async function collectSnow() {
   if (S._collectCooldown) return;
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   const amt = Math.floor(S.storageProgress);
-  if (amt < 1) { showNotif('Хранилище пусто!', 'e'); return; }
+  if (amt < 1) { showNotif(t('storageEmptyMsg'), 'e'); return; }
   S._collectCooldown = true;
   setTimeout(() => S._collectCooldown = false, 3000);
   S.user.snow = (S.user.snow || 0) + amt;
   S.storageProgress = 0;
   updateUI();
   triggerSnowfall(30);
-  showNotif(`+${fmt(amt)} Snow собрано!`, 's');
+  showNotif(t('collected', fmt(amt)), 's');
   api('collect', { amount: amt }).catch(() => {});
 }
 
@@ -2602,16 +3061,16 @@ function spawnSnowParticle() {
 
 function santaClick() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   spawnSnowParticle();
   triggerSnowfall(20);
 }
 
 async function openWelcomeChest() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   
   const chestImg = document.querySelector('#welcomeChest .chest-image');
   if (chestImg) chestImg.classList.add('chest-opening');
@@ -2630,14 +3089,14 @@ async function openWelcomeChest() {
     showRewardsPopup(result.snow, 1, result.miningRate);
     
   } catch (e) {
-    showNotif(`❌ ${e.message || 'Не удалось открыть сундук'}`, 'e');
+    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
 }
 
 async function openWelcomeChestFromModal() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   
   const chestImg = document.getElementById('chestToOpen');
   if (chestImg) chestImg.classList.add('chest-opening');
@@ -2658,7 +3117,7 @@ async function openWelcomeChestFromModal() {
     showRewardsPopup(result.snow, 1, result.miningRate);
     
   } catch (e) {
-    showNotif(`❌ ${e.message || 'Не удалось открыть сундук'}`, 'e');
+    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
 }
 
@@ -2669,22 +3128,22 @@ function showRewardsPopup(snow, machines, rate) {
   popup.innerHTML = `
     <div class="modal-box rewards-popup" style="max-width: 360px; text-align: center;">
       <div style="font-size: 56px; margin-bottom: 16px;">🎁✨🎄</div>
-      <div style="font-size: 26px; font-weight: 800; color: var(--ice); margin-bottom: 20px;">🎉 ПОЗДРАВЛЯЕМ! 🎉</div>
+      <div style="font-size: 26px; font-weight: 800; color: var(--ice); margin-bottom: 20px;">🎉 ${currentLang === 'ru' ? 'ПОЗДРАВЛЯЕМ!' : 'CONGRATULATIONS!'} 🎉</div>
       <div style="background: linear-gradient(135deg, rgba(77,208,225,0.2), rgba(0,0,0,0.4)); border-radius: 24px; padding: 20px;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
           <span><img src="${SNOW_IMG}" style="width: 32px; vertical-align: middle;"> Snow:</span>
           <span style="font-weight: 800; color: var(--gold);">+${fmt(snow)}</span>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-          <span><i class="fas fa-microchip"></i> Майнер:</span>
+          <span><i class="fas fa-microchip"></i> ${currentLang === 'ru' ? 'Майнер:' : 'Miner:'}</span>
           <span style="font-weight: 800;">+1</span>
         </div>
         <div style="display: flex; justify-content: space-between;">
-          <span><i class="fas fa-bolt"></i> Скорость:</span>
+          <span><i class="fas fa-bolt"></i> ${currentLang === 'ru' ? 'Скорость:' : 'Rate:'}</span>
           <span style="font-weight: 800; color: var(--ice);">+${rate} Snow/час</span>
         </div>
       </div>
-      <button onclick="closeRewardsPopup()" class="btn-prim" style="margin-top: 20px; padding: 12px 32px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800;">🎄 Начать майнинг! 🎄</button>
+      <button onclick="closeRewardsPopup()" class="btn-prim" style="margin-top: 20px; padding: 12px 32px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800;">${currentLang === 'ru' ? '🎄 Начать майнинг! 🎄' : '🎄 Start Mining! 🎄'}</button>
     </div>
   `;
   document.body.appendChild(popup);
@@ -2712,27 +3171,32 @@ function openMachineShop() {
   openModal('machineShopModal');
 }
 
+function getMachineName(m) {
+  return currentLang === 'ru' ? (m.name_ru || m.name) : m.name;
+}
+
 function buildMachineShop() {
   let html = '<div class="machine-cards">';
   for (let i = 1; i <= 3; i++) {
     const m = CFG.MACHINES[i];
     const count = S.user.miningMachines?.[i] || 0;
     const canAfford = (S.user.tonBalance || 0) >= m.cost;
+    const machineName = getMachineName(m);
     html += `
       <div class="machine-card">
         <img src="${m.image}" class="machine-card-img">
         <div class="machine-card-info">
-          <div class="machine-card-name">${m.name}</div>
-          <div class="machine-card-rate">⚡ <span>${m.rate}</span> Snow/час</div>
-          <div class="machine-card-cost">💰 ${m.cost} TON за шт</div>
-          <div class="machine-count-badge">В наличии: ${count}</div>
+          <div class="machine-card-name">${machineName}</div>
+          <div class="machine-card-rate">⚡ <span>${m.rate}</span> ${t('snowPerHour')}</div>
+          <div class="machine-card-cost">💰 ${m.cost} TON ${t('tonEach')}</div>
+          <div class="machine-count-badge">${t('inStock')} ${count}</div>
         </div>
         <div class="machine-quantity">
           <input type="number" id="qty_${i}" value="1" min="1" max="99">
-          <span>шт</span>
+          <span>${currentLang === 'ru' ? 'шт' : 'pcs'}</span>
         </div>
         <button class="machine-card-btn" onclick="purchaseMachine(${i})" ${!canAfford ? 'disabled' : ''}>
-          ${canAfford ? 'Купить' : 'Нужно ' + m.cost + ' TON'}
+          ${canAfford ? t('buy') : t('need') + ' ' + m.cost + ' TON'}
         </button>
       </div>
     `;
@@ -2743,13 +3207,13 @@ function buildMachineShop() {
 
 async function purchaseMachine(machineType) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   const m = CFG.MACHINES[machineType];
   const qty = parseInt(document.getElementById(`qty_${machineType}`)?.value) || 1;
   const totalCost = m.cost * qty;
   if ((S.user.tonBalance || 0) < totalCost) {
-    showNotif(`Нужно ${totalCost} TON`, 'e');
+    showNotif(t('need') + ' ' + totalCost + ' TON', 'e');
     return;
   }
   try {
@@ -2760,10 +3224,10 @@ async function purchaseMachine(machineType) {
     updateUI();
     buildMachineShop();
     triggerSnowfall(30);
-    showNotif(`🎉 ${qty}x ${m.name} куплен!`, 's');
+    showNotif(t('purchaseSuccess', qty, getMachineName(m)), 's');
     spawnSnowParticle();
   } catch (e) {
-    showNotif(`❌ ${e.message}`, 'e');
+    showNotif(t('purchaseError', e.message), 'e');
   }
 }
 
@@ -2771,27 +3235,29 @@ function buildUpgradeContent() {
   const lv = S.user.storageLevel || 1;
   const cur = STORAGE_LVS[lv];
   const next = STORAGE_LVS[lv + 1];
+  const curLabel = currentLang === 'ru' ? (cur.label_ru || cur.label) : cur.label;
+  const nextLabel = next ? (currentLang === 'ru' ? (next.label_ru || next.label) : next.label) : '';
   let html = `<div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 16px; text-align: center;">
     <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
       <div style="flex:1; text-align: center;">
-        <div style="font-size: 20px; font-weight: 800; color: var(--ice);">Ур.${lv}</div>
-        <div style="font-size: 12px;">${cur.label}</div>
-        <div>Вместимость: ${fmt(cur.cap)}</div>
+        <div style="font-size: 20px; font-weight: 800; color: var(--ice);">${t('upgrade')} ${lv}</div>
+        <div style="font-size: 12px;">${curLabel}</div>
+        <div>${t('storage')}: ${fmt(cur.cap)}</div>
       </div>
       <div style="font-size: 24px; color: var(--ice);">→</div>
       <div style="flex:1; text-align: center;">
-        <div style="font-size: 20px; font-weight: 800; color: var(--gold);">Ур.${lv+1}</div>
-        <div style="font-size: 12px;">${next?.label || 'МАКС'}</div>
-        <div>Вместимость: ${next ? fmt(next.cap) : 'МАКС'}</div>
+        <div style="font-size: 20px; font-weight: 800; color: var(--gold);">${t('upgrade')} ${lv+1}</div>
+        <div style="font-size: 12px;">${nextLabel || (next ? '' : t('maxLevel'))}</div>
+        <div>${t('storage')}: ${next ? fmt(next.cap) : t('maxLevel')}</div>
       </div>
     </div>`;
   if (next) {
     html += `<div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
-      Стоимость: <span style="font-weight: 800; color: var(--gold);">${fmt(next.upgCost)} Snow</span>
+      ${t('totalCost')} <span style="font-weight: 800; color: var(--gold);">${fmt(next.upgCost)} Snow</span>
     </div>
-    <button class="modern-btn primary" onclick="upgradeStorage()" style="width:100%;">⬆️ Улучшить</button>`;
+    <button class="modern-btn primary" onclick="upgradeStorage()" style="width:100%;">${t('upgradeBtn')}</button>`;
   } else {
-    html += `<div style="color: var(--ice); font-weight: 800;">🏆 Максимальный уровень!</div>`;
+    html += `<div style="color: var(--ice); font-weight: 800;">${t('maxLevel')}</div>`;
   }
   html += `</div>`;
   document.getElementById('upgradeContent').innerHTML = html;
@@ -2799,23 +3265,23 @@ function buildUpgradeContent() {
 
 async function upgradeStorage() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   const lv = S.user.storageLevel || 1;
   const next = STORAGE_LVS[lv + 1];
-  if (!next) { showNotif('Уже максимум!', 'e'); return; }
-  if ((S.user.snow || 0) < next.upgCost) { showNotif(`Нужно ${fmt(next.upgCost)} Snow!`, 'e'); return; }
+  if (!next) { showNotif(t('maxLevelMsg'), 'e'); return; }
+  if ((S.user.snow || 0) < next.upgCost) { showNotif(t('notEnoughSnow'), 'e'); return; }
   S.user.snow -= next.upgCost;
   S.user.storageLevel = lv + 1;
   api('upgradeStorage', { newLevel: lv + 1 }).catch(() => {});
   buildUpgradeContent();
   updateUI();
   triggerSnowfall(30);
-  showNotif(`✅ Хранилище улучшено до Ур.${lv+1}!`, 's');
+  showNotif(t('upgradeSuccess', lv + 1), 's');
 }
 
 function updateSwapBals() {
-  document.getElementById('swapFromBalSnow').innerHTML = `Баланс: ${fmt(S.user.snow || 0)} Snow`;
+  document.getElementById('swapFromBalSnow').innerHTML = `${t('snow')}: ${fmt(S.user.snow || 0)}`;
 }
 
 function swapSnowMax() {
@@ -2835,13 +3301,13 @@ function updSwapSnowToTon() {
 let _exchInFlight = false;
 async function swapSnowToTon() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   if (_exchInFlight) return;
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
-  if (snow <= 0) { showNotif('Введите сумму!', 'e'); return; }
-  if (snow < 100) { showNotif('Минимум 100 Snow', 'e'); return; }
-  if (snow > (S.user.snow || 0)) { showNotif('Недостаточно Snow!', 'e'); return; }
+  if (snow <= 0) { showNotif(t('minSnow'), 'e'); return; }
+  if (snow < 100) { showNotif(t('minSnow'), 'e'); return; }
+  if (snow > (S.user.snow || 0)) { showNotif(t('notEnoughSnowMsg'), 'e'); return; }
   _exchInFlight = true;
   try {
     const result = await api('exchange', { snowAmount: snow });
@@ -2851,8 +3317,8 @@ async function swapSnowToTon() {
     document.getElementById('swapSnowAmt').value = '';
     updSwapSnowToTon();
     triggerSnowfall(30);
-    showNotif(`✅ Обменяно ${fmt(snow)} Snow`, 's');
-  } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
+    showNotif(t('exchangeSuccess', fmt(snow)), 's');
+  } catch (e) { showNotif(t('exchangeError', e.message), 'e'); }
   finally { _exchInFlight = false; }
 }
 
@@ -2860,32 +3326,32 @@ function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
 
 async function doWithdraw() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   const addr = document.getElementById('wdAddr').value.trim();
   const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
-  if (!addr || addr.length < 10) { showNotif('Неверный адрес!', 'e'); return; }
-  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(`Минимум ${CFG.MIN_WITHDRAW_TON} TON!`, 'e'); return; }
-  if (tonAmt > (S.user.tonBalance || 0)) { showNotif('Недостаточно TON!', 'e'); return; }
+  if (!addr || addr.length < 10) { showNotif(t('invalidAddress'), 'e'); return; }
+  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(t('minWithdraw', CFG.MIN_WITHDRAW_TON), 'e'); return; }
+  if (tonAmt > (S.user.tonBalance || 0)) { showNotif(t('notEnoughTon'), 'e'); return; }
   try {
     const res = await api('withdraw', { address: addr, amount: tonAmt });
     S.user.tonBalance = res.tonBalance;
     updateUI();
-    showNotif(`✅ Заявка на вывод отправлена!`, 's');
+    showNotif(t('withdrawSuccess'), 's');
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
-  } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
+  } catch (e) { showNotif(t('withdrawError', e.message), 'e'); }
 }
 
 function setDepAmt(v) { document.getElementById('depositAmountInput').value = v; }
 
 async function initiateDeposit() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
-  if (!S.wallet) { showNotif('Сначала подключите кошелек!', 'e'); return; }
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
+  if (!S.wallet) { showNotif(t('connectWalletFirst'), 'e'); return; }
   const amt = parseFloat(document.getElementById('depositAmountInput').value);
-  if (!amt || amt < 1) { showNotif('Минимум 1 TON', 'e'); return; }
+  if (!amt || amt < 1) { showNotif(t('minDeposit'), 'e'); return; }
   try {
     const comment = String(S.userId);
     const nano = String(Math.floor(amt * 1e9));
@@ -2901,16 +3367,16 @@ async function initiateDeposit() {
     const result = await S.tonUI.sendTransaction(tx);
     const sd = document.getElementById('depositStatus');
     sd.classList.add('visible');
-    sd.querySelector('div:first-child').innerHTML = '⏳ Транзакция отправлена!';
-    document.getElementById('depositStatusDetail').textContent = 'Баланс будет добавлен в течение 3 минут.';
+    sd.querySelector('div:first-child').innerHTML = '⏳ Transaction sent!';
+    document.getElementById('depositStatusDetail').textContent = 'Balance will be added within 3 minutes.';
     triggerSnowfall(30);
-    showNotif('✅ Депозит отправлен!', 's');
+    showNotif(t('depositSent'), 's');
     await api('deposit', { amount: amt, txHash: result.boc, comment });
   } catch (e) {
     const sd = document.getElementById('depositStatus');
     sd.classList.add('visible');
-    sd.querySelector('div:first-child').innerHTML = '❌ Транзакция не удалась';
-    document.getElementById('depositStatusDetail').textContent = e.message || 'Попробуйте снова';
+    sd.querySelector('div:first-child').innerHTML = '❌ Transaction failed';
+    document.getElementById('depositStatusDetail').textContent = e.message || 'Try again';
   }
 }
 
@@ -2924,12 +3390,12 @@ function startDepVerify(depId, txHash) {
       if (r.status === 'completed') {
         clearInterval(S.depCheckInt);
         const sd = document.getElementById('depositStatus');
-        sd.querySelector('div:first-child').innerHTML = '✅ Депозит подтвержден!';
-        document.getElementById('depositStatusDetail').textContent = `${r.amount} TON добавлено`;
+        sd.querySelector('div:first-child').innerHTML = '✅ Deposit confirmed!';
+        document.getElementById('depositStatusDetail').textContent = `${r.amount} TON added`;
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
         updateUI();
         triggerSnowfall(30);
-        showNotif(`💰 ${r.amount} TON зачислено!`, 's');
+        showNotif(t('depositConfirmed', r.amount), 's');
         setTimeout(() => sd.classList.remove('visible'), 3000);
       }
     } catch (e) { if (attempts >= 18) clearInterval(S.depCheckInt); }
@@ -2940,6 +3406,7 @@ function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refHtml = '';
   for (const task of REF_TASKS) {
+    const taskName = currentLang === 'ru' ? (task.name_ru || task.name) : task.name;
     const completed = S.doneTasks.includes(task.id);
     const canClaim = referralCount >= task.n && !completed;
     const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
@@ -2947,22 +3414,22 @@ function renderTasks() {
       <div class="task-item">
         <div class="ticon"><img src="${REF_TASK_IMG}" alt="Referral"></div>
         <div class="tinfo">
-          <div class="tname">${task.name}</div>
+          <div class="tname">${taskName}</div>
           <div class="trew"><img src="${SNOW_IMG}" style="width: 16px; vertical-align: middle;"> ${fmt(task.snow)} Snow</div>
           <div class="progress-bar"><div style="width: ${progress}%; background: var(--ice); height: 100%; border-radius: 10px;"></div></div>
-          <div class="tstat">${referralCount}/${task.n} друзей (${progress}%)</div>
+          <div class="tstat">${referralCount}/${task.n} ${t('friends')} (${progress}%)</div>
         </div>
-        ${completed ? '<button class="tbtn done">✅ Выполнено</button>' : canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 Получить</button>` : `<button class="tbtn go" disabled>🔒 Нужно ${task.n}</button>`}
+        ${completed ? '<button class="tbtn done">✅ ' + (currentLang === 'ru' ? 'Выполнено' : 'Completed') + '</button>' : canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 ${currentLang === 'ru' ? 'Получить' : 'Claim'}</button>` : `<button class="tbtn go" disabled>🔒 ${currentLang === 'ru' ? 'Нужно' : 'Need'} ${task.n}</button>`}
       </div>`;
   }
-  document.getElementById('referralTasksList').innerHTML = refHtml || '<div class="hist-empty">Приглашайте друзей, чтобы открыть награды!</div>';
+  document.getElementById('referralTasksList').innerHTML = refHtml || `<div class="hist-empty">${t('inviteFriendsHint') || 'Invite friends to unlock rewards!'}</div>`;
   renderSocTasks();
 }
 
 async function claimRefTask(taskId) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   try {
     const result = await api('claimTask', { taskId });
     S.user.snow = result.snow;
@@ -2970,14 +3437,14 @@ async function claimRefTask(taskId) {
     updateUI();
     renderTasks();
     triggerSnowfall(30);
-    showNotif(`🎉 +${fmt(result.snowReward)} Snow!`, 's');
-  } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
+    showNotif(t('taskCompleted', fmt(result.snowReward)), 's');
+  } catch (e) { showNotif(t('taskError', e.message), 'e'); }
 }
 
 function buildTaskCard(t, cat) {
   const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
   const icon = t.type === 'channel' ? '📢' : '🤖';
-  const name = t.name || (t.link?.split('t.me/')[1]?.split('/')[0] || 'Задание');
+  const name = t.name || (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task');
   const snow = t.snowReward || 50;
   const link = t.link || '';
   return `<div class="task-item">
@@ -2985,16 +3452,16 @@ function buildTaskCard(t, cat) {
     <div class="tinfo">
       <div class="tname">${esc(name)}</div>
       <div class="trew"><img src="${SNOW_IMG}" style="width: 14px;"> ${fmt(snow)} Snow</div>
-      ${t.completions ? `<div class="tstat">${t.completions}/${t.targetUsers} выполнено</div>` : ''}
+      ${t.completions ? `<div class="tstat">${t.completions}/${t.targetUsers} ${currentLang === 'ru' ? 'выполнено' : 'completed'}</div>` : ''}
     </div>
-    ${done ? '<button class="tbtn done">✅ Выполнено</button>' : inFlight ? '<button class="tbtn done">⏳</button>' : `<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type}','${cat}')">Выполнить →</button>`}
+    ${done ? '<button class="tbtn done">✅ ' + (currentLang === 'ru' ? 'Выполнено' : 'Completed') + '</button>' : inFlight ? '<button class="tbtn done">⏳</button>' : `<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type}','${cat}')">${currentLang === 'ru' ? 'Выполнить →' : 'Do →'}</button>`}
   </div>`;
 }
 
 function renderSocTasks() {
   const p = S.tasks?.partner || [], c = S.tasks?.community || [];
-  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : '<div class="hist-empty">Нет партнерских заданий</div>';
-  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : '<div class="hist-empty">Нет заданий сообщества</div>';
+  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет партнерских заданий' : 'No partner tasks'}</div>`;
+  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет заданий сообщества' : 'No community tasks'}</div>`;
 }
 
 function switchTTab(el, t) {
@@ -3016,13 +3483,13 @@ function switchSocTab(tab) {
 
 async function doDbTask(tid, link, type, cat) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   if (_taskInFlight.has(tid)) return;
   _taskInFlight.add(tid);
   renderSocTasks();
   if (link) window.open(link, '_blank');
-  showNotif('⏳ Проверка...', 'i');
+  showNotif('⏳ Checking...', 'i');
   setTimeout(async () => {
     try {
       const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
@@ -3031,9 +3498,9 @@ async function doDbTask(tid, link, type, cat) {
       updateUI();
       renderTasks();
       triggerSnowfall(30);
-      showNotif(`🎉 +${fmt(r.snowAdded)} Snow!`, 's');
+      showNotif(t('taskCompleted', fmt(r.snowAdded)), 's');
     } catch (e) {
-      showNotif(`❌ ${e.message || 'Проверка не удалась'}`, 'e');
+      showNotif(t('taskError', e.message || 'Verification failed'), 'e');
     } finally {
       _taskInFlight.delete(tid);
       renderSocTasks();
@@ -3061,26 +3528,26 @@ function updAtCost() {
 
 async function submitAddTask() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Подождите 3 секунды!', 'w'); return; }
-  _lastClickTime = now;
+  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  S._lastClickTime = now;
   if (_submitInFlight) return;
   const link = document.getElementById('atLink').value.trim();
   const target = parseInt(document.getElementById('atTarget').value) || 0;
   const st = document.getElementById('atStatus');
   st.style.display = 'block';
-  st.textContent = '⏳ Создание...';
-  if (!link.includes('t.me/')) { st.textContent = '❌ Неверная ссылка'; return; }
-  if (target < MIN_TASK_TARGET) { st.textContent = `❌ Минимум ${MIN_TASK_TARGET} пользователей`; return; }
+  st.textContent = '⏳ ' + (currentLang === 'ru' ? 'Создание...' : 'Creating...');
+  if (!link.includes('t.me/')) { st.textContent = '❌ ' + (currentLang === 'ru' ? 'Неверная ссылка' : 'Invalid link'); return; }
+  if (target < MIN_TASK_TARGET) { st.textContent = `❌ ${currentLang === 'ru' ? 'Минимум' : 'Minimum'} ${MIN_TASK_TARGET} ${currentLang === 'ru' ? 'пользователей' : 'users'}`; return; }
   const cost = target * TASK_SNOW_PER_USER;
-  if ((S.user.snow || 0) < cost) { st.textContent = `❌ Нужно ${fmt(cost)} Snow`; return; }
+  if ((S.user.snow || 0) < cost) { st.textContent = `❌ ${currentLang === 'ru' ? 'Нужно' : 'Need'} ${fmt(cost)} Snow`; return; }
   _submitInFlight = true;
   try {
     await api('createTask', { type: _atType, link, targetUsers: target });
     S.user.snow = (S.user.snow || 0) - cost;
-    st.textContent = '✅ Задание создано!';
+    st.textContent = '✅ ' + (currentLang === 'ru' ? 'Задание создано!' : 'Task created!');
     updateUI();
     triggerSnowfall(30);
-    showNotif(`✅ Задание создано! Стоимость: ${fmt(cost)} Snow`, 's');
+    showNotif(`✅ ${currentLang === 'ru' ? 'Задание создано! Стоимость:' : 'Task created! Cost:'} ${fmt(cost)} Snow`, 's');
     setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
   } catch (e) { st.textContent = `❌ ${e.message}`; }
   finally { _submitInFlight = false; }
@@ -3092,18 +3559,18 @@ function updateRefUI() {
   const inp = document.getElementById('refLinkInp');
   if (inp) inp.value = link;
   document.getElementById('depositUserIdDisplay').textContent = esc(S.userId);
-  document.getElementById('totalRefsDisp').textContent = `${S.refs.length} Друзей`;
+  document.getElementById('totalRefsDisp').textContent = `${S.refs.length} ${t('friends')}`;
   const listEl = document.getElementById('recentRefsList');
   if (listEl) {
     if (!S.refs.length) {
-      listEl.innerHTML = '<div class="hist-empty">Нет рефералов</div>';
+      listEl.innerHTML = `<div class="hist-empty">${t('noRefs')}</div>`;
     } else {
       listEl.innerHTML = S.refs.slice(0, 20).map(r => `
         <div class="ref-list-item">
           <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}">` : '🎅'}</div>
           <div class="rli-info">
             <div class="rli-name">${esc(r.name)}</div>
-            <div class="rli-date">${r.date || 'Присоединился недавно'}</div>
+            <div class="rli-date">${r.date || (currentLang === 'ru' ? 'Присоединился недавно' : 'Joined recently')}</div>
           </div>
           <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
         </div>`).join('');
@@ -3113,33 +3580,33 @@ function updateRefUI() {
 
 function copyRefLink() {
   const v = document.getElementById('refLinkInp').value;
-  navigator.clipboard.writeText(v).then(() => showNotif('✅ Ссылка скопирована!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Ссылка скопирована!', 's'); });
+  navigator.clipboard.writeText(v).then(() => showNotif(t('linkCopied'), 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif(t('linkCopied'), 's'); });
 }
 
 function renderExchHist() {
   const el = document.getElementById('exchHist');
   if (!el) return;
-  if (!S.exchHist.length) { el.innerHTML = '<div class="hist-empty">Нет обменов</div>'; return; }
+  if (!S.exchHist.length) { el.innerHTML = `<div class="hist-empty">${t('noExchanges')}</div>`; return; }
   el.innerHTML = S.exchHist.slice(0, 30).map(h => `
     <div class="hist-row">
       <span class="hist-l">${new Date(h.ts).toLocaleDateString()} · ${h.dir || 'S→T'}</span>
       <span class="hist-r">${h.ton.toFixed(6)} TON</span>
     </div>
-    <div style="font-size: 10px; color: var(--muted); padding: 0 16px 8px;">Из: ${fmt(h.snow)} Snow (Комиссия: ${fmt(h.fee)} Snow)</div>
+    <div style="font-size: 10px; color: var(--muted); padding: 0 16px 8px;">From: ${fmt(h.snow)} Snow (Fee: ${fmt(h.fee)} Snow)</div>
   `).join('');
 }
 
 function renderWdHist() {
   const el = document.getElementById('wdHist');
   if (!el) return;
-  if (!S.wdHist.length) { el.innerHTML = '<div class="hist-empty">Нет выводов</div>'; return; }
+  if (!S.wdHist.length) { el.innerHTML = `<div class="hist-empty">${t('noWithdrawals')}</div>`; return; }
   el.innerHTML = S.wdHist.slice(0, 20).map(h => `
     <div class="hist-row">
       <div>
         <div style="font-weight: 800;">${h.tonAmount.toFixed(6)} TON</div>
         <div style="font-size: 10px; color: var(--muted);">${h.d || new Date(h.ts).toLocaleDateString()}</div>
       </div>
-      <span class="stat-badge sb-${h.status || 'pending'}">${h.status === 'pending' ? 'Ожидание' : h.status === 'approved' ? 'Одобрено' : 'Отклонено'}</span>
+      <span class="stat-badge sb-${h.status || 'pending'}">${h.status === 'pending' ? (currentLang === 'ru' ? 'Ожидание' : 'Pending') : h.status === 'approved' ? (currentLang === 'ru' ? 'Одобрено' : 'Approved') : (currentLang === 'ru' ? 'Отклонено' : 'Rejected')}</span>
     </div>
   `).join('');
 }
@@ -3161,16 +3628,16 @@ function onWConn(w) {
   const short = `${S.wallet.address.substring(0, 6)}...${S.wallet.address.slice(-4)}`;
   document.getElementById('walletAddressDisplay').textContent = short;
   const btn = document.getElementById('connectWalletBtn');
-  btn.innerHTML = '<i class="fas fa-unlink"></i> Отключить';
+  btn.innerHTML = `<i class="fas fa-unlink"></i> ${t('disconnect')}`;
   btn.onclick = disconnectWallet;
   document.getElementById('submitDepositBtn').disabled = false;
 }
 
 function onWDisc() {
   S.wallet = null;
-  document.getElementById('walletAddressDisplay').textContent = 'Не подключен';
+  document.getElementById('walletAddressDisplay').textContent = t('notConnected');
   const btn = document.getElementById('connectWalletBtn');
-  btn.innerHTML = '<i class="fas fa-plug"></i> Подключить';
+  btn.innerHTML = `<i class="fas fa-plug"></i> ${t('connect')}`;
   btn.onclick = connectWallet;
   document.getElementById('submitDepositBtn').disabled = true;
 }
@@ -3236,7 +3703,7 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 async function init() {
   const startTime = Date.now();
   const MIN_LOADING_MS = 3000;
-  ldProgress(0, 'Запуск...');
+  ldProgress(0, t('loading'));
   
   if (window.Telegram?.WebApp) {
     S.tg = window.Telegram.WebApp;
@@ -3255,11 +3722,18 @@ async function init() {
     S.startParam = startParam.replace(/\D/g, '');
   }
   
-  await ldAnimateTo(10, 'Подключение...', 700);
+  // Detect language from Telegram
+  if (S.tg?.initDataUnsafe?.user?.language_code === 'en') {
+    setLanguage('en');
+  } else {
+    setLanguage('ru');
+  }
+  
+  await ldAnimateTo(10, t('connecting'), 700);
   await new Promise(r => setTimeout(r, 400));
-  await ldAnimateTo(20, 'Загрузка ресурсов...', 600);
+  await ldAnimateTo(20, t('loadingResources'), 600);
   await new Promise(r => setTimeout(r, 500));
-  await ldAnimateTo(40, 'Загрузка аккаунта...', 500);
+  await ldAnimateTo(40, t('loadingAccount'), 500);
   
   let loaded = false;
   for (let i = 0; i < 5 && !loaded; i++) {
@@ -3269,15 +3743,15 @@ async function init() {
     } catch (e) { await new Promise(r => setTimeout(r, 1500)); }
   }
   
-  if (!loaded) { ldProgress(100, 'Ошибка подключения'); return; }
-  await ldAnimateTo(70, 'Аккаунт загружен!', 500);
-  await ldAnimateTo(80, 'Построение интерфейса...', 400);
+  if (!loaded) { ldProgress(100, 'Connection error'); return; }
+  await ldAnimateTo(70, t('accountLoaded'), 500);
+  await ldAnimateTo(80, t('buildingUI'), 400);
   renderTasks();
-  await ldAnimateTo(90, 'Настройка кошелька...', 400);
+  await ldAnimateTo(90, t('settingWallet'), 400);
   setTimeout(() => initTON(), 600);
   startStorage();
   setInterval(() => loadState(), 30000);
-  await ldAnimateTo(100, 'Готово! 🎅', 500);
+  await ldAnimateTo(100, t('ready'), 500);
   
   const elapsed = Date.now() - startTime;
   if (elapsed < MIN_LOADING_MS) await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
