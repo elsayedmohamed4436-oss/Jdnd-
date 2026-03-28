@@ -79,7 +79,6 @@ body::after {
   z-index: -1;
 }
 
-/* Language Switcher */
 .lang-switcher {
   position: fixed;
   top: 12px;
@@ -111,7 +110,6 @@ body::after {
   color: var(--ice);
 }
 
-/* ========== LOADING SCREEN ========== */
 #loadingScreen {
   position: fixed;
   inset: 0;
@@ -229,7 +227,6 @@ body::after {
   border-radius: 20px;
 }
 
-/* ========== WELCOME MODAL ========== */
 .welcome-modal {
   position: fixed;
   top: 0;
@@ -332,7 +329,6 @@ body::after {
   margin-bottom: 10px;
 }
 
-/* ========== TOP BAR MODERN DESIGN ========== */
 .topbar-main {
   display: flex;
   align-items: center;
@@ -412,7 +408,6 @@ body::after {
   text-shadow: 0 0 8px rgba(77, 208, 225, 0.5);
 }
 
-/* ========== HOME SECTION MODERN ========== */
 .sec {
   display: none;
   padding: 12px 16px;
@@ -702,7 +697,6 @@ body::after {
   transform: scale(0.98);
 }
 
-/* ========== TASKS SECTION MODERN ========== */
 .tasks-container {
   background: linear-gradient(135deg, rgba(30, 45, 65, 0.95), rgba(15, 25, 40, 0.95));
   border-radius: 32px;
@@ -862,7 +856,6 @@ body::after {
   transition: width 0.3s ease;
 }
 
-/* ========== FRIENDS SECTION MODERN ========== */
 .friends-container {
   background: linear-gradient(135deg, rgba(30, 45, 65, 0.95), rgba(15, 25, 40, 0.95));
   border-radius: 32px;
@@ -1012,7 +1005,6 @@ body::after {
   white-space: nowrap;
 }
 
-/* ========== MACHINE SHOP ========== */
 .machine-shop {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
@@ -1148,7 +1140,6 @@ body::after {
   margin-left: 8px;
 }
 
-/* ========== WELCOME CHEST ========== */
 .welcome-chest {
   position: relative;
   margin: 10px auto 20px;
@@ -1215,7 +1206,6 @@ body::after {
   50% { opacity: 1; text-shadow: 0 0 15px rgba(77, 208, 225, 0.8); }
 }
 
-/* ========== WALLET SECTION ========== */
 .wallet-modern {
   margin-top: 8px;
 }
@@ -1660,7 +1650,6 @@ body::after {
   border: 1px solid rgba(239, 83, 80, 0.3);
 }
 
-/* ========== BOTTOM NAVIGATION ========== */
 .bnav {
   position: fixed;
   bottom: 0;
@@ -1726,7 +1715,6 @@ body::after {
   text-shadow: 0 0 6px rgba(77, 208, 225, 0.5);
 }
 
-/* ========== FLOATING BUTTON ========== */
 #floatAddTask {
   position: fixed;
   bottom: 100px;
@@ -1775,7 +1763,6 @@ body::after {
   filter: drop-shadow(0 0 10px rgba(77, 208, 225, 0.5));
 }
 
-/* ========== MODALS ========== */
 .modal {
   display: none;
   position: fixed;
@@ -1838,7 +1825,6 @@ body::after {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ========== SNOWFLAKES ========== */
 .snowflake {
   position: fixed;
   color: #fff;
@@ -2007,13 +1993,11 @@ body::after {
 
 <div class="background-fixed"></div>
 
-<!-- Language Switcher -->
 <div class="lang-switcher">
   <button class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">🇷🇺 RU</button>
   <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
 </div>
 
-<!-- Loading Screen -->
 <div id="loadingScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/76b663ee-bd1e-45b4-96cc-ed86f714c9f3.png" alt="Santa">
   <div class="ld-title">Santa Snow</div>
@@ -2026,7 +2010,6 @@ body::after {
   </div>
 </div>
 
-<!-- Welcome Modal -->
 <div id="welcomeModal" class="welcome-modal">
   <div class="welcome-modal-box">
     <div class="welcome-chest-container" style="position: relative; margin-bottom: 15px;">
@@ -2039,7 +2022,6 @@ body::after {
   </div>
 </div>
 
-<!-- Top Bar -->
 <div class="topbar-main">
   <div class="user-profile">
     <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
@@ -2056,14 +2038,11 @@ body::after {
   </div>
 </div>
 
-<!-- Home Section -->
 <div class="sec active" id="sectionHome">
   <div id="welcomeChest" class="welcome-chest" style="display: none;">
     <div class="chest-container" onclick="openWelcomeChest()">
       <div class="chest-wrapper" style="position: relative; display: inline-block;">
-        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" 
-             alt="Gift" 
-             class="chest-image">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Gift" class="chest-image">
         <div class="chest-glow"></div>
       </div>
       <div class="chest-text" id="chestText">🎁 OPEN THE GIFT! 🎁</div>
@@ -2121,7 +2100,6 @@ body::after {
   </div>
 </div>
 
-<!-- Friends Section -->
 <div class="sec" id="sectionFriends">
   <div class="friends-container">
     <div class="ref-prog-card">
@@ -2146,7 +2124,6 @@ body::after {
   </div>
 </div>
 
-<!-- Tasks Section -->
 <div class="sec" id="sectionTasks">
   <div class="tasks-container">
     <div class="task-tabs">
@@ -2167,7 +2144,6 @@ body::after {
   </div>
 </div>
 
-<!-- Wallet Section -->
 <div class="sec" id="sectionWallet">
   <div class="wallet-modern">
     <div class="modern-tabs">
@@ -2298,14 +2274,12 @@ body::after {
   </div>
 </div>
 
-<!-- Support Button -->
 <div class="support-img-btn" onclick="openSupport()">
   <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" alt="Support">
 </div>
 
 <button id="floatAddTask" onclick="openModal('addTaskModal')">➕ <span id="addTaskBtnText">Add Task</span></button>
 
-<!-- Bottom Navigation -->
 <nav class="bnav">
   <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div>
@@ -2325,7 +2299,6 @@ body::after {
   </div>
 </nav>
 
-<!-- Modals -->
 <div class="modal" id="helpModal">
   <div class="modal-box">
     <div class="mhdr">
@@ -2425,17 +2398,52 @@ body::after {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v16.2 (BILINGUAL)
-// FIXED: Machine Shop button working
-// FIXED: Collect button working
+// SANTA SNOW - FRONTEND v16.3 (FIXED - All Buttons Working)
+// FIXED: Machine Shop button functionality
+// FIXED: Collect button functionality
+// FIXED: Storage Upgrade button functionality
+// FIXED: All event handlers properly defined
+// ADDED: Bilingual support (English/Russian)
 // FIXED: Notifications auto-hide after 3 seconds
-// ADDED: English language support
 // ============================================================
 
-// Language translations
+// ========== GLOBAL VARIABLES ==========
+let currentLang = 'ru';
+
+// Main state object
+const S = {
+  userId: null,
+  startParam: '',
+  user: { 
+    snow: 0, 
+    miningRate: 0, 
+    miningMachines: {1:0, 2:0, 3:0}, 
+    totalEarned: 0, 
+    storageLevel: 1, 
+    tonBalance: 0, 
+    referralCount: 0, 
+    welcomeChestOpened: false, 
+    hasWelcomeMachine: false 
+  },
+  refs: [], 
+  exchHist: [], 
+  wdHist: [], 
+  doneTasks: [],
+  tasks: { partner: [], community: [] },
+  storageProgress: 0, 
+  storageInt: null,
+  tg: null, 
+  tonUI: null, 
+  wallet: null, 
+  depCheckInt: null,
+  _collectCooldown: false,
+  isNewUser: false,
+  _lastClickTime: 0
+};
+
+// ========== LANGUAGE TRANSLATIONS ==========
 const translations = {
   ru: {
-    // Loading
     loading: "Загрузка...",
     connecting: "Подключение...",
     loadingResources: "Загрузка ресурсов...",
@@ -2444,13 +2452,9 @@ const translations = {
     buildingUI: "Построение интерфейса...",
     settingWallet: "Настройка кошелька...",
     ready: "Готово! 🎅",
-    
-    // Welcome Modal
     welcomeTitle: "🎄 Подарок Санты! 🎄",
     welcomeSubtitle: "Откройте сундук, чтобы получить награду!",
     openChest: "🎁 Открыть сундук! 🎁",
-    
-    // Home
     accumulated: "Накоплено",
     perDay: "В день",
     storage: "Хранилище",
@@ -2459,26 +2463,18 @@ const translations = {
     storageEmpty: "Хранилище пусто...",
     collectX: (amt) => `Собрать ${amt} Snow`,
     buyMiners: "Купить майнеры",
-    
-    // Chest
     openGift: "🎁 ОТКРОЙТЕ ПОДАРОК! 🎁",
     chestReward: "⭐ 1000 Snow + 1 Майнер (10 Snow/час) ⭐",
-    
-    // Friends
     refBonus: "💰 20% комиссия с покупок друзей! Получайте Snow за каждую покупку!",
     copy: "Копировать",
     refInfo: "📤 Поделитесь ссылкой с друзьями. Когда они покупают майнеры, вы получаете 20% от суммы покупки в Snow!",
     recentRefs: "Недавние рефералы",
     noRefs: "Нет рефералов",
     friends: "Друзей",
-    
-    // Tasks
     social: "📢 Соц. сети",
     referrals: "👥 Рефералы",
     partners: "⭐ Партнеры",
     community: "🌍 Сообщество",
-    
-    // Wallet
     deposit: "Депозит",
     withdraw: "Вывод",
     exchange: "Обмен",
@@ -2505,8 +2501,6 @@ const translations = {
     exchangeSnow: "Обменять Snow → TON",
     exchangeHistory: "📋 История обменов",
     noExchanges: "Нет обменов",
-    
-    // Machine Shop
     minerShop: "🤖 Магазин майнеров",
     basicMiner: "Базовый Майнер",
     advancedMiner: "Продвинутый Майнер",
@@ -2516,13 +2510,9 @@ const translations = {
     inStock: "В наличии:",
     buy: "Купить",
     need: "Нужно",
-    
-    // Upgrade
     upgradeStorage: "⬆️ Улучшить хранилище",
     maxLevel: "🏆 Максимальный уровень!",
     upgradeBtn: "⬆️ Улучшить",
-    
-    // Add Task
     addTask: "➕ Добавить задание",
     taskCostInfo: "💡 Стоимость = Цель × 60 Snow\nМин: 100 пользователей = 6,000 Snow",
     channel: "📢 Канал",
@@ -2532,8 +2522,6 @@ const translations = {
     target: "Цель (мин 100)",
     totalCost: "Общая стоимость:",
     createTask: "✅ Создать задание",
-    
-    // Notifications
     wait: "Подождите 3 секунды!",
     storageEmptyMsg: "Хранилище пусто!",
     collected: (amt) => `+${amt} Snow собрано!`,
@@ -2557,8 +2545,6 @@ const translations = {
     linkCopied: "✅ Ссылка скопирована!",
     connectWalletFirst: "Сначала подключите кошелек!",
     minDeposit: "Минимум 1 TON",
-    
-    // Help
     helpTitle: "🎅 Гайд Santa Snow",
     payoutsChannel: "Канал выплат",
     newsChannel: "Новостной канал",
@@ -2567,20 +2553,15 @@ const translations = {
     welcomeGiftDesc: "Откройте сундук, чтобы получить 1000 Snow + 1 Майнер (10 Snow/час)!",
     howToPlay: "💡 Как играть",
     howToPlayDesc: "• Покупайте майнеры за TON, чтобы увеличить скорость добычи\n• Собирайте Snow из хранилища каждый час\n• Обменивайте Snow на TON (комиссия 4%)\n• Приглашайте друзей для 20% комиссии!\n• Выполняйте задания для бонусных Snow",
-    
-    // Navigation
     navHome: "Главная",
     navTasks: "Задания",
     navFriends: "Друзья",
     navWallet: "Кошелек",
-    
-    // Other
     snow: "Snow",
     ton: "TON",
     max: "MAX",
   },
   en: {
-    // Loading
     loading: "Loading...",
     connecting: "Connecting...",
     loadingResources: "Loading resources...",
@@ -2589,13 +2570,9 @@ const translations = {
     buildingUI: "Building interface...",
     settingWallet: "Setting up wallet...",
     ready: "Ready! 🎅",
-    
-    // Welcome Modal
     welcomeTitle: "🎄 Santa's Gift! 🎄",
     welcomeSubtitle: "Open the chest to get your reward!",
     openChest: "🎁 Open Chest! 🎁",
-    
-    // Home
     accumulated: "Accumulated",
     perDay: "Per day",
     storage: "Storage",
@@ -2604,26 +2581,18 @@ const translations = {
     storageEmpty: "Storage empty...",
     collectX: (amt) => `Collect ${amt} Snow`,
     buyMiners: "Buy Miners",
-    
-    // Chest
     openGift: "🎁 OPEN THE GIFT! 🎁",
     chestReward: "⭐ 1000 Snow + 1 Miner (10 Snow/hour) ⭐",
-    
-    // Friends
     refBonus: "💰 20% commission from friends' purchases! Get Snow for every purchase!",
     copy: "Copy",
     refInfo: "📤 Share this link with friends. When they buy miners, you get 20% of the purchase amount in Snow!",
     recentRefs: "Recent Referrals",
     noRefs: "No referrals",
     friends: "Friends",
-    
-    // Tasks
     social: "📢 Social",
     referrals: "👥 Referrals",
     partners: "⭐ Partners",
     community: "🌍 Community",
-    
-    // Wallet
     deposit: "Deposit",
     withdraw: "Withdraw",
     exchange: "Exchange",
@@ -2650,8 +2619,6 @@ const translations = {
     exchangeSnow: "Exchange Snow → TON",
     exchangeHistory: "📋 Exchange History",
     noExchanges: "No exchanges",
-    
-    // Machine Shop
     minerShop: "🤖 Miner Shop",
     basicMiner: "Basic Miner",
     advancedMiner: "Advanced Miner",
@@ -2661,13 +2628,9 @@ const translations = {
     inStock: "In stock:",
     buy: "Buy",
     need: "Need",
-    
-    // Upgrade
     upgradeStorage: "⬆️ Upgrade Storage",
     maxLevel: "🏆 Maximum level!",
     upgradeBtn: "⬆️ Upgrade",
-    
-    // Add Task
     addTask: "➕ Add Task",
     taskCostInfo: "💡 Cost = Target × 60 Snow\nMin: 100 users = 6,000 Snow",
     channel: "📢 Channel",
@@ -2677,8 +2640,6 @@ const translations = {
     target: "Target (min 100)",
     totalCost: "Total cost:",
     createTask: "✅ Create Task",
-    
-    // Notifications
     wait: "Wait 3 seconds!",
     storageEmptyMsg: "Storage is empty!",
     collected: (amt) => `+${amt} Snow collected!`,
@@ -2702,8 +2663,6 @@ const translations = {
     linkCopied: "✅ Link copied!",
     connectWalletFirst: "Connect wallet first!",
     minDeposit: "Minimum 1 TON",
-    
-    // Help
     helpTitle: "🎅 Santa Snow Guide",
     payoutsChannel: "Payouts Channel",
     newsChannel: "News Channel",
@@ -2712,144 +2671,17 @@ const translations = {
     welcomeGiftDesc: "Open the chest to get 1000 Snow + 1 Miner (10 Snow/hour)!",
     howToPlay: "💡 How to Play",
     howToPlayDesc: "• Buy miners with TON to increase mining speed\n• Collect Snow from storage every hour\n• Exchange Snow for TON (4% fee)\n• Invite friends for 20% commission!\n• Complete tasks for bonus Snow",
-    
-    // Navigation
     navHome: "Home",
     navTasks: "Tasks",
     navFriends: "Friends",
     navWallet: "Wallet",
-    
-    // Other
     snow: "Snow",
     ton: "TON",
     max: "MAX",
   }
 };
 
-let currentLang = 'ru';
-
-function t(key, ...args) {
-  let text = translations[currentLang][key] || translations['ru'][key] || key;
-  if (args.length) {
-    text = typeof text === 'function' ? text(...args) : text;
-  }
-  return text;
-}
-
-function updateAllTexts() {
-  // Update all elements with data-i18n or ids
-  const elements = {
-    // Loading
-    ldStatus: t('loading'),
-    
-    // Welcome Modal
-    welcomeTitle: t('welcomeTitle'),
-    welcomeSubtitle: t('welcomeSubtitle'),
-    openChestBtn: t('openChest'),
-    
-    // Home
-    statAccruedLabel: t('accumulated'),
-    statRateLabel: t('perDay'),
-    storageTitle: t('storage'),
-    storageUpgradeBtn: t('upgrade'),
-    claimBtnTxt: t('collect'),
-    buyMinersBtnText: t('buyMiners'),
-    chestText: t('openGift'),
-    chestRewardText: t('chestReward'),
-    
-    // Friends
-    refBonusText: t('refBonus'),
-    copyBtnText: t('copy'),
-    refInfoText: t('refInfo'),
-    recentRefsTitle: t('recentRefs'),
-    noRefsText: t('noRefs'),
-    totalRefsDisp: `${S.refs.length} ${t('friends')}`,
-    
-    // Tasks
-    socialTabText: t('social'),
-    referralTabText: t('referrals'),
-    partnerTabText: t('partners'),
-    communityTabText: t('community'),
-    
-    // Wallet
-    depositTabText: t('deposit'),
-    withdrawTabText: t('withdraw'),
-    exchangeTabText: t('exchange'),
-    depositCardTitle: t('tonDeposit'),
-    withdrawCardTitle: t('tonWithdrawal'),
-    walletLabel: t('wallet'),
-    connectBtnText: S.wallet ? t('disconnect') : t('connect'),
-    importantText: t('important'),
-    depositUserIdLabel: t('yourUserId'),
-    mustBeCommentText: t('mustBeComment'),
-    amountLabel: t('amount'),
-    depositBtnText: t('depositTon'),
-    withdrawBtnText: t('withdrawTon'),
-    yourTonBalanceLabel: t('yourTonBalance'),
-    withdrawHistoryTitle: t('withdrawalHistory'),
-    noWithdrawalsText: t('noWithdrawals'),
-    exchangeCardTitle: t('snowToTon'),
-    feeBadgeText: t('fee'),
-    youGetText: t('youWillGet'),
-    exchangeRateInfo: t('exchangeRate'),
-    exchangeFeeInfo: t('exchangeFee'),
-    exchangeBtnText: t('exchangeSnow'),
-    exchangeHistoryTitle: t('exchangeHistory'),
-    noExchangesText: t('noExchanges'),
-    maxBtnText: t('max'),
-    
-    // Machine Shop
-    machineShopTitle: t('minerShop'),
-    
-    // Upgrade
-    upgradeTitle: t('upgradeStorage'),
-    
-    // Add Task
-    addTaskBtnText: t('addTask'),
-    taskCostInfo: t('taskCostInfo'),
-    channelTypeText: t('channel'),
-    botTypeText: t('bot'),
-    botHintText: t('botHint'),
-    telegramLinkLabel: t('telegramLink'),
-    targetLabel: t('target'),
-    totalCostLabel: t('totalCost'),
-    createTaskBtnText: t('createTask'),
-    
-    // Navigation
-    navHome: t('navHome'),
-    navTasks: t('navTasks'),
-    navFriends: t('navFriends'),
-    navWallet: t('navWallet'),
-    
-    // Help
-    helpTitle: t('helpTitle'),
-    helpPayouts: t('payoutsChannel'),
-    helpNews: t('newsChannel'),
-    helpSupport: t('support'),
-    welcomeGiftTitle: t('welcomeGift'),
-    welcomeGiftText: t('welcomeGiftDesc'),
-    howToPlayTitle: t('howToPlay'),
-    howToPlayText: t('howToPlayDesc'),
-  };
-  
-  for (const [id, text] of Object.entries(elements)) {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = text;
-  }
-  
-  // Update storage label
-  updateStorageUI();
-  updateSwapBals();
-}
-
-function setLanguage(lang) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-  updateAllTexts();
-}
-
+// ========== CONFIGURATION ==========
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
@@ -2893,103 +2725,106 @@ const STORAGE_LVS = {
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
 
-const S = {
-  userId: null,
-  startParam: '',
-  user: { snow: 0, miningRate: 0, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
-  refs: [], exchHist: [], wdHist: [], doneTasks: [],
-  tasks: { partner: [], community: [] },
-  storageProgress: 0, storageInt: null,
-  tg: null, tonUI: null, wallet: null, depCheckInt: null,
-  _collectCooldown: false,
-  isNewUser: false,
-  _lastClickTime: 0
-};
+// ========== HELPER FUNCTIONS ==========
+function t(key, ...args) {
+  let text = translations[currentLang]?.[key] || translations['ru'][key] || key;
+  if (args.length && typeof text === 'function') {
+    text = text(...args);
+  }
+  return text;
+}
 
-let _apiInFlight = 0;
-let _nt = null;
-let _taskInFlight = new Set();
-let _atType = 'channel';
-let _submitInFlight = false;
-let _socTab = 'partner';
-const TASK_SNOW_PER_USER = 60;
-const MIN_TASK_TARGET = 100;
+function setLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  updateAllTexts();
+}
+
+function updateAllTexts() {
+  const elements = {
+    ldStatus: t('loading'),
+    welcomeTitle: t('welcomeTitle'),
+    welcomeSubtitle: t('welcomeSubtitle'),
+    openChestBtn: t('openChest'),
+    statAccruedLabel: t('accumulated'),
+    statRateLabel: t('perDay'),
+    storageTitle: t('storage'),
+    storageUpgradeBtn: t('upgrade'),
+    claimBtnTxt: t('collect'),
+    buyMinersBtnText: t('buyMiners'),
+    chestText: t('openGift'),
+    chestRewardText: t('chestReward'),
+    refBonusText: t('refBonus'),
+    copyBtnText: t('copy'),
+    refInfoText: t('refInfo'),
+    recentRefsTitle: t('recentRefs'),
+    noRefsText: t('noRefs'),
+    socialTabText: t('social'),
+    referralTabText: t('referrals'),
+    partnerTabText: t('partners'),
+    communityTabText: t('community'),
+    depositTabText: t('deposit'),
+    withdrawTabText: t('withdraw'),
+    exchangeTabText: t('exchange'),
+    depositCardTitle: t('tonDeposit'),
+    withdrawCardTitle: t('tonWithdrawal'),
+    walletLabel: t('wallet'),
+    connectBtnText: S.wallet ? t('disconnect') : t('connect'),
+    importantText: t('important'),
+    depositUserIdLabel: t('yourUserId'),
+    mustBeCommentText: t('mustBeComment'),
+    amountLabel: t('amount'),
+    depositBtnText: t('depositTon'),
+    withdrawBtnText: t('withdrawTon'),
+    yourTonBalanceLabel: t('yourTonBalance'),
+    withdrawHistoryTitle: t('withdrawalHistory'),
+    noWithdrawalsText: t('noWithdrawals'),
+    exchangeCardTitle: t('snowToTon'),
+    feeBadgeText: t('fee'),
+    youGetText: t('youWillGet'),
+    exchangeRateInfo: t('exchangeRate'),
+    exchangeFeeInfo: t('exchangeFee'),
+    exchangeBtnText: t('exchangeSnow'),
+    exchangeHistoryTitle: t('exchangeHistory'),
+    noExchangesText: t('noExchanges'),
+    maxBtnText: t('max'),
+    machineShopTitle: t('minerShop'),
+    upgradeTitle: t('upgradeStorage'),
+    addTaskBtnText: t('addTask'),
+    taskCostInfo: t('taskCostInfo'),
+    channelTypeText: t('channel'),
+    botTypeText: t('bot'),
+    botHintText: t('botHint'),
+    telegramLinkLabel: t('telegramLink'),
+    targetLabel: t('target'),
+    totalCostLabel: t('totalCost'),
+    createTaskBtnText: t('createTask'),
+    navHome: t('navHome'),
+    navTasks: t('navTasks'),
+    navFriends: t('navFriends'),
+    navWallet: t('navWallet'),
+    helpTitle: t('helpTitle'),
+    helpPayouts: t('payoutsChannel'),
+    helpNews: t('newsChannel'),
+    helpSupport: t('support'),
+    welcomeGiftTitle: t('welcomeGift'),
+    welcomeGiftText: t('welcomeGiftDesc'),
+    howToPlayTitle: t('howToPlay'),
+    howToPlayText: t('howToPlayDesc'),
+  };
+  
+  for (const [id, text] of Object.entries(elements)) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = text;
+  }
+  
+  updateStorageUI();
+  updateSwapBals();
+}
 
 function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
-
-async function api(action, data = {}) {
-  if (_apiInFlight > 8) throw new Error('Too many requests');
-  _apiInFlight++;
-  try {
-    const h = { 'Content-Type': 'application/json' };
-    if (S.tg?.initData) h.Authorization = `Telegram ${S.tg.initData}`;
-    const r = await fetch(`${CFG.API_URL}/api`, { method: 'POST', headers: h, body: JSON.stringify({ action, data }) });
-    const j = await r.json();
-    if (!j.success) throw new Error(j.error || 'API Error');
-    return j.data;
-  } finally { _apiInFlight--; }
-}
-
-function showNotif(msg, type = 'i') {
-  const el = document.getElementById('notif');
-  if (!el) return;
-  if (_nt) clearTimeout(_nt);
-  el.classList.remove('show');
-  el.innerHTML = msg;
-  el.className = 'notif ' + type;
-  setTimeout(() => el.classList.add('show'), 10);
-  // Auto-hide after 3 seconds
-  _nt = setTimeout(() => {
-    el.classList.remove('show');
-  }, 3000);
-}
-
-async function loadState() {
-  try {
-    const d = await api('getState', { start_param: S.startParam, _initData: S.tg?.initData || '' });
-    S.user = d.user || S.user;
-    S.refs = d.referrals || [];
-    S.exchHist = d.exchHistory || [];
-    S.wdHist = d.wdHistory || [];
-    S.doneTasks = d.completedTasks || [];
-    S.tasks = d.tasks || { partner: [], community: [] };
-    if (d.user?.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued);
-    if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
-    S.isNewUser = !S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine;
-    updateRefUI();
-  } catch (e) { console.warn('loadState:', e.message); showNotif('Failed to load data', 'e'); }
-  updateUI();
-}
-
-function updateUI() {
-  const u = S.user;
-  document.getElementById('tbSnow').textContent = fmt(u.snow || 0);
-  document.getElementById('tbTON').textContent = fmtTon(u.tonBalance || 0);
-  const rateDay = Math.round((u.miningRate || 0) * 24);
-  document.getElementById('heroRateDay').textContent = fmt(rateDay);
-  document.getElementById('wdTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
-  updateSwapBals();
-  renderExchHist();
-  renderWdHist();
-  renderTasks();
-  updateStorageUI();
-}
-
-function updateStorageUI() {
-  const lv = S.user.storageLevel || 1;
-  const cfg = STORAGE_LVS[lv];
-  const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
-  document.getElementById('heroAccrued').textContent = S.storageProgress.toFixed(6);
-  document.getElementById('storagePct').textContent = pct + '%';
-  document.getElementById('storageFill').style.width = pct + '%';
-  document.getElementById('storageLbl').textContent = `${Math.floor(S.storageProgress)} / ${fmt(cfg.cap)} Snow`;
-  document.getElementById('storageLvDisp').textContent = `Lv.${lv}`;
-  const btn = document.getElementById('collectBtn');
-  const has = S.storageProgress >= 1;
-  btn.disabled = !has;
-  const claimSpan = document.getElementById('claimBtnTxt');
-  if (claimSpan) claimSpan.innerHTML = has ? t('collectX', fmt(Math.floor(S.storageProgress))) : t('storageEmpty');
-}
 
 function fmt(n) {
   n = Math.floor(n || 0);
@@ -3005,33 +2840,17 @@ function fmtTon(n) {
   return n.toFixed(4);
 }
 
-function startStorage() {
-  if (S.storageInt) clearInterval(S.storageInt);
-  S.storageInt = setInterval(() => {
-    const rate = S.user.miningRate || 0;
-    if (rate <= 0) return;
-    const lv = S.user.storageLevel || 1;
-    const cap = STORAGE_LVS[lv].cap;
-    S.storageProgress = Math.min(cap, S.storageProgress + (rate / 3600));
-    updateStorageUI();
-  }, 1000);
-}
-
-async function collectSnow() {
-  if (S._collectCooldown) return;
-  const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
-  const amt = Math.floor(S.storageProgress);
-  if (amt < 1) { showNotif(t('storageEmptyMsg'), 'e'); return; }
-  S._collectCooldown = true;
-  setTimeout(() => S._collectCooldown = false, 3000);
-  S.user.snow = (S.user.snow || 0) + amt;
-  S.storageProgress = 0;
-  updateUI();
-  triggerSnowfall(30);
-  showNotif(t('collected', fmt(amt)), 's');
-  api('collect', { amount: amt }).catch(() => {});
+function showNotif(msg, type = 'i') {
+  const el = document.getElementById('notif');
+  if (!el) return;
+  if (window._nt) clearTimeout(window._nt);
+  el.classList.remove('show');
+  el.innerHTML = msg;
+  el.className = 'notif ' + type;
+  setTimeout(() => el.classList.add('show'), 10);
+  window._nt = setTimeout(() => {
+    el.classList.remove('show');
+  }, 3000);
 }
 
 function triggerSnowfall(count = 40) {
@@ -3059,9 +2878,127 @@ function spawnSnowParticle() {
   setTimeout(() => p.remove(), 960);
 }
 
+// ========== API FUNCTIONS ==========
+let _apiInFlight = 0;
+
+async function api(action, data = {}) {
+  if (_apiInFlight > 8) throw new Error('Too many requests');
+  _apiInFlight++;
+  try {
+    const h = { 'Content-Type': 'application/json' };
+    if (S.tg?.initData) h.Authorization = `Telegram ${S.tg.initData}`;
+    const r = await fetch(`${CFG.API_URL}/api`, { method: 'POST', headers: h, body: JSON.stringify({ action, data }) });
+    const j = await r.json();
+    if (!j.success) throw new Error(j.error || 'API Error');
+    return j.data;
+  } finally { _apiInFlight--; }
+}
+
+// ========== UI UPDATE FUNCTIONS ==========
+function updateUI() {
+  const u = S.user;
+  const tbSnow = document.getElementById('tbSnow');
+  if (tbSnow) tbSnow.textContent = fmt(u.snow || 0);
+  const tbTON = document.getElementById('tbTON');
+  if (tbTON) tbTON.textContent = fmtTon(u.tonBalance || 0);
+  const heroRateDay = document.getElementById('heroRateDay');
+  if (heroRateDay) {
+    const rateDay = Math.round((u.miningRate || 0) * 24);
+    heroRateDay.textContent = fmt(rateDay);
+  }
+  const wdTonBalance = document.getElementById('wdTonBalance');
+  if (wdTonBalance) wdTonBalance.textContent = fmtTon(u.tonBalance || 0) + ' TON';
+  updateSwapBals();
+  renderExchHist();
+  renderWdHist();
+  renderTasks();
+  updateStorageUI();
+}
+
+function updateStorageUI() {
+  const lv = S.user.storageLevel || 1;
+  const cfg = STORAGE_LVS[lv];
+  const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
+  const heroAccrued = document.getElementById('heroAccrued');
+  if (heroAccrued) heroAccrued.textContent = S.storageProgress.toFixed(6);
+  const storagePct = document.getElementById('storagePct');
+  if (storagePct) storagePct.textContent = pct + '%';
+  const storageFill = document.getElementById('storageFill');
+  if (storageFill) storageFill.style.width = pct + '%';
+  const storageLbl = document.getElementById('storageLbl');
+  if (storageLbl) storageLbl.textContent = `${Math.floor(S.storageProgress)} / ${fmt(cfg.cap)} Snow`;
+  const storageLvDisp = document.getElementById('storageLvDisp');
+  if (storageLvDisp) storageLvDisp.textContent = `Lv.${lv}`;
+  const btn = document.getElementById('collectBtn');
+  if (btn) {
+    const has = S.storageProgress >= 1;
+    btn.disabled = !has;
+  }
+  const claimSpan = document.getElementById('claimBtnTxt');
+  if (claimSpan) {
+    claimSpan.innerHTML = S.storageProgress >= 1 ? t('collectX', fmt(Math.floor(S.storageProgress))) : t('storageEmpty');
+  }
+}
+
+function startStorage() {
+  if (S.storageInt) clearInterval(S.storageInt);
+  S.storageInt = setInterval(() => {
+    const rate = S.user.miningRate || 0;
+    if (rate <= 0) return;
+    const lv = S.user.storageLevel || 1;
+    const cap = STORAGE_LVS[lv].cap;
+    S.storageProgress = Math.min(cap, S.storageProgress + (rate / 3600));
+    updateStorageUI();
+  }, 1000);
+}
+
+// ========== MAIN ACTIONS ==========
+async function collectSnow() {
+  const now = Date.now();
+  if (S._collectCooldown) {
+    showNotif(t('wait'), 'w');
+    return;
+  }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
+  
+  const amt = Math.floor(S.storageProgress);
+  if (amt < 1) { 
+    showNotif(t('storageEmptyMsg'), 'e'); 
+    return; 
+  }
+  
+  S._lastClickTime = now;
+  S._collectCooldown = true;
+  setTimeout(() => S._collectCooldown = false, 3000);
+  
+  const collectedAmt = amt;
+  S.user.snow = (S.user.snow || 0) + collectedAmt;
+  S.storageProgress = 0;
+  
+  updateUI();
+  triggerSnowfall(30);
+  showNotif(t('collected', fmt(collectedAmt)), 's');
+  
+  try {
+    await api('collect', { amount: collectedAmt });
+  } catch (e) {
+    console.error('Collect error:', e);
+    S.user.snow = (S.user.snow || 0) - collectedAmt;
+    S.storageProgress = collectedAmt;
+    updateUI();
+    showNotif('❌ ' + (e.message || 'Failed to collect'), 'e');
+  }
+}
+
 function santaClick() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   spawnSnowParticle();
   triggerSnowfall(20);
@@ -3069,7 +3006,10 @@ function santaClick() {
 
 async function openWelcomeChest() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   
   const chestImg = document.querySelector('#welcomeChest .chest-image');
@@ -3082,12 +3022,12 @@ async function openWelcomeChest() {
     S.user.hasWelcomeMachine = true;
     S.user.miningRate = result.miningRate;
     
-    document.getElementById('welcomeChest').style.display = 'none';
+    const welcomeChest = document.getElementById('welcomeChest');
+    if (welcomeChest) welcomeChest.style.display = 'none';
     updateUI();
     triggerSnowfall(50);
     
     showRewardsPopup(result.snow, 1, result.miningRate);
-    
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
@@ -3095,7 +3035,10 @@ async function openWelcomeChest() {
 
 async function openWelcomeChestFromModal() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   
   const chestImg = document.getElementById('chestToOpen');
@@ -3115,7 +3058,6 @@ async function openWelcomeChestFromModal() {
     triggerSnowfall(50);
     
     showRewardsPopup(result.snow, 1, result.miningRate);
-    
   } catch (e) {
     showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
   }
@@ -3166,6 +3108,7 @@ function showWelcomeModal() {
   if (modal) modal.classList.add('active');
 }
 
+// ========== MACHINE SHOP ==========
 function openMachineShop() {
   buildMachineShop();
   openModal('machineShopModal');
@@ -3202,15 +3145,20 @@ function buildMachineShop() {
     `;
   }
   html += '</div>';
-  document.getElementById('machineShopContent').innerHTML = html;
+  const machineShopContent = document.getElementById('machineShopContent');
+  if (machineShopContent) machineShopContent.innerHTML = html;
 }
 
 async function purchaseMachine(machineType) {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   const m = CFG.MACHINES[machineType];
-  const qty = parseInt(document.getElementById(`qty_${machineType}`)?.value) || 1;
+  const qtyInput = document.getElementById(`qty_${machineType}`);
+  const qty = parseInt(qtyInput?.value) || 1;
   const totalCost = m.cost * qty;
   if ((S.user.tonBalance || 0) < totalCost) {
     showNotif(t('need') + ' ' + totalCost + ' TON', 'e');
@@ -3231,127 +3179,205 @@ async function purchaseMachine(machineType) {
   }
 }
 
+// ========== STORAGE UPGRADE ==========
 function buildUpgradeContent() {
   const lv = S.user.storageLevel || 1;
   const cur = STORAGE_LVS[lv];
   const next = STORAGE_LVS[lv + 1];
-  const curLabel = currentLang === 'ru' ? (cur.label_ru || cur.label) : cur.label;
-  const nextLabel = next ? (currentLang === 'ru' ? (next.label_ru || next.label) : next.label) : '';
+  const lang = currentLang;
+  const curLabel = lang === 'ru' ? (cur.label_ru || cur.label) : cur.label;
+  const nextLabel = next ? (lang === 'ru' ? (next.label_ru || next.label) : next.label) : '';
+  
   let html = `<div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 16px; text-align: center;">
     <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
       <div style="flex:1; text-align: center;">
-        <div style="font-size: 20px; font-weight: 800; color: var(--ice);">${t('upgrade')} ${lv}</div>
+        <div style="font-size: 20px; font-weight: 800; color: var(--ice);">${lang === 'ru' ? 'Уровень' : 'Level'} ${lv}</div>
         <div style="font-size: 12px;">${curLabel}</div>
-        <div>${t('storage')}: ${fmt(cur.cap)}</div>
+        <div>${lang === 'ru' ? 'Вместимость:' : 'Capacity:'} ${fmt(cur.cap)}</div>
       </div>
       <div style="font-size: 24px; color: var(--ice);">→</div>
       <div style="flex:1; text-align: center;">
-        <div style="font-size: 20px; font-weight: 800; color: var(--gold);">${t('upgrade')} ${lv+1}</div>
-        <div style="font-size: 12px;">${nextLabel || (next ? '' : t('maxLevel'))}</div>
-        <div>${t('storage')}: ${next ? fmt(next.cap) : t('maxLevel')}</div>
+        <div style="font-size: 20px; font-weight: 800; color: var(--gold);">${lang === 'ru' ? 'Уровень' : 'Level'} ${lv+1}</div>
+        <div style="font-size: 12px;">${nextLabel || (next ? '' : (lang === 'ru' ? 'Максимум!' : 'Max Level!'))}</div>
+        <div>${lang === 'ru' ? 'Вместимость:' : 'Capacity:'} ${next ? fmt(next.cap) : (lang === 'ru' ? 'Максимум' : 'Max')}</div>
       </div>
     </div>`;
+    
   if (next) {
     html += `<div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
-      ${t('totalCost')} <span style="font-weight: 800; color: var(--gold);">${fmt(next.upgCost)} Snow</span>
+      ${lang === 'ru' ? 'سعر الترقية:' : 'Upgrade Cost:'} <span style="font-weight: 800; color: var(--gold);">${fmt(next.upgCost)} Snow</span>
     </div>
-    <button class="modern-btn primary" onclick="upgradeStorage()" style="width:100%;">${t('upgradeBtn')}</button>`;
+    <button class="modern-btn primary" onclick="upgradeStorage()" style="width:100%;">${lang === 'ru' ? '⬆️ ترقية' : '⬆️ Upgrade'}</button>`;
   } else {
-    html += `<div style="color: var(--ice); font-weight: 800;">${t('maxLevel')}</div>`;
+    html += `<div style="color: var(--ice); font-weight: 800;">${lang === 'ru' ? '🏆 المستوى الأقصى!' : '🏆 Maximum level!'}</div>`;
   }
   html += `</div>`;
-  document.getElementById('upgradeContent').innerHTML = html;
+  
+  const upgradeContent = document.getElementById('upgradeContent');
+  if (upgradeContent) upgradeContent.innerHTML = html;
 }
 
 async function upgradeStorage() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   const lv = S.user.storageLevel || 1;
   const next = STORAGE_LVS[lv + 1];
-  if (!next) { showNotif(t('maxLevelMsg'), 'e'); return; }
-  if ((S.user.snow || 0) < next.upgCost) { showNotif(t('notEnoughSnow'), 'e'); return; }
+  if (!next) { 
+    showNotif(t('maxLevelMsg'), 'e'); 
+    return; 
+  }
+  if ((S.user.snow || 0) < next.upgCost) { 
+    showNotif(t('notEnoughSnow'), 'e'); 
+    return; 
+  }
   S.user.snow -= next.upgCost;
   S.user.storageLevel = lv + 1;
-  api('upgradeStorage', { newLevel: lv + 1 }).catch(() => {});
+  try {
+    await api('upgradeStorage', { newLevel: lv + 1 });
+  } catch (e) {
+    console.error('Upgrade error:', e);
+    S.user.snow += next.upgCost;
+    S.user.storageLevel = lv;
+    showNotif('❌ ' + (e.message || 'Upgrade failed'), 'e');
+    return;
+  }
   buildUpgradeContent();
   updateUI();
   triggerSnowfall(30);
   showNotif(t('upgradeSuccess', lv + 1), 's');
 }
 
+// ========== EXCHANGE FUNCTIONS ==========
 function updateSwapBals() {
-  document.getElementById('swapFromBalSnow').innerHTML = `${t('snow')}: ${fmt(S.user.snow || 0)}`;
+  const swapFromBalSnow = document.getElementById('swapFromBalSnow');
+  if (swapFromBalSnow) swapFromBalSnow.innerHTML = `${t('snow')}: ${fmt(S.user.snow || 0)}`;
 }
 
 function swapSnowMax() {
-  document.getElementById('swapSnowAmt').value = Math.floor(S.user.snow || 0);
+  const swapSnowAmt = document.getElementById('swapSnowAmt');
+  if (swapSnowAmt) swapSnowAmt.value = Math.floor(S.user.snow || 0);
   updSwapSnowToTon();
 }
 
 function updSwapSnowToTon() {
-  const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
+  const snowInput = document.getElementById('swapSnowAmt');
+  const snow = parseInt(snowInput?.value) || 0;
   const fee = Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
   const snowAfterFee = snow - fee;
   const ton = snowAfterFee * CFG.SNOW_TO_TON;
-  document.getElementById('swapTonOut').textContent = ton.toFixed(6);
-  document.getElementById('feeAmountDisplay').textContent = fmt(fee);
+  const swapTonOut = document.getElementById('swapTonOut');
+  if (swapTonOut) swapTonOut.textContent = ton.toFixed(6);
+  const feeAmountDisplay = document.getElementById('feeAmountDisplay');
+  if (feeAmountDisplay) feeAmountDisplay.textContent = fmt(fee);
 }
 
 let _exchInFlight = false;
+
 async function swapSnowToTon() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   if (_exchInFlight) return;
-  const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
-  if (snow <= 0) { showNotif(t('minSnow'), 'e'); return; }
-  if (snow < 100) { showNotif(t('minSnow'), 'e'); return; }
-  if (snow > (S.user.snow || 0)) { showNotif(t('notEnoughSnowMsg'), 'e'); return; }
+  const snowInput = document.getElementById('swapSnowAmt');
+  const snow = parseInt(snowInput?.value) || 0;
+  if (snow <= 0) { 
+    showNotif(t('minSnow'), 'e'); 
+    return; 
+  }
+  if (snow < 100) { 
+    showNotif(t('minSnow'), 'e'); 
+    return; 
+  }
+  if (snow > (S.user.snow || 0)) { 
+    showNotif(t('notEnoughSnowMsg'), 'e'); 
+    return; 
+  }
   _exchInFlight = true;
   try {
     const result = await api('exchange', { snowAmount: snow });
     S.user.snow = result.snow;
     S.user.tonBalance = result.tonBalance;
     updateUI();
-    document.getElementById('swapSnowAmt').value = '';
+    if (snowInput) snowInput.value = '';
     updSwapSnowToTon();
     triggerSnowfall(30);
     showNotif(t('exchangeSuccess', fmt(snow)), 's');
-  } catch (e) { showNotif(t('exchangeError', e.message), 'e'); }
+  } catch (e) { 
+    showNotif(t('exchangeError', e.message), 'e'); 
+  }
   finally { _exchInFlight = false; }
 }
 
-function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
+// ========== WITHDRAW FUNCTIONS ==========
+function setWdAmt(amt) { 
+  const wdAmt = document.getElementById('wdAmt');
+  if (wdAmt) wdAmt.value = amt; 
+}
 
 async function doWithdraw() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
-  const addr = document.getElementById('wdAddr').value.trim();
-  const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
-  if (!addr || addr.length < 10) { showNotif(t('invalidAddress'), 'e'); return; }
-  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(t('minWithdraw', CFG.MIN_WITHDRAW_TON), 'e'); return; }
-  if (tonAmt > (S.user.tonBalance || 0)) { showNotif(t('notEnoughTon'), 'e'); return; }
+  const addr = document.getElementById('wdAddr')?.value.trim();
+  const tonAmt = parseFloat(document.getElementById('wdAmt')?.value) || 0;
+  if (!addr || addr.length < 10) { 
+    showNotif(t('invalidAddress'), 'e'); 
+    return; 
+  }
+  if (tonAmt < CFG.MIN_WITHDRAW_TON) { 
+    showNotif(t('minWithdraw', CFG.MIN_WITHDRAW_TON), 'e'); 
+    return; 
+  }
+  if (tonAmt > (S.user.tonBalance || 0)) { 
+    showNotif(t('notEnoughTon'), 'e'); 
+    return; 
+  }
   try {
     const res = await api('withdraw', { address: addr, amount: tonAmt });
     S.user.tonBalance = res.tonBalance;
     updateUI();
     showNotif(t('withdrawSuccess'), 's');
-    document.getElementById('wdAddr').value = '';
-    document.getElementById('wdAmt').value = '';
-  } catch (e) { showNotif(t('withdrawError', e.message), 'e'); }
+    const wdAddr = document.getElementById('wdAddr');
+    const wdAmt = document.getElementById('wdAmt');
+    if (wdAddr) wdAddr.value = '';
+    if (wdAmt) wdAmt.value = '';
+  } catch (e) { 
+    showNotif(t('withdrawError', e.message), 'e'); 
+  }
 }
 
-function setDepAmt(v) { document.getElementById('depositAmountInput').value = v; }
+// ========== DEPOSIT FUNCTIONS ==========
+function setDepAmt(v) { 
+  const depositAmountInput = document.getElementById('depositAmountInput');
+  if (depositAmountInput) depositAmountInput.value = v; 
+}
 
 async function initiateDeposit() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
-  if (!S.wallet) { showNotif(t('connectWalletFirst'), 'e'); return; }
-  const amt = parseFloat(document.getElementById('depositAmountInput').value);
-  if (!amt || amt < 1) { showNotif(t('minDeposit'), 'e'); return; }
+  if (!S.wallet) { 
+    showNotif(t('connectWalletFirst'), 'e'); 
+    return; 
+  }
+  const amt = parseFloat(document.getElementById('depositAmountInput')?.value);
+  if (!amt || amt < 1) { 
+    showNotif(t('minDeposit'), 'e'); 
+    return; 
+  }
   try {
     const comment = String(S.userId);
     const nano = String(Math.floor(amt * 1e9));
@@ -3366,17 +3392,25 @@ async function initiateDeposit() {
     };
     const result = await S.tonUI.sendTransaction(tx);
     const sd = document.getElementById('depositStatus');
-    sd.classList.add('visible');
-    sd.querySelector('div:first-child').innerHTML = '⏳ Transaction sent!';
-    document.getElementById('depositStatusDetail').textContent = 'Balance will be added within 3 minutes.';
+    if (sd) {
+      sd.classList.add('visible');
+      const statusMsg = sd.querySelector('div:first-child');
+      if (statusMsg) statusMsg.innerHTML = '⏳ Transaction sent!';
+    }
+    const depositStatusDetail = document.getElementById('depositStatusDetail');
+    if (depositStatusDetail) depositStatusDetail.textContent = 'Balance will be added within 3 minutes.';
     triggerSnowfall(30);
     showNotif(t('depositSent'), 's');
     await api('deposit', { amount: amt, txHash: result.boc, comment });
   } catch (e) {
     const sd = document.getElementById('depositStatus');
-    sd.classList.add('visible');
-    sd.querySelector('div:first-child').innerHTML = '❌ Transaction failed';
-    document.getElementById('depositStatusDetail').textContent = e.message || 'Try again';
+    if (sd) {
+      sd.classList.add('visible');
+      const statusMsg = sd.querySelector('div:first-child');
+      if (statusMsg) statusMsg.innerHTML = '❌ Transaction failed';
+    }
+    const depositStatusDetail = document.getElementById('depositStatusDetail');
+    if (depositStatusDetail) depositStatusDetail.textContent = e.message || 'Try again';
   }
 }
 
@@ -3390,18 +3424,25 @@ function startDepVerify(depId, txHash) {
       if (r.status === 'completed') {
         clearInterval(S.depCheckInt);
         const sd = document.getElementById('depositStatus');
-        sd.querySelector('div:first-child').innerHTML = '✅ Deposit confirmed!';
-        document.getElementById('depositStatusDetail').textContent = `${r.amount} TON added`;
+        if (sd) {
+          const statusMsg = sd.querySelector('div:first-child');
+          if (statusMsg) statusMsg.innerHTML = '✅ Deposit confirmed!';
+        }
+        const depositStatusDetail = document.getElementById('depositStatusDetail');
+        if (depositStatusDetail) depositStatusDetail.textContent = `${r.amount} TON added`;
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
         updateUI();
         triggerSnowfall(30);
         showNotif(t('depositConfirmed', r.amount), 's');
-        setTimeout(() => sd.classList.remove('visible'), 3000);
+        setTimeout(() => {
+          if (sd) sd.classList.remove('visible');
+        }, 3000);
       }
     } catch (e) { if (attempts >= 18) clearInterval(S.depCheckInt); }
   }, 10000);
 }
 
+// ========== TASKS FUNCTIONS ==========
 function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refHtml = '';
@@ -3422,13 +3463,19 @@ function renderTasks() {
         ${completed ? '<button class="tbtn done">✅ ' + (currentLang === 'ru' ? 'Выполнено' : 'Completed') + '</button>' : canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 ${currentLang === 'ru' ? 'Получить' : 'Claim'}</button>` : `<button class="tbtn go" disabled>🔒 ${currentLang === 'ru' ? 'Нужно' : 'Need'} ${task.n}</button>`}
       </div>`;
   }
-  document.getElementById('referralTasksList').innerHTML = refHtml || `<div class="hist-empty">${t('inviteFriendsHint') || 'Invite friends to unlock rewards!'}</div>`;
+  const referralTasksList = document.getElementById('referralTasksList');
+  if (referralTasksList) {
+    referralTasksList.innerHTML = refHtml || `<div class="hist-empty">${t('inviteFriendsHint') || 'Invite friends to unlock rewards!'}</div>`;
+  }
   renderSocTasks();
 }
 
 async function claimRefTask(taskId) {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   try {
     const result = await api('claimTask', { taskId });
@@ -3438,11 +3485,13 @@ async function claimRefTask(taskId) {
     renderTasks();
     triggerSnowfall(30);
     showNotif(t('taskCompleted', fmt(result.snowReward)), 's');
-  } catch (e) { showNotif(t('taskError', e.message), 'e'); }
+  } catch (e) { 
+    showNotif(t('taskError', e.message), 'e'); 
+  }
 }
 
 function buildTaskCard(t, cat) {
-  const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
+  const tid = t.id, done = S.doneTasks.includes(tid), inFlight = window._taskInFlight?.has(tid);
   const icon = t.type === 'channel' ? '📢' : '🤖';
   const name = t.name || (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task');
   const snow = t.snowReward || 50;
@@ -3460,33 +3509,49 @@ function buildTaskCard(t, cat) {
 
 function renderSocTasks() {
   const p = S.tasks?.partner || [], c = S.tasks?.community || [];
-  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет партнерских заданий' : 'No partner tasks'}</div>`;
-  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет заданий сообщества' : 'No community tasks'}</div>`;
+  const socPartnerList = document.getElementById('socPartnerList');
+  const socCommunityList = document.getElementById('socCommunityList');
+  if (socPartnerList) {
+    socPartnerList.innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет партнерских заданий' : 'No partner tasks'}</div>`;
+  }
+  if (socCommunityList) {
+    socCommunityList.innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет заданий сообщества' : 'No community tasks'}</div>`;
+  }
 }
 
 function switchTTab(el, t) {
   document.querySelectorAll('.ttab').forEach(x => x.classList.remove('active'));
   document.querySelectorAll('.tcont').forEach(x => x.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById(`tc${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('active');
+  const tcElement = document.getElementById(`tc${t.charAt(0).toUpperCase() + t.slice(1)}`);
+  if (tcElement) tcElement.classList.add('active');
 }
 
 function switchSocTab(tab) {
-  _socTab = tab;
-  document.getElementById('stab-partner').className = 'ttab' + (tab === 'partner' ? ' active' : '');
-  document.getElementById('stab-community').className = 'ttab' + (tab === 'community' ? ' active' : '');
-  document.getElementById('socPartnerList').style.display = tab === 'partner' ? 'block' : 'none';
-  document.getElementById('socCommunityList').style.display = tab === 'community' ? 'block' : 'none';
+  window._socTab = tab;
+  const stabPartner = document.getElementById('stab-partner');
+  const stabCommunity = document.getElementById('stab-community');
+  if (stabPartner) stabPartner.className = 'ttab' + (tab === 'partner' ? ' active' : '');
+  if (stabCommunity) stabCommunity.className = 'ttab' + (tab === 'community' ? ' active' : '');
+  const socPartnerList = document.getElementById('socPartnerList');
+  const socCommunityList = document.getElementById('socCommunityList');
+  if (socPartnerList) socPartnerList.style.display = tab === 'partner' ? 'block' : 'none';
+  if (socCommunityList) socCommunityList.style.display = tab === 'community' ? 'block' : 'none';
   const fab = document.getElementById('floatAddTask');
   if (fab) fab.style.display = tab === 'community' ? 'flex' : 'none';
 }
 
+window._taskInFlight = new Set();
+
 async function doDbTask(tid, link, type, cat) {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
-  if (_taskInFlight.has(tid)) return;
-  _taskInFlight.add(tid);
+  if (window._taskInFlight.has(tid)) return;
+  window._taskInFlight.add(tid);
   renderSocTasks();
   if (link) window.open(link, '_blank');
   showNotif('⏳ Checking...', 'i');
@@ -3502,70 +3567,106 @@ async function doDbTask(tid, link, type, cat) {
     } catch (e) {
       showNotif(t('taskError', e.message || 'Verification failed'), 'e');
     } finally {
-      _taskInFlight.delete(tid);
+      window._taskInFlight.delete(tid);
       renderSocTasks();
     }
   }, 3000);
 }
 
+// ========== ADD TASK FUNCTIONS ==========
+let _atType = 'channel';
+let _submitInFlight = false;
+const TASK_SNOW_PER_USER = 60;
+const MIN_TASK_TARGET = 100;
+
 function setTaskType(t) {
   _atType = t;
   const sel = 'flex:1; padding: 10px; border-radius: 12px; border: 2px solid var(--ice); background: rgba(77,208,225,0.2); color: var(--ice); font-weight: 800;';
   const unsel = 'flex:1; padding: 10px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-weight: 800;';
-  document.getElementById('atTypeChannel').style.cssText = t === 'channel' ? sel : unsel;
-  document.getElementById('atTypeBot').style.cssText = t === 'bot' ? sel : unsel;
-  const hint = document.getElementById('atBotHint');
-  if (hint) hint.style.display = t === 'channel' ? 'block' : 'none';
+  const atTypeChannel = document.getElementById('atTypeChannel');
+  const atTypeBot = document.getElementById('atTypeBot');
+  if (atTypeChannel) atTypeChannel.style.cssText = t === 'channel' ? sel : unsel;
+  if (atTypeBot) atTypeBot.style.cssText = t === 'bot' ? sel : unsel;
+  const atBotHint = document.getElementById('atBotHint');
+  if (atBotHint) atBotHint.style.display = t === 'channel' ? 'block' : 'none';
   updAtCost();
 }
 
-function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
+function setAtTarget(v) { 
+  const atTarget = document.getElementById('atTarget');
+  if (atTarget) atTarget.value = v; 
+  updAtCost(); 
+}
 
 function updAtCost() {
-  const tgt = parseInt(document.getElementById('atTarget').value) || 0;
-  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
+  const atTarget = document.getElementById('atTarget');
+  const tgt = parseInt(atTarget?.value) || 0;
+  const atCostPreview = document.getElementById('atCostPreview');
+  if (atCostPreview) atCostPreview.textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
 }
 
 async function submitAddTask() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
+  if (now - S._lastClickTime < 3000) { 
+    showNotif(t('wait'), 'w'); 
+    return; 
+  }
   S._lastClickTime = now;
   if (_submitInFlight) return;
-  const link = document.getElementById('atLink').value.trim();
-  const target = parseInt(document.getElementById('atTarget').value) || 0;
+  const link = document.getElementById('atLink')?.value.trim();
+  const target = parseInt(document.getElementById('atTarget')?.value) || 0;
   const st = document.getElementById('atStatus');
-  st.style.display = 'block';
-  st.textContent = '⏳ ' + (currentLang === 'ru' ? 'Создание...' : 'Creating...');
-  if (!link.includes('t.me/')) { st.textContent = '❌ ' + (currentLang === 'ru' ? 'Неверная ссылка' : 'Invalid link'); return; }
-  if (target < MIN_TASK_TARGET) { st.textContent = `❌ ${currentLang === 'ru' ? 'Минимум' : 'Minimum'} ${MIN_TASK_TARGET} ${currentLang === 'ru' ? 'пользователей' : 'users'}`; return; }
+  if (st) {
+    st.style.display = 'block';
+    st.textContent = '⏳ ' + (currentLang === 'ru' ? 'Создание...' : 'Creating...');
+  }
+  if (!link || !link.includes('t.me/')) { 
+    if (st) st.textContent = '❌ ' + (currentLang === 'ru' ? 'Неверная ссылка' : 'Invalid link'); 
+    return; 
+  }
+  if (target < MIN_TASK_TARGET) { 
+    if (st) st.textContent = `❌ ${currentLang === 'ru' ? 'Минимум' : 'Minimum'} ${MIN_TASK_TARGET} ${currentLang === 'ru' ? 'пользователей' : 'users'}`; 
+    return; 
+  }
   const cost = target * TASK_SNOW_PER_USER;
-  if ((S.user.snow || 0) < cost) { st.textContent = `❌ ${currentLang === 'ru' ? 'Нужно' : 'Need'} ${fmt(cost)} Snow`; return; }
+  if ((S.user.snow || 0) < cost) { 
+    if (st) st.textContent = `❌ ${currentLang === 'ru' ? 'Нужно' : 'Need'} ${fmt(cost)} Snow`; 
+    return; 
+  }
   _submitInFlight = true;
   try {
     await api('createTask', { type: _atType, link, targetUsers: target });
     S.user.snow = (S.user.snow || 0) - cost;
-    st.textContent = '✅ ' + (currentLang === 'ru' ? 'Задание создано!' : 'Task created!');
+    if (st) st.textContent = '✅ ' + (currentLang === 'ru' ? 'Задание создано!' : 'Task created!');
     updateUI();
     triggerSnowfall(30);
     showNotif(`✅ ${currentLang === 'ru' ? 'Задание создано! Стоимость:' : 'Task created! Cost:'} ${fmt(cost)} Snow`, 's');
-    setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
-  } catch (e) { st.textContent = `❌ ${e.message}`; }
+    setTimeout(() => { 
+      closeModal('addTaskModal'); 
+      loadState(); 
+    }, 1500);
+  } catch (e) { 
+    if (st) st.textContent = `❌ ${e.message}`; 
+  }
   finally { _submitInFlight = false; }
 }
 
+// ========== REFERRAL FUNCTIONS ==========
 function updateRefUI() {
   if (!S.userId) return;
   const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
-  const inp = document.getElementById('refLinkInp');
-  if (inp) inp.value = link;
-  document.getElementById('depositUserIdDisplay').textContent = esc(S.userId);
-  document.getElementById('totalRefsDisp').textContent = `${S.refs.length} ${t('friends')}`;
-  const listEl = document.getElementById('recentRefsList');
-  if (listEl) {
+  const refLinkInp = document.getElementById('refLinkInp');
+  if (refLinkInp) refLinkInp.value = link;
+  const depositUserIdDisplay = document.getElementById('depositUserIdDisplay');
+  if (depositUserIdDisplay) depositUserIdDisplay.textContent = esc(S.userId);
+  const totalRefsDisp = document.getElementById('totalRefsDisp');
+  if (totalRefsDisp) totalRefsDisp.textContent = `${S.refs.length} ${t('friends')}`;
+  const recentRefsList = document.getElementById('recentRefsList');
+  if (recentRefsList) {
     if (!S.refs.length) {
-      listEl.innerHTML = `<div class="hist-empty">${t('noRefs')}</div>`;
+      recentRefsList.innerHTML = `<div class="hist-empty">${t('noRefs')}</div>`;
     } else {
-      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
+      recentRefsList.innerHTML = S.refs.slice(0, 20).map(r => `
         <div class="ref-list-item">
           <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}">` : '🎅'}</div>
           <div class="rli-info">
@@ -3579,15 +3680,28 @@ function updateRefUI() {
 }
 
 function copyRefLink() {
-  const v = document.getElementById('refLinkInp').value;
-  navigator.clipboard.writeText(v).then(() => showNotif(t('linkCopied'), 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif(t('linkCopied'), 's'); });
+  const refLinkInp = document.getElementById('refLinkInp');
+  const v = refLinkInp?.value;
+  if (v) {
+    navigator.clipboard.writeText(v).then(() => showNotif(t('linkCopied'), 's')).catch(() => { 
+      if (refLinkInp) {
+        refLinkInp.select(); 
+        document.execCommand('copy'); 
+        showNotif(t('linkCopied'), 's');
+      }
+    });
+  }
 }
 
+// ========== HISTORY FUNCTIONS ==========
 function renderExchHist() {
-  const el = document.getElementById('exchHist');
-  if (!el) return;
-  if (!S.exchHist.length) { el.innerHTML = `<div class="hist-empty">${t('noExchanges')}</div>`; return; }
-  el.innerHTML = S.exchHist.slice(0, 30).map(h => `
+  const exchHistEl = document.getElementById('exchHist');
+  if (!exchHistEl) return;
+  if (!S.exchHist.length) { 
+    exchHistEl.innerHTML = `<div class="hist-empty">${t('noExchanges')}</div>`; 
+    return; 
+  }
+  exchHistEl.innerHTML = S.exchHist.slice(0, 30).map(h => `
     <div class="hist-row">
       <span class="hist-l">${new Date(h.ts).toLocaleDateString()} · ${h.dir || 'S→T'}</span>
       <span class="hist-r">${h.ton.toFixed(6)} TON</span>
@@ -3597,10 +3711,13 @@ function renderExchHist() {
 }
 
 function renderWdHist() {
-  const el = document.getElementById('wdHist');
-  if (!el) return;
-  if (!S.wdHist.length) { el.innerHTML = `<div class="hist-empty">${t('noWithdrawals')}</div>`; return; }
-  el.innerHTML = S.wdHist.slice(0, 20).map(h => `
+  const wdHistEl = document.getElementById('wdHist');
+  if (!wdHistEl) return;
+  if (!S.wdHist.length) { 
+    wdHistEl.innerHTML = `<div class="hist-empty">${t('noWithdrawals')}</div>`; 
+    return; 
+  }
+  wdHistEl.innerHTML = S.wdHist.slice(0, 20).map(h => `
     <div class="hist-row">
       <div>
         <div style="font-weight: 800;">${h.tonAmount.toFixed(6)} TON</div>
@@ -3611,6 +3728,7 @@ function renderWdHist() {
   `).join('');
 }
 
+// ========== WALLET FUNCTIONS ==========
 async function initTON() {
   try {
     if (window.TON_CONNECT_UI) {
@@ -3626,34 +3744,44 @@ async function initTON() {
 function onWConn(w) {
   S.wallet = { address: w.account.address };
   const short = `${S.wallet.address.substring(0, 6)}...${S.wallet.address.slice(-4)}`;
-  document.getElementById('walletAddressDisplay').textContent = short;
-  const btn = document.getElementById('connectWalletBtn');
-  btn.innerHTML = `<i class="fas fa-unlink"></i> ${t('disconnect')}`;
-  btn.onclick = disconnectWallet;
-  document.getElementById('submitDepositBtn').disabled = false;
+  const walletAddressDisplay = document.getElementById('walletAddressDisplay');
+  if (walletAddressDisplay) walletAddressDisplay.textContent = short;
+  const connectWalletBtn = document.getElementById('connectWalletBtn');
+  if (connectWalletBtn) {
+    connectWalletBtn.innerHTML = `<i class="fas fa-unlink"></i> ${t('disconnect')}`;
+    connectWalletBtn.onclick = disconnectWallet;
+  }
+  const submitDepositBtn = document.getElementById('submitDepositBtn');
+  if (submitDepositBtn) submitDepositBtn.disabled = false;
 }
 
 function onWDisc() {
   S.wallet = null;
-  document.getElementById('walletAddressDisplay').textContent = t('notConnected');
-  const btn = document.getElementById('connectWalletBtn');
-  btn.innerHTML = `<i class="fas fa-plug"></i> ${t('connect')}`;
-  btn.onclick = connectWallet;
-  document.getElementById('submitDepositBtn').disabled = true;
+  const walletAddressDisplay = document.getElementById('walletAddressDisplay');
+  if (walletAddressDisplay) walletAddressDisplay.textContent = t('notConnected');
+  const connectWalletBtn = document.getElementById('connectWalletBtn');
+  if (connectWalletBtn) {
+    connectWalletBtn.innerHTML = `<i class="fas fa-plug"></i> ${t('connect')}`;
+    connectWalletBtn.onclick = connectWallet;
+  }
+  const submitDepositBtn = document.getElementById('submitDepositBtn');
+  if (submitDepositBtn) submitDepositBtn.disabled = true;
 }
 
 async function connectWallet() { if (S.tonUI) await S.tonUI.openModal(); }
 async function disconnectWallet() { if (S.tonUI) await S.tonUI.disconnect(); }
 
+// ========== NAVIGATION FUNCTIONS ==========
 function goNav(el) {
   document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById(el.dataset.s).classList.add('active');
+  const section = document.getElementById(el.dataset.s);
+  if (section) section.classList.add('active');
   
   const fab = document.getElementById('floatAddTask');
   if (fab) {
-    if (el.dataset.s === 'sectionTasks' && _socTab === 'community') {
+    if (el.dataset.s === 'sectionTasks' && window._socTab === 'community') {
       fab.style.display = 'flex';
     } else {
       fab.style.display = 'none';
@@ -3663,30 +3791,40 @@ function goNav(el) {
 
 function openModal(id) {
   if (id === 'upgradeModal') buildUpgradeContent();
-  document.getElementById(id).classList.add('active');
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.add('active');
 }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-function openSupport() { window.open('https://t.me/Santa_1_Snow', '_blank'); }
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.remove('active');
+}
+
+function openSupport() { 
+  window.open('https://t.me/Santa_1_Snow', '_blank'); 
+}
 
 function switchWalletModernTab(el, t) {
   document.querySelectorAll('.modern-tab').forEach(x => x.classList.remove('active'));
   document.querySelectorAll('.modern-content').forEach(x => x.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById(`wt-${t}-modern`).classList.add('active');
+  const content = document.getElementById(`wt-${t}-modern`);
+  if (content) content.classList.add('active');
 }
 
+// ========== LOADING FUNCTIONS ==========
 function ldProgress(pct, msg) {
-  const fill = document.getElementById('iceFill');
-  if (fill) fill.style.width = pct + '%';
-  const pctEl = document.getElementById('ldPct');
-  if (pctEl) pctEl.textContent = Math.round(pct) + '%';
-  const stat = document.getElementById('ldStatus');
-  if (stat) stat.textContent = msg;
+  const iceFill = document.getElementById('iceFill');
+  if (iceFill) iceFill.style.width = pct + '%';
+  const ldPct = document.getElementById('ldPct');
+  if (ldPct) ldPct.textContent = Math.round(pct) + '%';
+  const ldStatus = document.getElementById('ldStatus');
+  if (ldStatus) ldStatus.textContent = msg;
 }
 
 function ldAnimateTo(targetPct, msg, duration = 600) {
-  const start = parseFloat(document.getElementById('iceFill')?.style.width) || 0;
+  const iceFill = document.getElementById('iceFill');
+  const start = parseFloat(iceFill?.style.width) || 0;
   const steps = 30;
   const stepTime = duration / steps;
   let step = 0;
@@ -3700,6 +3838,29 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
   });
 }
 
+// ========== LOAD STATE ==========
+async function loadState() {
+  try {
+    const d = await api('getState', { start_param: S.startParam, _initData: S.tg?.initData || '' });
+    S.user = d.user || S.user;
+    S.refs = d.referrals || [];
+    S.exchHist = d.exchHistory || [];
+    S.wdHist = d.wdHistory || [];
+    S.doneTasks = d.completedTasks || [];
+    S.tasks = d.tasks || { partner: [], community: [] };
+    if (d.user?.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued);
+    if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
+    S.isNewUser = !S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine;
+    updateRefUI();
+    return true;
+  } catch (e) { 
+    console.warn('loadState:', e.message); 
+    showNotif('Failed to load data', 'e');
+    return false;
+  }
+}
+
+// ========== INITIALIZATION ==========
 async function init() {
   const startTime = Date.now();
   const MIN_LOADING_MS = 3000;
@@ -3712,8 +3873,9 @@ async function init() {
     const u = S.tg.initDataUnsafe?.user;
     if (u) {
       S.userId = String(u.id);
-      if (u.photo_url) {
-        document.getElementById('uavatar').innerHTML = `<img src="${esc(u.photo_url)}">`;
+      const uavatar = document.getElementById('uavatar');
+      if (uavatar && u.photo_url) {
+        uavatar.innerHTML = `<img src="${esc(u.photo_url)}">`;
       }
     }
     let startParam = '';
@@ -3722,7 +3884,6 @@ async function init() {
     S.startParam = startParam.replace(/\D/g, '');
   }
   
-  // Detect language from Telegram
   if (S.tg?.initDataUnsafe?.user?.language_code === 'en') {
     setLanguage('en');
   } else {
@@ -3738,12 +3899,17 @@ async function init() {
   let loaded = false;
   for (let i = 0; i < 5 && !loaded; i++) {
     try {
-      await loadState();
-      if (S.user && S.userId) loaded = true;
-    } catch (e) { await new Promise(r => setTimeout(r, 1500)); }
+      loaded = await loadState();
+    } catch (e) { 
+      await new Promise(r => setTimeout(r, 1500)); 
+    }
   }
   
-  if (!loaded) { ldProgress(100, 'Connection error'); return; }
+  if (!loaded) { 
+    ldProgress(100, 'Connection error'); 
+    return; 
+  }
+  
   await ldAnimateTo(70, t('accountLoaded'), 500);
   await ldAnimateTo(80, t('buildingUI'), 400);
   renderTasks();
@@ -3756,10 +3922,25 @@ async function init() {
   const elapsed = Date.now() - startTime;
   if (elapsed < MIN_LOADING_MS) await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
   
-  const ls = document.getElementById('loadingScreen');
-  if (ls) { ls.classList.add('hidden'); setTimeout(() => ls.remove(), 700); }
+  const loadingScreen = document.getElementById('loadingScreen');
+  if (loadingScreen) { 
+    loadingScreen.classList.add('hidden'); 
+    setTimeout(() => loadingScreen.remove(), 700); 
+  }
   
-  if (S.isNewUser) showWelcomeModal();
+  if (S.isNewUser) {
+    showWelcomeModal();
+  } else if (S.user.welcomeChestOpened) {
+    const welcomeChest = document.getElementById('welcomeChest');
+    if (welcomeChest) welcomeChest.style.display = 'none';
+  } else {
+    const welcomeChest = document.getElementById('welcomeChest');
+    if (welcomeChest) welcomeChest.style.display = 'block';
+  }
+  
+  window._socTab = 'partner';
+  const fab = document.getElementById('floatAddTask');
+  if (fab) fab.style.display = 'none';
 }
 
 window.addEventListener('load', init);
