@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -77,38 +77,6 @@ body::after {
   bottom: 0;
   background: rgba(0, 0, 0, 0.45);
   z-index: -1;
-}
-
-/* Language Switcher */
-.lang-switcher {
-  position: fixed;
-  top: 12px;
-  right: 16px;
-  z-index: 101;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 30px;
-  padding: 6px 12px;
-  display: flex;
-  gap: 8px;
-  border: 1px solid rgba(77, 208, 225, 0.3);
-}
-
-.lang-btn {
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 20px;
-  transition: all 0.2s;
-}
-
-.lang-btn.active {
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.3), rgba(77, 208, 225, 0.1));
-  color: var(--ice);
 }
 
 /* ========== LOADING SCREEN ========== */
@@ -307,31 +275,6 @@ body::after {
   100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-.welcome-open-btn {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  border: none;
-  border-radius: 50px;
-  padding: 14px 28px;
-  color: white;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.2s;
-  box-shadow: 0 0 20px rgba(77, 208, 225, 0.5);
-}
-
-.welcome-open-btn:active {
-  transform: scale(0.95);
-}
-
-.welcome-modal-title {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--ice);
-  margin-bottom: 10px;
-}
-
 /* ========== TOP BAR MODERN DESIGN ========== */
 .topbar-main {
   display: flex;
@@ -410,6 +353,28 @@ body::after {
   font-weight: 800;
   color: #fff;
   text-shadow: 0 0 8px rgba(77, 208, 225, 0.5);
+}
+
+.lang-btn {
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.25), rgba(0, 0, 0, 0.5));
+  border: 1px solid rgba(77, 208, 225, 0.5);
+  border-radius: 40px;
+  padding: 8px 16px;
+  color: var(--ice);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.lang-btn:active {
+  transform: scale(0.95);
+  background: rgba(77, 208, 225, 0.4);
 }
 
 /* ========== HOME SECTION MODERN ========== */
@@ -1883,6 +1848,33 @@ body::after {
   border-radius: 2px;
 }
 
+.lang-menu {
+  position: fixed;
+  top: 70px;
+  right: 12px;
+  z-index: 300;
+  background: rgba(10, 20, 35, 0.98);
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 20px;
+  overflow: hidden;
+  min-width: 150px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.lang-opt {
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lang-opt:hover {
+  background: rgba(77, 208, 225, 0.2);
+}
+
 @keyframes santaFloat {
   0%, 100% { transform: translateY(0) rotate(-1.5deg); }
   50% { transform: translateY(-9px) rotate(1.5deg); }
@@ -1915,103 +1907,11 @@ body::after {
     justify-content: center;
   }
 }
-
-.notif {
-  position: fixed;
-  bottom: 110px;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(10px);
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 700;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-  pointer-events: none;
-  white-space: nowrap;
-  border: 1px solid rgba(77, 208, 225, 0.5);
-  color: #fff;
-}
-
-.notif.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-.notif.s {
-  border-color: #4DD0E1;
-  color: #4DD0E1;
-}
-
-.notif.e {
-  border-color: #EF5350;
-  color: #EF5350;
-}
-
-.notif.w {
-  border-color: #FFD966;
-  color: #FFD966;
-}
-
-.flabel {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  margin-bottom: 6px;
-  display: block;
-}
-
-.finput {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 12px;
-  padding: 12px;
-  color: white;
-  font-size: 14px;
-}
-
-.prbtn {
-  background: rgba(77, 208, 225, 0.1);
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 10px;
-  padding: 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.prbtn:active {
-  transform: scale(0.95);
-  background: rgba(77, 208, 225, 0.3);
-}
-
-.btn-prim {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  border: none;
-  border-radius: 50px;
-  padding: 14px;
-  color: white;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-prim:active {
-  transform: scale(0.98);
-}
 </style>
 </head>
 <body>
 
 <div class="background-fixed"></div>
-
-<!-- Language Switcher -->
-<div class="lang-switcher">
-  <button class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">🇷🇺 RU</button>
-  <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
-</div>
 
 <!-- Loading Screen -->
 <div id="loadingScreen">
@@ -2033,13 +1933,13 @@ body::after {
       <img class="welcome-chest-img" id="chestToOpen" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest">
       <div style="position: absolute; top: -10px; right: -10px; background: #4DD0E1; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
     </div>
-    <div class="welcome-modal-title" id="welcomeTitle">🎄 Santa's Gift! 🎄</div>
-    <div class="welcome-modal-subtitle" id="welcomeSubtitle" style="font-size: 14px; color: var(--gold); margin-bottom: 15px;">Open the chest to get your reward!</div>
+    <div class="welcome-modal-title">🎄 Santa's Gift! 🎄</div>
+    <div class="welcome-modal-subtitle" style="font-size: 14px; color: var(--gold); margin-bottom: 15px;">Open to receive your rewards!</div>
     <button class="welcome-open-btn" id="openChestBtn">🎁 Open Chest! 🎁</button>
   </div>
 </div>
 
-<!-- Top Bar -->
+<!-- Top Bar - New Design -->
 <div class="topbar-main">
   <div class="user-profile">
     <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
@@ -2054,6 +1954,15 @@ body::after {
       <span class="balance-value" id="tbTON">0</span>
     </div>
   </div>
+  <button id="langBtn" class="lang-btn" onclick="toggleLangMenu()">
+    <span id="langFlag">🇷🇺</span>
+    <span id="langCode">RU</span>
+  </button>
+</div>
+
+<div id="langMenu" class="lang-menu" style="display: none;">
+  <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')">🇬🇧 &nbsp;English</div>
+  <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')">🇷🇺 &nbsp;Русский</div>
 </div>
 
 <!-- Home Section -->
@@ -2066,8 +1975,8 @@ body::after {
              class="chest-image">
         <div class="chest-glow"></div>
       </div>
-      <div class="chest-text" id="chestText">🎁 OPEN THE GIFT! 🎁</div>
-      <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;" id="chestRewardText">⭐ 1000 Snow + 1 Miner (10 Snow/hour) ⭐</div>
+      <div class="chest-text">🎁 OPEN YOUR WELCOME GIFT! 🎁</div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">⭐ 1000 Snow + 1 Mining Machine (10 Snow/hour) ⭐</div>
     </div>
   </div>
   
@@ -2081,23 +1990,23 @@ body::after {
     </div>
     <div class="hero-stats">
       <div class="hero-stat-box">
-        <div class="stat-lbl" id="statAccruedLabel">Accumulated</div>
+        <div class="stat-lbl" data-i18n="statAccrued">Accrued</div>
         <div class="stat-val" id="heroAccrued">0.000000</div>
         <div class="stat-unit">Snow</div>
       </div>
       <div class="hero-stat-sep"></div>
       <div class="hero-stat-box">
-        <div class="stat-lbl" id="statRateLabel">Per day</div>
+        <div class="stat-lbl" data-i18n="statRateDay">Rate/Day</div>
         <div class="stat-val" id="heroRateDay">0</div>
-        <div class="stat-unit">Snow/day</div>
+        <div class="stat-unit" data-i18n="statSnowDay">Snow/day</div>
       </div>
     </div>
     
     <div class="storage-outer">
-      <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Upgrade Storage" id="storageUpgradeBtn">↑</div>
+      <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Upgrade Storage">↑</div>
       <div class="storage-main">
         <div class="storage-head">
-          <div class="storage-title"><i class="fas fa-database"></i> <span id="storageTitle">Storage</span></div>
+          <div class="storage-title"><i class="fas fa-database"></i> <span data-i18n="storageTitle">Storage</span></div>
           <div class="storage-pct" id="storagePct">0%</div>
         </div>
         <div class="storage-track">
@@ -2111,52 +2020,52 @@ body::after {
     <div class="claim-wrap">
       <button class="collect-btn" id="collectBtn" onclick="collectSnow()" disabled>
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
-        <span id="claimBtnTxt">Collect Snow</span>
+        <span id="claimBtnTxt">Claim Snow</span>
       </button>
       <button class="machine-shop-btn" id="openMachineShopBtn" onclick="openMachineShop()">
-        <i class="fas fa-microchip"></i> <span id="buyMinersBtnText">Buy Miners</span>
+        <i class="fas fa-microchip"></i> Upgrade Mining Machines
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
   </div>
 </div>
 
-<!-- Friends Section -->
+<!-- Friends Section - New Design -->
 <div class="sec" id="sectionFriends">
   <div class="friends-container">
     <div class="ref-prog-card">
       <div class="ref-bonus-badge">
         <span class="rbb-pct">20%</span>
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px;">
-        <span class="rbb-txt" id="refBonusText">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' purchases!<br>Get Snow for every purchase!</span>
+        <span class="rbb-txt">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' machine purchases!<br>Earn TON value in Snow from each machine they buy!</span>
       </div>
       <div class="ref-link-row">
         <input class="ref-inp" id="refLinkInp" readonly placeholder="Your referral link...">
-        <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span id="copyBtnText">Copy</span></button>
+        <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> Copy</button>
       </div>
-      <div style="font-size: 11px; color: var(--muted); margin-top: 8px;" id="refInfoText">📤 Share this link with friends. When they buy miners, you get 20% of the purchase amount in Snow!</div>
+      <div style="font-size: 11px; color: var(--muted); margin-top: 8px;">📤 Share this link with friends. When they buy machines, you get 20% of their purchase value in Snow!</div>
     </div>
     <div class="hist-box">
       <div class="hist-hdr" style="justify-content: space-between">
-        <span><i class="fas fa-users"></i> <span id="recentRefsTitle">Recent Referrals</span></span>
+        <span><i class="fas fa-users"></i> Recent Referrals</span>
         <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
       </div>
-      <div id="recentRefsList"><div class="hist-empty" id="noRefsText">No referrals</div></div>
+      <div id="recentRefsList"><div class="hist-empty">No referrals yet</div></div>
     </div>
   </div>
 </div>
 
-<!-- Tasks Section -->
+<!-- Tasks Section - New Design -->
 <div class="sec" id="sectionTasks">
   <div class="tasks-container">
     <div class="task-tabs">
-      <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')"><span id="socialTabText">📢 Social</span></div>
-      <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')"><span id="referralTabText">👥 Referrals</span></div>
+      <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">📢 Social</div>
+      <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">👥 Referral</div>
     </div>
     <div class="tcont active" id="tcSocial">
       <div style="display: flex; gap: 8px; margin-bottom: 12px">
-        <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')"><span id="partnerTabText">⭐ Partners</span></div>
-        <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')"><span id="communityTabText">🌍 Community</span></div>
+        <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')">⭐ Partner</div>
+        <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')">🌍 Community</div>
       </div>
       <div id="socPartnerList"></div>
       <div id="socCommunityList" style="display: none;"></div>
@@ -2172,36 +2081,36 @@ body::after {
   <div class="wallet-modern">
     <div class="modern-tabs">
       <div class="modern-tab active" data-wt="deposit" onclick="switchWalletModernTab(this,'deposit')">
-        <i class="fas fa-arrow-down"></i> <span id="depositTabText">Deposit</span>
+        <i class="fas fa-arrow-down"></i> Deposit
       </div>
       <div class="modern-tab" data-wt="withdraw" onclick="switchWalletModernTab(this,'withdraw')">
-        <i class="fas fa-arrow-up"></i> <span id="withdrawTabText">Withdraw</span>
+        <i class="fas fa-arrow-up"></i> Withdraw
       </div>
       <div class="modern-tab" data-wt="exchange" onclick="switchWalletModernTab(this,'exchange')">
-        <i class="fas fa-exchange-alt"></i> <span id="exchangeTabText">Exchange</span>
+        <i class="fas fa-exchange-alt"></i> Exchange
       </div>
     </div>
 
     <div class="modern-content active" id="wt-deposit-modern">
       <div class="modern-card deposit">
         <div class="modern-card-title">
-          <i class="fas fa-coins" style="color: var(--ice);"></i> <span id="depositCardTitle">TON Deposit</span>
+          <i class="fas fa-coins" style="color: var(--ice);"></i> Deposit TON
         </div>
         <div class="wal-row">
           <div class="wl-inf">
-            <div class="wll" id="walletLabel">Wallet</div>
+            <div class="wll">Wallet</div>
             <div class="wla" id="walletAddressDisplay">Not connected</div>
           </div>
-          <button class="btn-conn" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> <span id="connectBtnText">Connect</span></button>
+          <button class="btn-conn" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> Connect</button>
         </div>
         <div class="dep-warn">
           <i class="fas fa-exclamation-triangle"></i>
           <div>
-            <strong id="importantText">IMPORTANT:</strong> <span id="depositUserIdLabel">Your user ID</span> <span id="depositUserIdDisplay" style="background: rgba(255,255,255,.2); padding: 2px 8px; border-radius: 12px; font-weight: 800;"></span> <span id="mustBeCommentText">must be the only comment.</span>
+            <strong>IMPORTANT:</strong> Your User ID <span id="depositUserIdDisplay" style="background: rgba(255,255,255,.2); padding: 2px 8px; border-radius: 12px; font-weight: 800;"></span> must be the ONLY comment.
           </div>
         </div>
         <div class="modern-input-group">
-          <label class="modern-label" id="amountLabel">Amount (TON)</label>
+          <label class="modern-label">Amount (TON)</label>
           <input type="number" id="depositAmountInput" class="modern-input" placeholder="1" step="0.1" min="1">
         </div>
         <div class="modern-preset">
@@ -2211,10 +2120,10 @@ body::after {
           <span class="modern-preset-btn" onclick="setDepAmt(10)">10</span>
         </div>
         <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="initiateDeposit()">
-          <i class="fas fa-arrow-down"></i> <span id="depositBtnText">Deposit TON</span>
+          <i class="fas fa-arrow-down"></i> Deposit TON
         </button>
         <div class="tx-status" id="depositStatus">
-          <div id="depositStatusMsg">⏳ Processing deposit...</div>
+          <div>⏳ Processing deposit...</div>
           <div id="depositStatusDetail"></div>
         </div>
       </div>
@@ -2223,14 +2132,14 @@ body::after {
     <div class="modern-content" id="wt-withdraw-modern">
       <div class="modern-card withdraw">
         <div class="modern-card-title">
-          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span id="withdrawCardTitle">TON Withdrawal</span>
+          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> Withdraw TON
         </div>
         <div class="modern-input-group">
-          <label class="modern-label" id="walletAddressLabel">TON Wallet Address</label>
+          <label class="modern-label">TON Wallet Address</label>
           <input type="text" class="modern-input" id="wdAddr" placeholder="UQ...">
         </div>
         <div class="modern-input-group">
-          <label class="modern-label" id="amountWithdrawLabel">Amount (TON)</label>
+          <label class="modern-label">Amount (TON)</label>
           <input type="number" class="modern-input" id="wdAmt" placeholder="0.02" min="0.02" step="0.01">
         </div>
         <div class="modern-preset">
@@ -2240,24 +2149,24 @@ body::after {
           <span class="modern-preset-btn" onclick="setWdAmt(0.5)">0.5</span>
         </div>
         <div class="modern-rate-info">
-          <div style="font-size: 12px; color: var(--muted);" id="yourTonBalanceLabel">Your TON balance</div>
+          <div style="font-size: 12px; color: var(--muted);">Your TON Balance</div>
           <div class="modern-rate-value" id="wdTonBalance">0 TON</div>
         </div>
         <button class="modern-btn secondary" id="wdBtn" onclick="doWithdraw()">
-          <i class="fas fa-arrow-up"></i> <span id="withdrawBtnText">Withdraw TON</span>
+          <i class="fas fa-arrow-up"></i> Withdraw TON
         </button>
       </div>
       <div class="hist-box">
-        <div class="hist-hdr" id="withdrawHistoryTitle">📋 Withdrawal History</div>
-        <div id="wdHist"><div class="hist-empty" id="noWithdrawalsText">No withdrawals</div></div>
+        <div class="hist-hdr">📋 Withdrawal History</div>
+        <div id="wdHist"><div class="hist-empty">No withdrawals yet</div></div>
       </div>
     </div>
 
     <div class="modern-content" id="wt-exchange-modern">
       <div class="modern-card exchange">
         <div class="modern-card-title">
-          <i class="fas fa-exchange-alt"></i> <span id="exchangeCardTitle">Snow → TON Exchange</span>
-          <span class="fee-badge" id="feeBadgeText">Fee: 4%</span>
+          <i class="fas fa-exchange-alt"></i> Exchange Snow → TON
+          <span class="fee-badge">Fee: 4%</span>
         </div>
         <div class="swap-section-modern">
           <div class="swap-row">
@@ -2270,29 +2179,29 @@ body::after {
             </div>
             <div class="swap-input-area">
               <input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwapSnowToTon()">
-              <span class="swap-max" onclick="swapSnowMax()" id="maxBtnText">MAX</span>
+              <span class="swap-max" onclick="swapSnowMax()">MAX</span>
             </div>
             <div class="fee-info">
-              <i class="fas fa-info-circle"></i> <span id="feeInfoText">Fee: 4%</span> (<span id="feeAmountDisplay">0</span> Snow)
+              <i class="fas fa-info-circle"></i> Fee: 4% (<span id="feeAmountDisplay">0</span> Snow)
             </div>
             <div class="swap-output-area">
-              <span id="youGetText">You will get:</span>
+              <span>You get:</span>
               <div class="swap-output-value" id="swapTonOut">0</div>
               <span>TON</span>
             </div>
           </div>
         </div>
-        <div class="modern-rate-info" id="exchangeRateInfo">
+        <div class="modern-rate-info">
           📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON
-          <div style="font-size: 10px;" id="exchangeFeeInfo">Exchange fee 4%</div>
+          <div style="font-size: 10px;">4% exchange fee applies</div>
         </div>
         <button class="modern-btn primary" onclick="swapSnowToTon()">
-          <i class="fas fa-exchange-alt"></i> <span id="exchangeBtnText">Exchange Snow → TON</span>
+          <i class="fas fa-exchange-alt"></i> Exchange Snow → TON
         </button>
       </div>
       <div class="hist-box">
-        <div class="hist-hdr" id="exchangeHistoryTitle">📋 Exchange History</div>
-        <div id="exchHist"><div class="hist-empty" id="noExchangesText">No exchanges</div></div>
+        <div class="hist-hdr">📋 Exchange History</div>
+        <div id="exchHist"><div class="hist-empty">No conversions yet</div></div>
       </div>
     </div>
   </div>
@@ -2303,25 +2212,25 @@ body::after {
   <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" alt="Support">
 </div>
 
-<button id="floatAddTask" onclick="openModal('addTaskModal')">➕ <span id="addTaskBtnText">Add Task</span></button>
+<button id="floatAddTask" onclick="openModal('addTaskModal')">➕ Add Task</button>
 
 <!-- Bottom Navigation -->
 <nav class="bnav">
   <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div>
-    <div class="ni-lbl" id="navHome">Home</div>
+    <div class="ni-lbl">Home</div>
   </div>
   <div class="ni" data-s="sectionTasks" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div>
-    <div class="ni-lbl" id="navTasks">Tasks</div>
+    <div class="ni-lbl">Tasks</div>
   </div>
   <div class="ni" data-s="sectionFriends" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div>
-    <div class="ni-lbl" id="navFriends">Friends</div>
+    <div class="ni-lbl">Friends</div>
   </div>
   <div class="ni" data-s="sectionWallet" onclick="goNav(this)">
     <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div>
-    <div class="ni-lbl" id="navWallet">Wallet</div>
+    <div class="ni-lbl">Wallet</div>
   </div>
 </nav>
 
@@ -2329,34 +2238,34 @@ body::after {
 <div class="modal" id="helpModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle" id="helpTitle">🎅 Santa Snow Guide</div>
+      <div class="mtitle">🎅 Santa Snow Guide</div>
       <button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button>
     </div>
     <div style="padding: 10px 0;">
       <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px;">
         <a href="https://t.me/SantaSnowPayouts" target="_blank" style="background: rgba(77,208,225,0.1); border-radius: 16px; padding: 12px; text-align: center; text-decoration: none;">
           <span style="font-size: 28px;">💸</span>
-          <div style="font-size: 11px; color: var(--ice);" id="helpPayouts">Payouts Channel</div>
+          <div style="font-size: 11px; color: var(--ice);">Payouts Channel</div>
         </a>
         <a href="https://t.me/SantaSnowNews" target="_blank" style="background: rgba(77,208,225,0.1); border-radius: 16px; padding: 12px; text-align: center; text-decoration: none;">
           <span style="font-size: 28px;">📢</span>
-          <div style="font-size: 11px; color: var(--ice);" id="helpNews">News Channel</div>
+          <div style="font-size: 11px; color: var(--ice);">News Channel</div>
         </a>
         <a href="https://t.me/Santa_1_Snow" target="_blank" style="background: rgba(255,217,102,0.1); border-radius: 16px; padding: 12px; text-align: center; text-decoration: none;">
           <span style="font-size: 28px;">🛟</span>
-          <div style="font-size: 11px; color: var(--gold);" id="helpSupport">Support</div>
+          <div style="font-size: 11px; color: var(--gold);">Support</div>
         </a>
       </div>
       <div style="background: rgba(77,208,225,0.1); border-radius: 16px; padding: 14px; margin-bottom: 12px;">
-        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;" id="welcomeGiftTitle">🎁 Welcome Gift</div>
-        <div style="font-size: 12px;" id="welcomeGiftText">Open the chest to get 1000 Snow + 1 Miner (10 Snow/hour)!</div>
+        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;">🎁 Welcome Gift</div>
+        <div style="font-size: 12px;">Open chest to get 1000 Snow + 1 Machine (10 Snow/hour)!</div>
       </div>
       <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 14px;">
-        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;" id="howToPlayTitle">💡 How to Play</div>
-        <div style="font-size: 12px; line-height: 1.6;" id="howToPlayText">
-          • Buy miners with TON to increase mining speed<br>
+        <div style="font-weight: 800; color: var(--ice); margin-bottom: 8px;">💡 How to Play</div>
+        <div style="font-size: 12px; line-height: 1.6;">
+          • Buy machines with TON to increase Snow/hour<br>
           • Collect Snow from storage every hour<br>
-          • Exchange Snow for TON (4% fee)<br>
+          • Exchange Snow to TON (4% fee)<br>
           • Invite friends for 20% commission!<br>
           • Complete tasks for bonus Snow
         </div>
@@ -2368,7 +2277,7 @@ body::after {
 <div class="modal" id="upgradeModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle" id="upgradeTitle">⬆️ Upgrade Storage</div>
+      <div class="mtitle">⬆️ Upgrade Storage</div>
       <button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button>
     </div>
     <div id="upgradeContent"></div>
@@ -2378,7 +2287,7 @@ body::after {
 <div class="modal" id="machineShopModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle" id="machineShopTitle">🤖 Miner Shop</div>
+      <div class="mtitle">🤖 Machine Shop</div>
       <button class="mclose" onclick="closeModal('machineShopModal')"><i class="fas fa-times"></i></button>
     </div>
     <div id="machineShopContent"></div>
@@ -2388,23 +2297,23 @@ body::after {
 <div class="modal" id="addTaskModal">
   <div class="modal-box">
     <div class="mhdr">
-      <div class="mtitle" id="addTaskTitle">➕ Add Community Task</div>
+      <div class="mtitle">➕ Add Community Task</div>
       <button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button>
     </div>
-    <div style="background: rgba(77,208,225,0.1); border-radius: 12px; padding: 12px; margin-bottom: 12px;" id="taskCostInfo">
-      💡 Cost = <strong>Target × 60 Snow</strong><br>
+    <div style="background: rgba(77,208,225,0.1); border-radius: 12px; padding: 12px; margin-bottom: 12px;">
+      💡 Cost = <strong>Target Users × 60 Snow</strong><br>
       <span style="font-size: 11px;">Min: 100 users = 6,000 Snow</span>
     </div>
     <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex:1; padding: 10px; border-radius: 12px; border: 2px solid var(--ice); background: rgba(77,208,225,0.2); color: var(--ice); font-weight: 800;"><span id="channelTypeText">📢 Channel</span></button>
-      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex:1; padding: 10px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-weight: 800;"><span id="botTypeText">🤖 Bot</span></button>
+      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex:1; padding: 10px; border-radius: 12px; border: 2px solid var(--ice); background: rgba(77,208,225,0.2); color: var(--ice); font-weight: 800;">📢 Channel</button>
+      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex:1; padding: 10px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-weight: 800;">🤖 Bot</button>
     </div>
-    <div id="atBotHint" style="background: rgba(255,193,7,0.1); border-radius: 10px; padding: 8px; margin-bottom: 12px; font-size: 11px; color: #FFD740;" id="botHintText">
-      ⚠️ Add @SANTASNOWBOT_BOT as admin to your channel!
+    <div id="atBotHint" style="background: rgba(255,193,7,0.1); border-radius: 10px; padding: 8px; margin-bottom: 12px; font-size: 11px; color: #FFD740;">
+      ⚠️ Add @SANTASNOWBOT_BOT as admin in your channel first!
     </div>
-    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;" id="telegramLinkLabel">Telegram Link</label>
+    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;">Telegram Link</label>
     <input type="text" id="atLink" class="finput" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px;" placeholder="https://t.me/yourchannel">
-    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;" id="targetLabel">Target (min 100)</label>
+    <label class="flabel" style="display: block; margin-bottom: 4px; font-size: 12px;">Target Users (min 100)</label>
     <input type="number" id="atTarget" class="finput" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px;" placeholder="100" min="100">
     <div class="preset-row" style="display: flex; gap: 8px; margin-bottom: 12px;">
       <span class="prbtn" style="flex:1; text-align: center; padding: 8px; background: rgba(77,208,225,0.1); border-radius: 10px; cursor: pointer;" onclick="setAtTarget(100)">100</span>
@@ -2413,10 +2322,10 @@ body::after {
       <span class="prbtn" style="flex:1; text-align: center; padding: 8px; background: rgba(77,208,225,0.1); border-radius: 10px; cursor: pointer;" onclick="setAtTarget(5000)">5K</span>
     </div>
     <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px; display: flex; justify-content: space-between;">
-      <span id="totalCostLabel">Total cost:</span>
+      <span>Total Cost:</span>
       <span id="atCostPreview" style="font-weight: 800; color: var(--ice);">0 Snow</span>
     </div>
-    <button class="btn-prim" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800; cursor: pointer;" onclick="submitAddTask()"><span id="createTaskBtnText">✅ Create Task</span></button>
+    <button class="btn-prim" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800; cursor: pointer;" onclick="submitAddTask()">✅ Create Task</button>
     <div id="atStatus" style="margin-top: 8px; font-size: 12px; text-align: center; display: none;"></div>
   </div>
 </div>
@@ -2425,430 +2334,11 @@ body::after {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v16.2 (BILINGUAL)
-// FIXED: Machine Shop button working
-// FIXED: Collect button working
-// FIXED: Notifications auto-hide after 3 seconds
-// ADDED: English language support
+// SANTA SNOW - FRONTEND v16.0
+// FIXED: Machine shop button functionality
+// FIXED: Russian language translation
+// UPDATED: Complete translations for all UI elements
 // ============================================================
-
-// Language translations
-const translations = {
-  ru: {
-    // Loading
-    loading: "Загрузка...",
-    connecting: "Подключение...",
-    loadingResources: "Загрузка ресурсов...",
-    loadingAccount: "Загрузка аккаунта...",
-    accountLoaded: "Аккаунт загружен!",
-    buildingUI: "Построение интерфейса...",
-    settingWallet: "Настройка кошелька...",
-    ready: "Готово! 🎅",
-    
-    // Welcome Modal
-    welcomeTitle: "🎄 Подарок Санты! 🎄",
-    welcomeSubtitle: "Откройте сундук, чтобы получить награду!",
-    openChest: "🎁 Открыть сундук! 🎁",
-    
-    // Home
-    accumulated: "Накоплено",
-    perDay: "В день",
-    storage: "Хранилище",
-    upgrade: "Улучшить",
-    collect: "Собрать",
-    storageEmpty: "Хранилище пусто...",
-    collectX: (amt) => `Собрать ${amt} Snow`,
-    buyMiners: "Купить майнеры",
-    
-    // Chest
-    openGift: "🎁 ОТКРОЙТЕ ПОДАРОК! 🎁",
-    chestReward: "⭐ 1000 Snow + 1 Майнер (10 Snow/час) ⭐",
-    
-    // Friends
-    refBonus: "💰 20% комиссия с покупок друзей! Получайте Snow за каждую покупку!",
-    copy: "Копировать",
-    refInfo: "📤 Поделитесь ссылкой с друзьями. Когда они покупают майнеры, вы получаете 20% от суммы покупки в Snow!",
-    recentRefs: "Недавние рефералы",
-    noRefs: "Нет рефералов",
-    friends: "Друзей",
-    
-    // Tasks
-    social: "📢 Соц. сети",
-    referrals: "👥 Рефералы",
-    partners: "⭐ Партнеры",
-    community: "🌍 Сообщество",
-    
-    // Wallet
-    deposit: "Депозит",
-    withdraw: "Вывод",
-    exchange: "Обмен",
-    tonDeposit: "TON Депозит",
-    tonWithdrawal: "TON Вывод",
-    wallet: "Кошелек",
-    notConnected: "Не подключен",
-    connect: "Подключить",
-    disconnect: "Отключить",
-    important: "ВАЖНО:",
-    yourUserId: "Ваш ID пользователя",
-    mustBeComment: "должен быть единственным комментарием.",
-    amount: "Сумма (TON)",
-    depositTon: "Депозит TON",
-    withdrawTon: "Вывести TON",
-    yourTonBalance: "Ваш баланс TON",
-    withdrawalHistory: "📋 История выводов",
-    noWithdrawals: "Нет выводов",
-    snowToTon: "Snow → TON",
-    fee: "Комиссия: 4%",
-    youWillGet: "Вы получите:",
-    exchangeRate: "📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON",
-    exchangeFee: "Комиссия за обмен 4%",
-    exchangeSnow: "Обменять Snow → TON",
-    exchangeHistory: "📋 История обменов",
-    noExchanges: "Нет обменов",
-    
-    // Machine Shop
-    minerShop: "🤖 Магазин майнеров",
-    basicMiner: "Базовый Майнер",
-    advancedMiner: "Продвинутый Майнер",
-    eliteMiner: "Элитный Майнер",
-    snowPerHour: "Snow/час",
-    tonEach: "TON за шт",
-    inStock: "В наличии:",
-    buy: "Купить",
-    need: "Нужно",
-    
-    // Upgrade
-    upgradeStorage: "⬆️ Улучшить хранилище",
-    maxLevel: "🏆 Максимальный уровень!",
-    upgradeBtn: "⬆️ Улучшить",
-    
-    // Add Task
-    addTask: "➕ Добавить задание",
-    taskCostInfo: "💡 Стоимость = Цель × 60 Snow\nМин: 100 пользователей = 6,000 Snow",
-    channel: "📢 Канал",
-    bot: "🤖 Бот",
-    botHint: "⚠️ Добавьте @SANTASNOWBOT_BOT как администратора в ваш канал!",
-    telegramLink: "Ссылка Telegram",
-    target: "Цель (мин 100)",
-    totalCost: "Общая стоимость:",
-    createTask: "✅ Создать задание",
-    
-    // Notifications
-    wait: "Подождите 3 секунды!",
-    storageEmptyMsg: "Хранилище пусто!",
-    collected: (amt) => `+${amt} Snow собрано!`,
-    purchaseSuccess: (qty, name) => `🎉 ${qty}x ${name} куплен!`,
-    purchaseError: (msg) => `❌ ${msg}`,
-    upgradeSuccess: (lv) => `✅ Хранилище улучшено до Ур.${lv}!`,
-    notEnoughSnow: "Недостаточно Snow!",
-    maxLevelMsg: "Уже максимум!",
-    minSnow: "Минимум 100 Snow",
-    notEnoughSnowMsg: "Недостаточно Snow!",
-    exchangeSuccess: (amt) => `✅ Обменяно ${amt} Snow`,
-    withdrawSuccess: "✅ Заявка на вывод отправлена!",
-    withdrawError: (msg) => `❌ ${msg}`,
-    invalidAddress: "Неверный адрес!",
-    minWithdraw: (min) => `Минимум ${min} TON!`,
-    notEnoughTon: "Недостаточно TON!",
-    depositSent: "✅ Депозит отправлен!",
-    depositConfirmed: (amt) => `💰 ${amt} TON зачислено!`,
-    taskCompleted: (amt) => `🎉 +${amt} Snow!`,
-    taskError: (msg) => `❌ ${msg}`,
-    linkCopied: "✅ Ссылка скопирована!",
-    connectWalletFirst: "Сначала подключите кошелек!",
-    minDeposit: "Минимум 1 TON",
-    
-    // Help
-    helpTitle: "🎅 Гайд Santa Snow",
-    payoutsChannel: "Канал выплат",
-    newsChannel: "Новостной канал",
-    support: "Поддержка",
-    welcomeGift: "🎁 Приветственный подарок",
-    welcomeGiftDesc: "Откройте сундук, чтобы получить 1000 Snow + 1 Майнер (10 Snow/час)!",
-    howToPlay: "💡 Как играть",
-    howToPlayDesc: "• Покупайте майнеры за TON, чтобы увеличить скорость добычи\n• Собирайте Snow из хранилища каждый час\n• Обменивайте Snow на TON (комиссия 4%)\n• Приглашайте друзей для 20% комиссии!\n• Выполняйте задания для бонусных Snow",
-    
-    // Navigation
-    navHome: "Главная",
-    navTasks: "Задания",
-    navFriends: "Друзья",
-    navWallet: "Кошелек",
-    
-    // Other
-    snow: "Snow",
-    ton: "TON",
-    max: "MAX",
-  },
-  en: {
-    // Loading
-    loading: "Loading...",
-    connecting: "Connecting...",
-    loadingResources: "Loading resources...",
-    loadingAccount: "Loading account...",
-    accountLoaded: "Account loaded!",
-    buildingUI: "Building interface...",
-    settingWallet: "Setting up wallet...",
-    ready: "Ready! 🎅",
-    
-    // Welcome Modal
-    welcomeTitle: "🎄 Santa's Gift! 🎄",
-    welcomeSubtitle: "Open the chest to get your reward!",
-    openChest: "🎁 Open Chest! 🎁",
-    
-    // Home
-    accumulated: "Accumulated",
-    perDay: "Per day",
-    storage: "Storage",
-    upgrade: "Upgrade",
-    collect: "Collect",
-    storageEmpty: "Storage empty...",
-    collectX: (amt) => `Collect ${amt} Snow`,
-    buyMiners: "Buy Miners",
-    
-    // Chest
-    openGift: "🎁 OPEN THE GIFT! 🎁",
-    chestReward: "⭐ 1000 Snow + 1 Miner (10 Snow/hour) ⭐",
-    
-    // Friends
-    refBonus: "💰 20% commission from friends' purchases! Get Snow for every purchase!",
-    copy: "Copy",
-    refInfo: "📤 Share this link with friends. When they buy miners, you get 20% of the purchase amount in Snow!",
-    recentRefs: "Recent Referrals",
-    noRefs: "No referrals",
-    friends: "Friends",
-    
-    // Tasks
-    social: "📢 Social",
-    referrals: "👥 Referrals",
-    partners: "⭐ Partners",
-    community: "🌍 Community",
-    
-    // Wallet
-    deposit: "Deposit",
-    withdraw: "Withdraw",
-    exchange: "Exchange",
-    tonDeposit: "TON Deposit",
-    tonWithdrawal: "TON Withdrawal",
-    wallet: "Wallet",
-    notConnected: "Not connected",
-    connect: "Connect",
-    disconnect: "Disconnect",
-    important: "IMPORTANT:",
-    yourUserId: "Your user ID",
-    mustBeComment: "must be the only comment.",
-    amount: "Amount (TON)",
-    depositTon: "Deposit TON",
-    withdrawTon: "Withdraw TON",
-    yourTonBalance: "Your TON balance",
-    withdrawalHistory: "📋 Withdrawal History",
-    noWithdrawals: "No withdrawals",
-    snowToTon: "Snow → TON",
-    fee: "Fee: 4%",
-    youWillGet: "You will get:",
-    exchangeRate: "📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON",
-    exchangeFee: "Exchange fee 4%",
-    exchangeSnow: "Exchange Snow → TON",
-    exchangeHistory: "📋 Exchange History",
-    noExchanges: "No exchanges",
-    
-    // Machine Shop
-    minerShop: "🤖 Miner Shop",
-    basicMiner: "Basic Miner",
-    advancedMiner: "Advanced Miner",
-    eliteMiner: "Elite Miner",
-    snowPerHour: "Snow/hour",
-    tonEach: "TON each",
-    inStock: "In stock:",
-    buy: "Buy",
-    need: "Need",
-    
-    // Upgrade
-    upgradeStorage: "⬆️ Upgrade Storage",
-    maxLevel: "🏆 Maximum level!",
-    upgradeBtn: "⬆️ Upgrade",
-    
-    // Add Task
-    addTask: "➕ Add Task",
-    taskCostInfo: "💡 Cost = Target × 60 Snow\nMin: 100 users = 6,000 Snow",
-    channel: "📢 Channel",
-    bot: "🤖 Bot",
-    botHint: "⚠️ Add @SANTASNOWBOT_BOT as admin to your channel!",
-    telegramLink: "Telegram Link",
-    target: "Target (min 100)",
-    totalCost: "Total cost:",
-    createTask: "✅ Create Task",
-    
-    // Notifications
-    wait: "Wait 3 seconds!",
-    storageEmptyMsg: "Storage is empty!",
-    collected: (amt) => `+${amt} Snow collected!`,
-    purchaseSuccess: (qty, name) => `🎉 ${qty}x ${name} purchased!`,
-    purchaseError: (msg) => `❌ ${msg}`,
-    upgradeSuccess: (lv) => `✅ Storage upgraded to Lv.${lv}!`,
-    notEnoughSnow: "Not enough Snow!",
-    maxLevelMsg: "Already max level!",
-    minSnow: "Minimum 100 Snow",
-    notEnoughSnowMsg: "Not enough Snow!",
-    exchangeSuccess: (amt) => `✅ Exchanged ${amt} Snow`,
-    withdrawSuccess: "✅ Withdrawal request sent!",
-    withdrawError: (msg) => `❌ ${msg}`,
-    invalidAddress: "Invalid address!",
-    minWithdraw: (min) => `Minimum ${min} TON!`,
-    notEnoughTon: "Not enough TON!",
-    depositSent: "✅ Deposit sent!",
-    depositConfirmed: (amt) => `💰 ${amt} TON added!`,
-    taskCompleted: (amt) => `🎉 +${amt} Snow!`,
-    taskError: (msg) => `❌ ${msg}`,
-    linkCopied: "✅ Link copied!",
-    connectWalletFirst: "Connect wallet first!",
-    minDeposit: "Minimum 1 TON",
-    
-    // Help
-    helpTitle: "🎅 Santa Snow Guide",
-    payoutsChannel: "Payouts Channel",
-    newsChannel: "News Channel",
-    support: "Support",
-    welcomeGift: "🎁 Welcome Gift",
-    welcomeGiftDesc: "Open the chest to get 1000 Snow + 1 Miner (10 Snow/hour)!",
-    howToPlay: "💡 How to Play",
-    howToPlayDesc: "• Buy miners with TON to increase mining speed\n• Collect Snow from storage every hour\n• Exchange Snow for TON (4% fee)\n• Invite friends for 20% commission!\n• Complete tasks for bonus Snow",
-    
-    // Navigation
-    navHome: "Home",
-    navTasks: "Tasks",
-    navFriends: "Friends",
-    navWallet: "Wallet",
-    
-    // Other
-    snow: "Snow",
-    ton: "TON",
-    max: "MAX",
-  }
-};
-
-let currentLang = 'ru';
-
-function t(key, ...args) {
-  let text = translations[currentLang][key] || translations['ru'][key] || key;
-  if (args.length) {
-    text = typeof text === 'function' ? text(...args) : text;
-  }
-  return text;
-}
-
-function updateAllTexts() {
-  // Update all elements with data-i18n or ids
-  const elements = {
-    // Loading
-    ldStatus: t('loading'),
-    
-    // Welcome Modal
-    welcomeTitle: t('welcomeTitle'),
-    welcomeSubtitle: t('welcomeSubtitle'),
-    openChestBtn: t('openChest'),
-    
-    // Home
-    statAccruedLabel: t('accumulated'),
-    statRateLabel: t('perDay'),
-    storageTitle: t('storage'),
-    storageUpgradeBtn: t('upgrade'),
-    claimBtnTxt: t('collect'),
-    buyMinersBtnText: t('buyMiners'),
-    chestText: t('openGift'),
-    chestRewardText: t('chestReward'),
-    
-    // Friends
-    refBonusText: t('refBonus'),
-    copyBtnText: t('copy'),
-    refInfoText: t('refInfo'),
-    recentRefsTitle: t('recentRefs'),
-    noRefsText: t('noRefs'),
-    totalRefsDisp: `${S.refs.length} ${t('friends')}`,
-    
-    // Tasks
-    socialTabText: t('social'),
-    referralTabText: t('referrals'),
-    partnerTabText: t('partners'),
-    communityTabText: t('community'),
-    
-    // Wallet
-    depositTabText: t('deposit'),
-    withdrawTabText: t('withdraw'),
-    exchangeTabText: t('exchange'),
-    depositCardTitle: t('tonDeposit'),
-    withdrawCardTitle: t('tonWithdrawal'),
-    walletLabel: t('wallet'),
-    connectBtnText: S.wallet ? t('disconnect') : t('connect'),
-    importantText: t('important'),
-    depositUserIdLabel: t('yourUserId'),
-    mustBeCommentText: t('mustBeComment'),
-    amountLabel: t('amount'),
-    depositBtnText: t('depositTon'),
-    withdrawBtnText: t('withdrawTon'),
-    yourTonBalanceLabel: t('yourTonBalance'),
-    withdrawHistoryTitle: t('withdrawalHistory'),
-    noWithdrawalsText: t('noWithdrawals'),
-    exchangeCardTitle: t('snowToTon'),
-    feeBadgeText: t('fee'),
-    youGetText: t('youWillGet'),
-    exchangeRateInfo: t('exchangeRate'),
-    exchangeFeeInfo: t('exchangeFee'),
-    exchangeBtnText: t('exchangeSnow'),
-    exchangeHistoryTitle: t('exchangeHistory'),
-    noExchangesText: t('noExchanges'),
-    maxBtnText: t('max'),
-    
-    // Machine Shop
-    machineShopTitle: t('minerShop'),
-    
-    // Upgrade
-    upgradeTitle: t('upgradeStorage'),
-    
-    // Add Task
-    addTaskBtnText: t('addTask'),
-    taskCostInfo: t('taskCostInfo'),
-    channelTypeText: t('channel'),
-    botTypeText: t('bot'),
-    botHintText: t('botHint'),
-    telegramLinkLabel: t('telegramLink'),
-    targetLabel: t('target'),
-    totalCostLabel: t('totalCost'),
-    createTaskBtnText: t('createTask'),
-    
-    // Navigation
-    navHome: t('navHome'),
-    navTasks: t('navTasks'),
-    navFriends: t('navFriends'),
-    navWallet: t('navWallet'),
-    
-    // Help
-    helpTitle: t('helpTitle'),
-    helpPayouts: t('payoutsChannel'),
-    helpNews: t('newsChannel'),
-    helpSupport: t('support'),
-    welcomeGiftTitle: t('welcomeGift'),
-    welcomeGiftText: t('welcomeGiftDesc'),
-    howToPlayTitle: t('howToPlay'),
-    howToPlayText: t('howToPlayDesc'),
-  };
-  
-  for (const [id, text] of Object.entries(elements)) {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = text;
-  }
-  
-  // Update storage label
-  updateStorageUI();
-  updateSwapBals();
-}
-
-function setLanguage(lang) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-  updateAllTexts();
-}
 
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
@@ -2861,37 +2351,157 @@ const CFG = {
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
   BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow',
   MACHINES: {
-    1: { cost: 1, rate: 300, name: "Basic Miner", name_ru: "Базовый Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
-    2: { cost: 2, rate: 650, name: "Advanced Miner", name_ru: "Продвинутый Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
-    3: { cost: 3, rate: 1000, name: "Elite Miner", name_ru: "Элитный Майнер", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
+    1: { cost: 1, rate: 300, name: "Basic Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
+    2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
+    3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   }
 };
 
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 600, name: "Invite 10 friends", name_ru: "Пригласи 10 друзей", icon: "👥" },
-  { id: 'ref_20', n: 20, snow: 1500, name: "Invite 20 friends", name_ru: "Пригласи 20 друзей", icon: "👥👥" },
-  { id: 'ref_50', n: 50, snow: 4000, name: "Invite 50 friends", name_ru: "Пригласи 50 друзей", icon: "🌟" },
-  { id: 'ref_100', n: 100, snow: 10000, name: "Invite 100 friends", name_ru: "Пригласи 100 друзей", icon: "💎" },
-  { id: 'ref_200', n: 200, snow: 20000, name: "Invite 200 friends", name_ru: "Пригласи 200 друзей", icon: "👑" },
-  { id: 'ref_500', n: 500, snow: 50000, name: "Invite 500 friends", name_ru: "Пригласи 500 друзей", icon: "🏆" }
+  { id: 'ref_10', n: 10, snow: 600, name: "Invite 10 Friends", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 1500, name: "Invite 20 Friends", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 4000, name: "Invite 50 Friends", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 10000, name: "Invite 100 Friends", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 20000, name: "Invite 200 Friends", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 50000, name: "Invite 500 Friends", icon: "🏆" }
 ];
 
 const REF_TASK_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const STORAGE_LVS = {
-  1: { cap: 300, upgCost: 500, label: "Gift Box", label_ru: "Подарочная коробка" },
-  2: { cap: 900, upgCost: 2000, label: "Snowdrift", label_ru: "Сугроб" },
-  3: { cap: 2400, upgCost: 8000, label: "Ice Block", label_ru: "Ледяной блок" },
-  4: { cap: 6000, upgCost: 25000, label: "Snowman", label_ru: "Снеговик" },
-  5: { cap: 18000, upgCost: 80000, label: "Ice Castle", label_ru: "Ледяной замок" },
-  6: { cap: 60000, upgCost: 250000, label: "Frozen Palace", label_ru: "Замороженный дворец" },
-  7: { cap: 120000, upgCost: 500000, label: "North Pole", label_ru: "Северный полюс" },
-  8: { cap: 210000, upgCost: 900000, label: "Arctic Base", label_ru: "Арктическая база" },
-  9: { cap: 330000, upgCost: 1500000, label: "Glacier", label_ru: "Ледник" },
-  10: { cap: 480000, upgCost: 2500000, label: "Iceberg", label_ru: "Айсберг" }
+  1: { cap: 300, upgCost: 500, label: 'Gift Box' },
+  2: { cap: 900, upgCost: 2000, label: 'Snow Pile' },
+  3: { cap: 2400, upgCost: 8000, label: 'Ice Block' },
+  4: { cap: 6000, upgCost: 25000, label: 'Snowman' },
+  5: { cap: 18000, upgCost: 80000, label: 'Ice Castle' },
+  6: { cap: 60000, upgCost: 250000, label: 'Frozen Palace' },
+  7: { cap: 120000, upgCost: 500000, label: 'North Pole' },
+  8: { cap: 210000, upgCost: 900000, label: 'Arctic Base' },
+  9: { cap: 330000, upgCost: 1500000, label: 'Glacier' },
+  10: { cap: 480000, upgCost: 2500000, label: 'Iceberg' }
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
+
+// Complete translations for both languages
+const TRANSLATIONS = {
+  en: {
+    labelSnow: 'Snow',
+    labelTON: 'TON',
+    statAccrued: 'Accrued',
+    statRateDay: 'Rate/Day',
+    statSnowDay: 'Snow/day',
+    storageTitle: 'Storage',
+    depositBtn: 'Deposit TON',
+    withdrawBtn: 'Withdraw TON',
+    exchangeNow: 'Exchange',
+    collectBtn: 'Claim Snow',
+    upgradeBtn: 'Upgrade Mining Machines',
+    home: 'Home',
+    tasks: 'Tasks',
+    friends: 'Friends',
+    wallet: 'Wallet',
+    storageLbl: 'Storage',
+    snow: 'Snow',
+    ton: 'TON',
+    yourBalance: 'Your Balance',
+    needMore: 'Need',
+    buy: 'Buy',
+    owned: 'Owned',
+    snowPerHour: 'Snow/hour',
+    each: 'each',
+    pcs: 'pcs',
+    commission: 'commission',
+    fromFriends: 'from friends',
+    copy: 'Copy',
+    share: 'Share',
+    recentReferrals: 'Recent Referrals',
+    noReferrals: 'No referrals yet',
+    referralTasks: 'Referral Tasks',
+    socialTasks: 'Social Tasks',
+    partnerTasks: 'Partner Tasks',
+    communityTasks: 'Community Tasks',
+    addTask: 'Add Task',
+    upgrade: 'Upgrade',
+    exchange: 'Exchange',
+    withdraw: 'Withdraw',
+    deposit: 'Deposit',
+    connectWallet: 'Connect Wallet',
+    disconnect: 'Disconnect',
+    notConnected: 'Not connected',
+    pending: 'Pending',
+    completed: 'Completed',
+    failed: 'Failed',
+    maxLevel: 'Maximum Level',
+    welcomeGift: 'Welcome Gift',
+    openChest: 'Open Chest',
+    rewards: 'Rewards',
+    startMining: 'Start Mining',
+    howToPlay: 'How to Play',
+    buyMachines: 'Buy machines with TON to increase Snow/hour',
+    collectSnow: 'Collect Snow from storage every hour',
+    exchangeSnow: 'Exchange Snow to TON',
+    inviteFriends: 'Invite friends for 20% commission'
+  },
+  ru: {
+    labelSnow: 'Снег',
+    labelTON: 'TON',
+    statAccrued: 'Накоплено',
+    statRateDay: 'Ставка/День',
+    statSnowDay: 'Снег/день',
+    storageTitle: 'Хранилище',
+    depositBtn: 'Внести TON',
+    withdrawBtn: 'Вывести TON',
+    exchangeNow: 'Обменять',
+    collectBtn: 'Собрать Снег',
+    upgradeBtn: 'Улучшить Машины',
+    home: 'Главная',
+    tasks: 'Задания',
+    friends: 'Друзья',
+    wallet: 'Кошелек',
+    storageLbl: 'Хранилище',
+    snow: 'Снег',
+    ton: 'TON',
+    yourBalance: 'Ваш Баланс',
+    needMore: 'Нужно',
+    buy: 'Купить',
+    owned: 'Владеет',
+    snowPerHour: 'Снег/час',
+    each: 'шт',
+    pcs: 'шт',
+    commission: 'комиссия',
+    fromFriends: 'от друзей',
+    copy: 'Копировать',
+    share: 'Поделиться',
+    recentReferrals: 'Недавние приглашения',
+    noReferrals: 'Пока нет приглашений',
+    referralTasks: 'Реферальные задания',
+    socialTasks: 'Социальные задания',
+    partnerTasks: 'Партнерские задания',
+    communityTasks: 'Задания сообщества',
+    addTask: 'Добавить задание',
+    upgrade: 'Улучшить',
+    exchange: 'Обменять',
+    withdraw: 'Вывести',
+    deposit: 'Внести',
+    connectWallet: 'Подключить кошелек',
+    disconnect: 'Отключить',
+    notConnected: 'Не подключен',
+    pending: 'Ожидает',
+    completed: 'Выполнено',
+    failed: 'Ошибка',
+    maxLevel: 'Максимальный уровень',
+    welcomeGift: 'Подарок Санты',
+    openChest: 'Открыть сундук',
+    rewards: 'Награды',
+    startMining: 'Начать майнинг',
+    howToPlay: 'Как играть',
+    buyMachines: 'Покупайте машины за TON чтобы увеличить Снег/час',
+    collectSnow: 'Собирайте Снег из хранилища каждый час',
+    exchangeSnow: 'Обменивайте Снег на TON',
+    inviteFriends: 'Приглашайте друзей за 20% комиссию'
+  }
+};
 
 const S = {
   userId: null,
@@ -2902,10 +2512,10 @@ const S = {
   storageProgress: 0, storageInt: null,
   tg: null, tonUI: null, wallet: null, depCheckInt: null,
   _collectCooldown: false,
-  isNewUser: false,
-  _lastClickTime: 0
+  isNewUser: false
 };
 
+let _lastClickTime = 0;
 let _apiInFlight = 0;
 let _nt = null;
 let _taskInFlight = new Set();
@@ -2925,7 +2535,7 @@ async function api(action, data = {}) {
     if (S.tg?.initData) h.Authorization = `Telegram ${S.tg.initData}`;
     const r = await fetch(`${CFG.API_URL}/api`, { method: 'POST', headers: h, body: JSON.stringify({ action, data }) });
     const j = await r.json();
-    if (!j.success) throw new Error(j.error || 'API Error');
+    if (!j.success) throw new Error(j.error || 'API error');
     return j.data;
   } finally { _apiInFlight--; }
 }
@@ -2938,10 +2548,7 @@ function showNotif(msg, type = 'i') {
   el.innerHTML = msg;
   el.className = 'notif ' + type;
   setTimeout(() => el.classList.add('show'), 10);
-  // Auto-hide after 3 seconds
-  _nt = setTimeout(() => {
-    el.classList.remove('show');
-  }, 3000);
+  _nt = setTimeout(() => el.classList.remove('show'), 3000);
 }
 
 async function loadState() {
@@ -2988,7 +2595,7 @@ function updateStorageUI() {
   const has = S.storageProgress >= 1;
   btn.disabled = !has;
   const claimSpan = document.getElementById('claimBtnTxt');
-  if (claimSpan) claimSpan.innerHTML = has ? t('collectX', fmt(Math.floor(S.storageProgress))) : t('storageEmpty');
+  if (claimSpan) claimSpan.innerHTML = has ? `Claim ${fmt(Math.floor(S.storageProgress))} Snow` : 'Storage Empty...';
 }
 
 function fmt(n) {
@@ -3020,17 +2627,17 @@ function startStorage() {
 async function collectSnow() {
   if (S._collectCooldown) return;
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   const amt = Math.floor(S.storageProgress);
-  if (amt < 1) { showNotif(t('storageEmptyMsg'), 'e'); return; }
+  if (amt < 1) { showNotif('Storage is empty!', 'e'); return; }
   S._collectCooldown = true;
   setTimeout(() => S._collectCooldown = false, 3000);
   S.user.snow = (S.user.snow || 0) + amt;
   S.storageProgress = 0;
   updateUI();
   triggerSnowfall(30);
-  showNotif(t('collected', fmt(amt)), 's');
+  showNotif(`+${fmt(amt)} Snow collected!`, 's');
   api('collect', { amount: amt }).catch(() => {});
 }
 
@@ -3061,16 +2668,16 @@ function spawnSnowParticle() {
 
 function santaClick() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   spawnSnowParticle();
   triggerSnowfall(20);
 }
 
 async function openWelcomeChest() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   
   const chestImg = document.querySelector('#welcomeChest .chest-image');
   if (chestImg) chestImg.classList.add('chest-opening');
@@ -3095,8 +2702,8 @@ async function openWelcomeChest() {
 
 async function openWelcomeChestFromModal() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   
   const chestImg = document.getElementById('chestToOpen');
   if (chestImg) chestImg.classList.add('chest-opening');
@@ -3128,22 +2735,22 @@ function showRewardsPopup(snow, machines, rate) {
   popup.innerHTML = `
     <div class="modal-box rewards-popup" style="max-width: 360px; text-align: center;">
       <div style="font-size: 56px; margin-bottom: 16px;">🎁✨🎄</div>
-      <div style="font-size: 26px; font-weight: 800; color: var(--ice); margin-bottom: 20px;">🎉 ${currentLang === 'ru' ? 'ПОЗДРАВЛЯЕМ!' : 'CONGRATULATIONS!'} 🎉</div>
+      <div style="font-size: 26px; font-weight: 800; color: var(--ice); margin-bottom: 20px;">🎉 CONGRATULATIONS! 🎉</div>
       <div style="background: linear-gradient(135deg, rgba(77,208,225,0.2), rgba(0,0,0,0.4)); border-radius: 24px; padding: 20px;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
           <span><img src="${SNOW_IMG}" style="width: 32px; vertical-align: middle;"> Snow:</span>
           <span style="font-weight: 800; color: var(--gold);">+${fmt(snow)}</span>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-          <span><i class="fas fa-microchip"></i> ${currentLang === 'ru' ? 'Майнер:' : 'Miner:'}</span>
+          <span><i class="fas fa-microchip"></i> Machine:</span>
           <span style="font-weight: 800;">+1</span>
         </div>
         <div style="display: flex; justify-content: space-between;">
-          <span><i class="fas fa-bolt"></i> ${currentLang === 'ru' ? 'Скорость:' : 'Rate:'}</span>
-          <span style="font-weight: 800; color: var(--ice);">+${rate} Snow/час</span>
+          <span><i class="fas fa-bolt"></i> Rate:</span>
+          <span style="font-weight: 800; color: var(--ice);">+${rate} Snow/hour</span>
         </div>
       </div>
-      <button onclick="closeRewardsPopup()" class="btn-prim" style="margin-top: 20px; padding: 12px 32px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800;">${currentLang === 'ru' ? '🎄 Начать майнинг! 🎄' : '🎄 Start Mining! 🎄'}</button>
+      <button onclick="closeRewardsPopup()" class="btn-prim" style="margin-top: 20px; padding: 12px 32px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 50px; color: white; font-weight: 800;">🎄 Start Mining! 🎄</button>
     </div>
   `;
   document.body.appendChild(popup);
@@ -3166,13 +2773,23 @@ function showWelcomeModal() {
   if (modal) modal.classList.add('active');
 }
 
+// FIXED: Machine shop functions with error handling
 function openMachineShop() {
-  buildMachineShop();
-  openModal('machineShopModal');
-}
-
-function getMachineName(m) {
-  return currentLang === 'ru' ? (m.name_ru || m.name) : m.name;
+    console.log('Opening machine shop...');
+    try {
+        buildMachineShop();
+        const modal = document.getElementById('machineShopModal');
+        if (modal) {
+            modal.classList.add('active');
+            console.log('Machine shop opened successfully');
+        } else {
+            console.error('Modal not found!');
+            showNotif('System error: modal not found', 'e');
+        }
+    } catch(e) {
+        console.error('Error opening machine shop:', e);
+        showNotif('Error opening machine shop', 'e');
+    }
 }
 
 function buildMachineShop() {
@@ -3181,22 +2798,21 @@ function buildMachineShop() {
     const m = CFG.MACHINES[i];
     const count = S.user.miningMachines?.[i] || 0;
     const canAfford = (S.user.tonBalance || 0) >= m.cost;
-    const machineName = getMachineName(m);
     html += `
       <div class="machine-card">
         <img src="${m.image}" class="machine-card-img">
         <div class="machine-card-info">
-          <div class="machine-card-name">${machineName}</div>
-          <div class="machine-card-rate">⚡ <span>${m.rate}</span> ${t('snowPerHour')}</div>
-          <div class="machine-card-cost">💰 ${m.cost} TON ${t('tonEach')}</div>
-          <div class="machine-count-badge">${t('inStock')} ${count}</div>
+          <div class="machine-card-name">${m.name}</div>
+          <div class="machine-card-rate">⚡ <span>${m.rate}</span> Snow/hour</div>
+          <div class="machine-card-cost">💰 ${m.cost} TON each</div>
+          <div class="machine-count-badge">Owned: ${count}</div>
         </div>
         <div class="machine-quantity">
           <input type="number" id="qty_${i}" value="1" min="1" max="99">
-          <span>${currentLang === 'ru' ? 'шт' : 'pcs'}</span>
+          <span>pcs</span>
         </div>
         <button class="machine-card-btn" onclick="purchaseMachine(${i})" ${!canAfford ? 'disabled' : ''}>
-          ${canAfford ? t('buy') : t('need') + ' ' + m.cost + ' TON'}
+          ${canAfford ? 'Buy' : 'Need ' + m.cost + ' TON'}
         </button>
       </div>
     `;
@@ -3207,13 +2823,13 @@ function buildMachineShop() {
 
 async function purchaseMachine(machineType) {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   const m = CFG.MACHINES[machineType];
   const qty = parseInt(document.getElementById(`qty_${machineType}`)?.value) || 1;
   const totalCost = m.cost * qty;
   if ((S.user.tonBalance || 0) < totalCost) {
-    showNotif(t('need') + ' ' + totalCost + ' TON', 'e');
+    showNotif(`Need ${totalCost} TON`, 'e');
     return;
   }
   try {
@@ -3224,40 +2840,61 @@ async function purchaseMachine(machineType) {
     updateUI();
     buildMachineShop();
     triggerSnowfall(30);
-    showNotif(t('purchaseSuccess', qty, getMachineName(m)), 's');
+    showNotif(`🎉 ${qty}x ${m.name} purchased!`, 's');
     spawnSnowParticle();
   } catch (e) {
-    showNotif(t('purchaseError', e.message), 'e');
+    showNotif(`❌ ${e.message}`, 'e');
   }
+}
+
+// FIXED: openModal with error handling
+function openModal(id) {
+  console.log('Opening modal:', id);
+  try {
+    if (id === 'upgradeModal') {
+      buildUpgradeContent();
+    }
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.add('active');
+    } else {
+      console.error('Modal not found:', id);
+    }
+  } catch(e) {
+    console.error('Error opening modal:', e);
+  }
+}
+
+function closeModal(id) { 
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.remove('active');
 }
 
 function buildUpgradeContent() {
   const lv = S.user.storageLevel || 1;
   const cur = STORAGE_LVS[lv];
   const next = STORAGE_LVS[lv + 1];
-  const curLabel = currentLang === 'ru' ? (cur.label_ru || cur.label) : cur.label;
-  const nextLabel = next ? (currentLang === 'ru' ? (next.label_ru || next.label) : next.label) : '';
   let html = `<div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 16px; text-align: center;">
     <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
       <div style="flex:1; text-align: center;">
-        <div style="font-size: 20px; font-weight: 800; color: var(--ice);">${t('upgrade')} ${lv}</div>
-        <div style="font-size: 12px;">${curLabel}</div>
-        <div>${t('storage')}: ${fmt(cur.cap)}</div>
+        <div style="font-size: 20px; font-weight: 800; color: var(--ice);">Lv.${lv}</div>
+        <div style="font-size: 12px;">${cur.label}</div>
+        <div>Cap: ${fmt(cur.cap)}</div>
       </div>
       <div style="font-size: 24px; color: var(--ice);">→</div>
       <div style="flex:1; text-align: center;">
-        <div style="font-size: 20px; font-weight: 800; color: var(--gold);">${t('upgrade')} ${lv+1}</div>
-        <div style="font-size: 12px;">${nextLabel || (next ? '' : t('maxLevel'))}</div>
-        <div>${t('storage')}: ${next ? fmt(next.cap) : t('maxLevel')}</div>
+        <div style="font-size: 20px; font-weight: 800; color: var(--gold);">Lv.${lv+1}</div>
+        <div style="font-size: 12px;">${next?.label || 'MAX'}</div>
+        <div>Cap: ${next ? fmt(next.cap) : 'MAX'}</div>
       </div>
     </div>`;
   if (next) {
     html += `<div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
-      ${t('totalCost')} <span style="font-weight: 800; color: var(--gold);">${fmt(next.upgCost)} Snow</span>
+      Cost: <span style="font-weight: 800; color: var(--gold);">${fmt(next.upgCost)} Snow</span>
     </div>
-    <button class="modern-btn primary" onclick="upgradeStorage()" style="width:100%;">${t('upgradeBtn')}</button>`;
+    <button class="modern-btn primary" onclick="upgradeStorage()" style="width:100%;">⬆️ Upgrade</button>`;
   } else {
-    html += `<div style="color: var(--ice); font-weight: 800;">${t('maxLevel')}</div>`;
+    html += `<div style="color: var(--ice); font-weight: 800;">🏆 Maximum Level!</div>`;
   }
   html += `</div>`;
   document.getElementById('upgradeContent').innerHTML = html;
@@ -3265,23 +2902,23 @@ function buildUpgradeContent() {
 
 async function upgradeStorage() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   const lv = S.user.storageLevel || 1;
   const next = STORAGE_LVS[lv + 1];
-  if (!next) { showNotif(t('maxLevelMsg'), 'e'); return; }
-  if ((S.user.snow || 0) < next.upgCost) { showNotif(t('notEnoughSnow'), 'e'); return; }
+  if (!next) { showNotif('Already max!', 'e'); return; }
+  if ((S.user.snow || 0) < next.upgCost) { showNotif(`Need ${fmt(next.upgCost)} Snow!`, 'e'); return; }
   S.user.snow -= next.upgCost;
   S.user.storageLevel = lv + 1;
   api('upgradeStorage', { newLevel: lv + 1 }).catch(() => {});
   buildUpgradeContent();
   updateUI();
   triggerSnowfall(30);
-  showNotif(t('upgradeSuccess', lv + 1), 's');
+  showNotif(`✅ Storage upgraded to Lv.${lv+1}!`, 's');
 }
 
 function updateSwapBals() {
-  document.getElementById('swapFromBalSnow').innerHTML = `${t('snow')}: ${fmt(S.user.snow || 0)}`;
+  document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
 }
 
 function swapSnowMax() {
@@ -3301,13 +2938,13 @@ function updSwapSnowToTon() {
 let _exchInFlight = false;
 async function swapSnowToTon() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   if (_exchInFlight) return;
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
-  if (snow <= 0) { showNotif(t('minSnow'), 'e'); return; }
-  if (snow < 100) { showNotif(t('minSnow'), 'e'); return; }
-  if (snow > (S.user.snow || 0)) { showNotif(t('notEnoughSnowMsg'), 'e'); return; }
+  if (snow <= 0) { showNotif('Enter amount!', 'e'); return; }
+  if (snow < 100) { showNotif('Min 100 Snow', 'e'); return; }
+  if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
   _exchInFlight = true;
   try {
     const result = await api('exchange', { snowAmount: snow });
@@ -3317,8 +2954,8 @@ async function swapSnowToTon() {
     document.getElementById('swapSnowAmt').value = '';
     updSwapSnowToTon();
     triggerSnowfall(30);
-    showNotif(t('exchangeSuccess', fmt(snow)), 's');
-  } catch (e) { showNotif(t('exchangeError', e.message), 'e'); }
+    showNotif(`✅ Exchanged ${fmt(snow)} Snow`, 's');
+  } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
   finally { _exchInFlight = false; }
 }
 
@@ -3326,32 +2963,32 @@ function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
 
 async function doWithdraw() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   const addr = document.getElementById('wdAddr').value.trim();
   const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
-  if (!addr || addr.length < 10) { showNotif(t('invalidAddress'), 'e'); return; }
-  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(t('minWithdraw', CFG.MIN_WITHDRAW_TON), 'e'); return; }
-  if (tonAmt > (S.user.tonBalance || 0)) { showNotif(t('notEnoughTon'), 'e'); return; }
+  if (!addr || addr.length < 10) { showNotif('Invalid address!', 'e'); return; }
+  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(`Min ${CFG.MIN_WITHDRAW_TON} TON!`, 'e'); return; }
+  if (tonAmt > (S.user.tonBalance || 0)) { showNotif('Not enough TON!', 'e'); return; }
   try {
     const res = await api('withdraw', { address: addr, amount: tonAmt });
     S.user.tonBalance = res.tonBalance;
     updateUI();
-    showNotif(t('withdrawSuccess'), 's');
+    showNotif(`✅ Withdrawal request sent!`, 's');
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
-  } catch (e) { showNotif(t('withdrawError', e.message), 'e'); }
+  } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
 }
 
 function setDepAmt(v) { document.getElementById('depositAmountInput').value = v; }
 
 async function initiateDeposit() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
-  if (!S.wallet) { showNotif(t('connectWalletFirst'), 'e'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (!S.wallet) { showNotif('Connect wallet first!', 'e'); return; }
   const amt = parseFloat(document.getElementById('depositAmountInput').value);
-  if (!amt || amt < 1) { showNotif(t('minDeposit'), 'e'); return; }
+  if (!amt || amt < 1) { showNotif('Minimum 1 TON', 'e'); return; }
   try {
     const comment = String(S.userId);
     const nano = String(Math.floor(amt * 1e9));
@@ -3368,15 +3005,15 @@ async function initiateDeposit() {
     const sd = document.getElementById('depositStatus');
     sd.classList.add('visible');
     sd.querySelector('div:first-child').innerHTML = '⏳ Transaction sent!';
-    document.getElementById('depositStatusDetail').textContent = 'Balance will be added within 3 minutes.';
+    document.getElementById('depositStatusDetail').textContent = 'Your balance will be added within 3 minutes.';
     triggerSnowfall(30);
-    showNotif(t('depositSent'), 's');
+    showNotif('✅ Deposit sent!', 's');
     await api('deposit', { amount: amt, txHash: result.boc, comment });
   } catch (e) {
     const sd = document.getElementById('depositStatus');
     sd.classList.add('visible');
     sd.querySelector('div:first-child').innerHTML = '❌ Transaction failed';
-    document.getElementById('depositStatusDetail').textContent = e.message || 'Try again';
+    document.getElementById('depositStatusDetail').textContent = e.message || 'Please try again';
   }
 }
 
@@ -3395,7 +3032,7 @@ function startDepVerify(depId, txHash) {
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
         updateUI();
         triggerSnowfall(30);
-        showNotif(t('depositConfirmed', r.amount), 's');
+        showNotif(`💰 ${r.amount} TON deposited!`, 's');
         setTimeout(() => sd.classList.remove('visible'), 3000);
       }
     } catch (e) { if (attempts >= 18) clearInterval(S.depCheckInt); }
@@ -3406,7 +3043,6 @@ function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refHtml = '';
   for (const task of REF_TASKS) {
-    const taskName = currentLang === 'ru' ? (task.name_ru || task.name) : task.name;
     const completed = S.doneTasks.includes(task.id);
     const canClaim = referralCount >= task.n && !completed;
     const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
@@ -3414,22 +3050,22 @@ function renderTasks() {
       <div class="task-item">
         <div class="ticon"><img src="${REF_TASK_IMG}" alt="Referral"></div>
         <div class="tinfo">
-          <div class="tname">${taskName}</div>
+          <div class="tname">${task.name}</div>
           <div class="trew"><img src="${SNOW_IMG}" style="width: 16px; vertical-align: middle;"> ${fmt(task.snow)} Snow</div>
           <div class="progress-bar"><div style="width: ${progress}%; background: var(--ice); height: 100%; border-radius: 10px;"></div></div>
-          <div class="tstat">${referralCount}/${task.n} ${t('friends')} (${progress}%)</div>
+          <div class="tstat">${referralCount}/${task.n} friends (${progress}%)</div>
         </div>
-        ${completed ? '<button class="tbtn done">✅ ' + (currentLang === 'ru' ? 'Выполнено' : 'Completed') + '</button>' : canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 ${currentLang === 'ru' ? 'Получить' : 'Claim'}</button>` : `<button class="tbtn go" disabled>🔒 ${currentLang === 'ru' ? 'Нужно' : 'Need'} ${task.n}</button>`}
+        ${completed ? '<button class="tbtn done">✅ Done</button>' : canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 Claim</button>` : `<button class="tbtn go" disabled>🔒 ${task.n} needed</button>`}
       </div>`;
   }
-  document.getElementById('referralTasksList').innerHTML = refHtml || `<div class="hist-empty">${t('inviteFriendsHint') || 'Invite friends to unlock rewards!'}</div>`;
+  document.getElementById('referralTasksList').innerHTML = refHtml || '<div class="hist-empty">Invite friends to unlock rewards!</div>';
   renderSocTasks();
 }
 
 async function claimRefTask(taskId) {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   try {
     const result = await api('claimTask', { taskId });
     S.user.snow = result.snow;
@@ -3437,8 +3073,8 @@ async function claimRefTask(taskId) {
     updateUI();
     renderTasks();
     triggerSnowfall(30);
-    showNotif(t('taskCompleted', fmt(result.snowReward)), 's');
-  } catch (e) { showNotif(t('taskError', e.message), 'e'); }
+    showNotif(`🎉 +${fmt(result.snowReward)} Snow!`, 's');
+  } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
 }
 
 function buildTaskCard(t, cat) {
@@ -3452,16 +3088,16 @@ function buildTaskCard(t, cat) {
     <div class="tinfo">
       <div class="tname">${esc(name)}</div>
       <div class="trew"><img src="${SNOW_IMG}" style="width: 14px;"> ${fmt(snow)} Snow</div>
-      ${t.completions ? `<div class="tstat">${t.completions}/${t.targetUsers} ${currentLang === 'ru' ? 'выполнено' : 'completed'}</div>` : ''}
+      ${t.completions ? `<div class="tstat">${t.completions}/${t.targetUsers} completed</div>` : ''}
     </div>
-    ${done ? '<button class="tbtn done">✅ ' + (currentLang === 'ru' ? 'Выполнено' : 'Completed') + '</button>' : inFlight ? '<button class="tbtn done">⏳</button>' : `<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type}','${cat}')">${currentLang === 'ru' ? 'Выполнить →' : 'Do →'}</button>`}
+    ${done ? '<button class="tbtn done">✅ Done</button>' : inFlight ? '<button class="tbtn done">⏳</button>' : `<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type}','${cat}')">Go →</button>`}
   </div>`;
 }
 
 function renderSocTasks() {
   const p = S.tasks?.partner || [], c = S.tasks?.community || [];
-  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет партнерских заданий' : 'No partner tasks'}</div>`;
-  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : `<div class="hist-empty">${currentLang === 'ru' ? 'Нет заданий сообщества' : 'No community tasks'}</div>`;
+  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : '<div class="hist-empty">No partner tasks</div>';
+  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : '<div class="hist-empty">No community tasks</div>';
 }
 
 function switchTTab(el, t) {
@@ -3483,13 +3119,13 @@ function switchSocTab(tab) {
 
 async function doDbTask(tid, link, type, cat) {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   if (_taskInFlight.has(tid)) return;
   _taskInFlight.add(tid);
   renderSocTasks();
   if (link) window.open(link, '_blank');
-  showNotif('⏳ Checking...', 'i');
+  showNotif('⏳ Verifying...', 'i');
   setTimeout(async () => {
     try {
       const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
@@ -3498,9 +3134,9 @@ async function doDbTask(tid, link, type, cat) {
       updateUI();
       renderTasks();
       triggerSnowfall(30);
-      showNotif(t('taskCompleted', fmt(r.snowAdded)), 's');
+      showNotif(`🎉 +${fmt(r.snowAdded)} Snow!`, 's');
     } catch (e) {
-      showNotif(t('taskError', e.message || 'Verification failed'), 'e');
+      showNotif(`❌ ${e.message || 'Verification failed'}`, 'e');
     } finally {
       _taskInFlight.delete(tid);
       renderSocTasks();
@@ -3528,26 +3164,26 @@ function updAtCost() {
 
 async function submitAddTask() {
   const now = Date.now();
-  if (now - S._lastClickTime < 3000) { showNotif(t('wait'), 'w'); return; }
-  S._lastClickTime = now;
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
   if (_submitInFlight) return;
   const link = document.getElementById('atLink').value.trim();
   const target = parseInt(document.getElementById('atTarget').value) || 0;
   const st = document.getElementById('atStatus');
   st.style.display = 'block';
-  st.textContent = '⏳ ' + (currentLang === 'ru' ? 'Создание...' : 'Creating...');
-  if (!link.includes('t.me/')) { st.textContent = '❌ ' + (currentLang === 'ru' ? 'Неверная ссылка' : 'Invalid link'); return; }
-  if (target < MIN_TASK_TARGET) { st.textContent = `❌ ${currentLang === 'ru' ? 'Минимум' : 'Minimum'} ${MIN_TASK_TARGET} ${currentLang === 'ru' ? 'пользователей' : 'users'}`; return; }
+  st.textContent = '⏳ Creating...';
+  if (!link.includes('t.me/')) { st.textContent = '❌ Invalid link'; return; }
+  if (target < MIN_TASK_TARGET) { st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; return; }
   const cost = target * TASK_SNOW_PER_USER;
-  if ((S.user.snow || 0) < cost) { st.textContent = `❌ ${currentLang === 'ru' ? 'Нужно' : 'Need'} ${fmt(cost)} Snow`; return; }
+  if ((S.user.snow || 0) < cost) { st.textContent = `❌ Need ${fmt(cost)} Snow`; return; }
   _submitInFlight = true;
   try {
     await api('createTask', { type: _atType, link, targetUsers: target });
     S.user.snow = (S.user.snow || 0) - cost;
-    st.textContent = '✅ ' + (currentLang === 'ru' ? 'Задание создано!' : 'Task created!');
+    st.textContent = '✅ Task created!';
     updateUI();
     triggerSnowfall(30);
-    showNotif(`✅ ${currentLang === 'ru' ? 'Задание создано! Стоимость:' : 'Task created! Cost:'} ${fmt(cost)} Snow`, 's');
+    showNotif(`✅ Task created! Cost: ${fmt(cost)} Snow`, 's');
     setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
   } catch (e) { st.textContent = `❌ ${e.message}`; }
   finally { _submitInFlight = false; }
@@ -3559,18 +3195,18 @@ function updateRefUI() {
   const inp = document.getElementById('refLinkInp');
   if (inp) inp.value = link;
   document.getElementById('depositUserIdDisplay').textContent = esc(S.userId);
-  document.getElementById('totalRefsDisp').textContent = `${S.refs.length} ${t('friends')}`;
+  document.getElementById('totalRefsDisp').textContent = `${S.refs.length} Friends`;
   const listEl = document.getElementById('recentRefsList');
   if (listEl) {
     if (!S.refs.length) {
-      listEl.innerHTML = `<div class="hist-empty">${t('noRefs')}</div>`;
+      listEl.innerHTML = '<div class="hist-empty">No referrals yet</div>';
     } else {
       listEl.innerHTML = S.refs.slice(0, 20).map(r => `
         <div class="ref-list-item">
           <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}">` : '🎅'}</div>
           <div class="rli-info">
             <div class="rli-name">${esc(r.name)}</div>
-            <div class="rli-date">${r.date || (currentLang === 'ru' ? 'Присоединился недавно' : 'Joined recently')}</div>
+            <div class="rli-date">${r.date || 'Joined recently'}</div>
           </div>
           <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
         </div>`).join('');
@@ -3580,13 +3216,13 @@ function updateRefUI() {
 
 function copyRefLink() {
   const v = document.getElementById('refLinkInp').value;
-  navigator.clipboard.writeText(v).then(() => showNotif(t('linkCopied'), 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif(t('linkCopied'), 's'); });
+  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
 }
 
 function renderExchHist() {
   const el = document.getElementById('exchHist');
   if (!el) return;
-  if (!S.exchHist.length) { el.innerHTML = `<div class="hist-empty">${t('noExchanges')}</div>`; return; }
+  if (!S.exchHist.length) { el.innerHTML = '<div class="hist-empty">No conversions yet</div>'; return; }
   el.innerHTML = S.exchHist.slice(0, 30).map(h => `
     <div class="hist-row">
       <span class="hist-l">${new Date(h.ts).toLocaleDateString()} · ${h.dir || 'S→T'}</span>
@@ -3599,14 +3235,14 @@ function renderExchHist() {
 function renderWdHist() {
   const el = document.getElementById('wdHist');
   if (!el) return;
-  if (!S.wdHist.length) { el.innerHTML = `<div class="hist-empty">${t('noWithdrawals')}</div>`; return; }
+  if (!S.wdHist.length) { el.innerHTML = '<div class="hist-empty">No withdrawals yet</div>'; return; }
   el.innerHTML = S.wdHist.slice(0, 20).map(h => `
     <div class="hist-row">
       <div>
         <div style="font-weight: 800;">${h.tonAmount.toFixed(6)} TON</div>
         <div style="font-size: 10px; color: var(--muted);">${h.d || new Date(h.ts).toLocaleDateString()}</div>
       </div>
-      <span class="stat-badge sb-${h.status || 'pending'}">${h.status === 'pending' ? (currentLang === 'ru' ? 'Ожидание' : 'Pending') : h.status === 'approved' ? (currentLang === 'ru' ? 'Одобрено' : 'Approved') : (currentLang === 'ru' ? 'Отклонено' : 'Rejected')}</span>
+      <span class="stat-badge sb-${h.status || 'pending'}">${h.status || 'Pending'}</span>
     </div>
   `).join('');
 }
@@ -3628,16 +3264,16 @@ function onWConn(w) {
   const short = `${S.wallet.address.substring(0, 6)}...${S.wallet.address.slice(-4)}`;
   document.getElementById('walletAddressDisplay').textContent = short;
   const btn = document.getElementById('connectWalletBtn');
-  btn.innerHTML = `<i class="fas fa-unlink"></i> ${t('disconnect')}`;
+  btn.innerHTML = '<i class="fas fa-unlink"></i> Disconnect';
   btn.onclick = disconnectWallet;
   document.getElementById('submitDepositBtn').disabled = false;
 }
 
 function onWDisc() {
   S.wallet = null;
-  document.getElementById('walletAddressDisplay').textContent = t('notConnected');
+  document.getElementById('walletAddressDisplay').textContent = 'Not connected';
   const btn = document.getElementById('connectWalletBtn');
-  btn.innerHTML = `<i class="fas fa-plug"></i> ${t('connect')}`;
+  btn.innerHTML = '<i class="fas fa-plug"></i> Connect';
   btn.onclick = connectWallet;
   document.getElementById('submitDepositBtn').disabled = true;
 }
@@ -3661,12 +3297,6 @@ function goNav(el) {
   }
 }
 
-function openModal(id) {
-  if (id === 'upgradeModal') buildUpgradeContent();
-  document.getElementById(id).classList.add('active');
-}
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
 function openSupport() { window.open('https://t.me/Santa_1_Snow', '_blank'); }
 
 function switchWalletModernTab(el, t) {
@@ -3674,6 +3304,49 @@ function switchWalletModernTab(el, t) {
   document.querySelectorAll('.modern-content').forEach(x => x.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(`wt-${t}-modern`).classList.add('active');
+}
+
+// FIXED: Complete language functions with full translations
+function setLang(lang, flag, code) {
+  localStorage.setItem('santaLang', lang);
+  applyLang(lang, flag, code);
+  document.getElementById('langMenu').style.display = 'none';
+}
+
+function applyLang(lang, flag, code) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+  
+  document.getElementById('langFlag').textContent = flag;
+  document.getElementById('langCode').textContent = code;
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key]) el.innerHTML = t[key];
+  });
+  
+  const navItems = ['home', 'tasks', 'friends', 'wallet'];
+  document.querySelectorAll('.ni .ni-lbl').forEach((el, i) => {
+    if (navItems[i] && t[navItems[i]]) {
+      el.textContent = t[navItems[i]];
+    }
+  });
+  
+  const collectBtn = document.getElementById('collectBtn');
+  if (collectBtn && t.collectBtn) {
+    const span = collectBtn.querySelector('span');
+    if (span) span.textContent = t.collectBtn;
+  }
+  
+  const machineBtn = document.getElementById('openMachineShopBtn');
+  if (machineBtn && t.upgradeBtn) {
+    const textNode = machineBtn.childNodes[1];
+    if (textNode) textNode.textContent = t.upgradeBtn;
+  }
+}
+
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
 }
 
 function ldProgress(pct, msg) {
@@ -3703,7 +3376,7 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
 async function init() {
   const startTime = Date.now();
   const MIN_LOADING_MS = 3000;
-  ldProgress(0, t('loading'));
+  ldProgress(0, 'Starting...');
   
   if (window.Telegram?.WebApp) {
     S.tg = window.Telegram.WebApp;
@@ -3722,18 +3395,11 @@ async function init() {
     S.startParam = startParam.replace(/\D/g, '');
   }
   
-  // Detect language from Telegram
-  if (S.tg?.initDataUnsafe?.user?.language_code === 'en') {
-    setLanguage('en');
-  } else {
-    setLanguage('ru');
-  }
-  
-  await ldAnimateTo(10, t('connecting'), 700);
+  await ldAnimateTo(10, 'Connecting...', 700);
   await new Promise(r => setTimeout(r, 400));
-  await ldAnimateTo(20, t('loadingResources'), 600);
+  await ldAnimateTo(20, 'Loading assets...', 600);
   await new Promise(r => setTimeout(r, 500));
-  await ldAnimateTo(40, t('loadingAccount'), 500);
+  await ldAnimateTo(40, 'Loading account...', 500);
   
   let loaded = false;
   for (let i = 0; i < 5 && !loaded; i++) {
@@ -3743,15 +3409,15 @@ async function init() {
     } catch (e) { await new Promise(r => setTimeout(r, 1500)); }
   }
   
-  if (!loaded) { ldProgress(100, 'Connection error'); return; }
-  await ldAnimateTo(70, t('accountLoaded'), 500);
-  await ldAnimateTo(80, t('buildingUI'), 400);
+  if (!loaded) { ldProgress(100, 'Connection failed'); return; }
+  await ldAnimateTo(70, 'Account loaded!', 500);
+  await ldAnimateTo(80, 'Building interface...', 400);
   renderTasks();
-  await ldAnimateTo(90, t('settingWallet'), 400);
+  await ldAnimateTo(90, 'Setting up wallet...', 400);
   setTimeout(() => initTON(), 600);
   startStorage();
   setInterval(() => loadState(), 30000);
-  await ldAnimateTo(100, t('ready'), 500);
+  await ldAnimateTo(100, 'Ready! 🎅', 500);
   
   const elapsed = Date.now() - startTime;
   if (elapsed < MIN_LOADING_MS) await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
@@ -3760,6 +3426,10 @@ async function init() {
   if (ls) { ls.classList.add('hidden'); setTimeout(() => ls.remove(), 700); }
   
   if (S.isNewUser) showWelcomeModal();
+  
+  const savedLang = localStorage.getItem('santaLang');
+  if (savedLang === 'en') applyLang('en', '🇬🇧', 'EN');
+  else applyLang('ru', '🇷🇺', 'RU');
 }
 
 window.addEventListener('load', init);
