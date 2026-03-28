@@ -36,13 +36,12 @@
   --mid-blue: #1A2A4A;
   --purple: #9C27B0;
   --orange: #FF9800;
-  --bg-image-url: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ee3d15b9-4c4b-4a50-ba6e-5e0b9f526179.png');
 }
 
 body {
   font-family: 'Fredoka', cursive;
   font-weight: 600;
-  background: var(--dark-blue);
+  background: #0A1428;
   color: var(--text);
   min-height: 100vh;
   padding-bottom: 85px;
@@ -51,16 +50,16 @@ body {
   position: relative;
 }
 
-/* الخلفية الثابتة */
 .background-fixed {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--bg-image-url) center center / cover no-repeat;
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png') center center / cover no-repeat;
   z-index: -2;
   opacity: 1;
+  visibility: visible;
   animation: subtleZoom 20s ease-in-out infinite;
 }
 
@@ -80,13 +79,13 @@ body::after {
   z-index: -1;
 }
 
-/* Loading Screen */
+/* Loading Screen with New Background */
 #loadingScreen {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(10, 20, 40, 0.92);
-  backdrop-filter: blur(12px);
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ee3d15b9-4c4b-4a50-ba6e-5e0b9f526179.png') center center / cover no-repeat;
+  backdrop-filter: blur(0px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,10 +100,11 @@ body::after {
 }
 
 .ld-logo {
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   animation: ldBounce 1.6s ease-in-out infinite;
   filter: drop-shadow(0 0 24px rgba(77, 208, 225, 0.7));
+  object-fit: contain;
 }
 
 @keyframes ldBounce {
@@ -113,11 +113,11 @@ body::after {
 }
 
 .ld-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
   color: #fff;
-  letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(77, 208, 225, 0.8);
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
   background: linear-gradient(135deg, #fff, #4DD0E1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -125,11 +125,15 @@ body::after {
 }
 
 .ld-sub {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
   min-height: 18px;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 6px 16px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
 }
 
 .ld-bar-wrap {
@@ -138,32 +142,43 @@ body::after {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px 20px;
+  border-radius: 40px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
 }
 
 .ice-track {
   width: 100%;
-  height: 12px;
-  background: rgba(255, 255, 255, 0.15);
+  height: 14px;
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(77, 208, 225, 0.5);
+  border: 1px solid rgba(77, 208, 225, 0.4);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .ice-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #4DD0E1, #80DEEA, #B2EBF2);
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA, #B2EBF2, #4DD0E1);
+  background-size: 200% auto;
   border-radius: 20px;
   position: relative;
   transition: width 0.3s ease;
-  animation: iceGlow 1.5s ease-in-out infinite;
+  animation: iceGlow 1.5s ease-in-out infinite, shimmer 2s linear infinite;
 }
 
 @keyframes iceGlow {
   0%, 100% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.5); }
-  50% { box-shadow: 0 0 15px rgba(77, 208, 225, 0.8), 0 0 8px rgba(77, 208, 225, 0.8); }
+  50% { box-shadow: 0 0 15px rgba(77, 208, 225, 0.8); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 .ice-fill::after {
@@ -183,49 +198,17 @@ body::after {
 }
 
 .ld-pct {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--ice);
   letter-spacing: 1px;
   text-shadow: 0 0 10px rgba(77, 208, 225, 0.5);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
 }
 
-/* Notifications - Improved */
-#notif {
-  position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100px);
-  background: linear-gradient(135deg, rgba(10, 20, 35, 0.98), rgba(20, 30, 50, 0.98));
-  border: 1px solid rgba(77, 208, 225, 0.5);
-  border-radius: 30px;
-  padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 700;
-  z-index: 1000;
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  max-width: 90vw;
-  text-align: center;
-  backdrop-filter: blur(16px);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-@media (max-width: 480px) {
-  #notif { white-space: normal; min-width: 200px; max-width: 85vw; }
-}
-
-#notif.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-#notif.success { border-color: #4DD0E1; color: #4DD0E1; background: linear-gradient(135deg, rgba(77, 208, 225, 0.25), rgba(0, 0, 0, 0.6)); }
-#notif.error { border-color: #EF5350; color: #FF8A80; background: linear-gradient(135deg, rgba(239, 83, 80, 0.25), rgba(0, 0, 0, 0.6)); }
-#notif.info { border-color: #42A5F5; color: #90CAF9; background: linear-gradient(135deg, rgba(66, 165, 245, 0.25), rgba(0, 0, 0, 0.6)); }
-#notif.warning { border-color: #FFC107; color: #FFD740; background: linear-gradient(135deg, rgba(255, 193, 7, 0.25), rgba(0, 0, 0, 0.6)); }
-
-/* Welcome Modal */
+/* Welcome Modal with Animation */
 .welcome-modal {
   position: fixed;
   top: 0;
@@ -265,42 +248,141 @@ body::after {
   100% { transform: scale(1); opacity: 1; }
 }
 
+.welcome-chest-container {
+  position: relative;
+  margin-bottom: 15px;
+  cursor: pointer;
+  animation: chestFloat 2s ease-in-out infinite;
+}
+
+@keyframes chestFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
 .welcome-chest-img {
   width: 120px;
   height: 120px;
-  margin: 0 auto 15px;
+  margin: 0 auto;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .welcome-chest-img.opening {
-  animation: chestShake 0.5s ease-in-out, chestOpen 0.6s ease-out 0.5s forwards;
+  animation: chestShake 0.5s ease-in-out, chestOpen 0.6s ease-out forwards;
 }
 
 @keyframes chestShake {
   0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(10deg); }
-  75% { transform: rotate(-10deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
 }
 
 @keyframes chestOpen {
   0% { transform: scale(1) rotate(0deg); opacity: 1; }
-  50% { transform: scale(1.2) rotate(15deg); }
+  50% { transform: scale(1.2) rotate(10deg); }
   100% { transform: scale(0) rotate(30deg); opacity: 0; }
 }
 
-/* Top Bar */
+.rewards-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(145deg, #1a2a3a, #0f1a24);
+  border-radius: 40px;
+  padding: 30px 25px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 60px rgba(255, 217, 102, 0.6);
+  z-index: 10001;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.rewards-popup.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.rewards-popup .close-rewards {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.rewards-popup .reward-item {
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.4));
+  border-radius: 24px;
+  padding: 20px;
+  margin: 15px 0;
+  border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.rewards-popup .start-mining-btn {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 50px;
+  padding: 14px 35px;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 0 20px var(--ice-glow);
+}
+
+.rewards-popup .start-mining-btn:active {
+  transform: scale(0.96);
+}
+
+.notif {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-80px);
+  background: rgba(10, 20, 35, 0.97);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 1000;
+  transition: transform 0.28s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+  max-width: 84vw;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.notif.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.notif.s { border-color: var(--ice-glow); color: var(--ice); background: rgba(77, 208, 225, 0.2); }
+.notif.e { border-color: rgba(239, 83, 80, 0.5); color: #FF8A80; background: rgba(239, 83, 80, 0.1); }
+.notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; background: rgba(66, 165, 245, 0.1); }
+.notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; background: rgba(255, 193, 7, 0.1); }
+
+/* New Modern Top Bar */
 .topbar-main {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   padding: 12px 16px;
-  background: linear-gradient(135deg, rgba(10, 20, 35, 0.95), rgba(20, 30, 50, 0.95));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.55));
   backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(77, 208, 225, 0.3);
+  border-bottom: 1px solid rgba(77, 208, 225, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -308,11 +390,12 @@ body::after {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  background: linear-gradient(135deg, var(--ice), #0097B2);
   overflow: hidden;
   flex-shrink: 0;
   position: relative;
   padding: 2px;
+  box-shadow: 0 0 15px rgba(77, 208, 225, 0.5);
 }
 
 .uavatar::before {
@@ -320,9 +403,9 @@ body::after {
   position: absolute;
   inset: -2px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4DD0E1, #FFD966);
+  background: linear-gradient(135deg, #4DD0E1, #80DEEA);
   z-index: -1;
-  animation: ringRot 4s linear infinite;
+  animation: ringRot 8s linear infinite;
 }
 
 @keyframes ringRot {
@@ -339,12 +422,12 @@ body::after {
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  background: #0A1428;
+  background: var(--dark-blue);
 }
 
 .tb-bals {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex: 1;
   min-width: 0;
 }
@@ -353,30 +436,60 @@ body::after {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(77, 208, 225, 0.2));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(77, 208, 225, 0.15));
   border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 30px;
+  border-radius: 60px;
   padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 800;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
   flex: 1;
   min-width: 0;
   transition: all 0.3s ease;
 }
 
-.tb-chip.snow { border-color: rgba(77, 208, 225, 0.5); background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(77, 208, 225, 0.3)); }
-.tb-chip.ton { border-color: rgba(255, 217, 102, 0.5); background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(255, 217, 102, 0.2)); }
+.tb-chip:hover {
+  border-color: var(--ice);
+  box-shadow: 0 0 15px rgba(77, 208, 225, 0.3);
+}
 
-.tb-chip img { width: 28px; height: 28px; object-fit: contain; }
-.tb-chip div { display: flex; flex-direction: column; line-height: 1.2; }
-.tb-chip div span:first-child { font-size: 9px; opacity: 0.7; font-weight: 600; }
-.tb-chip-num { font-size: 14px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; }
+.tb-chip.snow {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(232, 240, 255, 0.1));
+}
+
+.tb-chip.ton {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(255, 217, 102, 0.1));
+}
+
+.tb-chip-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+.tb-chip-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.tb-chip-label {
+  font-size: 9px;
+  opacity: 0.7;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tb-chip-num {
+  font-size: 16px;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .lang-btn {
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.3), rgba(0, 0, 0, 0.5));
-  border: 1px solid rgba(77, 208, 225, 0.5);
-  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.5));
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 40px;
   padding: 8px 14px;
   color: var(--ice);
   font-size: 13px;
@@ -390,89 +503,64 @@ body::after {
   white-space: nowrap;
 }
 
-.lang-btn:active { transform: scale(0.95); }
-
-/* Sections */
-.sec {
-  display: none;
-  padding: 16px;
-  animation: fadeIn 0.3s ease;
+.lang-btn:active {
+  transform: scale(0.95);
+  background: rgba(77, 208, 225, 0.3);
 }
 
-.sec.active { display: block; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Hero Card */
-.hero-card {
-  background: linear-gradient(135deg, rgba(20, 30, 50, 0.95), rgba(10, 20, 35, 0.95));
+/* New Home Page Design */
+.hero-card-modern {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(77, 208, 225, 0.1));
   border-radius: 32px;
-  padding: 24px;
+  margin: 16px;
+  padding: 24px 20px;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(77, 208, 225, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  margin-bottom: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.santa-frame-wrap {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 20px;
+.santa-showcase {
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
 }
 
-.santa-frame-wrap::before {
-  content: '';
+.santa-glow {
   position: absolute;
-  inset: 0;
+  width: 200px;
+  height: 200px;
   background: radial-gradient(circle, rgba(77, 208, 225, 0.3), transparent);
   border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 0.8; }
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
-.santa-frame-inner {
+.santa-avatar {
+  width: 140px;
+  height: 140px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
   position: relative;
   z-index: 1;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  padding: 3px;
 }
 
-.santa-frame-inner img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  animation: santaFloat 3s ease-in-out infinite;
-  cursor: pointer;
+.santa-avatar:active {
+  transform: scale(0.92);
 }
 
-@keyframes santaFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.hero-stats {
+.stats-grid {
   display: flex;
   gap: 12px;
   margin-bottom: 20px;
 }
 
-.hero-stat-box {
+.stat-card {
   flex: 1;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 20px;
@@ -481,324 +569,172 @@ body::after {
   border: 1px solid rgba(77, 208, 225, 0.2);
 }
 
-.stat-lbl {
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-}
-
-.stat-val {
-  font-size: 22px;
+.stat-value {
+  font-size: 24px;
   font-weight: 800;
   color: var(--ice);
   line-height: 1.2;
 }
 
-.stat-unit {
+.stat-label {
   font-size: 10px;
   color: var(--muted);
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
 }
 
-/* Storage */
-.storage-outer {
-  width: 100%;
-  margin: 16px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.storage-side-btn {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.4));
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
-  transition: all 0.2s;
-  backdrop-filter: blur(6px);
-}
-
-.storage-side-btn:active { transform: scale(0.92); background: rgba(77, 208, 225, 0.4); }
-
-.storage-main {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.4);
+.storage-section {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 16px;
   border: 1px solid rgba(77, 208, 225, 0.2);
-  border-radius: 20px;
-  padding: 12px 16px;
-  backdrop-filter: blur(8px);
 }
 
-.storage-head {
+.storage-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .storage-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
 }
 
-.storage-pct {
-  font-size: 14px;
+.storage-level {
+  background: rgba(77, 208, 225, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--ice);
 }
 
-.storage-track {
-  height: 28px;
+.storage-progress {
+  margin-bottom: 12px;
+}
+
+.progress-track {
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 14px;
+  border-radius: 12px;
+  height: 12px;
   overflow: hidden;
-  border: 1px solid rgba(77, 208, 225, 0.2);
-  position: relative;
+  margin-bottom: 8px;
 }
 
-.storage-fill {
+.progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4DD0E1, #80DEEA, #B2EBF2);
-  border-radius: 14px;
-  transition: width 0.5s ease;
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA);
+  border-radius: 12px;
+  transition: width 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.storage-fill::after {
+.progress-fill::after {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
-  width: 55%;
+  width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shine 2.2s infinite;
+  animation: progressShine 2s infinite;
 }
 
-@keyframes shine {
+@keyframes progressShine {
   0% { left: -100%; }
-  100% { left: 200%; }
+  100% { left: 100%; }
 }
 
-.storage-lbl {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
   font-size: 11px;
-  font-weight: 800;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
-  z-index: 2;
-  pointer-events: none;
+  color: var(--muted);
+  font-weight: 600;
 }
 
-.collect-btn {
-  width: 100%;
+.collect-action {
+  display: flex;
+  gap: 12px;
   margin-top: 12px;
-  padding: 14px;
+}
+
+.collect-btn-modern {
+  flex: 1;
   background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
-  border-radius: 20px;
-  color: #fff;
+  border-radius: 40px;
+  padding: 14px;
+  color: white;
   font-size: 16px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(77, 208, 225, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
 }
 
-.collect-btn:active { transform: scale(0.98); }
-.collect-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+.collect-btn-modern:active {
+  transform: scale(0.98);
+}
 
-.machine-shop-btn {
-  width: 100%;
-  margin-top: 12px;
-  padding: 14px;
-  background: linear-gradient(135deg, #4CAF50, #2E7D32);
-  border: none;
-  border-radius: 20px;
-  color: white;
-  font-size: 15px;
-  font-weight: 800;
+.collect-btn-modern:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.upgrade-btn {
+  width: 50px;
+  background: linear-gradient(135deg, rgba(255, 217, 102, 0.2), rgba(0, 0, 0, 0.3));
+  border: 1px solid rgba(255, 217, 102, 0.4);
+  border-radius: 40px;
+  color: var(--gold);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.2s;
-  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
-}
-
-.machine-shop-btn:active { transform: scale(0.98); }
-
-/* Tasks */
-.task-tabs {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 60px;
-  padding: 6px;
-}
-
-.ttab {
-  flex: 1;
-  padding: 12px;
-  text-align: center;
-  background: transparent;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.ttab.active {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  color: white;
-  box-shadow: 0 4px 15px rgba(77, 208, 225, 0.4);
-}
-
-.tcont { display: none; }
-.tcont.active { display: block; }
-
-.task-item {
-  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
-  border: 1px solid rgba(77, 208, 225, 0.2);
-  border-radius: 20px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
-}
-
-.task-item:hover { transform: translateY(-2px); border-color: rgba(77, 208, 225, 0.5); }
-
-.ticon {
-  font-size: 40px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  background: rgba(77, 208, 225, 0.1);
-  border-radius: 20px;
-}
-
-.tinfo { flex: 1; }
-.tname { font-weight: 800; font-size: 14px; margin-bottom: 4px; color: var(--ice); }
-.trew { font-size: 12px; color: var(--gold); font-weight: 700; margin-top: 4px; }
-
-.tbtn {
-  border: none;
-  border-radius: 14px;
-  padding: 10px 18px;
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
-
-.tbtn:active { transform: scale(0.95); }
-.tbtn.go { background: linear-gradient(135deg, #1976D2, #0D47A1); color: #fff; }
-.tbtn.claim { background: linear-gradient(135deg, #4DD0E1, #0097B2); color: #fff; animation: claimGlow 1.8s ease-in-out infinite; }
-
-@keyframes claimGlow {
-  0%, 100% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.5); }
-  50% { box-shadow: 0 0 20px rgba(77, 208, 225, 0.8); }
-}
-
-.tbtn.done { background: rgba(255, 255, 255, 0.1); color: var(--muted); cursor: default; }
-
-/* Bottom Navigation */
-.bnav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 200;
-  background: linear-gradient(135deg, rgba(10, 20, 35, 0.98), rgba(20, 30, 50, 0.98));
-  border-top: 1px solid rgba(77, 208, 225, 0.3);
-  display: flex;
-  backdrop-filter: blur(20px);
-  padding-bottom: env(safe-area-inset-bottom, 0);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.ni {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 5px;
-  cursor: pointer;
-  transition: all 0.25s ease;
   gap: 4px;
-}
-
-.ni-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s ease;
-}
-
-.ni-icon img {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  transition: all 0.25s ease;
-}
-
-.ni.active .ni-icon { transform: translateY(-3px); }
-.ni.active .ni-icon img { filter: drop-shadow(0 0 8px rgba(77, 208, 225, 0.8)); }
-
-.ni-lbl {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--muted);
   transition: all 0.2s;
 }
 
-.ni.active .ni-lbl {
-  color: var(--ice);
-  text-shadow: 0 0 6px rgba(77, 208, 225, 0.5);
+.upgrade-btn:active {
+  transform: scale(0.95);
+}
+
+.machine-shop-btn-modern {
+  width: 100%;
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  border: none;
+  border-radius: 40px;
+  padding: 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.machine-shop-btn-modern:active {
+  transform: scale(0.98);
 }
 
 /* Machine Shop */
@@ -809,6 +745,14 @@ body::after {
   margin-top: 15px;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.machine-shop-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--ice);
 }
 
 .machine-cards {
@@ -825,7 +769,13 @@ body::after {
   align-items: center;
   gap: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
   flex-wrap: wrap;
+}
+
+.machine-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(77, 208, 225, 0.5);
 }
 
 .machine-card-img {
@@ -833,12 +783,64 @@ body::after {
   height: 60px;
   border-radius: 12px;
   object-fit: contain;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
 }
 
-.machine-card-info { flex: 1; }
-.machine-card-name { font-size: 16px; font-weight: 800; color: var(--ice); }
-.machine-card-rate { font-size: 12px; color: var(--snow); }
-.machine-card-cost { font-size: 13px; font-weight: 800; color: var(--gold); }
+.machine-card-info {
+  flex: 1;
+  min-width: 120px;
+}
+
+.machine-card-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ice);
+}
+
+.machine-card-rate {
+  font-size: 12px;
+  color: var(--snow);
+  margin-top: 4px;
+}
+
+.machine-card-rate span {
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.machine-card-cost {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.machine-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 5px 10px;
+}
+
+.machine-quantity input {
+  width: 60px;
+  background: transparent;
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 8px;
+  padding: 6px;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.machine-quantity span {
+  font-size: 12px;
+  color: var(--muted);
+}
 
 .machine-card-btn {
   background: linear-gradient(135deg, #4DD0E1, #0097B2);
@@ -849,32 +851,325 @@ body::after {
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
-.machine-card-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.machine-card-btn:active {
+  transform: scale(0.95);
+}
 
-/* Modal */
+.machine-card-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.machine-count-badge {
+  background: rgba(77, 208, 225, 0.2);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 10px;
+  color: var(--ice);
+  margin-left: 8px;
+}
+
+/* Tasks Page */
+.tasks-container {
+  padding: 16px;
+}
+
+.task-tabs-modern {
+  display: flex;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 60px;
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.ttab-modern {
+  flex: 1;
+  padding: 12px 8px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ttab-modern.active {
+  background: linear-gradient(135deg, var(--ice), #0097B2);
+  color: white;
+  box-shadow: 0 4px 15px rgba(77, 208, 225, 0.4);
+}
+
+.tcontent-modern {
+  display: none;
+  animation: fadeSlideUp 0.3s ease;
+}
+
+.tcontent-modern.active {
+  display: block;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.task-card {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  transition: all 0.2s;
+}
+
+.task-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(77, 208, 225, 0.5);
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.task-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(77, 208, 225, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ice);
+  margin-bottom: 4px;
+}
+
+.task-reward {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.task-progress {
+  margin: 12px 0;
+}
+
+.task-progress-track {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.task-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA);
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.task-progress-text {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  text-align: right;
+}
+
+.task-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-btn.go {
+  background: linear-gradient(135deg, #1976D2, #0D47A1);
+  color: white;
+}
+
+.task-btn.claim {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  color: white;
+  animation: claimGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes claimGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(77, 208, 225, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(77, 208, 225, 0.8); }
+}
+
+.task-btn.done {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--muted);
+  cursor: default;
+}
+
+.task-btn:active {
+  transform: scale(0.98);
+}
+
+/* Bottom Navigation */
+.bnav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(10, 20, 35, 0.95));
+  border-top: 1px solid rgba(77, 208, 225, 0.3);
+  display: flex;
+  backdrop-filter: blur(20px);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ni {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 2px 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  gap: 4px;
+}
+
+.ni-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.ni-icon img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transition: all 0.25s ease;
+}
+
+.ni.active .ni-icon {
+  transform: translateY(-3px);
+}
+
+.ni.active .ni-icon img {
+  filter: drop-shadow(0 0 8px rgba(77, 208, 225, 0.8));
+}
+
+.ni-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  transition: all 0.2s;
+  line-height: 1;
+  letter-spacing: 0.3px;
+}
+
+.ni.active .ni-lbl {
+  color: var(--ice);
+  text-shadow: 0 0 6px rgba(77, 208, 225, 0.5);
+}
+
+.sec {
+  display: none;
+  padding: 10px 12px;
+  animation: fadeIn 0.26s ease;
+}
+
+.sec.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Other styles continue... */
+.snowflake {
+  position: fixed;
+  color: #fff;
+  user-select: none;
+  pointer-events: none;
+  z-index: 999;
+  font-size: 1.2rem;
+  animation: fall linear forwards;
+  text-shadow: 0 0 5px rgba(77, 208, 225, 0.5);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+button, input, select, textarea, span, div, p, h1, h2, h3, a {
+  font-family: 'Fredoka', cursive !important;
+}
+
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 500;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
 }
 
-.modal.active { display: flex; }
+.modal.active {
+  display: flex;
+}
 
 .modal-box {
   background: linear-gradient(160deg, #0A1428, #0A1A2A);
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 32px;
-  padding: 24px;
-  width: 90%;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 18px;
+  width: 100%;
   max-width: 480px;
-  max-height: 85vh;
+  max-height: 80vh;
   overflow-y: auto;
   animation: scaleIn 0.3s ease;
 }
@@ -888,99 +1183,193 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
-.mtitle { font-size: 18px; font-weight: 800; color: var(--ice); }
+.mtitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ice);
+}
+
 .mclose {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   color: var(--muted);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
+  transition: all 0.1s;
 }
 
-/* ========== WALLET SECTION - FIXED LAYOUT ========== */
-.wallet-balance-card {
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.15), rgba(0, 0, 0, 0.4));
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(77, 208, 225, 0.3);
+.mclose:active {
+  transform: scale(0.9);
 }
 
-.wallet-balance-card .balance-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+.ptc {
+  position: fixed;
+  pointer-events: none;
+  z-index: 400;
+  font-size: 17px;
+  animation: particleUp 0.9s ease-out forwards;
 }
 
-.balance-item {
-  flex: 1;
-  text-align: center;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 16px;
+@keyframes particleUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-74px) scale(0.4); opacity: 0; }
 }
 
-.balance-item .balance-label {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 8px;
+.support-img-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 14px;
+  z-index: 190;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
-.balance-item .balance-value {
-  font-size: 28px;
+.support-img-btn:active {
+  transform: scale(0.92);
+}
+
+.support-img-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(77, 208, 225, 0.5));
+}
+
+#floatAddTask {
+  position: fixed;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  color: #fff;
+  font-size: 14px;
   font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 20px var(--ice-glow);
+  display: none;
+  align-items: center;
+  gap: 8px;
+  z-index: 150;
+  white-space: nowrap;
+  transition: all 0.2s;
 }
 
-.balance-item.snow .balance-value { color: var(--ice); }
-.balance-item.ton .balance-value { color: var(--gold); }
+#floatAddTask:active {
+  transform: translateX(-50%) scale(0.96);
+}
 
-/* Modern Tabs */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ice);
+  border-radius: 2px;
+}
+
+.fee-badge {
+  background: rgba(255, 217, 102, 0.15);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 10px;
+  color: var(--gold);
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+/* Wallet Styles */
+.wallet-modern {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
+  border-radius: 28px;
+  padding: 5px;
+  backdrop-filter: blur(12px);
+  margin-bottom: 16px;
+}
+
 .modern-tabs {
   display: flex;
   gap: 8px;
   background: rgba(0, 0, 0, 0.3);
-  border-radius: 60px;
+  border-radius: 24px;
   padding: 6px;
   margin-bottom: 20px;
 }
 
 .modern-tab {
   flex: 1;
-  padding: 12px;
+  padding: 12px 8px;
   text-align: center;
-  cursor: pointer;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  color: var(--muted);
   background: transparent;
   border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modern-tab i {
+  font-size: 18px;
 }
 
 .modern-tab.active {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  background: linear-gradient(135deg, var(--ice), #0097B2);
   color: white;
   box-shadow: 0 4px 15px rgba(77, 208, 225, 0.4);
 }
 
-.modern-content { display: none; }
-.modern-content.active { display: block; }
+.modern-content {
+  display: none;
+  animation: fadeSlideUp 0.3s ease;
+}
 
-/* Cards */
-.deposit-card, .withdraw-card, .exchange-card {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 20px;
+.modern-content.active {
+  display: block;
+}
+
+.modern-card {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
+  border-radius: 28px;
   padding: 20px;
-  border: 1px solid rgba(77, 208, 225, 0.2);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modern-card.deposit {
+  border-top: 3px solid var(--ice);
+}
+
+.modern-card.withdraw {
+  border-top: 3px solid var(--gold);
+}
+
+.modern-card.exchange {
+  border-top: 3px solid var(--ice);
+}
+
+.modern-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .modern-input-group {
@@ -988,22 +1377,22 @@ body::after {
 }
 
 .modern-label {
-  display: block;
   font-size: 12px;
   color: var(--muted);
-  margin-bottom: 8px;
   font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
 }
 
 .modern-input {
   width: 100%;
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(77, 208, 225, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
-  padding: 14px;
-  color: white;
-  font-size: 16px;
-  font-family: inherit;
+  padding: 12px 16px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .modern-input:focus {
@@ -1014,32 +1403,49 @@ body::after {
 .modern-preset {
   display: flex;
   gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  margin-bottom: 16px;
 }
 
 .modern-preset-btn {
   flex: 1;
+  padding: 8px;
   text-align: center;
-  padding: 10px;
-  background: rgba(77, 208, 225, 0.2);
+  background: rgba(77, 208, 225, 0.15);
+  border: 1px solid rgba(77, 208, 225, 0.3);
   border-radius: 12px;
-  cursor: pointer;
+  font-size: 12px;
   font-weight: 700;
-  font-size: 14px;
+  cursor: pointer;
+  color: var(--ice);
   transition: all 0.2s;
-  min-width: 60px;
 }
 
-.modern-preset-btn:active { transform: scale(0.95); background: rgba(77, 208, 225, 0.4); }
+.modern-preset-btn:active {
+  transform: scale(0.96);
+  background: rgba(77, 208, 225, 0.3);
+}
+
+.modern-rate-info {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.modern-rate-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--gold);
+}
 
 .modern-btn {
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: 20px;
-  font-weight: 800;
+  border-radius: 50px;
   font-size: 16px;
+  font-weight: 800;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -1048,115 +1454,37 @@ body::after {
   gap: 8px;
 }
 
-.modern-btn:active { transform: scale(0.98); }
-.modern-btn.primary { background: linear-gradient(135deg, #4DD0E1, #0097B2); color: white; }
-.modern-btn.secondary { background: linear-gradient(135deg, #FFD966, #FFB347); color: #2C1A00; }
-
-/* Wallet Row */
-.wallet-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.wallet-info {
-  flex: 1;
-}
-
-.wallet-label {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 4px;
-}
-
-.wallet-address {
-  font-size: 13px;
-  font-weight: 600;
-  font-family: monospace;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 8px 12px;
-  border-radius: 12px;
-  display: inline-block;
-}
-
-.btn-conn {
+.modern-btn.primary {
   background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  border: none;
-  border-radius: 12px;
-  padding: 10px 20px;
   color: white;
-  font-weight: 800;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s;
+  box-shadow: 0 0 20px var(--ice-glow);
 }
 
-.btn-conn:active { transform: scale(0.95); }
-
-.dep-warn {
-  background: rgba(255, 193, 7, 0.15);
-  border-radius: 12px;
-  padding: 12px;
-  margin-bottom: 20px;
-  font-size: 12px;
-  border-left: 3px solid var(--gold);
+.modern-btn.secondary {
+  background: linear-gradient(135deg, #FFD966, #FFB347);
+  color: #2C1A00;
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
-.user-id-badge {
-  background: rgba(77, 208, 225, 0.3);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-family: monospace;
-  font-weight: 800;
+.modern-btn:active {
+  transform: scale(0.98);
 }
 
-/* History Box */
-.hist-box {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 16px;
+.modern-btn:disabled {
+  opacity: 0.5;
+  transform: none;
 }
 
-.hist-hdr {
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  font-weight: 700;
-  color: var(--ice);
-}
-
-.hist-empty {
-  padding: 20px;
-  text-align: center;
-  color: var(--muted);
-}
-
-.hist-item {
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.swap-section-modern {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.hist-date {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.hist-amount {
-  font-weight: 800;
-  color: var(--gold);
-}
-
-/* Swap Section */
-.swap-section-modern .swap-row {
-  margin-bottom: 20px;
+.swap-row {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 16px;
 }
 
 .swap-header {
@@ -1164,8 +1492,6 @@ body::after {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 
 .swap-currency {
@@ -1173,6 +1499,7 @@ body::after {
   align-items: center;
   gap: 8px;
   font-weight: 800;
+  font-size: 16px;
 }
 
 .swap-currency img {
@@ -1187,52 +1514,48 @@ body::after {
 
 .swap-input-area {
   display: flex;
-  gap: 8px;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .swap-input-area input {
   flex: 1;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 16px;
-  padding: 14px;
+  min-width: 120px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: 800;
   color: white;
-  font-size: 18px;
-  font-weight: 600;
+  text-align: right;
+  outline: none;
 }
 
 .swap-max {
-  background: rgba(77, 208, 225, 0.2);
-  border-radius: 12px;
-  padding: 10px 16px;
   cursor: pointer;
+  background: rgba(77, 208, 225, 0.2);
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
   font-weight: 800;
-  font-size: 12px;
+  color: var(--ice);
+  white-space: nowrap;
   transition: all 0.2s;
 }
 
-.swap-max:active { transform: scale(0.95); background: rgba(77, 208, 225, 0.4); }
-
-.fee-info {
-  margin-top: 12px;
-  font-size: 11px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.swap-max:active {
+  transform: scale(0.95);
+  background: rgba(77, 208, 225, 0.4);
 }
 
 .swap-output-area {
-  margin-top: 16px;
-  padding: 16px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 16px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 12px;
+  margin-top: 12px;
 }
 
 .swap-output-value {
@@ -1241,135 +1564,463 @@ body::after {
   color: var(--gold);
 }
 
-/* Ref Section */
+.hist-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  margin-top: 16px;
+}
+
+.hist-hdr {
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hist-row {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hist-row:last-child {
+  border-bottom: none;
+}
+
+.hist-l {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.hist-r {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.hist-empty {
+  padding: 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Friends Page */
+.ref-prog-card {
+  background: linear-gradient(145deg, rgba(77, 208, 225, 0.1), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(8px);
+}
+
+.ref-bonus-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(77, 208, 225, 0.08);
+  border: 1px solid rgba(77, 208, 225, 0.18);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 11px;
+  animation: badgePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { border-color: rgba(77, 208, 225, 0.18); }
+  50% { border-color: rgba(77, 208, 225, 0.5); }
+}
+
+.rbb-pct {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--ice);
+  line-height: 1;
+}
+
+.rbb-txt {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
 .ref-link-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 4px;
 }
 
 .ref-inp {
   flex: 1;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(77, 208, 225, 0.3);
-  border-radius: 16px;
-  padding: 12px;
-  color: white;
-  font-size: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .btn-copy {
   background: linear-gradient(135deg, #4DD0E1, #0097B2);
   border: none;
-  border-radius: 16px;
-  padding: 12px 20px;
-  color: white;
+  border-radius: 10px;
+  padding: 8px 13px;
+  color: #fff;
+  font-size: 12px;
   font-weight: 800;
   cursor: pointer;
-  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.1s;
 }
 
-.btn-copy:active { transform: scale(0.95); }
+.btn-copy:active {
+  transform: scale(0.96);
+}
 
 .ref-count-badge {
-  background: rgba(77, 208, 225, 0.2);
-  padding: 4px 12px;
+  background: rgba(0, 242, 122, 0.12);
+  border: 1px solid rgba(0, 242, 122, 0.25);
   border-radius: 20px;
-  font-size: 12px;
+  padding: 3px 11px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #00F27A;
 }
 
-/* Support Button */
-.support-img-btn {
-  position: fixed;
-  bottom: 100px;
-  right: 16px;
-  z-index: 190;
-  width: 56px;
-  height: 56px;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+.ref-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.ref-list-item:last-child {
+  border-bottom: none;
+}
+
+.rli-av {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
+  background: var(--glass);
+  border: 2px solid var(--ice);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(77, 208, 225, 0.5);
+  font-size: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.support-img-btn:active { transform: scale(0.92); }
-
-.support-img-btn img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
+.rli-av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Snowflake animation */
-.snowflake {
-  position: fixed;
+.rli-info {
+  flex: 1;
+}
+
+.rli-name {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.rli-date {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+.rli-earn {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--snow);
+  white-space: nowrap;
+}
+
+/* Add Task Modal */
+.flabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.finput {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.finput:focus {
+  outline: none;
+  border-color: var(--ice);
+}
+
+.preset-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 9px;
+}
+
+.prbtn {
+  flex: 1;
+  padding: 7px;
+  text-align: center;
+  background: rgba(77, 208, 225, 0.1);
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ice);
+  transition: all 0.1s;
+}
+
+.prbtn:active {
+  background: rgba(77, 208, 225, 0.28);
+  transform: scale(0.96);
+}
+
+.btn-prim {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 12px;
   color: #fff;
-  user-select: none;
-  pointer-events: none;
-  z-index: 999;
-  font-size: 1.2rem;
-  animation: fall linear forwards;
-  text-shadow: 0 0 5px rgba(77, 208, 225, 0.5);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 14px var(--ice-glow);
+  transition: all 0.1s;
 }
 
-@keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+.btn-prim:active {
+  transform: scale(0.98);
 }
 
-.ptc {
-  position: fixed;
-  pointer-events: none;
-  z-index: 400;
-  font-size: 24px;
-  animation: particleUp 0.9s ease-out forwards;
+.btn-prim:disabled {
+  opacity: 0.42;
+  cursor: default;
+  box-shadow: none;
 }
 
-@keyframes particleUp {
-  0% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-74px) scale(0.4); opacity: 0; }
+/* Wallet connection */
+.wal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
-::-webkit-scrollbar-thumb { background: var(--ice); border-radius: 4px; }
+.wl-inf .wll {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.wl-inf .wla {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-conn {
+  background: linear-gradient(135deg, var(--ice), #0097B2);
+  border: none;
+  border-radius: 10px;
+  padding: 7px 14px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.1s;
+}
+
+.btn-conn:active {
+  transform: scale(0.96);
+}
+
+.dep-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 11px;
+  background: rgba(255, 193, 7, 0.07);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: #FFD740;
+  font-weight: 600;
+}
+
+.tx-status {
+  display: none;
+  margin-top: 10px;
+  padding: 11px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.tx-status.visible {
+  display: block;
+}
+
+.stat-badge {
+  padding: 2px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.sb-pending {
+  background: rgba(255, 202, 40, 0.12);
+  color: #FFD740;
+  border: 1px solid rgba(255, 202, 40, 0.25);
+}
+
+.sb-approved {
+  background: rgba(0, 242, 122, 0.12);
+  color: #00F27A;
+  border: 1px solid rgba(0, 242, 122, 0.25);
+}
+
+.sb-rejected {
+  background: rgba(239, 83, 80, 0.12);
+  color: #FF8A80;
+  border: 1px solid rgba(239, 83, 80, 0.25);
+}
+
+.fee-info {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Help Modal Links */
+.help-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 4px;
+}
+
+.help-link {
+  text-decoration: none;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 12px;
+  padding: 9px 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.help-link span:first-child {
+  font-size: 20px;
+}
+
+.help-link span:last-child {
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.help-link.payout {
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.help-link.payout span:last-child {
+  color: #00D4FF;
+}
+
+.help-link.news span:last-child {
+  color: var(--ice);
+}
+
+.help-link.support span:last-child {
+  color: var(--gold);
+}
+
+.help-section {
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.08), rgba(0, 0, 0, 0.4));
+  border: 1px solid rgba(77, 208, 225, 0.25);
+  border-radius: 16px;
+  padding: 13px;
+  margin-bottom: 12px;
+}
+
+.help-section-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ice);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.help-section-content {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.8;
+}
 </style>
 </head>
 <body>
 
-<div class="background-fixed"></div>
-
-<!-- Welcome Modal -->
-<div id="welcomeModal" class="welcome-modal">
-  <div class="welcome-modal-box">
-    <div class="chest-animation-container" style="position: relative; margin-bottom: 20px;">
-      <img id="chestImage" class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest" style="width: 120px; height: 120px; cursor: pointer;">
-      <div style="position: absolute; top: -10px; right: -10px; background: #4DD0E1; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
-    </div>
-    <div class="welcome-modal-title" data-i18n="welcomeTitle">🎄 Santa's Gift! 🎄</div>
-    <div class="welcome-modal-subtitle" style="font-size: 14px; color: var(--gold); margin-bottom: 20px;" data-i18n="welcomeSubtitle">Open to receive your rewards!</div>
-    <button class="welcome-open-btn" onclick="openWelcomeChestWithAnimation()" data-i18n="openChestBtn">🎁 Open Chest! 🎁</button>
-  </div>
-</div>
-
-<!-- Rewards Modal -->
-<div id="rewardsModal" class="modal">
-  <div class="modal-box" style="max-width: 380px; text-align: center;">
-    <div class="rewards-container">
-      <div style="font-size: 56px; margin-bottom: 20px;">🎉✨🎄</div>
-      <div style="font-size: 26px; font-weight: 800; color: var(--ice); margin-bottom: 20px;" data-i18n="congratsTitle">🎉 CONGRATULATIONS! 🎉</div>
-      <div id="rewardsContent"></div>
-      <button class="welcome-open-btn" onclick="closeRewardsAndStart()" style="margin-top: 20px;" data-i18n="startMiningBtn">🎄 Start Mining! 🎄</button>
-    </div>
-  </div>
-</div>
-
-<!-- Loading Screen -->
 <div id="loadingScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/76b663ee-bd1e-45b4-96cc-ed86f714c9f3.png" alt="Santa">
   <div class="ld-title">Santa Snow</div>
@@ -1382,21 +2033,64 @@ body::after {
   </div>
 </div>
 
-<!-- Top Bar -->
+<!-- Welcome Modal with Animation -->
+<div id="welcomeModal" class="welcome-modal">
+  <div class="welcome-modal-box">
+    <div class="welcome-chest-container" id="welcomeChestContainer">
+      <img class="welcome-chest-img" id="welcomeChestImg" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest">
+      <div style="position: absolute; top: -10px; right: -10px; background: #4DD0E1; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
+    </div>
+    <div class="welcome-modal-title">🎄 Santa's Gift! 🎄</div>
+    <div class="welcome-modal-subtitle" style="font-size: 14px; color: var(--gold); margin-bottom: 15px;">Open to receive your rewards!</div>
+    <button class="welcome-open-btn" id="openChestBtn">🎁 Open Chest! 🎁</button>
+  </div>
+</div>
+
+<!-- Rewards Popup -->
+<div id="rewardsPopup" class="rewards-popup">
+  <button class="close-rewards" onclick="closeRewardsPopup()">×</button>
+  <div style="font-size: 48px; margin-bottom: 10px;">🎉✨🎄</div>
+  <div style="font-size: 24px; font-weight: 800; color: var(--ice); margin-bottom: 20px;">CONGRATULATIONS!</div>
+  <div class="reward-item">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 40px; height: 40px;">
+        <span style="font-size: 16px; font-weight: 600; color: var(--muted);">Snow Received:</span>
+      </div>
+      <span id="rewardSnow" style="font-size: 28px; font-weight: 800; color: var(--gold);">+1000</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <i class="fas fa-microchip" style="font-size: 40px; color: var(--ice);"></i>
+        <span style="font-size: 16px; font-weight: 600; color: var(--muted);">Welcome Machine:</span>
+      </div>
+      <span style="font-size: 28px; font-weight: 800; color: var(--snow);">+1</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <i class="fas fa-bolt" style="font-size: 40px; color: var(--gold);"></i>
+        <span style="font-size: 16px; font-weight: 600; color: var(--muted);">Mining Rate:</span>
+      </div>
+      <span id="rewardRate" style="font-size: 24px; font-weight: 800; color: var(--ice);">+10 Snow/hour</span>
+    </div>
+  </div>
+  <button class="start-mining-btn" onclick="closeRewardsPopupAndStart()">🚀 Start Mining! 🚀</button>
+</div>
+
 <div class="topbar-main">
   <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
   <div class="tb-bals">
     <div class="tb-chip snow">
-      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
-      <div>
-        <span data-i18n="labelSnow">Snow</span>
+      <div class="tb-chip-icon">❄️</div>
+      <div class="tb-chip-info">
+        <span class="tb-chip-label" data-i18n="labelSnow">Snow</span>
         <span class="tb-chip-num" id="tbSnow">0</span>
       </div>
     </div>
     <div class="tb-chip ton">
-      <i class="fas fa-coins" style="font-size: 28px; color: var(--gold);"></i>
-      <div>
-        <span data-i18n="labelTON">TON</span>
+      <div class="tb-chip-icon">💰</div>
+      <div class="tb-chip-info">
+        <span class="tb-chip-label" data-i18n="labelTON">TON</span>
         <span class="tb-chip-num" id="tbTON">0</span>
       </div>
     </div>
@@ -1407,150 +2101,166 @@ body::after {
   </button>
 </div>
 
-<div id="langMenu" style="display: none; position: fixed; top: 70px; right: 12px; z-index: 300; background: linear-gradient(135deg, #0A1428, #1A2A4A); border: 1px solid rgba(77, 208, 225, 0.5); border-radius: 20px; overflow: hidden; min-width: 140px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);">
-  <div style="padding: 8px 0">
-    <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')" style="padding: 12px 16px; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 8px;">🇬🇧 English</div>
-    <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')" style="padding: 12px 16px; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 8px;">🇷🇺 Русский</div>
+<div id="langMenu" style="display: none; position: fixed; top: 70px; right: 12px; z-index: 300; background: rgba(10, 20, 35, 0.97); border: 1px solid rgba(77, 208, 225, 0.35); border-radius: 16px; overflow: hidden; min-width: 140px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);">
+  <div style="padding: 6px 0">
+    <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')">🇬🇧 &nbsp;English</div>
+    <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')">🇷🇺 &nbsp;Русский</div>
   </div>
 </div>
 
 <!-- Home Section -->
-<div class="sec active" id="sectionHome">
-  <div class="hero-card">
-    <div class="santa-frame-wrap">
-      <div class="santa-frame-inner">
-        <img id="santaChar" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" alt="Santa" onclick="santaClick()" draggable="false">
-      </div>
+<div class="sec active" id="sectionHome" style="padding: 10px 12px 24px">
+  <div class="hero-card-modern">
+    <div class="santa-showcase">
+      <div class="santa-glow"></div>
+      <img class="santa-avatar" id="santaChar" onclick="santaClick()" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" alt="Santa" draggable="false">
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat-box">
-        <div class="stat-lbl" data-i18n="statAccrued">Accrued</div>
-        <div class="stat-val" id="heroAccrued">0</div>
-        <div class="stat-unit">Snow</div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="heroAccrued">0.00</div>
+        <div class="stat-label" data-i18n="statAccrued">Accrued</div>
       </div>
-      <div class="hero-stat-box">
-        <div class="stat-lbl" data-i18n="statRateDay">Rate/Day</div>
-        <div class="stat-val" id="heroRateDay">0</div>
-        <div class="stat-unit" data-i18n="statSnowDay">Snow/day</div>
+      <div class="stat-card">
+        <div class="stat-value" id="heroRateDay">0</div>
+        <div class="stat-label" data-i18n="statRateDay">Rate/Day</div>
       </div>
     </div>
     
-    <div class="storage-outer">
-      <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Upgrade Storage">
-        <i class="fas fa-arrow-up"></i>
-      </div>
-      <div class="storage-main">
-        <div class="storage-head">
-          <div class="storage-title"><i class="fas fa-box"></i> <span data-i18n="storageTitle">Storage</span> <span id="storageLvDisp">1</span></div>
-          <div class="storage-pct" id="claimPct">0%</div>
+    <div class="storage-section">
+      <div class="storage-header">
+        <div class="storage-title">
+          <i class="fas fa-database"></i> <span data-i18n="storageTitle">Storage</span>
         </div>
-        <div class="storage-track">
-          <div class="storage-fill" id="storageFill" style="width: 0%"></div>
-          <div class="storage-lbl" id="storageLbl">0 / 300 Snow</div>
+        <div class="storage-level">
+          <span data-i18n="lvLabel">Lv.</span><span id="storageLvDisp">1</span>
         </div>
       </div>
-    </div>
-    
-    <button class="collect-btn" id="collectBtn" onclick="collectSnow()">
-      <i class="fas fa-snowflake"></i> <span id="claimBtnTxt" data-i18n="claimBtn">Claim Snow</span>
-    </button>
-    
-    <button class="machine-shop-btn" onclick="openMachineShop()">
-      <i class="fas fa-microchip"></i> <span data-i18n="upgradeMachinesBtn">Upgrade Mining Machines</span> <i class="fas fa-chevron-right"></i>
-    </button>
-  </div>
-</div>
-
-<!-- Friends Section -->
-<div class="sec" id="sectionFriends">
-  <div class="hero-card" style="margin-bottom: 16px;">
-    <div style="text-align: center; margin-bottom: 20px;">
-      <i class="fas fa-users" style="font-size: 48px; color: var(--ice);"></i>
-      <h2 style="margin-top: 8px;" data-i18n="friendsTitle">Friends & Referrals</h2>
-    </div>
-    <div class="ref-bonus-badge" style="background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.4)); border-radius: 20px; padding: 16px; text-align: center; margin-bottom: 16px;">
-      <span style="font-size: 36px; font-weight: 800; color: var(--gold);">20%</span>
-      <span style="display: block; font-size: 12px; color: var(--muted); margin-top: 4px;" data-i18n="refCommissionText">commission from friends' machine purchases!</span>
-    </div>
-    <div class="ref-link-row">
-      <input class="ref-inp" id="refLinkInp" readonly style="flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(77,208,225,0.3); border-radius: 16px; padding: 12px; color: white;">
-      <button class="btn-copy" onclick="copyRefLink()" style="background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 16px; padding: 12px 20px; color: white; font-weight: 800; cursor: pointer;"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
-    </div>
-    <div class="hist-box">
-      <div class="hist-hdr" style="display: flex; justify-content: space-between;">
-        <span><i class="fas fa-history"></i> <span data-i18n="recentRefs">Recent Referrals</span></span>
-        <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
+      <div class="storage-progress">
+        <div class="progress-track">
+          <div class="progress-fill" id="storageFill" style="width: 0%"></div>
+        </div>
+        <div class="progress-stats">
+          <span id="storageCurrent">0</span>
+          <span>/</span>
+          <span id="storageMax">300</span>
+          <span>Snow</span>
+        </div>
       </div>
-      <div id="recentRefsList"><div class="hist-empty" data-i18n="noReferrals">No referrals yet</div></div>
+      <div class="collect-action">
+        <button class="collect-btn-modern" id="collectBtn" onclick="collectSnow()" disabled>
+          <i class="fas fa-hand-holding-heart"></i> <span id="claimBtnTxt">Claim Snow</span>
+        </button>
+        <button class="upgrade-btn" onclick="openModal('upgradeModal')">
+          <i class="fas fa-arrow-up"></i>
+          <span>↑</span>
+        </button>
+      </div>
     </div>
+    
+    <button class="machine-shop-btn-modern" id="openMachineShopBtn" onclick="openMachineShop()">
+      <i class="fas fa-microchip"></i> Upgrade Mining Machines
+      <i class="fas fa-chevron-right"></i>
+    </button>
   </div>
 </div>
 
 <!-- Tasks Section -->
 <div class="sec" id="sectionTasks">
-  <div class="task-tabs">
-    <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')"><i class="fas fa-globe"></i> <span data-i18n="tabSocialTxt">Social</span></div>
-    <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')"><i class="fas fa-users"></i> <span data-i18n="tabReferralTxt">Referral</span></div>
-  </div>
-  <div class="tcont active" id="tcSocial">
-    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-      <div class="ttab active" id="stab-partner" style="flex: 1; font-size: 13px;" onclick="switchSocTab('partner')">⭐ Partner</div>
-      <div class="ttab" id="stab-community" style="flex: 1; font-size: 13px;" onclick="switchSocTab('community')">🌍 Community</div>
-    </div>
-    <div id="socPartnerList"></div>
-    <div id="socCommunityList" style="display: none;"></div>
-  </div>
-  <div class="tcont" id="tcReferral">
-    <div id="referralTasksList"></div>
-  </div>
-</div>
-
-<!-- Wallet Section - FIXED LAYOUT -->
-<div class="sec" id="sectionWallet">
-  <div class="hero-card">
-    <div style="text-align: center; margin-bottom: 20px;">
-      <i class="fas fa-wallet" style="font-size: 48px; color: var(--gold);"></i>
-      <h2 style="margin-top: 8px;" data-i18n="walletTitle">Wallet</h2>
-    </div>
-    
-    <!-- Balance Cards -->
-    <div class="wallet-balance-card">
-      <div class="balance-row" style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <div class="balance-item snow" style="flex: 1;">
-          <div class="balance-label" data-i18n="snowBalance">Snow Balance</div>
-          <div class="balance-value" id="walletSnowBalance">0</div>
-        </div>
-        <div class="balance-item ton" style="flex: 1;">
-          <div class="balance-label" data-i18n="tonBalance">TON Balance</div>
-          <div class="balance-value" id="walletTonBalance">0</div>
-        </div>
+  <div class="tasks-container">
+    <div class="task-tabs-modern">
+      <div class="ttab-modern active" data-t="social" onclick="switchTTabModern(this,'social')">
+        <i class="fas fa-globe"></i> <span data-i18n="tabSocialTxt">Social</span>
+      </div>
+      <div class="ttab-modern" data-t="referral" onclick="switchTTabModern(this,'referral')">
+        <i class="fas fa-users"></i> <span data-i18n="tabReferralTxt">Referral</span>
       </div>
     </div>
     
-    <!-- Tabs -->
-    <div class="modern-tabs">
-      <div class="modern-tab active" data-wt="deposit" onclick="switchWalletModernTab(this,'deposit')"><i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit</span></div>
-      <div class="modern-tab" data-wt="withdraw" onclick="switchWalletModernTab(this,'withdraw')"><i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw</span></div>
-      <div class="modern-tab" data-wt="exchange" onclick="switchWalletModernTab(this,'exchange')"><i class="fas fa-exchange-alt"></i> <span data-i18n="exchangeNow">Exchange</span></div>
+    <div class="tcontent-modern active" id="tcSocial">
+      <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+        <div class="ttab-modern active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')">
+          <i class="fas fa-star"></i> Partner
+        </div>
+        <div class="ttab-modern" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')">
+          <i class="fas fa-globe-americas"></i> Community
+        </div>
+      </div>
+      <div id="socPartnerList"></div>
+      <div id="socCommunityList" style="display: none;"></div>
     </div>
     
-    <!-- Deposit Tab -->
+    <div class="tcontent-modern" id="tcReferral">
+      <div id="referralTasksList"></div>
+    </div>
+  </div>
+</div>
+
+<button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none;">
+  <i class="fas fa-plus"></i> <span data-i18n="floatAdd">Add Task</span>
+</button>
+
+<!-- Friends Section -->
+<div class="sec" id="sectionFriends">
+  <div class="ref-prog-card">
+    <div class="ref-bonus-badge">
+      <span class="rbb-pct">20%</span>
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px; object-fit: contain;">
+      <span class="rbb-txt">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' machine purchases!<br>Earn TON equivalent in Snow for each machine they buy!</span>
+    </div>
+    <div class="ref-link-row">
+      <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
+      <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
+    </div>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 4px" data-i18n="refNote">📤 Share this link with friends. When they buy machines, you get 20% of their purchase value in Snow!</div>
+  </div>
+  <div class="hist-box">
+    <div class="hist-hdr" style="justify-content: space-between">
+      <span><i class="fas fa-history"></i> <span data-i18n="recentRefs">Recent Referrals</span></span>
+      <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
+    </div>
+    <div id="recentRefsList"><div class="hist-empty" data-i18n="noReferrals">No referrals yet</div></div>
+  </div>
+</div>
+
+<!-- Wallet Section -->
+<div class="sec" id="sectionWallet">
+  <div class="wallet-modern">
+    <div class="modern-tabs">
+      <div class="modern-tab active" data-wt="deposit" onclick="switchWalletModernTab(this,'deposit')">
+        <i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit</span>
+      </div>
+      <div class="modern-tab" data-wt="withdraw" onclick="switchWalletModernTab(this,'withdraw')">
+        <i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw</span>
+      </div>
+      <div class="modern-tab" data-wt="exchange" onclick="switchWalletModernTab(this,'exchange')">
+        <i class="fas fa-exchange-alt"></i> <span data-i18n="exchangeNow">Exchange</span>
+      </div>
+    </div>
+
     <div class="modern-content active" id="wt-deposit-modern">
-      <div class="deposit-card">
-        <div class="wallet-row">
-          <div class="wallet-info">
-            <div class="wallet-label" data-i18n="labelWallet">Wallet</div>
-            <div class="wallet-address" id="walletAddressDisplay" data-i18n="notConnected">Not connected</div>
+      <div class="modern-card deposit">
+        <div class="modern-card-title">
+          <i class="fas fa-coins" style="color: var(--ice);"></i> <span data-i18n="depositBtn">Deposit TON</span>
+        </div>
+        <div class="wal-row">
+          <div class="wl-inf">
+            <div class="wll" data-i18n="labelWallet">Wallet</div>
+            <div class="wla" id="walletAddressDisplay" data-i18n="notConnected">Not connected</div>
           </div>
           <button class="btn-conn" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> <span data-i18n="connectBtn">Connect</span></button>
         </div>
         <div class="dep-warn">
           <i class="fas fa-exclamation-triangle"></i>
-          <div><strong data-i18n="important">IMPORTANT:</strong> <span data-i18n="depositWarning1">Your User ID</span> <span class="user-id-badge" id="depositUserIdDisplay" style="background: rgba(77,208,225,0.3); padding: 2px 8px; border-radius: 8px;"></span> <span data-i18n="depositWarning2">must be the ONLY comment in the transaction.</span></div>
+          <div>
+            <strong data-i18n="important">IMPORTANT:</strong> <span data-i18n="depositWarning1">Your User ID</span>
+            <span id="depositUserIdDisplay" style="background: rgba(255,255,255,.14); padding: 2px 7px; border-radius: 10px; font-weight: 800"></span>
+            <span data-i18n="depositWarning2">must be the ONLY comment in the transaction.</span>
+          </div>
         </div>
         <div class="modern-input-group">
           <label class="modern-label" data-i18n="amountTON">Amount (TON)</label>
-          <input type="number" id="depositAmountInput" class="modern-input" placeholder="1" step="0.1" min="1">
+          <input type="number" id="depositAmountInput" class="modern-input" placeholder="1" step="0.1" min="1" oninput="updDepPreview()">
         </div>
         <div class="modern-preset">
           <span class="modern-preset-btn" onclick="setDepAmt(1)">1</span>
@@ -1558,20 +2268,29 @@ body::after {
           <span class="modern-preset-btn" onclick="setDepAmt(5)">5</span>
           <span class="modern-preset-btn" onclick="setDepAmt(10)">10</span>
         </div>
-        <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="window.initiateDeposit()"><i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit TON</span></button>
+        <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="window.initiateDeposit()">
+          <i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit TON</span>
+        </button>
+        <div class="tx-status" id="depositStatus">
+          <div>⏳</div>
+          <div data-i18n="processingDeposit">Processing deposit...</div>
+          <div id="depositStatusDetail"></div>
+        </div>
       </div>
     </div>
-    
-    <!-- Withdraw Tab -->
+
     <div class="modern-content" id="wt-withdraw-modern">
-      <div class="withdraw-card">
+      <div class="modern-card withdraw">
+        <div class="modern-card-title">
+          <i class="fas fa-arrow-up" style="color: var(--gold);"></i> <span data-i18n="withdrawBtn">Withdraw TON</span>
+        </div>
         <div class="modern-input-group">
           <label class="modern-label" data-i18n="tonWalletAddr">TON Wallet Address</label>
           <input type="text" class="modern-input" id="wdAddr" placeholder="UQ...">
         </div>
         <div class="modern-input-group">
           <label class="modern-label" data-i18n="amountTON">Amount (TON)</label>
-          <input type="number" class="modern-input" id="wdAmt" placeholder="0.02" min="0.02" step="0.01">
+          <input type="number" class="modern-input" id="wdAmt" placeholder="0.02" min="0.02" step="0.01" oninput="updWdPrev()">
         </div>
         <div class="modern-preset">
           <span class="modern-preset-btn" onclick="setWdAmt(0.02)">0.02 TON</span>
@@ -1579,22 +2298,31 @@ body::after {
           <span class="modern-preset-btn" onclick="setWdAmt(0.1)">0.1 TON</span>
           <span class="modern-preset-btn" onclick="setWdAmt(0.5)">0.5 TON</span>
         </div>
-        <button class="modern-btn secondary" id="wdBtn" onclick="doWithdraw()"><i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw TON</span></button>
+        <div class="modern-rate-info">
+          <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">💰 Your TON Balance</div>
+          <div class="modern-rate-value" id="wdTonBalance">0 TON</div>
+        </div>
+        <button class="modern-btn secondary" id="wdBtn" onclick="doWithdraw()">
+          <i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw TON</span>
+        </button>
       </div>
       <div class="hist-box">
         <div class="hist-hdr" data-i18n="withdrawHist">📋 Withdrawal History</div>
         <div id="wdHist"><div class="hist-empty" data-i18n="noWithdrawals">No withdrawals yet</div></div>
       </div>
     </div>
-    
-    <!-- Exchange Tab -->
+
     <div class="modern-content" id="wt-exchange-modern">
-      <div class="exchange-card">
+      <div class="modern-card exchange">
+        <div class="modern-card-title">
+          <i class="fas fa-exchange-alt" style="color: var(--ice);"></i> <span data-i18n="exchangeNow">Exchange Snow → TON</span>
+          <span class="fee-badge">Fee: 4%</span>
+        </div>
         <div class="swap-section-modern">
           <div class="swap-row">
             <div class="swap-header">
               <div class="swap-currency">
-                <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png">
+                <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
                 <span>Snow → TON</span>
               </div>
               <div class="swap-balance" id="swapFromBalSnow">0 Snow</div>
@@ -1603,17 +2331,23 @@ body::after {
               <input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwapSnowToTon()">
               <span class="swap-max" onclick="swapSnowMax()" data-i18n="maxBtn">MAX</span>
             </div>
-            <div class="fee-info">
+            <div class="fee-info" style="margin-top: 8px;">
               <i class="fas fa-info-circle"></i> Fee: 4% (<span id="feeAmountDisplay">0</span> Snow)
             </div>
-            <div class="swap-output-area">
+            <div class="swap-output-area" style="margin-top: 12px;">
               <span data-i18n="youGet">You get (after fee):</span>
               <div class="swap-output-value" id="swapTonOut">0</div>
               <span>TON</span>
             </div>
           </div>
         </div>
-        <button class="modern-btn primary" onclick="swapSnowToTon()"><i class="fas fa-exchange-alt"></i> Exchange Snow → TON</button>
+        <div class="modern-rate-info" style="margin-top: 16px;">
+          📊 <span data-i18n="swapRate">1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON</span>
+          <div style="font-size: 10px; color: var(--muted); margin-top: 4px;">4% exchange fee applies</div>
+        </div>
+        <button class="modern-btn primary" onclick="swapSnowToTon()" style="margin-top: 16px;">
+          <i class="fas fa-exchange-alt"></i> Exchange Snow → TON
+        </button>
       </div>
       <div class="hist-box">
         <div class="hist-hdr" data-i18n="exchangeHist">📋 Exchange History</div>
@@ -1623,32 +2357,79 @@ body::after {
   </div>
 </div>
 
-<!-- Support Button -->
 <div id="supportBtn" class="support-img-btn" onclick="openSupport()">
   <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" alt="Support">
 </div>
 
-<!-- Bottom Navigation -->
 <nav class="bnav">
   <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
-    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div>
+    <div class="ni-icon"><i class="fas fa-home" style="font-size: 28px; color: var(--ice);"></i></div>
     <div class="ni-lbl" data-i18n="Home">Home</div>
   </div>
   <div class="ni" data-s="sectionTasks" onclick="goNav(this)">
-    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div>
+    <div class="ni-icon"><i class="fas fa-tasks" style="font-size: 28px; color: var(--muted);"></i></div>
     <div class="ni-lbl" data-i18n="Tasks">Tasks</div>
   </div>
   <div class="ni" data-s="sectionFriends" onclick="goNav(this)">
-    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div>
+    <div class="ni-icon"><i class="fas fa-users" style="font-size: 28px; color: var(--muted);"></i></div>
     <div class="ni-lbl" data-i18n="Friends">Friends</div>
   </div>
   <div class="ni" data-s="sectionWallet" onclick="goNav(this)">
-    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div>
+    <div class="ni-icon"><i class="fas fa-wallet" style="font-size: 28px; color: var(--muted);"></i></div>
     <div class="ni-lbl" data-i18n="Wallet">Wallet</div>
   </div>
 </nav>
 
 <!-- Modals -->
+<div class="modal" id="helpModal">
+  <div class="modal-box" style="max-height: 88vh; overflow-y: auto; padding: 0;">
+    <div style="position: sticky; top: 0; background: linear-gradient(135deg, #0A1428, #0A1A2A); border-bottom: 1px solid rgba(77, 208, 225, 0.18); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-size: 17px; font-weight: 800; color: var(--ice); display: flex; align-items: center; gap: 8px;" data-i18n="helpTitle">🎅 Santa Snow Guide</div>
+      <button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="padding: 14px;">
+      <div class="help-links">
+        <a href="https://t.me/SantaSnowPayouts" target="_blank" class="help-link payout">
+          <span>💸</span>
+          <span data-i18n="helpPayCh">Payouts<br>Channel</span>
+        </a>
+        <a href="https://t.me/SantaSnowNews" target="_blank" class="help-link news">
+          <span>📢</span>
+          <span data-i18n="helpNewsCh">Bot<br>News</span>
+        </a>
+        <a href="https://t.me/Santa_1_Snow" target="_blank" class="help-link support">
+          <span>🛟</span>
+          <span data-i18n="helpSupport">Technical<br>Support</span>
+        </a>
+      </div>
+      
+      <div class="help-section">
+        <div class="help-section-title" data-i18n="helpWelcomeTitle">🎁 Free Welcome Gift</div>
+        <div class="help-section-content" data-i18n="helpWelcomeBody">When you register for the first time you automatically receive:<br><span style="color: #fff; font-weight: 800">• 1000 Snow</span> — main currency<br><span style="color: #fff; font-weight: 800">• 1 Mining Machine (10 Snow/hour)</span> — free mining power starts immediately</div>
+      </div>
+      
+      <div class="help-section">
+        <div class="help-section-title" data-i18n="helpIdeaTitle">💡 Main Concept</div>
+        <div class="help-section-content" data-i18n="helpIdeaBody">The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color: var(--gold); font-weight: 800">TON</span><br>⬅ 3 Machine Types available:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on the Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)</div>
+      </div>
+      
+      <div class="help-section">
+        <div class="help-section-title">👥 Referral Rewards (20% Commission!)</div>
+        <div class="help-section-content">Invite friends and earn <strong style="color: var(--gold);">20% commission</strong> from their machine purchases!<br>
+        When your friend buys any mining machine, you get 20% of their spent TON converted to Snow!<br>
+        Example: Friend buys Basic Machine (1 TON) → You get 0.2 TON worth of Snow (20,000 Snow)!<br><br>
+        <span style="color: var(--ice); font-weight: 800">🎁 Plus Referral Tasks:</span><br>
+        <span style="color: var(--gold); font-weight: 800">10 friends:</span> 600 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">20 friends:</span> 1,500 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">50 friends:</span> 4,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">100 friends:</span> 10,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">200 friends:</span> 20,000 Snow<br>
+        <span style="color: var(--gold); font-weight: 800">500 friends:</span> 50,000 Snow</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="upgradeModal">
   <div class="modal-box">
     <div class="mhdr"><div class="mtitle" data-i18n="upgTitle">⬆️ Upgrade Storage</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div>
@@ -1672,34 +2453,38 @@ body::after {
       <div class="mtitle" data-i18n="addTaskTitle">➕ Add Community Task</div>
       <button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button>
     </div>
-    <div style="background: rgba(77,208,225,0.1); border-radius: 16px; padding: 12px; margin-bottom: 16px; font-size: 12px;">
+    <div style="background: rgba(77, 208, 225, 0.08); border: 1px solid rgba(77, 208, 225, 0.2); border-radius: 12px; padding: 10px 13px; margin-bottom: 12px; font-size: 12px; color: var(--muted); font-weight: 600">
       💡 <span data-i18n="taskCostFormula">Cost = <strong style="color: var(--ice)">Target Users × 60 Snow</strong></span><br>
       <span style="font-size: 11px" data-i18n="taskCostNote">Min target: 100 users | 100 users = 6,000 Snow</span>
     </div>
-    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex:1; padding:10px; border-radius:12px; border:2px solid var(--ice); background:rgba(77,208,225,0.2); color:var(--ice); font-weight:800; cursor:pointer;">📢 <span data-i18n="taskTypeChannel">Channel</span></button>
-      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex:1; padding:10px; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--muted); font-weight:800; cursor:pointer;">🤖 <span data-i18n="taskTypeBot">Bot</span></button>
+    <div style="display: flex; gap: 7px; margin-bottom: 10px">
+      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex: 1; padding: 9px; border-radius: 10px; border: 2px solid var(--ice); background: rgba(77, 208, 225, 0.2); color: var(--ice); font-size: 13px; font-weight: 800; cursor: pointer">
+        📢 <span data-i18n="taskTypeChannel">Channel</span>
+      </button>
+      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex: 1; padding: 9px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 13px; font-weight: 800; cursor: pointer">
+        🤖 <span data-i18n="taskTypeBot">Bot</span>
+      </button>
     </div>
-    <div id="atBotHint" style="background: rgba(255,193,7,0.1); border-radius: 12px; padding: 10px; margin-bottom: 16px; font-size: 11px; color: #FFD740;">
+    <div id="atBotHint" style="background: rgba(255, 193, 7, 0.07); border: 1px solid rgba(255, 193, 7, 0.22); border-radius: 10px; padding: 8px 12px; margin-bottom: 10px; font-size: 11px; color: #FFD740; font-weight: 600">
       ⚠️ <span data-i18n="taskBotHint">Add our bot as admin in your channel first:</span><br>
-      <span style="color: #fff; font-weight: 800;">@SANTASNOWBOT_BOT</span>
+      <span style="color: #fff; font-weight: 800; font-size: 13px; letter-spacing: 0.5px">@SANTASNOWBOT_BOT</span>
     </div>
-    <label class="modern-label" data-i18n="taskLinkLabel">Telegram Link</label>
-    <input type="text" id="atLink" class="modern-input" style="margin-bottom: 12px;" placeholder="https://t.me/yourchannel">
-    <label class="modern-label" data-i18n="taskTargetLabel">Target Users (min 100)</label>
-    <input type="number" id="atTarget" class="modern-input" style="margin-bottom: 12px;" placeholder="100" min="100">
-    <div class="modern-preset" style="margin-bottom: 16px;">
-      <span class="modern-preset-btn" onclick="setAtTarget(100)">100</span>
-      <span class="modern-preset-btn" onclick="setAtTarget(500)">500</span>
-      <span class="modern-preset-btn" onclick="setAtTarget(1000)">1K</span>
-      <span class="modern-preset-btn" onclick="setAtTarget(5000)">5K</span>
+    <label class="flabel" data-i18n="taskLinkLabel">Telegram Link</label>
+    <input type="text" id="atLink" class="finput" data-i18n-ph="taskLinkPh" placeholder="https://t.me/yourchannel">
+    <label class="flabel" data-i18n="taskTargetLabel">Target Users (min 100)</label>
+    <input type="number" id="atTarget" class="finput" placeholder="100" min="100" oninput="updAtCost()">
+    <div class="preset-row">
+      <span class="prbtn" onclick="setAtTarget(100)">100</span>
+      <span class="prbtn" onclick="setAtTarget(500)">500</span>
+      <span class="prbtn" onclick="setAtTarget(1000)">1K</span>
+      <span class="prbtn" onclick="setAtTarget(5000)">5K</span>
     </div>
-    <div style="background: rgba(0,0,0,0.4); border-radius: 12px; padding: 12px; margin-bottom: 16px; display: flex; justify-content: space-between;">
-      <span data-i18n="taskTotalCost">Total Cost:</span>
-      <span id="atCostPreview" style="font-weight: 800; color: var(--ice);">0 Snow</span>
+    <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 10px 13px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center">
+      <span style="font-size: 12px; color: var(--muted); font-weight: 600" data-i18n="taskTotalCost">Total Cost:</span>
+      <span id="atCostPreview" style="font-size: 16px; font-weight: 800; color: var(--ice)">0 Snow</span>
     </div>
-    <button class="modern-btn primary" onclick="submitAddTask()" data-i18n="taskCreateBtn">✅ Create Task</button>
-    <div id="atStatus" style="margin-top: 12px; font-size: 12px; text-align: center; display: none"></div>
+    <button class="btn-prim" onclick="submitAddTask()" data-i18n="taskCreateBtn">✅ Create Task</button>
+    <div id="atStatus" style="margin-top: 8px; font-size: 12px; text-align: center; display: none"></div>
   </div>
 </div>
 
@@ -1707,9 +2492,12 @@ body::after {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v15.2
-// FIXED: Background image from start, improved notifications,
-// FIXED: Wallet page layout (organized properly)
+// SANTA SNOW - FRONTEND v15.0
+// UPDATED: Referral commission changed to 20%
+// UPDATED: New UI design for Home and Tasks pages
+// UPDATED: Loading screen with new background
+// UPDATED: Chest animation with rewards popup
+// FIXED: Complete Russian translations
 // ============================================================
 
 const CFG = {
@@ -1761,6 +2549,7 @@ const STORAGE_LVS = {
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
+const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const S = {
   userId: null,
@@ -1772,7 +2561,6 @@ const S = {
   tg: null, tonUI: null, wallet: null, depCheckInt: null,
   _collectCooldown: false,
   isNewUser: false,
-  rewardsShown: false,
 };
 
 let _lastClickTime = 0;
@@ -1786,62 +2574,8 @@ let _socTab = 'partner';
 const TASK_SNOW_PER_USER = 60;
 const MIN_TASK_TARGET = 100;
 
-// Translations
-const TRANSLATIONS = {
-  en: {
-    labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommissionText: '20% commission from friends\' machine purchases!',
-    copyBtn: 'Copy', recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
-    labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
-    important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
-    amountTON: 'Amount (TON)', depositBtn: 'Deposit TON', withdrawBtn: 'Withdraw TON',
-    youGet: 'You get (after fee):', exchangeNow: 'Exchange',
-    upgTitle: '⬆️ Upgrade Storage', storageTitle: 'Storage', claimBtn: 'Claim Snow',
-    upgradeMachinesBtn: 'Upgrade Mining Machines', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet',
-    tabSocialTxt: 'Social', tabReferralTxt: 'Referral', withdrawHist: '📋 Withdrawal History',
-    noWithdrawals: 'No withdrawals yet', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
-    maxBtn: 'MAX', welcomeTitle: '🎄 Santa\'s Gift! 🎄', welcomeSubtitle: 'Open to receive your rewards!',
-    openChestBtn: '🎁 Open Chest! 🎁', congratsTitle: '🎉 CONGRATULATIONS! 🎉', startMiningBtn: '🎄 Start Mining! 🎄',
-    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = Target Users × 60 Snow',
-    taskCostNote: 'Min target: 100 users | 100 users = 6,000 Snow', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
-    taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
-    taskTargetLabel: 'Target Users (min 100)', taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
-    tonWalletAddr: 'TON Wallet Address', walletTitle: 'Wallet', snowBalance: 'Snow Balance', tonBalance: 'TON Balance',
-  },
-  ru: {
-    labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommissionText: '20% комиссии от покупок машин друзьями!',
-    copyBtn: 'Копировать', recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
-    labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
-    important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
-    amountTON: 'Сумма (TON)', depositBtn: 'Внести TON', withdrawBtn: 'Вывести TON',
-    youGet: 'Вы получите (после комиссии):', exchangeNow: 'Обменять',
-    upgTitle: '⬆️ Улучшить хранилище', storageTitle: 'Хранилище', claimBtn: 'Забрать Снег',
-    upgradeMachinesBtn: 'Улучшить майнинг машины', Home: 'Главная', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек',
-    tabSocialTxt: 'Соц. сети', tabReferralTxt: 'Рефералы', withdrawHist: '📋 История выводов',
-    noWithdrawals: 'Пока нет выводов', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
-    maxBtn: 'МАКС', welcomeTitle: '🎄 Подарок Санты! 🎄', welcomeSubtitle: 'Откройте чтобы получить награды!',
-    openChestBtn: '🎁 Открыть сундук! 🎁', congratsTitle: '🎉 ПОЗДРАВЛЯЕМ! 🎉', startMiningBtn: '🎄 Начать майнинг! 🎄',
-    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = Целевые пользователи × 60 Снега',
-    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
-    taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
-    taskTargetLabel: 'Целевые пользователи (мин. 100)', taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
-    tonWalletAddr: 'TON адрес кошелька', walletTitle: 'Кошелек', snowBalance: 'Баланс Снега', tonBalance: 'Баланс TON',
-  },
-};
-
-function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-
-function showNotif(msg, type = 'info') {
-  const el = document.getElementById('notif');
-  if (!el) return;
-  if (_nt) { clearTimeout(_nt); _nt = null; }
-  el.classList.remove('show');
-  el.innerHTML = msg;
-  el.className = '';
-  el.classList.add('notif', type);
-  setTimeout(() => el.classList.add('show'), 10);
-  _nt = setTimeout(() => { el.classList.remove('show'); _nt = null; }, 3000);
+function esc(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 async function api(action, data = {}) {
@@ -1861,72 +2595,67 @@ async function api(action, data = {}) {
   } finally { _apiInFlight--; }
 }
 
-function fmt(n) {
-  n = Math.floor(n || 0);
-  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
-  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
-  return n.toString();
-}
-
-function fmtTon(n) {
-  if (n === undefined || n === null) return '0';
-  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
-  if (n >= 1) return n.toFixed(2);
-  if (n > 0) return n.toFixed(4);
-  return n.toString();
-}
-
-function updateUI() {
-  const u = S.user;
-  document.getElementById('tbSnow').textContent = fmt(u.snow || 0);
-  document.getElementById('tbTON').textContent = fmtTon(u.tonBalance || 0);
-  document.getElementById('walletSnowBalance').textContent = fmt(u.snow || 0);
-  document.getElementById('walletTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
-  const rateDay = Math.round((u.miningRate || 0) * 24);
-  document.getElementById('heroRateDay').textContent = fmt(rateDay);
-  document.getElementById('heroAccrued').textContent = Math.floor(S.storageProgress);
-  updateStorageUI();
-  updateSwapBals();
-  updateRefUI();
-  renderExchHist();
-  renderWdHist();
-  renderTasks();
-}
-
-function updateStorageUI() {
-  const u = S.user, lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1];
-  const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
-  document.getElementById('storageFill').style.width = pct + '%';
-  document.getElementById('storageLbl').textContent = `${Math.floor(S.storageProgress)} / ${cfg.cap} Snow`;
-  document.getElementById('claimPct').textContent = pct + '%';
-  document.getElementById('storageLvDisp').textContent = lv;
-  const btn = document.getElementById('collectBtn');
-  btn.disabled = !(S.storageProgress >= 1);
+function showNotif(msg, type = 'i') {
+  const el = document.getElementById('notif');
+  if (!el) return;
+  
+  if (_nt) {
+    clearTimeout(_nt);
+    _nt = null;
+  }
+  
+  el.classList.remove('show');
+  el.innerHTML = msg;
+  el.className = '';
+  el.classList.add('notif', type);
+  
+  setTimeout(() => {
+    el.classList.add('show');
+  }, 10);
+  
+  _nt = setTimeout(() => {
+    el.classList.remove('show');
+    _nt = null;
+  }, 3000);
 }
 
 async function loadState() {
   try {
     const startParam = S.startParam || '';
-    const d = await api('getState', { start_param: startParam, _initData: S.tg?.initData || '' });
+    console.log('[loadState] Sending start_param:', startParam);
+    
+    const d = await api('getState', { 
+      start_param: startParam,
+      _initData: S.tg?.initData || '' 
+    });
+    
     S.user = d.user || S.user;
     S.refs = d.referrals || [];
     S.exchHist = d.exchHistory || [];
     S.wdHist = d.wdHistory || [];
     S.doneTasks = d.completedTasks || [];
     S.tasks = d.tasks || { partner: [], community: [] };
-    if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
-    if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
-    if (!S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine && !S.rewardsShown) {
+    
+    if (d.user && d.user.storageAccrued !== undefined) {
+      S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
+    }
+    if (d.pendingDeposit) {
+      startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
+    }
+    
+    if (!S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine) {
       S.isNewUser = true;
-      showWelcomeModal();
     } else {
       S.isNewUser = false;
     }
-    updateUI();
+    
+    updateRefUI();
+    
   } catch (e) { 
     console.warn('loadState:', e.message);
-    showNotif('Failed to load data: ' + e.message, 'error');
+    showNotif('Failed to load data: ' + e.message, 'e');
   }
+  updateUI();
 }
 
 function showWelcomeModal() {
@@ -1939,61 +2668,67 @@ function hideWelcomeModal() {
   if (modal) modal.classList.remove('active');
 }
 
+function showRewardsPopup(snow, rate) {
+  document.getElementById('rewardSnow').textContent = `+${fmt(snow)}`;
+  document.getElementById('rewardRate').textContent = `+${rate} Snow/hour`;
+  const popup = document.getElementById('rewardsPopup');
+  popup.classList.add('active');
+}
+
+function closeRewardsPopup() {
+  const popup = document.getElementById('rewardsPopup');
+  popup.classList.remove('active');
+}
+
+function closeRewardsPopupAndStart() {
+  closeRewardsPopup();
+}
+
 async function openWelcomeChestWithAnimation() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
-  _lastClickTime = now;
+  const chestImg = document.getElementById('welcomeChestImg');
+  const chestContainer = document.getElementById('welcomeChestContainer');
   
-  const chestImg = document.getElementById('chestImage');
+  // Add opening animation
   chestImg.classList.add('opening');
   
-  setTimeout(async () => {
-    try {
-      const result = await api('openWelcomeChest', {});
-      S.user.welcomeChestOpened = true;
-      S.user.snow = (S.user.snow || 0) + result.snow;
-      S.user.hasWelcomeMachine = true;
-      S.user.miningRate = result.miningRate;
-      S.user.miningLevel = result.miningLevel;
-      S.rewardsShown = true;
-      
-      hideWelcomeModal();
-      showRewardsModal(result.snow, 1, result.miningRate);
-      updateUI();
-      triggerSnowfall(50);
-      spawnSnowParticle();
-    } catch (e) {
-      showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'error');
-      chestImg.classList.remove('opening');
-    }
-  }, 600);
+  // Wait for animation to complete
+  await new Promise(resolve => setTimeout(resolve, 800));
+  
+  // Call API to open chest
+  try {
+    const result = await api('openWelcomeChest', {});
+    S.user.welcomeChestOpened = true;
+    S.user.snow = (S.user.snow || 0) + result.snow;
+    S.user.hasWelcomeMachine = true;
+    S.user.miningRate = result.miningRate;
+    S.user.miningLevel = result.miningLevel;
+    
+    hideWelcomeModal();
+    
+    // Show rewards popup (no notification)
+    showRewardsPopup(result.snow, result.miningRate);
+    
+    updateUI();
+    triggerSnowfall(50);
+    spawnSnowParticle();
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
+    chestImg.classList.remove('opening');
+  }
 }
 
-function showRewardsModal(snow, machines, rate) {
-  const rewardsContent = `
-    <div class="reward-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(77,208,225,0.15); border-radius: 20px; margin-bottom: 15px;">
-      <i class="fas fa-snowflake" style="font-size: 40px;"></i>
-      <div><strong>Snow Received:</strong></div>
-      <div style="font-size: 24px; color: var(--gold);">+${fmt(snow)}</div>
-    </div>
-    <div class="reward-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(77,208,225,0.15); border-radius: 20px; margin-bottom: 15px;">
-      <i class="fas fa-microchip" style="font-size: 40px;"></i>
-      <div><strong>Welcome Machine:</strong></div>
-      <div style="font-size: 24px; color: var(--ice);">+1</div>
-    </div>
-    <div class="reward-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(77,208,225,0.15); border-radius: 20px;">
-      <i class="fas fa-bolt" style="font-size: 40px;"></i>
-      <div><strong>Mining Rate:</strong></div>
-      <div style="font-size: 24px; color: var(--ice);">+${rate} Snow/hour</div>
-    </div>
-  `;
-  document.getElementById('rewardsContent').innerHTML = rewardsContent;
-  openModal('rewardsModal');
-}
-
-function closeRewardsAndStart() {
-  closeModal('rewardsModal');
-}
+// Event listeners for welcome modal
+document.addEventListener('DOMContentLoaded', () => {
+  const openBtn = document.getElementById('openChestBtn');
+  if (openBtn) {
+    openBtn.onclick = openWelcomeChestWithAnimation;
+  }
+  
+  const chestContainer = document.getElementById('welcomeChestContainer');
+  if (chestContainer) {
+    chestContainer.onclick = openWelcomeChestWithAnimation;
+  }
+});
 
 function openMachineShop() {
   buildMachineShop();
@@ -2008,19 +2743,20 @@ function buildMachineShop() {
     const canAfford = (S.user.tonBalance || 0) >= machine.cost;
     html += `
       <div class="machine-card">
-        <img src="${machine.image}" class="machine-card-img">
+        <img src="${machine.image}" class="machine-card-img" alt="${machine.name}">
         <div class="machine-card-info">
           <div class="machine-card-name">${machine.name}</div>
-          <div class="machine-card-rate">⚡ ${machine.rate} Snow/hour</div>
+          <div class="machine-card-rate">⚡ <span>${machine.rate}</span> Snow/hour</div>
           <div class="machine-card-cost">💰 ${machine.cost} TON each</div>
-          <div style="font-size: 11px; color: var(--ice);">Owned: ${count}</div>
+          <div class="machine-count-badge">Owned: ${count}</div>
         </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <input type="number" id="qty_${i}" value="1" min="1" max="99" style="width: 60px; background: rgba(0,0,0,0.4); border: 1px solid rgba(77,208,225,0.3); border-radius: 8px; padding: 6px; color: white; text-align: center;">
-          <button class="machine-card-btn" onclick="purchaseMachine(${i})" ${!canAfford ? 'disabled' : ''}>
-            ${canAfford ? 'Buy' : 'Need ' + machine.cost + ' TON'}
-          </button>
+        <div class="machine-quantity">
+          <input type="number" id="qty_${i}" value="1" min="1" max="99" style="width: 60px;">
+          <span>pcs</span>
         </div>
+        <button class="machine-card-btn" onclick="purchaseMachine(${i})" ${!canAfford ? 'disabled' : ''}>
+          ${canAfford ? 'Buy' : 'Need ' + machine.cost + ' TON'}
+        </button>
       </div>
     `;
   }
@@ -2030,7 +2766,7 @@ function buildMachineShop() {
 
 async function purchaseMachine(machineType) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   
   const machine = CFG.MACHINES[machineType];
@@ -2039,7 +2775,7 @@ async function purchaseMachine(machineType) {
   const currentTon = S.user.tonBalance || 0;
   
   if (currentTon < totalCost) {
-    showNotif(`❌ Need ${totalCost} TON (you have ${currentTon} TON)`, 'error');
+    showNotif(`❌ Need ${totalCost} TON to buy ${quantity}x ${machine.name} (you have ${currentTon} TON)`, 'e');
     return;
   }
   
@@ -2051,29 +2787,34 @@ async function purchaseMachine(machineType) {
     updateUI();
     buildMachineShop();
     triggerSnowfall(30);
-    showNotif(`🎉 ${quantity}x ${machine.name} purchased! +${result.totalRateAdded} Snow/hour`, 'success');
+    showNotif(`🎉 ${quantity}x ${machine.name} purchased! +${result.totalRateAdded} Snow/hour`, 's');
     spawnSnowParticle();
   } catch (e) {
-    showNotif(`❌ ${e.message || 'Purchase failed'}`, 'error');
+    showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e');
   }
 }
 
-async function collectSnow() {
-  if (S._collectCooldown) return;
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
-  _lastClickTime = now;
-  const amt = Math.floor(S.storageProgress);
-  if (amt < 1) { showNotif('Storage is empty!', 'error'); return; }
-  S._collectCooldown = true;
-  setTimeout(() => S._collectCooldown = false, 3000);
-  S.user.snow = (S.user.snow || 0) + amt;
-  S.user.totalEarned = (S.user.totalEarned || 0) + amt;
-  S.storageProgress = 0;
-  updateUI();
-  triggerSnowfall(30);
-  showNotif(`+${fmt(amt)} Snow collected!`, 'success');
-  api('collect', { amount: amt }).catch(() => {});
+function updateUI() {
+  const u = S.user;
+  document.getElementById('tbSnow').textContent = fmt(u.snow || 0);
+  document.getElementById('tbTON').textContent = fmtTon(u.tonBalance || 0);
+  const rateDay = Math.round((u.miningRate || 0) * 24);
+  document.getElementById('heroRateDay').textContent = fmt(rateDay);
+  document.getElementById('wdTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
+  updateSwapBals();
+  updateRefUI();
+  renderExchHist();
+  renderWdHist();
+  renderTasks();
+  updateStorageUI();
+}
+
+function fmtTon(n) {
+  if (n === undefined || n === null) return '0';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  if (n >= 1) return n.toFixed(2);
+  if (n > 0) return n.toFixed(4);
+  return n.toString();
 }
 
 function startStorage() {
@@ -2087,85 +2828,183 @@ function startStorage() {
   }, 1000);
 }
 
+function updateStorageUI() {
+  const u = S.user, lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1];
+  const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
+  const accruedExact = S.storageProgress.toFixed(6);
+  document.getElementById('heroAccrued').textContent = accruedExact;
+  document.getElementById('storageFill').style.width = pct + '%';
+  document.getElementById('storageCurrent').textContent = Math.floor(S.storageProgress);
+  document.getElementById('storageMax').textContent = fmt(cfg.cap);
+  
+  const btn = document.getElementById('collectBtn');
+  const txtEl = document.getElementById('claimBtnTxt');
+  const has = S.storageProgress >= 1;
+  btn.disabled = !has;
+  if (txtEl) txtEl.innerHTML = has
+    ? `<i class="fas fa-hand-holding-heart"></i> Claim ${fmt(Math.floor(S.storageProgress))} Snow`
+    : `<i class="fas fa-database"></i> Storage Empty...`;
+  const lvEl = document.getElementById('storageLvDisp');
+  if (lvEl) lvEl.textContent = lv;
+}
+
+function triggerSnowfall(count = 40) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.innerHTML = '❄️';
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.fontSize = Math.random() * 16 + 10 + 'px';
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+      snowflake.style.animationDelay = Math.random() * 0.5 + 's';
+      snowflake.style.opacity = Math.random() * 0.7 + 0.4;
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 5000);
+    }, i * 50);
+  }
+}
+
+function startSnowfallLoop() {
+  setInterval(() => {
+    if (Math.random() > 0.3) {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.innerHTML = '❄️';
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.fontSize = Math.random() * 14 + 8 + 'px';
+      snowflake.style.animationDuration = Math.random() * 4 + 2.5 + 's';
+      snowflake.style.animationDelay = '0s';
+      snowflake.style.opacity = Math.random() * 0.6 + 0.3;
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 5000);
+    }
+  }, 300);
+}
+
+async function collectSnow() {
+  if (S._collectCooldown) return;
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const amt = Math.floor(S.storageProgress);
+  if (amt < 1) { showNotif('Storage is empty!', 'e'); return; }
+  S._collectCooldown = true;
+  setTimeout(() => S._collectCooldown = false, 3000);
+  S.user.snow = (S.user.snow || 0) + amt;
+  S.user.totalEarned = (S.user.totalEarned || 0) + amt;
+  S.storageProgress = 0;
+  updateUI(); updateStorageUI(); spawnSnowParticle();
+  triggerSnowfall(30);
+  showNotif(`+${fmt(amt)} Snow collected!`, 's');
+  api('collect', { amount: amt }).catch(() => { });
+}
+
 function buildUpgradeContent() {
   const u = S.user, lv = u.storageLevel || 1, cur = STORAGE_LVS[lv], next = STORAGE_LVS[lv + 1];
-  let h = `<div style="text-align: center; margin-bottom: 20px;">
-    <div style="display: flex; justify-content: space-between; gap: 16px;">
-      <div style="flex: 1; background: rgba(0,0,0,0.4); border-radius: 16px; padding: 16px;">
-        <div style="font-size: 24px; font-weight: 800; color: var(--ice);">Lv.${lv}</div>
-        <div style="font-size: 12px; color: var(--muted);">${cur.label}</div>
-        <div style="font-size: 12px;">Cap: ${fmt(cur.cap)}</div>
+  let h = `<div style="background: rgba(0, 0, 0, 0.28); border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin-bottom: 10px">
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px">
+      <div style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 12px; text-align: center">
+        <div style="font-size: 16px; font-weight: 800; color: var(--ice)">Lv.${lv}</div>
+        <div style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(cur.label)}</div>
+        <div style="font-size: 10px; color: var(--muted); margin-top: 2px">Cap: ${fmt(cur.cap)}</div>
       </div>
-      <div style="font-size: 24px; color: var(--ice);">→</div>`;
+      <div style="font-size: 20px; color: var(--ice)">→</div>`;
   if (next) {
-    h += `<div style="flex: 1; background: linear-gradient(135deg, rgba(77,208,225,0.2), rgba(0,0,0,0.4)); border-radius: 16px; padding: 16px; border: 1px solid var(--ice);">
-      <div style="font-size: 24px; font-weight: 800; color: var(--gold);">Lv.${lv + 1}</div>
-      <div style="font-size: 12px; color: var(--muted);">${next.label}</div>
-      <div style="font-size: 12px;">Cap: ${fmt(next.cap)}</div>
+    h += `<div style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--ice); border-radius: 12px; text-align: center">
+      <div style="font-size: 16px; font-weight: 800; color: var(--gold)">Lv.${lv + 1}</div>
+      <div style="font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px">${esc(next.label)}</div>
+      <div style="font-size: 10px; color: var(--muted); margin-top: 2px">Cap: ${fmt(next.cap)}</div>
     </div>`;
   } else {
-    h += `<div style="flex: 1; background: rgba(0,0,0,0.4); border-radius: 16px; padding: 16px;"><div>MAX</div><div>Max Level</div></div>`;
+    h += `<div style="flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 12px; text-align: center"><div style="font-size: 16px; font-weight: 800">MAX</div><div>Max Level</div></div>`;
   }
   h += `</div>`;
   if (next) {
-    h += `<div style="background: rgba(0,0,0,0.4); border-radius: 16px; padding: 16px; margin: 20px 0;">
-      <div>💰 Upgrade Cost: <span style="color: var(--gold); font-weight: 800;">${fmt(next.upgCost)} Snow</span></div>
+    h += `<div style="font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.9; margin-bottom: 10px; padding: 9px; background: rgba(0, 0, 0, 0.28); border-radius: 10px">
+      📦 Capacity: <span style="color: #fff; font-weight: 800">${fmt(cur.cap)} → ${fmt(next.cap)} Snow</span><br>
+      💰 Cost: <span style="color: #fff; font-weight: 800">${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width: 14px; height: 14px; object-fit: contain; vertical-align: middle"></span>
     </div>
-    <button onclick="upgradeStorage()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 20px; color: white; font-weight: 800; cursor: pointer;">⬆️ Upgrade to Lv.${lv + 1}</button>`;
+    <button onclick="upgradeStorage()" style="width: 100%; padding: 11px; background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 12px; color: #fff; font-size: 14px; font-weight: 800; cursor: pointer;">⬆️ Upgrade for ${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width: 16px; height: 16px; object-fit: contain; vertical-align: middle"></button>`;
   } else {
-    h += `<div style="text-align: center; padding: 20px; color: var(--ice);">🏆 Maximum Level Reached!</div>`;
+    h += `<div style="text-align: center; padding: 12px; color: var(--ice); font-weight: 800">🏆 Maximum Level!</div>`;
   }
+  h += `</div>`;
   document.getElementById('upgradeContent').innerHTML = h;
 }
 
 async function upgradeStorage() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const u = S.user, lv = u.storageLevel || 1, next = STORAGE_LVS[lv + 1];
-  if (!next) { showNotif('Already max!', 'error'); return; }
-  if ((u.snow || 0) < next.upgCost) { showNotif(`Need ${fmt(next.upgCost)} Snow!`, 'error'); return; }
+  if (!next) { showNotif('Already max!', 'e'); return; }
+  if ((u.snow || 0) < next.upgCost) { showNotif(`Need ${fmt(next.upgCost)} Snow!`, 'e'); return; }
   S.user.snow -= next.upgCost;
   S.user.storageLevel = lv + 1;
-  api('upgradeStorage', { newLevel: lv + 1 }).catch(() => {});
+  api('upgradeStorage', { newLevel: lv + 1 }).catch(() => { });
   buildUpgradeContent();
   updateUI();
   triggerSnowfall(30);
-  showNotif(`✅ Storage upgraded to Level ${lv + 1}!`, 'success');
+  showNotif(`✅ Storage → Level ${lv + 1}!`, 's');
 }
+
+function goNav(el) {
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(el.dataset.s).classList.add('active');
+  hideFab();
+}
+
+function hideFab() { const f = document.getElementById('floatAddTask'); if (f) f.style.display = 'none'; }
+function showFab() { const f = document.getElementById('floatAddTask'); if (f) f.style.display = 'flex'; }
 
 function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refTasksHtml = '';
+  
   for (const task of REF_TASKS) {
     const completed = S.doneTasks.includes(task.id);
     const canClaim = referralCount >= task.n && !completed;
     const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
+    
     refTasksHtml += `
-      <div class="task-item">
-        <div class="ticon">${task.icon}</div>
-        <div class="tinfo">
-          <div class="tname">${task.name}</div>
-          <div class="trew">🎁 ${fmt(task.snow)} Snow</div>
-          <div style="background: rgba(0,0,0,0.3); border-radius: 8px; height: 6px; margin-top: 8px;">
-            <div style="width: ${progress}%; background: linear-gradient(90deg, #4DD0E1, #80DEEA); height: 100%; border-radius: 8px;"></div>
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-icon">${task.icon}</div>
+          <div class="task-info">
+            <div class="task-name">${task.name}</div>
+            <div class="task-reward">
+              <img src="${SNOW_IMG}" style="width: 16px; height: 16px;"> ${fmt(task.snow)} Snow
+            </div>
           </div>
-          <div style="font-size: 11px; margin-top: 4px;">${referralCount}/${task.n} friends (${progress}%)</div>
         </div>
-        ${completed ? '<button class="tbtn done">✅ Completed</button>' : 
-          canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 Claim</button>` :
-          `<button class="tbtn go" disabled>🔒 ${task.n} needed</button>`}
+        <div class="task-progress">
+          <div class="task-progress-track">
+            <div class="task-progress-fill" style="width: ${progress}%"></div>
+          </div>
+          <div class="task-progress-text">${referralCount}/${task.n} friends (${progress}%)</div>
+        </div>
+        ${completed ? 
+          `<button class="task-btn done"><i class="fas fa-check"></i> Completed</button>` :
+          canClaim ? 
+          `<button class="task-btn claim" onclick="claimRefTask('${task.id}')"><i class="fas fa-gift"></i> Claim Reward</button>` :
+          `<button class="task-btn go" disabled><i class="fas fa-lock"></i> ${task.n} friends needed</button>`
+        }
       </div>
     `;
   }
-  document.getElementById('referralTasksList').innerHTML = refTasksHtml || '<div class="hist-empty">✨ Invite friends to unlock rewards!</div>';
+  
+  document.getElementById('referralTasksList').innerHTML = refTasksHtml || `<div class="hist-empty">✨ Invite friends to unlock rewards! ✨</div>`;
   renderSocTasks();
 }
 
 async function claimRefTask(taskId) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
+  
   try {
     const result = await api('claimTask', { taskId });
     S.user.snow = result.snow;
@@ -2173,67 +3012,204 @@ async function claimRefTask(taskId) {
     updateUI();
     renderTasks();
     triggerSnowfall(30);
-    showNotif(`🎉 +${fmt(result.snowReward)} Snow!`, 'success');
+    showNotif(`🎉 +${fmt(result.snowReward)} Snow from referral task!`, 's');
     spawnSnowParticle();
   } catch (e) {
-    showNotif(`❌ ${e.message || 'Failed to claim'}`, 'error');
+    showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
   }
 }
 
 function buildTaskCard(t, cat) {
   const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
   const icon = t.type === 'channel' ? '📢' : '🤖';
-  const name = t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task'));
+  const name = esc(t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task')));
   const snow = t.snowReward || 50;
-  return `<div class="task-item">
-    <div class="ticon">${icon}</div>
-    <div class="tinfo">
-      <div class="tname">${name}</div>
-      <div class="trew">🎁 ${fmt(snow)} Snow</div>
-      ${t.completions ? `<div style="font-size: 11px;">${t.completions}/${t.targetUsers} completed</div>` : ''}
+  const progress = t.completions ? Math.min(100, Math.round((t.completions / t.targetUsers) * 100)) : 0;
+  
+  return `
+    <div class="task-card">
+      <div class="task-header">
+        <div class="task-icon" style="font-size: 28px;">${icon}</div>
+        <div class="task-info">
+          <div class="task-name">${name}</div>
+          <div class="task-reward">
+            <img src="${SNOW_IMG}" style="width: 16px; height: 16px;"> ${fmt(snow)} Snow
+          </div>
+        </div>
+      </div>
+      ${t.targetUsers ? `
+      <div class="task-progress">
+        <div class="task-progress-track">
+          <div class="task-progress-fill" style="width: ${progress}%"></div>
+        </div>
+        <div class="task-progress-text">${t.completions || 0}/${t.targetUsers} completed</div>
+      </div>
+      ` : ''}
+      ${done ? 
+        `<button class="task-btn done"><i class="fas fa-check"></i> Done</button>` :
+        inFlight ? 
+        `<button class="task-btn done" style="opacity: 0.6;"><i class="fas fa-spinner fa-spin"></i> Verifying...</button>` :
+        `<button class="task-btn go" onclick="doDbTask('${tid}','${t.link}','${t.type || 'bot'}','${cat}')"><i class="fas fa-external-link-alt"></i> Go →</button>`
+      }
     </div>
-    ${done ? '<button class="tbtn done">✅ Done</button>' :
-      inFlight ? '<button class="tbtn done">⏳</button>' :
-      `<button class="tbtn go" onclick="doDbTask('${tid}','${t.link}','${t.type || 'bot'}','${cat}')">Go →</button>`}
-  </div>`;
+  `;
 }
 
 function renderSocTasks() {
   const p = S.tasks?.partner || [], c = S.tasks?.community || [];
-  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : '<div class="hist-empty">No partner tasks yet</div>';
-  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : '<div class="hist-empty">No community tasks yet</div>';
+  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : `<div class="hist-empty">No partner tasks yet</div>`;
+  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : `<div class="hist-empty">No community tasks yet</div>`;
+}
+
+function switchTTabModern(el, t) {
+  document.querySelectorAll('.ttab-modern').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.tcontent-modern').forEach(x => x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(`tc${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('active');
+  hideFab();
+}
+
+function switchSocTab(tab) {
+  _socTab = tab;
+  document.getElementById('stab-partner').className = 'ttab-modern' + (tab === 'partner' ? ' active' : '');
+  document.getElementById('stab-community').className = 'ttab-modern' + (tab === 'community' ? ' active' : '');
+  document.getElementById('socPartnerList').style.display = tab === 'partner' ? 'block' : 'none';
+  document.getElementById('socCommunityList').style.display = tab === 'community' ? 'block' : 'none';
+  if (tab === 'community') showFab(); else hideFab();
 }
 
 async function doDbTask(tid, link, type, cat) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
+  if (now - _lastClickTime < 3000) { 
+    showNotif('Please wait 3 seconds!', 'w'); 
+    return; 
+  }
   _lastClickTime = now;
-  if (_taskInFlight.has(tid)) { showNotif('⏳ Processing...', 'warning'); return; }
+  
+  if (_taskInFlight.has(tid)) { 
+    showNotif('⏳ Already processing...', 'w'); 
+    return; 
+  }
+  
   _taskInFlight.add(tid);
   renderSocTasks();
-  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank');
-  showNotif('⏳ Verifying membership...', 'info');
+  
+  if (link && link.startsWith('https://t.me/')) {
+    window.open(link, '_blank', 'noopener');
+  }
+  
+  showNotif('⏳ Verifying your membership...', 'i');
+  
   setTimeout(async () => {
     try {
-      const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
-      if (!S.doneTasks.includes(tid)) S.doneTasks.push(tid);
+      const r = await api('verifyTask', { 
+        taskId: tid, 
+        taskType: type, 
+        taskCategory: cat 
+      });
+      
+      if (!S.doneTasks.includes(tid)) {
+        S.doneTasks.push(tid);
+      }
+      
       if (r.snowAdded) {
         S.user.snow = (S.user.snow || 0) + r.snowAdded;
         updateUI();
         triggerSnowfall(30);
-        showNotif(`🎉 +${fmt(r.snowAdded)} Snow!`, 'success');
+        showNotif(`🎉 +${fmt(r.snowAdded)} Snow! Task completed!`, 's');
         spawnSnowParticle();
       } else {
-        showNotif(`✅ Task completed!`, 'success');
+        showNotif(`✅ Task completed!`, 's');
       }
+      
       renderTasks();
+      
     } catch (e) {
-      showNotif(`❌ ${e.message || 'Verification failed'}`, 'error');
+      let errorMsg = e.message || 'Verification failed';
+      if (errorMsg.includes('member') || errorMsg.includes('channel')) {
+        showNotif(`❌ Please join the channel first, then try again!`, 'e');
+      } else {
+        showNotif(`❌ ${errorMsg}`, 'e');
+      }
     } finally {
       _taskInFlight.delete(tid);
       renderSocTasks();
     }
   }, 3000);
+}
+
+function setTaskType(t) {
+  _atType = t;
+  const sel = 'flex:1;padding:9px;border-radius:10px;border:2px solid var(--ice);background:rgba(77,208,225,0.2);color:var(--ice);font-size:13px;font-weight:800;cursor:pointer';
+  const unsel = 'flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:13px;font-weight:800;cursor:pointer';
+  document.getElementById('atTypeChannel').style.cssText = t === 'channel' ? sel : unsel;
+  document.getElementById('atTypeBot').style.cssText = t === 'bot' ? sel : unsel;
+  const hint = document.getElementById('atBotHint');
+  if (hint) hint.style.display = t === 'channel' ? 'block' : 'none';
+  updAtCost();
+}
+
+function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
+
+function updAtCost() {
+  const tgt = parseInt(document.getElementById('atTarget').value) || 0;
+  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
+}
+
+async function submitAddTask() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { 
+    showNotif('Please wait 3 seconds!', 'w'); 
+    return; 
+  }
+  _lastClickTime = now;
+  
+  if (_submitInFlight) return;
+  const link = (document.getElementById('atLink').value || '').trim();
+  const target = parseInt(document.getElementById('atTarget').value) || 0;
+  const st = document.getElementById('atStatus');
+  st.style.display = 'block';
+  st.style.color = 'var(--muted)';
+  st.textContent = '⏳ Creating...';
+  
+  if (!link.includes('t.me/')) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = '❌ Invalid Telegram link'; 
+    return; 
+  }
+  if (target < MIN_TASK_TARGET) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; 
+    return; 
+  }
+  
+  const cost = target * TASK_SNOW_PER_USER;
+  if ((S.user.snow || 0) < cost) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = `❌ Need ${fmt(cost)} Snow (have ${fmt(S.user.snow || 0)})`; 
+    return; 
+  }
+  
+  _submitInFlight = true;
+  try {
+    await api('createTask', { type: _atType, link, targetUsers: target });
+    S.user.snow = (S.user.snow || 0) - cost;
+    st.style.color = 'var(--ice)';
+    st.textContent = '✅ Task created!';
+    updateUI();
+    triggerSnowfall(30);
+    showNotif(`✅ Task created! Cost: ${fmt(cost)} Snow`, 's');
+    setTimeout(() => { 
+      closeModal('addTaskModal'); 
+      loadState(); 
+    }, 1500);
+  } catch (e) { 
+    st.style.color = '#ff8a80'; 
+    st.textContent = `❌ ${e.message || 'Failed'}`;
+    showNotif(`❌ ${e.message || 'Failed to create task'}`, 'e');
+  } finally { 
+    _submitInFlight = false; 
+  }
 }
 
 function updateSwapBals() {
@@ -2254,14 +3230,17 @@ function updSwapSnowToTon() {
   document.getElementById('feeAmountDisplay').textContent = fmt(fee);
 }
 
+let _exchInFlight = false;
 async function swapSnowToTon() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
+  if (_exchInFlight) return;
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
-  if (snow <= 0) { showNotif('Enter amount!', 'error'); return; }
-  if (snow < 100) { showNotif('Min 100 Snow!', 'error'); return; }
-  if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'error'); return; }
+  if (snow <= 0) { showNotif('Enter amount!', 'e'); return; }
+  if (snow < 100) { showNotif('Min 100 Snow (0.001 TON before fee)!', 'e'); return; }
+  if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
+  _exchInFlight = true;
   try {
     const result = await api('exchange', { snowAmount: snow });
     S.user.snow = result.snow;
@@ -2272,121 +3251,103 @@ async function swapSnowToTon() {
     S.exchHist.unshift({ snow: snow, fee: fee, ton: tonReceived, dir: 'S→T', ts: Date.now() });
     document.getElementById('swapSnowAmt').value = '';
     document.getElementById('swapTonOut').textContent = '0';
-    updateUI();
-    renderExchHist();
+    document.getElementById('feeAmountDisplay').textContent = '0';
+    updateUI(); renderExchHist();
     triggerSnowfall(30);
-    showNotif(`⚡ ${fmt(snow)} Snow → ${tonReceived.toFixed(6)} TON`, 'success');
+    showNotif(`⚡ ${fmt(snow)} Snow → ${tonReceived.toFixed(6)} TON (Fee: ${fmt(fee)} Snow)`, 's');
     spawnSnowParticle();
-  } catch (e) { showNotif(`❌ ${e.message}`, 'error'); }
+  } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
+  finally { _exchInFlight = false; }
 }
 
 function renderExchHist() {
   const el = document.getElementById('exchHist');
   if (!el) return;
   if (!S.exchHist.length) { el.innerHTML = '<div class="hist-empty">No conversions yet</div>'; return; }
-  el.innerHTML = S.exchHist.slice(0, 30).map(h => `
-    <div class="hist-item">
-      <div class="hist-date">${new Date(h.ts).toLocaleDateString()}</div>
-      <div class="hist-amount">${h.ton.toFixed(6)} TON</div>
-      <div style="font-size: 11px;">From: ${fmt(h.snow)} Snow (Fee: ${fmt(h.fee)} Snow)</div>
-    </div>
-  `).join('');
+  el.innerHTML = S.exchHist.slice(0, 30).map(h => {
+    const date = h.ts ? new Date(h.ts).toLocaleDateString() : '';
+    const feeText = h.fee ? ` (Fee: ${fmt(h.fee)} Snow)` : '';
+    return `<div class="hist-row" style="flex-direction:column;align-items:flex-start;gap:2px">
+      <div style="display:flex;justify-content:space-between;width:100%">
+        <span class="hist-l">${esc(h.dir)} · ${esc(date)}</span>
+        <span style="font-size:12px;font-weight:800;color:var(--gold)">${h.ton.toFixed(6)} TON</span>
+      </div>
+      <span style="font-size:11px;color:var(--muted);font-weight:500">From: ${fmt(h.snow)} Snow${feeText}</span>
+    </div>`;
+  }).join('');
+}
+
+function updWdPrev() {
+  const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
+  document.getElementById('wdTonBalance').textContent = fmtTon(S.user.tonBalance || 0) + ' TON';
+}
+
+function setWdAmt(amt) {
+  document.getElementById('wdAmt').value = amt;
+  updWdPrev();
+}
+
+function goToTasksPartner() {
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  const tn = document.querySelector('.ni[data-s="sectionTasks"]');
+  if (tn) tn.classList.add('active');
+  document.getElementById('sectionTasks').classList.add('active');
+  const stab = document.querySelector('.ttab-modern[data-t="social"]');
+  if (stab) switchTTabModern(stab, 'social');
+  switchSocTab('partner');
+  hideFab();
+}
+
+async function doWithdraw() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const addr = (document.getElementById('wdAddr').value || '').trim();
+  const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
+  const u = S.user;
+  if (!addr || addr.length < 10) { showNotif('Enter valid TON address!', 'e'); return; }
+  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(`Min ${CFG.MIN_WITHDRAW_TON} TON!`, 'e'); return; }
+  if (tonAmt > (u.tonBalance || 0)) { showNotif('Not enough TON balance!', 'e'); return; }
+  const partnerTasks = S.tasks?.partner || [];
+  const missingPartner = partnerTasks.filter(t => t.status === 'active' && !S.doneTasks.includes(t.id));
+  if (missingPartner.length > 0) {
+    showNotif(`❌ Complete all Partner tasks first (${missingPartner.length} remaining)`, 'e');
+    setTimeout(() => goToTasksPartner(), 5000);
+    return;
+  }
+  try {
+    const res = await api('withdraw', { address: addr, amount: tonAmt });
+    u.tonBalance -= tonAmt;
+    S.wdHist.unshift({ tonAmt, addr, d: new Date().toLocaleDateString(), status: 'pending' });
+    document.getElementById('wdAddr').value = '';
+    document.getElementById('wdAmt').value = '';
+    updWdPrev(); updateUI(); renderWdHist();
+    triggerSnowfall(30);
+    showNotif(`✅ Withdrawal requested: ${tonAmt.toFixed(6)} TON`, 's');
+  } catch (e) {
+    const msg = e.message || '';
+    showNotif(`❌ ${msg}`, 'e');
+    if (msg.includes('partner tasks') || msg.includes('PARTNER_TASKS')) {
+      setTimeout(() => goToTasksPartner(), 5000);
+    }
+  }
 }
 
 function renderWdHist() {
   const el = document.getElementById('wdHist');
   if (!el) return;
   if (!S.wdHist.length) { el.innerHTML = '<div class="hist-empty">No withdrawals yet</div>'; return; }
-  el.innerHTML = S.wdHist.slice(0, 20).map(h => `
-    <div class="hist-item">
-      <div class="hist-date">${h.d || new Date(h.ts).toLocaleDateString()}</div>
-      <div class="hist-amount">${h.tonAmt.toFixed(6)} TON</div>
-      <div><span class="status-badge" style="background: ${h.status === 'approved' ? '#4CAF50' : h.status === 'rejected' ? '#F44336' : '#FF9800'}; padding: 2px 8px; border-radius: 20px; font-size: 10px;">${h.status || 'Pending'}</span></div>
-    </div>
-  `).join('');
-}
-
-async function doWithdraw() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
-  _lastClickTime = now;
-  const addr = (document.getElementById('wdAddr').value || '').trim();
-  const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
-  const u = S.user;
-  if (!addr || addr.length < 10) { showNotif('Enter valid TON address!', 'error'); return; }
-  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(`Min ${CFG.MIN_WITHDRAW_TON} TON!`, 'error'); return; }
-  if (tonAmt > (u.tonBalance || 0)) { showNotif('Not enough TON!', 'error'); return; }
-  const partnerTasks = S.tasks?.partner || [];
-  const missingPartner = partnerTasks.filter(t => t.status === 'active' && !S.doneTasks.includes(t.id));
-  if (missingPartner.length > 0) {
-    showNotif(`❌ Complete ${missingPartner.length} partner tasks first!`, 'error');
-    return;
-  }
-  try {
-    const res = await api('withdraw', { address: addr, amount: tonAmt });
-    u.tonBalance -= tonAmt;
-    S.wdHist.unshift({ tonAmt, addr, d: new Date().toLocaleDateString(), status: 'pending', ts: Date.now() });
-    document.getElementById('wdAddr').value = '';
-    document.getElementById('wdAmt').value = '';
-    updateUI();
-    renderWdHist();
-    triggerSnowfall(30);
-    showNotif(`✅ Withdrawal requested: ${tonAmt.toFixed(6)} TON`, 'success');
-  } catch (e) {
-    showNotif(`❌ ${e.message}`, 'error');
-  }
-}
-
-function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
-function setDepAmt(v) { document.getElementById('depositAmountInput').value = Math.max(1, v); }
-
-function updateRefUI() {
-  if (!S.userId) return;
-  const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
-  const refInput = document.getElementById('refLinkInp');
-  if (refInput) refInput.value = link;
-  document.getElementById('depositUserIdDisplay').textContent = S.userId;
-  const cntEl = document.getElementById('totalRefsDisp');
-  if (cntEl) cntEl.textContent = `${S.refs.length} Friends`;
-  const listEl = document.getElementById('recentRefsList');
-  if (listEl) {
-    if (!S.refs.length) {
-      listEl.innerHTML = '<div class="hist-empty">No referrals yet</div>';
-    } else {
-      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
-        <div class="hist-item">
-          <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(77,208,225,0.2); display: flex; align-items: center; justify-content: center;">${r.photo ? '👤' : '🎅'}</div>
-            <div style="flex: 1;">
-              <div style="font-weight: 800;">${r.name || 'Friend'}</div>
-              <div style="font-size: 10px; color: var(--muted);">${r.date || 'Joined recently'}</div>
-            </div>
-          </div>
-          <div style="font-weight: 800; color: var(--ice);">+${fmt(r.totalCommissionEarned || 0)}</div>
-        </div>
-      `).join('');
-    }
-  }
-}
-
-function copyRefLink() {
-  const v = document.getElementById('refLinkInp').value;
-  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 'success')).catch(() => { showNotif('✅ Link copied!', 'success'); });
-}
-
-function switchTTab(el, t) {
-  document.querySelectorAll('.ttab').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.tcont').forEach(x => x.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(`tc${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('active');
-}
-
-function switchSocTab(tab) {
-  _socTab = tab;
-  document.getElementById('stab-partner').className = 'ttab' + (tab === 'partner' ? ' active' : '');
-  document.getElementById('stab-community').className = 'ttab' + (tab === 'community' ? ' active' : '');
-  document.getElementById('socPartnerList').style.display = tab === 'partner' ? 'block' : 'none';
-  document.getElementById('socCommunityList').style.display = tab === 'community' ? 'block' : 'none';
+  el.innerHTML = S.wdHist.slice(0, 20).map(h => {
+    const sc = { approved: 'sb-approved', pending: 'sb-pending', rejected: 'sb-rejected' }[h.status || 'pending'];
+    return `<div class="hist-row" style="flex-direction:column;gap:4px;align-items:flex-start">
+      <div style="display:flex;justify-content:space-between;width:100%">
+        <span style="font-size:13px;font-weight:800;color:var(--ice)">${h.tonAmt.toFixed(6)} TON</span>
+        <span class="stat-badge ${sc}">${esc(h.status || 'Pending')}</span>
+      </div>
+      <div style="font-size:10px;color:var(--muted)">${esc(h.d || '')} · ${esc((h.addr || '').substring(0, 12))}...</div>
+    </div>`;
+  }).join('');
 }
 
 function switchWalletModernTab(el, t) {
@@ -2396,78 +3357,60 @@ function switchWalletModernTab(el, t) {
   document.getElementById(`wt-${t}-modern`).classList.add('active');
 }
 
-function goNav(el) {
+function goToWalletDeposit() {
   document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(el.dataset.s).classList.add('active');
+  const fn = document.querySelector('.ni[data-s="sectionWallet"]');
+  if (fn) fn.classList.add('active');
+  document.getElementById('sectionWallet').classList.add('active');
+  const dt = document.querySelector('.modern-tab[data-wt="deposit"]');
+  if (dt) switchWalletModernTab(dt, 'deposit');
+  document.getElementById('depositUserIdDisplay').textContent = S.userId || '???';
 }
 
-function openModal(id) {
-  if (id === 'upgradeModal') buildUpgradeContent();
-  document.getElementById(id).classList.add('active');
-}
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-function santaClick() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
-  _lastClickTime = now;
-  spawnSnowParticle();
-  triggerSnowfall(20);
-}
-
-function spawnSnowParticle() {
-  const p = document.createElement('img');
-  p.src = SNOW_IMG;
-  p.className = 'ptc';
-  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain;`;
-  document.body.appendChild(p);
-  setTimeout(() => p.remove(), 960);
-}
-
-function triggerSnowfall(count = 40) {
-  for (let i = 0; i < count; i++) {
-    setTimeout(() => {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.innerHTML = '❄️';
-      snowflake.style.left = Math.random() * 100 + '%';
-      snowflake.style.fontSize = Math.random() * 16 + 10 + 'px';
-      snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-      snowflake.style.opacity = Math.random() * 0.7 + 0.4;
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 5000);
-    }, i * 50);
+function updateRefUI() {
+  if (!S.userId) {
+    console.warn('[updateRefUI] No userId available');
+    return;
+  }
+  
+  const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
+  const refInput = document.getElementById('refLinkInp');
+  if (refInput) refInput.value = link;
+  
+  document.getElementById('depositUserIdDisplay').textContent = esc(S.userId || '...');
+  const cntEl = document.getElementById('totalRefsDisp');
+  if (cntEl) cntEl.textContent = `${S.refs.length} Friends`;
+  const listEl = document.getElementById('recentRefsList');
+  if (listEl) {
+    if (!S.refs.length) {
+      listEl.innerHTML = `<div class="hist-empty">No referrals yet</div>`;
+    } else {
+      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
+        <div class="ref-list-item">
+          <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">` : '🎅'}</div>
+          <div class="rli-info">
+            <div class="rli-name">${esc(r.name || 'Friend')}</div>
+            <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
+            ${r.totalSpentTon ? `<div style="font-size: 10px; color: var(--gold);">💰 Spent: ${r.totalSpentTon} TON</div>` : ''}
+            ${r.totalCommissionEarned ? `<div style="font-size: 10px; color: var(--ice);">🎁 Commission: +${fmt(r.totalCommissionEarned)} <img src="${SNOW_IMG}" style="width:12px;height:12px;object-fit:contain;vertical-align:middle"></div>` : '<div style="font-size: 10px; color: var(--muted);">⏳ Waiting for purchases</div>'}
+          </div>
+          <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
+        </div>`).join('');
+    }
   }
 }
 
-function openSupport() { window.open('https://t.me/Santa_1_Snow', '_blank'); }
-
-// Language Functions
-function toggleLangMenu() {
-  const m = document.getElementById('langMenu');
-  m.style.display = m.style.display === 'none' ? 'block' : 'none';
-}
-function setLang(lang, flag, code) {
-  localStorage.setItem('santaLang', lang);
-  applyLang(lang, flag, code);
-  document.getElementById('langMenu').style.display = 'none';
-}
-function applyLang(lang, flag, code) {
-  const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-  document.getElementById('langFlag').textContent = flag;
-  document.getElementById('langCode').textContent = code;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (t[key] !== undefined) el.innerHTML = t[key];
-  });
-  const navItems = document.querySelectorAll('.ni .ni-lbl');
-  const navKeys = ['Home', 'Tasks', 'Friends', 'Wallet'];
-  navItems.forEach((el, i) => { if (navKeys[i] && t[navKeys[i]]) el.textContent = t[navKeys[i]]; });
+function copyRefLink() {
+  const v = document.getElementById('refLinkInp').value;
+  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
 }
 
-// TON Connect Functions
+function setDepAmt(v) { document.getElementById('depositAmountInput').value = Math.max(1, v); updDepPreview(); }
+function updDepPreview() {
+  const ton = parseFloat(document.getElementById('depositAmountInput').value) || 0;
+}
+
 async function initTON() {
   try {
     if (window.TON_CONNECT_UI) {
@@ -2476,17 +3419,20 @@ async function initTON() {
         uiPreferences: { theme: 'DARK' }
       });
       S.tonUI.onStatusChange(w => w ? onWConn(w) : onWDisc());
+      setTimeout(() => { if (S.tonUI.connected) S.tonUI.getWallets(); }, 500);
     }
   } catch (e) { console.error('TON:', e); }
 }
+
 function onWConn(w) {
   S.wallet = { address: w.account.address, chain: w.account.chain, appName: w.device.appName };
   const sh = `${S.wallet.address.substring(0, 6)}...${S.wallet.address.slice(-4)}`;
-  document.getElementById('walletAddressDisplay').textContent = sh;
+  document.getElementById('walletAddressDisplay').textContent = `${sh} · ${S.wallet.appName}`;
   document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-unlink"></i> Disconnect';
   document.getElementById('connectWalletBtn').onclick = disconnectWallet;
   document.getElementById('submitDepositBtn').disabled = false;
 }
+
 function onWDisc() {
   S.wallet = null;
   document.getElementById('walletAddressDisplay').textContent = 'Not connected';
@@ -2494,32 +3440,43 @@ function onWDisc() {
   document.getElementById('connectWalletBtn').onclick = connectWallet;
   document.getElementById('submitDepositBtn').disabled = true;
 }
+
 async function connectWallet() { if (S.tonUI) await S.tonUI.openModal(); }
 async function disconnectWallet() { if (S.tonUI) await S.tonUI.disconnect(); }
 
-window.initiateDeposit = async function() {
+window.initiateDeposit = async function () {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   if (!S.wallet) { alert('Connect wallet first'); return; }
   const amt = parseFloat(document.getElementById('depositAmountInput').value);
   if (!amt || amt < 1) { alert('Minimum 1 TON'); return; }
+  if (amt > 1000) { alert('Amount too large'); return; }
   try {
     const comment = String(S.userId);
     const nano = String(Math.floor(amt * 1e9));
     if (!window.TonWeb) throw new Error('TonWeb not loaded');
-    const TW = window.TonWeb;
+    const TW = window.TonWeb; new TW();
     const cell = new TW.boc.Cell();
-    cell.bits.writeUint(0, 32);
-    cell.bits.writeString(comment);
+    cell.bits.writeUint(0, 32); cell.bits.writeString(comment);
     const boc = await cell.toBoc(false);
     const payload = TW.utils.bytesToBase64(boc);
     const tx = { validUntil: Math.floor(Date.now() / 1000) + 600, messages: [{ address: CFG.DEPOSIT_WALLET, amount: nano, payload }] };
     const result = await S.tonUI.sendTransaction(tx);
-    showNotif('✅ Transaction sent!', 'success');
-    await api('deposit', { amount: amt, txHash: result.boc, comment });
+    const sd = document.getElementById('depositStatus');
+    sd.classList.add('visible');
+    sd.querySelector('.txsi').innerHTML = '⏳';
+    sd.querySelector('.txsm').innerHTML = 'Transaction sent!';
+    document.getElementById('depositStatusDetail').textContent = 'Your balance will be added to your account within 3 minutes.';
+    triggerSnowfall(30);
+    showNotif('✅ Transaction sent! Balance will be credited within 3 minutes', 's');
+    try { await api('deposit', { amount: amt, txHash: result.boc, comment }); } catch (_) { }
   } catch (e) {
-    showNotif(`❌ ${e.message}`, 'error');
+    const sd = document.getElementById('depositStatus');
+    sd.classList.add('visible');
+    sd.querySelector('.txsi').innerHTML = '❌';
+    sd.querySelector('.txsm').innerHTML = e.message?.includes('rejected') ? 'Transaction rejected' : 'Transaction failed';
+    document.getElementById('depositStatusDetail').textContent = e.message || 'Please try again';
   }
 };
 
@@ -2533,73 +3490,85 @@ function startDepVerify(depId, txHash) {
       const r = await api('verifyDeposit', { depositId: depId, txHash });
       if (r.status === 'completed') {
         clearInterval(S.depCheckInt);
-        showNotif(`💰 ${r.amount} TON deposited!`, 'success');
+        const sd = document.getElementById('depositStatus');
+        sd.querySelector('.txsi').innerHTML = '✅';
+        sd.querySelector('.txsm').innerHTML = 'Deposit confirmed!';
+        document.getElementById('depositStatusDetail').textContent = `${r.amount} TON added`;
+        triggerSnowfall(30);
+        showNotif(`💰 ${r.amount} TON deposited!`, 's');
         S.user.hasDeposited = true;
         S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
         loadState();
+        setTimeout(() => sd.classList.remove('visible'), 3000);
       }
     } catch (e) { if (attempts >= 18) clearInterval(S.depCheckInt); }
   }, 10000);
 }
 
-function setTaskType(t) {
-  _atType = t;
-  const sel = 'flex:1; padding:10px; border-radius:12px; border:2px solid var(--ice); background:rgba(77,208,225,0.2); color:var(--ice); font-weight:800; cursor:pointer';
-  const unsel = 'flex:1; padding:10px; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--muted); font-weight:800; cursor:pointer';
-  document.getElementById('atTypeChannel').style.cssText = t === 'channel' ? sel : unsel;
-  document.getElementById('atTypeBot').style.cssText = t === 'bot' ? sel : unsel;
-  const hint = document.getElementById('atBotHint');
-  if (hint) hint.style.display = t === 'channel' ? 'block' : 'none';
-  updAtCost();
+function openModal(id) {
+  if (id === 'upgradeModal') buildUpgradeContent();
+  document.getElementById(id).classList.add('active');
 }
-function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
-function updAtCost() {
-  const tgt = parseInt(document.getElementById('atTarget').value) || 0;
-  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
-}
-async function submitAddTask() {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'warning'); return; }
-  _lastClickTime = now;
-  if (_submitInFlight) return;
-  const link = (document.getElementById('atLink').value || '').trim();
-  const target = parseInt(document.getElementById('atTarget').value) || 0;
-  const st = document.getElementById('atStatus');
-  st.style.display = 'block';
-  st.textContent = '⏳ Creating...';
-  if (!link.includes('t.me/')) { st.textContent = '❌ Invalid link'; return; }
-  if (target < MIN_TASK_TARGET) { st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; return; }
-  const cost = target * TASK_SNOW_PER_USER;
-  if ((S.user.snow || 0) < cost) { st.textContent = `❌ Need ${fmt(cost)} Snow`; return; }
-  _submitInFlight = true;
-  try {
-    await api('createTask', { type: _atType, link, targetUsers: target });
-    S.user.snow = (S.user.snow || 0) - cost;
-    st.style.color = 'var(--ice)';
-    st.textContent = '✅ Task created!';
-    updateUI();
-    showNotif(`✅ Task created!`, 'success');
-    setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
-  } catch (e) { 
-    st.textContent = `❌ ${e.message}`;
-    showNotif(`❌ ${e.message}`, 'error');
-  } finally { _submitInFlight = false; }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
+
+function fmt(n) {
+  n = Math.floor(n || 0);
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  return n.toString();
 }
 
-// Loading Animation
+function spawnSnowParticle() {
+  const p = document.createElement('img');
+  p.src = SNOW_IMG;
+  p.className = 'ptc';
+  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain; font-size: 0`;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 960);
+}
+
+function santaClick() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const p = document.getElementById('santaChar');
+  if (p) { p.style.transition = 'transform .12s'; p.style.transform = 'scale(.86) rotate(9deg)'; setTimeout(() => { p.style.transform = ''; }, 220); }
+  spawnSnowParticle();
+  triggerSnowfall(20);
+}
+
+function openSupport() {
+  window.open('https://t.me/Santa_1_Snow', '_blank');
+}
+
 function ldProgress(pct, msg) {
   const fill = document.getElementById('iceFill');
   if (fill) fill.style.width = pct + '%';
   const pctEl = document.getElementById('ldPct');
   if (pctEl) pctEl.textContent = Math.round(pct) + '%';
   const stat = document.getElementById('ldStatus');
-  if (stat) stat.textContent = msg;
+  if (stat) { stat.textContent = msg; stat.style.color = ''; }
 }
+
 function ldHide() {
   const s = document.getElementById('loadingScreen');
   if (s) { s.classList.add('hidden'); setTimeout(() => s.remove(), 700); }
 }
-async function ldAnimateTo(targetPct, msg, duration = 600) {
+
+function preloadImages() {
+  const urls = [
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
+    SNOW_IMG, REF_TASK_ICON,
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png',
+    CFG.MACHINES[1].image, CFG.MACHINES[2].image, CFG.MACHINES[3].image
+  ];
+  return Promise.all(urls.map(u => new Promise(res => { const img = new Image(); img.onload = img.onerror = res; img.src = u; })));
+}
+
+function ldAnimateTo(targetPct, msg, duration = 600) {
   const start = parseFloat(document.getElementById('iceFill')?.style.width) || 0;
   const steps = 30;
   const stepTime = duration / steps;
@@ -2614,13 +3583,117 @@ async function ldAnimateTo(targetPct, msg, duration = 600) {
   });
 }
 
+// Translations - Complete Russian Translation
+const TRANSLATIONS = {
+  en: {
+    labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day',
+    friendsTitle: 'Friends & Referrals', refCommission: '20% commission from machine purchases!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link with friends. When they buy machines, you get 20% of their purchase value in Snow!',
+    recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
+    labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
+    important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment in the transaction.',
+    amountTON: 'Amount (TON)', depositBtn: 'Deposit TON',
+    processingDeposit: 'Processing deposit...', tonWalletAddr: 'TON Wallet Address',
+    withdrawBtn: 'Withdraw TON', withdrawHist: '📋 Withdrawal History', noWithdrawals: 'No withdrawals yet',
+    youGet: 'You get (after fee):', swapRate: '1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON',
+    exchangeNow: 'Exchange', exchangeHist: '📋 Exchange History', noConversions: 'No conversions yet',
+    helpTitle: '🎅 Santa Snow Guide', helpPayCh: 'Payouts\nChannel', helpNewsCh: 'Bot\nNews', helpSupport: 'Technical\nSupport',
+    helpWelcomeTitle: '🎁 Free Welcome Gift', helpWelcomeBody: 'Open the chest to receive:<br><span style="color:#fff;font-weight:800">• 1000 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (10 Snow/hour)</span> — free mining power starts immediately',
+    helpIdeaTitle: '💡 Main Concept', helpIdeaBody: 'The bot is a virtual Snow Factory ❄️<br>⬅ Buy Mining Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 Machine Types:<br>&nbsp;&nbsp;&nbsp;🔧 Basic (1 TON): 300 Snow/hour<br>&nbsp;&nbsp;&nbsp;⚙️ Advanced (2 TON): 650 Snow/hour<br>&nbsp;&nbsp;&nbsp;💎 Elite (3 TON): 1000 Snow/hour<br>⬅ More machines = more Snow per hour!<br>⬅ Exchange Snow to TON on Wallet page (4% fee)<br>⬅ Withdraw TON to your wallet 💎<br>📊 1 TON = 100,000 Snow (1,000 Snow = 0.01 TON)',
+    addTaskTitle: '➕ Add Community Task', taskCostFormula: 'Cost = <strong style="color:var(--ice)">Target Users × 60 Snow</strong>',
+    taskCostNote: 'Min target: 100 users | 100 users = 6,000 Snow', taskTypeChannel: 'Channel', taskTypeBot: 'Bot',
+    taskBotHint: 'Add our bot as admin in your channel first:', taskLinkLabel: 'Telegram Link',
+    taskLinkPh: 'https://t.me/yourchannel', taskTargetLabel: 'Target Users (min 100)',
+    taskTotalCost: 'Total Cost:', taskCreateBtn: '✅ Create Task',
+    upgTitle: '⬆️ Upgrade Storage', lvLabel: 'Lv.', tabReferralTxt: 'Referral', tabSocialTxt: 'Social',
+    floatAdd: 'Add Task', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet', storageTitle: 'Storage',
+  },
+  ru: {
+    labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День',
+    friendsTitle: 'Друзья и Рефералы', refCommission: '20% комиссии от покупок машин!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь этой ссылкой с друзьями. Когда они покупают машины, вы получаете 20% от стоимости покупки в Снеге!',
+    recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
+    labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
+    important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием в транзакции.',
+    amountTON: 'Сумма (TON)', depositBtn: 'Внести TON',
+    processingDeposit: 'Обработка депозита...', tonWalletAddr: 'TON адрес кошелька',
+    withdrawBtn: 'Вывести TON', withdrawHist: '📋 История выводов', noWithdrawals: 'Пока нет выводов',
+    youGet: 'Вы получите (после комиссии):', swapRate: '1 TON = 100,000 Снега | 1,000 Снега = 0.01 TON',
+    exchangeNow: 'Обменять', exchangeHist: '📋 История обменов', noConversions: 'Пока нет обменов',
+    helpTitle: '🎅 Руководство Santa Snow', helpPayCh: 'Канал\nВыплат', helpNewsCh: 'Новости\nбота', helpSupport: 'Техническая\nподдержка',
+    helpWelcomeTitle: '🎁 Бесплатный приветственный подарок', helpWelcomeBody: 'Откройте сундук чтобы получить:<br><span style="color:#fff;font-weight:800">• 1000 Снега</span> — основная валюта<br><span style="color:#fff;font-weight:800">• 1 Майнинг Машина (10 Снег/час)</span> — бесплатная мощность майнинга начинается сразу',
+    helpIdeaTitle: '💡 Основная концепция', helpIdeaBody: 'Бот - это виртуальная Снежная Фабрика ❄️<br>⬅ Покупайте Майнинг Машины за <span style="color:var(--gold);font-weight:800">TON</span><br>⬅ 3 типа машин:<br>&nbsp;&nbsp;&nbsp;🔧 Базовая (1 TON): 300 Снег/час<br>&nbsp;&nbsp;&nbsp;⚙️ Продвинутая (2 TON): 650 Снег/час<br>&nbsp;&nbsp;&nbsp;💎 Элитная (3 TON): 1000 Снег/час<br>⬅ Больше машин = больше Снега в час!<br>⬅ Обменяйте Снег на TON на странице Кошелька (комиссия 4%)<br>⬅ Выводите TON на ваш кошелек 💎<br>📊 1 TON = 100,000 Снега (1,000 Снега = 0.01 TON)',
+    addTaskTitle: '➕ Добавить задачу сообщества', taskCostFormula: 'Стоимость = <strong style="color:var(--ice)">Целевые пользователи × 60 Снега</strong>',
+    taskCostNote: 'Мин. цель: 100 пользователей | 100 пользователей = 6,000 Снега', taskTypeChannel: 'Канал', taskTypeBot: 'Бот',
+    taskBotHint: 'Сначала добавьте нашего бота как администратора в ваш канал:', taskLinkLabel: 'Ссылка Telegram',
+    taskLinkPh: 'https://t.me/ваш_канал', taskTargetLabel: 'Целевые пользователи (мин. 100)',
+    taskTotalCost: 'Общая стоимость:', taskCreateBtn: '✅ Создать задачу',
+    upgTitle: '⬆️ Улучшить хранилище', lvLabel: 'Ур.', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети',
+    floatAdd: 'Добавить задачу', Home: 'Главная', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек', storageTitle: 'Хранилище',
+  },
+};
+
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+  if (m.style.display === 'block') {
+    setTimeout(() => document.addEventListener('click', closeLangMenuOutside, { once: true }), 10);
+  }
+}
+function closeLangMenuOutside(e) {
+  const m = document.getElementById('langMenu');
+  const btn = document.getElementById('langBtn');
+  if (m && !m.contains(e.target) && !btn.contains(e.target)) m.style.display = 'none';
+}
+function setLang(lang, flag, code) {
+  localStorage.setItem('santaLang', lang);
+  applyLang(lang, flag, code);
+  document.getElementById('langMenu').style.display = 'none';
+}
+function applyLang(lang, flag, code) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+  document.getElementById('langFlag').textContent = flag;
+  document.getElementById('langCode').textContent = code;
+  document.querySelectorAll('.lang-opt').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key] !== undefined) el.innerHTML = t[key]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { const key = el.dataset.i18nPh; if (t[key] !== undefined) el.placeholder = t[key]; });
+  const navItems = document.querySelectorAll('.ni .ni-lbl');
+  const navKeys = ['Home', 'Tasks', 'Friends', 'Wallet'];
+  navItems.forEach((el, i) => { if (navKeys[i] && t[navKeys[i]]) el.textContent = t[navKeys[i]]; });
+  const ftabs = document.querySelectorAll('.modern-tab');
+  const ftabKeys = ['Deposit', 'Withdraw', 'Exchange'];
+  ftabs.forEach((el, i) => { if (ftabKeys[i] && t[ftabKeys[i].toLowerCase()+'Btn']) el.innerHTML = `<i class="fas ${i === 0 ? 'fa-arrow-down' : i === 1 ? 'fa-arrow-up' : 'fa-exchange-alt'}"></i> ${t[ftabKeys[i].toLowerCase()+'Btn']}`; });
+  document.querySelectorAll('.ttab-modern[data-t]').forEach(el => {
+    if (el.dataset.t === 'referral') el.innerHTML = `<i class="fas fa-users"></i> ${t.tabReferralTxt}`;
+    if (el.dataset.t === 'social') el.innerHTML = `<i class="fas fa-globe"></i> ${t.tabSocialTxt}`;
+  });
+  const stP = document.getElementById('stab-partner'); if (stP) stP.innerHTML = `<i class="fas fa-star"></i> Partner`;
+  const stC = document.getElementById('stab-community'); if (stC) stC.innerHTML = `<i class="fas fa-globe-americas"></i> Community`;
+  const claimTxt = document.getElementById('claimBtnTxt');
+  if (claimTxt && !claimTxt.innerHTML.includes('Storage Empty')) {
+    claimTxt.innerHTML = `<i class="fas fa-hand-holding-heart"></i> ${t.claimBtn || 'Claim Snow'}`;
+  }
+  const depBtn = document.getElementById('submitDepositBtn');
+  if (depBtn) depBtn.innerHTML = `<i class="fas fa-arrow-down"></i> ${t.depositBtn}`;
+  const connBtn = document.getElementById('connectWalletBtn');
+  if (connBtn && connBtn.innerHTML.includes('Connect')) connBtn.innerHTML = `<i class="fas fa-plug"></i> ${t.connectBtn}`;
+  if (connBtn && connBtn.innerHTML.includes('Disconnect')) connBtn.innerHTML = `<i class="fas fa-unlink"></i> Disconnect`;
+  const wdBtn = document.getElementById('wdBtn');
+  if (wdBtn) wdBtn.innerHTML = `<i class="fas fa-arrow-up"></i> ${t.withdrawBtn}`;
+  document.querySelectorAll('.btn-copy').forEach(el => el.innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`);
+  const floatBtn = document.getElementById('floatAddTask');
+  if (floatBtn) floatBtn.innerHTML = `<i class="fas fa-plus"></i> ${t.floatAdd}`;
+}
+
 async function init() {
   const startTime = Date.now();
   const MIN_LOADING_MS = 3000;
+  startSnowfallLoop();
   ldProgress(0, 'Starting...');
   if (window.Telegram?.WebApp) {
     S.tg = window.Telegram.WebApp;
-    S.tg.ready();
+    S.tg.ready(); 
     S.tg.expand();
     const u = S.tg.initDataUnsafe?.user;
     if (u) {
@@ -2630,46 +3703,76 @@ async function init() {
         if (av) av.innerHTML = `<img src="${esc(u.photo_url)}" onerror="this.parentElement.innerHTML='<div class=ap>🎅</div>'">`;
       }
     }
+    
     let startParam = '';
-    if (S.tg.initDataUnsafe?.start_param) startParam = String(S.tg.initDataUnsafe.start_param);
-    else if (S.tg.initDataUnsafe?.startParam) startParam = String(S.tg.initDataUnsafe.startParam);
+    if (S.tg.initDataUnsafe?.start_param) {
+      startParam = String(S.tg.initDataUnsafe.start_param);
+    } else if (S.tg.initDataUnsafe?.startParam) {
+      startParam = String(S.tg.initDataUnsafe.startParam);
+    }
     S.startParam = startParam.replace(/\D/g, '');
+    
+    console.log('[init] Extracted startParam:', S.startParam);
   }
+  await ldAnimateTo(10, 'Connecting to Telegram...', 700);
+  await new Promise(r => setTimeout(r, 400));
   await ldAnimateTo(20, 'Loading assets...', 600);
-  await new Promise(r => setTimeout(r, 500));
-  await ldAnimateTo(40, 'Connecting to server...', 500);
+  await Promise.all([preloadImages().catch(() => { }), new Promise(r => setTimeout(r, 800))]);
+  await ldAnimateTo(40, 'Assets loaded!', 500);
+  await new Promise(r => setTimeout(r, 300));
+  await ldAnimateTo(50, 'Loading your account...', 600);
   let loaded = false;
   let attempts = 0;
-  while (!loaded && attempts < 5) {
+  const MAX_ATTEMPTS = 5;
+  while (!loaded && attempts < MAX_ATTEMPTS) {
     attempts++;
     try {
       await loadState();
       if (S.user && S.userId) loaded = true;
       else throw new Error('No user data');
     } catch (e) {
-      ldProgress(40 + attempts * 10, `Retry ${attempts}/5...`);
-      await new Promise(r => setTimeout(r, 1500));
+      console.warn(`Attempt ${attempts} failed:`, e.message);
+      if (attempts < MAX_ATTEMPTS) {
+        ldProgress(50, `Retrying... (${attempts}/${MAX_ATTEMPTS})`);
+        await new Promise(r => setTimeout(r, 1500 * attempts));
+      }
     }
   }
-  if (!loaded) { ldProgress(100, 'Connection failed'); return; }
-  await ldAnimateTo(70, 'Building interface...', 500);
+  if (!loaded) {
+    ldProgress(100, 'Connection failed. Please restart.');
+    return;
+  }
+  await ldAnimateTo(70, 'Account loaded!', 500);
+  await new Promise(r => setTimeout(r, 300));
+  await ldAnimateTo(80, 'Building interface...', 400);
   renderTasks();
+  await new Promise(r => setTimeout(r, 300));
   await ldAnimateTo(90, 'Setting up wallet...', 400);
   setTimeout(() => initTON(), 600);
   startStorage();
-  setInterval(() => loadState(), 30000);
+  setInterval(() => { loadState(); }, 30000);
   await new Promise(r => setTimeout(r, 400));
   await ldAnimateTo(100, 'Ready! 🎅', 500);
   const elapsed = Date.now() - startTime;
-  if (elapsed < MIN_LOADING_MS) await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
+  if (elapsed < MIN_LOADING_MS) {
+    await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
+  }
   ldHide();
+  
+  if (S.isNewUser) {
+    showWelcomeModal();
+  }
+  
   const savedLang = localStorage.getItem('santaLang');
-  if (savedLang === 'en') applyLang('en', '🇬🇧', 'EN');
-  else applyLang('ru', '🇷🇺', 'RU');
+  if (savedLang && (savedLang === 'en' || savedLang === 'ru')) {
+    const meta = { en: ['🇬🇧', 'EN'], ru: ['🇷🇺', 'RU'] };
+    applyLang(savedLang, meta[savedLang][0], meta[savedLang][1]);
+  } else {
+    applyLang('ru', '🇷🇺', 'RU');
+  }
 }
 
 window.addEventListener('load', init);
-document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
 </script>
 </body>
 </html>
