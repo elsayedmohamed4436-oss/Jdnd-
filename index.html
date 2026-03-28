@@ -113,7 +113,7 @@ body::after {
 }
 
 .ld-title {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   color: #fff;
   letter-spacing: 0.5px;
@@ -279,6 +279,7 @@ body::after {
 .topbar-main {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   padding: 12px 16px;
   background: linear-gradient(135deg, rgba(10, 20, 35, 0.95), rgba(20, 35, 55, 0.95));
@@ -286,13 +287,19 @@ body::after {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(77, 208, 225, 0.25);
+  border-bottom: 1px solid rgba(77, 208, 225, 0.3);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .uavatar {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--ice), #0097B2);
   overflow: hidden;
@@ -312,78 +319,40 @@ body::after {
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  background: rgba(0, 0, 0, 0.3);
 }
 
-.tb-bals {
+.balance-container {
   display: flex;
   gap: 12px;
-  flex: 1;
-  min-width: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
 }
 
-.tb-chip {
+.balance-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(77, 208, 225, 0.15));
-  border: 1px solid rgba(77, 208, 225, 0.35);
-  border-radius: 60px;
-  padding: 8px 16px;
-  backdrop-filter: blur(8px);
-  flex: 1;
-  min-width: 0;
-  transition: all 0.2s;
 }
 
-.tb-chip:hover {
-  border-color: var(--ice);
-  transform: translateY(-1px);
+.balance-item.snow {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  padding-right: 12px;
 }
 
-.tb-chip.snow {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(77, 208, 225, 0.2));
-}
-
-.tb-chip.ton {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(255, 217, 102, 0.2));
-}
-
-.tb-chip span:first-child {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tb-chip span:first-child img,
-.tb-chip span:first-child i {
-  width: 32px;
-  height: 32px;
+.balance-icon {
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  font-size: 28px;
 }
 
-.tb-chip > div {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-
-.tb-chip > div span:first-child {
-  font-size: 9px;
-  opacity: 0.7;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.tb-chip-num {
-  font-size: 16px;
+.balance-value {
+  font-size: 18px;
   font-weight: 800;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(77, 208, 225, 0.5);
 }
 
 .lang-btn {
@@ -408,7 +377,7 @@ body::after {
   background: rgba(77, 208, 225, 0.4);
 }
 
-/* ========== HOME PAGE ========== */
+/* ========== HOME SECTION MODERN ========== */
 .sec {
   display: none;
   padding: 12px 16px;
@@ -537,7 +506,6 @@ body::after {
   font-weight: 700;
 }
 
-/* Storage Section */
 .storage-outer {
   width: 100%;
   margin: 16px 0;
@@ -699,7 +667,317 @@ body::after {
   transform: scale(0.98);
 }
 
-/* Machine Shop Modal */
+/* ========== TASKS SECTION MODERN ========== */
+.tasks-container {
+  background: linear-gradient(135deg, rgba(30, 45, 65, 0.95), rgba(15, 25, 40, 0.95));
+  border-radius: 32px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.task-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  border-radius: 60px;
+}
+
+.ttab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--muted);
+}
+
+.ttab.active {
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.3), rgba(77, 208, 225, 0.1));
+  color: var(--ice);
+  box-shadow: 0 0 15px rgba(77, 208, 225, 0.3);
+}
+
+.tcont {
+  display: none;
+}
+
+.tcont.active {
+  display: block;
+}
+
+.task-item {
+  background: linear-gradient(135deg, rgba(20, 30, 45, 0.95), rgba(10, 20, 35, 0.95));
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s;
+}
+
+.task-item:hover {
+  border-color: rgba(77, 208, 225, 0.5);
+  transform: translateX(5px);
+}
+
+.ticon {
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.3));
+  border-radius: 50%;
+  font-size: 28px;
+}
+
+.ticon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.tinfo {
+  flex: 1;
+}
+
+.tname {
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.trew {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tstat {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.tbtn {
+  border: none;
+  border-radius: 40px;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.tbtn:active {
+  transform: scale(0.95);
+}
+
+.tbtn.go {
+  background: linear-gradient(135deg, #1976D2, #0D47A1);
+  color: #fff;
+}
+
+.tbtn.claim {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  color: #fff;
+  animation: claimGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes claimGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(77, 208, 225, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(77, 208, 225, 0.8); }
+}
+
+.tbtn.done {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  cursor: default;
+}
+
+.progress-bar {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  height: 6px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.progress-bar > div {
+  transition: width 0.3s ease;
+}
+
+/* ========== FRIENDS SECTION MODERN ========== */
+.friends-container {
+  background: linear-gradient(135deg, rgba(30, 45, 65, 0.95), rgba(15, 25, 40, 0.95));
+  border-radius: 32px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+}
+
+.ref-prog-card {
+  background: linear-gradient(145deg, rgba(77, 208, 225, 0.15), rgba(0, 0, 0, 0.4));
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.ref-bonus-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.3));
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 60px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
+
+.rbb-pct {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--ice);
+  line-height: 1;
+}
+
+.rbb-txt {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ref-link-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.ref-inp {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 16px;
+  padding: 12px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.btn-copy {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 16px;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.btn-copy:active {
+  transform: scale(0.95);
+}
+
+.ref-count-badge {
+  background: rgba(77, 208, 225, 0.2);
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ice);
+}
+
+.ref-list-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+.ref-list-item:hover {
+  background: rgba(77, 208, 225, 0.05);
+}
+
+.ref-list-item:last-child {
+  border-bottom: none;
+}
+
+.rli-av {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ice), #0097B2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.rli-av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rli-info {
+  flex: 1;
+}
+
+.rli-name {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rli-date {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.rli-earn {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ========== MACHINE SHOP ========== */
 .machine-shop {
   background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
@@ -835,7 +1113,7 @@ body::after {
   margin-left: 8px;
 }
 
-/* Welcome Chest on Home */
+/* ========== WELCOME CHEST ========== */
 .welcome-chest {
   position: relative;
   margin: 10px auto 20px;
@@ -902,49 +1180,21 @@ body::after {
   50% { opacity: 1; text-shadow: 0 0 15px rgba(77, 208, 225, 0.8); }
 }
 
-/* Notifications */
-.notif {
-  position: fixed;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-80px);
-  background: rgba(10, 20, 35, 0.97);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 10px 18px;
-  font-size: 13px;
-  font-weight: 700;
-  z-index: 1000;
-  transition: transform 0.28s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
-  max-width: 84vw;
-  text-align: center;
-  backdrop-filter: blur(12px);
-  pointer-events: none;
+/* ========== WALLET SECTION ========== */
+.wallet-modern {
+  margin-top: 8px;
 }
 
-.notif.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-.notif.s { border-color: var(--ice-glow); color: var(--ice); background: rgba(77, 208, 225, 0.2); }
-.notif.e { border-color: rgba(239, 83, 80, 0.5); color: #FF8A80; background: rgba(239, 83, 80, 0.1); }
-.notif.i { border-color: rgba(66, 165, 245, 0.4); color: #90CAF9; background: rgba(66, 165, 245, 0.1); }
-.notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; background: rgba(255, 193, 7, 0.1); }
-
-/* ========== TASKS SECTION MODERN DESIGN ========== */
-.task-tabs {
+.modern-tabs {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
   background: rgba(0, 0, 0, 0.4);
-  padding: 6px;
   border-radius: 60px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(77, 208, 225, 0.2);
+  padding: 6px;
+  margin-bottom: 20px;
 }
 
-.ttab {
+.modern-tab {
   flex: 1;
   padding: 12px 8px;
   text-align: center;
@@ -952,7 +1202,7 @@ body::after {
   border: none;
   border-radius: 50px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   transition: all 0.3s ease;
   color: var(--muted);
@@ -962,480 +1212,420 @@ body::after {
   gap: 8px;
 }
 
-.ttab i {
-  font-size: 16px;
+.modern-tab i {
+  font-size: 18px;
 }
 
-.ttab.active {
+.modern-tab.active {
   background: linear-gradient(135deg, var(--ice), #0097B2);
   color: white;
   box-shadow: 0 4px 15px rgba(77, 208, 225, 0.4);
 }
 
-.tcont {
+.modern-content {
   display: none;
   animation: fadeSlideUp 0.3s ease;
 }
 
-.tcont.active {
+.modern-content.active {
   display: block;
 }
 
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Task Categories */
-.task-categories {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 5px;
-  border-radius: 50px;
-}
-
-.cat-tab {
-  flex: 1;
-  padding: 10px;
-  text-align: center;
-  border-radius: 40px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.cat-tab.active {
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.3), rgba(77, 208, 225, 0.1));
-  color: var(--ice);
-  border: 1px solid rgba(77, 208, 225, 0.4);
-}
-
-/* Task Cards Modern */
-.task-item-modern {
-  background: linear-gradient(135deg, rgba(20, 30, 45, 0.95), rgba(10, 20, 35, 0.95));
-  border-radius: 20px;
-  margin-bottom: 12px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(77, 208, 225, 0.2);
-  position: relative;
-}
-
-.task-item-modern:hover {
-  transform: translateX(5px);
-  border-color: rgba(77, 208, 225, 0.5);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-.task-header {
-  display: flex;
-  align-items: center;
-  padding: 14px;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.task-icon {
-  width: 55px;
-  height: 55px;
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(77, 208, 225, 0.05));
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  flex-shrink: 0;
-  border: 1px solid rgba(77, 208, 225, 0.3);
-}
-
-.task-icon img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-
-.task-info {
-  flex: 1;
-}
-
-.task-name {
-  font-size: 15px;
-  font-weight: 800;
-  margin-bottom: 5px;
-  color: #fff;
-}
-
-.task-reward {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 5px;
-}
-
-.task-reward img {
-  width: 18px;
-  height: 18px;
-}
-
-.task-reward span {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-.task-progress {
-  margin-top: 8px;
-}
-
-.progress-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  height: 6px;
-  overflow: hidden;
-  margin-bottom: 4px;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--ice), #80DEEA);
-  border-radius: 20px;
-  width: 0%;
-  transition: width 0.3s ease;
-}
-
-.progress-text {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.task-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px 14px 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.task-btn {
-  border: none;
-  border-radius: 40px;
-  padding: 10px 24px;
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.task-btn:active {
-  transform: scale(0.96);
-}
-
-.task-btn.go {
-  background: linear-gradient(135deg, #1976D2, #0D47A1);
-  color: white;
-}
-
-.task-btn.claim {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  color: white;
-  animation: claimPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes claimPulse {
-  0%, 100% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.4); }
-  50% { box-shadow: 0 0 18px rgba(77, 208, 225, 0.9); }
-}
-
-.task-btn.done {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--muted);
-  cursor: default;
-}
-
-.task-btn.disabled {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--muted);
-  cursor: not-allowed;
-}
-
-/* ========== FRIENDS SECTION MODERN DESIGN ========== */
-.ref-hero-card {
-  background: linear-gradient(145deg, rgba(77, 208, 225, 0.15), rgba(0, 0, 0, 0.5));
+.modern-card {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95));
   border-radius: 28px;
   padding: 20px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(77, 208, 225, 0.4);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.commission-badge {
+.modern-card.deposit {
+  border-top: 3px solid var(--ice);
+}
+
+.modern-card.withdraw {
+  border-top: 3px solid var(--gold);
+}
+
+.modern-card.exchange {
+  border-top: 3px solid var(--ice);
+}
+
+.modern-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.4));
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.commission-rate {
-  display: flex;
-  align-items: baseline;
   gap: 8px;
 }
 
-.commission-percent {
-  font-size: 42px;
-  font-weight: 800;
-  color: var(--ice);
-  line-height: 1;
+.modern-input-group {
+  margin-bottom: 16px;
 }
 
-.commission-text {
+.modern-label {
   font-size: 12px;
   color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
 }
 
-.commission-desc {
-  font-size: 11px;
-  color: var(--gold);
-  background: rgba(255, 217, 102, 0.15);
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-
-.ref-link-modern {
+.modern-input {
+  width: 100%;
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.ref-link-title {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ref-link-input-group {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.ref-link-input {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(77, 208, 225, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   padding: 12px 16px;
   color: var(--text);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  font-family: monospace;
 }
 
-.copy-btn-modern {
-  background: linear-gradient(135deg, #4DD0E1, #0097B2);
-  border: none;
+.modern-input:focus {
+  outline: none;
+  border-color: var(--ice);
+}
+
+.modern-preset {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.modern-preset-btn {
+  flex: 1;
+  padding: 8px;
+  text-align: center;
+  background: rgba(77, 208, 225, 0.15);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ice);
+  transition: all 0.2s;
+}
+
+.modern-preset-btn:active {
+  transform: scale(0.96);
+  background: rgba(77, 208, 225, 0.3);
+}
+
+.modern-rate-info {
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 16px;
-  padding: 12px 24px;
-  color: white;
-  font-size: 13px;
+  padding: 12px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.modern-rate-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.modern-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
   font-weight: 800;
   cursor: pointer;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  transition: all 0.2s;
-  white-space: nowrap;
 }
 
-.copy-btn-modern:active {
-  transform: scale(0.96);
+.modern-btn.primary {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  color: white;
+  box-shadow: 0 0 20px var(--ice-glow);
 }
 
-.ref-stats-card {
+.modern-btn.secondary {
+  background: linear-gradient(135deg, #FFD966, #FFB347);
+  color: #2C1A00;
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.modern-btn:active {
+  transform: scale(0.98);
+}
+
+.modern-btn:disabled {
+  opacity: 0.5;
+  transform: none;
+}
+
+.swap-section-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.swap-row {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   padding: 16px;
-  margin-bottom: 20px;
+}
+
+.swap-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 12px;
 }
 
-.ref-count-modern {
+.swap-currency {
   display: flex;
   align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.swap-currency img {
+  width: 32px;
+  height: 32px;
+}
+
+.swap-balance {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.swap-input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.ref-count-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(77, 208, 225, 0.05));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.swap-input-area input {
+  flex: 1;
+  min-width: 120px;
+  background: transparent;
+  border: none;
   font-size: 24px;
-}
-
-.ref-count-number {
-  font-size: 28px;
   font-weight: 800;
-  color: var(--ice);
-}
-
-.ref-count-label {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.ref-commission-earned {
+  color: white;
   text-align: right;
+  outline: none;
 }
 
-.commission-label {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.commission-amount {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--gold);
-}
-
-/* Referral List Modern */
-.ref-list-modern {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 24px;
-  overflow: hidden;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(77, 208, 225, 0.2);
-}
-
-.ref-list-header {
-  padding: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ref-list-header h4 {
-  font-size: 14px;
+.swap-max {
+  cursor: pointer;
+  background: rgba(77, 208, 225, 0.2);
+  border: 1px solid rgba(77, 208, 225, 0.4);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
   font-weight: 800;
   color: var(--ice);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ref-list-items {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.ref-item-modern {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  white-space: nowrap;
   transition: all 0.2s;
 }
 
-.ref-item-modern:hover {
-  background: rgba(77, 208, 225, 0.05);
+.swap-max:active {
+  transform: scale(0.95);
+  background: rgba(77, 208, 225, 0.4);
 }
 
-.ref-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--ice), #0097B2);
+.swap-output-area {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  overflow: hidden;
-  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
 }
 
-.ref-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.ref-info {
-  flex: 1;
-}
-
-.ref-name {
-  font-size: 14px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.ref-date {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.ref-earnings {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.ref-earnings-amount {
-  font-size: 14px;
+.swap-output-value {
+  font-size: 28px;
   font-weight: 800;
   color: var(--gold);
 }
 
-.ref-earnings-label {
-  font-size: 9px;
-  color: var(--muted);
+.fee-badge {
+  background: rgba(255, 217, 102, 0.15);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 10px;
+  color: var(--gold);
+  margin-left: 8px;
+  font-weight: 600;
 }
 
-.empty-ref-list {
-  padding: 40px;
+.fee-info {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.hist-box {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  margin-top: 16px;
+}
+
+.hist-hdr {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ice);
+}
+
+.hist-row {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hist-row:last-child {
+  border-bottom: none;
+}
+
+.hist-l {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.hist-r {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.hist-empty {
+  padding: 24px;
   text-align: center;
   color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
 }
 
-.empty-ref-list i {
-  font-size: 48px;
-  margin-bottom: 12px;
-  opacity: 0.5;
+.wal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  border-radius: 16px;
 }
 
-/* Bottom Navigation */
+.wl-inf .wll {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.wl-inf .wla {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-conn {
+  background: linear-gradient(135deg, var(--ice), #0097B2);
+  border: none;
+  border-radius: 40px;
+  padding: 8px 18px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.btn-conn:active {
+  transform: scale(0.96);
+}
+
+.dep-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.25);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  font-size: 11px;
+  color: #FFD740;
+  font-weight: 600;
+}
+
+.tx-status {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.tx-status.visible {
+  display: block;
+}
+
+.stat-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.sb-pending {
+  background: rgba(255, 202, 40, 0.15);
+  color: #FFD740;
+  border: 1px solid rgba(255, 202, 40, 0.3);
+}
+
+.sb-approved {
+  background: rgba(0, 242, 122, 0.15);
+  color: #00F27A;
+  border: 1px solid rgba(0, 242, 122, 0.3);
+}
+
+.sb-rejected {
+  background: rgba(239, 83, 80, 0.15);
+  color: #FF8A80;
+  border: 1px solid rgba(239, 83, 80, 0.3);
+}
+
+/* ========== BOTTOM NAVIGATION ========== */
 .bnav {
   position: fixed;
   bottom: 0;
@@ -1501,7 +1691,7 @@ body::after {
   text-shadow: 0 0 6px rgba(77, 208, 225, 0.5);
 }
 
-/* Floating Add Task Button */
+/* ========== FLOATING BUTTON ========== */
 #floatAddTask {
   position: fixed;
   bottom: 100px;
@@ -1550,7 +1740,7 @@ body::after {
   filter: drop-shadow(0 0 10px rgba(77, 208, 225, 0.5));
 }
 
-/* Modal */
+/* ========== MODALS ========== */
 .modal {
   display: none;
   position: fixed;
@@ -1613,7 +1803,7 @@ body::after {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Snowflakes */
+/* ========== SNOWFLAKES ========== */
 .snowflake {
   position: fixed;
   color: #fff;
@@ -1636,7 +1826,6 @@ body::after {
   }
 }
 
-/* Particles */
 .ptc {
   position: fixed;
   pointer-events: none;
@@ -1650,7 +1839,6 @@ body::after {
   100% { transform: translateY(-74px) scale(0.4); opacity: 0; }
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 3px;
 }
@@ -1660,8 +1848,7 @@ body::after {
   border-radius: 2px;
 }
 
-/* Lang Menu */
-#langMenu {
+.lang-menu {
   position: fixed;
   top: 70px;
   right: 12px;
@@ -1688,19 +1875,13 @@ body::after {
   background: rgba(77, 208, 225, 0.2);
 }
 
-/* Santa Click Animation */
 @keyframes santaFloat {
   0%, 100% { transform: translateY(0) rotate(-1.5deg); }
   50% { transform: translateY(-9px) rotate(1.5deg); }
 }
 
-/* Responsive */
 @media (max-width: 480px) {
-  .tb-chip {
-    padding: 6px 12px;
-  }
-  
-  .tb-chip-num {
+  .balance-value {
     font-size: 14px;
   }
   
@@ -1712,17 +1893,18 @@ body::after {
     font-size: 18px;
   }
   
-  .task-header {
-    flex-wrap: wrap;
+  .modern-tab {
+    font-size: 12px;
+    padding: 10px 6px;
   }
   
-  .ref-link-input-group {
-    flex-direction: column;
-  }
-  
-  .commission-badge {
+  .machine-card {
     flex-direction: column;
     text-align: center;
+  }
+  
+  .machine-quantity {
+    justify-content: center;
   }
 }
 </style>
@@ -1757,23 +1939,19 @@ body::after {
   </div>
 </div>
 
-<!-- Top Bar -->
+<!-- Top Bar - New Design -->
 <div class="topbar-main">
-  <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
-  <div class="tb-bals">
-    <div class="tb-chip snow">
-      <span><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow"></span>
-      <div>
-        <span data-i18n="labelSnow">Snow</span>
-        <span class="tb-chip-num" id="tbSnow">0</span>
-      </div>
+  <div class="user-profile">
+    <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
+  </div>
+  <div class="balance-container">
+    <div class="balance-item snow">
+      <img class="balance-icon" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
+      <span class="balance-value" id="tbSnow">0</span>
     </div>
-    <div class="tb-chip ton">
-      <span><i class="fas fa-coins"></i></span>
-      <div>
-        <span data-i18n="labelTON">TON</span>
-        <span class="tb-chip-num" id="tbTON">0</span>
-      </div>
+    <div class="balance-item">
+      <i class="fas fa-coins" style="color: var(--gold); font-size: 20px;"></i>
+      <span class="balance-value" id="tbTON">0</span>
     </div>
   </div>
   <button id="langBtn" class="lang-btn" onclick="toggleLangMenu()">
@@ -1782,7 +1960,7 @@ body::after {
   </button>
 </div>
 
-<div id="langMenu" style="display: none;">
+<div id="langMenu" class="lang-menu" style="display: none;">
   <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')">🇬🇧 &nbsp;English</div>
   <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')">🇷🇺 &nbsp;Русский</div>
 </div>
@@ -1824,7 +2002,6 @@ body::after {
       </div>
     </div>
     
-    <!-- Storage Section -->
     <div class="storage-outer">
       <div class="storage-side-btn" onclick="openModal('upgradeModal')" title="Upgrade Storage">↑</div>
       <div class="storage-main">
@@ -1853,91 +2030,52 @@ body::after {
   </div>
 </div>
 
-<!-- Friends Section -->
+<!-- Friends Section - New Design -->
 <div class="sec" id="sectionFriends">
-  <div class="ref-hero-card">
-    <div class="commission-badge">
-      <div class="commission-rate">
-        <span class="commission-percent">20%</span>
-        <span class="commission-text">Commission</span>
+  <div class="friends-container">
+    <div class="ref-prog-card">
+      <div class="ref-bonus-badge">
+        <span class="rbb-pct">20%</span>
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px;">
+        <span class="rbb-txt">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' machine purchases!<br>Earn TON value in Snow from each machine they buy!</span>
       </div>
-      <div class="commission-desc">
-        <i class="fas fa-gift"></i> From friends' machine purchases!
+      <div class="ref-link-row">
+        <input class="ref-inp" id="refLinkInp" readonly placeholder="Your referral link...">
+        <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> Copy</button>
       </div>
+      <div style="font-size: 11px; color: var(--muted); margin-top: 8px;">📤 Share this link with friends. When they buy machines, you get 20% of their purchase value in Snow!</div>
     </div>
-    
-    <div class="ref-link-modern">
-      <div class="ref-link-title">
-        <i class="fas fa-link"></i> Your Referral Link
+    <div class="hist-box">
+      <div class="hist-hdr" style="justify-content: space-between">
+        <span><i class="fas fa-users"></i> Recent Referrals</span>
+        <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
       </div>
-      <div class="ref-link-input-group">
-        <input class="ref-link-input" id="refLinkInp" readonly placeholder="Your referral link...">
-        <button class="copy-btn-modern" onclick="copyRefLink()">
-          <i class="fas fa-copy"></i> Copy Link
-        </button>
-      </div>
-    </div>
-    
-    <div class="ref-stats-card">
-      <div class="ref-count-modern">
-        <div class="ref-count-icon">
-          <i class="fas fa-users"></i>
-        </div>
-        <div>
-          <div class="ref-count-number" id="totalRefsDisp">0</div>
-          <div class="ref-count-label">Friends Invited</div>
-        </div>
-      </div>
-      <div class="ref-commission-earned">
-        <div class="commission-label">Total Earned</div>
-        <div class="commission-amount" id="totalCommissionEarned">0</div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="ref-list-modern">
-    <div class="ref-list-header">
-      <h4><i class="fas fa-user-friends"></i> Recent Referrals</h4>
-      <i class="fas fa-chevron-right" style="color: var(--muted); font-size: 12px;"></i>
-    </div>
-    <div class="ref-list-items" id="recentRefsList">
-      <div class="empty-ref-list">
-        <i class="fas fa-user-plus"></i>
-        <div>No referrals yet</div>
-        <div style="font-size: 11px; margin-top: 8px;">Share your link to invite friends!</div>
-      </div>
+      <div id="recentRefsList"><div class="hist-empty">No referrals yet</div></div>
     </div>
   </div>
 </div>
 
-<!-- Tasks Section -->
+<!-- Tasks Section - New Design -->
 <div class="sec" id="sectionTasks">
-  <div class="task-tabs">
-    <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">
-      <i class="fas fa-tasks"></i> Social Tasks
+  <div class="tasks-container">
+    <div class="task-tabs">
+      <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">📢 Social</div>
+      <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">👥 Referral</div>
     </div>
-    <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">
-      <i class="fas fa-trophy"></i> Referral Tasks
-    </div>
-  </div>
-  
-  <div class="tcont active" id="tcSocial">
-    <div class="task-categories">
-      <div class="cat-tab active" id="stab-partner" onclick="switchSocTab('partner')">
-        <i class="fas fa-star"></i> Partner
+    <div class="tcont active" id="tcSocial">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px">
+        <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')">⭐ Partner</div>
+        <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')">🌍 Community</div>
       </div>
-      <div class="cat-tab" id="stab-community" onclick="switchSocTab('community')">
-        <i class="fas fa-globe"></i> Community
-      </div>
+      <div id="socPartnerList"></div>
+      <div id="socCommunityList" style="display: none;"></div>
     </div>
-    <div id="socPartnerList"></div>
-    <div id="socCommunityList" style="display: none;"></div>
-  </div>
-  
-  <div class="tcont" id="tcReferral">
-    <div id="referralTasksList"></div>
+    <div class="tcont" id="tcReferral">
+      <div id="referralTasksList"></div>
+    </div>
   </div>
 </div>
+
 <!-- Wallet Section -->
 <div class="sec" id="sectionWallet">
   <div class="wallet-modern">
@@ -2197,13 +2335,12 @@ body::after {
 <script>
 // ============================================================
 // SANTA SNOW - FRONTEND v16.0
-// UPDATED: Modern UI for Tasks & Friends sections
-// UPDATED: Larger logo in loading screen
-// UPDATED: Floating Add Task button only in Tasks section
-// UPDATED: Referral tasks with custom image icon
+// UPDATED: 20% referral commission
+// UPDATED: New modern design for all sections
+// UPDATED: Larger loading logo (180px)
+// UPDATED: Add Task button only in Tasks section
+// UPDATED: Referral tasks with custom image
 // ============================================================
-
-const REF_TASK_IMAGE = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png';
 
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
@@ -2231,6 +2368,8 @@ const REF_TASKS = [
   { id: 'ref_500', n: 500, snow: 50000, name: "Invite 500 Friends", icon: "🏆" }
 ];
 
+const REF_TASK_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
+
 const STORAGE_LVS = {
   1: { cap: 300, upgCost: 500, label: 'Gift Box' },
   2: { cap: 900, upgCost: 2000, label: 'Snow Pile' },
@@ -2249,7 +2388,7 @@ const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e5
 const S = {
   userId: null,
   startParam: '',
-  user: { snow: 0, miningRate: 0, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false, totalCommissionEarned: 0 },
+  user: { snow: 0, miningRate: 0, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
@@ -2417,7 +2556,6 @@ function santaClick() {
   triggerSnowfall(20);
 }
 
-// ========== WELCOME CHEST ==========
 async function openWelcomeChest() {
   const now = Date.now();
   if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
@@ -2517,7 +2655,6 @@ function showWelcomeModal() {
   if (modal) modal.classList.add('active');
 }
 
-// ========== MACHINE SHOP ==========
 function openMachineShop() {
   buildMachineShop();
   openModal('machineShopModal');
@@ -2578,7 +2715,6 @@ async function purchaseMachine(machineType) {
   }
 }
 
-// ========== STORAGE UPGRADE ==========
 function buildUpgradeContent() {
   const lv = S.user.storageLevel || 1;
   const cur = STORAGE_LVS[lv];
@@ -2626,7 +2762,6 @@ async function upgradeStorage() {
   showNotif(`✅ Storage upgraded to Lv.${lv+1}!`, 's');
 }
 
-// ========== EXCHANGE FUNCTIONS ==========
 function updateSwapBals() {
   document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
 }
@@ -2669,7 +2804,6 @@ async function swapSnowToTon() {
   finally { _exchInFlight = false; }
 }
 
-// ========== WITHDRAW FUNCTIONS ==========
 function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
 
 async function doWithdraw() {
@@ -2691,7 +2825,6 @@ async function doWithdraw() {
   } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
 }
 
-// ========== DEPOSIT FUNCTIONS ==========
 function setDepAmt(v) { document.getElementById('depositAmountInput').value = v; }
 
 async function initiateDeposit() {
@@ -2751,103 +2884,26 @@ function startDepVerify(depId, txHash) {
   }, 10000);
 }
 
-// ========== TASKS MODERN ==========
-function buildModernTaskCard(task, cat, isReferral = false) {
-  const tid = task.id;
-  const done = S.doneTasks.includes(tid);
-  const inFlight = _taskInFlight.has(tid);
-  const icon = isReferral ? REF_TASK_IMAGE : (task.type === 'channel' ? '📢' : '🤖');
-  const name = task.name || (task.link?.split('t.me/')[1]?.split('/')[0] || 'Task');
-  const snow = task.snowReward || 50;
-  const link = task.link || '';
-  const progress = task.completions ? (task.completions / task.targetUsers) * 100 : 0;
-  
-  let buttonHtml = '';
-  if (done) {
-    buttonHtml = '<button class="task-btn done"><i class="fas fa-check-circle"></i> Done</button>';
-  } else if (inFlight) {
-    buttonHtml = '<button class="task-btn disabled"><i class="fas fa-spinner fa-pulse"></i> Verifying...</button>';
-  } else if (isReferral) {
-    const canClaim = (S.user.referralCount || 0) >= task.n && !done;
-    if (canClaim) {
-      buttonHtml = `<button class="task-btn claim" onclick="claimRefTask('${tid}')"><i class="fas fa-gift"></i> Claim Reward</button>`;
-    } else {
-      buttonHtml = `<button class="task-btn go" disabled><i class="fas fa-lock"></i> ${task.n} Friends Needed</button>`;
-    }
-  } else {
-    buttonHtml = `<button class="task-btn go" onclick="doDbTask('${tid}','${link}','${task.type}','${cat}')"><i class="fas fa-external-link-alt"></i> Go to Task</button>`;
-  }
-  
-  return `
-    <div class="task-item-modern">
-      <div class="task-header">
-        <div class="task-icon">
-          ${isReferral ? `<img src="${REF_TASK_IMAGE}" alt="referral">` : (icon === '📢' ? '<i class="fas fa-bullhorn"></i>' : '<i class="fas fa-robot"></i>')}
-        </div>
-        <div class="task-info">
-          <div class="task-name">${esc(name)}</div>
-          <div class="task-reward">
-            <img src="${SNOW_IMG}" alt="snow"> <span>+${fmt(snow)} Snow</span>
-          </div>
-          ${!isReferral && task.completions ? `
-            <div class="task-progress">
-              <div class="progress-track">
-                <div class="progress-fill" style="width: ${progress}%"></div>
-              </div>
-              <div class="progress-text">${task.completions}/${task.targetUsers} completed</div>
-            </div>
-          ` : ''}
-          ${isReferral ? `
-            <div class="task-progress">
-              <div class="progress-track">
-                <div class="progress-fill" style="width: ${Math.min(100, (S.user.referralCount || 0) / task.n * 100)}%"></div>
-              </div>
-              <div class="progress-text">${S.user.referralCount || 0}/${task.n} friends</div>
-            </div>
-          ` : ''}
-        </div>
-      </div>
-      <div class="task-footer">
-        ${buttonHtml}
-      </div>
-    </div>
-  `;
-}
-
 function renderTasks() {
   const referralCount = S.user.referralCount || 0;
   let refHtml = '';
   for (const task of REF_TASKS) {
-    const done = S.doneTasks.includes(task.id);
-    const progress = Math.min(100, (referralCount / task.n) * 100);
+    const completed = S.doneTasks.includes(task.id);
+    const canClaim = referralCount >= task.n && !completed;
+    const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
     refHtml += `
-      <div class="task-item-modern">
-        <div class="task-header">
-          <div class="task-icon">
-            <img src="${REF_TASK_IMAGE}" alt="referral">
-          </div>
-          <div class="task-info">
-            <div class="task-name">${task.name}</div>
-            <div class="task-reward">
-              <img src="${SNOW_IMG}" alt="snow"> <span>+${fmt(task.snow)} Snow</span>
-            </div>
-            <div class="task-progress">
-              <div class="progress-track">
-                <div class="progress-fill" style="width: ${progress}%"></div>
-              </div>
-              <div class="progress-text">${referralCount}/${task.n} friends (${Math.round(progress)}%)</div>
-            </div>
-          </div>
+      <div class="task-item">
+        <div class="ticon"><img src="${REF_TASK_IMG}" alt="Referral"></div>
+        <div class="tinfo">
+          <div class="tname">${task.name}</div>
+          <div class="trew"><img src="${SNOW_IMG}" style="width: 16px; vertical-align: middle;"> ${fmt(task.snow)} Snow</div>
+          <div class="progress-bar"><div style="width: ${progress}%; background: var(--ice); height: 100%; border-radius: 10px;"></div></div>
+          <div class="tstat">${referralCount}/${task.n} friends (${progress}%)</div>
         </div>
-        <div class="task-footer">
-          ${done ? '<button class="task-btn done"><i class="fas fa-check-circle"></i> Done</button>' : 
-            (referralCount >= task.n ? `<button class="task-btn claim" onclick="claimRefTask('${task.id}')"><i class="fas fa-gift"></i> Claim Reward</button>` : 
-            `<button class="task-btn go" disabled><i class="fas fa-lock"></i> ${task.n} Friends Needed</button>`)}
-        </div>
-      </div>
-    `;
+        ${completed ? '<button class="tbtn done">✅ Done</button>' : canClaim ? `<button class="tbtn claim" onclick="claimRefTask('${task.id}')">🎁 Claim</button>` : `<button class="tbtn go" disabled>🔒 ${task.n} needed</button>`}
+      </div>`;
   }
-  document.getElementById('referralTasksList').innerHTML = refHtml || '<div class="empty-ref-list"><i class="fas fa-tasks"></i><div>No referral tasks available</div></div>';
+  document.getElementById('referralTasksList').innerHTML = refHtml || '<div class="hist-empty">Invite friends to unlock rewards!</div>';
   renderSocTasks();
 }
 
@@ -2866,10 +2922,27 @@ async function claimRefTask(taskId) {
   } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
 }
 
+function buildTaskCard(t, cat) {
+  const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
+  const icon = t.type === 'channel' ? '📢' : '🤖';
+  const name = t.name || (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task');
+  const snow = t.snowReward || 50;
+  const link = t.link || '';
+  return `<div class="task-item">
+    <div class="ticon">${icon}</div>
+    <div class="tinfo">
+      <div class="tname">${esc(name)}</div>
+      <div class="trew"><img src="${SNOW_IMG}" style="width: 14px;"> ${fmt(snow)} Snow</div>
+      ${t.completions ? `<div class="tstat">${t.completions}/${t.targetUsers} completed</div>` : ''}
+    </div>
+    ${done ? '<button class="tbtn done">✅ Done</button>' : inFlight ? '<button class="tbtn done">⏳</button>' : `<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type}','${cat}')">Go →</button>`}
+  </div>`;
+}
+
 function renderSocTasks() {
   const p = S.tasks?.partner || [], c = S.tasks?.community || [];
-  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildModernTaskCard(t, 'partner')).join('') : '<div class="empty-ref-list"><i class="fas fa-star"></i><div>No partner tasks available</div></div>';
-  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildModernTaskCard(t, 'community')).join('') : '<div class="empty-ref-list"><i class="fas fa-users"></i><div>No community tasks yet</div><div style="font-size: 11px;">Click + to create one!</div></div>';
+  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : '<div class="hist-empty">No partner tasks</div>';
+  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : '<div class="hist-empty">No community tasks</div>';
 }
 
 function switchTTab(el, t) {
@@ -2881,8 +2954,8 @@ function switchTTab(el, t) {
 
 function switchSocTab(tab) {
   _socTab = tab;
-  document.getElementById('stab-partner').className = 'cat-tab' + (tab === 'partner' ? ' active' : '');
-  document.getElementById('stab-community').className = 'cat-tab' + (tab === 'community' ? ' active' : '');
+  document.getElementById('stab-partner').className = 'ttab' + (tab === 'partner' ? ' active' : '');
+  document.getElementById('stab-community').className = 'ttab' + (tab === 'community' ? ' active' : '');
   document.getElementById('socPartnerList').style.display = tab === 'partner' ? 'block' : 'none';
   document.getElementById('socCommunityList').style.display = tab === 'community' ? 'block' : 'none';
   const fab = document.getElementById('floatAddTask');
@@ -2916,7 +2989,6 @@ async function doDbTask(tid, link, type, cat) {
   }, 3000);
 }
 
-// ========== TASK CREATION ==========
 function setTaskType(t) {
   _atType = t;
   const sel = 'flex:1; padding: 10px; border-radius: 12px; border: 2px solid var(--ice); background: rgba(77,208,225,0.2); color: var(--ice); font-weight: 800;';
@@ -2962,34 +3034,26 @@ async function submitAddTask() {
   finally { _submitInFlight = false; }
 }
 
-// ========== REFERRAL UI MODERN ==========
 function updateRefUI() {
   if (!S.userId) return;
   const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
   const inp = document.getElementById('refLinkInp');
   if (inp) inp.value = link;
   document.getElementById('depositUserIdDisplay').textContent = esc(S.userId);
-  document.getElementById('totalRefsDisp').textContent = `${S.refs.length}`;
-  const totalCommission = S.user.totalCommissionEarned || 0;
-  document.getElementById('totalCommissionEarned').textContent = fmt(totalCommission);
+  document.getElementById('totalRefsDisp').textContent = `${S.refs.length} Friends`;
   const listEl = document.getElementById('recentRefsList');
   if (listEl) {
     if (!S.refs.length) {
-      listEl.innerHTML = '<div class="empty-ref-list"><i class="fas fa-user-plus"></i><div>No referrals yet</div><div style="font-size: 11px; margin-top: 8px;">Share your link to invite friends!</div></div>';
+      listEl.innerHTML = '<div class="hist-empty">No referrals yet</div>';
     } else {
       listEl.innerHTML = S.refs.slice(0, 20).map(r => `
-        <div class="ref-item-modern">
-          <div class="ref-avatar">
-            ${r.photo ? `<img src="${esc(r.photo)}">` : '<i class="fas fa-user"></i>'}
+        <div class="ref-list-item">
+          <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}">` : '🎅'}</div>
+          <div class="rli-info">
+            <div class="rli-name">${esc(r.name)}</div>
+            <div class="rli-date">${r.date || 'Joined recently'}</div>
           </div>
-          <div class="ref-info">
-            <div class="ref-name">${esc(r.name)}</div>
-            <div class="ref-date">${r.date || 'Joined recently'}</div>
-          </div>
-          <div class="ref-earnings">
-            <div class="ref-earnings-amount">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
-            <div class="ref-earnings-label">Snow earned</div>
-          </div>
+          <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
         </div>`).join('');
     }
   }
@@ -3000,7 +3064,6 @@ function copyRefLink() {
   navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
 }
 
-// ========== HISTORY ==========
 function renderExchHist() {
   const el = document.getElementById('exchHist');
   if (!el) return;
@@ -3029,7 +3092,6 @@ function renderWdHist() {
   `).join('');
 }
 
-// ========== WALLET CONNECT ==========
 async function initTON() {
   try {
     if (window.TON_CONNECT_UI) {
@@ -3064,25 +3126,20 @@ function onWDisc() {
 async function connectWallet() { if (S.tonUI) await S.tonUI.openModal(); }
 async function disconnectWallet() { if (S.tonUI) await S.tonUI.disconnect(); }
 
-// ========== UI HELPERS ==========
 function goNav(el) {
   document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
-  const sectionId = el.dataset.s;
-  document.getElementById(sectionId).classList.add('active');
+  document.getElementById(el.dataset.s).classList.add('active');
   
-  // Show/hide floating add task button based on active section
-  const floatBtn = document.getElementById('floatAddTask');
-  if (sectionId === 'sectionTasks') {
-    const activeTab = document.querySelector('#tcSocial .cat-tab.active')?.id;
-    if (activeTab === 'stab-community') {
-      floatBtn.style.display = 'flex';
+  // Show/hide Add Task button only in Tasks section
+  const fab = document.getElementById('floatAddTask');
+  if (fab) {
+    if (el.dataset.s === 'sectionTasks' && _socTab === 'community') {
+      fab.style.display = 'flex';
     } else {
-      floatBtn.style.display = 'none';
+      fab.style.display = 'none';
     }
-  } else {
-    floatBtn.style.display = 'none';
   }
 }
 
@@ -3101,7 +3158,6 @@ function switchWalletModernTab(el, t) {
   document.getElementById(`wt-${t}-modern`).classList.add('active');
 }
 
-// ========== TRANSLATIONS ==========
 const TRANSLATIONS = {
   en: {
     labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
@@ -3133,7 +3189,6 @@ function toggleLangMenu() {
   m.style.display = m.style.display === 'none' ? 'block' : 'none';
 }
 
-// ========== LOADING ANIMATION ==========
 function ldProgress(pct, msg) {
   const fill = document.getElementById('iceFill');
   if (fill) fill.style.width = pct + '%';
