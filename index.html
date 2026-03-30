@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Santa Snow | مملكة الثلج</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>SnowVerse ❄️ | Next Gen Mining</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
@@ -18,57 +18,71 @@
 }
 
 :root {
-  --primary: #00E5FF;
-  --primary-dark: #00ACC1;
-  --gold: #FFD966;
-  --gold-dark: #FFB347;
-  --dark-bg: #0A0F1E;
-  --card-bg: rgba(15, 25, 45, 0.85);
-  --glass: rgba(255, 255, 255, 0.08);
-  --border: rgba(255, 255, 255, 0.1);
-  --text: #FFFFFF;
-  --text-muted: rgba(255, 255, 255, 0.6);
-  --success: #00E676;
-  --warning: #FFB74D;
-  --error: #FF5252;
+  --primary: #00F5FF;
+  --primary-dark: #00B8CC;
+  --primary-glow: rgba(0, 245, 255, 0.5);
+  --secondary: #FFE55C;
+  --secondary-dark: #FFD700;
+  --secondary-glow: rgba(255, 229, 92, 0.4);
+  --accent: #FF6B9D;
+  --success: #4ADE80;
+  --warning: #FBBF24;
+  --bg-deep: #030712;
+  --bg-dark: #0A0F1A;
+  --bg-card: rgba(15, 25, 40, 0.85);
+  --bg-glass: rgba(20, 30, 50, 0.65);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 245, 255, 0.3);
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --gradient-primary: linear-gradient(135deg, #00F5FF, #00B8CC);
+  --gradient-secondary: linear-gradient(135deg, #FFE55C, #FFB347);
+  --gradient-dark: linear-gradient(135deg, #0F172A, #1E293B);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 15px 45px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(0, 245, 255, 0.3);
 }
 
 body {
-  font-family: 'Cairo', sans-serif;
-  background: #0A0F1E;
-  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
   min-height: 100vh;
-  padding-bottom: 85px;
+  padding-bottom: 80px;
   overflow-x: hidden;
   position: relative;
 }
 
-/* خلفية متحركة */
-.animated-bg {
+.background-fixed {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #0A0F1E 0%, #1A2A3A 50%, #0F172A 100%);
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png') center/cover no-repeat;
   z-index: -2;
+  animation: slowZoom 30s ease-in-out infinite;
 }
 
-.animated-bg::before {
+@keyframes slowZoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+body::after {
   content: '';
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 20% 40%, rgba(0, 229, 255, 0.08) 0%, transparent 50%);
-  animation: bgMove 20s ease-in-out infinite;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 245, 255, 0.08), transparent 70%);
+  z-index: -1;
 }
 
-@keyframes bgMove {
-  0%, 100% { transform: translate(-20%, -20%); }
-  50% { transform: translate(0%, 0%); }
-}
-
-/* شاشة التحميل */
+/* Loading Screen Modern */
 #loadingScreen {
   position: fixed;
   inset: 0;
@@ -78,7 +92,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
   transition: opacity 0.8s ease;
 }
 
@@ -90,7 +103,7 @@ body {
 .loading-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(3, 7, 18, 0.75);
   backdrop-filter: blur(8px);
 }
 
@@ -98,260 +111,286 @@ body {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
 }
 
-.ld-logo {
-  width: 140px;
-  height: 140px;
-  animation: floatLogo 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.6));
-  margin-bottom: 20px;
+.loading-logo {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 25px;
+  animation: floatLogo 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px var(--primary-glow));
 }
 
 @keyframes floatLogo {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
 }
 
-.ld-title {
-  font-size: 32px;
+.loading-title {
+  font-size: 36px;
   font-weight: 900;
-  background: linear-gradient(135deg, #fff, var(--primary));
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-bottom: 10px;
-  letter-spacing: 2px;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
 }
 
-.ld-sub {
+.loading-sub {
   font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 30px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 35px;
 }
 
-/* شريط تحميل عصري */
-.loader-wrapper {
+.loading-progress {
   width: 280px;
-  position: relative;
+  margin: 0 auto;
 }
 
-.loader-track {
+.loading-track {
   width: 100%;
   height: 8px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.loader-fill {
+.loading-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, var(--primary), var(--primary-dark), var(--gold));
+  background: var(--gradient-primary);
   border-radius: 20px;
   position: relative;
   transition: width 0.3s ease;
-  animation: fillGlow 1.5s ease-in-out infinite;
+  animation: fillPulse 1.2s ease-in-out infinite;
 }
 
-@keyframes fillGlow {
-  0%, 100% { box-shadow: 0 0 5px var(--primary); }
-  50% { box-shadow: 0 0 20px var(--primary), 0 0 10px var(--gold); }
+@keyframes fillPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
 }
 
-.loader-percent {
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--primary);
+.loading-percent {
   text-align: center;
   margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
   letter-spacing: 1px;
 }
 
-/* الشريط العلوي الجديد */
-.gradient-topbar {
+/* Modern Top Bar - Glass Morphism */
+.topbar-glass {
   position: sticky;
   top: 0;
   z-index: 100;
   padding: 12px 16px;
-  background: linear-gradient(135deg, rgba(10, 15, 30, 0.95), rgba(20, 30, 50, 0.95));
+  background: rgba(3, 7, 18, 0.85);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.topbar-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
 }
 
-.user-avatar-ring {
-  position: relative;
-  width: 52px;
-  height: 52px;
-  flex-shrink: 0;
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 5px 12px 5px 5px;
+  border-radius: 60px;
+  border: 1px solid rgba(0, 245, 255, 0.25);
 }
 
-.user-avatar-ring::before {
+.user-avatar-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.user-avatar-wrap::before {
   content: '';
   position: absolute;
-  inset: -3px;
+  inset: -2px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--gold));
-  animation: ringSpin 3s linear infinite;
+  background: var(--gradient-primary);
+  z-index: -1;
+  animation: rotateRing 4s linear infinite;
 }
 
-@keyframes ringSpin {
+@keyframes rotateRing {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.user-avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1E2A3A, #0F172A);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.user-avatar img {
+.user-avatar-wrap img, .user-avatar-wrap .avatar-placeholder {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.balances-container {
-  flex: 1;
-  display: flex;
-  gap: 12px;
-}
-
-.balance-card-mini {
-  flex: 1;
-  background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 0, 0, 0.3));
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  border-radius: 20px;
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.balance-card-mini:hover {
-  transform: translateY(-2px);
-  border-color: var(--primary);
-}
-
-.balance-icon {
-  width: 36px;
-  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 229, 255, 0.2);
-  border-radius: 12px;
+  font-size: 20px;
+  background: var(--bg-deep);
 }
 
-.balance-icon img {
-  width: 28px;
-  height: 28px;
+.balances-horizontal {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.balance-pill {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 60px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.balance-pill:hover {
+  transform: translateY(-2px);
+}
+
+.balance-pill.snow {
+  border-color: var(--primary);
+}
+
+.balance-pill.ton {
+  border-color: var(--secondary);
+}
+
+.pill-icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill-icon img {
+  width: 22px;
+  height: 22px;
   object-fit: contain;
 }
 
-.balance-info {
-  flex: 1;
-}
-
-.balance-label {
-  font-size: 10px;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.balance-value {
-  font-size: 16px;
-  font-weight: 800;
-  color: #fff;
+.pill-info {
+  display: flex;
+  flex-direction: column;
   line-height: 1.2;
 }
 
-.lang-glow-btn {
-  background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(255, 217, 102, 0.1));
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  border-radius: 30px;
-  padding: 8px 14px;
+.pill-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pill-value {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.lang-selector {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  border-radius: 40px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   transition: all 0.2s;
-  flex-shrink: 0;
 }
 
-.lang-glow-btn:active {
+.lang-selector:active {
   transform: scale(0.95);
 }
 
-/* صفحة Home المطورة */
-.home-hero {
-  padding: 20px 16px;
-}
-
-.hero-glow-card {
-  background: linear-gradient(145deg, rgba(20, 30, 50, 0.9), rgba(10, 15, 30, 0.9));
+/* Hero Card - 3D Style */
+.hero-3d {
+  margin: 16px;
+  background: linear-gradient(145deg, rgba(15, 25, 45, 0.9), rgba(10, 15, 30, 0.95));
   border-radius: 32px;
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  padding: 24px 20px;
+  padding: 20px;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
 }
 
-.hero-glow-card::before {
+.hero-3d::before {
   content: '';
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.1), transparent);
-  animation: cardGlow 8s linear infinite;
+  background: radial-gradient(circle, rgba(0, 245, 255, 0.1), transparent 70%);
+  animation: rotateBg 20s linear infinite;
 }
 
-@keyframes cardGlow {
+@keyframes rotateBg {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.santa-character {
+.santa-3d {
+  position: relative;
   text-align: center;
   margin-bottom: 20px;
-  position: relative;
-  cursor: pointer;
 }
 
-.santa-character img {
+.santa-3d-image {
   width: 180px;
-  height: auto;
-  filter: drop-shadow(0 10px 30px rgba(0, 229, 255, 0.4));
-  transition: transform 0.2s ease;
-  animation: santaWave 3s ease-in-out infinite;
+  height: 180px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-@keyframes santaWave {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-8px) rotate(2deg); }
+.santa-3d-image:active {
+  transform: scale(0.92) rotate(5deg);
 }
 
-.santa-character:active img {
-  transform: scale(0.92);
+.santa-3d-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 15px var(--primary-glow));
+  animation: santaBob 3s ease-in-out infinite;
+}
+
+@keyframes santaBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 .stats-grid {
@@ -359,182 +398,198 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
-.stat-glass-card {
+.stat-card {
   background: rgba(0, 0, 0, 0.4);
   border-radius: 20px;
   padding: 14px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
 }
 
 .stat-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-
-.stat-value {
   font-size: 24px;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1;
+  margin-bottom: 6px;
 }
 
 .stat-label {
   font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 5px;
-}
-
-.storage-section {
-  margin-bottom: 16px;
-}
-
-.storage-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.storage-title {
-  font-size: 12px;
-  color: var(--text-muted);
   font-weight: 600;
-}
-
-.storage-level {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.storage-level:active {
-  transform: scale(0.95);
-}
-
-.storage-progress {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 16px;
-  height: 12px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-
-.storage-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--primary), var(--gold));
-  border-radius: 16px;
-  width: 0%;
-  transition: width 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.storage-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shine 2s infinite;
-}
-
-@keyframes shine {
-  100% { left: 100%; }
-}
-
-.storage-amount {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
 }
 
-.claim-button {
-  width: 100%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  border: none;
-  border-radius: 24px;
-  padding: 16px;
-  color: white;
-  font-size: 16px;
+.stat-value {
+  font-size: 20px;
   font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-}
-
-.claim-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.claim-button:active::before {
-  width: 300px;
-  height: 300px;
-}
-
-.claim-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.machine-shop-button {
-  width: 100%;
-  background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(0, 0, 0, 0.4));
-  border: 2px solid rgba(0, 229, 255, 0.3);
-  border-radius: 24px;
-  padding: 14px;
   color: var(--primary);
+}
+
+.stat-unit {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-claim {
+  flex: 1;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 60px;
+  padding: 14px 20px;
+  color: white;
   font-size: 14px;
   font-weight: 800;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-claim:active {
+  transform: scale(0.97);
+}
+
+.btn-claim:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-upgrade {
+  width: 52px;
+  background: rgba(255, 229, 92, 0.15);
+  border: 2px solid var(--secondary);
+  border-radius: 60px;
+  color: var(--secondary);
+  font-size: 20px;
+  font-weight: 800;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
   transition: all 0.2s;
 }
 
-.machine-shop-button:active {
+.btn-upgrade:active {
+  transform: scale(0.95);
+  background: rgba(255, 229, 92, 0.3);
+}
+
+.btn-upgrade span:first-child {
+  font-size: 22px;
+}
+
+.btn-upgrade span:last-child {
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.btn-machine {
+  width: 100%;
+  margin-top: 16px;
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), rgba(0, 184, 204, 0.15));
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  border-radius: 60px;
+  padding: 14px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-machine:active {
   transform: scale(0.98);
-  background: rgba(0, 229, 255, 0.25);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.25), rgba(0, 184, 204, 0.25));
 }
 
-/* صفحة Tasks المطورة */
+/* Welcome Chest */
+.welcome-chest {
+  margin: 16px;
+  text-align: center;
+  cursor: pointer;
+  animation: chestGlow 2s ease-in-out infinite;
+}
+
+.chest-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.chest-img {
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 0 20px var(--primary-glow));
+  transition: transform 0.2s;
+}
+
+.chest-img:active {
+  transform: scale(0.95);
+}
+
+.chest-glow-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, var(--primary-glow), transparent);
+  border-radius: 50%;
+  animation: pulseRing 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseRing {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.chest-text {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary);
+  background: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 60px;
+  backdrop-filter: blur(8px);
+}
+
+/* Tasks Section - Modern */
 .tasks-header {
-  padding: 20px 16px 0;
-}
-
-.tasks-tabs {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
-  background: rgba(0, 0, 0, 0.3);
+  margin: 16px 16px 12px;
+  background: rgba(255, 255, 255, 0.03);
   padding: 6px;
   border-radius: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .task-tab {
@@ -544,80 +599,80 @@ body {
   background: transparent;
   border: none;
   border-radius: 50px;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
   color: var(--text-muted);
   transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .task-tab.active {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  background: var(--gradient-primary);
   color: white;
-  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
-.tasks-container {
-  padding: 0 16px 20px;
-}
-
-.task-category-tabs {
+.task-subtabs {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 4px;
-  border-radius: 40px;
+  margin: 0 16px 12px;
 }
 
-.category-tab {
+.subtab {
   flex: 1;
   padding: 10px;
   text-align: center;
-  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 40px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   transition: all 0.2s;
 }
 
-.category-tab.active {
-  background: rgba(0, 229, 255, 0.2);
-  color: var(--primary);
+.subtab.active {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: white;
+}
+
+.task-list {
+  padding: 0 16px 20px;
 }
 
 .task-card {
-  background: linear-gradient(135deg, rgba(20, 30, 50, 0.8), rgba(10, 15, 30, 0.8));
-  border-radius: 24px;
-  padding: 16px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 12px;
+  border: 1px solid var(--border-light);
   transition: all 0.2s;
 }
 
 .task-card:hover {
   transform: translateX(4px);
-  border-color: rgba(0, 229, 255, 0.3);
+  border-color: var(--primary);
 }
 
 .task-icon {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(0, 0, 0, 0.3));
-  border-radius: 20px;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 245, 255, 0.1);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  flex-shrink: 0;
+  font-size: 28px;
 }
 
 .task-info {
@@ -625,126 +680,381 @@ body {
 }
 
 .task-name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   margin-bottom: 4px;
 }
 
 .task-reward {
+  font-size: 11px;
+  color: var(--secondary);
+  font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--gold);
-  font-weight: 700;
+  gap: 4px;
 }
 
 .task-reward img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
+  width: 14px;
+  height: 14px;
 }
 
 .task-progress {
-  margin-top: 8px;
-}
-
-.progress-track {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-  height: 6px;
+  margin-top: 6px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
   overflow: hidden;
 }
 
-.progress-fill {
+.task-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary), var(--gold));
-  border-radius: 10px;
-  width: 0%;
+  background: var(--gradient-primary);
+  border-radius: 4px;
+  transition: width 0.3s;
 }
 
-.task-button {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+.task-btn {
+  background: var(--gradient-primary);
   border: none;
-  border-radius: 16px;
-  padding: 10px 20px;
+  border-radius: 40px;
+  padding: 8px 16px;
   color: white;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
-  white-space: nowrap;
   transition: all 0.2s;
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
-.task-button:active {
+.task-btn:active {
   transform: scale(0.95);
 }
 
-.task-button.done {
+.task-btn.done {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-muted);
   cursor: default;
 }
 
-.task-button.done:active {
+.task-btn.done:active {
   transform: none;
 }
 
-/* باقي الأنماط مع الحفاظ على الوظائف */
-.sec {
-  display: none;
-  animation: fadeIn 0.3s ease;
+/* Wallet Section */
+.wallet-container {
+  padding: 16px;
 }
 
-.sec.active {
+.wallet-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px;
+  border-radius: 60px;
+}
+
+.wallet-tab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.wallet-tab.active {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.wallet-content {
+  display: none;
+  animation: fadeSlide 0.3s ease;
+}
+
+.wallet-content.active {
   display: block;
 }
 
-@keyframes fadeIn {
+@keyframes fadeSlide {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.notif {
-  position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100px);
-  background: rgba(10, 20, 35, 0.98);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  border-radius: 50px;
-  padding: 12px 24px;
-  font-size: 13px;
+.wallet-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border-radius: 28px;
+  padding: 20px;
+  border: 1px solid var(--border-light);
+}
+
+.wallet-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wallet-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.wallet-address {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.btn-connect {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 40px;
+  padding: 8px 16px;
+  color: white;
+  font-size: 12px;
   font-weight: 700;
-  z-index: 1000;
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  white-space: nowrap;
-  max-width: 90vw;
-  white-space: normal;
+  cursor: pointer;
+}
+
+.deposit-warning {
+  background: rgba(255, 229, 92, 0.1);
+  border: 1px solid rgba(255, 229, 92, 0.3);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 11px;
+  color: var(--secondary);
+  display: flex;
+  gap: 8px;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.input-field {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.preset-btn {
+  flex: 1;
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  border-radius: 12px;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-btn:active {
+  transform: scale(0.96);
+  background: rgba(0, 245, 255, 0.2);
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 60px;
+  padding: 14px;
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  width: 100%;
+  background: var(--gradient-secondary);
+  border: none;
+  border-radius: 60px;
+  padding: 14px;
+  color: #1a1a2e;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.swap-row {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.swap-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.swap-currency {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+}
+
+.swap-input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.swap-input-area input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  text-align: right;
+  outline: none;
+}
+
+.swap-max {
+  background: rgba(0, 245, 255, 0.2);
+  border: 1px solid var(--primary);
+  border-radius: 40px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.swap-output {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.swap-output-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--secondary);
+}
+
+.fee-info {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 8px;
   text-align: center;
 }
 
-.notif.show {
-  transform: translateX(-50%) translateY(0);
+/* History Box */
+.history-box {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  margin-top: 16px;
+  overflow: hidden;
 }
 
-.notif.success { background: rgba(0, 230, 118, 0.2); border-color: var(--success); color: var(--success); }
-.notif.error { background: rgba(255, 82, 82, 0.2); border-color: var(--error); color: var(--error); }
-.notif.warning { background: rgba(255, 183, 77, 0.2); border-color: var(--warning); color: var(--warning); }
+.history-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-.bnav {
+.history-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(10, 15, 30, 0.95);
+  background: rgba(3, 7, 18, 0.95);
   backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(0, 229, 255, 0.2);
+  border-top: 1px solid rgba(0, 245, 255, 0.2);
   display: flex;
-  padding: 8px 16px 20px;
-  gap: 8px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
   z-index: 200;
 }
 
@@ -753,45 +1063,67 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 8px 0;
+  justify-content: center;
+  padding: 8px 4px 12px;
   cursor: pointer;
-  border-radius: 16px;
   transition: all 0.2s;
-}
-
-.nav-item.active {
-  background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(0, 0, 0, 0.2));
+  gap: 4px;
 }
 
 .nav-icon {
-  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
   transition: all 0.2s;
 }
 
-.nav-item.active .nav-icon {
+.nav-item.active .nav-icon img {
+  filter: drop-shadow(0 0 8px var(--primary));
   transform: translateY(-2px);
-  color: var(--primary);
-  text-shadow: 0 0 10px var(--primary);
 }
 
 .nav-label {
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   color: var(--text-muted);
+  transition: all 0.2s;
 }
 
 .nav-item.active .nav-label {
   color: var(--primary);
 }
 
-/* مودالات وباقي العناصر */
+/* Sections */
+.section {
+  display: none;
+  padding: 0 0 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
   z-index: 500;
   align-items: center;
   justify-content: center;
@@ -802,18 +1134,18 @@ body {
 }
 
 .modal-content {
-  background: linear-gradient(145deg, #1A2538, #0F172A);
+  background: linear-gradient(145deg, #0F192A, #0A0F1A);
+  border: 1px solid rgba(0, 245, 255, 0.3);
   border-radius: 32px;
   padding: 20px;
   width: 90%;
   max-width: 400px;
   max-height: 80vh;
   overflow-y: auto;
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  animation: modalSlide 0.3s ease;
+  animation: modalPop 0.3s ease;
 }
 
-@keyframes modalSlide {
+@keyframes modalPop {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
@@ -824,7 +1156,7 @@ body {
   align-items: center;
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .modal-title {
@@ -839,247 +1171,520 @@ body {
   border-radius: 50%;
   width: 32px;
   height: 32px;
+  color: var(--text-muted);
   cursor: pointer;
-  color: white;
-  transition: all 0.2s;
+  font-size: 14px;
 }
 
-.modal-close:active {
-  transform: scale(0.9);
+/* Notifications */
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: rgba(10, 15, 30, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: 60px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+  max-width: 90vw;
+  white-space: normal;
+  text-align: center;
+  pointer-events: none;
 }
 
-/* دعم الشاشات الصغيرة */
-@media (max-width: 480px) {
-  .balance-card-mini {
-    padding: 6px 10px;
-  }
-  
-  .balance-value {
-    font-size: 14px;
-  }
-  
-  .santa-character img {
-    width: 140px;
-  }
-  
-  .stat-value {
-    font-size: 20px;
-  }
+.notification.show {
+  transform: translateX(-50%) translateY(0);
 }
 
-.snow-particle {
+.notification.success { border-color: var(--primary); color: var(--primary); }
+.notification.error { border-color: #FF6B6B; color: #FF6B6B; }
+.notification.warning { border-color: var(--secondary); color: var(--secondary); }
+
+/* Particles */
+.particle {
   position: fixed;
   pointer-events: none;
-  z-index: 1000;
-  animation: particleFall 1s ease-out forwards;
+  z-index: 400;
+  animation: particleFly 0.8s ease-out forwards;
 }
 
-@keyframes particleFall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100px) rotate(360deg);
-    opacity: 0;
-  }
+@keyframes particleFly {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-60px) scale(0.3); opacity: 0; }
+}
+
+/* Snowflakes */
+.snowflake {
+  position: fixed;
+  color: white;
+  pointer-events: none;
+  z-index: 999;
+  animation: snowFall linear forwards;
+}
+
+@keyframes snowFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .balance-pill { padding: 4px 10px; }
+  .pill-value { font-size: 12px; }
+  .stat-value { font-size: 18px; }
+  .santa-3d-image { width: 150px; height: 150px; }
 }
 </style>
 </head>
 <body>
 
-<div class="animated-bg"></div>
+<div class="background-fixed"></div>
 
+<!-- Welcome Modal -->
+<div id="welcomeModal" class="modal">
+  <div class="modal-content" style="text-align: center;">
+    <div style="margin-bottom: 20px;">
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" style="width: 100px; height: 100px; animation: floatLogo 1s ease-in-out infinite;">
+    </div>
+    <div class="modal-title" style="font-size: 24px; margin-bottom: 12px;">🎄 Santa's Gift! 🎄</div>
+    <div style="color: var(--secondary); margin-bottom: 20px;">Open to receive your rewards!</div>
+    <button class="btn-primary" onclick="openWelcomeChestFromModal()" style="width: auto; padding: 12px 32px;">🎁 Open Chest! 🎁</button>
+  </div>
+</div>
+
+<!-- Loading Screen -->
 <div id="loadingScreen">
   <div class="loading-overlay"></div>
   <div class="loading-content">
-    <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="Santa Snow">
-    <div class="ld-title">SANTA SNOW</div>
-    <div class="ld-sub" id="ldStatus">جاري التحميل...</div>
-    <div class="loader-wrapper">
-      <div class="loader-track">
-        <div class="loader-fill" id="loaderFill"></div>
+    <img class="loading-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="SnowVerse">
+    <div class="loading-title">SnowVerse</div>
+    <div class="loading-sub" id="ldStatus">Initializing...</div>
+    <div class="loading-progress">
+      <div class="loading-track">
+        <div class="loading-fill" id="loadingFill"></div>
       </div>
-      <div class="loader-percent" id="loaderPercent">0%</div>
+      <div class="loading-percent" id="ldPercent">0%</div>
     </div>
   </div>
 </div>
 
-<!-- الشريط العلوي الجديد -->
-<div class="gradient-topbar">
-  <div class="user-avatar-ring">
-    <div class="user-avatar" id="userAvatar">
-      <div>🎅</div>
-    </div>
-  </div>
-  <div class="balances-container">
-    <div class="balance-card-mini">
-      <div class="balance-icon">
-        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
-      </div>
-      <div class="balance-info">
-        <div class="balance-label">SNOW</div>
-        <div class="balance-value" id="topSnow">0</div>
+<!-- Top Bar -->
+<div class="topbar-glass">
+  <div class="topbar-container">
+    <div class="user-profile">
+      <div class="user-avatar-wrap" id="userAvatar">
+        <div class="avatar-placeholder">🎅</div>
       </div>
     </div>
-    <div class="balance-card-mini">
-      <div class="balance-icon">
-        <i class="fas fa-coins" style="font-size: 24px; color: var(--gold);"></i>
+    <div class="balances-horizontal">
+      <div class="balance-pill snow">
+        <div class="pill-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow"></div>
+        <div class="pill-info">
+          <span class="pill-label">SNOW</span>
+          <span class="pill-value" id="topSnow">0</span>
+        </div>
       </div>
-      <div class="balance-info">
-        <div class="balance-label">TON</div>
-        <div class="balance-value" id="topTon">0</div>
+      <div class="balance-pill ton">
+        <div class="pill-icon"><i class="fas fa-coins" style="color: var(--secondary); font-size: 18px;"></i></div>
+        <div class="pill-info">
+          <span class="pill-label">TON</span>
+          <span class="pill-value" id="topTON">0</span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="lang-glow-btn" id="langBtn" onclick="toggleLangMenu()">
-    <span id="langFlag">🇪🇬</span>
-    <span id="langCode">AR</span>
-  </div>
-</div>
-
-<div id="langMenu" style="display: none; position: fixed; top: 70px; right: 12px; z-index: 300; background: rgba(10, 20, 35, 0.98); backdrop-filter: blur(16px); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 16px; overflow: hidden; min-width: 140px;">
-  <div style="padding: 8px 0">
-    <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')" style="padding: 10px 16px; cursor: pointer; transition: background 0.2s;">🇬🇧 English</div>
-    <div class="lang-opt" data-lang="ar" data-flag="🇪🇬" data-label="العربية" onclick="setLang('ar','🇪🇬','AR')" style="padding: 10px 16px; cursor: pointer; transition: background 0.2s;">🇪🇬 العربية</div>
-    <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')" style="padding: 10px 16px; cursor: pointer; transition: background 0.2s;">🇷🇺 Русский</div>
-  </div>
-</div>
-
-<!-- الصفحة الرئيسية المطورة -->
-<div class="sec active" id="sectionHome">
-  <div class="home-hero">
-    <div class="hero-glow-card">
-      <div class="santa-character" onclick="santaClick()">
-        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" alt="Santa">
-      </div>
-      
-      <div class="stats-grid">
-        <div class="stat-glass-card">
-          <div class="stat-icon">⏱️</div>
-          <div class="stat-value" id="heroRateDay">0</div>
-          <div class="stat-label">سنو/يوم</div>
-        </div>
-        <div class="stat-glass-card">
-          <div class="stat-icon">📦</div>
-          <div class="stat-value" id="heroAccrued">0</div>
-          <div class="stat-label">متراكم</div>
-        </div>
-      </div>
-      
-      <div class="storage-section">
-        <div class="storage-header">
-          <span class="storage-title">🪣 مخزن الثلج</span>
-          <div class="storage-level" onclick="openModal('upgradeModal')">
-            المستوى <span id="storageLvDisp">1</span> ⬆️
-          </div>
-        </div>
-        <div class="storage-progress">
-          <div class="storage-fill" id="storageFill"></div>
-        </div>
-        <div class="storage-amount">
-          <span id="storageCurrent">0</span>
-          <span id="storageMax">0</span>
-        </div>
-      </div>
-      
-      <button class="claim-button" id="collectBtn" onclick="collectSnow()" disabled>
-        <i class="fas fa-snowflake"></i>
-        <span id="claimBtnText">جمع الثلج</span>
-        <span id="claimPct">0%</span>
-      </button>
-      
-      <button class="machine-shop-button" onclick="openMachineShop()">
-        <i class="fas fa-microchip"></i>
-        تطوير آلات التعدين
-        <i class="fas fa-arrow-left"></i>
-      </button>
+    <div class="lang-selector" id="langBtn" onclick="toggleLangMenu()">
+      <span id="langFlag">🇷🇺</span>
+      <span id="langCode">RU</span>
+      <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
     </div>
   </div>
 </div>
 
-<!-- صفحة المهام المطورة -->
-<div class="sec" id="sectionTasks">
-  <div class="tasks-header">
-    <div class="tasks-tabs">
-      <div class="task-tab active" data-t="social" onclick="switchTaskTab(this, 'social')">
-        <i class="fas fa-globe"></i> مهام
-      </div>
-      <div class="task-tab" data-t="referral" onclick="switchTaskTab(this, 'referral')">
-        <i class="fas fa-users"></i> الإحالات
-      </div>
+<!-- Language Menu -->
+<div id="langMenu" style="display: none; position: fixed; top: 70px; right: 12px; z-index: 300; background: rgba(10, 15, 30, 0.98); border: 1px solid rgba(0, 245, 255, 0.3); border-radius: 20px; overflow: hidden; backdrop-filter: blur(20px); box-shadow: var(--shadow-lg);">
+  <div style="padding: 8px 0;">
+    <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')" style="padding: 12px 20px; cursor: pointer; transition: background 0.2s;">🇬🇧 English</div>
+    <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')" style="padding: 12px 20px; cursor: pointer; transition: background 0.2s;">🇷🇺 Русский</div>
+  </div>
+</div>
+
+<!-- Home Section -->
+<div class="section active" id="sectionHome">
+  <div id="welcomeChest" class="welcome-chest" style="display: none;">
+    <div class="chest-wrapper" onclick="openWelcomeChest()">
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" class="chest-img">
+      <div class="chest-glow-ring"></div>
+      <div class="chest-text">🎁 OPEN YOUR WELCOME GIFT! 🎁</div>
     </div>
   </div>
   
-  <div class="tasks-container">
-    <div class="task-category-tabs" id="socialTabs">
-      <div class="category-tab active" onclick="switchSocTab('partner')">⭐ شركاء</div>
-      <div class="category-tab" onclick="switchSocTab('community')">🌍 المجتمع</div>
-    </div>
-    <div id="partnerTasksList"></div>
-    <div id="communityTasksList" style="display: none;"></div>
-    <div id="referralTasksList"></div>
-  </div>
-</div>
-
-<div class="sec" id="sectionFriends">
-  <div style="padding: 20px 16px;">
-    <div class="hero-glow-card" style="text-align: center;">
-      <div style="font-size: 48px; margin-bottom: 10px;">👥</div>
-      <div style="font-size: 20px; font-weight: 800; color: var(--primary);">الأصدقاء والإحالات</div>
-      <div style="font-size: 14px; color: var(--gold); margin: 10px 0;">15% عمولة من إنتاج أصدقائك!</div>
-      <div class="ref-link-row" style="display: flex; gap: 8px; margin: 15px 0;">
-        <input class="ref-inp" id="refLinkInp" readonly style="flex:1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; color: white; font-size: 12px;">
-        <button class="btn-copy" onclick="copyRefLink()" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: 12px; padding: 0 20px; color: white; font-weight: 800; cursor: pointer;">نسخ</button>
+  <div class="hero-3d">
+    <div class="santa-3d">
+      <div class="santa-3d-image" onclick="santaClick()">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" draggable="false">
       </div>
-      <div id="totalRefsDisp" style="background: rgba(0,229,255,0.1); border-radius: 20px; padding: 8px; margin: 10px 0;">0 أصدقاء</div>
-      <div id="recentRefsList"></div>
     </div>
-  </div>
-</div>
-
-<div class="sec" id="sectionWallet">
-  <div style="padding: 20px 16px;">
-    <div class="hero-glow-card">
-      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-        <button class="machine-shop-button" style="flex:1;" onclick="switchWalletTab('deposit')">💰 إيداع</button>
-        <button class="machine-shop-button" style="flex:1;" onclick="switchWalletTab('withdraw')">💸 سحب</button>
-        <button class="machine-shop-button" style="flex:1;" onclick="switchWalletTab('exchange')">🔄 صرف</button>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-label">Accrued</div>
+        <div class="stat-value" id="heroAccrued">0</div>
+        <div class="stat-unit">Snow</div>
       </div>
-      <div id="walletDeposit"></div>
-      <div id="walletWithdraw" style="display:none;"></div>
-      <div id="walletExchange" style="display:none;"></div>
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-label">Rate/Day</div>
+        <div class="stat-value" id="heroRateDay">0</div>
+        <div class="stat-unit">Snow/day</div>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button class="btn-claim" id="collectBtn" onclick="collectSnow()" disabled>
+        <i class="fas fa-snowflake"></i>
+        <span id="claimBtnText">Claim Snow</span>
+      </button>
+      <button class="btn-upgrade" onclick="openModal('upgradeModal')">
+        <span>↑</span>
+        <span>Lv.<span id="storageLvDisp">1</span></span>
+      </button>
+    </div>
+    <button class="btn-machine" onclick="openMachineShop()">
+      <i class="fas fa-microchip"></i>
+      Upgrade Mining Machines
+      <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Friends Section -->
+<div class="section" id="sectionFriends">
+  <div style="padding: 16px;">
+    <div style="background: var(--gradient-dark); border-radius: 28px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border-light);">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="font-size: 48px;">👥</div>
+          <div>
+            <div style="font-size: 28px; font-weight: 800; color: var(--primary);" id="totalRefsDisp">0</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Friends</div>
+          </div>
+        </div>
+        <div style="background: rgba(0, 245, 255, 0.15); padding: 8px 16px; border-radius: 40px;">
+          <span style="font-size: 24px; font-weight: 800; color: var(--primary);">15%</span>
+          <span style="font-size: 11px;">Commission</span>
+        </div>
+      </div>
+      <div style="background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 12px; margin-bottom: 16px;">
+        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">🔗 Your Referral Link</div>
+        <div style="display: flex; gap: 8px;">
+          <input class="input-field" id="refLinkInp" readonly style="flex: 1; padding: 10px; font-size: 11px;">
+          <button class="btn-primary" onclick="copyRefLink()" style="width: auto; padding: 10px 20px;"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+        💡 Invite friends and earn <strong style="color: var(--primary);">15% commission</strong> from their machine purchases (one-time)!
+      </div>
+    </div>
+    <div class="history-box">
+      <div class="history-header">
+        <i class="fas fa-users"></i> Recent Referrals
+      </div>
+      <div id="recentRefsList">
+        <div class="history-empty">No referrals yet</div>
+      </div>
     </div>
   </div>
 </div>
 
-<button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: 50px; padding: 12px 28px; color: white; font-weight: 800; cursor: pointer; z-index: 150; box-shadow: 0 4px 20px rgba(0,229,255,0.4);">➕ إضافة مهمة</button>
+<!-- Tasks Section -->
+<div class="section" id="sectionTasks">
+  <div class="tasks-header">
+    <button class="task-tab active" data-t="social" onclick="switchTaskTab(this, 'social')">
+      <i class="fas fa-globe"></i> Social
+    </button>
+    <button class="task-tab" data-t="referral" onclick="switchTaskTab(this, 'referral')">
+      <i class="fas fa-gift"></i> Referral
+    </button>
+  </div>
+  <div id="taskSocialContent">
+    <div class="task-subtabs">
+      <button class="subtab active" id="stab-partner" onclick="switchSocialTab('partner')">⭐ Partner</button>
+      <button class="subtab" id="stab-community" onclick="switchSocialTab('community')">🌍 Community</button>
+    </div>
+    <div class="task-list" id="socPartnerList"></div>
+    <div class="task-list" id="socCommunityList" style="display: none;"></div>
+  </div>
+  <div id="taskReferralContent" style="display: none;">
+    <div class="task-list" id="referralTasksList"></div>
+  </div>
+</div>
 
-<nav class="bnav">
-  <div class="nav-item active" data-s="sectionHome" onclick="goNav(this)">
-    <div class="nav-icon"><i class="fas fa-home"></i></div>
-    <div class="nav-label">الرئيسية</div>
+<!-- Wallet Section -->
+<div class="section" id="sectionWallet">
+  <div class="wallet-container">
+    <div class="wallet-tabs">
+      <button class="wallet-tab active" data-wt="deposit" onclick="switchWalletTab(this, 'deposit')">
+        <i class="fas fa-arrow-down"></i> Deposit
+      </button>
+      <button class="wallet-tab" data-wt="withdraw" onclick="switchWalletTab(this, 'withdraw')">
+        <i class="fas fa-arrow-up"></i> Withdraw
+      </button>
+      <button class="wallet-tab" data-wt="exchange" onclick="switchWalletTab(this, 'exchange')">
+        <i class="fas fa-exchange-alt"></i> Exchange
+      </button>
+    </div>
+    
+    <!-- Deposit Tab -->
+    <div class="wallet-content active" id="wt-deposit">
+      <div class="wallet-card">
+        <div class="wallet-card-title">
+          <i class="fas fa-coins" style="color: var(--primary);"></i> Deposit TON
+        </div>
+        <div class="wallet-status">
+          <div>
+            <div style="font-size: 10px; color: var(--text-muted);">Wallet</div>
+            <div class="wallet-address" id="walletAddressDisplay">Not connected</div>
+          </div>
+          <button class="btn-connect" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> Connect</button>
+        </div>
+        <div class="deposit-warning">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div><strong>IMPORTANT:</strong> Your User ID <span id="depositUserIdDisplay" style="background: rgba(0,245,255,0.2); padding: 2px 8px; border-radius: 20px; font-weight: 800;"></span> must be the ONLY comment in the transaction.</div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Amount (TON)</label>
+          <input type="number" id="depositAmountInput" class="input-field" placeholder="1" step="0.1" min="1">
+        </div>
+        <div class="preset-buttons">
+          <span class="preset-btn" onclick="setDepAmt(1)">1</span>
+          <span class="preset-btn" onclick="setDepAmt(2)">2</span>
+          <span class="preset-btn" onclick="setDepAmt(5)">5</span>
+          <span class="preset-btn" onclick="setDepAmt(10)">10</span>
+        </div>
+        <button class="btn-primary" id="submitDepositBtn" disabled onclick="initiateDeposit()">
+          <i class="fas fa-arrow-down"></i> Deposit TON
+        </button>
+        <div id="depositStatus" style="display: none; margin-top: 12px; text-align: center; font-size: 12px; color: var(--primary);"></div>
+      </div>
+    </div>
+    
+    <!-- Withdraw Tab -->
+    <div class="wallet-content" id="wt-withdraw">
+      <div class="wallet-card">
+        <div class="wallet-card-title">
+          <i class="fas fa-arrow-up" style="color: var(--secondary);"></i> Withdraw TON
+        </div>
+        <div class="input-group">
+          <label class="input-label">TON Wallet Address</label>
+          <input type="text" class="input-field" id="wdAddr" placeholder="UQ...">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Amount (TON)</label>
+          <input type="number" class="input-field" id="wdAmt" placeholder="0.02" min="0.02" step="0.01">
+        </div>
+        <div class="preset-buttons">
+          <span class="preset-btn" onclick="setWdAmt(0.02)">0.02</span>
+          <span class="preset-btn" onclick="setWdAmt(0.05)">0.05</span>
+          <span class="preset-btn" onclick="setWdAmt(0.1)">0.1</span>
+          <span class="preset-btn" onclick="setWdAmt(0.5)">0.5</span>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 12px; text-align: center; margin-bottom: 16px;">
+          <div style="font-size: 11px; color: var(--text-muted);">Your Balance</div>
+          <div style="font-size: 24px; font-weight: 800; color: var(--secondary);" id="wdTonBalance">0 TON</div>
+        </div>
+        <button class="btn-secondary" onclick="doWithdraw()">
+          <i class="fas fa-arrow-up"></i> Withdraw TON
+        </button>
+      </div>
+      <div class="history-box" style="margin-top: 16px;">
+        <div class="history-header"><i class="fas fa-history"></i> Withdrawal History</div>
+        <div id="wdHist"><div class="history-empty">No withdrawals yet</div></div>
+      </div>
+    </div>
+    
+    <!-- Exchange Tab -->
+    <div class="wallet-content" id="wt-exchange">
+      <div class="wallet-card">
+        <div class="wallet-card-title">
+          <i class="fas fa-exchange-alt" style="color: var(--primary);"></i> Exchange Snow → TON
+          <span style="background: rgba(0,245,255,0.15); padding: 2px 8px; border-radius: 20px; font-size: 10px;">Fee: 4%</span>
+        </div>
+        <div class="swap-row">
+          <div class="swap-header">
+            <div class="swap-currency">
+              <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px;"> Snow
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted);" id="swapFromBalSnow">0 Snow</div>
+          </div>
+          <div class="swap-input-area">
+            <input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwapSnowToTon()">
+            <span class="swap-max" onclick="swapSnowMax()">MAX</span>
+          </div>
+          <div class="fee-info">
+            <i class="fas fa-info-circle"></i> Fee: 4% (<span id="feeAmountDisplay">0</span> Snow)
+          </div>
+          <div class="swap-output">
+            <div style="font-size: 11px; color: var(--text-muted);">You get (after fee):</div>
+            <div class="swap-output-value" id="swapTonOut">0</div>
+            <div style="font-size: 11px;">TON</div>
+          </div>
+        </div>
+        <div class="fee-info" style="margin-bottom: 16px;">
+          📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON
+        </div>
+        <button class="btn-primary" onclick="swapSnowToTon()">
+          <i class="fas fa-exchange-alt"></i> Exchange
+        </button>
+      </div>
+      <div class="history-box" style="margin-top: 16px;">
+        <div class="history-header"><i class="fas fa-history"></i> Exchange History</div>
+        <div id="exchHist"><div class="history-empty">No conversions yet</div></div>
+      </div>
+    </div>
   </div>
-  <div class="nav-item" data-s="sectionTasks" onclick="goNav(this)">
-    <div class="nav-icon"><i class="fas fa-tasks"></i></div>
-    <div class="nav-label">المهام</div>
+</div>
+
+<!-- Support Button -->
+<div class="support-img-btn" style="position: fixed; bottom: 100px; right: 16px; z-index: 150; width: 48px; height: 48px; cursor: pointer;" onclick="openSupport()">
+  <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px var(--primary-glow));">
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <div class="nav-item active" data-section="sectionHome" onclick="goToSection(this)">
+    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div>
+    <div class="nav-label">Home</div>
   </div>
-  <div class="nav-item" data-s="sectionFriends" onclick="goNav(this)">
-    <div class="nav-icon"><i class="fas fa-users"></i></div>
-    <div class="nav-label">الأصدقاء</div>
+  <div class="nav-item" data-section="sectionTasks" onclick="goToSection(this)">
+    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div>
+    <div class="nav-label">Tasks</div>
   </div>
-  <div class="nav-item" data-s="sectionWallet" onclick="goNav(this)">
-    <div class="nav-icon"><i class="fas fa-wallet"></i></div>
-    <div class="nav-label">المحفظة</div>
+  <div class="nav-item" data-section="sectionFriends" onclick="goToSection(this)">
+    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div>
+    <div class="nav-label">Friends</div>
+  </div>
+  <div class="nav-item" data-section="sectionWallet" onclick="goToSection(this)">
+    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div>
+    <div class="nav-label">Wallet</div>
   </div>
 </nav>
 
-<div id="notif"></div>
+<!-- Modals -->
+<div id="upgradeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">⬆️ Upgrade Storage</div>
+      <button class="modal-close" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="upgradeContent"></div>
+  </div>
+</div>
+
+<div id="machineShopModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">🤖 Machine Shop</div>
+      <button class="modal-close" onclick="closeModal('machineShopModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="machineShopContent"></div>
+  </div>
+</div>
+
+<div id="addTaskModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">➕ Add Community Task</div>
+      <button class="modal-close" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="background: rgba(0,245,255,0.1); border-radius: 16px; padding: 12px; margin-bottom: 16px; font-size: 12px;">
+      💡 Cost = <strong style="color: var(--primary);">Target Users × 60 Snow</strong><br>
+      <span style="font-size: 11px;">Min target: 100 users | 100 users = 6,000 Snow</span>
+    </div>
+    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+      <button id="atTypeChannel" onclick="setTaskType('channel')" style="flex:1; padding: 10px; border-radius: 40px; border: 2px solid var(--primary); background: rgba(0,245,255,0.2); color: var(--primary); font-weight: 800;">📢 Channel</button>
+      <button id="atTypeBot" onclick="setTaskType('bot')" style="flex:1; padding: 10px; border-radius: 40px; border: 1px solid var(--border-light); background: transparent; color: var(--text-muted); font-weight: 800;">🤖 Bot</button>
+    </div>
+    <div id="atBotHint" style="background: rgba(255,229,92,0.1); border-radius: 12px; padding: 10px; margin-bottom: 16px; font-size: 11px; color: var(--secondary);">
+      ⚠️ Add our bot as admin in your channel first:<br>
+      <strong>@SANTASNOWBOT_BOT</strong>
+    </div>
+    <div class="input-group">
+      <label class="input-label">Telegram Link</label>
+      <input type="text" id="atLink" class="input-field" placeholder="https://t.me/yourchannel">
+    </div>
+    <div class="input-group">
+      <label class="input-label">Target Users (min 100)</label>
+      <input type="number" id="atTarget" class="input-field" placeholder="100" min="100" oninput="updAtCost()">
+    </div>
+    <div class="preset-buttons">
+      <span class="preset-btn" onclick="setAtTarget(100)">100</span>
+      <span class="preset-btn" onclick="setAtTarget(500)">500</span>
+      <span class="preset-btn" onclick="setAtTarget(1000)">1K</span>
+      <span class="preset-btn" onclick="setAtTarget(5000)">5K</span>
+    </div>
+    <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 12px; margin: 16px 0; display: flex; justify-content: space-between;">
+      <span>Total Cost:</span>
+      <span id="atCostPreview" style="font-weight: 800; color: var(--primary);">0 Snow</span>
+    </div>
+    <button class="btn-primary" onclick="submitAddTask()">✅ Create Task</button>
+    <div id="atStatus" style="margin-top: 12px; font-size: 12px; text-align: center; display: none;"></div>
+  </div>
+</div>
+
+<div id="helpModal" class="modal">
+  <div class="modal-content" style="max-height: 85vh;">
+    <div class="modal-header">
+      <div class="modal-title">🎅 SnowVerse Guide</div>
+      <button class="modal-close" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+      <a href="https://t.me/SantaSnowPayouts" target="_blank" style="text-decoration: none; background: rgba(0,245,255,0.1); border-radius: 16px; padding: 12px; text-align: center;">
+        <div style="font-size: 24px;">💸</div>
+        <div style="font-size: 10px; color: var(--primary);">Payouts Channel</div>
+      </a>
+      <a href="https://t.me/SantaSnowNews" target="_blank" style="text-decoration: none; background: rgba(0,245,255,0.1); border-radius: 16px; padding: 12px; text-align: center;">
+        <div style="font-size: 24px;">📢</div>
+        <div style="font-size: 10px; color: var(--primary);">Bot News</div>
+      </a>
+      <a href="https://t.me/Santa_1_Snow" target="_blank" style="text-decoration: none; background: rgba(255,229,92,0.1); border-radius: 16px; padding: 12px; text-align: center;">
+        <div style="font-size: 24px;">🛟</div>
+        <div style="font-size: 10px; color: var(--secondary);">Support</div>
+      </a>
+    </div>
+    <div style="background: rgba(0,245,255,0.05); border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+      <div style="font-weight: 800; margin-bottom: 8px;">🎁 Free Welcome Gift</div>
+      <div style="font-size: 12px; color: var(--text-secondary);">Open the chest to receive 1000 Snow + 1 Mining Machine (10 Snow/hour)!</div>
+    </div>
+    <div style="background: rgba(255,255,255,0.03); border-radius: 16px; padding: 16px;">
+      <div style="font-weight: 800; margin-bottom: 8px;">💡 How It Works</div>
+      <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
+        • Buy Mining Machines with TON<br>
+        • Basic (1 TON): 300 Snow/h<br>
+        • Advanced (2 TON): 650 Snow/h<br>
+        • Elite (3 TON): 1000 Snow/h<br>
+        • Exchange Snow → TON (4% fee)<br>
+        • Invite friends for 15% commission!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="notif" class="notification"></div>
 
 <script>
 // ============================================================
-// SANTA SNOW - VERSION WITH ENHANCED UI
-// جميع الوظائف محفوظة بالكامل
+// SNOWVERSE - COMPLETE FRONTEND
+// All functions preserved, UI enhanced
 // ============================================================
 
 const CFG = {
@@ -1089,9 +1694,9 @@ const CFG = {
   SNOW_TO_TON: 0.00001,
   MIN_WITHDRAW_TON: 0.02,
   MACHINES: {
-    1: { cost: 1, rate: 300, name: "آلة أساسية", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
-    2: { cost: 2, rate: 650, name: "آلة متطورة", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
-    3: { cost: 3, rate: 1000, name: "آلة نخبوية", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
+    1: { cost: 1, rate: 300, name: "Basic Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
+    2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
+    3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   },
   REF_COMMISSION_PERCENT: 15,
   EXCHANGE_FEE_PERCENT: 4,
@@ -1100,45 +1705,64 @@ const CFG = {
 };
 
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 600, name: "🎁 دعوة 10 أصدقاء", icon: "👥" },
-  { id: 'ref_20', n: 20, snow: 1500, name: "🎁 دعوة 20 صديق", icon: "👥👥" },
-  { id: 'ref_50', n: 50, snow: 4000, name: "🎁 دعوة 50 صديق", icon: "🌟" },
-  { id: 'ref_100', n: 100, snow: 10000, name: "🎁 دعوة 100 صديق", icon: "💎" },
-  { id: 'ref_200', n: 200, snow: 20000, name: "🎁 دعوة 200 صديق", icon: "👑" },
-  { id: 'ref_500', n: 500, snow: 50000, name: "🎁 دعوة 500 صديق", icon: "🏆" },
+  { id: 'ref_10', n: 10, snow: 600, name: "Invite 10 Friends", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 1500, name: "Invite 20 Friends", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 4000, name: "Invite 50 Friends", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 10000, name: "Invite 100 Friends", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 20000, name: "Invite 200 Friends", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 50000, name: "Invite 500 Friends", icon: "🏆" },
 ];
 
 const SOC_TASKS = [
-  { id: 'tg_payouts', name: 'انضم لقناة المكافآت', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 100 },
-  { id: 'tg_news', name: 'انضم لقناة الأخبار', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 50 },
-  { id: 'tg_ch', name: 'انضم للقناة الرسمية', icon: '📢', link: 'https://t.me/SantaSnowChannel', snow: 100 },
-  { id: 'tg_grp', name: 'انضم للمجموعة', icon: '👥', link: 'https://t.me/SantaSnowGroup', snow: 50 },
-  { id: 'tg_bot', name: 'ابدأ البوت', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 30 },
+  { id: 'tg_payouts', name: 'Join Payouts Channel', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 100 },
+  { id: 'tg_news', name: 'Join News Channel', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 50 },
+  { id: 'tg_ch', name: 'Join Telegram Channel', icon: '📢', link: 'https://t.me/SantaSnowChannel', snow: 100 },
+  { id: 'tg_grp', name: 'Join Telegram Group', icon: '👥', link: 'https://t.me/SantaSnowGroup', snow: 50 },
+  { id: 'tg_bot', name: 'Start our Bot', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 30 },
 ];
 
 const STORAGE_LVS = {
-  1: { cap: 300, upgCost: 500, label: 'صندوق الهدايا' },
-  2: { cap: 900, upgCost: 2000, label: 'كومة ثلج' },
-  3: { cap: 2400, upgCost: 8000, label: 'كتلة جليد' },
-  4: { cap: 6000, upgCost: 25000, label: 'رجل الثلج' },
-  5: { cap: 18000, upgCost: 80000, label: 'قلعة الجليد' },
-  6: { cap: 60000, upgCost: 250000, label: 'القصر المتجمد' },
-  7: { cap: 120000, upgCost: 500000, label: 'القطب الشمالي' },
-  8: { cap: 210000, upgCost: 900000, label: 'القاعدة القطبية' },
-  9: { cap: 330000, upgCost: 1500000, label: 'النهر الجليدي' },
-  10: { cap: 480000, upgCost: 2500000, label: 'جبل الجليد' },
+  1: { cap: 300, upgCost: 500, label: 'Gift Box' },
+  2: { cap: 900, upgCost: 2000, label: 'Snow Pile' },
+  3: { cap: 2400, upgCost: 8000, label: 'Ice Block' },
+  4: { cap: 6000, upgCost: 25000, label: 'Snowman' },
+  5: { cap: 18000, upgCost: 80000, label: 'Ice Castle' },
+  6: { cap: 60000, upgCost: 250000, label: 'Frozen Palace' },
+  7: { cap: 120000, upgCost: 500000, label: 'North Pole' },
+  8: { cap: 210000, upgCost: 900000, label: 'Arctic Base' },
+  9: { cap: 330000, upgCost: 1500000, label: 'Glacier' },
+  10: { cap: 480000, upgCost: 2500000, label: 'Iceberg' },
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
+const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
 const S = {
-  userId: null, startParam: '', user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
-  refs: [], exchHist: [], wdHist: [], doneTasks: [], tasks: { partner: [], community: [] }, storageProgress: 0, storageInt: null, tg: null, tonUI: null, wallet: null, _collectCooldown: false, isNewUser: false,
+  userId: null,
+  startParam: '',
+  user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
+  refs: [], exchHist: [], wdHist: [], doneTasks: [],
+  tasks: { partner: [], community: [] },
+  storageProgress: 0, storageInt: null,
+  tg: null, tonUI: null, wallet: null,
+  _collectCooldown: false,
+  isNewUser: false,
 };
 
-let _lastClickTime = 0, _apiInFlight = 0, _nt = null, _taskInFlight = new Set(), _atType = 'channel', _submitInFlight = false, _socTab = 'partner';
+let _lastClickTime = 0;
+let _apiInFlight = 0;
+let _nt = null;
+let _taskInFlight = new Set();
+let _atType = 'channel';
+let _submitInFlight = false;
+let _socTab = 'partner';
 
-function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+const TASK_SNOW_PER_USER = 60;
+const MIN_TASK_TARGET = 100;
+
+function esc(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
 
 async function api(action, data = {}) {
   if (_apiInFlight > 8) throw new Error('Too many requests');
@@ -1146,7 +1770,11 @@ async function api(action, data = {}) {
   try {
     const h = { 'Content-Type': 'application/json' };
     if (S.tg?.initData) h.Authorization = `Telegram ${S.tg.initData}`;
-    const r = await fetch(`${CFG.API_URL}/api`, { method: 'POST', headers: h, body: JSON.stringify({ action, data }) });
+    const r = await fetch(`${CFG.API_URL}/api`, {
+      method: 'POST',
+      headers: h,
+      body: JSON.stringify({ action, data }),
+    });
     const j = await r.json();
     if (!j.success) throw new Error(j.error || 'API error');
     return j.data;
@@ -1156,16 +1784,16 @@ async function api(action, data = {}) {
 function showNotif(msg, type = 'i') {
   const el = document.getElementById('notif');
   if (!el) return;
-  if (_nt) { clearTimeout(_nt); _nt = null; }
+  if (_nt) clearTimeout(_nt);
   el.classList.remove('show');
   el.innerHTML = msg;
-  el.className = `notif ${type === 's' ? 'success' : type === 'e' ? 'error' : type === 'w' ? 'warning' : ''}`;
+  el.className = 'notification';
+  if (type === 's') el.classList.add('success');
+  else if (type === 'e') el.classList.add('error');
+  else if (type === 'w') el.classList.add('warning');
   setTimeout(() => el.classList.add('show'), 10);
   _nt = setTimeout(() => { el.classList.remove('show'); _nt = null; }, 3000);
 }
-
-function fmt(n) { n = Math.floor(n || 0); if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M'; if (n >= 1000) return (n / 1000).toFixed(1) + 'K'; return n.toString(); }
-function fmtTon(n) { if (n === undefined || n === null) return '0'; if (n >= 1000) return (n / 1000).toFixed(1) + 'K'; if (n >= 1) return n.toFixed(2); if (n > 0) return n.toFixed(4); return n.toString(); }
 
 async function loadState() {
   try {
@@ -1178,35 +1806,42 @@ async function loadState() {
     S.doneTasks = d.completedTasks || [];
     S.tasks = d.tasks || { partner: [], community: [] };
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
+    if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     if (!S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine) S.isNewUser = true;
     else S.isNewUser = false;
     updateRefUI();
-  } catch (e) { console.warn('loadState:', e.message); showNotif('فشل تحميل البيانات: ' + e.message, 'e'); }
+  } catch (e) { console.warn('loadState:', e.message); showNotif('Failed to load data: ' + e.message, 'e'); }
   updateUI();
 }
 
 function updateUI() {
   const u = S.user;
   document.getElementById('topSnow').textContent = fmt(u.snow || 0);
-  document.getElementById('topTon').textContent = fmtTon(u.tonBalance || 0);
+  document.getElementById('topTON').textContent = fmtTon(u.tonBalance || 0);
   const rateDay = Math.round((u.miningRate || 0) * 24);
   document.getElementById('heroRateDay').textContent = fmt(rateDay);
-  const lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1];
-  document.getElementById('storageMax').textContent = fmt(cfg.cap);
-  document.getElementById('storageLvDisp').textContent = lv;
-  const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
-  document.getElementById('storageFill').style.width = pct + '%';
-  document.getElementById('storageCurrent').textContent = Math.floor(S.storageProgress);
-  document.getElementById('heroAccrued').textContent = S.storageProgress.toFixed(6);
-  const btn = document.getElementById('collectBtn');
-  const has = S.storageProgress >= 1;
-  btn.disabled = !has;
-  document.getElementById('claimPct').textContent = pct + '%';
-  document.getElementById('claimBtnText').innerHTML = has ? `<i class="fas fa-snowflake"></i> جمع ${fmt(Math.floor(S.storageProgress))} ثلج` : `<i class="fas fa-snowflake"></i> المخزن فارغ`;
+  document.getElementById('wdTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
   updateSwapBals();
+  updateRefUI();
   renderExchHist();
   renderWdHist();
   renderTasks();
+  updateStorageUI();
+}
+
+function fmt(n) {
+  n = Math.floor(n || 0);
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  return n.toString();
+}
+
+function fmtTon(n) {
+  if (n === undefined || n === null) return '0';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  if (n >= 1) return n.toFixed(2);
+  if (n > 0) return n.toFixed(4);
+  return n.toString();
 }
 
 function startStorage() {
@@ -1216,88 +1851,212 @@ function startStorage() {
     if (rate <= 0) return;
     S.storageProgress += (rate / 3600);
     if (S.storageProgress > cfg.cap) S.storageProgress = cfg.cap;
-    updateUI();
+    updateStorageUI();
   }, 1000);
+}
+
+function updateStorageUI() {
+  const u = S.user, lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1];
+  const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
+  document.getElementById('heroAccrued').textContent = S.storageProgress.toFixed(6);
+  const btn = document.getElementById('collectBtn');
+  const has = S.storageProgress >= 1;
+  btn.disabled = !has;
+  const claimText = document.getElementById('claimBtnText');
+  if (claimText) claimText.innerHTML = has ? `Claim ${fmt(Math.floor(S.storageProgress))} Snow` : 'Storage Empty';
+  const lvEl = document.getElementById('storageLvDisp');
+  if (lvEl) lvEl.textContent = lv;
 }
 
 async function collectSnow() {
   if (S._collectCooldown) return;
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('الرجاء الانتظار 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const amt = Math.floor(S.storageProgress);
-  if (amt < 1) { showNotif('المخزن فارغ!', 'e'); return; }
+  if (amt < 1) { showNotif('Storage is empty!', 'e'); return; }
   S._collectCooldown = true;
   setTimeout(() => S._collectCooldown = false, 3000);
   S.user.snow = (S.user.snow || 0) + amt;
   S.user.totalEarned = (S.user.totalEarned || 0) + amt;
   S.storageProgress = 0;
   updateUI();
-  showNotif(`+${fmt(amt)} ثلج تم جمعه!`, 's');
+  triggerSnowfall(30);
+  showNotif(`+${fmt(amt)} Snow collected!`, 's');
+  spawnSnowParticle();
   api('collect', { amount: amt }).catch(() => {});
+}
+
+function triggerSnowfall(count = 40) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.innerHTML = '❄️';
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.fontSize = Math.random() * 16 + 10 + 'px';
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+      snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 5000);
+    }, i * 50);
+  }
+}
+
+function spawnSnowParticle() {
+  const p = document.createElement('img');
+  p.src = SNOW_IMG;
+  p.className = 'particle';
+  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain; position: fixed;`;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 800);
 }
 
 function santaClick() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('الرجاء الانتظار 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
-  showNotif('🎅 سانتا يضحك معك!', 's');
+  spawnSnowParticle();
+  triggerSnowfall(20);
 }
 
-function openMachineShop() { buildMachineShop(); openModal('machineShopModal'); }
-function buildMachineShop() { /* محتوى متجر الآلات */ }
-async function purchaseMachine(machineType) { /* شراء الآلات */ }
+function goToSection(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(el.dataset.section).classList.add('active');
+}
 
-function renderTasks() {
-  const referralCount = S.user.referralCount || 0;
-  let refHtml = '';
-  for (const task of REF_TASKS) {
-    const completed = S.doneTasks.includes(task.id);
-    const canClaim = referralCount >= task.n && !completed;
-    const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
-    refHtml += `<div class="task-card"><div class="task-icon">${task.icon}</div><div class="task-info"><div class="task-name">${task.name}</div><div class="task-reward"><img src="${SNOW_IMG}"> +${fmt(task.snow)}</div><div class="task-progress"><div class="progress-track"><div class="progress-fill" style="width:${progress}%"></div></div><div style="font-size:10px;margin-top:4px;">${referralCount}/${task.n}</div></div></div>${completed ? '<button class="task-button done">✅ مكتمل</button>' : canClaim ? `<button class="task-button" onclick="claimRefTask(\'${task.id}\')">🎁 استلام</button>` : `<button class="task-button" style="background:rgba(255,255,255,0.1);">🔒 ${task.n}</button>`}</div>`;
+function openModal(id) {
+  if (id === 'upgradeModal') buildUpgradeContent();
+  if (id === 'machineShopModal') buildMachineShop();
+  document.getElementById(id).classList.add('active');
+}
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
+
+function buildUpgradeContent() {
+  const u = S.user, lv = u.storageLevel || 1, cur = STORAGE_LVS[lv], next = STORAGE_LVS[lv + 1];
+  let html = `<div style="text-align: center; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 20px;">
+      <div style="flex:1; background: rgba(0,0,0,0.3); border-radius: 20px; padding: 16px; border: 1px solid var(--border-light);">
+        <div style="font-size: 24px; font-weight: 800; color: var(--primary);">Lv.${lv}</div>
+        <div style="font-size: 12px; color: var(--text-muted);">${cur.label}</div>
+        <div style="font-size: 14px; font-weight: 700;">Cap: ${fmt(cur.cap)}</div>
+      </div>
+      <div style="flex:1; background: rgba(0,0,0,0.3); border-radius: 20px; padding: 16px; border: 1px solid ${next ? 'var(--primary)' : 'var(--border-light)'};">
+        <div style="font-size: 24px; font-weight: 800; color: ${next ? 'var(--secondary)' : 'var(--text-muted)'};">Lv.${lv + 1}</div>
+        <div style="font-size: 12px; color: var(--text-muted);">${next ? next.label : 'MAX'}</div>
+        <div style="font-size: 14px; font-weight: 700;">Cap: ${next ? fmt(next.cap) : 'Maximum'}</div>
+      </div>
+    </div>`;
+  if (next) {
+    html += `<div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 12px; margin-bottom: 20px;">
+      <div>Upgrade Cost: <strong style="color: var(--primary);">${fmt(next.upgCost)} Snow</strong></div>
+    </div>
+    <button class="btn-primary" onclick="upgradeStorage()">⬆️ Upgrade to Level ${lv + 1}</button>`;
+  } else {
+    html += `<div style="text-align: center; color: var(--primary);">🏆 Maximum Level Reached!</div>`;
   }
-  document.getElementById('referralTasksList').innerHTML = refHtml || '<div class="hero-glow-card" style="text-align:center;padding:30px;">✨ قم بدعوة الأصدقاء للحصول على المكافآت ✨</div>';
-  renderSocTasks();
+  html += `</div>`;
+  document.getElementById('upgradeContent').innerHTML = html;
 }
 
-function renderSocTasks() {
-  const p = S.tasks?.partner || [], c = S.tasks?.community || [];
-  const renderList = (tasks, isPartner) => tasks.map(t => `<div class="task-card"><div class="task-icon">${t.type === 'channel' ? '📢' : '🤖'}</div><div class="task-info"><div class="task-name">${esc(t.name || 'مهمة')}</div><div class="task-reward"><img src="${SNOW_IMG}"> +${fmt(t.snowReward || 50)}</div>${t.completions ? `<div style="font-size:11px;color:var(--text-muted);">${t.completions}/${t.targetUsers} مكتمل</div>` : ''}</div>${S.doneTasks.includes(t.id) ? '<button class="task-button done">✅</button>' : `<button class="task-button" onclick="doTask(\'${t.id}\',\'${t.link}\',\'${t.type}\',\'${isPartner ? 'partner' : 'community'}\')">➡️ تنفيذ</button>`}</div>`).join('');
-  document.getElementById('partnerTasksList').innerHTML = renderList(p, true) || '<div class="hero-glow-card" style="text-align:center;padding:20px;">لا توجد مهام شركاء</div>';
-  document.getElementById('communityTasksList').innerHTML = renderList(c, false) || '<div class="hero-glow-card" style="text-align:center;padding:20px;">لا توجد مهام مجتمع</div>';
+async function upgradeStorage() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const u = S.user, lv = u.storageLevel || 1, next = STORAGE_LVS[lv + 1];
+  if (!next) { showNotif('Already max!', 'e'); return; }
+  if ((u.snow || 0) < next.upgCost) { showNotif(`Need ${fmt(next.upgCost)} Snow!`, 'e'); return; }
+  S.user.snow -= next.upgCost;
+  S.user.storageLevel = lv + 1;
+  api('upgradeStorage', { newLevel: lv + 1 }).catch(() => {});
+  buildUpgradeContent();
+  updateUI();
+  triggerSnowfall(30);
+  showNotif(`✅ Storage → Level ${lv + 1}!`, 's');
 }
 
-async function doTask(tid, link, type, cat) {
-  if (Date.now() - _lastClickTime < 3000) { showNotif('الرجاء الانتظار 3 ثواني!', 'w'); return; }
-  _lastClickTime = Date.now();
-  if (_taskInFlight.has(tid)) return;
-  _taskInFlight.add(tid);
-  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank');
-  showNotif('⏳ جاري التحقق من عضويتك...', 'i');
-  setTimeout(async () => {
-    try {
-      const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
-      if (!S.doneTasks.includes(tid)) S.doneTasks.push(tid);
-      if (r.snowAdded) { S.user.snow = (S.user.snow || 0) + r.snowAdded; updateUI(); showNotif(`🎉 +${fmt(r.snowAdded)} ثلج!`, 's'); }
-      else showNotif(`✅ تم إكمال المهمة!`, 's');
-      renderTasks();
-    } catch (e) { showNotif(`❌ ${e.message || 'فشل التحقق'}`, 'e'); }
-    finally { _taskInFlight.delete(tid); renderSocTasks(); }
-  }, 3000);
+function buildMachineShop() {
+  let html = '<div style="display: flex; flex-direction: column; gap: 12px;">';
+  for (let i = 1; i <= 3; i++) {
+    const m = CFG.MACHINES[i];
+    const count = S.user.miningMachines?.[i] || 0;
+    const canAfford = (S.user.tonBalance || 0) >= m.cost;
+    html += `
+      <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 14px; display: flex; align-items: center; gap: 12px;">
+        <img src="${m.image}" style="width: 55px; height: 55px; object-fit: contain; border-radius: 12px;">
+        <div style="flex:1;">
+          <div style="font-weight: 800;">${m.name}</div>
+          <div style="font-size: 11px; color: var(--primary);">⚡ ${m.rate} Snow/hour</div>
+          <div style="font-size: 11px; color: var(--secondary);">💰 ${m.cost} TON</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Owned: ${count}</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <input type="number" id="qty_${i}" value="1" min="1" max="99" style="width: 55px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-light); border-radius: 12px; padding: 8px; color: white; text-align: center;">
+          <button class="btn-primary" onclick="purchaseMachine(${i})" style="padding: 8px 16px; margin: 0;" ${!canAfford ? 'disabled' : ''}>Buy</button>
+        </div>
+      </div>
+    `;
+  }
+  html += '</div>';
+  document.getElementById('machineShopContent').innerHTML = html;
 }
 
-async function claimRefTask(taskId) {
-  if (Date.now() - _lastClickTime < 3000) { showNotif('الرجاء الانتظار 3 ثواني!', 'w'); return; }
-  _lastClickTime = Date.now();
+async function purchaseMachine(machineType) {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const machine = CFG.MACHINES[machineType];
+  const quantity = parseInt(document.getElementById(`qty_${machineType}`)?.value) || 1;
+  const totalCost = machine.cost * quantity;
+  if ((S.user.tonBalance || 0) < totalCost) {
+    showNotif(`❌ Need ${totalCost} TON`, 'e');
+    return;
+  }
   try {
-    const result = await api('claimTask', { taskId });
-    S.user.snow = result.snow;
-    S.doneTasks.push(taskId);
+    const result = await api('purchaseMachine', { machineType, quantity });
+    S.user.tonBalance = result.tonBalance;
+    S.user.miningRate = result.miningRate;
+    S.user.miningMachines = result.miningMachines;
     updateUI();
-    renderTasks();
-    showNotif(`🎉 +${fmt(result.snowReward)} ثلج!`, 's');
-  } catch (e) { showNotif(`❌ ${e.message || 'فشل الاستلام'}`, 'e'); }
+    buildMachineShop();
+    triggerSnowfall(30);
+    showNotif(`🎉 ${quantity}x ${machine.name} purchased!`, 's');
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e');
+  }
+}
+
+function openMachineShop() {
+  buildMachineShop();
+  openModal('machineShopModal');
+}
+
+async function openWelcomeChest() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  try {
+    const result = await api('openWelcomeChest', {});
+    S.user.welcomeChestOpened = true;
+    S.user.snow = (S.user.snow || 0) + result.snow;
+    S.user.hasWelcomeMachine = true;
+    S.user.miningRate = result.miningRate;
+    S.user.miningLevel = result.miningLevel;
+    document.getElementById('welcomeChest').style.display = 'none';
+    updateUI();
+    triggerSnowfall(50);
+    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Welcome Machine!`, 's');
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e');
+  }
+}
+
+async function openWelcomeChestFromModal() {
+  await openWelcomeChest();
+  closeModal('welcomeModal');
 }
 
 function updateRefUI() {
@@ -1305,74 +2064,407 @@ function updateRefUI() {
   const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
   const refInput = document.getElementById('refLinkInp');
   if (refInput) refInput.value = link;
+  document.getElementById('depositUserIdDisplay').textContent = esc(S.userId || '...');
   const cntEl = document.getElementById('totalRefsDisp');
-  if (cntEl) cntEl.textContent = `${S.refs.length} أصدقاء`;
+  if (cntEl) cntEl.textContent = `${S.refs.length}`;
   const listEl = document.getElementById('recentRefsList');
   if (listEl) {
-    if (!S.refs.length) listEl.innerHTML = '<div class="hero-glow-card" style="text-align:center;padding:15px;">لا يوجد إحالات بعد</div>';
-    else listEl.innerHTML = S.refs.slice(0, 20).map(r => `<div class="ref-list-item" style="display:flex;align-items:center;gap:10px;padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);"><div style="width:40px;height:40px;background:rgba(0,229,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;">${r.photo ? `<img src="${esc(r.photo)}" style="width:100%;height:100%;border-radius:50%;">` : '🎅'}</div><div style="flex:1;"><div style="font-weight:800;">${esc(r.name || 'صديق')}</div><div style="font-size:10px;color:var(--text-muted);">${esc(r.date || 'انضم مؤخراً')}</div></div><div style="color:var(--gold);">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div></div>`).join('');
+    if (!S.refs.length) {
+      listEl.innerHTML = `<div class="history-empty">No referrals yet</div>`;
+    } else {
+      listEl.innerHTML = S.refs.slice(0, 20).map(r => `
+        <div class="history-item">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 36px; height: 36px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🎅</div>
+            <div>
+              <div style="font-weight: 700;">${esc(r.name || 'Friend')}</div>
+              <div style="font-size: 10px; color: var(--text-muted);">${esc(r.date || 'Joined recently')}</div>
+            </div>
+          </div>
+          <div style="color: var(--primary); font-weight: 700;">+${fmt(r.totalCommissionEarned || 0)}</div>
+        </div>`).join('');
+    }
   }
 }
 
-function copyRefLink() { const v = document.getElementById('refLinkInp').value; navigator.clipboard.writeText(v).then(() => showNotif('✅ تم نسخ الرابط!', 's')).catch(() => { showNotif('✅ تم نسخ الرابط!', 's'); }); }
+function copyRefLink() {
+  const v = document.getElementById('refLinkInp').value;
+  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { showNotif('✅ Link copied!', 's'); });
+}
+
+function renderTasks() {
+  const referralCount = S.user.referralCount || 0;
+  let refTasksHtml = '';
+  for (const task of REF_TASKS) {
+    const completed = S.doneTasks.includes(task.id);
+    const canClaim = referralCount >= task.n && !completed;
+    const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
+    refTasksHtml += `
+      <div class="task-card">
+        <div class="task-icon">${task.icon}</div>
+        <div class="task-info">
+          <div class="task-name">${task.name}</div>
+          <div class="task-reward"><img src="${SNOW_IMG}"> ${fmt(task.snow)} Snow</div>
+          <div class="task-progress"><div class="task-progress-fill" style="width: ${progress}%;"></div></div>
+          <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">${referralCount}/${task.n} invited (${progress}%)</div>
+        </div>
+        ${completed ? `<button class="task-btn done">✅ Done</button>` : 
+          canClaim ? `<button class="task-btn" onclick="claimRefTask('${task.id}')">🎁 Claim</button>` :
+          `<button class="task-btn done" style="opacity:0.5;">🔒 Locked</button>`}
+      </div>
+    `;
+  }
+  document.getElementById('referralTasksList').innerHTML = refTasksHtml || `<div class="history-empty">✨ Invite friends to unlock rewards!</div>`;
+  renderSocTasks();
+}
+
+async function claimRefTask(taskId) {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  try {
+    const result = await api('claimTask', { taskId });
+    S.user.snow = result.snow;
+    S.doneTasks.push(taskId);
+    updateUI();
+    renderTasks();
+    triggerSnowfall(30);
+    showNotif(`🎉 +${fmt(result.snowReward)} Snow!`, 's');
+  } catch (e) {
+    showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e');
+  }
+}
+
+function renderSocTasks() {
+  const p = S.tasks?.partner || [];
+  const c = S.tasks?.community || [];
+  const partnerHtml = p.map(t => buildTaskCard(t, 'partner')).join('');
+  const communityHtml = c.map(t => buildTaskCard(t, 'community')).join('');
+  document.getElementById('socPartnerList').innerHTML = partnerHtml || `<div class="history-empty">No partner tasks yet</div>`;
+  document.getElementById('socCommunityList').innerHTML = communityHtml || `<div class="history-empty">No community tasks yet</div>`;
+}
+
+function buildTaskCard(t, cat) {
+  const tid = t.id, done = S.doneTasks.includes(tid);
+  const icon = t.type === 'channel' ? '📢' : '🤖';
+  const name = esc(t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task')));
+  const snow = t.snowReward || 50;
+  return `<div class="task-card">
+    <div class="task-icon">${icon}</div>
+    <div class="task-info">
+      <div class="task-name">${name}</div>
+      <div class="task-reward"><img src="${SNOW_IMG}"> ${fmt(snow)} Snow</div>
+      ${t.completions !== undefined ? `<div style="font-size: 10px; color: var(--text-muted);">${t.completions || 0}/${t.targetUsers || 0} completed</div>` : ''}
+    </div>
+    ${done ? `<button class="task-btn done">✅ Done</button>` :
+      `<button class="task-btn" onclick="doTask('${tid}','${t.link}','${t.type || 'bot'}','${cat}')">Go →</button>`}
+  </div>`;
+}
+
+async function doTask(tid, link, type, cat) {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_taskInFlight.has(tid)) { showNotif('⏳ Processing...', 'w'); return; }
+  _taskInFlight.add(tid);
+  renderSocTasks();
+  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank');
+  showNotif('⏳ Verifying...', 'i');
+  setTimeout(async () => {
+    try {
+      const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
+      if (!S.doneTasks.includes(tid)) S.doneTasks.push(tid);
+      if (r.snowAdded) {
+        S.user.snow = (S.user.snow || 0) + r.snowAdded;
+        updateUI();
+        triggerSnowfall(30);
+        showNotif(`🎉 +${fmt(r.snowAdded)} Snow!`, 's');
+      }
+      renderTasks();
+    } catch (e) {
+      showNotif(`❌ ${e.message || 'Verification failed'}`, 'e');
+    } finally {
+      _taskInFlight.delete(tid);
+      renderSocTasks();
+    }
+  }, 3000);
+}
 
 function switchTaskTab(el, tab) {
-  document.querySelectorAll('.task-tab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.task-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  const socialTabs = document.getElementById('socialTabs');
-  const partnerTasks = document.getElementById('partnerTasksList');
-  const communityTasks = document.getElementById('communityTasksList');
-  const referralTasks = document.getElementById('referralTasksList');
   if (tab === 'social') {
-    socialTabs.style.display = 'flex';
-    partnerTasks.style.display = 'block';
-    communityTasks.style.display = 'none';
-    referralTasks.style.display = 'none';
-    document.getElementById('floatAddTask').style.display = _socTab === 'community' ? 'flex' : 'none';
+    document.getElementById('taskSocialContent').style.display = 'block';
+    document.getElementById('taskReferralContent').style.display = 'none';
   } else {
-    socialTabs.style.display = 'none';
-    partnerTasks.style.display = 'none';
-    communityTasks.style.display = 'none';
-    referralTasks.style.display = 'block';
-    document.getElementById('floatAddTask').style.display = 'none';
+    document.getElementById('taskSocialContent').style.display = 'none';
+    document.getElementById('taskReferralContent').style.display = 'block';
   }
 }
 
-function switchSocTab(tab) {
+function switchSocialTab(tab) {
   _socTab = tab;
-  document.querySelectorAll('.category-tab').forEach((el, i) => { el.classList.toggle('active', (tab === 'partner' && i === 0) || (tab === 'community' && i === 1)); });
-  document.getElementById('partnerTasksList').style.display = tab === 'partner' ? 'block' : 'none';
-  document.getElementById('communityTasksList').style.display = tab === 'community' ? 'block' : 'none';
-  document.getElementById('floatAddTask').style.display = tab === 'community' ? 'flex' : 'none';
+  document.getElementById('stab-partner').classList.toggle('active', tab === 'partner');
+  document.getElementById('stab-community').classList.toggle('active', tab === 'community');
+  document.getElementById('socPartnerList').style.display = tab === 'partner' ? 'block' : 'none';
+  document.getElementById('socCommunityList').style.display = tab === 'community' ? 'block' : 'none';
 }
 
-function switchWalletTab(tab) {
-  document.getElementById('walletDeposit').style.display = tab === 'deposit' ? 'block' : 'none';
-  document.getElementById('walletWithdraw').style.display = tab === 'withdraw' ? 'block' : 'none';
-  document.getElementById('walletExchange').style.display = tab === 'exchange' ? 'block' : 'none';
-}
-
-function goNav(el) {
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+function switchWalletTab(el, tab) {
+  document.querySelectorAll('.wallet-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.wallet-content').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById(el.dataset.s).classList.add('active');
+  document.getElementById(`wt-${tab}`).classList.add('active');
 }
 
-function openModal(id) { document.getElementById(id).classList.add('active'); }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+function setTaskType(t) {
+  _atType = t;
+  const activeStyle = 'flex:1; padding: 10px; border-radius: 40px; border: 2px solid var(--primary); background: rgba(0,245,255,0.2); color: var(--primary); font-weight: 800;';
+  const inactiveStyle = 'flex:1; padding: 10px; border-radius: 40px; border: 1px solid var(--border-light); background: transparent; color: var(--text-muted); font-weight: 800;';
+  document.getElementById('atTypeChannel').style.cssText = t === 'channel' ? activeStyle : inactiveStyle;
+  document.getElementById('atTypeBot').style.cssText = t === 'bot' ? activeStyle : inactiveStyle;
+  const hint = document.getElementById('atBotHint');
+  if (hint) hint.style.display = t === 'channel' ? 'block' : 'none';
+  updAtCost();
+}
 
-function updateSwapBals() { }
-function renderExchHist() { }
-function renderWdHist() { }
+function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
+function updAtCost() {
+  const tgt = parseInt(document.getElementById('atTarget').value) || 0;
+  document.getElementById('atCostPreview').textContent = fmt(tgt * TASK_SNOW_PER_USER) + ' Snow';
+}
+
+async function submitAddTask() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_submitInFlight) return;
+  const link = (document.getElementById('atLink').value || '').trim();
+  const target = parseInt(document.getElementById('atTarget').value) || 0;
+  const st = document.getElementById('atStatus');
+  st.style.display = 'block';
+  st.textContent = '⏳ Creating...';
+  if (!link.includes('t.me/')) { st.textContent = '❌ Invalid Telegram link'; return; }
+  if (target < MIN_TASK_TARGET) { st.textContent = `❌ Min ${MIN_TASK_TARGET} users`; return; }
+  const cost = target * TASK_SNOW_PER_USER;
+  if ((S.user.snow || 0) < cost) { st.textContent = `❌ Need ${fmt(cost)} Snow`; return; }
+  _submitInFlight = true;
+  try {
+    await api('createTask', { type: _atType, link, targetUsers: target });
+    S.user.snow = (S.user.snow || 0) - cost;
+    st.textContent = '✅ Task created!';
+    updateUI();
+    triggerSnowfall(30);
+    showNotif(`✅ Task created!`, 's');
+    setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
+  } catch (e) { st.textContent = `❌ ${e.message || 'Failed'}`; showNotif(`❌ Failed to create task`, 'e'); }
+  finally { _submitInFlight = false; }
+}
+
+function updateSwapBals() {
+  document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`;
+}
+
+function swapSnowMax() {
+  document.getElementById('swapSnowAmt').value = Math.floor(S.user.snow || 0);
+  updSwapSnowToTon();
+}
+
+function updSwapSnowToTon() {
+  const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
+  const fee = Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
+  const snowAfterFee = snow - fee;
+  const ton = snowAfterFee * CFG.SNOW_TO_TON;
+  document.getElementById('swapTonOut').textContent = ton.toFixed(6);
+  document.getElementById('feeAmountDisplay').textContent = fmt(fee);
+}
+
+async function swapSnowToTon() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
+  if (snow <= 0) { showNotif('Enter amount!', 'e'); return; }
+  if (snow < 100) { showNotif('Min 100 Snow!', 'e'); return; }
+  if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
+  try {
+    const result = await api('exchange', { snowAmount: snow });
+    S.user.snow = result.snow;
+    S.user.tonBalance = result.tonBalance;
+    const fee = result.fee || Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
+    const snowAfterFee = snow - fee;
+    const tonReceived = snowAfterFee * CFG.SNOW_TO_TON;
+    S.exchHist.unshift({ snow: snow, fee: fee, ton: tonReceived, dir: 'S→T', ts: Date.now() });
+    document.getElementById('swapSnowAmt').value = '';
+    document.getElementById('swapTonOut').textContent = '0';
+    updateUI();
+    renderExchHist();
+    triggerSnowfall(30);
+    showNotif(`⚡ ${fmt(snow)} Snow → ${tonReceived.toFixed(6)} TON`, 's');
+  } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
+}
+
+function renderExchHist() {
+  const el = document.getElementById('exchHist');
+  if (!el) return;
+  if (!S.exchHist.length) { el.innerHTML = '<div class="history-empty">No conversions yet</div>'; return; }
+  el.innerHTML = S.exchHist.slice(0, 30).map(h => `
+    <div class="history-item">
+      <div>${h.dir} · ${h.ts ? new Date(h.ts).toLocaleDateString() : ''}</div>
+      <div style="color: var(--secondary); font-weight: 800;">${h.ton.toFixed(6)} TON</div>
+    </div>
+  `).join('');
+}
+
+function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
+function setDepAmt(amt) { document.getElementById('depositAmountInput').value = Math.max(1, amt); }
+
+async function doWithdraw() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  const addr = (document.getElementById('wdAddr').value || '').trim();
+  const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
+  const u = S.user;
+  if (!addr || addr.length < 10) { showNotif('Enter valid TON address!', 'e'); return; }
+  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(`Min ${CFG.MIN_WITHDRAW_TON} TON!`, 'e'); return; }
+  if (tonAmt > (u.tonBalance || 0)) { showNotif('Not enough TON!', 'e'); return; }
+  const partnerTasks = S.tasks?.partner || [];
+  const missingPartner = partnerTasks.filter(t => t.status === 'active' && !S.doneTasks.includes(t.id));
+  if (missingPartner.length > 0) { showNotif(`Complete all Partner tasks first!`, 'e'); return; }
+  try {
+    const res = await api('withdraw', { address: addr, amount: tonAmt });
+    u.tonBalance -= tonAmt;
+    S.wdHist.unshift({ tonAmt, addr, d: new Date().toLocaleDateString(), status: 'pending' });
+    document.getElementById('wdAddr').value = '';
+    document.getElementById('wdAmt').value = '';
+    updateUI();
+    renderWdHist();
+    triggerSnowfall(30);
+    showNotif(`✅ Withdrawal requested: ${tonAmt.toFixed(6)} TON`, 's');
+  } catch (e) { showNotif(`❌ ${e.message}`, 'e'); }
+}
+
+function renderWdHist() {
+  const el = document.getElementById('wdHist');
+  if (!el) return;
+  if (!S.wdHist.length) { el.innerHTML = '<div class="history-empty">No withdrawals yet</div>'; return; }
+  el.innerHTML = S.wdHist.slice(0, 20).map(h => `
+    <div class="history-item">
+      <div>${h.tonAmt.toFixed(6)} TON</div>
+      <div style="font-size: 11px; color: var(--text-muted);">${esc(h.status || 'Pending')}</div>
+    </div>
+  `).join('');
+}
+
+function startDepVerify(depId, txHash) {
+  let attempts = 0;
+  const interval = setInterval(async () => {
+    attempts++;
+    try {
+      const r = await api('verifyDeposit', { depositId: depId, txHash });
+      if (r.status === 'completed') {
+        clearInterval(interval);
+        showNotif(`💰 ${r.amount} TON deposited!`, 's');
+        S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
+        loadState();
+      }
+    } catch (e) { if (attempts >= 18) clearInterval(interval); }
+  }, 10000);
+}
+
+async function initTON() {
+  try {
+    if (window.TON_CONNECT_UI) {
+      S.tonUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: `${CFG.API_URL}/tonconnect-manifest.json`,
+        uiPreferences: { theme: 'DARK' }
+      });
+      S.tonUI.onStatusChange(w => w ? onWalletConnect(w) : onWalletDisconnect());
+    }
+  } catch (e) { console.error('TON init:', e); }
+}
+
+function onWalletConnect(w) {
+  S.wallet = { address: w.account.address };
+  const sh = `${S.wallet.address.substring(0, 6)}...${S.wallet.address.slice(-4)}`;
+  document.getElementById('walletAddressDisplay').textContent = sh;
+  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-unlink"></i> Disconnect';
+  document.getElementById('connectWalletBtn').onclick = disconnectWallet;
+  document.getElementById('submitDepositBtn').disabled = false;
+}
+
+function onWalletDisconnect() {
+  S.wallet = null;
+  document.getElementById('walletAddressDisplay').textContent = 'Not connected';
+  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-plug"></i> Connect';
+  document.getElementById('connectWalletBtn').onclick = connectWallet;
+  document.getElementById('submitDepositBtn').disabled = true;
+}
+
+async function connectWallet() { if (S.tonUI) await S.tonUI.openModal(); }
+async function disconnectWallet() { if (S.tonUI) await S.tonUI.disconnect(); }
+
+async function initiateDeposit() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (!S.wallet) { alert('Connect wallet first'); return; }
+  const amt = parseFloat(document.getElementById('depositAmountInput').value);
+  if (!amt || amt < 1) { alert('Minimum 1 TON'); return; }
+  try {
+    const comment = String(S.userId);
+    const nano = String(Math.floor(amt * 1e9));
+    if (!window.TonWeb) throw new Error('TonWeb not loaded');
+    const TW = window.TonWeb;
+    const cell = new TW.boc.Cell();
+    cell.bits.writeUint(0, 32);
+    cell.bits.writeString(comment);
+    const boc = await cell.toBoc(false);
+    const payload = TW.utils.bytesToBase64(boc);
+    const tx = { validUntil: Math.floor(Date.now() / 1000) + 600, messages: [{ address: CFG.DEPOSIT_WALLET, amount: nano, payload }] };
+    await S.tonUI.sendTransaction(tx);
+    showNotif('✅ Transaction sent! Balance will be credited within 3 minutes', 's');
+  } catch (e) {
+    showNotif(`❌ ${e.message?.includes('rejected') ? 'Transaction rejected' : 'Transaction failed'}`, 'e');
+  }
+}
+
+function openSupport() { window.open('https://t.me/Santa_1_Snow', '_blank'); }
 
 function ldProgress(pct, msg) {
-  const fill = document.getElementById('loaderFill');
+  const fill = document.getElementById('loadingFill');
   if (fill) fill.style.width = pct + '%';
-  const pctEl = document.getElementById('loaderPercent');
+  const pctEl = document.getElementById('ldPercent');
   if (pctEl) pctEl.textContent = Math.round(pct) + '%';
-  const stat = document.getElementById('ldStatus');
-  if (stat) stat.textContent = msg;
+  const status = document.getElementById('ldStatus');
+  if (status) status.textContent = msg;
+}
+
+function ldAnimateTo(targetPct, msg, duration = 600) {
+  const start = parseFloat(document.getElementById('loadingFill')?.style.width) || 0;
+  const steps = 30;
+  const stepTime = duration / steps;
+  let step = 0;
+  return new Promise(resolve => {
+    const iv = setInterval(() => {
+      step++;
+      const pct = start + (targetPct - start) * (step / steps);
+      ldProgress(pct, msg);
+      if (step >= steps) { clearInterval(iv); ldProgress(targetPct, msg); resolve(); }
+    }, stepTime);
+  });
+}
+
+function preloadImages() {
+  const urls = [
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
+    SNOW_IMG, REF_TASK_ICON,
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
+    CFG.MACHINES[1].image, CFG.MACHINES[2].image, CFG.MACHINES[3].image
+  ];
+  return Promise.all(urls.map(u => new Promise(res => { const img = new Image(); img.onload = img.onerror = res; img.src = u; })));
 }
 
 function ldHide() {
@@ -1380,13 +2472,36 @@ function ldHide() {
   if (s) { s.classList.add('hidden'); setTimeout(() => s.remove(), 700); }
 }
 
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+  if (m.style.display === 'block') {
+    setTimeout(() => document.addEventListener('click', function closeMenu(e) {
+      const menu = document.getElementById('langMenu');
+      const btn = document.getElementById('langBtn');
+      if (menu && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.style.display = 'none';
+        document.removeEventListener('click', closeMenu);
+      }
+    }), 10);
+  }
+}
+
+function setLang(lang, flag, code) {
+  localStorage.setItem('santaLang', lang);
+  document.getElementById('langFlag').textContent = flag;
+  document.getElementById('langCode').textContent = code;
+  document.getElementById('langMenu').style.display = 'none';
+}
+
 async function init() {
   const startTime = Date.now();
   const MIN_LOADING_MS = 3000;
-  ldProgress(0, 'جاري التشغيل...');
+  ldProgress(0, 'Starting...');
   if (window.Telegram?.WebApp) {
     S.tg = window.Telegram.WebApp;
-    S.tg.ready(); S.tg.expand();
+    S.tg.ready();
+    S.tg.expand();
     const u = S.tg.initDataUnsafe?.user;
     if (u) {
       S.userId = String(u.id);
@@ -1395,27 +2510,48 @@ async function init() {
         if (av) av.innerHTML = `<img src="${esc(u.photo_url)}" style="width:100%;height:100%;object-fit:cover;">`;
       }
     }
-    let startParam = S.tg.initDataUnsafe?.start_param || S.tg.initDataUnsafe?.startParam || '';
+    let startParam = '';
+    if (S.tg.initDataUnsafe?.start_param) startParam = String(S.tg.initDataUnsafe.start_param);
+    else if (S.tg.initDataUnsafe?.startParam) startParam = String(S.tg.initDataUnsafe.startParam);
     S.startParam = startParam.replace(/\D/g, '');
   }
-  ldProgress(15, 'جاري تحميل الأصول...');
-  await new Promise(r => setTimeout(r, 800));
-  ldProgress(35, 'جاري تحميل حسابك...');
+  await ldAnimateTo(10, 'Connecting...', 700);
+  await new Promise(r => setTimeout(r, 400));
+  await ldAnimateTo(20, 'Loading assets...', 600);
+  await preloadImages().catch(() => {});
+  await ldAnimateTo(40, 'Assets loaded!', 500);
+  await new Promise(r => setTimeout(r, 300));
+  await ldAnimateTo(50, 'Loading your account...', 600);
   let loaded = false;
-  for (let i = 0; i < 5 && !loaded; i++) {
-    try { await loadState(); if (S.user && S.userId) loaded = true; } catch(e) { await new Promise(r => setTimeout(r, 1500)); }
+  let attempts = 0;
+  while (!loaded && attempts < 5) {
+    attempts++;
+    try {
+      await loadState();
+      if (S.user && S.userId) loaded = true;
+      else throw new Error('No user data');
+    } catch (e) {
+      if (attempts < 5) await new Promise(r => setTimeout(r, 1500));
+    }
   }
-  if (!loaded) { ldProgress(100, 'فشل الاتصال. الرجاء إعادة التشغيل.'); return; }
-  ldProgress(70, 'جاري بناء الواجهة...');
+  await ldAnimateTo(70, 'Account loaded!', 500);
+  await ldAnimateTo(80, 'Building interface...', 400);
   renderTasks();
-  await new Promise(r => setTimeout(r, 500));
-  ldProgress(90, 'جاري التجهيز...');
+  await ldAnimateTo(90, 'Setting up wallet...', 400);
+  setTimeout(() => initTON(), 600);
   startStorage();
-  await new Promise(r => setTimeout(r, 500));
-  ldProgress(100, 'جاهز! 🎅');
+  setInterval(() => { loadState(); }, 30000);
+  await ldAnimateTo(100, 'Ready! 🎅', 500);
   const elapsed = Date.now() - startTime;
   if (elapsed < MIN_LOADING_MS) await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
   ldHide();
+  if (S.isNewUser) {
+    const welcomeModal = document.getElementById('welcomeModal');
+    if (welcomeModal) welcomeModal.classList.add('active');
+  }
+  const savedLang = localStorage.getItem('santaLang');
+  if (savedLang === 'en') setLang('en', '🇬🇧', 'EN');
+  else setLang('ru', '🇷🇺', 'RU');
 }
 
 window.addEventListener('load', init);
