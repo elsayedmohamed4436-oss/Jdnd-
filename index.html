@@ -11,16 +11,14 @@
 <script src="https://unpkg.com/tonweb/dist/tonweb.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--snow:#E8F0FF;--snow-glow:rgba(232,240,255,0.5);--gold:#FFD966;--gold-glow:rgba(255,217,102,0.4);--ice:#4DD0E1;--ice-glow:rgba(77,208,225,0.4);--ice-dark:#0097B2;--card:rgba(10,20,35,0.85);--glass:rgba(20,30,50,0.7);--border:rgba(255,255,255,0.12);--text:#FFFFFF;--muted:rgba(255,255,255,0.65);--red:#EF5350;--blue:#42A5F5;--cyan:#26C6DA;--dark-blue:#0A1428;--mid-blue:#1A2A4A}
-body{font-family:'Fredoka',cursive;font-weight:600;background:#0A1428;color:var(--text);min-height:100vh;padding-bottom:85px;overflow-x:hidden;font-size:14px;position:relative}
+:root{--snow:#E8F0FF;--gold:#FFD966;--gold-glow:rgba(255,217,102,0.4);--ice:#4DD0E1;--ice-glow:rgba(77,208,225,0.4);--ice-dark:#0097B2;--card:rgba(10,20,35,0.85);--glass:rgba(20,30,50,0.7);--border:rgba(255,255,255,0.12);--text:#FFFFFF;--muted:rgba(255,255,255,0.65);--red:#EF5350;--blue:#42A5F5;--cyan:#26C6DA;--dark-blue:#0A1428}
+body{font-family:'Fredoka',cursive;font-weight:600;background:#0A1428;color:var(--text);min-height:100vh;padding-bottom:85px;overflow-x:hidden;font-size:14px}
 button,input,select,textarea,span,div,p,h1,h2,h3,a{font-family:'Fredoka',cursive!important}
-
 .bg-fixed{position:fixed;top:0;left:0;right:0;bottom:0;z-index:-2;overflow:hidden}
 .bg-fixed img{width:100%;height:100%;object-fit:cover;animation:bgZoom 25s ease-in-out infinite}
 @keyframes bgZoom{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:-1}
 
-/* === LOADING SCREEN === */
 #loadingScreen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;overflow:hidden;transition:opacity 0.6s ease}
 #loadingScreen .ld-bg{position:absolute;inset:0;z-index:0}
 #loadingScreen .ld-bg img{width:100%;height:100%;object-fit:cover}
@@ -28,29 +26,25 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 #loadingScreen>*:not(.ld-bg){position:relative;z-index:1}
 .ld-logo{width:100px;height:100px;animation:ldFloat 2s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(77,208,225,0.6))}
 @keyframes ldFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.05)}}
-.ld-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:1px;text-shadow:0 2px 15px rgba(0,0,0,0.8)}
-.ld-sub{font-size:13px;color:rgba(255,255,255,0.75);font-weight:600;min-height:18px;text-shadow:0 1px 6px rgba(0,0,0,0.8);text-align:center;padding:0 20px}
+.ld-title{font-size:26px;font-weight:800;color:#fff;text-shadow:0 2px 15px rgba(0,0,0,0.8)}
+.ld-sub{font-size:13px;color:rgba(255,255,255,0.75);font-weight:600;text-align:center;padding:0 20px}
 .ld-ring-wrap{position:relative;width:120px;height:120px}
 .ld-ring-svg{width:120px;height:120px;transform:rotate(-90deg)}
 .ld-ring-bg{fill:none;stroke:rgba(255,255,255,0.08);stroke-width:5}
 .ld-ring-fill{fill:none;stroke:url(#iceGrad);stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset 0.4s ease;filter:drop-shadow(0 0 6px rgba(77,208,225,0.5))}
 .ld-ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.ld-pct{font-size:20px;font-weight:800;color:var(--ice);text-shadow:0 0 10px rgba(77,208,225,0.5)}
+.ld-pct{font-size:20px;font-weight:800;color:var(--ice)}
 .ld-hidden{opacity:0;pointer-events:none}
 
-/* === WELCOME CINEMATIC === */
 .welcome-cin{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
 .welcome-cin.active{display:flex}
-.welcome-spotlight{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:300px;height:500px;background:radial-gradient(ellipse,rgba(77,208,225,0.1),transparent 70%);pointer-events:none}
 .wc-chest-wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-.wc-chest{width:160px;height:160px;cursor:pointer;animation:wcFloat 2s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(77,208,225,0.4));transition:filter 0.3s}
+.wc-chest{width:160px;height:160px;cursor:pointer;animation:wcFloat 2s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(77,208,225,0.4))}
 @keyframes wcFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
 .wc-chest.shaking{animation:wcShake 1.2s ease-in-out !important}
 @keyframes wcShake{0%,100%{transform:rotate(0) scale(1)}10%{transform:rotate(-12deg) scale(1.06)}20%{transform:rotate(12deg) scale(1.06)}30%{transform:rotate(-15deg) scale(1.1)}40%{transform:rotate(15deg) scale(1.1)}50%{transform:rotate(-18deg) scale(1.12)}60%{transform:rotate(18deg) scale(1.12)}70%{transform:rotate(-10deg) scale(1.08)}80%{transform:rotate(10deg) scale(1.08)}90%{transform:rotate(-5deg) scale(1.03)}}
 .wc-chest.burst{animation:wcBurst 0.6s ease-out forwards !important}
 @keyframes wcBurst{0%{transform:scale(1.12);opacity:1}50%{transform:scale(1.8);opacity:0.5}100%{transform:scale(2.5);opacity:0}}
-.wc-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(77,208,225,0.25),transparent 70%);border-radius:50%;animation:wcGlow 2s ease-in-out infinite;pointer-events:none}
-@keyframes wcGlow{0%,100%{opacity:0.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.3)}}
 .wc-open-btn{margin-top:25px;padding:14px 40px;background:linear-gradient(135deg,#4DD0E1,#0097B2);border:none;border-radius:50px;color:#fff;font-size:18px;font-weight:800;cursor:pointer;box-shadow:0 0 25px rgba(77,208,225,0.5);transition:all 0.2s}
 .wc-open-btn:active{transform:scale(0.95)}
 .wc-open-btn.hidden{display:none}
@@ -66,7 +60,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .wc-start-btn{margin-top:10px;padding:16px 50px;background:linear-gradient(135deg,#4CAF50,#2E7D32);border:none;border-radius:50px;color:white;font-size:18px;font-weight:800;cursor:pointer;box-shadow:0 0 20px rgba(76,175,80,0.4);animation:btnPulse 2s infinite}
 @keyframes btnPulse{0%,100%{box-shadow:0 0 20px rgba(76,175,80,0.4)}50%{box-shadow:0 0 35px rgba(76,175,80,0.7)}}
 
-/* === TOP BAR === */
 .topbar-modern{position:sticky;top:0;z-index:100;padding:10px 12px;background:rgba(0,0,0,0.4);backdrop-filter:blur(20px);border-bottom:1px solid rgba(77,208,225,0.15)}
 .topbar-inner{display:flex;align-items:center;gap:10px;background:linear-gradient(105deg,rgba(77,208,225,0.1),rgba(0,0,0,0.4),rgba(255,217,102,0.1));border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:6px 8px 6px 6px}
 .uavatar{width:42px;height:42px;border-radius:50%;background:var(--glass);overflow:hidden;flex-shrink:0;border:2px solid var(--ice);box-shadow:0 0 10px var(--ice-glow)}
@@ -83,7 +76,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .lang-btn{background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:14px;padding:8px 12px;color:var(--ice);font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:4px;flex-shrink:0}
 .lang-btn:active{transform:scale(0.95)}
 
-/* === SECTIONS & NAV === */
 .sec{display:none;padding:12px;animation:fadeIn 0.3s ease}
 .sec.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -94,7 +86,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .ni-lbl{font-size:10px;font-weight:700;color:var(--muted)}
 .ni.active .ni-lbl{color:var(--ice)}
 
-/* === HOME PAGE === */
 .hero-card{width:100%;margin:0 auto;padding:20px 15px;border-radius:28px;background:linear-gradient(180deg,rgba(20,30,50,0.9),rgba(10,20,40,0.95));border:1px solid rgba(77,208,225,0.2);box-shadow:0 15px 40px rgba(0,0,0,0.5);position:relative;overflow:hidden}
 .hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ice),transparent)}
 .santa-wrap{display:flex;justify-content:center;margin-bottom:15px}
@@ -123,7 +114,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .shop-main-btn{width:100%;margin-top:10px;padding:14px;background:linear-gradient(135deg,#4CAF50,#2E7D32);border:none;border-radius:14px;color:white;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 15px rgba(76,175,80,0.3);transition:all 0.2s}
 .shop-main-btn:active{transform:scale(0.98)}
 
-/* === TASKS PAGE === */
 .task-tabs{display:flex;gap:8px;margin-bottom:15px;background:rgba(0,0,0,0.3);border-radius:16px;padding:4px}
 .ttab{flex:1;padding:10px;text-align:center;background:transparent;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;color:var(--muted);transition:all 0.2s}
 .ttab.active{background:var(--ice);color:#fff;box-shadow:0 4px 10px var(--ice-glow)}
@@ -131,10 +121,9 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .tsub{flex:1;padding:8px;text-align:center;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted);transition:all 0.2s}
 .tsub.active{border-color:var(--ice);color:var(--ice);background:rgba(77,208,225,0.1)}
 .task-list{display:flex;flex-direction:column;gap:10px;padding-bottom:20px}
-.task-card{background:linear-gradient(135deg,rgba(30,40,60,0.9),rgba(20,30,50,0.9));border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;align-items:center;gap:12px;transition:all 0.2s;animation:taskIn 0.4s ease both}
+.task-card{background:linear-gradient(135deg,rgba(30,40,60,0.9),rgba(20,30,50,0.9));border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;align-items:center;gap:12px;animation:taskIn 0.4s ease both}
 @keyframes taskIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
 .task-icon{width:48px;height:48px;border-radius:14px;background:rgba(77,208,225,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;border:1px solid rgba(77,208,225,0.2)}
-.task-icon img{width:100%;height:100%;object-fit:contain;border-radius:14px}
 .task-info{flex:1;min-width:0}
 .task-name{font-size:13px;font-weight:800;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .task-reward{font-size:11px;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:4px}
@@ -150,7 +139,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .task-btn.done{background:rgba(255,255,255,0.05);color:var(--muted);cursor:default}
 .empty-state{padding:30px;text-align:center;color:var(--muted);font-size:13px;font-weight:600}
 
-/* === WALLET === */
 .wallet-card{background:linear-gradient(135deg,rgba(30,40,60,0.95),rgba(20,30,50,0.95));border-radius:24px;padding:16px;border:1px solid rgba(255,255,255,0.1);margin-bottom:12px}
 .wallet-tabs{display:flex;gap:8px;background:rgba(0,0,0,0.3);border-radius:16px;padding:4px;margin-bottom:16px}
 .wtab{flex:1;padding:10px;text-align:center;background:transparent;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.2s}
@@ -165,7 +153,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .modern-btn.secondary{background:linear-gradient(135deg,var(--gold),#FFB347);color:#2C1A00;box-shadow:0 0 20px var(--gold-glow)}
 .modern-btn:active{transform:scale(0.98)}
 
-/* === FRIENDS === */
 .ref-card{background:linear-gradient(145deg,rgba(77,208,225,0.08),var(--card));border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px;text-align:center}
 .ref-pct{font-size:36px;font-weight:800;color:var(--ice)}
 .ref-link-row{display:flex;gap:8px;margin-top:12px}
@@ -185,7 +172,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .ref-date{font-size:10px;color:var(--muted)}
 .ref-earn{font-size:12px;font-weight:800;color:var(--snow);white-space:nowrap}
 
-/* === MODALS === */
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .modal.active{display:flex}
 .modal-box{background:linear-gradient(160deg,#0A1428,#0A1A2A);border:1px solid var(--border);border-radius:24px;padding:20px;width:90%;max-width:480px;max-height:85vh;overflow-y:auto;animation:scaleIn 0.3s ease}
@@ -195,19 +181,13 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .mclose{background:rgba(255,255,255,0.08);border:none;border-radius:50%;width:32px;height:32px;color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
 .mclose:active{transform:scale(0.9)}
 
-/* === NOTIFICATIONS === */
 .notif{position:fixed;top:15px;left:50%;transform:translateX(-50%) translateY(-80px);background:rgba(10,20,35,0.97);border:1px solid var(--border);border-radius:14px;padding:10px 18px;font-size:13px;font-weight:700;z-index:9000;transition:transform 0.3s ease;box-shadow:0 4px 20px rgba(0,0,0,0.6);max-width:85vw;text-align:center;backdrop-filter:blur(12px);pointer-events:none}
 .notif.show{transform:translateX(-50%) translateY(0)}
 .notif.s{border-color:var(--ice-glow);color:var(--ice);background:rgba(77,208,225,0.15)}
 .notif.e{border-color:rgba(239,83,80,0.5);color:#FF8A80;background:rgba(239,83,80,0.1)}
-.notif.i{border-color:rgba(66,165,245,0.4);color:#90CAF9;background:rgba(66,165,245,0.1)}
-.notif.w{border-color:rgba(255,193,7,0.4);color:#FFD740;background:rgba(255,193,7,0.1)}
 
-/* === MISC === */
-.snowflake{position:fixed;color:#fff;user-select:none;pointer-events:none;z-index:800;font-size:1rem;animation:fall linear forwards;text-shadow:0 0 5px rgba(77,208,225,0.5)}
+.snowflake{position:fixed;color:#fff;user-select:none;pointer-events:none;z-index:800;font-size:1rem;animation:fall linear forwards}
 @keyframes fall{0%{transform:translateY(-10vh) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(360deg);opacity:0}}
-.ptc{position:fixed;pointer-events:none;z-index:400;font-size:17px;animation:particleUp 0.9s ease-out forwards}
-@keyframes particleUp{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-74px) scale(0.4);opacity:0}}
 .swap-max{cursor:pointer;background:rgba(77,208,225,0.15);border:1px solid rgba(77,208,225,0.3);border-radius:10px;padding:8px 14px;font-size:12px;font-weight:800;color:var(--ice);transition:all 0.2s}
 .swap-max:active{transform:scale(0.95)}
 .preset-row{display:flex;gap:6px;margin:10px 0}
@@ -220,7 +200,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 
 <div class="bg-fixed"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png" alt="BG"></div>
 
-<!-- LOADING SCREEN -->
 <div id="loadingScreen">
   <div class="ld-bg"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ee3d15b9-4c4b-4a50-ba6e-5e0b9f526179.png" alt="Loading BG"></div>
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="Santa">
@@ -232,39 +211,33 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
       <circle class="ld-ring-bg" cx="60" cy="60" r="54"/>
       <circle class="ld-ring-fill" id="ringFill" cx="60" cy="60" r="54" stroke-dasharray="339.292" stroke-dashoffset="339.292"/>
     </svg>
-    <div class="ld-ring-inner">
-      <div class="ld-pct" id="ldPct">0%</div>
-    </div>
+    <div class="ld-ring-inner"><div class="ld-pct" id="ldPct">0%</div></div>
   </div>
 </div>
 
-<!-- WELCOME CINEMATIC -->
 <div class="welcome-cin" id="welcomeCin">
-  <div class="welcome-spotlight"></div>
   <div class="wc-chest-wrap">
-    <div class="wc-glow"></div>
     <img class="wc-chest" id="wcChest" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Chest">
-    <button class="wc-open-btn" id="wcOpenBtn" onclick="openWelcomeCest()">🎁 Открыть Сундук 🎁</button>
+    <button class="wc-open-btn" id="wcOpenBtn" onclick="openWelcomeChestAction()">🎁 Открыть Сундук 🎁</button>
     <div class="wc-rewards" id="wcRewards">
-      <div class="wc-reward-item" style="animation-delay:0.1s"><div class="wc-reward-icon">❄️</div><div class="wc-reward-info"><div class="wc-reward-title" data-i18n="snowReceived">Получено Снега</div><div class="wc-reward-val">+1,000</div></div></div>
-      <div class="wc-reward-item" style="animation-delay:0.3s"><div class="wc-reward-icon">🤖</div><div class="wc-reward-info"><div class="wc-reward-title" data-i18n="welcomeMachine">Приветственная Машина</div><div class="wc-reward-val">+1 (10/ч)</div></div></div>
+      <div class="wc-reward-item" style="animation-delay:0.1s"><div class="wc-reward-icon">❄️</div><div class="wc-reward-info"><div class="wc-reward-title" id="wcSnowTitle">Получено Снега</div><div class="wc-reward-val">+1,000</div></div></div>
+      <div class="wc-reward-item" style="animation-delay:0.3s"><div class="wc-reward-icon">🤖</div><div class="wc-reward-info"><div class="wc-reward-title" id="wcMacTitle">Приветственная Машина</div><div class="wc-reward-val">+1 (10/ч)</div></div></div>
       <button class="wc-start-btn" onclick="closeCinAndStart()">🌱 Начать Фарм 🌱</button>
     </div>
   </div>
 </div>
 
-<!-- TOP BAR -->
 <div class="topbar-modern">
   <div class="topbar-inner">
     <div class="uavatar" id="uavatar"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px">🎅</div></div>
     <div class="topbar-bals">
       <div class="tb-chip snow">
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
-        <div class="tb-chip-info"><span class="tb-chip-lbl" data-i18n="labelSnow">Снег</span><span class="tb-chip-val" id="tbSnow">0</span></div>
+        <div class="tb-chip-info"><span class="tb-chip-lbl" id="lblSnow">Снег</span><span class="tb-chip-val" id="tbSnow">0</span></div>
       </div>
       <div class="tb-chip ton">
         <i class="fas fa-coins"></i>
-        <div class="tb-chip-info"><span class="tb-chip-lbl" data-i18n="labelTON">TON</span><span class="tb-chip-val" id="tbTON">0</span></div>
+        <div class="tb-chip-info"><span class="tb-chip-lbl">TON</span><span class="tb-chip-val" id="tbTON">0</span></div>
       </div>
     </div>
     <button class="lang-btn" onclick="toggleLangMenu()"><span id="langFlag">🇷🇺</span></button>
@@ -278,7 +251,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
   </div>
 </div>
 
-<!-- HOME SECTION -->
 <div class="sec active" id="sectionHome">
   <div class="hero-card">
     <div class="santa-wrap" onclick="santaClick()">
@@ -286,33 +258,32 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="hero-stat-lbl" data-i18n="statAccrued">Накоплено</div>
+        <div class="hero-stat-lbl" id="statAccrued">Накоплено</div>
         <div class="hero-stat-val" id="heroAccrued">0.000000</div>
         <div class="hero-stat-unit">Snow</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-lbl" data-i18n="statRateDay">Ставка/День</div>
+        <div class="hero-stat-lbl" id="statRateDay">Ставка/День</div>
         <div class="hero-stat-val" id="heroRateDay">0</div>
-        <div class="hero-stat-unit" data-i18n="statSnowDay">Снег/день</div>
+        <div class="hero-stat-unit" id="statSnowDay">Снег/день</div>
       </div>
     </div>
     <div class="storage-box">
-      <div class="storage-head"><span data-i18n="storageLabel">Хранилище (Ур. <span id='storageLvDisp'>1</span>)</span><span class="storage-pct" id="storagePctDisp">0%</span></div>
+      <div class="storage-head"><span id="storageLabel">Хранилище (Ур. <span id='storageLvDisp'>1</span>)</span><span class="storage-pct" id="storagePctDisp">0%</span></div>
       <div class="storage-track"><div class="storage-fill" id="storageFill" style="width:0%"></div><div class="storage-lbl" id="storageLbl">0 / 300</div></div>
     </div>
     <div class="action-btns">
-      <button class="action-btn primary" id="collectBtn" onclick="collectSnow()" disabled><i class="fas fa-snowflake"></i> <span id="collectTxt" data-i18n="claimSnow">Собрать</span></button>
-      <button class="action-btn gold" onclick="openModal('upgradeModal')"><i class="fas fa-arrow-up"></i> <span data-i18n="upgBtn">Улучш.</span></button>
+      <button class="action-btn primary" id="collectBtn" onclick="collectSnow()" disabled><i class="fas fa-snowflake"></i> <span id="collectTxt">Собрать</span></button>
+      <button class="action-btn gold" onclick="openModal('upgradeModal')"><i class="fas fa-arrow-up"></i> <span id="upgBtn">Улучш.</span></button>
     </div>
-    <button class="shop-main-btn" onclick="openModal('machineShopModal')"><i class="fas fa-microchip"></i> <span data-i18n="shopBtn">Магазин Машин</span></button>
+    <button class="shop-main-btn" onclick="openModal('machineShopModal')"><i class="fas fa-microchip"></i> <span id="shopBtn">Магазин Машин</span></button>
   </div>
 </div>
 
-<!-- TASKS SECTION -->
 <div class="sec" id="sectionTasks">
   <div class="task-tabs">
-    <div class="ttab active" onclick="switchTTab(this,'social')">📢 <span data-i18n="tabSocial">Соц. сети</span></div>
-    <div class="ttab" onclick="switchTTab(this,'referral')">👥 <span data-i18n="tabReferral">Рефералы</span></div>
+    <div class="ttab active" onclick="switchTTab(this,'social')">📢 <span id="tabSocial">Соц. сети</span></div>
+    <div class="ttab" onclick="switchTTab(this,'referral')">👥 <span id="tabReferral">Рефералы</span></div>
   </div>
   <div class="tcont active" id="tcSocial">
     <div class="task-sub-tabs">
@@ -327,12 +298,11 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
   </div>
 </div>
 
-<button id="floatAddTask" onclick="openModal('addTaskModal')" style="position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ice);border:none;border-radius:30px;padding:12px 24px;color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px var(--ice-glow);display:none;z-index:150;gap:8px;align-items:center">➕ <span data-i18n="floatAdd">Добавить</span></button>
+<button id="floatAddTask" onclick="openModal('addTaskModal')" style="position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ice);border:none;border-radius:30px;padding:12px 24px;color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px var(--ice-glow);display:none;z-index:150;align-items:center">➕ <span id="floatAdd">Добавить</span></button>
 
-<!-- FRIENDS SECTION -->
 <div class="sec" id="sectionFriends">
   <div class="ref-card">
-    <div style="font-size:14px;color:var(--muted);margin-bottom:5px" data-i18n="refCommissionText">💰 Получайте <strong style="color:var(--gold)">20% комиссию</strong> в TON от покупок машин ваших друзей!</div>
+    <div style="font-size:14px;color:var(--muted);margin-bottom:5px" id="refCommissionText">💰 Получайте <strong style="color:var(--gold)">20% комиссию</strong> в TON от покупок машин ваших друзей!</div>
     <div class="ref-pct">20%</div>
     <div class="ref-link-row">
       <input class="ref-input" id="refLinkInp" readonly placeholder="Ваша ссылка...">
@@ -340,42 +310,41 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     </div>
   </div>
   <div class="hist-box">
-    <div class="hist-hdr"><span data-i18n="recentRefs">Недавние рефералы</span><span style="font-size:11px;color:var(--ice)" id="totalRefsDisp">0</span></div>
-    <div id="recentRefsList"><div class="empty-state">Пока нет рефералов</div></div>
+    <div class="hist-hdr"><span id="recentRefs">Недавние рефералы</span><span style="font-size:11px;color:var(--ice)" id="totalRefsDisp">0</span></div>
+    <div id="recentRefsList"><div class="empty-state" id="noRefs">Пока нет рефералов</div></div>
   </div>
 </div>
 
-<!-- WALLET SECTION -->
 <div class="sec" id="sectionWallet">
   <div class="wallet-card">
     <div class="wallet-tabs">
-      <div class="wtab active" onclick="switchWTab(this,'deposit')"><i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Внести</span></div>
-      <div class="wtab" onclick="switchWTab(this,'withdraw')"><i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Вывести</span></div>
-      <div class="wtab" onclick="switchWTab(this,'exchange')"><i class="fas fa-exchange-alt"></i> <span data-i18n="exchangeBtn">Обмен</span></div>
+      <div class="wtab active" onclick="switchWTab(this,'deposit')"><i class="fas fa-arrow-down"></i> <span id="depositBtn">Внести</span></div>
+      <div class="wtab" onclick="switchWTab(this,'withdraw')"><i class="fas fa-arrow-up"></i> <span id="withdrawBtn">Вывести</span></div>
+      <div class="wtab" onclick="switchWTab(this,'exchange')"><i class="fas fa-exchange-alt"></i> <span id="exchangeBtn">Обменять</span></div>
     </div>
     <div class="wcont active" id="wt-deposit">
       <div style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.3);padding:10px;border-radius:12px">
-        <div><div style="font-size:10px;color:var(--muted)">Кошелек</div><div style="font-size:12px;font-weight:700;color:var(--cyan)" id="walletAddressDisplay">Не подключен</div></div>
-        <button class="copy-btn" style="padding:6px 12px;font-size:11px" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> <span data-i18n="connectBtn">Подключить</span></button>
+        <div><div style="font-size:10px;color:var(--muted)" id="lblWallet">Кошелек</div><div style="font-size:12px;font-weight:700;color:var(--cyan)" id="walletAddressDisplay" data-i18n="notConnected">Не подключен</div></div>
+        <button class="copy-btn" style="padding:6px 12px;font-size:11px" id="connectWalletBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> <span id="connectBtn">Подключить</span></button>
       </div>
       <div style="background:rgba(255,193,7,0.07);border:1px solid rgba(255,193,7,0.2);border-radius:10px;padding:10px;margin-bottom:12px;font-size:11px;color:#FFD740">
         ⚠️ <strong>ВАЖНО:</strong> Ваш ID <span style="background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:6px;font-weight:800" id="depositUserIdDisplay">...</span> должен быть ЕДИНСТВЕННЫМ комментарием.
       </div>
-      <label class="modern-label" data-i18n="amountTON">Сумма (TON)</label>
+      <label class="modern-label" id="lblAmountTON">Сумма (TON)</label>
       <input type="number" class="modern-input" id="depositAmountInput" placeholder="1" step="0.1" min="1" style="margin-bottom:10px">
       <div class="preset-row"><span class="prbtn" onclick="setDepAmt(1)">1</span><span class="prbtn" onclick="setDepAmt(2)">2</span><span class="prbtn" onclick="setDepAmt(5)">5</span><span class="prbtn" onclick="setDepAmt(10)">10</span></div>
-      <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="initiateDeposit()"><i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Внести TON</span></button>
+      <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="initiateDeposit()"><i class="fas fa-arrow-down"></i> <span id="depositBtn2">Внести TON</span></button>
       <div id="depositStatus" style="display:none;margin-top:10px;padding:10px;background:rgba(0,0,0,0.3);border-radius:10px;text-align:center;font-size:12px"></div>
     </div>
     <div class="wcont" id="wt-withdraw">
-      <label class="modern-label" data-i18n="tonWalletAddr">TON адрес кошелька</label>
+      <label class="modern-label" id="lblTonAddr">TON адрес кошелька</label>
       <input type="text" class="modern-input" id="wdAddr" placeholder="UQ..." style="margin-bottom:10px">
-      <label class="modern-label" data-i18n="amountTON">Сумма (TON)</label>
+      <label class="modern-label" id="lblAmountTON2">Сумма (TON)</label>
       <input type="number" class="modern-input" id="wdAmt" placeholder="0.02" min="0.02" step="0.01" style="margin-bottom:10px">
       <div class="preset-row"><span class="prbtn" onclick="setWdAmt(0.02)">0.02</span><span class="prbtn" onclick="setWdAmt(0.05)">0.05</span><span class="prbtn" onclick="setWdAmt(0.1)">0.1</span><span class="prbtn" onclick="setWdAmt(0.5)">0.5</span></div>
-      <div style="text-align:center;margin-bottom:12px;font-size:12px;color:var(--muted)">💰 <span data-i18n="yourBal">Ваш баланс:</span> <strong style="color:var(--gold)" id="wdTonBalance">0 TON</strong></div>
-      <button class="modern-btn secondary" onclick="doWithdraw()"><i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Вывести TON</span></button>
-      <div class="hist-box" style="margin-top:16px"><div class="hist-hdr" data-i18n="withdrawHist">📋 История выводов</div><div id="wdHist"><div class="empty-state">Пока нет выводов</div></div></div>
+      <div style="text-align:center;margin-bottom:12px;font-size:12px;color:var(--muted)" id="yourBal">💰 Ваш баланс: <strong style="color:var(--gold)" id="wdTonBalance">0 TON</strong></div>
+      <button class="modern-btn secondary" onclick="doWithdraw()"><i class="fas fa-arrow-up"></i> <span id="withdrawBtn2">Вывести TON</span></button>
+      <div class="hist-box" style="margin-top:16px"><div class="hist-hdr" id="withdrawHist">📋 История выводов</div><div id="wdHist"><div class="empty-state" id="noWd">Пока нет выводов</div></div></div>
     </div>
     <div class="wcont" id="wt-exchange">
       <label class="modern-label">Snow → TON <span style="color:var(--gold);font-size:10px">(Комиссия 4%)</span></label>
@@ -383,27 +352,25 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
         <input type="number" class="modern-input" id="swapSnowAmt" placeholder="0" style="border:none;background:transparent;flex:1;padding:10px 0">
         <span class="swap-max" onclick="swapSnowMax()">MAX</span>
       </div>
-      <div style="text-align:right;margin-bottom:12px;color:var(--muted);font-size:12px" data-i18n="swapBal">Баланс: 0 Snow</div>
+      <div style="text-align:right;margin-bottom:12px;color:var(--muted);font-size:12px" id="swapBal">Баланс: 0 Снега</div>
       <div style="text-align:center;margin-bottom:16px"><span style="font-size:24px;font-weight:800;color:var(--gold)" id="swapTonOut">0</span> <span style="color:var(--muted)">TON</span></div>
-      <button class="modern-btn primary" onclick="swapSnowToTon()"><i class="fas fa-exchange-alt"></i> <span data-i18n="exchangeBtn">Обменять</span></button>
-      <div class="hist-box" style="margin-top:16px"><div class="hist-hdr" data-i18n="exchangeHist">📋 История обменов</div><div id="exchHist"><div class="empty-state">Пока нет обменов</div></div></div>
+      <button class="modern-btn primary" onclick="swapSnowToTon()"><i class="fas fa-exchange-alt"></i> <span id="exchangeBtn2">Обменять</span></button>
+      <div class="hist-box" style="margin-top:16px"><div class="hist-hdr" id="exchangeHist">📋 История обменов</div><div id="exchHist"><div class="empty-state" id="noExch">Пока нет обменов</div></div></div>
     </div>
   </div>
 </div>
 
-<!-- MODALS -->
-<div class="modal" id="upgradeModal"><div class="modal-box"><div class="mhdr"><div class="mtitle" data-i18n="upgTitle">⬆️ Улучшить Хранилище</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div><div id="upgradeContent"></div></div></div>
+<div class="modal" id="upgradeModal"><div class="modal-box"><div class="mhdr"><div class="mtitle" id="upgTitle">⬆️ Улучшить Хранилище</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div><div id="upgradeContent"></div></div></div>
 <div class="modal" id="machineShopModal"><div class="modal-box"><div class="mhdr"><div class="mtitle">🤖 Магазин Машин</div><button class="mclose" onclick="closeModal('machineShopModal')"><i class="fas fa-times"></i></button></div><div id="machineShopContent"></div></div></div>
-<div class="modal" id="addTaskModal"><div class="modal-box"><div class="mhdr"><div class="mtitle" data-i18n="addTaskTitle">➕ Добавить Задачу</div><button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button></div><div id="addTaskContent"></div></div></div>
-<div class="modal" id="helpModal"><div class="modal-box" style="max-height:85vh;overflow-y:auto"><div class="mhdr"><div class="mtitle">🎅 Гайд</div><button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button></div><div style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="helpBody">Покупайте машины за TON → Они добывают Снег → Обменивайте Снег на TON.<br><br>🔧 Базовая (1 TON): 300 Снег/ч<br>⚙️ Продвинутая (2 TON): 650 Снег/ч<br>💎 Элитная (3 TON): 1000 Снег/ч<br><br>👥 Приглашайте друзей и получайте 20% от их покупок машин в TON!</div></div></div>
+<div class="modal" id="addTaskModal"><div class="modal-box"><div class="mhdr"><div class="mtitle" id="addTaskTitle">➕ Добавить Задачу</div><button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button></div><div id="addTaskContent"></div></div></div>
 
 <div style="position:fixed;bottom:90px;right:12px;z-index:190;width:44px;height:44px;cursor:pointer" onclick="openModal('helpModal')"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 8px rgba(77,208,225,0.5))"></div>
 
 <nav class="bnav">
-  <div class="ni active" data-s="sectionHome" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div><div class="ni-lbl" data-i18n="Home">Главная</div></div>
-  <div class="ni" data-s="sectionTasks" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div><div class="ni-lbl" data-i18n="Tasks">Задачи</div></div>
-  <div class="ni" data-s="sectionFriends" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div><div class="ni-lbl" data-i18n="Friends">Друзья</div></div>
-  <div class="ni" data-s="sectionWallet" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div><div class="ni-lbl" data-i18n="Wallet">Кошелек</div></div>
+  <div class="ni active" data-s="sectionHome" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div><div class="ni-lbl" id="navHome">Главная</div></div>
+  <div class="ni" data-s="sectionTasks" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div><div class="ni-lbl" id="navTasks">Задачи</div></div>
+  <div class="ni" data-s="sectionFriends" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div><div class="ni-lbl" id="navFriends">Друзья</div></div>
+  <div class="ni" data-s="sectionWallet" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div><div class="ni-lbl" id="navWallet">Кошелек</div></div>
 </nav>
 
 <div id="notif" class="notif"></div>
@@ -414,9 +381,9 @@ const CFG = {
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
   TON_TO_SNOW: 100000, SNOW_TO_TON: 0.00001, MIN_WITHDRAW_TON: 0.02,
   MACHINES: {
-    1: { cost: 1, rate: 300, name: "Базовая", nameEn: "Basic", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
-    2: { cost: 2, rate: 650, name: "Продвинутая", nameEn: "Advanced", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
-    3: { cost: 3, rate: 1000, name: "Элитная", nameEn: "Elite", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
+    1: { cost: 1, rate: 300, nameRu: "Базовая", nameEn: "Basic", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
+    2: { cost: 2, rate: 650, nameRu: "Продвинутая", nameEn: "Advanced", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
+    3: { cost: 3, rate: 1000, nameRu: "Элитная", nameEn: "Elite", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   }, EXCHANGE_FEE_PERCENT: 4, BOT_USERNAME: 'SANTASNOWBOT_BOT', BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow'
 };
 const STORAGE_LVS = {1:{cap:300,upgCost:500},2:{cap:900,upgCost:2000},3:{cap:2400,upgCost:8000},4:{cap:6000,upgCost:25000},5:{cap:18000,upgCost:80000},6:{cap:60000,upgCost:250000},7:{cap:120000,upgCost:500000},8:{cap:210000,upgCost:900000},9:{cap:330000,upgCost:1500000},10:{cap:480000,upgCost:2500000}};
@@ -429,12 +396,12 @@ const S = {userId:null,startParam:'',user:{snow:0,miningRate:0,miningMachines:{1
 let _lastClick=0, _apiInFlight=0, _nt=null, _taskInFlight=new Set(), _exchInFlight=false;
 
 const T = {
-  en:{labelSnow:'Snow',labelTON:'TON',statAccrued:'Accrued',statRateDay:'Rate/Day',statSnowDay:'Snow/day',storageLabel:'Storage (Lv. <span id=\'storageLvDisp\'>1</span>)',claimSnow:'Claim',upgBtn:'Upg.',shopBtn:'Machine Shop',tabSocial:'Social',tabReferral:'Referral',recentRefs:'Recent Refs',refCommissionText:'💰 Earn <strong style="color:var(--gold)">20% commission</strong> in TON from friends machine purchases!',snowReceived:'Snow Received',welcomeMachine:'Welcome Machine',depositBtn:'Deposit',withdrawBtn:'Withdraw',exchangeBtn:'Exchange',connectBtn:'Connect',amountTON:'Amount (TON)',tonWalletAddr:'TON Wallet Address',withdrawHist:'📋 Withdrawals',exchangeHist:'📋 Exchanges',swapBal:'Balance: 0 Snow',yourBal:'Your Balance:',Home:'Home',Tasks:'Tasks',Friends:'Friends',Wallet:'Wallet',floatAdd:'Add Task',upgTitle:'⬆️ Upgrade Storage',helpBody:'Buy machines with TON → They mine Snow → Exchange Snow to TON.<br><br>🔧 Basic (1 TON): 300 Snow/h<br>⚙️ Advanced (2 TON): 650 Snow/h<br>💎 Elite (3 TON): 1000 Snow/h<br><br>👥 Invite friends and get 20% of their machine purchases in TON!',addTaskTitle:'➕ Add Task',noRefs:'No referrals yet',noWd:'No withdrawals yet',noExch:'No exchanges yet',emptyPartner:'No partner tasks',emptyCommunity:'No community tasks'},
-  ru:{labelSnow:'Снег',labelTON:'TON',statAccrued:'Накоплено',statRateDay:'Ставка/День',statSnowDay:'Снег/день',storageLabel:'Хранилище (Ур. <span id=\'storageLvDisp\'>1</span>)',claimSnow:'Собрать',upgBtn:'Улучш.',shopBtn:'Магазин Машин',tabSocial:'Соц. сети',tabReferral:'Рефералы',recentRefs:'Недавние рефералы',refCommissionText:'💰 Получайте <strong style="color:var(--gold)">20% комиссию</strong> в TON от покупок машин ваших друзей!',snowReceived:'Получено Снега',welcomeMachine:'Приветственная Машина',depositBtn:'Внести',withdrawBtn:'Вывести',exchangeBtn:'Обменять',connectBtn:'Подключить',amountTON:'Сумма (TON)',tonWalletAddr:'TON адрес кошелька',withdrawHist:'📋 История выводов',exchangeHist:'📋 История обменов',swapBal:'Баланс: 0 Снега',yourBal:'Ваш баланс:',Home:'Главная',Tasks:'Задачи',Friends:'Друзья',Wallet:'Кошелек',floatAdd:'Добавить',upgTitle:'⬆️ Улучшить Хранилище',helpBody:'Покупайте машины за TON → Они добывают Снег → Обменивайте Снег на TON.<br><br>🔧 Базовая (1 TON): 300 Снег/ч<br>⚙️ Продвинутая (2 TON): 650 Снег/ч<br>💎 Элитная (3 TON): 1000 Снег/ч<br><br>👥 Приглашайте друзей и получайте 20% от их покупок машин в TON!',addTaskTitle:'➕ Добавить Задачу',noRefs:'Пока нет рефералов',noWd:'Пока нет выводов',noExch:'Пока нет обменов',emptyPartner:'Нет партнерских задач',emptyCommunity:'Нет задач сообщества'}
+  en:{labelSnow:'Snow',statAccrued:'Accrued',statRateDay:'Rate/Day',statSnowDay:'Snow/day',storageLabel:'Storage (Lv. <span id=\'storageLvDisp\'>1</span>)',claimSnow:'Claim',upgBtn:'Upg.',shopBtn:'Machine Shop',tabSocial:'Social',tabReferral:'Referral',recentRefs:'Recent Refs',refCommissionText:'💰 Earn <strong style="color:var(--gold)">20% commission</strong> in TON from friends machine purchases!',snowReceived:'Snow Received',welcomeMachine:'Welcome Machine',depositBtn:'Deposit',withdrawBtn:'Withdraw',exchangeBtn:'Exchange',connectBtn:'Connect',amountTON:'Amount (TON)',tonWalletAddr:'TON Wallet Address',withdrawHist:'📋 Withdrawals',exchangeHist:'📋 Exchanges',swapBal:'Balance: 0 Snow',yourBal:'💰 Your Balance: ',Home:'Home',Tasks:'Tasks',Friends:'Friends',Wallet:'Wallet',floatAdd:'Add Task',upgTitle:'⬆️ Upgrade Storage',addTaskTitle:'➕ Add Task',noRefs:'No referrals yet',noWd:'No withdrawals yet',noExch:'No exchanges yet',emptyPartner:'No partner tasks',emptyCommunity:'No community tasks',notConnected:'Not connected',collectEmpty:'Empty',buyBtn:'Buy',needTon:'Need TON',upgBtn2:'Upgrade',maxLv:'Max Level!',capacity:'Capacity',cost:'Cost',addTaskLink:'Telegram Link',addTaskTarget:'Target Users (min 100)',addTaskCost:'Cost:',createTask:'✅ Create Task',invalidLink:'Invalid link',minTarget:'Min 100',notEnoughSnow:'Not enough Snow',created:'✅ Created!',failed:'Failed',joinFirst:'❌ Join first!',claimTask:'Claim',friendsNeeded:'friends needed',startFarm:'🌱 Start Farm 🌱',openChest:'🎁 Open Chest 🎁',noWithdrawals:'No withdrawals yet'},
+  ru:{labelSnow:'Снег',statAccrued:'Накоплено',statRateDay:'Ставка/День',statSnowDay:'Снег/день',storageLabel:'Хранилище (Ур. <span id=\'storageLvDisp\'>1</span>)',claimSnow:'Собрать',upgBtn:'Улучш.',shopBtn:'Магазин Машин',tabSocial:'Соц. сети',tabReferral:'Рефералы',recentRefs:'Недавние рефералы',refCommissionText:'💰 Получайте <strong style="color:var(--gold)">20% комиссию</strong> в TON от покупок машин ваших друзей!',snowReceived:'Получено Снега',welcomeMachine:'Приветственная Машина',depositBtn:'Внести',withdrawBtn:'Вывести',exchangeBtn:'Обменять',connectBtn:'Подключить',amountTON:'Сумма (TON)',tonWalletAddr:'TON адрес кошелька',withdrawHist:'📋 История выводов',exchangeHist:'📋 История обменов',swapBal:'Баланс: 0 Снега',yourBal:'💰 Ваш баланс: ',Home:'Главная',Tasks:'Задачи',Friends:'Друзья',Wallet:'Кошелек',floatAdd:'Добавить',upgTitle:'⬆️ Улучшить Хранилище',addTaskTitle:'➕ Добавить Задачу',noRefs:'Пока нет рефералов',noWd:'Пока нет выводов',noExch:'Пока нет обменов',emptyPartner:'Нет партнерских задач',emptyCommunity:'Нет задач сообщества',notConnected:'Не подключен',collectEmpty:'Пусто',buyBtn:'Купить',needTon:'Мало TON',upgBtn2:'Улучшить',maxLv:'Максимальный уровень!',capacity:'Вместимость',cost:'Стоимость',addTaskLink:'Telegram ссылка',addTaskTarget:'Целевые пользователи (мин 100)',addTaskCost:'Стоимость:',createTask:'✅ Создать',invalidLink:'Неверная ссылка',minTarget:'Мин 100',notEnoughSnow:'Мало Снега',created:'✅ Создано!',failed:'Ошибка',joinFirst:'❌ Сначала подпишитесь!',claimTask:'Забрать',friendsNeeded:'друзей нужно',startFarm:'🌱 Начать Фарм 🌱',openChest:'🎁 Открыть Сундук 🎁',noWithdrawals:'Пока нет выводов'}
 };
 
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function t(k){return T[LANG]?.[k] || T.en[k] || k}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function fmt(n){n=Math.floor(n||0);if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n.toString()}
 function fmtTon(n){if(!n)return'0';if(n>=1000)return(n/1000).toFixed(1)+'K';if(n>=1)return n.toFixed(2);return n.toFixed(4)}
 
@@ -446,7 +413,7 @@ async function loadState(){try{const d=await api('getState',{start_param:S.start
 
 function closeCinAndStart(){document.getElementById('welcomeCin').classList.remove('active');}
 
-async function openWelcomeCest(){
+async function openWelcomeChestAction(){
   if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();
   const chest=document.getElementById('wcChest');
   chest.classList.add('shaking');
@@ -458,7 +425,7 @@ async function openWelcomeCest(){
       document.getElementById('wcOpenBtn').classList.add('hidden');
       document.getElementById('wcRewards').classList.add('active');
     },700);
-    api('openWelcomeCest',{}).catch(e=>console.error(e));
+    api('openWelcomeChest',{}).catch(e=>console.error(e));
     S.user.welcomeChestOpened=true;S.user.snow+=1000;S.user.hasWelcomeMachine=true;
     let rate=10;for(let i=1;i<=3;i++)rate+=(S.user.miningMachines[i]||0)*CFG.MACHINES[i].rate;S.user.miningRate=rate;
     updateUI();
@@ -475,8 +442,7 @@ function updateUI(){
   document.getElementById('tbTON').textContent=fmtTon(u.tonBalance||0);
   document.getElementById('heroRateDay').textContent=fmt(Math.round((u.miningRate||0)*24));
   document.getElementById('wdTonBalance').textContent=fmtTon(u.tonBalance||0)+' TON';
-  const swapBalEl=document.querySelector('[data-i18n="swapBal"]');
-  if(swapBalEl)swapBalEl.textContent=(LANG==='ru'?'Баланс: ':'Balance: ')+fmt(u.snow||0)+(LANG==='ru'?' Снега':' Snow');
+  document.getElementById('swapBal').textContent=(LANG==='ru'?'Баланс: ':'Balance: ')+fmt(u.snow||0)+(LANG==='ru'?' Снега':' Snow');
   updateStorageUI();renderTasks();renderExchHist();renderWdHist();
 }
 
@@ -486,91 +452,85 @@ function updateStorageUI(){
   document.getElementById('heroAccrued').textContent=S.storageProgress.toFixed(6);
   document.getElementById('storagePctDisp').textContent=pct+'%';
   document.getElementById('storageFill').style.width=pct+'%';
-  document.getElementById('storageLbl').textContent=`${Math.floor(S.storageProgress)} / ${fmt(cfg.cap)}`;
-  const btn=document.getElementById('collectBtn');btn.disabled=S.storageProgress<1;
-  const txt=document.getElementById('collectTxt');
-  txt.textContent=S.storageProgress>=1?`${t('claimSnow')} ${fmt(Math.floor(S.storageProgress))}`:(LANG==='ru'?'Пусто':'Empty');
+  document.getElementById('storageLbl').textContent=Math.floor(S.storageProgress)+' / '+fmt(cfg.cap);
+  document.getElementById('collectBtn').disabled=S.storageProgress<1;
+  document.getElementById('collectTxt').textContent=S.storageProgress>=1?t('claimSnow')+' '+fmt(Math.floor(S.storageProgress)):t('collectEmpty');
 }
 
 function startStorage(){if(S.storageInt)clearInterval(S.storageInt);S.storageInt=setInterval(()=>{const u=S.user,lv=u.storageLevel||1,cfg=STORAGE_LVS[lv]||STORAGE_LVS[1],rate=u.miningRate||0;if(rate<=0)return;S.storageProgress+=rate/3600;if(S.storageProgress>cfg.cap)S.storageProgress=cfg.cap;updateStorageUI();},1000);}
 
-async function collectSnow(){if(S._collectCooldown)return;if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const amt=Math.floor(S.storageProgress);if(amt<1)return;S._collectCooldown=true;setTimeout(()=>S._collectCooldown=false,3000);try{const r=await api('collect',{amount:amt});S.user.snow=r.snow;S.user.totalEarned=(S.user.totalEarned||0)+amt;S.storageProgress=0;updateUI();triggerSnowfall(30);showNotif(`+${fmt(amt)} Snow`,'s');}catch(e){showNotif(e.message,'e');}}
+async function collectSnow(){if(S._collectCooldown)return;if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const amt=Math.floor(S.storageProgress);if(amt<1)return;S._collectCooldown=true;setTimeout(()=>S._collectCooldown=false,3000);try{const r=await api('collect',{amount:amt});S.user.snow=r.snow;S.user.totalEarned=(S.user.totalEarned||0)+amt;S.storageProgress=0;updateUI();triggerSnowfall(30);showNotif('+'+fmt(amt)+' Snow','s');}catch(e){showNotif(e.message,'e');}}
 
 function buildUpgradeContent(){
   const lv=S.user.storageLevel||1,cur=STORAGE_LVS[lv],next=STORAGE_LVS[lv+1];
-  let h=`<div style="text-align:center;margin-bottom:15px"><span style="font-size:32px;font-weight:800;color:var(--ice)">Ур. ${lv}</span> <span style="font-size:20px;color:var(--muted)">→</span> ${next?`<span style="font-size:32px;font-weight:800;color:var(--gold)">Ур. ${lv+1}</span>`:'<span style="font-size:24px;color:var(--gold)">MAX</span>'}</div>`;
-  if(next){h+=`<div style="background:rgba(0,0,0,0.3);padding:15px;border-radius:14px;margin-bottom:15px;text-align:center"><div style="color:var(--muted);font-size:12px">Вместимость</div><div style="font-size:18px;font-weight:800;color:#fff">${fmt(cur.cap)} → ${fmt(next.cap)}</div><div style="color:var(--muted);font-size:12px;margin-top:8px">Стоимость</div><div style="font-size:18px;font-weight:800;color:var(--ice)">${fmt(next.upgCost)} <img src="${SNOW_IMG}" style="width:16px;height:16px;vertical-align:middle"></div></div><button class="modern-btn primary" onclick="upgradeStorage()">⬆️ Улучшить</button>`;}else{h+=`<div style="text-align:center;color:var(--ice);font-weight:800">Максимальный уровень!</div>`;}
+  let h='<div style="text-align:center;margin-bottom:15px"><span style="font-size:32px;font-weight:800;color:var(--ice)">Ур. '+lv+'</span> <span style="font-size:20px;color:var(--muted)">→</span> '+(next?'<span style="font-size:32px;font-weight:800;color:var(--gold)">Ур. '+(lv+1)+'</span>':'<span style="font-size:24px;color:var(--gold)">MAX</span>')+'</div>';
+  if(next){h+='<div style="background:rgba(0,0,0,0.3);padding:15px;border-radius:14px;margin-bottom:15px;text-align:center"><div style="color:var(--muted);font-size:12px">'+t('capacity')+'</div><div style="font-size:18px;font-weight:800;color:#fff">'+fmt(cur.cap)+' → '+fmt(next.cap)+'</div><div style="color:var(--muted);font-size:12px;margin-top:8px">'+t('cost')+'</div><div style="font-size:18px;font-weight:800;color:var(--ice)">'+fmt(next.upgCost)+' <img src="'+SNOW_IMG+'" style="width:16px;height:16px;vertical-align:middle"></div></div><button class="modern-btn primary" onclick="upgradeStorage()">⬆️ '+t('upgBtn2')+'</button>';}else{h+='<div style="text-align:center;color:var(--ice);font-weight:800">'+t('maxLv')+'</div>';}
   document.getElementById('upgradeContent').innerHTML=h;
 }
 
-async function upgradeStorage(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const lv=S.user.storageLevel||1,next=STORAGE_LVS[lv+1];if(!next)return;try{const r=await api('upgradeStorage',{newLevel:lv+1});S.user.snow=r.snow;S.user.storageLevel=r.storageLevel;updateUI();closeModal('upgradeModal');triggerSnowfall(30);showNotif(`✅ Ур. ${r.storageLevel}!`,'s');}catch(e){showNotif(e.message,'e');}}
+async function upgradeStorage(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const lv=S.user.storageLevel||1,next=STORAGE_LVS[lv+1];if(!next)return;try{const r=await api('upgradeStorage',{newLevel:lv+1});S.user.snow=r.snow;S.user.storageLevel=r.storageLevel;updateUI();closeModal('upgradeModal');triggerSnowfall(30);showNotif('✅ Ур. '+r.storageLevel+'!','s');}catch(e){showNotif(e.message,'e');}}
 
 function buildMachineShop(){
   let h='<div style="display:flex;flex-direction:column;gap:12px">';
   for(let i=1;i<=3;i++){const m=CFG.MACHINES[i],cnt=S.user.miningMachines?.[i]||0,can=(S.user.tonBalance||0)>=m.cost;
-    h+=`<div style="background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <img src="${m.image}" style="width:60px;height:60px;border-radius:12px;object-fit:contain">
-      <div style="flex:1;min-width:120px"><div style="font-weight:800;color:var(--ice)">${LANG==='ru'?m.name:m.nameEn}</div><div style="font-size:12px;color:var(--snow)">⚡ ${m.rate} /ч</div><div style="font-size:12px;color:var(--gold);margin-top:2px">💰 ${m.cost} TON</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Имеется: ${cnt}</div></div>
-      <div style="display:flex;align-items:center;gap:6px"><input type="number" id="qty_${i}" value="1" min="1" max="99" style="width:50px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;padding:6px;color:#fff;text-align:center;font-size:14px"><span style="font-size:11px;color:var(--muted)">шт</span></div>
-      <button class="task-btn ${can?'go':''}" style="${can?'':'opacity:0.5;cursor:not-allowed;background:var(--muted)'}" onclick="purchaseMachine(${i})" ${can?'':'disabled'}>${can?(LANG==='ru'?'Купить':'Buy'):(LANG==='ru'?'Мало TON':'Need TON')}</button>
-    </div>`;}
+    h+='<div style="background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap"><img src="'+m.image+'" style="width:60px;height:60px;border-radius:12px;object-fit:contain"><div style="flex:1;min-width:120px"><div style="font-weight:800;color:var(--ice)">'+(LANG==='ru'?m.nameRu:m.nameEn)+'</div><div style="font-size:12px;color:var(--snow)">⚡ '+m.rate+' /ч</div><div style="font-size:12px;color:var(--gold);margin-top:2px">💰 '+m.cost+' TON</div><div style="font-size:10px;color:var(--muted);margin-top:2px">'+(LANG==='ru'?'Имеется':'Owned')+': '+cnt+'</div></div><div style="display:flex;align-items:center;gap:6px"><input type="number" id="qty_'+i+'" value="1" min="1" max="99" style="width:50px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;padding:6px;color:#fff;text-align:center;font-size:14px"><span style="font-size:11px;color:var(--muted)">шт</span></div><button class="task-btn '+(can?'go':'')+'" style="'+(can?'':'opacity:0.5;cursor:not-allowed;background:var(--muted)')+'" onclick="purchaseMachine('+i+')" '+(can?'':'disabled')+'>'+(can?t('buyBtn'):t('needTon'))+'</button></div>';}
   h+='</div>';document.getElementById('machineShopContent').innerHTML=h;
 }
 
-async function purchaseMachine(t){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const m=CFG.MACHINES[t],q=parseInt(document.getElementById(`qty_${t}`)?.value)||1;try{const r=await api('purchaseMachine',{machineType:t,quantity:q});S.user.tonBalance=r.tonBalance;S.user.miningRate=r.miningRate;S.user.miningMachines=r.miningMachines;updateUI();buildMachineShop();triggerSnowfall(30);showNotif(`+${q}x ${LANG==='ru'?m.name:m.nameEn}`,'s');}catch(e){showNotif(e.message,'e');}}
+async function purchaseMachine(tp){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const m=CFG.MACHINES[tp],q=parseInt(document.getElementById('qty_'+tp)?.value)||1;try{const r=await api('purchaseMachine',{machineType:tp,quantity:q});S.user.tonBalance=r.tonBalance;S.user.miningRate=r.miningRate;S.user.miningMachines=r.miningMachines;updateUI();buildMachineShop();triggerSnowfall(30);showNotif('+'+q+'x '+(LANG==='ru'?m.nameRu:m.nameEn),'s');}catch(e){showNotif(e.message,'e');}}
 
-function buildAddTask(){document.getElementById('addTaskContent').innerHTML=`<div style="display:flex;flex-direction:column;gap:10px"><label class="modern-label">Telegram ссылка</label><input type="text" id="atLink" class="modern-input" placeholder="https://t.me/..."><label class="modern-label">Целевое пользователи (мин 100)</label><input type="number" id="atTarget" class="modern-input" placeholder="100" min="100"><div style="text-align:right;font-size:14px;font-weight:800;color:var(--ice)">Стоимость: <span id="atCost">0</span> Snow</div><button class="modern-btn primary" onclick="submitAddTask()">✅ Создать</button></div>`;document.getElementById('atTarget')?.addEventListener('input',e=>{document.getElementById('atCost').textContent=fmt((parseInt(e.target.value)||0)*60)});}
-async function submitAddTask(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const link=document.getElementById('atLink')?.value,target=parseInt(document.getElementById('atTarget')?.value)||0;if(!link?.includes('t.me/'))return showNotif('Неверная ссылка','e');if(target<100)return showNotif('Мин 100','e');try{await api('createTask',{type:'channel',link,targetUsers:target});S.user.snow-=target*60;updateUI();closeModal('addTaskModal');loadState();showNotif('✅ Создано!','s');}catch(e){showNotif(e.message,'e');}}
+function buildAddTask(){document.getElementById('addTaskContent').innerHTML='<div style="display:flex;flex-direction:column;gap:10px"><label class="modern-label">'+t('addTaskLink')+'</label><input type="text" id="atLink" class="modern-input" placeholder="https://t.me/..."><label class="modern-label">'+t('addTaskTarget')+'</label><input type="number" id="atTarget" class="modern-input" placeholder="100" min="100"><div style="text-align:right;font-size:14px;font-weight:800;color:var(--ice)">'+t('addTaskCost')+' <span id="atCost">0</span> Snow</div><button class="modern-btn primary" onclick="submitAddTask()">'+t('createTask')+'</button></div>';document.getElementById('atTarget')?.addEventListener('input',e=>{document.getElementById('atCost').textContent=fmt((parseInt(e.target.value)||0)*60)});}
+async function submitAddTask(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const link=document.getElementById('atLink')?.value,target=parseInt(document.getElementById('atTarget')?.value)||0;if(!link?.includes('t.me/'))return showNotif(t('invalidLink'),'e');if(target<100)return showNotif(t('minTarget'),'e');try{await api('createTask',{type:'channel',link,targetUsers:target});S.user.snow-=target*60;updateUI();closeModal('addTaskModal');loadState();showNotif(t('created'),'s');}catch(e){showNotif(e.message,'e');}}
 
 function renderTasks(){
   const cnt=S.user.referralCount||0;let refH='';
   REF_TASKS.forEach(tk=>{const done=S.doneTasks.includes(tk.id),can=cnt>=tk.n&&!done,p=Math.min(100,Math.round(cnt/tk.n*100));
-    refH+=`<div class="task-card"><div class="task-icon">👥</div><div class="task-info"><div class="task-name">${LANG==='ru'?tk.nameRu:tk.nameEn}</div><div class="task-reward"><img src="${SNOW_IMG}"> ${fmt(tk.snow)} Snow</div><div class="task-progress"><div class="task-progress-fill" style="width:${p}%"></div></div><div class="task-stat">${cnt}/${tk.n}</div></div><button class="task-btn ${done?'done':can?'claim':'go'}" style="${done?'':can?'':'opacity:0.5;cursor:not-allowed'}" onclick="claimRefTask('${tk.id}')" ${done||!can?'disabled':''}>${done?'✅':can?(LANG==='ru'?'Забрать':'Claim'):tk.n}</button></div>`;});
-  document.getElementById('referralTasksList').innerHTML=refH||`<div class="empty-state">✨ Приглашайте друзей! ✨</div>`;
+    refH+='<div class="task-card"><div class="task-icon">👥</div><div class="task-info"><div class="task-name">'+(LANG==='ru'?tk.nameRu:tk.nameEn)+'</div><div class="task-reward"><img src="'+SNOW_IMG+'"> '+fmt(tk.snow)+' Snow</div><div class="task-progress"><div class="task-progress-fill" style="width:'+p+'%"></div></div><div class="task-stat">'+cnt+'/'+tk.n+'</div></div><button class="task-btn '+(done?'done':can?'claim':'go')+'" style="'+(done?'':can?'':'opacity:0.5;cursor:not-allowed')+'" onclick="claimRefTask(\''+tk.id+'\')" '+(done||!can?'disabled':'')+'>'+(done?'✅':can?t('claimTask'):tk.n)+'</button></div>';});
+  document.getElementById('referralTasksList').innerHTML=refH||'<div class="empty-state">✨</div>';
   renderSocTasks();
 }
 
 function renderSocTasks(){
   const p=S.tasks?.partner||[],c=S.tasks?.community||[];
-  document.getElementById('socPartnerList').innerHTML=p.length?p.map(t=>buildTaskCard(t,'partner')).join(''):`<div class="empty-state">${t('emptyPartner')}</div>`;
-  document.getElementById('socCommunityList').innerHTML=c.length?c.map(t=>buildTaskCard(t,'community')).join(''):`<div class="empty-state">${t('emptyCommunity')}</div>`;
+  document.getElementById('socPartnerList').innerHTML=p.length?p.map(t=>buildTaskCard(t,'partner')).join(''):'<div class="empty-state">'+t('emptyPartner')+'</div>';
+  document.getElementById('socCommunityList').innerHTML=c.length?c.map(t=>buildTaskCard(t,'community')).join(''):'<div class="empty-state">'+t('emptyCommunity')+'</div>';
 }
 
-function buildTaskCard(t,cat){const done=S.doneTasks.includes(t.id),inF=_taskInFlight.has(t.id);const icon=t.type==='channel'?'📢':'🤖';return`<div class="task-card"><div class="task-icon">${icon}</div><div class="task-info"><div class="task-name">${esc(t.name)}</div><div class="task-reward"><img src="${SNOW_IMG}"> ${t.snowReward||50}</div></div>${done?`<button class="task-btn done">✅</button>`:inF?`<button class="task-btn done" style="opacity:.6">⏳</button>`:`<button class="task-btn go" onclick="doDbTask('${t.id}','${esc(t.link)}','${t.type||'bot'}','${cat}')">Go →</button>`}</div>`;}
+function buildTaskCard(t,cat){const done=S.doneTasks.includes(t.id),inF=_taskInFlight.has(t.id);const icon=t.type==='channel'?'📢':'🤖';return'<div class="task-card"><div class="task-icon">'+icon+'</div><div class="task-info"><div class="task-name">'+esc(t.name)+'</div><div class="task-reward"><img src="'+SNOW_IMG+'"> '+(t.snowReward||50)+'</div></div>'+(done?'<button class="task-btn done">✅</button>':inF?'<button class="task-btn done" style="opacity:.6">⏳</button>':'<button class="task-btn go" onclick="doDbTask(\''+t.id+'\',\''+esc(t.link)+'\',\''+(t.type||'bot')+'\',\''+cat+'\')">Go →</button>')+'</div>';}
 
-async function claimRefTask(id){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();try{const r=await api('claimTask',{taskId:id});S.user.snow=r.snow;S.doneTasks.push(id);updateUI();renderTasks();triggerSnowfall(20);showNotif(`+${fmt(r.snowReward)} Snow`,'s');}catch(e){showNotif(e.message,'e');}}
+async function claimRefTask(id){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();try{const r=await api('claimTask',{taskId:id});S.user.snow=r.snow;S.doneTasks.push(id);updateUI();renderTasks();triggerSnowfall(20);showNotif('+'+fmt(r.snowReward)+' Snow','s');}catch(e){showNotif(e.message,'e');}}
 
-async function doDbTask(id,link,type,cat){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();if(_taskInFlight.has(id))return;_taskInFlight.add(id);renderSocTasks();if(link?.startsWith('https://t.me/'))window.open(link,'_blank');showNotif('⏳ Проверка...','i');setTimeout(async()=>{try{const r=await api('verifyTask',{taskId:id,taskType:type,taskCategory:cat});if(!S.doneTasks.includes(id))S.doneTasks.push(id);if(r.snowAdded){S.user.snow=(S.user.snow||0)+r.snowAdded;updateUI();triggerSnowfall(20);showNotif(`+${fmt(r.snowAdded)} Snow`,'s');}renderTasks();}catch(e){showNotif(e.message.includes('member')?(LANG==='ru'?'❌ Сначала подпишитесь!':'❌ Join first!'):e.message,'e');}finally{_taskInFlight.delete(id);renderSocTasks();}},3000);}
+async function doDbTask(id,link,type,cat){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();if(_taskInFlight.has(id))return;_taskInFlight.add(id);renderSocTasks();if(link?.startsWith('https://t.me/'))window.open(link,'_blank');showNotif('⏳...','i');setTimeout(async()=>{try{const r=await api('verifyTask',{taskId:id,taskType:type,taskCategory:cat});if(!S.doneTasks.includes(id))S.doneTasks.push(id);if(r.snowAdded){S.user.snow=(S.user.snow||0)+r.snowAdded;updateUI();triggerSnowfall(20);showNotif('+'+fmt(r.snowAdded)+' Snow','s');}renderTasks();}catch(e){showNotif(e.message.includes('member')?t('joinFirst'):e.message,'e');}finally{_taskInFlight.delete(id);renderSocTasks();}},3000);}
 
-function switchTTab(el,t){document.querySelectorAll('.ttab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById(`tc${t.charAt(0).toUpperCase()+t.slice(1)}`).classList.add('active');document.getElementById('floatAddTask').style.display='none';}
+function switchTTab(el,t){document.querySelectorAll('.ttab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('tc'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');document.getElementById('floatAddTask').style.display='none';}
 function switchSocTab(tab){document.getElementById('stab-partner').className='tsub'+(tab==='partner'?' active':'');document.getElementById('stab-community').className='tsub'+(tab==='community'?' active':'');document.getElementById('socPartnerList').style.display=tab==='partner'?'flex':'none';document.getElementById('socCommunityList').style.display=tab==='community'?'flex':'none';document.getElementById('floatAddTask').style.display=tab==='community'?'flex':'none';}
 
 function swapSnowMax(){document.getElementById('swapSnowAmt').value=Math.floor(S.user.snow||0);updSwap();}
 function updSwap(){const s=parseInt(document.getElementById('swapSnowAmt').value)||0,f=Math.floor(s*4/100),a=s-f;document.getElementById('swapTonOut').textContent=(a*CFG.SNOW_TO_TON).toFixed(6);}
 document.getElementById('swapSnowAmt')?.addEventListener('input',updSwap);
 
-async function swapSnowToTon(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();if(_exchInFlight)return;const s=parseInt(document.getElementById('swapSnowAmt').value)||0;if(s<100)return showNotif('Мин 100','e');if(s>(S.user.snow||0))return showNotif('Мало Снега','e');_exchInFlight=true;try{const r=await api('exchange',{snowAmount:s});S.user.snow=r.snow;S.user.tonBalance=r.tonBalance;S.exchHist.unshift(r.entry);document.getElementById('swapSnowAmt').value='';document.getElementById('swapTonOut').textContent='0';updateUI();renderExchHist();triggerSnowfall(20);showNotif(`✅ ${r.entry.ton.toFixed(6)} TON`,'s');}catch(e){showNotif(e.message,'e');}finally{_exchInFlight=false;}}
+async function swapSnowToTon(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();if(_exchInFlight)return;const s=parseInt(document.getElementById('swapSnowAmt').value)||0;if(s<100)return showNotif('Мин 100','e');if(s>(S.user.snow||0))return showNotif(t('notEnoughSnow'),'e');_exchInFlight=true;try{const r=await api('exchange',{snowAmount:s});S.user.snow=r.snow;S.user.tonBalance=r.tonBalance;S.exchHist.unshift(r.entry);document.getElementById('swapSnowAmt').value='';document.getElementById('swapTonOut').textContent='0';updateUI();renderExchHist();triggerSnowfall(20);showNotif('✅ '+r.entry.ton.toFixed(6)+' TON','s');}catch(e){showNotif(e.message,'e');}finally{_exchInFlight=false;}}
 
-function renderExchHist(){const el=document.getElementById('exchHist');if(!S.exchHist.length){el.innerHTML=`<div class="empty-state">${t('noExch')}</div>`;return;}el.innerHTML=S.exchHist.slice(0,20).map(h=>`<div class="hist-row"><span class="hist-l">${new Date(h.ts).toLocaleDateString()}</span><span class="hist-r">${h.ton.toFixed(6)} TON</span></div>`).join('');}
-function renderWdHist(){const el=document.getElementById('wdHist');if(!S.wdHist.length){el.innerHTML=`<div class="empty-state">${t('noWd')}</div>`;return;}el.innerHTML=S.wdHist.slice(0,20).map(h=>`<div class="hist-row" style="flex-direction:column;align-items:flex-start;gap:4px"><div style="display:flex;justify-content:space-between;width:100%"><span class="hist-r">${h.tonAmount.toFixed(6)} TON</span><span style="font-size:11px;color:var(--muted)">${esc(h.status)}</span></div><span class="hist-l">${esc(h.address?.substring(0,15))}...</span></div>`).join('');}
+function renderExchHist(){const el=document.getElementById('exchHist');if(!S.exchHist.length){el.innerHTML='<div class="empty-state">'+t('noExch')+'</div>';return;}el.innerHTML=S.exchHist.slice(0,20).map(h=>'<div class="hist-row"><span class="hist-l">'+new Date(h.ts).toLocaleDateString()+'</span><span class="hist-r">'+h.ton.toFixed(6)+' TON</span></div>').join('');}
+function renderWdHist(){const el=document.getElementById('wdHist');if(!S.wdHist.length){el.innerHTML='<div class="empty-state">'+t('noWd')+'</div>';return;}el.innerHTML=S.wdHist.slice(0,20).map(h=>'<div class="hist-row" style="flex-direction:column;align-items:flex-start;gap:4px"><div style="display:flex;justify-content:space-between;width:100%"><span class="hist-r">'+h.tonAmount.toFixed(6)+' TON</span><span style="font-size:11px;color:var(--muted)">'+esc(h.status)+'</span></div><span class="hist-l">'+esc(h.address?.substring(0,15))+'...</span></div>').join('');}
 
-function switchWTab(el,t){document.querySelectorAll('.wtab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.wcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById(`wt-${t}`).classList.add('active');}
+function switchWTab(el,t){document.querySelectorAll('.wtab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.wcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('wt-'+t).classList.add('active');}
 
 function setDepAmt(v){document.getElementById('depositAmountInput').value=v;}
 function setWdAmt(v){document.getElementById('wdAmt').value=v;}
 
-async function doWithdraw(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const addr=document.getElementById('wdAddr').value?.trim(),amt=parseFloat(document.getElementById('wdAmt').value)||0;if(!addr||addr.length<10)return showNotif('Неверный адрес','e');if(amt<CFG.MIN_WITHDRAW_TON)return showNotif('Мин 0.02 TON','e');if(amt>(S.user.tonBalance||0))return showNotif('Мало TON','e');const miss=(S.tasks?.partner||[]).filter(t=>!S.doneTasks.includes(t.id));if(miss.length)return showNotif(`❌ Выполните партнерские задачи (${miss.length})`,'e');try{const r=await api('withdraw',{address:addr,amount:amt});S.user.tonBalance=r.tonBalance;S.wdHist.unshift({tonAmount:amt,address:addr,status:'pending',ts:Date.now()});updateUI();renderWdHist();showNotif('✅ Запрос отправлен','s');}catch(e){showNotif(e.message,'e');}}
+async function doWithdraw(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();const addr=document.getElementById('wdAddr').value?.trim(),amt=parseFloat(document.getElementById('wdAmt').value)||0;if(!addr||addr.length<10)return showNotif('Неверный адрес','e');if(amt<CFG.MIN_WITHDRAW_TON)return showNotif('Мин 0.02 TON','e');if(amt>(S.user.tonBalance||0))return showNotif('Мало TON','e');const miss=(S.tasks?.partner||[]).filter(t=>!S.doneTasks.includes(t.id));if(miss.length)return showNotif('❌ Партнерские задачи ('+miss.length+')','e');try{const r=await api('withdraw',{address:addr,amount:amt});S.user.tonBalance=r.tonBalance;S.wdHist.unshift({tonAmount:amt,address:addr,status:'pending',ts:Date.now()});updateUI();renderWdHist();showNotif('✅ Запрос отправлен','s');}catch(e){showNotif(e.message,'e');}}
 
-function updateRefUI(){if(!S.userId)return;document.getElementById('refLinkInp').value=`${CFG.BOT_APP_LINK}?startapp=${S.userId}`;document.getElementById('depositUserIdDisplay').textContent=S.userId;document.getElementById('totalRefsDisp').textContent=S.refs.length+' '+(LANG==='ru'?'Друзей':'Friends');const el=document.getElementById('recentRefsList');if(!S.refs.length){el.innerHTML=`<div class="empty-state">${t('noRefs')}</div>`;return;}el.innerHTML=S.refs.slice(0,20).map(r=>`<div class="ref-item"><div class="ref-av">🎅</div><div class="ref-info"><div class="ref-name">${esc(r.name)}</div><div class="ref-date">${esc(r.date)}</div></div><div class="ref-earn">${r.totalCommissionEarned?'+'+fmtTon(r.totalCommissionEarned)+' TON':'0'}</div></div>`).join('');}
-function copyRefLink(){navigator.clipboard.writeText(document.getElementById('refLinkInp').value).then(()=>showNotif('✅ Скопировано','s')).catch(()=>showNotif('Ошибка','e'));}
+function updateRefUI(){if(!S.userId)return;document.getElementById('refLinkInp').value=CFG.BOT_APP_LINK+'?startapp='+S.userId;document.getElementById('depositUserIdDisplay').textContent=S.userId;document.getElementById('totalRefsDisp').textContent=S.refs.length+' '+(LANG==='ru'?'Друзей':'Friends');const el=document.getElementById('recentRefsList');if(!S.refs.length){el.innerHTML='<div class="empty-state">'+t('noRefs')+'</div>';return;}el.innerHTML=S.refs.slice(0,20).map(r=>'<div class="ref-item"><div class="ref-av">🎅</div><div class="ref-info"><div class="ref-name">'+esc(r.name)+'</div><div class="ref-date">'+esc(r.date)+'</div></div><div class="ref-earn">'+(r.totalCommissionEarned?'+'+fmtTon(r.totalCommissionEarned)+' TON':'0')+'</div></div>').join('');}
+function copyRefLink(){navigator.clipboard.writeText(document.getElementById('refLinkInp').value).then(()=>showNotif('✅','s')).catch(()=>showNotif('Error','e'));}
 
-async function initTON(){try{if(window.TON_CONNECT_UI){S.tonUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:`${CFG.API_URL}/tonconnect-manifest.json`,uiPreferences:{theme:'DARK'}});S.tonUI.onStatusChange(w=>w?onWConn(w):onWDisc());}}catch(e){console.error('TON:',e);}}
-function onWConn(w){S.wallet={address:w.account.address,appName:w.device.appName};document.getElementById('walletAddressDisplay').textContent=`${w.account.address.substring(0,6)}...${w.account.address.slice(-4)}`;document.getElementById('connectWalletBtn').innerHTML='<i class="fas fa-unlink"></i>';document.getElementById('connectWalletBtn').onclick=disconnectWallet;document.getElementById('submitDepositBtn').disabled=false;}
-function onWDisc(){S.wallet=null;document.getElementById('walletAddressDisplay').textContent=LANG==='ru'?'Не подключен':'Not connected';document.getElementById('connectWalletBtn').innerHTML=`<i class="fas fa-plug"></i> <span>${t('connectBtn')}</span>`;document.getElementById('connectWalletBtn').onclick=connectWallet;document.getElementById('submitDepositBtn').disabled=true;}
+async function initTON(){try{if(window.TON_CONNECT_UI){S.tonUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:CFG.API_URL+'/tonconnect-manifest.json',uiPreferences:{theme:'DARK'}});S.tonUI.onStatusChange(w=>w?onWConn(w):onWDisc());}}catch(e){console.error('TON:',e);}}
+function onWConn(w){S.wallet={address:w.account.address,appName:w.device.appName};document.getElementById('walletAddressDisplay').textContent=w.account.address.substring(0,6)+'...'+w.account.address.slice(-4);document.getElementById('connectWalletBtn').innerHTML='<i class="fas fa-unlink"></i>';document.getElementById('connectWalletBtn').onclick=disconnectWallet;document.getElementById('submitDepositBtn').disabled=false;}
+function onWDisc(){S.wallet=null;document.getElementById('walletAddressDisplay').textContent=t('notConnected');document.getElementById('connectWalletBtn').innerHTML='<i class="fas fa-plug"></i> <span>'+t('connectBtn')+'</span>';document.getElementById('connectWalletBtn').onclick=connectWallet;document.getElementById('submitDepositBtn').disabled=true;}
 async function connectWallet(){if(S.tonUI)await S.tonUI.openModal();}
 async function disconnectWallet(){if(S.tonUI)await S.tonUI.disconnect();}
 
-window.initiateDeposit=async function(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();if(!S.wallet)return alert(LANG==='ru'?'Подключите кошелек':'Connect wallet');const amt=parseFloat(document.getElementById('depositAmountInput').value);if(!amt||amt<1)return alert(LANG==='ru'?'Мин 1 TON':'Min 1 TON');try{const comment=String(S.userId),nano=String(Math.floor(amt*1e9)),TW=window.TonWeb,new TW(),cell=new TW.boc.Cell();cell.bits.writeUint(0,32);cell.bits.writeString(comment);const boc=await cell.toBoc(false),payload=TW.utils.bytesToBase64(boc),tx={validUntil:Math.floor(Date.now()/1000)+600,messages:[{address:CFG.DEPOSIT_WALLET,amount:nano,payload}]};const result=await S.tonUI.sendTransaction(tx);document.getElementById('depositStatus').style.display='block';document.getElementById('depositStatus').innerHTML='⏳ Транзакция отправлена!';triggerSnowfall(20);showNotif('✅ Отправлено!','s');api('deposit',{amount:amt,txHash:result.boc,comment}).catch(()=>{});}catch(e){document.getElementById('depositStatus').style.display='block';document.getElementById('depositStatus').innerHTML='❌ '+e.message;}};
+window.initiateDeposit=async function(){if(Date.now()-_lastClick<3000)return;_lastClick=Date.now();if(!S.wallet)return alert(t('connectBtn'));const amt=parseFloat(document.getElementById('depositAmountInput').value);if(!amt||amt<1)return alert('Min 1 TON');try{const comment=String(S.userId),nano=String(Math.floor(amt*1e9)),TW=window.TonWeb;new TW();const cell=new TW.boc.Cell();cell.bits.writeUint(0,32);cell.bits.writeString(comment);const boc=await cell.toBoc(false),payload=TW.utils.bytesToBase64(boc),tx={validUntil:Math.floor(Date.now()/1000)+600,messages:[{address:CFG.DEPOSIT_WALLET,amount:nano,payload}]};const result=await S.tonUI.sendTransaction(tx);document.getElementById('depositStatus').style.display='block';document.getElementById('depositStatus').innerHTML='⏳';triggerSnowfall(20);showNotif('✅','s');api('deposit',{amount:amt,txHash:result.boc,comment}).catch(()=>{});}catch(e){document.getElementById('depositStatus').style.display='block';document.getElementById('depositStatus').innerHTML='❌';}};
 
 function goNav(el){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));el.classList.add('active');document.getElementById(el.dataset.s).classList.add('active');document.getElementById('floatAddTask').style.display='none';}
 
@@ -586,18 +546,80 @@ function ldProgress(pct,msg){const fill=document.getElementById('ringFill');cons
 
 async function init(){
   startSnowfallLoop();
-  ldProgress(0,LANG==='ru'?'Запуск...':'Starting...');
-  if(window.Telegram?.WebApp){S.tg=window.Telegram.WebApp;S.tg.ready();S.tg.expand();const u=S.tg.initDataUnsafe?.user;if(u){S.userId=String(u.id);if(u.photo_url)document.getElementById('uavatar').innerHTML=`<img src="${esc(u.photo_url)}" onerror="this.parentElement.innerHTML='<div style=width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px>🎅</div>'">`;}
-  let sp=S.tg.initDataUnsafe?.start_param||'';S.startParam=String(sp).replace(/\D/g,'');}
-  await new Promise(r=>setTimeout(r,800));ldProgress(30,LANG==='ru'?'Загрузка данных...':'Loading data...');
-  let loaded=false;for(let i=0;i<3;i++){try{await loadState();if(S.userId)loaded=true;break;}catch(e){await new Promise(r=>setTimeout(r,1500));}}
-  if(!loaded){ldProgress(100,'Error');return;}
-  ldProgress(70,LANG==='ru'?'Настройка...':'Setup...');
-  renderTasks();updateUI();
-  await new Promise(r=>setTimeout(r,500));ldProgress(90,LANG==='ru'?'Кошелек...':'Wallet...');setTimeout(()=>initTON(),500);startStorage();setInterval(()=>loadState(),30000);
-  await new Promise(r=>setTimeout(r,500));ldProgress(100,LANG==='ru'?'Готово! 🎅':'Ready! 🎅');
-  await new Promise(r=>setTimeout(r,500));document.getElementById('loadingScreen').classList.add('ld-hidden');setTimeout(()=>document.getElementById('loadingScreen').remove(),600);
-  if(S.isNewUser)document.getElementById('welcomeCin').classList.add('active');
+  ldProgress(0, LANG==='ru'?'Запуск...':'Starting...');
+  
+  try {
+    if(window.Telegram?.WebApp){
+      S.tg = window.Telegram.WebApp;
+      S.tg.ready();
+      S.tg.expand();
+      const u = S.tg.initDataUnsafe?.user;
+      if(u){
+        S.userId = String(u.id);
+        if(u.photo_url){
+          const av = document.getElementById('uavatar');
+          const img = document.createElement('img');
+          img.src = u.photo_url;
+          img.onerror = function() { 
+              av.innerHTML = ''; 
+              const div = document.createElement('div');
+              div.style.cssText = 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px';
+              div.textContent = '🎅';
+              av.appendChild(div);
+          };
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover';
+          av.innerHTML = '';
+          av.appendChild(img);
+        }
+        let sp = S.tg.initDataUnsafe?.start_param || '';
+        S.startParam = String(sp).replace(/\D/g, '');
+      }
+    }
+    
+    await new Promise(r => setTimeout(r, 800));
+    ldProgress(25, LANG==='ru'?'Загрузка данных...':'Loading data...');
+    
+    let loaded = false;
+    for(let i = 0; i < 3; i++){
+      try {
+        await loadState();
+        if(S.userId){ loaded = true; break; }
+      } catch(e) {
+        console.warn('Retry', i);
+        await new Promise(r => setTimeout(r, 1500));
+      }
+    }
+    
+    if(!loaded){ ldProgress(100, 'Connection failed'); return; }
+    
+    ldProgress(60, LANG==='ru'?'Настройка...':'Setup...');
+    renderTasks();
+    updateUI();
+    
+    await new Promise(r => setTimeout(r, 400));
+    ldProgress(80, LANG==='ru'?'Кошелек...':'Wallet...');
+    setTimeout(() => initTON(), 500);
+    startStorage();
+    setInterval(() => loadState(), 30000);
+    
+    await new Promise(r => setTimeout(r, 400));
+    ldProgress(100, LANG==='ru'?'Готово! 🎅':'Ready! 🎅');
+    
+    await new Promise(r => setTimeout(r, 600));
+    const ls = document.getElementById('loadingScreen');
+    if(ls){
+      ls.style.opacity = '0';
+      setTimeout(() => ls.remove(), 600);
+    }
+    
+    if(S.isNewUser){
+      document.getElementById('welcomeCin').classList.add('active');
+    }
+    
+  } catch(e) {
+    console.error('Init error:', e);
+    ldProgress(100, 'Error: ' + e.message);
+  }
 }
 
 function startSnowfallLoop(){setInterval(()=>{if(Math.random()>0.4){const s=document.createElement('div');s.classList.add('snowflake');s.innerHTML='❄️';s.style.left=Math.random()*100+'%';s.style.fontSize=Math.random()*10+6+'px';s.style.animationDuration=Math.random()*4+3+'s';s.style.opacity=Math.random()*0.5+0.2;document.body.appendChild(s);setTimeout(()=>s.remove(),5000);}},400);}
