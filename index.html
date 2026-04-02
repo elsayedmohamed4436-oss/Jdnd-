@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Santa Snow ❄️ | الإصدار الجديد</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Santa Snow ❄️ | Crystal Mining</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
@@ -18,42 +18,55 @@
 }
 
 :root {
-  --primary: #00d4ff;
-  --primary-dark: #0097b2;
-  --secondary: #ffd966;
-  --secondary-dark: #ffb347;
-  --glass: rgba(15, 25, 45, 0.75);
-  --glass-light: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(0, 212, 255, 0.25);
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.7);
-  --card-bg: linear-gradient(145deg, rgba(20, 30, 55, 0.95), rgba(10, 20, 40, 0.95));
-  --success: #00f27a;
-  --error: #ff6b6b;
-  --warning: #ffd93d;
+  --snow: #E8F0FF;
+  --snow-glow: rgba(232, 240, 255, 0.6);
+  --gold: #FFD966;
+  --gold-glow: rgba(255, 217, 102, 0.5);
+  --ice: #4DD0E1;
+  --ice-glow: rgba(77, 208, 225, 0.6);
+  --ice-dark: #0097B2;
+  --card: rgba(10, 20, 35, 0.7);
+  --glass: rgba(20, 30, 50, 0.5);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #FFFFFF;
+  --muted: rgba(255, 255, 255, 0.65);
+  --red: #EF5350;
+  --blue: #42A5F5;
+  --cyan: #26C6DA;
+  --dark-blue: #0A1428;
+  --mid-blue: #1A2A4A;
+  --purple: #9C27B0;
+  --orange: #FF9800;
 }
 
 body {
-  font-family: 'Cairo', 'Fredoka', cursive;
-  background: #0a0f1a;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  background: #0A0F1E;
   color: var(--text);
   min-height: 100vh;
-  padding-bottom: 80px;
+  padding-bottom: 85px;
   overflow-x: hidden;
+  font-size: 14px;
   position: relative;
 }
 
-/* الخلفية المتحركة */
-body::before {
-  content: '';
+/* خلفية متحركة جديدة مع تأثير التلألؤ */
+.background-fixed {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png') center/cover no-repeat fixed;
+  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ee3d15b9-4c4b-4a50-ba6e-5e0b9f526179.png') center center / cover no-repeat;
   z-index: -2;
-  animation: slowZoom 30s ease-in-out infinite;
+  opacity: 1;
+  animation: slowZoom 25s ease-in-out infinite;
+}
+
+@keyframes slowZoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
 body::after {
@@ -63,28 +76,23 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,30,50,0.6));
+  background: linear-gradient(135deg, rgba(10, 15, 30, 0.6), rgba(0, 0, 0, 0.7));
   z-index: -1;
 }
 
-@keyframes slowZoom {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-}
-
-/* ========== شاشة التحميل المطورة ========== */
+/* ========== شاشة التحميل الجديدة ========== */
 #loadingScreen {
   position: fixed;
   inset: 0;
-  z-index: 10000;
-  background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ee3d15b9-4c4b-4a50-ba6e-5e0b9f526179.png') center/cover no-repeat;
-  backdrop-filter: brightness(0.7);
+  z-index: 9999;
+  background: rgba(10, 15, 30, 0.95);
+  backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  transition: opacity 0.8s ease;
+  gap: 25px;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #loadingScreen.hidden {
@@ -92,66 +100,83 @@ body::after {
   pointer-events: none;
 }
 
-.loading-logo {
+.ld-logo {
   width: 140px;
   height: 140px;
-  animation: floatLogo 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.8));
+  animation: crystalPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(77, 208, 225, 0.8));
+  border-radius: 50%;
 }
 
-@keyframes floatLogo {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
+@keyframes crystalPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(77, 208, 225, 0.6)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 50px rgba(77, 208, 225, 0.9)); }
 }
 
-.loading-title {
-  font-size: 32px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #fff, #00d4ff, #ffd966);
+.ld-title {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, #4DD0E1, #fff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 20px rgba(0,212,255,0.3);
+  letter-spacing: 1px;
+  animation: titleShine 3s linear infinite;
 }
 
-.loading-sub {
-  font-size: 14px;
-  color: var(--text-muted);
-  font-weight: 600;
+@keyframes titleShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* شريط التحميل الجديد */
-.loading-bar-container {
-  width: 280px;
+.ld-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  min-height: 20px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.ld-bar-wrap {
+  width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 15px;
 }
 
+/* شريط تحميل كريستالي جديد */
 .crystal-track {
   width: 100%;
   height: 14px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(0,212,255,0.4);
-  box-shadow: 0 0 10px rgba(0,212,255,0.3);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .crystal-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #00d4ff, #80deea, #b2ebf2, #ffd966);
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA, #B2EBF2, #80DEEA, #4DD0E1);
+  background-size: 200% 100%;
   border-radius: 20px;
   position: relative;
   transition: width 0.3s ease;
-  animation: crystalGlow 1.5s ease-in-out infinite;
+  animation: crystalFlow 1.5s ease-in-out infinite, fillShine 2s linear infinite;
 }
 
-@keyframes crystalGlow {
-  0%, 100% { box-shadow: 0 0 5px #00d4ff; }
-  50% { box-shadow: 0 0 20px #00d4ff, 0 0 10px #ffd966; }
+@keyframes crystalFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes fillShine {
+  0% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.4); }
+  50% { box-shadow: 0 0 20px rgba(77, 208, 225, 0.8), 0 0 10px rgba(77, 208, 225, 0.5); }
+  100% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.4); }
 }
 
 .crystal-fill::after {
@@ -161,461 +186,184 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: shine 1.8s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: crystalSwipe 1.8s ease-in-out infinite;
 }
 
-@keyframes shine {
+@keyframes crystalSwipe {
   0% { left: -100%; }
   100% { left: 100%; }
 }
 
-.loading-percent {
-  font-size: 16px;
-  font-weight: 800;
-  color: #00d4ff;
-  text-align: center;
-  text-shadow: 0 0 10px rgba(0,212,255,0.5);
+.ld-pct {
+  font-size: 15px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4DD0E1, #B2EBF2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
 }
 
-/* ========== الشريط العلوي المطور ========== */
-.topbar-glass {
+/* ========== الشريط العلوي الجديد - تصميم الأيقونات العائمة ========== */
+.topbar-main {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background: rgba(10, 20, 35, 0.85);
+  margin: 12px 16px;
+  background: rgba(10, 20, 35, 0.7);
   backdrop-filter: blur(20px);
+  border-radius: 60px;
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   position: sticky;
-  top: 0;
+  top: 10px;
   z-index: 100;
-  border-bottom: 1px solid rgba(0,212,255,0.3);
 }
 
-.avatar-ring {
-  position: relative;
+.uavatar {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #00d4ff, #ffd966);
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  overflow: hidden;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: ringPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(77, 208, 225, 0.4);
 }
 
-@keyframes ringPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(0,212,255,0.1); }
-}
-
-.avatar-ring img {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+.uavatar img, .uavatar .ap {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 2px solid rgba(255,255,255,0.2);
-}
-
-.balance-cards {
-  display: flex;
-  gap: 10px;
-  flex: 1;
-}
-
-.balance-card {
-  flex: 1;
-  background: linear-gradient(125deg, rgba(0,212,255,0.15), rgba(0,0,0,0.4));
-  border: 1px solid rgba(0,212,255,0.3);
-  border-radius: 24px;
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.balance-card:hover {
-  transform: translateY(-2px);
-  border-color: #ffd966;
-}
-
-.balance-icon {
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.3);
-  border-radius: 50%;
-  font-size: 24px;
-}
-
-.balance-info {
-  flex: 1;
-}
-
-.balance-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.balance-value {
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.2;
-}
-
-.lang-btn-modern {
-  background: rgba(0,212,255,0.15);
-  border: 1px solid rgba(0,212,255,0.4);
-  border-radius: 30px;
-  padding: 8px 14px;
-  color: #00d4ff;
-  font-weight: 800;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
-}
-
-.lang-btn-modern:active {
-  transform: scale(0.95);
-  background: rgba(0,212,255,0.3);
-}
-
-/* ========== صفحة Home المطورة ========== */
-.hero-crystal {
-  background: var(--card-bg);
-  backdrop-filter: blur(15px);
-  border-radius: 40px;
-  margin: 16px;
-  padding: 20px;
-  border: 1px solid rgba(0,212,255,0.25);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.santa-sphere {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 20px;
-  cursor: pointer;
-}
-
-.sphere-outer {
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 30% 30%, rgba(0,212,255,0.2), rgba(0,100,150,0.4));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: sphereFloat 3s ease-in-out infinite;
-  border: 2px solid rgba(0,212,255,0.5);
-  box-shadow: 0 0 40px rgba(0,212,255,0.3);
-}
-
-@keyframes sphereFloat {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.02); }
-}
-
-.sphere-inner {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.2);
-}
-
-.sphere-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.2s;
-}
-
-.sphere-inner:active img {
-  transform: scale(0.9);
-}
-
-.stats-glass {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.stat-glass-card {
-  flex: 1;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  padding: 14px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.stat-glass-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 5px;
-}
-
-.stat-glass-value {
-  font-size: 22px;
-  font-weight: 800;
-  color: #00d4ff;
-}
-
-.stat-glass-unit {
-  font-size: 10px;
-  color: var(--text-muted);
-}
-
-/* مقياس الحرارة الثلجي */
-thermo-meter {
-  background: rgba(0,0,0,0.4);
-  border-radius: 30px;
-  padding: 4px;
-  margin-bottom: 16px;
-  border: 1px solid rgba(0,212,255,0.3);
-}
-
-thermo-track {
-  background: rgba(0,0,0,0.5);
-  border-radius: 30px;
-  height: 44px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-}
-
-thermo-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  background: linear-gradient(90deg, #00d4ff, #80deea, #b2ebf2);
-  border-radius: 30px;
-  transition: width 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 12px;
-}
-
-thermo-fill span {
-  position: relative;
-  z-index: 2;
-  font-size: 14px;
-  font-weight: 800;
-  color: #0a0f1a;
-}
-
-thermo-text {
-  position: relative;
-  z-index: 2;
-  font-size: 13px;
-  font-weight: 700;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
-
-.collect-btn-new {
-  width: 100%;
-  background: linear-gradient(135deg, #00d4ff, #0097b2);
-  border: none;
-  border-radius: 60px;
-  padding: 16px;
-  color: white;
-  font-size: 16px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-bottom: 12px;
-}
-
-.collect-btn-new:active {
-  transform: scale(0.97);
-}
-
-.collect-btn-new:disabled {
-  opacity: 0.5;
-  transform: none;
-}
-
-.upgrade-btn-new {
-  width: 100%;
-  background: rgba(255,217,102,0.15);
-  border: 2px solid rgba(255,217,102,0.4);
-  border-radius: 60px;
-  padding: 14px;
-  color: #ffd966;
-  font-size: 15px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.upgrade-btn-new:active {
-  transform: scale(0.97);
-  background: rgba(255,217,102,0.25);
-}
-
-/* ========== صفحة Tasks المطورة ========== */
-.tabs-crystal {
-  display: flex;
-  gap: 8px;
-  padding: 16px;
-  background: transparent;
-}
-
-.tab-crystal {
-  flex: 1;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0,212,255,0.2);
-  border-radius: 50px;
-  padding: 12px;
-  text-align: center;
-  font-weight: 700;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.tab-crystal.active {
-  background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,151,178,0.2));
-  border-color: #00d4ff;
-  color: #00d4ff;
-  box-shadow: 0 0 15px rgba(0,212,255,0.2);
-}
-
-.tasks-container {
-  padding: 0 16px 20px;
-}
-
-.task-card-glass {
-  background: rgba(20,30,55,0.8);
-  backdrop-filter: blur(12px);
-  border-radius: 28px;
-  padding: 16px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(0,212,255,0.2);
-  transition: all 0.2s;
-}
-
-.task-card-glass:active {
-  transform: scale(0.98);
-}
-
-.task-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-
-.task-icon {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,0,0,0.3));
-  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
+  background: rgba(0, 0, 0, 0.3);
 }
 
-.task-info {
+/* بطاقات العملات الجديدة */
+.tb-bals {
+  display: flex;
+  gap: 10px;
   flex: 1;
+  min-width: 0;
 }
 
-.task-name {
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.task-reward {
+.tb-chip {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: #ffd966;
-}
-
-.task-progress {
-  margin: 12px 0;
-}
-
-.progress-crystal {
-  background: rgba(0,0,0,0.4);
-  border-radius: 20px;
-  height: 8px;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  border-radius: 40px;
+  padding: 8px 16px;
+  backdrop-filter: blur(8px);
+  flex: 1;
+  min-width: 0;
+  transition: all 0.3s ease;
+  position: relative;
   overflow: hidden;
 }
 
-.progress-crystal-fill {
+.tb-chip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #00d4ff, #80deea);
-  border-radius: 20px;
-  width: 0%;
-  transition: width 0.3s;
+  background: linear-gradient(90deg, transparent, rgba(77, 208, 225, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-.task-btn {
-  background: linear-gradient(135deg, #00d4ff, #0097b2);
-  border: none;
+.tb-chip:hover::before {
+  left: 100%;
+}
+
+.tb-chip.snow {
+  border-color: rgba(77, 208, 225, 0.4);
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.15), rgba(0, 0, 0, 0.4));
+}
+
+.tb-chip.ton {
+  border-color: rgba(255, 217, 102, 0.4);
+  background: linear-gradient(135deg, rgba(255, 217, 102, 0.1), rgba(0, 0, 0, 0.4));
+}
+
+.tb-chip-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tb-chip-icon img, .tb-chip-icon i {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  font-size: 28px;
+}
+
+.tb-chip-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.tb-chip-label {
+  font-size: 9px;
+  opacity: 0.7;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tb-chip-num {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.tb-chip.snow .tb-chip-num {
+  color: #4DD0E1;
+}
+
+.tb-chip.ton .tb-chip-num {
+  color: #FFD966;
+}
+
+.lang-btn {
+  background: rgba(77, 208, 225, 0.15);
+  border: 1px solid rgba(77, 208, 225, 0.3);
   border-radius: 40px;
-  padding: 10px 20px;
-  color: white;
+  padding: 8px 16px;
+  color: var(--ice);
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(8px);
   transition: all 0.2s;
-  font-size: 13px;
 }
 
-.task-btn:active {
-  transform: scale(0.96);
+.lang-btn:active {
+  transform: scale(0.95);
+  background: rgba(77, 208, 225, 0.3);
 }
 
-.task-btn.done {
-  background: rgba(255,255,255,0.1);
-  color: var(--text-muted);
-  cursor: default;
-}
-
-/* ========== باقي التصميمات ========== */
+/* ========== تصميم صفحة Home الجديد ========== */
 .sec {
   display: none;
-  animation: fadeInUp 0.4s ease;
+  padding: 16px;
+  animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sec.active {
@@ -633,135 +381,647 @@ thermo-text {
   }
 }
 
-/* القائمة السفلية */
-.bottom-nav {
+/* البطاقة الرئيسية المتوهجة */
+.hero-card {
+  width: 100%;
+  margin: 0 auto 20px;
+  padding: 20px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.8), rgba(20, 30, 50, 0.8));
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(77, 208, 225, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(77, 208, 225, 0.1), transparent 70%);
+  animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* إطار سانتا الجديد */
+.santa-frame-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.santa-frame-inner {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  box-shadow: 0 0 40px rgba(77, 208, 225, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.santa-frame-inner:active {
+  transform: scale(0.95);
+}
+
+.santa-frame-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+/* إحصائيات البطاقة */
+.hero-stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hero-stat-box {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 14px;
+  text-align: center;
+  border: 1px solid rgba(77, 208, 225, 0.15);
+  backdrop-filter: blur(4px);
+}
+
+.stat-lbl {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+
+.stat-val {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.stat-unit {
+  font-size: 10px;
+  color: var(--ice);
+  font-weight: 600;
+}
+
+/* أزرار التحكم */
+.claim-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.collect-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 60px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.collect-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.collect-btn:hover::before {
+  left: 100%;
+}
+
+.collect-btn:active {
+  transform: scale(0.98);
+}
+
+.collect-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.collect-btn img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.upgrade-storage-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 217, 102, 0.15), rgba(0, 0, 0, 0.4));
+  border: 2px solid rgba(255, 217, 102, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upgrade-storage-btn:active {
+  transform: scale(0.95);
+}
+
+.upgrade-storage-btn span:first-child {
+  font-size: 24px;
+}
+
+.machine-shop-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  border: none;
+  border-radius: 60px;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.machine-shop-btn:active {
+  transform: scale(0.98);
+}
+
+/* تخزين الثلج */
+.storage-outer {
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.storage-side-btn {
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.storage-side-btn:active {
+  transform: scale(0.9);
+  background: rgba(77, 208, 225, 0.2);
+}
+
+.storage-main {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 12px 16px;
+}
+
+.storage-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.storage-title {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.storage-pct {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ice);
+}
+
+.storage-track {
+  height: 32px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(77, 208, 225, 0.2);
+}
+
+.storage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA, #B2EBF2);
+  border-radius: 16px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.storage-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: storageShine 2s infinite;
+}
+
+@keyframes storageShine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.storage-lbl {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* ========== صفحة Tasks الجديدة - تصميم اللوحة السحرية ========== */
+.task-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  border-radius: 60px;
+  backdrop-filter: blur(10px);
+}
+
+.ttab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ttab.active {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  color: white;
+  box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
+}
+
+.ttab i {
+  font-size: 18px;
+}
+
+.tcont {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tcont.active {
+  display: block;
+}
+
+/* بطاقات المهام الجديدة */
+.task-item {
+  background: linear-gradient(135deg, rgba(30, 40, 60, 0.8), rgba(20, 30, 50, 0.8));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(77, 208, 225, 0.15);
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.task-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(77, 208, 225, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.ticon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(0, 0, 0, 0.3));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.tinfo {
+  flex: 1;
+}
+
+.tname {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.trew {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 6px 0;
+}
+
+.trew img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.tstat {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* أزرار المهام */
+.tbtn {
+  border: none;
+  border-radius: 14px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tbtn:active {
+  transform: scale(0.95);
+}
+
+.tbtn.go {
+  background: linear-gradient(135deg, #1976D2, #0D47A1);
+  color: #fff;
+}
+
+.tbtn.claim {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  color: #fff;
+  animation: claimPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes claimPulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(77, 208, 225, 0.4); }
+  50% { box-shadow: 0 0 20px rgba(77, 208, 225, 0.7); }
+}
+
+.tbtn.done {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  cursor: default;
+}
+
+/* شريط التقدم للمهام */
+.progress-bar {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  height: 6px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.progress-bar > div {
+  background: linear-gradient(90deg, #4DD0E1, #80DEEA);
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+/* ========== باقي الأنماط ========== */
+.welcome-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(15px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.welcome-modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.welcome-modal-box {
+  background: linear-gradient(145deg, #1a2a3a, #0f1a24);
+  border-radius: 48px;
+  padding: 35px 25px;
+  max-width: 340px;
+  width: 85%;
+  text-align: center;
+  border: 2px solid rgba(77, 208, 225, 0.5);
+  box-shadow: 0 0 60px rgba(77, 208, 225, 0.4);
+  animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.welcome-chest-img {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 15px;
+  animation: chestFloat 2s ease-in-out infinite;
+}
+
+@keyframes chestFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+.welcome-open-btn {
+  background: linear-gradient(135deg, #4DD0E1, #0097B2);
+  border: none;
+  border-radius: 60px;
+  padding: 16px 40px;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 25px var(--ice-glow);
+}
+
+.welcome-open-btn:active {
+  transform: scale(0.96);
+}
+
+/* الشريط السفلي */
+.bnav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(10,20,35,0.95);
-  backdrop-filter: blur(20px);
-  display: flex;
-  border-top: 1px solid rgba(0,212,255,0.2);
-  padding-bottom: env(safe-area-inset-bottom, 0);
   z-index: 200;
+  background: rgba(10, 20, 35, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(77, 208, 225, 0.2);
+  display: flex;
+  padding: 8px 12px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 0));
 }
 
-.nav-item {
+.ni {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 0 12px;
+  padding: 8px 4px;
   cursor: pointer;
   transition: all 0.2s;
   gap: 4px;
+  border-radius: 16px;
 }
 
-.nav-icon {
+.ni.active {
+  background: rgba(77, 208, 225, 0.15);
+}
+
+.ni-icon {
   width: 48px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.ni-icon img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
   transition: all 0.2s;
 }
 
-.nav-icon img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+.ni.active .ni-icon img {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 10px rgba(77, 208, 225, 0.6));
 }
 
-.nav-label {
+.ni-lbl {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted);
 }
 
-.nav-item.active .nav-icon {
-  transform: translateY(-4px);
+.ni.active .ni-lbl {
+  color: var(--ice);
 }
 
-.nav-item.active .nav-icon img {
-  filter: drop-shadow(0 0 8px #00d4ff);
-}
-
-.nav-item.active .nav-label {
-  color: #00d4ff;
-}
-
-/* نوافذ منبثقة */
-.modal-glass {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(8px);
-  z-index: 500;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-glass.active {
-  display: flex;
-}
-
-.modal-content {
-  background: linear-gradient(145deg, #0f1a2a, #0a1220);
-  border-radius: 40px;
-  padding: 24px;
-  width: 90%;
-  max-width: 400px;
-  max-height: 85vh;
-  overflow-y: auto;
-  border: 1px solid rgba(0,212,255,0.3);
-  animation: modalPop 0.3s ease;
-}
-
-@keyframes modalPop {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* باقي العناصر */
+/* الإشعارات */
 .notif {
   position: fixed;
-  top: 70px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%) translateY(-100px);
-  background: rgba(10,20,35,0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(0,212,255,0.3);
+  background: rgba(10, 20, 35, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(77, 208, 225, 0.3);
   border-radius: 60px;
   padding: 12px 24px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   z-index: 1000;
-  transition: transform 0.3s ease;
-  white-space: nowrap;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   max-width: 90vw;
-  overflow-x: auto;
+  text-align: center;
+  pointer-events: none;
 }
 
 .notif.show {
   transform: translateX(-50%) translateY(0);
 }
 
+.notif.s { border-color: var(--ice); color: var(--ice); background: rgba(77, 208, 225, 0.15); }
+.notif.e { border-color: rgba(239, 83, 80, 0.5); color: #FF8A80; background: rgba(239, 83, 80, 0.1); }
+.notif.w { border-color: rgba(255, 193, 7, 0.4); color: #FFD740; background: rgba(255, 193, 7, 0.1); }
+
+/* تأثيرات الثلج */
 .snowflake {
   position: fixed;
   color: #fff;
+  user-select: none;
   pointer-events: none;
   z-index: 999;
   font-size: 1.2rem;
   animation: fall linear forwards;
-  text-shadow: 0 0 5px #00d4ff;
+  text-shadow: 0 0 5px rgba(77, 208, 225, 0.5);
 }
 
 @keyframes fall {
@@ -775,322 +1035,524 @@ thermo-text {
   }
 }
 
-/* زر الدعم */
-.support-btn-fixed {
+/* النوافذ المنبثقة */
+.modal {
+  display: none;
   position: fixed;
-  bottom: 100px;
-  right: 16px;
-  width: 54px;
-  height: 54px;
-  background: linear-gradient(135deg, #00d4ff, #0097b2);
-  border-radius: 50%;
-  display: flex;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 500;
   align-items: center;
   justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-box {
+  background: linear-gradient(145deg, #0A1428, #0A1A2A);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: 32px;
+  padding: 20px;
+  width: 90%;
+  max-width: 450px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: modalScale 0.3s ease;
+}
+
+@keyframes modalScale {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.mhdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mtitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ice);
+}
+
+.mclose {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: var(--muted);
   cursor: pointer;
-  z-index: 190;
-  box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+  font-size: 16px;
   transition: all 0.2s;
 }
 
-.support-btn-fixed:active {
+.mclose:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* زر الدعم */
+.support-img-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 16px;
+  z-index: 190;
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.support-img-btn:active {
   transform: scale(0.92);
 }
 
-.support-btn-fixed img {
-  width: 32px;
-  height: 32px;
-  filter: brightness(0) invert(1);
+.support-img-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(77, 208, 225, 0.5));
 }
 
-/* التمرير */
+/* متفرقات */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00d4ff;
-  border-radius: 10px;
+  background: var(--ice);
+  border-radius: 4px;
 }
+
+.ptc {
+  position: fixed;
+  pointer-events: none;
+  z-index: 400;
+  font-size: 20px;
+  animation: particleUp 1s ease-out forwards;
+}
+
+@keyframes particleUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(0.3); opacity: 0; }
+}
+
+.fee-badge {
+  background: rgba(255, 217, 102, 0.15);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 10px;
+  color: var(--gold);
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+/* باقي الأنماط من الكود الأصلي */
+.machine-shop { background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95)); border-radius: 28px; padding: 20px; margin-top: 15px; backdrop-filter: blur(12px); border: 1px solid rgba(77, 208, 225, 0.3); }
+.machine-cards { display: flex; flex-direction: column; gap: 12px; }
+.machine-card { background: rgba(0, 0, 0, 0.4); border-radius: 20px; padding: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255, 255, 255, 0.1); flex-wrap: wrap; }
+.machine-card-img { width: 60px; height: 60px; border-radius: 12px; object-fit: contain; background: rgba(0, 0, 0, 0.3); padding: 5px; }
+.machine-card-info { flex: 1; min-width: 120px; }
+.machine-card-name { font-size: 16px; font-weight: 800; color: var(--ice); }
+.machine-card-rate { font-size: 12px; color: var(--snow); margin-top: 4px; }
+.machine-card-rate span { font-weight: 800; color: var(--gold); }
+.machine-card-cost { font-size: 13px; font-weight: 800; color: var(--gold); margin-top: 4px; }
+.machine-quantity { display: flex; align-items: center; gap: 8px; background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 5px 10px; }
+.machine-quantity input { width: 60px; background: transparent; border: 1px solid rgba(77, 208, 225, 0.3); border-radius: 8px; padding: 6px; color: white; text-align: center; font-weight: 700; font-size: 14px; }
+.machine-card-btn { background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 12px; padding: 10px 18px; color: white; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.machine-card-btn:active { transform: scale(0.95); }
+.machine-count-badge { background: rgba(77, 208, 225, 0.2); border-radius: 20px; padding: 2px 8px; font-size: 10px; color: var(--ice); margin-left: 8px; }
+
+.ref-prog-card { background: linear-gradient(145deg, rgba(77, 208, 225, 0.1), var(--card)); border: 1px solid var(--border); border-radius: 24px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(8px); }
+.ref-bonus-badge { display: flex; align-items: center; justify-content: center; gap: 12px; background: rgba(77, 208, 225, 0.08); border-radius: 20px; padding: 15px; margin-bottom: 16px; }
+.rbb-pct { font-size: 36px; font-weight: 800; color: var(--ice); }
+.ref-link-row { display: flex; gap: 10px; margin-bottom: 8px; }
+.ref-inp { flex: 1; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border); border-radius: 14px; padding: 12px; color: var(--text); font-size: 12px; font-weight: 500; }
+.btn-copy { background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 14px; padding: 12px 20px; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+
+.hist-box { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; backdrop-filter: blur(8px); }
+.hist-hdr { padding: 14px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.hist-row { padding: 12px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); display: flex; justify-content: space-between; align-items: center; }
+
+.wallet-modern { background: linear-gradient(135deg, rgba(30, 40, 60, 0.95), rgba(20, 30, 50, 0.95)); border-radius: 28px; padding: 20px; backdrop-filter: blur(12px); }
+.modern-tabs { display: flex; gap: 8px; background: rgba(0, 0, 0, 0.3); border-radius: 60px; padding: 6px; margin-bottom: 20px; }
+.modern-tab { flex: 1; padding: 12px; text-align: center; background: transparent; border: none; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.modern-tab.active { background: linear-gradient(135deg, #4DD0E1, #0097B2); color: white; }
+.modern-content { display: none; animation: fadeIn 0.3s ease; }
+.modern-content.active { display: block; }
+.modern-card { background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 20px; }
+.modern-input { width: 100%; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 14px; color: var(--text); font-size: 14px; }
+.modern-btn { width: 100%; padding: 14px; border: none; border-radius: 50px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.modern-btn.primary { background: linear-gradient(135deg, #4DD0E1, #0097B2); color: white; }
+.modern-btn.secondary { background: linear-gradient(135deg, #FFD966, #FFB347); color: #2C1A00; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* نهاية الأنماط */
 </style>
 </head>
 <body>
+<body>
+
+<div class="background-fixed"></div>
 
 <!-- شاشة التحميل -->
 <div id="loadingScreen">
-  <img class="loading-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="Santa">
-  <div class="loading-title">SANTA SNOW</div>
-  <div class="loading-sub" id="ldStatus">جاري التحميل...</div>
-  <div class="loading-bar-container">
+  <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="Santa">
+  <div class="ld-title">Santa Snow</div>
+  <div class="ld-sub" id="ldStatus">Loading...</div>
+  <div class="ld-bar-wrap">
     <div class="crystal-track">
       <div class="crystal-fill" id="iceFill"></div>
     </div>
-    <div class="loading-percent" id="ldPct">0%</div>
+    <div class="ld-pct" id="ldPct">0%</div>
   </div>
 </div>
 
-<!-- الترحيب -->
-<div id="welcomeModal" class="modal-glass">
-  <div class="modal-content" style="text-align: center;">
-    <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" style="width: 100px; margin-bottom: 20px; animation: floatLogo 1s ease-in-out infinite;">
-    <h2 style="color: #00d4ff; margin-bottom: 10px;">🎄 هدية سانتا! 🎄</h2>
-    <p style="margin-bottom: 20px;">افتح الصندوق لاستلام هديتك المجانية!</p>
-    <button class="collect-btn-new" onclick="openWelcomeChestFromModal()" style="width: auto; padding: 12px 30px;">🎁 افتح الصندوق 🎁</button>
+<!-- نافذة الترحيب -->
+<div id="welcomeModal" class="welcome-modal">
+  <div class="welcome-modal-box">
+    <div style="position: relative; margin-bottom: 15px;">
+      <img class="welcome-chest-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Santa Chest">
+      <div style="position: absolute; top: -10px; right: -10px; background: #4DD0E1; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; animation: pulse 1s infinite;">✨</div>
+    </div>
+    <div style="font-size: 24px; font-weight: 800; color: var(--ice); margin-bottom: 15px;">🎄 Santa's Gift! 🎄</div>
+    <div style="font-size: 14px; color: var(--gold); margin-bottom: 15px;">Open to receive your rewards!</div>
+    <button class="welcome-open-btn" onclick="openWelcomeChestFromModal()">🎁 Open Chest! 🎁</button>
   </div>
 </div>
 
 <!-- الشريط العلوي -->
-<div class="topbar-glass">
-  <div class="avatar-ring">
-    <div id="uavatar"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2300d4ff'/%3E%3Ctext x='50' y='67' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3E🎅%3C/text%3E%3C/svg%3E"></div>
-  </div>
-  <div class="balance-cards">
-    <div class="balance-card">
-      <div class="balance-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px;"></div>
-      <div class="balance-info">
-        <div class="balance-label">SNOW</div>
-        <div class="balance-value" id="tbSnow">0</div>
+<div class="topbar-main">
+  <div class="uavatar" id="uavatar"><div class="ap">🎅</div></div>
+  <div class="tb-bals">
+    <div class="tb-chip snow">
+      <div class="tb-chip-icon">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
+      </div>
+      <div class="tb-chip-info">
+        <span class="tb-chip-label" data-i18n="labelSnow">Snow</span>
+        <span class="tb-chip-num" id="tbSnow">0</span>
       </div>
     </div>
-    <div class="balance-card">
-      <div class="balance-icon"><i class="fas fa-coins" style="color: #ffd966; font-size: 24px;"></i></div>
-      <div class="balance-info">
-        <div class="balance-label">TON</div>
-        <div class="balance-value" id="tbTON">0</div>
+    <div class="tb-chip ton">
+      <div class="tb-chip-icon">
+        <i class="fas fa-coins" style="font-size: 28px; color: var(--gold);"></i>
+      </div>
+      <div class="tb-chip-info">
+        <span class="tb-chip-label" data-i18n="labelTON">TON</span>
+        <span class="tb-chip-num" id="tbTON">0</span>
       </div>
     </div>
   </div>
-  <button class="lang-btn-modern" onclick="toggleLangMenu()">
-    <span id="langFlag">🇸🇦</span>
-    <span id="langCode">AR</span>
+  <button id="langBtn" class="lang-btn" onclick="toggleLangMenu()">
+    <span id="langFlag">🇷🇺</span>
+    <span id="langCode">RU</span>
   </button>
 </div>
 
-<div id="langMenu" style="display: none; position: fixed; top: 70px; right: 12px; z-index: 300; background: rgba(10,20,35,0.98); backdrop-filter: blur(16px); border: 1px solid rgba(0,212,255,0.3); border-radius: 20px; overflow: hidden; min-width: 140px;">
+<!-- قائمة اللغة -->
+<div id="langMenu" style="display: none; position: fixed; top: 80px; right: 16px; z-index: 300; background: rgba(10, 20, 35, 0.98); border: 1px solid rgba(77, 208, 225, 0.3); border-radius: 20px; overflow: hidden; min-width: 140px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);">
   <div style="padding: 8px 0">
-    <div class="lang-opt" data-lang="en" onclick="setLang('en','🇬🇧','EN')" style="padding: 12px 16px; cursor: pointer; transition: background 0.2s;">🇬🇧 English</div>
-    <div class="lang-opt" data-lang="ar" onclick="setLang('ar','🇸🇦','AR')" style="padding: 12px 16px; cursor: pointer; transition: background 0.2s;">🇸🇦 العربية</div>
+    <div class="lang-opt" data-lang="en" data-flag="🇬🇧" data-label="English" onclick="setLang('en','🇬🇧','EN')" style="padding: 12px 16px; cursor: pointer; transition: background 0.2s;">🇬🇧 &nbsp;English</div>
+    <div class="lang-opt" data-lang="ru" data-flag="🇷🇺" data-label="Русский" onclick="setLang('ru','🇷🇺','RU')" style="padding: 12px 16px; cursor: pointer; transition: background 0.2s;">🇷🇺 &nbsp;Русский</div>
   </div>
 </div>
 
-<!-- الأقسام -->
-<div class="sec active" id="sectionHome">
-  <div class="hero-crystal">
-    <div class="santa-sphere" onclick="santaClick()">
-      <div class="sphere-outer">
-        <div class="sphere-inner">
-          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" alt="Santa">
-        </div>
+<!-- صفحة Home -->
+<div class="sec active" id="sectionHome" style="padding: 10px 16px 24px">
+  
+  <div id="welcomeChest" class="welcome-chest" style="display: none; text-align: center; margin: 10px auto 20px;">
+    <div class="chest-container" onclick="openWelcomeChest()" style="cursor: pointer; display: inline-block;">
+      <div style="position: relative;">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Gift" style="width: 110px; height: 110px; filter: drop-shadow(0 0 20px rgba(77,208,225,0.7)); animation: chestFloat 1.5s ease-in-out infinite;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 130px; height: 130px; background: radial-gradient(circle, rgba(77, 208, 225, 0.5), transparent); border-radius: 50%; animation: pulse 1.5s ease-in-out infinite;"></div>
       </div>
-    </div>
-    
-    <div class="stats-glass">
-      <div class="stat-glass-card">
-        <div class="stat-glass-label">المجمّع</div>
-        <div class="stat-glass-value" id="heroAccrued">0</div>
-        <div class="stat-glass-unit">Snow</div>
+      <div style="margin-top: 12px; font-size: 14px; font-weight: 800; color: #4DD0E1; text-shadow: 0 0 10px rgba(77, 208, 225, 0.5); background: rgba(0, 0, 0, 0.5); display: inline-block; padding: 6px 16px; border-radius: 30px;">
+        🎁 OPEN YOUR WELCOME GIFT! 🎁
       </div>
-      <div class="stat-glass-card">
-        <div class="stat-glass-label">الإنتاج/يوم</div>
-        <div class="stat-glass-value" id="heroRateDay">0</div>
-        <div class="stat-glass-unit">Snow/يوم</div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px;">
+        ⭐ 1000 Snow + 1 Mining Machine (10 Snow/hour) ⭐
       </div>
-    </div>
-    
-    <div class="storage-area">
-      <thermo-meter>
-        <div class="thermo-track">
-          <div class="thermo-fill" id="storageFill" style="width: 0%;"></div>
-          <div class="thermo-text" id="storageText">0%</div>
-        </div>
-      </thermo-meter>
-    </div>
-    
-    <button class="collect-btn-new" id="collectBtn" onclick="collectSnow()" disabled>
-      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px;">
-      <span id="claimBtnTxt">جمع الثلج</span>
-    </button>
-    
-    <div style="display: flex; gap: 12px;">
-      <button class="upgrade-btn-new" onclick="openModal('upgradeModal')" style="flex: 1;">
-        <i class="fas fa-arrow-up"></i> تطوير المخزن <span id="storageLvDisp">1</span>
-      </button>
-      <button class="upgrade-btn-new" onclick="openMachineShop()" style="flex: 1; background: rgba(0,212,255,0.15); border-color: rgba(0,212,255,0.4); color: #00d4ff;">
-        <i class="fas fa-microchip"></i> الآلات
-      </button>
-    </div>
-  </div>
-</div>
-
-<div class="sec" id="sectionTasks">
-  <div class="tabs-crystal">
-    <div class="tab-crystal active" data-t="social" onclick="switchTTab(this,'social')">
-      <i class="fab fa-telegram"></i> المهام الاجتماعية
-    </div>
-    <div class="tab-crystal" data-t="referral" onclick="switchTTab(this,'referral')">
-      <i class="fas fa-users"></i> مهام الإحالة
     </div>
   </div>
   
-  <div class="tasks-container">
-    <div id="tcSocial" style="display: block;"></div>
-    <div id="tcReferral" style="display: none;"></div>
-  </div>
-</div>
-
-<div class="sec" id="sectionFriends">
-  <div class="hero-crystal">
-    <div class="stats-glass" style="margin-bottom: 20px;">
-      <div class="stat-glass-card">
-        <div class="stat-glass-label">المُحالون</div>
-        <div class="stat-glass-value" id="totalRefsDisp">0</div>
-        <div class="stat-glass-unit">صديق</div>
-      </div>
-      <div class="stat-glass-card">
-        <div class="stat-glass-label">العمولة</div>
-        <div class="stat-glass-value">15%</div>
-        <div class="stat-glass-unit">من الآلات</div>
+  <div class="hero-card">
+    <div class="santa-frame-wrap">
+      <div class="santa-frame-inner" id="santaChar" onclick="santaClick()">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" alt="Santa" draggable="false">
       </div>
     </div>
     
-    <div class="ref-link-area" style="background: rgba(0,0,0,0.3); border-radius: 60px; padding: 12px; margin-bottom: 20px; display: flex; gap: 10px;">
-      <input type="text" id="refLinkInp" readonly style="flex: 1; background: transparent; border: none; color: white; font-size: 12px; direction: ltr;">
-      <button onclick="copyRefLink()" style="background: #00d4ff; border: none; border-radius: 40px; padding: 8px 20px; color: #0a0f1a; font-weight: 800;">نسخ</button>
-    </div>
-    
-    <div id="recentRefsList"></div>
-  </div>
-</div>
-
-<div class="sec" id="sectionWallet">
-  <div class="hero-crystal">
-    <div class="tabs-crystal" style="padding: 0 0 16px 0;">
-      <div class="tab-crystal active" data-wt="deposit" onclick="switchWalletModernTab(this,'deposit')">
-        <i class="fas fa-arrow-down"></i> إيداع
+    <div class="hero-stats">
+      <div class="hero-stat-box">
+        <div class="stat-lbl" data-i18n="statAccrued">Accrued</div>
+        <div class="stat-val" id="heroAccrued">0.000000</div>
+        <div class="stat-unit">Snow</div>
       </div>
-      <div class="tab-crystal" data-wt="withdraw" onclick="switchWalletModernTab(this,'withdraw')">
-        <i class="fas fa-arrow-up"></i> سحب
-      </div>
-      <div class="tab-crystal" data-wt="exchange" onclick="switchWalletModernTab(this,'exchange')">
-        <i class="fas fa-exchange-alt"></i> صرف
+      <div class="hero-stat-box">
+        <div class="stat-lbl" data-i18n="statRateDay">Rate/Day</div>
+        <div class="stat-val" id="heroRateDay">0</div>
+        <div class="stat-unit" data-i18n="statSnowDay">Snow/day</div>
       </div>
     </div>
     
-    <div id="wt-deposit-modern" style="display: block;">
-      <div class="wallet-info" style="background: rgba(0,0,0,0.3); border-radius: 30px; padding: 16px; margin-bottom: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <span style="color: var(--text-muted);">المحفظة:</span>
-          <span id="walletAddressDisplay" style="font-weight: 700;">غير متصلة</span>
+    <div class="storage-outer">
+      <div class="storage-side-btn" onclick="openModal('upgradeModal')">⬆️</div>
+      <div class="storage-main">
+        <div class="storage-head">
+          <div class="storage-title"><i class="fas fa-database"></i> Storage</div>
+          <div class="storage-pct"><span id="storageLvDisp">1</span> / 10</div>
         </div>
-        <button class="collect-btn-new" id="connectWalletBtn" onclick="connectWallet()" style="margin: 0; padding: 12px;">
-          <i class="fas fa-plug"></i> ربط المحفظة
+        <div class="storage-track">
+          <div class="storage-fill" id="storageFill" style="width: 0%"></div>
+          <div class="storage-lbl" id="storageLabel">0%</div>
+        </div>
+      </div>
+      <div class="storage-side-btn" onclick="collectSnow()" id="collectQuickBtn" style="background: linear-gradient(135deg, #4DD0E1, #0097B2); color: white;">⚡</div>
+    </div>
+    
+    <div class="claim-wrap">
+      <button class="collect-btn" id="collectBtn" onclick="collectSnow()" disabled>
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" alt="Snow">
+        <span id="claimBtnTxt">Claim Snow</span>
+        <span class="claim-pct" id="claimPct">0%</span>
+      </button>
+      
+      <button class="machine-shop-btn" id="openMachineShopBtn" onclick="openMachineShop()">
+        <i class="fas fa-microchip"></i> Upgrade Mining Machines
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- صفحة Friends -->
+<div class="sec" id="sectionFriends">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width: 36px; height: 36px; object-fit: contain;">
+    <span style="font-size: 22px; font-weight: 800;" data-i18n="friendsTitle">Friends & Referrals</span>
+  </div>
+  
+  <div class="ref-prog-card">
+    <div class="ref-bonus-badge">
+      <span class="rbb-pct">15%</span>
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 32px; height: 32px; object-fit: contain;">
+      <span class="rbb-txt">💰 <strong style="color: var(--gold);">15% commission</strong> from friends' machine production!<br>Earn Snow from each machine they buy (one-time)!</span>
+    </div>
+    <div class="ref-link-row">
+      <input class="ref-inp" id="refLinkInp" readonly placeholder="Your referral link...">
+      <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> Copy</button>
+    </div>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 8px;">📤 Share this link with friends. When they buy machines, you get 15% of their machine production in Snow (one-time)!</div>
+  </div>
+  
+  <div class="hist-box">
+    <div class="hist-hdr" style="justify-content: space-between">
+      <span><i class="fas fa-history"></i> Recent Referrals</span>
+      <span class="ref-count-badge" id="totalRefsDisp">0 Friends</span>
+    </div>
+    <div id="recentRefsList"><div class="hist-empty">No referrals yet</div></div>
+  </div>
+</div>
+
+<!-- صفحة Tasks -->
+<div class="sec" id="sectionTasks">
+  <div class="task-tabs">
+    <div class="ttab active" data-t="social" onclick="switchTTab(this,'social')">
+      <i class="fas fa-users"></i> <span data-i18n="tabSocialTxt">Social</span>
+    </div>
+    <div class="ttab" data-t="referral" onclick="switchTTab(this,'referral')">
+      <i class="fas fa-gift"></i> <span data-i18n="tabReferralTxt">Referral</span>
+    </div>
+  </div>
+  
+  <div class="tcont active" id="tcSocial">
+    <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+      <div class="ttab active" id="stab-partner" style="flex: 1;" onclick="switchSocTab('partner')">⭐ Partner</div>
+      <div class="ttab" id="stab-community" style="flex: 1;" onclick="switchSocTab('community')">🌍 Community</div>
+    </div>
+    <div id="socPartnerList"></div>
+    <div id="socCommunityList" style="display: none;"></div>
+  </div>
+  
+  <div class="tcont" id="tcReferral">
+    <div id="referralTasksList"></div>
+  </div>
+</div>
+
+<button id="floatAddTask" onclick="openModal('addTaskModal')" style="display: none; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #4DD0E1, #0097B2); border: none; border-radius: 60px; padding: 14px 32px; color: white; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(77, 208, 225, 0.4); z-index: 150; white-space: nowrap; display: flex; align-items: center; gap: 8px;">
+  ➕ Add Task
+</button>
+
+<!-- صفحة Wallet -->
+<div class="sec" id="sectionWallet">
+  <div class="wallet-modern">
+    <div class="modern-tabs">
+      <div class="modern-tab active" data-wt="deposit" onclick="switchWalletModernTab(this,'deposit')">
+        <i class="fas fa-arrow-down"></i> Deposit
+      </div>
+      <div class="modern-tab" data-wt="withdraw" onclick="switchWalletModernTab(this,'withdraw')">
+        <i class="fas fa-arrow-up"></i> Withdraw
+      </div>
+      <div class="modern-tab" data-wt="exchange" onclick="switchWalletModernTab(this,'exchange')">
+        <i class="fas fa-exchange-alt"></i> Exchange
+      </div>
+    </div>
+
+    <div class="modern-content active" id="wt-deposit-modern">
+      <div class="modern-card">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <i class="fas fa-coins" style="font-size: 28px; color: var(--ice);"></i>
+          <span style="font-size: 18px; font-weight: 800;">Deposit TON</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 16px;">
+          <div>
+            <div style="font-size: 11px; color: var(--muted);">Wallet</div>
+            <div style="font-size: 13px; font-weight: 700;" id="walletAddressDisplay">Not connected</div>
+          </div>
+          <button class="btn-copy" id="connectWalletBtn" onclick="connectWallet()" style="margin: 0; padding: 10px 18px;">Connect</button>
+        </div>
+        <div style="background: rgba(255, 193, 7, 0.1); border-radius: 12px; padding: 12px; margin-bottom: 16px; font-size: 11px; color: #FFD740;">
+          <i class="fas fa-exclamation-triangle"></i> Your User ID: <strong id="depositUserIdDisplay" style="background: rgba(255,255,255,.14); padding: 2px 8px; border-radius: 10px;">...</strong> must be the ONLY comment in the transaction.
+        </div>
+        <label style="font-size: 13px; color: var(--muted); margin-bottom: 8px; display: block;">Amount (TON)</label>
+        <input type="number" id="depositAmountInput" class="modern-input" placeholder="1" step="0.1" min="1">
+        <div style="display: flex; gap: 10px; margin: 12px 0;">
+          <span class="prbtn" onclick="setDepAmt(1)" style="flex:1; text-align:center; padding:8px; background:rgba(77,208,225,0.1); border-radius:10px; cursor:pointer;">1</span>
+          <span class="prbtn" onclick="setDepAmt(2)" style="flex:1; text-align:center; padding:8px; background:rgba(77,208,225,0.1); border-radius:10px; cursor:pointer;">2</span>
+          <span class="prbtn" onclick="setDepAmt(5)" style="flex:1; text-align:center; padding:8px; background:rgba(77,208,225,0.1); border-radius:10px; cursor:pointer;">5</span>
+          <span class="prbtn" onclick="setDepAmt(10)" style="flex:1; text-align:center; padding:8px; background:rgba(77,208,225,0.1); border-radius:10px; cursor:pointer;">10</span>
+        </div>
+        <button class="modern-btn primary" id="submitDepositBtn" disabled onclick="window.initiateDeposit()">
+          <i class="fas fa-arrow-down"></i> Deposit TON
+        </button>
+        <div class="tx-status" id="depositStatus" style="display:none; margin-top:12px; padding:12px; background:rgba(0,0,0,0.3); border-radius:12px;"></div>
+      </div>
+    </div>
+
+    <div class="modern-content" id="wt-withdraw-modern">
+      <div class="modern-card">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <i class="fas fa-arrow-up" style="font-size: 28px; color: var(--gold);"></i>
+          <span style="font-size: 18px; font-weight: 800;">Withdraw TON</span>
+        </div>
+        <label style="font-size: 13px; color: var(--muted); margin-bottom: 8px; display: block;">TON Wallet Address</label>
+        <input type="text" class="modern-input" id="wdAddr" placeholder="UQ...">
+        <label style="font-size: 13px; color: var(--muted); margin: 12px 0 8px; display: block;">Amount (TON)</label>
+        <input type="number" class="modern-input" id="wdAmt" placeholder="0.02" min="0.02" step="0.01">
+        <div style="display: flex; gap: 8px; margin: 12px 0;">
+          <span class="prbtn" onclick="setWdAmt(0.02)" style="flex:1; text-align:center; padding:8px; background:rgba(255,217,102,0.1); border-radius:10px; cursor:pointer;">0.02</span>
+          <span class="prbtn" onclick="setWdAmt(0.05)" style="flex:1; text-align:center; padding:8px; background:rgba(255,217,102,0.1); border-radius:10px; cursor:pointer;">0.05</span>
+          <span class="prbtn" onclick="setWdAmt(0.1)" style="flex:1; text-align:center; padding:8px; background:rgba(255,217,102,0.1); border-radius:10px; cursor:pointer;">0.1</span>
+          <span class="prbtn" onclick="setWdAmt(0.5)" style="flex:1; text-align:center; padding:8px; background:rgba(255,217,102,0.1); border-radius:10px; cursor:pointer;">0.5</span>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px; text-align: center;">
+          <div style="font-size: 12px; color: var(--muted);">Your TON Balance</div>
+          <div style="font-size: 24px; font-weight: 800; color: var(--gold);" id="wdTonBalance">0 TON</div>
+        </div>
+        <button class="modern-btn secondary" id="wdBtn" onclick="doWithdraw()">
+          <i class="fas fa-arrow-up"></i> Withdraw TON
         </button>
       </div>
-      
-      <div style="background: rgba(255,217,102,0.1); border: 1px solid rgba(255,217,102,0.3); border-radius: 20px; padding: 12px; margin-bottom: 16px; font-size: 12px;">
-        <i class="fas fa-exclamation-triangle" style="color: #ffd966;"></i>
-        <strong>هام:</strong> اكتب رقم معرفك <span id="depositUserIdDisplay" style="background: #00d4ff; padding: 2px 8px; border-radius: 20px; color: #0a0f1a;">???</span> في تعليق التحويل فقط.
+      <div class="hist-box" style="margin-top: 16px;">
+        <div class="hist-hdr">📋 Withdrawal History</div>
+        <div id="wdHist"><div class="hist-empty">No withdrawals yet</div></div>
       </div>
-      
-      <input type="number" id="depositAmountInput" class="task-input" placeholder="المبلغ بـ TON" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,212,255,0.3); border-radius: 30px; color: white; margin-bottom: 12px;">
-      
-      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-        <button onclick="setDepAmt(1)" style="flex: 1; background: rgba(0,212,255,0.2); border: none; border-radius: 40px; padding: 10px; color: #00d4ff;">1 TON</button>
-        <button onclick="setDepAmt(2)" style="flex: 1; background: rgba(0,212,255,0.2); border: none; border-radius: 40px; padding: 10px; color: #00d4ff;">2 TON</button>
-        <button onclick="setDepAmt(5)" style="flex: 1; background: rgba(0,212,255,0.2); border: none; border-radius: 40px; padding: 10px; color: #00d4ff;">5 TON</button>
-        <button onclick="setDepAmt(10)" style="flex: 1; background: rgba(0,212,255,0.2); border: none; border-radius: 40px; padding: 10px; color: #00d4ff;">10 TON</button>
-      </div>
-      
-      <button class="collect-btn-new" id="submitDepositBtn" onclick="window.initiateDeposit()" disabled>إيداع TON</button>
     </div>
-    
-    <div id="wt-withdraw-modern" style="display: none;">
-      <input type="text" id="wdAddr" placeholder="عنوان محفظة TON" class="task-input" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,212,255,0.3); border-radius: 30px; color: white; margin-bottom: 12px;">
-      <input type="number" id="wdAmt" placeholder="المبلغ بـ TON" class="task-input" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,212,255,0.3); border-radius: 30px; color: white; margin-bottom: 12px;">
-      <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 16px; margin-bottom: 16px; text-align: center;">
-        <div style="font-size: 12px; color: var(--text-muted);">رصيد TON المتاح</div>
-        <div style="font-size: 28px; font-weight: 800; color: #ffd966;" id="wdTonBalance">0 TON</div>
-      </div>
-      <button class="collect-btn-new" onclick="doWithdraw()" style="background: linear-gradient(135deg, #ffd966, #ffb347);">سحب TON</button>
-    </div>
-    
-    <div id="wt-exchange-modern" style="display: none;">
-      <div style="background: rgba(0,0,0,0.3); border-radius: 30px; padding: 16px; margin-bottom: 16px;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-          <span><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 24px;"> Snow → TON</span>
-          <span id="swapFromBalSnow" style="color: #ffd966;">0 Snow</span>
-        </div>
-        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
-          <input type="number" id="swapSnowAmt" placeholder="الكمية" style="flex: 1; padding: 14px; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,212,255,0.3); border-radius: 30px; color: white;">
-          <button onclick="swapSnowMax()" style="background: #00d4ff; border: none; border-radius: 40px; padding: 0 20px; color: #0a0f1a; font-weight: 800;">MAX</button>
-        </div>
-        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">العمولة: 4%</div>
-        <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 12px; margin-bottom: 16px; text-align: center;">
-          <div>ستحصل (بعد الخصم):</div>
-          <div style="font-size: 32px; font-weight: 800; color: #ffd966;" id="swapTonOut">0</div>
-          <div>TON</div>
-        </div>
-        <button class="collect-btn-new" onclick="swapSnowToTon()">صرف Snow → TON</button>
-      </div>
-      
-      <div id="exchHist"></div>
-      <div id="wdHist"></div>
-    </div>
-  </div>
-</div>
 
-<!-- القائمة السفلية -->
-<div class="bottom-nav">
-  <div class="nav-item active" data-s="sectionHome" onclick="goNav(this)">
-    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div>
-    <div class="nav-label">الرئيسية</div>
-  </div>
-  <div class="nav-item" data-s="sectionTasks" onclick="goNav(this)">
-    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div>
-    <div class="nav-label">المهام</div>
-  </div>
-  <div class="nav-item" data-s="sectionFriends" onclick="goNav(this)">
-    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div>
-    <div class="nav-label">الأصدقاء</div>
-  </div>
-  <div class="nav-item" data-s="sectionWallet" onclick="goNav(this)">
-    <div class="nav-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div>
-    <div class="nav-label">المحفظة</div>
+    <div class="modern-content" id="wt-exchange-modern">
+      <div class="modern-card">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+          <i class="fas fa-exchange-alt" style="font-size: 28px; color: var(--ice);"></i>
+          <span style="font-size: 18px; font-weight: 800;">Exchange Snow → TON</span>
+          <span class="fee-badge">Fee: 4%</span>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 28px; height: 28px;">
+              <span style="font-weight: 700;">Snow → TON</span>
+            </div>
+            <div style="font-size: 12px; color: var(--muted);" id="swapFromBalSnow">0 Snow</div>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <input type="number" id="swapSnowAmt" placeholder="0" style="flex:1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 14px; color: white; font-size: 18px; font-weight: 700;">
+            <span class="prbtn" onclick="swapSnowMax()" style="padding: 12px 20px; background: rgba(77,208,225,0.2); border-radius: 14px; cursor: pointer; font-weight: 700;">MAX</span>
+          </div>
+          <div style="margin-top: 12px; font-size: 12px; color: var(--muted);">Fee: 4% (<span id="feeAmountDisplay">0</span> Snow)</div>
+          <div style="margin-top: 16px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <span>You get (after fee):</span>
+            <span style="font-size: 24px; font-weight: 800; color: var(--gold);" id="swapTonOut">0</span>
+            <span>TON</span>
+          </div>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin: 16px 0; text-align: center;">
+          📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON
+          <div style="font-size: 10px; color: var(--muted); margin-top: 4px;">4% exchange fee applies</div>
+        </div>
+        <button class="modern-btn primary" onclick="swapSnowToTon()">
+          <i class="fas fa-exchange-alt"></i> Exchange Snow → TON
+        </button>
+      </div>
+      <div class="hist-box" style="margin-top: 16px;">
+        <div class="hist-hdr">📋 Exchange History</div>
+        <div id="exchHist"><div class="hist-empty">No conversions yet</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- زر الدعم -->
-<div class="support-btn-fixed" onclick="openSupport()">
+<div id="supportBtn" class="support-img-btn" onclick="openSupport()">
   <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" alt="Support">
 </div>
 
+<!-- الشريط السفلي -->
+<nav class="bnav">
+  <div class="ni active" data-s="sectionHome" onclick="goNav(this)">
+    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div>
+    <div class="ni-lbl" data-i18n="Home">Home</div>
+  </div>
+  <div class="ni" data-s="sectionTasks" onclick="goNav(this)">
+    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div>
+    <div class="ni-lbl" data-i18n="Tasks">Tasks</div>
+  </div>
+  <div class="ni" data-s="sectionFriends" onclick="goNav(this)">
+    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div>
+    <div class="ni-lbl" data-i18n="Friends">Friends</div>
+  </div>
+  <div class="ni" data-s="sectionWallet" onclick="goNav(this)">
+    <div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div>
+    <div class="ni-lbl" data-i18n="Wallet">Wallet</div>
+  </div>
+</nav>
+
 <!-- النوافذ المنبثقة -->
-<div id="upgradeModal" class="modal-glass">
-  <div class="modal-content">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-      <h3 style="color: #00d4ff;">تطوير المخزن</h3>
-      <button onclick="closeModal('upgradeModal')" style="background: none; border: none; color: white; font-size: 24px;">&times;</button>
-    </div>
-    <div id="upgradeContent"></div>
-  </div>
-</div>
+<div class="modal" id="helpModal"><div class="modal-box"><div class="mhdr"><div class="mtitle">🎅 Santa Snow Guide</div><button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button></div><div id="helpContent"></div></div></div>
+<div class="modal" id="upgradeModal"><div class="modal-box"><div class="mhdr"><div class="mtitle">⬆️ Upgrade Storage</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div><div id="upgradeContent"></div></div></div>
+<div class="modal" id="machineShopModal"><div class="modal-box"><div class="mhdr"><div class="mtitle">🤖 Machine Shop</div><button class="mclose" onclick="closeModal('machineShopModal')"><i class="fas fa-times"></i></button></div><div id="machineShopContent"></div></div></div>
+<div class="modal" id="addTaskModal"><div class="modal-box"><div class="mhdr"><div class="mtitle">➕ Add Community Task</div><button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button></div><div id="addTaskContent"></div></div></div>
 
-<div id="machineShopModal" class="modal-glass">
-  <div class="modal-content">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-      <h3 style="color: #00d4ff;">متجر الآلات</h3>
-      <button onclick="closeModal('machineShopModal')" style="background: none; border: none; color: white; font-size: 24px;">&times;</button>
-    </div>
-    <div id="machineShopContent"></div>
-  </div>
-</div>
-
-<div id="notif" class="notif"></div>
+<div id="notif"></div>
 
 <script>
 // ============================================================
-// SANTA SNOW - VERSION 3.0 (مطور بالكامل)
-// جميع الوظائف محفوظة مع تصميم جديد ومبتكر
+// SANTA SNOW - FRONTEND v15.0 - DESIGN MAKEOVER
 // ============================================================
 
 const CFG = {
@@ -1100,57 +1562,58 @@ const CFG = {
   SNOW_TO_TON: 0.00001,
   MIN_WITHDRAW_TON: 0.02,
   MACHINES: {
-    1: { cost: 1, rate: 300, name: "آلة أساسية", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
-    2: { cost: 2, rate: 650, name: "آلة متطورة", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
-    3: { cost: 3, rate: 1000, name: "آلة راقية", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
+    1: { cost: 1, rate: 300, name: "Basic Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
+    2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
+    3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   },
   REF_COMMISSION_PERCENT: 15,
   EXCHANGE_FEE_PERCENT: 4,
+  WITHDRAW_FEE_PERCENT: 4,
   BOT_USERNAME: 'SANTASNOWBOT_BOT',
   BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow',
 };
 
 const REF_TASKS = [
-  { id: 'ref_10', n: 10, snow: 600, name: "🎁 10 أصدقاء", icon: "👥" },
-  { id: 'ref_20', n: 20, snow: 1500, name: "🎁 20 صديق", icon: "👥👥" },
-  { id: 'ref_50', n: 50, snow: 4000, name: "🎁 50 صديق", icon: "🌟" },
-  { id: 'ref_100', n: 100, snow: 10000, name: "🎁 100 صديق", icon: "💎" },
-  { id: 'ref_200', n: 200, snow: 20000, name: "🎁 200 صديق", icon: "👑" },
-  { id: 'ref_500', n: 500, snow: 50000, name: "🎁 500 صديق", icon: "🏆" },
+  { id: 'ref_10', n: 10, snow: 600, name: "🎁 Invite 10 Friends", icon: "👥" },
+  { id: 'ref_20', n: 20, snow: 1500, name: "🎁 Invite 20 Friends", icon: "👥👥" },
+  { id: 'ref_50', n: 50, snow: 4000, name: "🎁 Invite 50 Friends", icon: "🌟" },
+  { id: 'ref_100', n: 100, snow: 10000, name: "🎁 Invite 100 Friends", icon: "💎" },
+  { id: 'ref_200', n: 200, snow: 20000, name: "🎁 Invite 200 Friends", icon: "👑" },
+  { id: 'ref_500', n: 500, snow: 50000, name: "🎁 Invite 500 Friends", icon: "🏆" },
 ];
 
 const SOC_TASKS = [
-  { id: 'tg_payouts', name: 'قناة المدفوعات', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 100 },
-  { id: 'tg_news', name: 'قناة الأخبار', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 50 },
-  { id: 'tg_ch', name: 'قناة تيليجرام', icon: '📢', link: 'https://t.me/SantaSnowChannel', snow: 100 },
-  { id: 'tg_grp', name: 'مجموعة تيليجرام', icon: '👥', link: 'https://t.me/SantaSnowGroup', snow: 50 },
-  { id: 'tg_bot', name: 'تشغيل البوت', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 30 },
+  { id: 'tg_payouts', name: 'Join Payouts Channel', icon: '💰', link: 'https://t.me/SantaSnowPayouts', snow: 100 },
+  { id: 'tg_news', name: 'Join News Channel', icon: '📰', link: 'https://t.me/SantaSnowNews', snow: 50 },
+  { id: 'tg_ch', name: 'Join Telegram Channel', icon: '📢', link: 'https://t.me/SantaSnowChannel', snow: 100 },
+  { id: 'tg_grp', name: 'Join Telegram Group', icon: '👥', link: 'https://t.me/SantaSnowGroup', snow: 50 },
+  { id: 'tg_bot', name: 'Start our Bot', icon: '🤖', link: `https://t.me/${CFG.BOT_USERNAME}`, snow: 30 },
 ];
 
 const STORAGE_LVS = {
-  1: { cap: 300, upgCost: 500, label: 'صندوق الهدايا' },
-  2: { cap: 900, upgCost: 2000, label: 'كومة ثلج' },
-  3: { cap: 2400, upgCost: 8000, label: 'قطعة جليد' },
-  4: { cap: 6000, upgCost: 25000, label: 'رجل ثلج' },
-  5: { cap: 18000, upgCost: 80000, label: 'قلعة جليدية' },
-  6: { cap: 60000, upgCost: 250000, label: 'قصر متجمد' },
-  7: { cap: 120000, upgCost: 500000, label: 'القطب الشمالي' },
-  8: { cap: 210000, upgCost: 900000, label: 'قاعدة قطبية' },
-  9: { cap: 330000, upgCost: 1500000, label: 'نهر جليدي' },
-  10: { cap: 480000, upgCost: 2500000, label: 'جبل جليد' },
+  1: { cap: 300, upgCost: 500, label: 'Gift Box' },
+  2: { cap: 900, upgCost: 2000, label: 'Snow Pile' },
+  3: { cap: 2400, upgCost: 8000, label: 'Ice Block' },
+  4: { cap: 6000, upgCost: 25000, label: 'Snowman' },
+  5: { cap: 18000, upgCost: 80000, label: 'Ice Castle' },
+  6: { cap: 60000, upgCost: 250000, label: 'Frozen Palace' },
+  7: { cap: 120000, upgCost: 500000, label: 'North Pole' },
+  8: { cap: 210000, upgCost: 900000, label: 'Arctic Base' },
+  9: { cap: 330000, upgCost: 1500000, label: 'Glacier' },
+  10: { cap: 480000, upgCost: 2500000, label: 'Iceberg' },
 };
 
 const SNOW_IMG = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
 const REF_TASK_ICON = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
-const S = {
+let S = {
   userId: null,
   startParam: '',
   user: { snow: 0, miningRate: 0, miningLevel: 1, miningMachines: {1:0,2:0,3:0}, totalEarned: 0, storageLevel: 1, hasDeposited: false, tonBalance: 0, referralCount: 0, welcomeChestOpened: false, hasWelcomeMachine: false },
   refs: [], exchHist: [], wdHist: [], doneTasks: [],
   tasks: { partner: [], community: [] },
   storageProgress: 0, storageInt: null,
-  tg: null, tonUI: null, wallet: null,
+  tg: null, tonUI: null, wallet: null, depCheckInt: null,
   _collectCooldown: false,
   isNewUser: false,
 };
@@ -1159,18 +1622,27 @@ let _lastClickTime = 0;
 let _apiInFlight = 0;
 let _nt = null;
 let _taskInFlight = new Set();
+let _atType = 'channel';
+let _submitInFlight = false;
+let _socTab = 'partner';
 
-function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function esc(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
 
 async function api(action, data = {}) {
-  if (_apiInFlight > 8) throw new Error('طلبات كثيرة');
+  if (_apiInFlight > 8) throw new Error('Too many requests');
   _apiInFlight++;
   try {
     const h = { 'Content-Type': 'application/json' };
     if (S.tg?.initData) h.Authorization = `Telegram ${S.tg.initData}`;
-    const r = await fetch(`${CFG.API_URL}/api`, { method: 'POST', headers: h, body: JSON.stringify({ action, data }) });
+    const r = await fetch(`${CFG.API_URL}/api`, {
+      method: 'POST',
+      headers: h,
+      body: JSON.stringify({ action, data }),
+    });
     const j = await r.json();
-    if (!j.success) throw new Error(j.error || 'خطأ في API');
+    if (!j.success) throw new Error(j.error || 'API error');
     return j.data;
   } finally { _apiInFlight--; }
 }
@@ -1181,10 +1653,8 @@ function showNotif(msg, type = 'i') {
   if (_nt) clearTimeout(_nt);
   el.classList.remove('show');
   el.innerHTML = msg;
-  el.className = 'notif';
-  if (type === 's') el.style.borderColor = '#00f27a';
-  else if (type === 'e') el.style.borderColor = '#ff6b6b';
-  else el.style.borderColor = '#00d4ff';
+  el.className = '';
+  el.classList.add('notif', type);
   setTimeout(() => el.classList.add('show'), 10);
   _nt = setTimeout(() => { el.classList.remove('show'); _nt = null; }, 3000);
 }
@@ -1200,10 +1670,11 @@ async function loadState() {
     S.doneTasks = d.completedTasks || [];
     S.tasks = d.tasks || { partner: [], community: [] };
     if (d.user && d.user.storageAccrued !== undefined) S.storageProgress = parseFloat(d.user.storageAccrued) || 0;
+    if (d.pendingDeposit) startDepVerify(d.pendingDeposit.depId, d.pendingDeposit.txHash);
     if (!S.user.welcomeChestOpened && S.user.snow === 0 && !S.user.hasWelcomeMachine) S.isNewUser = true;
-    else S.isNewUser = false;
+    else { S.isNewUser = false; const chestEl = document.getElementById('welcomeChest'); if (chestEl && !S.user.welcomeChestOpened) chestEl.style.display = 'block'; else if (chestEl) chestEl.style.display = 'none'; }
     updateRefUI();
-  } catch (e) { console.warn('loadState:', e.message); showNotif('فشل تحميل البيانات: ' + e.message, 'e'); }
+  } catch (e) { console.warn('loadState:', e.message); showNotif('Failed to load data: ' + e.message, 'e'); }
   updateUI();
 }
 
@@ -1212,7 +1683,7 @@ function hideWelcomeModal() { document.getElementById('welcomeModal').classList.
 
 async function openWelcomeChestFromModal() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   try {
     const result = await api('openWelcomeChest', {});
@@ -1222,36 +1693,41 @@ async function openWelcomeChestFromModal() {
     S.user.miningRate = result.miningRate;
     S.user.miningLevel = result.miningLevel;
     hideWelcomeModal();
+    const chestEl = document.getElementById('welcomeChest');
+    if (chestEl) chestEl.style.display = 'none';
     updateUI();
     triggerSnowfall(50);
-    showNotif(`🎁 +${fmt(result.snow)} ثلج! +1 آلة ترحيب (${result.miningRate} ثلج/ساعة)`, 's');
+    showNotif(`🎁 +${fmt(result.snow)} Snow! +1 Welcome Machine (${result.miningRate} Snow/hour)`, 's');
     spawnSnowParticle();
-  } catch (e) { showNotif(`❌ ${e.message || 'فشل فتح الصندوق'}`, 'e'); }
+  } catch (e) { showNotif(`❌ ${e.message || 'Failed to open chest'}`, 'e'); }
 }
+
+async function openWelcomeChest() { await openWelcomeChestFromModal(); }
 
 function openMachineShop() { buildMachineShop(); openModal('machineShopModal'); }
 
 function buildMachineShop() {
-  let html = '<div style="display: flex; flex-direction: column; gap: 12px;">';
+  let html = '<div class="machine-cards">';
   for (let i = 1; i <= 3; i++) {
     const machine = CFG.MACHINES[i];
     const count = S.user.miningMachines?.[i] || 0;
     const canAfford = (S.user.tonBalance || 0) >= machine.cost;
-    html += `
-      <div style="background: rgba(0,0,0,0.4); border-radius: 24px; padding: 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-        <img src="${machine.image}" style="width: 60px; height: 60px; border-radius: 16px;">
-        <div style="flex: 1;">
-          <div style="font-weight: 800; color: #00d4ff;">${machine.name}</div>
-          <div style="font-size: 12px;">⚡ ${machine.rate} ثلج/ساعة</div>
-          <div style="font-size: 12px; color: #ffd966;">💰 ${machine.cost} TON</div>
-          <div style="font-size: 11px; color: var(--text-muted);">المملوكة: ${count}</div>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <input type="number" id="qty_${i}" value="1" min="1" max="99" style="width: 60px; background: rgba(0,0,0,0.5); border: 1px solid #00d4ff; border-radius: 12px; padding: 8px; color: white; text-align: center;">
-          <button onclick="purchaseMachine(${i})" style="background: ${canAfford ? 'linear-gradient(135deg, #00d4ff, #0097b2)' : 'rgba(255,255,255,0.1)'}; border: none; border-radius: 40px; padding: 10px 16px; color: white; font-weight: 700; cursor: ${canAfford ? 'pointer' : 'not-allowed'};" ${!canAfford ? 'disabled' : ''}>شراء</button>
-        </div>
+    html += `<div class="machine-card">
+      <img src="${machine.image}" class="machine-card-img" alt="${machine.name}">
+      <div class="machine-card-info">
+        <div class="machine-card-name">${machine.name}</div>
+        <div class="machine-card-rate">⚡ <span>${machine.rate}</span> Snow/hour</div>
+        <div class="machine-card-cost">💰 ${machine.cost} TON each</div>
+        <div class="machine-count-badge">Owned: ${count}</div>
       </div>
-    `;
+      <div class="machine-quantity">
+        <input type="number" id="qty_${i}" value="1" min="1" max="99" style="width: 60px;">
+        <span>pcs</span>
+      </div>
+      <button class="machine-card-btn" onclick="purchaseMachine(${i})" ${!canAfford ? 'disabled' : ''}>
+        ${canAfford ? 'Buy' : 'Need ' + machine.cost + ' TON'}
+      </button>
+    </div>`;
   }
   html += '</div>';
   document.getElementById('machineShopContent').innerHTML = html;
@@ -1259,23 +1735,24 @@ function buildMachineShop() {
 
 async function purchaseMachine(machineType) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const machine = CFG.MACHINES[machineType];
   const quantity = parseInt(document.getElementById(`qty_${machineType}`)?.value) || 1;
   const totalCost = machine.cost * quantity;
   const currentTon = S.user.tonBalance || 0;
-  if (currentTon < totalCost) { showNotif(`❌ تحتاج ${totalCost} TON`, 'e'); return; }
+  if (currentTon < totalCost) { showNotif(`❌ Need ${totalCost} TON to buy ${quantity}x ${machine.name}`, 'e'); return; }
   try {
     const result = await api('purchaseMachine', { machineType, quantity });
     S.user.tonBalance = result.tonBalance;
     S.user.miningRate = result.miningRate;
     S.user.miningMachines = result.miningMachines;
-    updateUI(); buildMachineShop();
+    updateUI();
+    buildMachineShop();
     triggerSnowfall(30);
-    showNotif(`🎉 تم شراء ${quantity}x ${machine.name}! +${result.totalRateAdded} ثلج/ساعة`, 's');
+    showNotif(`🎉 ${quantity}x ${machine.name} purchased! +${result.totalRateAdded} Snow/hour`, 's');
     spawnSnowParticle();
-  } catch (e) { showNotif(`❌ ${e.message || 'فشل الشراء'}`, 'e'); }
+  } catch (e) { showNotif(`❌ ${e.message || 'Purchase failed'}`, 'e'); }
 }
 
 function updateUI() {
@@ -1305,7 +1782,7 @@ function startStorage() {
   if (S.storageInt) clearInterval(S.storageInt);
   S.storageInt = setInterval(() => {
     const u = S.user, lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1], rate = u.miningRate || 0;
-    if (rate <= 0) return;
+    if (rate <= 0) { updateStorageUI(); return; }
     S.storageProgress += (rate / 3600);
     if (S.storageProgress > cfg.cap) S.storageProgress = cfg.cap;
     updateStorageUI();
@@ -1315,14 +1792,19 @@ function startStorage() {
 function updateStorageUI() {
   const u = S.user, lv = u.storageLevel || 1, cfg = STORAGE_LVS[lv] || STORAGE_LVS[1];
   const pct = Math.min(100, Math.round((S.storageProgress / cfg.cap) * 100));
-  document.getElementById('heroAccrued').textContent = fmt(Math.floor(S.storageProgress));
+  const accruedExact = S.storageProgress.toFixed(6);
+  document.getElementById('heroAccrued').textContent = accruedExact;
+  document.getElementById('storageFill').style.width = pct + '%';
+  document.getElementById('storageLabel').textContent = Math.floor(S.storageProgress) + ' / ' + fmt(cfg.cap);
   const btn = document.getElementById('collectBtn');
+  const pctEl = document.getElementById('claimPct');
+  const txtEl = document.getElementById('claimBtnTxt');
   const has = S.storageProgress >= 1;
   btn.disabled = !has;
-  document.getElementById('storageFill').style.width = pct + '%';
-  document.getElementById('storageText').innerHTML = `${pct}% | ${fmt(Math.floor(S.storageProgress))} / ${fmt(cfg.cap)}`;
-  document.getElementById('storageLvDisp').textContent = lv;
-  document.getElementById('claimBtnTxt').innerHTML = has ? `جمع ${fmt(Math.floor(S.storageProgress))} ثلج` : 'المخزن فارغ...';
+  if (pctEl) pctEl.textContent = pct + '%';
+  if (txtEl) txtEl.innerHTML = has ? `Claim ${fmt(Math.floor(S.storageProgress))} Snow` : 'Storage Empty...';
+  const lvEl = document.getElementById('storageLvDisp');
+  if (lvEl) lvEl.textContent = lv;
 }
 
 function triggerSnowfall(count = 40) {
@@ -1334,70 +1816,105 @@ function triggerSnowfall(count = 40) {
       snowflake.style.left = Math.random() * 100 + '%';
       snowflake.style.fontSize = Math.random() * 16 + 10 + 'px';
       snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+      snowflake.style.opacity = Math.random() * 0.7 + 0.3;
       document.body.appendChild(snowflake);
       setTimeout(() => snowflake.remove(), 5000);
     }, i * 50);
   }
 }
 
+function startSnowfallLoop() {
+  setInterval(() => {
+    if (Math.random() > 0.3) {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.innerHTML = '❄️';
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.fontSize = Math.random() * 14 + 8 + 'px';
+      snowflake.style.animationDuration = Math.random() * 4 + 2.5 + 's';
+      snowflake.style.opacity = Math.random() * 0.6 + 0.3;
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 5000);
+    }
+  }, 300);
+}
+
 async function collectSnow() {
   if (S._collectCooldown) return;
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const amt = Math.floor(S.storageProgress);
-  if (amt < 1) { showNotif('المخزن فارغ!', 'e'); return; }
+  if (amt < 1) { showNotif('Storage is empty!', 'e'); return; }
   S._collectCooldown = true;
   setTimeout(() => S._collectCooldown = false, 3000);
   S.user.snow = (S.user.snow || 0) + amt;
   S.user.totalEarned = (S.user.totalEarned || 0) + amt;
   S.storageProgress = 0;
-  updateUI(); spawnSnowParticle();
+  updateUI();
   triggerSnowfall(30);
-  showNotif(`+${fmt(amt)} ثلج تم جمعه!`, 's');
-  api('collect', { amount: amt }).catch(() => {});
+  showNotif(`+${fmt(amt)} Snow collected!`, 's');
+  api('collect', { amount: amt }).catch(() => { });
 }
 
 function buildUpgradeContent() {
   const u = S.user, lv = u.storageLevel || 1, cur = STORAGE_LVS[lv], next = STORAGE_LVS[lv + 1];
-  let html = `<div style="background: rgba(0,0,0,0.3); border-radius: 24px; padding: 16px; margin-bottom: 16px;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div><div style="font-size: 24px; font-weight: 800; color: #00d4ff;">المستوى ${lv}</div><div style="font-size: 12px;">${cur.label}</div><div>السعة: ${fmt(cur.cap)}</div></div>`;
-  if (next) html += `<div><i class="fas fa-arrow-right"></i></div><div><div style="font-size: 24px; font-weight: 800; color: #ffd966;">المستوى ${lv+1}</div><div style="font-size: 12px;">${next.label}</div><div>السعة: ${fmt(next.cap)}</div></div>`;
-  html += `</div></div>`;
+  let h = `<div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 16px; margin-bottom: 16px;">
+    <div style="display: flex; align-items: center; gap: 16px; justify-content: space-between;">
+      <div style="flex:1; text-align:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:16px;">
+        <div style="font-size: 20px; font-weight:800; color:var(--ice)">Lv.${lv}</div>
+        <div style="font-size: 12px; color:var(--muted);">${esc(cur.label)}</div>
+        <div style="font-size: 11px; color:var(--muted);">Cap: ${fmt(cur.cap)}</div>
+      </div>
+      <div style="font-size: 24px; color:var(--ice)">→</div>`;
   if (next) {
-    html += `<div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 12px; margin-bottom: 16px;">
-      <div>تكلفة التطوير: <strong style="color: #ffd966; font-size: 20px;">${fmt(next.upgCost)}</strong> <img src="${SNOW_IMG}" style="width: 20px;"></div>
-    </div>
-    <button onclick="upgradeStorage()" class="collect-btn-new" style="margin: 0;">تطوير المخزن</button>`;
+    h += `<div style="flex:1; text-align:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:16px; border:1px solid var(--ice);">
+      <div style="font-size: 20px; font-weight:800; color:var(--gold)">Lv.${lv + 1}</div>
+      <div style="font-size: 12px; color:var(--muted);">${esc(next.label)}</div>
+      <div style="font-size: 11px; color:var(--muted);">Cap: ${fmt(next.cap)}</div>
+    </div>`;
   } else {
-    html += `<div style="text-align: center; padding: 20px; color: #ffd966;">🏆 المستوى الأقصى!</div>`;
+    h += `<div style="flex:1; text-align:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:16px;"><div style="font-size:20px; font-weight:800;">MAX</div></div>`;
   }
-  document.getElementById('upgradeContent').innerHTML = html;
+  h += `</div>`;
+  if (next) {
+    h += `<div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
+      📦 Capacity: <strong>${fmt(cur.cap)} → ${fmt(next.cap)} Snow</strong><br>
+      💰 Cost: <strong>${fmt(next.upgCost)} Snow</strong>
+    </div>
+    <button class="modern-btn primary" onclick="upgradeStorage()">⬆️ Upgrade for ${fmt(next.upgCost)} Snow</button>`;
+  } else {
+    h += `<div style="text-align:center; padding:20px; color:var(--ice); font-weight:800;">🏆 Maximum Level!</div>`;
+  }
+  document.getElementById('upgradeContent').innerHTML = h;
 }
 
 async function upgradeStorage() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const u = S.user, lv = u.storageLevel || 1, next = STORAGE_LVS[lv + 1];
-  if (!next) { showNotif('المستوى الأقصى!', 'e'); return; }
-  if ((u.snow || 0) < next.upgCost) { showNotif(`تحتاج ${fmt(next.upgCost)} ثلج!`, 'e'); return; }
+  if (!next) { showNotif('Already max!', 'e'); return; }
+  if ((u.snow || 0) < next.upgCost) { showNotif(`Need ${fmt(next.upgCost)} Snow!`, 'e'); return; }
   S.user.snow -= next.upgCost;
   S.user.storageLevel = lv + 1;
-  await api('upgradeStorage', { newLevel: lv + 1 }).catch(() => {});
+  api('upgradeStorage', { newLevel: lv + 1 }).catch(() => { });
   buildUpgradeContent();
   updateUI();
   triggerSnowfall(30);
-  showNotif(`✅ تم تطوير المخزن إلى المستوى ${lv + 1}!`, 's');
+  showNotif(`✅ Storage → Level ${lv + 1}!`, 's');
 }
 
 function goNav(el) {
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(el.dataset.s).classList.add('active');
+  hideFab();
 }
+
+function hideFab() { const f = document.getElementById('floatAddTask'); if (f) f.style.display = 'none'; }
+function showFab() { const f = document.getElementById('floatAddTask'); if (f) f.style.display = 'flex'; }
 
 function renderTasks() {
   const referralCount = S.user.referralCount || 0;
@@ -1406,160 +1923,248 @@ function renderTasks() {
     const completed = S.doneTasks.includes(task.id);
     const canClaim = referralCount >= task.n && !completed;
     const progress = Math.min(100, Math.round((referralCount / task.n) * 100));
-    refTasksHtml += `
-      <div class="task-card-glass">
-        <div class="task-header">
-          <div class="task-icon">${task.icon}</div>
-          <div class="task-info">
-            <div class="task-name">${task.name}</div>
-            <div class="task-reward"><img src="${SNOW_IMG}" style="width: 18px;"> +${fmt(task.snow)} ثلج</div>
-          </div>
-        </div>
-        <div class="task-progress">
-          <div class="progress-crystal"><div class="progress-crystal-fill" style="width: ${progress}%;"></div></div>
-          <div style="font-size: 11px; margin-top: 5px;">${referralCount}/${task.n} صديق (${progress}%)</div>
-        </div>
-        ${completed ? `<button class="task-btn done" disabled>✅ مكتملة</button>` : canClaim ? `<button class="task-btn" onclick="claimRefTask('${task.id}')">🎁 استلام</button>` : `<button class="task-btn" style="background: rgba(255,255,255,0.1);" disabled>🔒 ${task.n} مطلوب</button>`}
+    refTasksHtml += `<div class="task-item">
+      <div class="ticon"><img src="${REF_TASK_ICON}" style="width: 52px; height: 52px; object-fit: contain; border-radius: 14px;"></div>
+      <div class="tinfo">
+        <div class="tname">${task.name}</div>
+        <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px;"> ${fmt(task.snow)} Snow</div>
+        <div class="progress-bar"><div style="width: ${progress}%;"></div></div>
+        <div class="tstat">${referralCount}/${task.n} friends invited (${progress}%)</div>
       </div>
-    `;
+      <div>${completed ? '<button class="tbtn done">✅ Completed</button>' : canClaim ? '<button class="tbtn claim" onclick="claimRefTask(\'' + task.id + '\')">🎁 Claim →</button>' : '<button class="tbtn go" disabled>🔒 ' + task.n + ' needed</button>'}</div>
+    </div>`;
   }
-  document.getElementById('tcReferral').innerHTML = refTasksHtml || '<div class="task-card-glass" style="text-align: center;">✨ قم بدعوة الأصدقاء للحصول على مكافآت! ✨</div>';
-  
-  let socialHtml = '';
-  for (const task of SOC_TASKS) {
-    const completed = S.doneTasks.includes(task.id);
-    socialHtml += `
-      <div class="task-card-glass">
-        <div class="task-header">
-          <div class="task-icon">${task.icon}</div>
-          <div class="task-info">
-            <div class="task-name">${task.name}</div>
-            <div class="task-reward"><img src="${SNOW_IMG}" style="width: 18px;"> +${fmt(task.snow)} ثلج</div>
-          </div>
-        </div>
-        ${completed ? `<button class="task-btn done" disabled>✅ مكتملة</button>` : `<button class="task-btn" onclick="doSocialTask('${task.id}','${task.link}')">🚀 ابدأ</button>`}
-      </div>
-    `;
-  }
-  document.getElementById('tcSocial').innerHTML = socialHtml;
+  document.getElementById('referralTasksList').innerHTML = refTasksHtml || '<div class="hist-empty">✨ Invite friends to unlock rewards!</div>';
+  renderSocTasks();
 }
 
 async function claimRefTask(taskId) {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   try {
     const result = await api('claimTask', { taskId });
     S.user.snow = result.snow;
     S.doneTasks.push(taskId);
-    updateUI(); renderTasks();
+    updateUI();
+    renderTasks();
     triggerSnowfall(30);
-    showNotif(`🎉 +${fmt(result.snowReward)} ثلج!`, 's');
+    showNotif(`🎉 +${fmt(result.snowReward)} Snow from referral task!`, 's');
     spawnSnowParticle();
-  } catch (e) { showNotif(`❌ ${e.message || 'فشل الاستلام'}`, 'e'); }
+  } catch (e) { showNotif(`❌ ${e.message || 'Failed to claim'}`, 'e'); }
 }
 
-async function doSocialTask(taskId, link) {
-  const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
-  _lastClickTime = now;
-  if (_taskInFlight.has(taskId)) { showNotif('⏳ جاري المعالجة...', 'w'); return; }
-  _taskInFlight.add(taskId);
-  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank', 'noopener');
-  showNotif('⏳ جاري التحقق...', 'i');
-  setTimeout(async () => {
-    try {
-      const r = await api('verifyTask', { taskId, taskType: 'bot', taskCategory: 'social' });
-      if (!S.doneTasks.includes(taskId)) S.doneTasks.push(taskId);
-      if (r.snowAdded) { S.user.snow = (S.user.snow || 0) + r.snowAdded; updateUI(); triggerSnowfall(30); showNotif(`🎉 +${fmt(r.snowAdded)} ثلج!`, 's'); spawnSnowParticle(); }
-      else showNotif(`✅ تم إكمال المهمة!`, 's');
-      renderTasks();
-    } catch (e) { showNotif(`❌ ${e.message || 'فشل التحقق'}`, 'e'); }
-    finally { _taskInFlight.delete(taskId); renderTasks(); }
-  }, 3000);
+function buildTaskCard(t, cat) {
+  const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
+  const icon = t.type === 'channel' ? '📢' : '🤖';
+  const name = esc(t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task')));
+  const snow = t.snowReward || 50;
+  const link = esc(t.link || '');
+  return `<div class="task-item">
+    <div class="ticon" style="font-size: 32px;">${icon}</div>
+    <div class="tinfo">
+      <div class="tname">${name}</div>
+      <div class="trew"><img src="${SNOW_IMG}" style="width: 18px; height: 18px;"> ${fmt(snow)} Snow</div>
+      ${t.completions !== undefined ? `<div class="tstat">${t.completions || 0}/${t.targetUsers || 0} completed</div>` : ''}
+    </div>
+    ${done ? '<button class="tbtn done">✅ Done</button>' : inFlight ? '<button class="tbtn done" style="opacity:.6">⏳</button>' : '<button class="tbtn go" onclick="doDbTask(\'' + tid + '\',\'' + link + '\',\'' + (t.type || 'bot') + '\',\'' + cat + '\')">Go →</button>'}
+  </div>`;
+}
+
+function renderSocTasks() {
+  const p = S.tasks?.partner || [], c = S.tasks?.community || [];
+  document.getElementById('socPartnerList').innerHTML = p.length ? p.map(t => buildTaskCard(t, 'partner')).join('') : '<div class="hist-empty">No partner tasks yet</div>';
+  document.getElementById('socCommunityList').innerHTML = c.length ? c.map(t => buildTaskCard(t, 'community')).join('') : '<div class="hist-empty">No community tasks yet</div>';
 }
 
 function switchTTab(el, t) {
-  document.querySelectorAll('.tab-crystal').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.ttab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.tcont').forEach(x => x.classList.remove('active'));
   el.classList.add('active');
-  if (t === 'social') { document.getElementById('tcSocial').style.display = 'block'; document.getElementById('tcReferral').style.display = 'none'; }
-  else { document.getElementById('tcSocial').style.display = 'none'; document.getElementById('tcReferral').style.display = 'block'; }
+  document.getElementById(`tc${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('active');
+  hideFab();
 }
 
-function updateSwapBals() { document.getElementById('swapFromBalSnow').innerHTML = `${fmt(S.user.snow || 0)} Snow`; }
+function switchSocTab(tab) {
+  _socTab = tab;
+  document.getElementById('stab-partner').className = 'ttab' + (tab === 'partner' ? ' active' : '');
+  document.getElementById('stab-community').className = 'ttab' + (tab === 'community' ? ' active' : '');
+  document.getElementById('socPartnerList').style.display = tab === 'partner' ? 'block' : 'none';
+  document.getElementById('socCommunityList').style.display = tab === 'community' ? 'block' : 'none';
+  if (tab === 'community') showFab(); else hideFab();
+}
+
+async function doDbTask(tid, link, type, cat) {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_taskInFlight.has(tid)) { showNotif('⏳ Already processing...', 'w'); return; }
+  _taskInFlight.add(tid);
+  renderSocTasks();
+  if (link && link.startsWith('https://t.me/')) window.open(link, '_blank', 'noopener');
+  showNotif('⏳ Verifying your membership...', 'i');
+  setTimeout(async () => {
+    try {
+      const r = await api('verifyTask', { taskId: tid, taskType: type, taskCategory: cat });
+      if (!S.doneTasks.includes(tid)) S.doneTasks.push(tid);
+      if (r.snowAdded) {
+        S.user.snow = (S.user.snow || 0) + r.snowAdded;
+        updateUI();
+        triggerSnowfall(30);
+        showNotif(`🎉 +${fmt(r.snowAdded)} Snow! Task completed!`, 's');
+        spawnSnowParticle();
+      } else { showNotif(`✅ Task completed!`, 's'); }
+      renderTasks();
+    } catch (e) {
+      let errorMsg = e.message || 'Verification failed';
+      if (errorMsg.includes('member') || errorMsg.includes('channel')) showNotif(`❌ Please join the channel first, then try again!`, 'e');
+      else showNotif(`❌ ${errorMsg}`, 'e');
+    } finally { _taskInFlight.delete(tid); renderSocTasks(); }
+  }, 3000);
+}
+
+function setTaskType(t) { _atType = t; updAtCost(); }
+function setAtTarget(v) { document.getElementById('atTarget').value = v; updAtCost(); }
+function updAtCost() { const tgt = parseInt(document.getElementById('atTarget').value) || 0; document.getElementById('atCostPreview').textContent = fmt(tgt * 60) + ' Snow'; }
+
+async function submitAddTask() {
+  const now = Date.now();
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
+  _lastClickTime = now;
+  if (_submitInFlight) return;
+  const link = (document.getElementById('atLink').value || '').trim();
+  const target = parseInt(document.getElementById('atTarget').value) || 0;
+  const st = document.getElementById('atStatus');
+  st.style.display = 'block';
+  st.textContent = '⏳ Creating...';
+  if (!link.includes('t.me/')) { st.innerHTML = '❌ Invalid Telegram link'; return; }
+  if (target < 100) { st.innerHTML = `❌ Min 100 users`; return; }
+  const cost = target * 60;
+  if ((S.user.snow || 0) < cost) { st.innerHTML = `❌ Need ${fmt(cost)} Snow`; return; }
+  _submitInFlight = true;
+  try {
+    await api('createTask', { type: _atType, link, targetUsers: target });
+    S.user.snow = (S.user.snow || 0) - cost;
+    st.style.color = 'var(--ice)';
+    st.innerHTML = '✅ Task created!';
+    updateUI();
+    triggerSnowfall(30);
+    showNotif(`✅ Task created! Cost: ${fmt(cost)} Snow`, 's');
+    setTimeout(() => { closeModal('addTaskModal'); loadState(); }, 1500);
+  } catch (e) { st.innerHTML = `❌ ${e.message || 'Failed'}`; showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
+  finally { _submitInFlight = false; }
+}
+
+function updateSwapBals() { document.getElementById('swapFromBalSnow').innerHTML = `Balance: ${fmt(S.user.snow || 0)} Snow`; }
 function swapSnowMax() { document.getElementById('swapSnowAmt').value = Math.floor(S.user.snow || 0); updSwapSnowToTon(); }
 function updSwapSnowToTon() {
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
-  const fee = Math.floor(snow * CFG.EXCHANGE_FEE_PERCENT / 100);
+  const fee = Math.floor(snow * 4 / 100);
   const snowAfterFee = snow - fee;
-  const ton = snowAfterFee * CFG.SNOW_TO_TON;
+  const ton = snowAfterFee * 0.00001;
   document.getElementById('swapTonOut').textContent = ton.toFixed(6);
+  document.getElementById('feeAmountDisplay').textContent = fmt(fee);
 }
 
+let _exchInFlight = false;
 async function swapSnowToTon() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
+  if (_exchInFlight) return;
   const snow = parseInt(document.getElementById('swapSnowAmt').value) || 0;
-  if (snow <= 0) { showNotif('أدخل المبلغ!', 'e'); return; }
-  if (snow < 100) { showNotif('الحد الأدنى 100 ثلج!', 'e'); return; }
-  if (snow > (S.user.snow || 0)) { showNotif('رصيد غير كافٍ!', 'e'); return; }
+  if (snow <= 0) { showNotif('Enter amount!', 'e'); return; }
+  if (snow < 100) { showNotif('Min 100 Snow (0.001 TON before fee)!', 'e'); return; }
+  if (snow > (S.user.snow || 0)) { showNotif('Not enough Snow!', 'e'); return; }
+  _exchInFlight = true;
   try {
     const result = await api('exchange', { snowAmount: snow });
     S.user.snow = result.snow;
     S.user.tonBalance = result.tonBalance;
-    updateUI(); renderExchHist();
-    triggerSnowfall(30);
-    showNotif(`⚡ تم صرف ${fmt(snow)} ثلج`, 's');
-    spawnSnowParticle();
+    const fee = result.fee || Math.floor(snow * 4 / 100);
+    const snowAfterFee = snow - fee;
+    const tonReceived = snowAfterFee * 0.00001;
+    S.exchHist.unshift({ snow: snow, fee: fee, ton: tonReceived, dir: 'S→T', ts: Date.now() });
     document.getElementById('swapSnowAmt').value = '';
     document.getElementById('swapTonOut').textContent = '0';
-  } catch (e) { showNotif(`❌ ${e.message || 'فشل الصرف'}`, 'e'); }
+    document.getElementById('feeAmountDisplay').textContent = '0';
+    updateUI(); renderExchHist();
+    triggerSnowfall(30);
+    showNotif(`⚡ ${fmt(snow)} Snow → ${tonReceived.toFixed(6)} TON (Fee: ${fmt(fee)} Snow)`, 's');
+    spawnSnowParticle();
+  } catch (e) { showNotif(`❌ ${e.message || 'Failed'}`, 'e'); }
+  finally { _exchInFlight = false; }
 }
 
 function renderExchHist() {
   const el = document.getElementById('exchHist');
-  if (!S.exchHist.length) { el.innerHTML = '<div class="task-card-glass" style="text-align: center;">لا توجد عمليات صرف بعد</div>'; return; }
-  el.innerHTML = '<div style="margin-top: 16px;"><div style="font-weight: 800; margin-bottom: 12px;">📋 تاريخ الصرف</div>' + S.exchHist.slice(0, 10).map(h => `<div style="background: rgba(0,0,0,0.2); border-radius: 16px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between;"><span>${fmt(h.snow)} ثلج → ${h.ton.toFixed(6)} TON</span><span style="color: #ffd966;">رسوم: ${fmt(h.fee)}</span></div>`).join('') + '</div>';
+  if (!el) return;
+  if (!S.exchHist.length) { el.innerHTML = '<div class="hist-empty">No conversions yet</div>'; return; }
+  el.innerHTML = S.exchHist.slice(0, 30).map(h => `<div class="hist-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+    <div style="display:flex;justify-content:space-between;width:100%"><span class="hist-l">${esc(h.dir)}</span><span style="font-weight:800;color:var(--gold)">${h.ton.toFixed(6)} TON</span></div>
+    <span style="font-size:11px;color:var(--muted)">From: ${fmt(h.snow)} Snow (Fee: ${fmt(h.fee)} Snow)</span>
+  </div>`).join('');
 }
 
-function renderWdHist() {
-  const el = document.getElementById('wdHist');
-  if (!S.wdHist.length) { el.innerHTML = '<div class="task-card-glass" style="text-align: center;">لا توجد عمليات سحب بعد</div>'; return; }
-  el.innerHTML = '<div style="margin-top: 16px;"><div style="font-weight: 800; margin-bottom: 12px;">📋 تاريخ السحب</div>' + S.wdHist.slice(0, 10).map(h => `<div style="background: rgba(0,0,0,0.2); border-radius: 16px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between;"><span>${h.tonAmt.toFixed(6)} TON</span><span style="color: ${h.status === 'approved' ? '#00f27a' : '#ffd966'};">${h.status || 'قيد المراجعة'}</span></div>`).join('') + '</div>';
-}
+function updWdPrev() { document.getElementById('wdTonBalance').textContent = fmtTon(S.user.tonBalance || 0) + ' TON'; }
+function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; updWdPrev(); }
 
-function switchWalletModernTab(el, t) {
-  document.querySelectorAll('.tab-crystal[data-wt]').forEach(x => x.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('wt-deposit-modern').style.display = t === 'deposit' ? 'block' : 'none';
-  document.getElementById('wt-withdraw-modern').style.display = t === 'withdraw' ? 'block' : 'none';
-  document.getElementById('wt-exchange-modern').style.display = t === 'exchange' ? 'block' : 'none';
+function goToTasksPartner() {
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  const tn = document.querySelector('.ni[data-s="sectionTasks"]');
+  if (tn) tn.classList.add('active');
+  document.getElementById('sectionTasks').classList.add('active');
+  const stab = document.querySelector('.ttab[data-t="social"]');
+  if (stab) switchTTab(stab, 'social');
+  switchSocTab('partner');
+  hideFab();
 }
-
-function setDepAmt(v) { document.getElementById('depositAmountInput').value = v; }
-function setWdAmt(amt) { document.getElementById('wdAmt').value = amt; }
 
 async function doWithdraw() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const addr = (document.getElementById('wdAddr').value || '').trim();
   const tonAmt = parseFloat(document.getElementById('wdAmt').value) || 0;
   const u = S.user;
-  if (!addr || addr.length < 10) { showNotif('أدخل عنوان TON صحيح!', 'e'); return; }
-  if (tonAmt < CFG.MIN_WITHDRAW_TON) { showNotif(`الحد الأدنى ${CFG.MIN_WITHDRAW_TON} TON!`, 'e'); return; }
-  if (tonAmt > (u.tonBalance || 0)) { showNotif('رصيد غير كافٍ!', 'e'); return; }
+  if (!addr || addr.length < 10) { showNotif('Enter valid TON address!', 'e'); return; }
+  if (tonAmt < 0.02) { showNotif('Min 0.02 TON!', 'e'); return; }
+  if (tonAmt > (u.tonBalance || 0)) { showNotif('Not enough TON balance!', 'e'); return; }
+  const partnerTasks = S.tasks?.partner || [];
+  const missingPartner = partnerTasks.filter(t => t.status === 'active' && !S.doneTasks.includes(t.id));
+  if (missingPartner.length > 0) {
+    showNotif(`❌ Complete all Partner tasks first (${missingPartner.length} remaining)`, 'e');
+    setTimeout(() => goToTasksPartner(), 5000);
+    return;
+  }
   try {
     const res = await api('withdraw', { address: addr, amount: tonAmt });
     u.tonBalance -= tonAmt;
     S.wdHist.unshift({ tonAmt, addr, d: new Date().toLocaleDateString(), status: 'pending' });
     document.getElementById('wdAddr').value = '';
     document.getElementById('wdAmt').value = '';
-    updateUI(); renderWdHist();
+    updWdPrev(); updateUI(); renderWdHist();
     triggerSnowfall(30);
-    showNotif(`✅ طلب سحب ${tonAmt.toFixed(6)} TON`, 's');
-  } catch (e) { showNotif(`❌ ${e.message || 'فشل السحب'}`, 'e'); }
+    showNotif(`✅ Withdrawal requested: ${tonAmt.toFixed(6)} TON`, 's');
+  } catch (e) { showNotif(`❌ ${e.message || ''}`, 'e'); }
+}
+
+function renderWdHist() {
+  const el = document.getElementById('wdHist');
+  if (!el) return;
+  if (!S.wdHist.length) { el.innerHTML = '<div class="hist-empty">No withdrawals yet</div>'; return; }
+  el.innerHTML = S.wdHist.slice(0, 20).map(h => `<div class="hist-row" style="flex-direction:column;gap:4px;align-items:flex-start">
+    <div style="display:flex;justify-content:space-between;width:100%"><span style="font-weight:800;color:var(--ice)">${h.tonAmt.toFixed(6)} TON</span><span class="stat-badge ${h.status === 'approved' ? 'sb-approved' : h.status === 'rejected' ? 'sb-rejected' : 'sb-pending'}">${esc(h.status || 'Pending')}</span></div>
+    <div style="font-size:10px;color:var(--muted)">${esc(h.d || '')} · ${esc((h.addr || '').substring(0, 12))}...</div>
+  </div>`).join('');
+}
+
+function switchWalletModernTab(el, t) {
+  document.querySelectorAll('.modern-tab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.modern-content').forEach(x => x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(`wt-${t}-modern`).classList.add('active');
 }
 
 function updateRefUI() {
@@ -1567,23 +2172,26 @@ function updateRefUI() {
   const link = `${CFG.BOT_APP_LINK}?startapp=${S.userId}`;
   const refInput = document.getElementById('refLinkInp');
   if (refInput) refInput.value = link;
-  document.getElementById('depositUserIdDisplay').textContent = S.userId || '???';
-  document.getElementById('totalRefsDisp').textContent = S.refs.length;
+  document.getElementById('depositUserIdDisplay').textContent = esc(S.userId || '...');
+  const cntEl = document.getElementById('totalRefsDisp');
+  if (cntEl) cntEl.textContent = `${S.refs.length} Friends`;
   const listEl = document.getElementById('recentRefsList');
-  if (!S.refs.length) { listEl.innerHTML = '<div class="task-card-glass" style="text-align: center;">لا يوجد إحالات بعد</div>'; return; }
-  listEl.innerHTML = S.refs.slice(0, 20).map(r => `
-    <div style="background: rgba(0,0,0,0.2); border-radius: 20px; padding: 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
-      <div style="width: 44px; height: 44px; background: #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">👤</div>
-      <div style="flex: 1;"><div style="font-weight: 800;">${esc(r.name || 'صديق')}</div><div style="font-size: 11px; color: var(--text-muted);">${r.date || 'انضم مؤخراً'}</div></div>
-      <div style="color: #ffd966; font-weight: 800;">${r.totalCommissionEarned ? '+' + fmt(r.totalCommissionEarned) : '0'}</div>
-    </div>
-  `).join('');
+  if (listEl) {
+    if (!S.refs.length) listEl.innerHTML = '<div class="hist-empty">No referrals yet</div>';
+    else listEl.innerHTML = S.refs.slice(0, 20).map(r => `<div class="ref-list-item">
+      <div class="rli-av">${r.photo ? `<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">` : '🎅'}</div>
+      <div class="rli-info"><div class="rli-name">${esc(r.name || 'Friend')}</div><div class="rli-date">${esc(r.date || 'Joined recently')}</div></div>
+      <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
+    </div>`).join('');
+  }
 }
 
 function copyRefLink() {
   const v = document.getElementById('refLinkInp').value;
-  navigator.clipboard.writeText(v).then(() => showNotif('✅ تم نسخ الرابط!', 's')).catch(() => { showNotif('✅ تم نسخ الرابط!', 's'); });
+  navigator.clipboard.writeText(v).then(() => showNotif('✅ Link copied!', 's')).catch(() => { document.getElementById('refLinkInp').select(); document.execCommand('copy'); showNotif('✅ Link copied!', 's'); });
 }
+
+function setDepAmt(v) { document.getElementById('depositAmountInput').value = Math.max(1, v); }
 
 async function initTON() {
   try {
@@ -1595,18 +2203,18 @@ async function initTON() {
 }
 
 function onWConn(w) {
-  S.wallet = { address: w.account.address };
+  S.wallet = { address: w.account.address, chain: w.account.chain, appName: w.device.appName };
   const sh = `${S.wallet.address.substring(0, 6)}...${S.wallet.address.slice(-4)}`;
-  document.getElementById('walletAddressDisplay').innerHTML = sh;
-  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-unlink"></i> فصل';
+  document.getElementById('walletAddressDisplay').textContent = `${sh} · ${S.wallet.appName}`;
+  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-unlink"></i> Disconnect';
   document.getElementById('connectWalletBtn').onclick = disconnectWallet;
   document.getElementById('submitDepositBtn').disabled = false;
 }
 
 function onWDisc() {
   S.wallet = null;
-  document.getElementById('walletAddressDisplay').innerHTML = 'غير متصلة';
-  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-plug"></i> ربط المحفظة';
+  document.getElementById('walletAddressDisplay').textContent = 'Not connected';
+  document.getElementById('connectWalletBtn').innerHTML = '<i class="fas fa-plug"></i> Connect';
   document.getElementById('connectWalletBtn').onclick = connectWallet;
   document.getElementById('submitDepositBtn').disabled = true;
 }
@@ -1614,13 +2222,13 @@ function onWDisc() {
 async function connectWallet() { if (S.tonUI) await S.tonUI.openModal(); }
 async function disconnectWallet() { if (S.tonUI) await S.tonUI.disconnect(); }
 
-window.initiateDeposit = async function() {
+window.initiateDeposit = async function () {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
-  if (!S.wallet) { showNotif('اربط المحفظة أولاً', 'e'); return; }
+  if (!S.wallet) { alert('Connect wallet first'); return; }
   const amt = parseFloat(document.getElementById('depositAmountInput').value);
-  if (!amt || amt < 1) { showNotif('الحد الأدنى 1 TON', 'e'); return; }
+  if (!amt || amt < 1) { alert('Minimum 1 TON'); return; }
   try {
     const comment = String(S.userId);
     const nano = String(Math.floor(amt * 1e9));
@@ -1632,16 +2240,46 @@ window.initiateDeposit = async function() {
     const boc = await cell.toBoc(false);
     const payload = TW.utils.bytesToBase64(boc);
     const tx = { validUntil: Math.floor(Date.now() / 1000) + 600, messages: [{ address: CFG.DEPOSIT_WALLET, amount: nano, payload }] };
-    await S.tonUI.sendTransaction(tx);
-    showNotif('✅ تم إرسال المعاملة! سيتم إضافة الرصيد خلال 3 دقائق', 's');
+    const result = await S.tonUI.sendTransaction(tx);
+    const sd = document.getElementById('depositStatus');
+    sd.style.display = 'block';
+    sd.innerHTML = '⏳ Transaction sent! Balance will be credited within 3 minutes.';
     triggerSnowfall(30);
-    await api('deposit', { amount: amt, comment }).catch(() => {});
-  } catch (e) { showNotif(`❌ ${e.message?.includes('rejected') ? 'تم رفض المعاملة' : 'فشلت المعاملة'}`, 'e'); }
+    showNotif('✅ Transaction sent! Balance will be credited within 3 minutes', 's');
+    try { await api('deposit', { amount: amt, txHash: result.boc, comment }); } catch (_) { }
+  } catch (e) {
+    const sd = document.getElementById('depositStatus');
+    sd.style.display = 'block';
+    sd.innerHTML = e.message?.includes('rejected') ? '❌ Transaction rejected' : '❌ Transaction failed';
+  }
 };
+
+function startDepVerify(depId, txHash) {
+  if (S.depCheckInt) clearInterval(S.depCheckInt);
+  if (!depId || !txHash) return;
+  let attempts = 0;
+  S.depCheckInt = setInterval(async () => {
+    attempts++;
+    try {
+      const r = await api('verifyDeposit', { depositId: depId, txHash });
+      if (r.status === 'completed') {
+        clearInterval(S.depCheckInt);
+        const sd = document.getElementById('depositStatus');
+        sd.innerHTML = `✅ Deposit confirmed! ${r.amount} TON added`;
+        triggerSnowfall(30);
+        showNotif(`💰 ${r.amount} TON deposited!`, 's');
+        S.user.hasDeposited = true;
+        S.user.tonBalance = (S.user.tonBalance || 0) + (r.amount || 0);
+        loadState();
+        setTimeout(() => sd.style.display = 'none', 3000);
+      }
+    } catch (e) { if (attempts >= 18) clearInterval(S.depCheckInt); }
+  }, 10000);
+}
 
 function openModal(id) { if (id === 'upgradeModal') buildUpgradeContent(); document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-document.querySelectorAll('.modal-glass').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
 
 function fmt(n) {
   n = Math.floor(n || 0);
@@ -1653,16 +2291,18 @@ function fmt(n) {
 function spawnSnowParticle() {
   const p = document.createElement('img');
   p.src = SNOW_IMG;
-  p.className = 'snowflake';
-  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; position: fixed; pointer-events: none; z-index: 999; animation: fall 1s ease-out forwards;`;
+  p.className = 'ptc';
+  p.style.cssText = `left: ${30 + Math.random() * 40}%; top: 38%; width: 24px; height: 24px; object-fit: contain;`;
   document.body.appendChild(p);
-  setTimeout(() => p.remove(), 1000);
+  setTimeout(() => p.remove(), 960);
 }
 
 function santaClick() {
   const now = Date.now();
-  if (now - _lastClickTime < 3000) { showNotif('انتظر 3 ثواني!', 'w'); return; }
+  if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
+  const p = document.getElementById('santaChar');
+  if (p) { p.style.transform = 'scale(0.95)'; setTimeout(() => p.style.transform = '', 200); }
   spawnSnowParticle();
   triggerSnowfall(20);
 }
@@ -1672,60 +2312,116 @@ function openSupport() { window.open('https://t.me/Santa_1_Snow', '_blank'); }
 function ldProgress(pct, msg) {
   const fill = document.getElementById('iceFill');
   if (fill) fill.style.width = pct + '%';
-  document.getElementById('ldPct').textContent = Math.round(pct) + '%';
-  document.getElementById('ldStatus').innerHTML = msg;
+  const pctEl = document.getElementById('ldPct');
+  if (pctEl) pctEl.textContent = Math.round(pct) + '%';
+  const stat = document.getElementById('ldStatus');
+  if (stat) stat.textContent = msg;
 }
 
-function ldHide() {
-  const s = document.getElementById('loadingScreen');
-  s.classList.add('hidden');
-  setTimeout(() => s.remove(), 800);
-}
+function ldHide() { const s = document.getElementById('loadingScreen'); if (s) { s.classList.add('hidden'); setTimeout(() => s.remove(), 700); } }
 
 function preloadImages() {
-  const urls = [SNOW_IMG, REF_TASK_ICON, 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png', CFG.MACHINES[1].image, CFG.MACHINES[2].image, CFG.MACHINES[3].image];
+  const urls = [
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png',
+    SNOW_IMG, REF_TASK_ICON,
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',
+    'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/be8abc59-1108-440f-a5fe-25b03d7a313c.png',
+    CFG.MACHINES[1].image, CFG.MACHINES[2].image, CFG.MACHINES[3].image
+  ];
   return Promise.all(urls.map(u => new Promise(res => { const img = new Image(); img.onload = img.onerror = res; img.src = u; })));
 }
 
-function setLang(lang, flag, code) {
-  localStorage.setItem('santaLang', lang);
-  document.getElementById('langFlag').textContent = flag;
-  document.getElementById('langCode').textContent = code;
-  document.getElementById('langMenu').style.display = 'none';
-}
+const TRANSLATIONS = {
+  en: { labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day', friendsTitle: 'Friends & Referrals', tabReferralTxt: 'Referral', tabSocialTxt: 'Social', Home: 'Home', Tasks: 'Tasks', Friends: 'Friends', Wallet: 'Wallet' },
+  ru: { labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день', friendsTitle: 'Друзья и Рефералы', tabReferralTxt: 'Рефералы', tabSocialTxt: 'Соц. сети', Home: 'Главная', Tasks: 'Задачи', Friends: 'Друзья', Wallet: 'Кошелек' },
+};
 
 function toggleLangMenu() {
   const m = document.getElementById('langMenu');
   m.style.display = m.style.display === 'none' ? 'block' : 'none';
+  if (m.style.display === 'block') setTimeout(() => document.addEventListener('click', closeLangMenuOutside, { once: true }), 10);
+}
+function closeLangMenuOutside(e) {
+  const m = document.getElementById('langMenu');
+  const btn = document.getElementById('langBtn');
+  if (m && !m.contains(e.target) && !btn.contains(e.target)) m.style.display = 'none';
+}
+function setLang(lang, flag, code) {
+  localStorage.setItem('santaLang', lang);
+  applyLang(lang, flag, code);
+  document.getElementById('langMenu').style.display = 'none';
+}
+function applyLang(lang, flag, code) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+  document.getElementById('langFlag').textContent = flag;
+  document.getElementById('langCode').textContent = code;
+  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (t[key] !== undefined) el.innerHTML = t[key]; });
+  const navItems = document.querySelectorAll('.ni .ni-lbl');
+  const navKeys = ['Home', 'Tasks', 'Friends', 'Wallet'];
+  navItems.forEach((el, i) => { if (navKeys[i] && t[navKeys[i]]) el.textContent = t[navKeys[i]]; });
 }
 
 async function init() {
-  ldProgress(0, 'جاري التشغيل...');
+  const startTime = Date.now();
+  const MIN_LOADING_MS = 2500;
+  startSnowfallLoop();
+  ldProgress(0, 'Starting...');
   if (window.Telegram?.WebApp) {
     S.tg = window.Telegram.WebApp;
     S.tg.ready();
     S.tg.expand();
     const u = S.tg.initDataUnsafe?.user;
-    if (u) S.userId = String(u.id);
+    if (u) {
+      S.userId = String(u.id);
+      if (u.photo_url) {
+        const av = document.getElementById('uavatar');
+        if (av) av.innerHTML = `<img src="${esc(u.photo_url)}" onerror="this.parentElement.innerHTML='<div class=ap>🎅</div>'">`;
+      }
+    }
     let startParam = '';
     if (S.tg.initDataUnsafe?.start_param) startParam = String(S.tg.initDataUnsafe.start_param);
     else if (S.tg.initDataUnsafe?.startParam) startParam = String(S.tg.initDataUnsafe.startParam);
     S.startParam = startParam.replace(/\D/g, '');
   }
-  ldProgress(20, 'جاري تحميل assets...');
+  await ldAnimateTo(20, 'Loading assets...', 500);
   await preloadImages().catch(() => {});
-  ldProgress(50, 'جاري تحميل حسابك...');
-  await loadState();
-  ldProgress(80, 'جاري تجهيز الواجهة...');
+  await ldAnimateTo(40, 'Loading your account...', 500);
+  let loaded = false;
+  let attempts = 0;
+  while (!loaded && attempts < 5) {
+    attempts++;
+    try { await loadState(); if (S.user && S.userId) loaded = true; else throw new Error('No user data'); }
+    catch (e) { if (attempts < 5) await new Promise(r => setTimeout(r, 1500)); }
+  }
+  if (!loaded) { ldProgress(100, 'Connection failed. Please restart.'); return; }
+  await ldAnimateTo(70, 'Building interface...', 400);
+  renderTasks();
+  await ldAnimateTo(90, 'Setting up wallet...', 400);
+  setTimeout(() => initTON(), 600);
   startStorage();
-  initTON();
-  setInterval(() => loadState(), 30000);
-  ldProgress(100, 'جاهز! 🎅');
-  setTimeout(ldHide, 500);
-  if (S.isNewUser) setTimeout(() => showWelcomeModal(), 1000);
+  setInterval(() => { loadState(); }, 30000);
+  const elapsed = Date.now() - startTime;
+  if (elapsed < MIN_LOADING_MS) await new Promise(r => setTimeout(r, MIN_LOADING_MS - elapsed));
+  ldHide();
+  if (S.isNewUser) showWelcomeModal();
   const savedLang = localStorage.getItem('santaLang');
-  if (savedLang === 'en') setLang('en', '🇬🇧', 'EN');
-  else setLang('ar', '🇸🇦', 'AR');
+  if (savedLang && (savedLang === 'en' || savedLang === 'ru')) applyLang(savedLang, savedLang === 'en' ? '🇬🇧' : '🇷🇺', savedLang === 'en' ? 'EN' : 'RU');
+  else applyLang('ru', '🇷🇺', 'RU');
+}
+
+function ldAnimateTo(targetPct, msg, duration = 500) {
+  const start = parseFloat(document.getElementById('iceFill')?.style.width) || 0;
+  const steps = 30;
+  const stepTime = duration / steps;
+  let step = 0;
+  return new Promise(resolve => {
+    const iv = setInterval(() => {
+      step++;
+      const pct = start + (targetPct - start) * (step / steps);
+      ldProgress(pct, msg);
+      if (step >= steps) { clearInterval(iv); ldProgress(targetPct, msg); resolve(); }
+    }, stepTime);
+  });
 }
 
 window.addEventListener('load', init);
