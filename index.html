@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -303,6 +318,38 @@ body::after {
 }
 .stat-unit { font-size: 10px; color: var(--snow); font-weight: 700; }
 
+/* ✨ Daily Bonus Card - NEW */
+.daily-bonus-card {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(255, 217, 102, 0.15), rgba(77, 208, 225, 0.1));
+  border: 2px solid rgba(255, 217, 102, 0.4);
+  border-radius: 20px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.daily-bonus-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 217, 102, 0.3);
+}
+.daily-bonus-card.claimed {
+  opacity: 0.7;
+  cursor: default;
+  border-style: dashed;
+}
+.daily-bonus-icon {
+  font-size: 28px;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 /* 🎁 Claim Section */
 .claim-wrap { width: 100%; display: flex; flex-direction: column; gap: 10px; }
 
@@ -325,6 +372,13 @@ body::after {
 .collect-btn:disabled {
   opacity: 0.45; cursor: not-allowed; box-shadow: none; animation: none;
   background: linear-gradient(135deg, rgba(77,208,225,0.3), rgba(77,208,225,0.1));
+}
+.collect-btn.ready {
+  animation: pulseCollect 2s infinite;
+}
+@keyframes pulseCollect {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(77, 208, 225, 0.3), 0 6px 25px rgba(77, 208, 225, 0.4); }
+  50% { box-shadow: 0 0 0 3px rgba(77, 208, 225, 0.6), 0 6px 35px rgba(77, 208, 225, 0.8); }
 }
 .claim-pct {
   font-size: 12px; font-weight: 800; background: rgba(0,0,0,0.3);
@@ -555,6 +609,21 @@ body::after {
 .ref-list-item {
   display: flex; align-items: center; gap: 12px; padding: 11px 14px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.ref-list-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 217, 102, 0.1), transparent);
+  transition: left 0.5s;
+}
+.ref-list-item:hover::before {
+  left: 100%;
 }
 .ref-list-item:last-child { border-bottom: none; }
 .rli-av {
@@ -569,6 +638,18 @@ body::after {
 .rli-date { font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 2px; }
 .rli-earn {
   font-size: 13px; font-weight: 800; color: var(--snow); white-space: nowrap;
+}
+.ref-commission-badge {
+  background: linear-gradient(135deg, rgba(255, 217, 102, 0.2), rgba(255, 152, 0, 0.15));
+  border: 1px solid rgba(255, 217, 102, 0.3);
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* 💼 Wallet Page - Modern Design */
@@ -1220,6 +1301,16 @@ body::after {
       </div>
     </div>
     
+    <!-- ✨ Daily Bonus Card - NEW -->
+    <div id="dailyBonusCard" class="daily-bonus-card" onclick="claimDailyBonus()" style="display: none;">
+      <div class="daily-bonus-icon">🎁</div>
+      <div style="flex: 1;">
+        <div style="font-size: 14px; font-weight: 800; color: var(--gold);">Daily Bonus!</div>
+        <div style="font-size: 11px; color: var(--muted);">Claim your free reward</div>
+      </div>
+      <div style="font-size: 16px; font-weight: 800; color: var(--ice);">+50 ❄️</div>
+    </div>
+    
     <div class="claim-wrap">
       <button class="collect-btn" id="collectBtn" onclick="collectSnow()" disabled>
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 24px; height: 24px; object-fit: contain;">
@@ -1242,16 +1333,17 @@ body::after {
   </div>
   
   <div class="ref-prog-card">
+    <!-- ✅ تم تحديث نسبة العمولة إلى 20% -->
     <div class="ref-bonus-badge">
-      <span class="rbb-pct">15%</span>
+      <span class="rbb-pct">20%</span>
       <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width: 30px; height: 30px;">
-      <span class="rbb-txt">💰 <strong style="color: var(--gold);">15% commission</strong> from friends' machine production!<br>Earn Snow from each machine they buy!</span>
+      <span class="rbb-txt">💰 <strong style="color: var(--gold);">20% commission</strong> from friends' machine purchases!<br>Earn <strong style="color: var(--gold);">TON directly</strong> when they buy machines!</span>
     </div>
     <div class="ref-link-row">
       <input class="ref-inp" id="refLinkInp" readonly data-i18n-ph="refLinkPh" placeholder="Your referral link...">
       <button class="btn-copy" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
     </div>
-    <div style="font-size: 11px; color: var(--muted); margin-top: 6px" data-i18n="refNote">📤 Share this link. When friends buy machines, you get 15% of their production in Snow!</div>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 6px" data-i18n="refNote">📤 Share this link. When friends buy machines, you get 20% of the purchase value in TON!</div>
   </div>
   
   <div class="hist-box">
@@ -1547,20 +1639,20 @@ body::after {
 
 <script>
 // ============================================================
-// SANTA SNOW - FRONTEND v15.0 [CRYSTAL EDITION]
-// ✨ Complete redesign with innovative crystal/glass aesthetics
+// SANTA SNOW - FRONTEND v15.1 [20% COMMISSION + VISUAL UPGRADES]
 // ============================================================
 
 const CFG = {
   API_URL: 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEPOSIT_WALLET: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
   TON_TO_SNOW: 100000, SNOW_TO_TON: 0.00001, MIN_WITHDRAW_TON: 0.02,
+  REF_COMMISSION_PERCENT: 20,  // ✅ تم التغيير من 15 إلى 20
   MACHINES: {
     1: { cost: 1, rate: 300, name: "Basic Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
     2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
     3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
   },
-  REF_COMMISSION_PERCENT: 15, EXCHANGE_FEE_PERCENT: 4, WITHDRAW_FEE_PERCENT: 4,
+  EXCHANGE_FEE_PERCENT: 4, WITHDRAW_FEE_PERCENT: 4,
   BOT_USERNAME: 'SANTASNOWBOT_BOT', BOT_APP_LINK: 'https://t.me/SANTASNOWBOT_BOT/santasnow',
 };
 
@@ -1613,7 +1705,10 @@ async function api(action, data = {}) {
     if (S.tg?.initData) h.Authorization = `Telegram ${S.tg.initData}`;
     const r = await fetch(`${CFG.API_URL}/api`, { method: 'POST', headers: h, body: JSON.stringify({ action, data }) });
     const j = await r.json();
-    if (!j.success) throw new Error(j.error || 'API error');
+    if (!j.success) {
+      console.error(`API Error [${action}]:`, j);
+      throw new Error(j.error || 'API error');
+    }
     return j.data;
   } finally { _apiInFlight--; }
 }
@@ -1744,6 +1839,9 @@ function buildMachineShop() {
 }
 
 async function purchaseMachine(machineType) {
+  const btn = event?.target;
+  if (btn?.disabled) return;
+  
   const now = Date.now(); if (now - _lastClickTime < 3000) { showNotif('Please wait 3 seconds!', 'w'); return; }
   _lastClickTime = now;
   const machine = CFG.MACHINES[machineType], quantity = parseInt(document.getElementById(`qty_${machineType}`)?.value) || 1;
@@ -1765,14 +1863,36 @@ function updateUI() {
   document.getElementById('heroRateDay').textContent = fmt(rateDay);
   document.getElementById('wdTonBalance').textContent = fmtTon(u.tonBalance || 0) + ' TON';
   updateSwapBals(); updateRefUI(); renderExchHist(); renderWdHist(); renderTasks();
+  
+  // ✨ تحديث حالة زر الجمع
+  const collectBtn = document.getElementById('collectBtn');
+  if (collectBtn) {
+    if (S.storageProgress >= 1) {
+      collectBtn.classList.add('ready');
+    } else {
+      collectBtn.classList.remove('ready');
+    }
+  }
+  
+  // ✨ عرض/إخفاء بطاقة المكافأة اليومية
+  const dailyBonus = document.getElementById('dailyBonusCard');
+  if (dailyBonus) {
+    const lastClaim = localStorage.getItem('santa_daily_bonus');
+    const now = Date.now();
+    const nextClaim = lastClaim ? parseInt(lastClaim) + 86400000 : 0;
+    if (now >= nextClaim && !dailyBonus.classList.contains('claimed')) {
+      dailyBonus.style.display = 'flex';
+    }
+  }
 }
 
+// ✅ تحسين دقة عرض TON
 function fmtTon(n) {
   if (n === undefined || n === null) return '0';
   if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
-  if (n >= 1) return n.toFixed(2);
-  if (n > 0) return n.toFixed(4);
-  return n.toString();
+  if (n >= 1) return n.toFixed(3);
+  if (n > 0) return n.toFixed(5);
+  return '0';
 }
 
 function startStorage() {
@@ -1913,7 +2033,7 @@ async function claimRefTask(taskId) {
 function buildTaskCard(t, cat) {
   const tid = t.id, done = S.doneTasks.includes(tid), inFlight = _taskInFlight.has(tid);
   const icon = t.type === 'channel' ? '📢' : '🤖', name = esc(t.name || ('@' + (t.link?.split('t.me/')[1]?.split('/')[0] || 'Task')));
-  const snow = t.snowReward || 50, link = esc(t.link || '');
+  const snow = t.snow_reward || 50, link = esc(t.link || '');
   return `<div class="task-item">
     <div class="ticon" style="font-size: 28px">${icon}</div>
     <div class="tinfo">
@@ -2123,9 +2243,15 @@ function updateRefUI() {
             <div class="rli-name">${esc(r.name || 'Friend')}</div>
             <div class="rli-date">${esc(r.date || 'Joined recently')}</div>
             ${r.totalSpentTon ? `<div style="font-size:10px;color:var(--gold)">💰 Spent: ${r.totalSpentTon} TON</div>` : ''}
-            ${r.totalCommissionEarned ? `<div style="font-size:10px;color:var(--ice)">🎁 Commission: +${fmt(r.totalCommissionEarned)} <img src="${SNOW_IMG}" style="width:12px;height:12px;vertical-align:middle"></div>` : '<div style="font-size:10px;color:var(--muted)">⏳ Waiting for purchases</div>'}
+            ${r.totalCommissionEarned ? 
+              `<div class="ref-commission-badge">
+                <i class="fas fa-coins" style="font-size: 10px;"></i>
+                +${fmtTon(r.totalCommissionEarned)} TON earned
+              </div>` : 
+              '<div style="font-size:10px;color:var(--muted)">⏳ Waiting for purchases</div>'
+            }
           </div>
-          <div class="rli-earn">${r.totalCommissionEarned ? `+${fmt(r.totalCommissionEarned)}` : '0'}</div>
+          <div class="rli-earn">${r.totalCommissionEarned ? `+${fmtTon(r.totalCommissionEarned)}` : '0'}</div>
         </div>`).join('');
     }
   }
@@ -2269,11 +2395,47 @@ function ldAnimateTo(targetPct, msg, duration = 600) {
   });
 }
 
+// ✨ دالة المكافأة اليومية الجديدة
+async function claimDailyBonus() {
+  const card = document.getElementById('dailyBonusCard');
+  if (!card || card.classList.contains('claimed')) return;
+  
+  const now = Date.now();
+  const lastClaim = localStorage.getItem('santa_daily_bonus');
+  const nextClaim = lastClaim ? parseInt(lastClaim) + 86400000 : 0;
+  
+  if (now < nextClaim) {
+    showNotif('🕐 Come back tomorrow!', 'w');
+    return;
+  }
+  
+  try {
+    // يمكن ربطها بـ API لاحقاً
+    S.user.snow = (S.user.snow || 0) + 50;
+    localStorage.setItem('santa_daily_bonus', now.toString());
+    card.classList.add('claimed');
+    card.innerHTML = `
+      <div class="daily-bonus-icon">✅</div>
+      <div style="flex: 1;">
+        <div style="font-size: 14px; font-weight: 800; color: var(--ice);">Claimed!</div>
+        <div style="font-size: 11px; color: var(--muted);">Next reward in 24h</div>
+      </div>
+      <div style="font-size: 16px; font-weight: 800; color: var(--gold);">+50 ❄️</div>
+    `;
+    updateUI();
+    triggerSnowfall(25);
+    showNotif('🎁 +50 Snow claimed!', 's');
+    spawnSnowParticle();
+  } catch (e) {
+    showNotif('❌ Failed to claim', 'e');
+  }
+}
+
 const TRANSLATIONS = {
   en: {
     labelSnow: 'Snow', labelTON: 'TON', statAccrued: 'Accrued', statRateDay: 'Rate/Day', statSnowDay: 'Snow/day',
-    friendsTitle: 'Friends & Referrals', refCommission: '15% commission from machine production!',
-    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link. When friends buy machines, you get 15% of their production in Snow!',
+    friendsTitle: 'Friends & Referrals', refCommission: '20% commission from machine purchases!',
+    refLinkPh: 'Your referral link...', copyBtn: 'Copy', refNote: '📤 Share this link. When friends buy machines, you get 20% of the purchase value in TON!',
     recentRefs: 'Recent Referrals', noReferrals: 'No referrals yet',
     labelWallet: 'Wallet', notConnected: 'Not connected', connectBtn: 'Connect',
     important: 'IMPORTANT:', depositWarning1: 'Your User ID', depositWarning2: 'must be the ONLY comment.',
@@ -2294,8 +2456,8 @@ const TRANSLATIONS = {
   },
   ru: {
     labelSnow: 'Снег', labelTON: 'TON', statAccrued: 'Накоплено', statRateDay: 'Ставка/День', statSnowDay: 'Снег/день',
-    friendsTitle: 'Друзья и Рефералы', refCommission: '15% комиссии от производства машин!',
-    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь ссылкой. Когда друзья покупают машины, вы получаете 15% от их производства в Снеге!',
+    friendsTitle: 'Друзья и Рефералы', refCommission: '20% комиссии от покупки машин!',
+    refLinkPh: 'Ваша реферальная ссылка...', copyBtn: 'Копировать', refNote: '📤 Поделитесь ссылкой. Когда друзья покупают машины, вы получаете 20% от قيمة الشراء بـ TON!',
     recentRefs: 'Недавние рефералы', noReferrals: 'Пока нет рефералов',
     labelWallet: 'Кошелек', notConnected: 'Не подключен', connectBtn: 'Подключить',
     important: 'ВАЖНО:', depositWarning1: 'Ваш ID пользователя', depositWarning2: 'должен быть ЕДИНСТВЕННЫМ комментарием.',
@@ -2410,3 +2572,551 @@ window.addEventListener('load', init);
 </body>
 </html>
 
+
+
+              <script>
+                              // ================================================================
+//  SANTA SNOW — Cloudflare Worker v16.2 (20% COMMISSION EDITION)
+// ================================================================
+
+const G = {
+  SNOW_PER_TON: 100000, TON_PER_SNOW: 0.00001, MIN_WITHDRAW_TON: 0.02, MIN_DEPOSIT_TON: 1,
+  REF_COMMISSION_PERCENT: 20, MAX_STORAGE_LVL: 10, MAX_RETRY: 3, RETRY_DELAY_MS: 100,
+  MACHINES: {
+    1: { cost: 1, rate: 300, name: "Basic Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png" },
+    2: { cost: 2, rate: 650, name: "Advanced Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png" },
+    3: { cost: 3, rate: 1000, name: "Elite Machine", image: "https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png" }
+  },
+  WELCOME_MACHINE_RATE: 10, EXCHANGE_FEE_PERCENT: 4, WITHDRAW_FEE_PERCENT: 4,
+  STORAGE: {
+    1: { cap: 300, upgCost: 500 }, 2: { cap: 900, upgCost: 2000 }, 3: { cap: 2400, upgCost: 8000 },
+    4: { cap: 6000, upgCost: 25000 }, 5: { cap: 18000, upgCost: 80000 }, 6: { cap: 60000, upgCost: 250000 },
+    7: { cap: 120000, upgCost: 500000 }, 8: { cap: 210000, upgCost: 900000 }, 9: { cap: 330000, upgCost: 1500000 },
+    10: { cap: 480000, upgCost: 2500000 },
+  },
+  REF_TASKS: { ref_10: { n: 10, snow: 600, name: "10 Referrals" }, ref_20: { n: 20, snow: 1500, name: "20 Referrals" }, ref_50: { n: 50, snow: 4000, name: "50 Referrals" }, ref_100: { n: 100, snow: 10000, name: "100 Referrals" }, ref_200: { n: 200, snow: 20000, name: "200 Referrals" }, ref_500: { n: 500, snow: 50000, name: "500 Referrals" } },
+  SOC_TASKS: { tg_payouts: 100, tg_news: 50, tg_ch: 100, tg_grp: 50, tg_bot: 30 },
+  BOT_USERNAME: 'SANTASNOWBOT_BOT',
+};
+
+const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Action', 'Access-Control-Max-Age': '86400' };
+const JSON_CT = { 'Content-Type': 'application/json', ...CORS };
+const jRes = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: JSON_CT });
+const ok = d => jRes({ success: true,  d });
+const fail = (m, s = 400) => jRes({ success: false, error: m }, s);
+
+function sanitise(i) { if (!i) return i; return i.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '').replace(/[<>]/g, m => m === '<' ? '&lt;' : '&gt;'); }
+
+const _rl = new Map();
+function rateOk(ip) { const now = Date.now(); const d = _rl.get(ip) || { c: 0, r: now + 60000 }; if (now > d.r) { d.c = 0; d.r = now + 60000; } d.c++; _rl.set(ip, d); return d.c <= 60; }
+
+const sb = {
+  async single(env, table, col, val, extra = '') {
+    const r = await fetch(`${env.SUPABASE_URL}/rest/v1/${table}?select=*&${col}=eq.${val}${extra ? '&'+extra : ''}`, {
+      headers: { 'apikey': env.SUPABASE_SERVICE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}` }
+    });
+    const data = await r.json();
+    if (data.code === 'PGRST116' || !Array.isArray(data) || data.length === 0) return null;
+    return data[0];
+  },
+  async select(env, table, query = '') {
+    const r = await fetch(`${env.SUPABASE_URL}/rest/v1/${table}${query}`, {
+      headers: { 'apikey': env.SUPABASE_SERVICE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}` }
+    });
+    return r.json();
+  },
+  async insert(env, table, data) {
+    const r = await fetch(`${env.SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: { 'apikey': env.SUPABASE_SERVICE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) { const err = await r.text(); throw new Error(`DB INSERT: ${err}`); }
+  },
+  async update(env, table, data, query = '') {
+    const r = await fetch(`${env.SUPABASE_URL}/rest/v1/${table}${query}`, {
+      method: 'PATCH',
+      headers: { 'apikey': env.SUPABASE_SERVICE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) { const err = await r.text(); throw new Error(`DB UPDATE: ${err}`); }
+  },
+  async rpc(env, name, params) {
+    const r = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/${name}`, {
+      method: 'POST',
+      headers: { 'apikey': env.SUPABASE_SERVICE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(params)
+    });
+    const data = await r.json();
+    if (data.message && data.code) throw new Error(data.message);
+    return Array.isArray(data) ? data[0] : data;
+  }
+};
+
+const BALANCE_CHANGE_EVENTS = new Set(['collect', 'upgrade_storage', 'exchange', 'withdraw_request', 'deposit_completed', 'claim_task', 'verify_task', 'create_task', 'admin_set_balance', 'admin_confirm_deposit', 'referral_commission', 'welcome_chest_opened', 'purchase_machine']);
+
+function log(env, uid, type, details = {}) {
+  if (!BALANCE_CHANGE_EVENTS.has(type)) return;
+  sb.insert(env, 'logs', { user_id: uid, type, details }).catch(e => console.error('LOG ERROR:', e.message));
+}
+
+async function validateTg(initData, botToken) {
+  try {
+    if (!initData) return { valid: false, error: 'No init data' };
+    const p = new URLSearchParams(initData);
+    const startParam = (p.get('start_param') || '').replace(/\D/g, '');
+    if (!botToken) { const u = p.get('user'); if (!u) return { valid: false, error: 'No user' }; return { valid: true, user: JSON.parse(decodeURIComponent(u)), startParam }; }
+    const hash = p.get('hash'); if (!hash) return { valid: false, error: 'No hash' };
+    p.delete('hash');
+    const authDate = parseInt(p.get('auth_date') || '0');
+    if (Date.now() / 1000 - authDate > 900) return { valid: false, error: 'Expired' };
+    const dc = [...p.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join('\n');
+    const enc = new TextEncoder();
+    const sec = await crypto.subtle.importKey('raw', enc.encode('WebAppData'), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const kb = await crypto.subtle.sign('HMAC', sec, enc.encode(botToken));
+    const key = await crypto.subtle.importKey('raw', kb, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const sig = await crypto.subtle.sign('HMAC', key, enc.encode(dc));
+    const hex = [...new Uint8Array(sig)].map(b => b.toString(16).padStart(2, '0')).join('');
+    if (hex !== hash) return { valid: false, error: 'Bad hash' };
+    const u = p.get('user'); if (!u) return { valid: false, error: 'No user' };
+    return { valid: true, user: JSON.parse(decodeURIComponent(u)), startParam };
+  } catch (e) { return { valid: false, error: e.message }; }
+}
+
+function syncStorage(user) {
+  const now = Date.now(); 
+  const lastSeen = new Date(user.last_seen).getTime();
+  const sec = (now - lastSeen) / 1000;
+  
+  // ✅ منع القيم غير المنطقية
+  if (sec <= 0 || sec > 86400) { 
+    user.last_seen = new Date().toISOString(); 
+    return; 
+  }
+  
+  let totalRate = 0;
+  const machines = user.mining_machines || { "1": 0, "2": 0, "3": 0 };
+  for (let i = 1; i <= 3; i++) totalRate += (machines[String(i)] || 0) * G.MACHINES[i].rate;
+  if (user.has_welcome_machine) totalRate += G.WELCOME_MACHINE_RATE;
+  if (totalRate <= 0) { user.last_seen = new Date().toISOString(); return; }
+
+  const cfg = G.STORAGE[user.storage_level || 1] || G.STORAGE[1];
+  user.storage_accrued = Math.min(cfg.cap, (user.storage_accrued || 0) + (totalRate / 3600) * sec);
+  user.last_seen = new Date().toISOString();
+}
+
+async function registerReferral(env, uid, user, referrerId) {
+  try {
+    const exists = await sb.single(env, 'referrals', 'referred_id', uid);
+    if (!exists) {
+      await sb.update(env, 'users', { referred_by: referrerId }, `?user_id=eq.${uid}`);
+      await sb.insert(env, 'referrals', { referrer_id: referrerId, referred_id: uid, first_name: user.first_name || '', last_name: user.last_name || '', username: user.username || '' });
+      const referrer = await sb.single(env, 'users', 'user_id', referrerId, 'referral_count');
+      if (referrer) await sb.update(env, 'users', { referral_count: (referrer.referral_count || 0) + 1 }, `?user_id=eq.${referrerId}`);
+      return true;
+    }
+    return false;
+  } catch (e) { console.error('registerReferral error:', e.message); return false; }
+}
+
+// ✅ الدالة المعدلة: عمولة 20% من قيمة الشراء بـ TON (وليس من معدل التعدين)
+async function processReferralCommission(env, uid, spentTon, machineType, quantity) {
+  try {
+    const user = await sb.single(env, 'users', 'user_id', uid, 'referred_by');
+    if (!user || !user.referred_by) return false;
+    
+    // ✅ العمولة الآن 20% من قيمة الشراء بـ TON
+    const commissionTon = spentTon * (G.REF_COMMISSION_PERCENT / 100);
+    
+    const refRecord = await sb.single(env, 'referrals', 'referrer_id', user.referred_by, `&referred_id=eq.${uid}`);
+    if (!refRecord) return false;
+    
+    const referrer = await sb.single(env, 'users', 'user_id', user.referred_by, 'ton_balance,snow');
+    if (referrer) {
+      // ✅ إضافة العمولة بـ TON مباشرة لرصيد المحيل
+      const newTonBalance = (referrer.ton_balance || 0) + commissionTon;
+      await sb.update(env, 'users', { ton_balance: newTonBalance }, `?user_id=eq.${user.referred_by}`);
+      
+      // تحديث سجل الإحالة
+      await sb.update(env, 'referrals', { 
+        total_spent_ton: (refRecord.total_spent_ton || 0) + spentTon, 
+        total_commission_earned: (refRecord.total_commission_earned || 0) + commissionTon,
+        total_rate_added: (refRecord.total_rate_added || 0) + (G.MACHINES[machineType].rate * quantity)
+      }, `?id=eq.${refRecord.id}`);
+      
+      log(env, user.referred_by, 'referral_commission', { 
+        referredUserId: uid, 
+        commission_ton: commissionTon,
+        machine_type: machineType,
+        quantity: quantity 
+      });
+      return true;
+    }
+    return false;
+  } catch (e) { 
+    console.error('processReferralCommission error:', e.message); 
+    return false; 
+  }
+}
+
+function makeUser(uid, tg = {}, ref = null) {
+  return { user_id: uid, first_name: (tg.first_name || '').slice(0, 64), last_name: (tg.last_name || '').slice(0, 64), username: (tg.username || '').slice(0, 64), photo_url: (tg.photo_url || '').slice(0, 512), snow: 0, mining_rate: 0, mining_level: 1, mining_machines: { "1": 0, "2": 0, "3": 0 }, has_welcome_machine: false, total_earned: 0, storage_level: 1, storage_accrued: 0, last_seen: new Date().toISOString(), created_at: new Date().toISOString(), welcome_chest_opened: false, has_deposited: false, ton_balance: 0, referral_code: String(uid), referred_by: ref || null, referral_count: 0, completed_tasks: [] };
+}
+
+function extractStartParam(initDataStr) {
+  try { if (!initDataStr) return ''; const p = new URLSearchParams(initDataStr); let sp = p.get('start_param'); if (sp) return sp.replace(/\D/g, ''); const userRaw = p.get('user'); if (userRaw) { try { const u = JSON.parse(decodeURIComponent(userRaw)); if (u.start_param) return String(u.start_param).replace(/\D/g, ''); } catch (e) {} } return ''; } catch (_) { return ''; }
+}
+
+async function hGetState(env, uid, tg, data = {}) {
+  try {
+    let rawRef = null;
+    if (data?.start_param) rawRef = data.start_param;
+    else if (data?.startParam) rawRef = data.startParam;
+    if (!rawRef && data?._initData) rawRef = extractStartParam(data._initData);
+    rawRef = String(rawRef || '').replace(/\D/g, '');
+    const ref = rawRef && rawRef !== uid ? rawRef : null;
+
+    let dbUser = await sb.single(env, 'users', 'user_id', uid);
+    
+    if (!dbUser) {
+      const newUser = makeUser(uid, tg, ref);
+      await sb.insert(env, 'users', newUser);
+      if (newUser.referred_by) await registerReferral(env, uid, newUser, newUser.referred_by);
+      dbUser = newUser;
+    } else {
+      syncStorage(dbUser);
+      if (tg) { if (tg.first_name) dbUser.first_name = tg.first_name.slice(0, 64); if (tg.last_name) dbUser.last_name = tg.last_name.slice(0, 64); if (tg.username) dbUser.username = tg.username.slice(0, 64); if (tg.photo_url) dbUser.photo_url = tg.photo_url.slice(0, 512); }
+      await sb.update(env, 'users', { first_name: dbUser.first_name, last_name: dbUser.last_name, username: dbUser.username, photo_url: dbUser.photo_url, storage_accrued: dbUser.storage_accrued, last_seen: dbUser.last_seen }, `?user_id=eq.${uid}`);
+    }
+
+    const [refRes, exchRes, wdRes, depRes, taskRes] = await Promise.all([
+      sb.select(env, 'referrals', `?referrer_id=eq.${uid}`),
+      sb.select(env, 'exchanges', `?user_id=eq.${uid}&order=created_at.desc&limit=30`),
+      sb.select(env, 'withdrawals', `?user_id=eq.${uid}&order=created_at.desc&limit=30`),
+      sb.select(env, 'deposits', `?user_id=eq.${uid}&order=created_at.desc&limit=30`),
+      sb.select(env, 'tasks', '?status=eq.active')
+    ]);
+
+    const referrals = (refRes || []).map(r => ({ userId: r.referred_id, name: `${r.first_name || ''} ${r.last_name || ''}`.trim() || 'Friend', photo: null, date: r.joined_at ? new Date(r.joined_at).toLocaleDateString() : '', totalSpentTon: r.total_spent_ton || 0, totalCommissionEarned: r.total_commission_earned || 0, totalRateAdded: r.total_rate_added || 0 }));
+    const exchHistory = (exchRes || []).map(e => ({ snow: e.snow, fee: e.fee, snowAfterFee: e.snow - e.fee, ton: e.ton, dir: e.dir, ts: new Date(e.created_at).getTime() }));
+    const wdHistory = (wdRes || []).map(w => ({ wdId: w.id, userId: w.user_id, address: w.address, tonAmount: w.amount, status: w.status, ts: new Date(w.created_at).getTime() }));
+    const deposits = (depRes || []).map(d => ({ depId: d.id, userId: d.user_id, txHash: d.tx_hash, amount: d.amount, status: d.status, ts: new Date(d.created_at).getTime() }));
+    const pendingDeposit = deposits.find(d => d.status === 'pending') || null;
+    const tasks = { partner: (taskRes || []).filter(t => t.category === 'partner'), community: (taskRes || []).filter(t => t.category === 'community') };
+
+    let totalRate = 0;
+    const machines = dbUser.mining_machines || { "1": 0, "2": 0, "3": 0 };
+    for (let i = 1; i <= 3; i++) totalRate += (machines[String(i)] || 0) * G.MACHINES[i].rate;
+    if (dbUser.has_welcome_machine) totalRate += G.WELCOME_MACHINE_RATE;
+
+    return { success: true, data: { user: { snow: dbUser.snow || 0, miningRate: totalRate, miningLevel: dbUser.mining_level || 1, miningMachines: machines, hasWelcomeMachine: dbUser.has_welcome_machine || false, totalEarned: dbUser.total_earned || 0, storageLevel: dbUser.storage_level || 1, storageAccrued: dbUser.storage_accrued || 0, hasDeposited: dbUser.has_deposited || false, tonBalance: dbUser.ton_balance || 0, referralCount: dbUser.referral_count || 0, welcomeChestOpened: dbUser.welcome_chest_opened || false }, referrals, completedTasks: dbUser.completed_tasks || [], exchHistory, wdHistory, deposits, pendingDeposit, tasks } };
+  } catch (e) { console.error('getState', e); return { success: false, error: e.message, errorCode: 'GET_STATE_ERROR' }; }
+}
+
+async function hOpenWelcomeChest(env, uid, data, _meta = {}) {
+  try {
+    const res = await sb.rpc(env, 'open_welcome_chest_safe', { p_uid: parseInt(uid) });
+    if (!res.success) return { success: false, error: res.error };
+    log(env, uid, 'welcome_chest_opened', res.data, _meta);
+    return { success: true, data: { snow: res.data.snowReward, miningRate: res.data.miningRate, miningLevel: 1 } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hCollect(env, uid, data, _meta = {}) {
+  try {
+    const res = await sb.rpc(env, 'collect_snow_safe', { p_uid: parseInt(uid) });
+    if (!res.success) return { success: false, error: res.error };
+    log(env, uid, 'collect', res.data, _meta);
+    return { success: true, data: res.data };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hPurchaseMachine(env, uid, data, _meta = {}) {
+  try {
+    const machineType = parseInt(data.machineType) || 1; const quantity = parseInt(data.quantity) || 1;
+    if (quantity < 1 || quantity > 99) return { success: false, error: 'Quantity must be between 1 and 99' };
+    if (machineType < 1 || machineType > 3) return { success: false, error: 'Invalid machine type' };
+    const machine = G.MACHINES[machineType]; const costTon = machine.cost * quantity;
+    
+    const res = await sb.rpc(env, 'purchase_machine_safe', { p_uid: parseInt(uid), p_type: machineType, p_qty: quantity, p_cost: costTon });
+    if (!res.success) return { success: false, error: res.error.includes('Insufficient') ? `Need ${costTon} TON to buy ${quantity}x ${machine.name}` : res.error };
+    
+    // ✅ معالجة العمولة بعد الشراء الناجح
+    processReferralCommission(env, uid, costTon, machineType, quantity).catch(()=>{});
+    log(env, uid, 'purchase_machine', { machine_type: machineType, quantity, cost_ton: costTon }, _meta);
+    
+    return { success: true, data: { miningMachines: res.data.miningMachines, tonBalance: res.data.tonBalance, miningRate: res.data.miningRate } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hUpgradeStorage(env, uid, data, _meta = {}) {
+  try {
+    const newLevel = parseInt(data.newLevel);
+    if (!newLevel) return { success: false, error: 'Missing newLevel' };
+    
+    const res = await sb.rpc(env, 'upgrade_storage_safe', { p_uid: parseInt(uid), p_new_level: newLevel });
+    if (!res.success) return { success: false, error: res.error };
+    log(env, uid, 'upgrade_storage', { newLevel }, _meta);
+    return { success: true,  res.data };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hExchange(env, uid, data, _meta = {}) {
+  try {
+    const snowAmount = Math.floor(parseInt(data.snowAmount) || 0);
+    if (!snowAmount) return { success: false, error: 'Specify snowAmount' };
+
+    const res = await sb.rpc(env, 'exchange_snow_safe', { p_uid: parseInt(uid), p_snow_amount: snowAmount });
+    if (!res.success) return { success: false, error: res.error };
+    
+    log(env, uid, 'exchange', { snow_spent: snowAmount, ton_received: res.data.tonAmount }, _meta);
+    const entry = { snow: snowAmount, fee: res.data.fee, snowAfterFee: snowAmount - res.data.fee, ton: res.data.tonAmount, dir: 'S→T', ts: Date.now() };
+    return { success: true, data: { snow: res.data.snow, tonBalance: res.data.tonBalance, entry, fee: res.data.fee } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hWithdraw(env, uid, data, _meta = {}) {
+  try {
+    const addr = (data.address || '').trim(); let tonAmount = parseFloat(data.amount) || 0;
+    if (!addr || addr.length < 10) return { success: false, error: 'Invalid TON address' };
+    if (tonAmount < G.MIN_WITHDRAW_TON) return { success: false, error: `Min ${G.MIN_WITHDRAW_TON} TON` };
+    if (tonAmount > 1000) return { success: false, error: 'Amount too large' };
+    
+    const partnerTasks = await sb.select(env, 'tasks', '?status=eq.active&category=eq.partner');
+    const user = await sb.single(env, 'users', 'user_id', uid, 'completed_tasks');
+    const missingPartner = (partnerTasks || []).filter(t => !(user?.completed_tasks || []).includes(t.id));
+    if (missingPartner.length > 0) return { success: false, error: 'Complete all partner tasks first', errorCode: 'PARTNER_TASKS_REQUIRED', missing: missingPartner.length };
+
+    const res = await sb.rpc(env, 'withdraw_safe', { p_uid: parseInt(uid), p_amount: tonAmount });
+    if (!res.success) return { success: false, error: res.error };
+
+    const wdId = `wd_${uid}_${Date.now()}`;
+    await sb.insert(env, 'withdrawals', { id: wdId, user_id: uid, address: addr, amount: tonAmount, status: 'pending' });
+    log(env, uid, 'withdraw_request', { wdId, amount_ton: tonAmount, address: addr }, _meta);
+    return { success: true, data: { wdId, tonBalance: res.data.tonBalance, status: 'pending' } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hClaimTask(env, uid, data, _meta = {}) {
+  try {
+    const tid = data.taskId;
+    let snow = G.SOC_TASKS[tid] || 0;
+    
+    if (G.REF_TASKS[tid]) {
+      const user = await sb.single(env, 'users', 'user_id', uid, 'referral_count');
+      if ((user?.referral_count || 0) < G.REF_TASKS[tid].n) return { success: false, error: `Need ${G.REF_TASKS[tid].n} refs` };
+      snow = G.REF_TASKS[tid].snow;
+    }
+    if (!snow) return { success: false, error: 'Unknown task' };
+
+    const res = await sb.rpc(env, 'complete_task_safe', { p_uid: parseInt(uid), p_task_id: tid, p_snow_reward: snow });
+    if (!res.success) return { success: false, error: res.error };
+    log(env, uid, 'claim_task', { taskId: tid, snow }, _meta);
+    return { success: true, data: res.data };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hVerifyTask(env, uid, data, _meta = {}) {
+  try {
+    const { taskId, taskCategory } = data;
+    const cat = taskCategory || 'community';
+    let task = await sb.single(env, 'tasks', 'id', taskId, `&category=eq.${cat}`) || 
+               await sb.single(env, 'tasks', 'id', taskId, `&category=eq.${cat === 'community' ? 'partner' : 'community'}`);
+    
+    if (!task || task.status !== 'active') return { success: false, error: 'Task not found or inactive' };
+
+    if (task.type === 'channel') {
+      const isMember = await checkMembership(env, uid, task.link);
+      if (!isMember) return { success: false, error: 'Not a member. Join first!' };
+    }
+
+    const snow = task.snow_reward || 50;
+    const res = await sb.rpc(env, 'complete_task_safe', { p_uid: parseInt(uid), p_task_id: taskId, p_snow_reward: snow });
+    if (!res.success) return { success: false, error: res.error };
+
+    const newCompletions = (task.completions || 0) + 1;
+    const taskUpdates = { completions: newCompletions, completed_by: [...(task.completed_by || []), uid], updated_at: new Date().toISOString() };
+    if (newCompletions >= (task.target_users || Infinity)) taskUpdates.status = 'completed';
+    await sb.update(env, 'tasks', taskUpdates, `?id=eq.${taskId}`);
+
+    log(env, uid, 'verify_task', { taskId, snow }, _meta);
+    return { success: true,  { snowAdded: snow, completions: newCompletions } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hCreateTask(env, uid, data, _meta = {}) {
+  try {
+    const { type, link, targetUsers } = data;
+    if (!['channel', 'bot'].includes(type)) return { success: false, error: 'Invalid type' };
+    const target = parseInt(targetUsers) || 0;
+    if (target < 100 || target > 100000) return { success: false, error: 'Invalid target' };
+    if (!link || !link.includes('t.me/')) return { success: false, error: 'Valid Telegram link required' };
+    
+    const SNOW_PER_USER = 60; const cost = target * SNOW_PER_USER;
+    const username = link.split('t.me/')[1]?.split('?')[0]?.split('/')[0] || link;
+    const taskId = `task_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
+
+    const res = await sb.rpc(env, 'create_task_safe', { 
+      p_uid: parseInt(uid), p_task_id: taskId, p_type: type, 
+      p_link: link, p_name: `@${username}`, p_target_users: target, p_snow_cost: cost 
+    });
+
+    if (!res.success) return { success: false, error: res.error };
+    log(env, uid, 'create_task', { taskId, type, target, cost }, _meta);
+    return { success: true,  { taskId, type, targetUsers: target, totalCost: cost, snowReward: 50 } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hDeposit(env, uid, data, _meta = {}) {
+  try {
+    const amt = parseFloat(data.amount) || 0; const txHash = (data.txHash || '').slice(0, 256);
+    if (!txHash || amt < G.MIN_DEPOSIT_TON) return { success: false, error: 'Invalid deposit data' };
+    const safeHash = txHash.replace(/[^a-zA-Z0-9]/g, '_');
+    const dup = await sb.single(env, 'tx_hashes', 'hash', safeHash);
+    if (dup) return { success: false, error: 'Duplicate transaction' };
+    const depId = `dep_${uid}_${Date.now()}`;
+    await sb.insert(env, 'tx_hashes', { hash: safeHash, user_id: uid });
+    await sb.insert(env, 'deposits', { id: depId, user_id: uid, tx_hash: txHash, amount: amt, status: 'pending' });
+    log(env, uid, 'deposit_initiated', { depId, txHash, amount_ton: amt }, _meta);
+    return { success: true,  { depositId: depId, message: 'Transaction registered.' } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function hVerifyDeposit(env, uid, data, _meta = {}) {
+  try {
+    const { depositId, txHash } = data;
+    const dep = await sb.single(env, 'deposits', 'id', depositId, `&user_id=eq.${uid}`);
+    if (!dep) return { success: false, error: 'Deposit not found' };
+    if (dep.status === 'completed') return { success: true,  { status: 'completed', amount: dep.amount } };
+    try {
+      const res = await fetch(`https://toncenter.com/api/v2/getTransaction?hash=${encodeURIComponent(txHash || dep.tx_hash)}`);
+      if (res.ok) { const j = await res.json(); if (j.ok && j.result) {
+        const tonAmt = parseFloat(dep.amount);
+        await sb.update(env, 'deposits', { status: 'completed', completed_at: new Date().toISOString() }, `?id=eq.${depositId}`);
+        await sb.rpc(env, 'add_deposit_safe', { p_uid: parseInt(uid), p_amount: tonAmt });
+        log(env, uid, 'deposit_completed', { depositId, amount_ton: tonAmt }, _meta);
+        return { success: true,  { status: 'completed', amount: tonAmt } };
+      }}
+    } catch (_) {}
+    return { success: true, data: { status: 'pending' } };
+  } catch (e) { return { success: false, error: e.message }; }
+}
+
+async function checkMembership(env, userId, channelLink) {
+  try {
+    if (!env.BOT_TOKEN) return true;
+    let username = channelLink;
+    if (channelLink.includes('t.me/')) username = channelLink.split('t.me/')[1].split('?')[0].split('/')[0];
+    if (username.startsWith('@')) username = username.substring(1);
+    const res = await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/getChatMember`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: `@${username}`, user_id: parseInt(userId) }),
+    });
+    const j = await res.json();
+    return ['member', 'administrator', 'creator'].includes(j.result?.status);
+  } catch (e) { return false; }
+}
+
+async function hAdmin(env, action, data) {
+  try {
+    switch (action) {
+      case 'adminGetUser': { const r = await sb.single(env, 'users', 'user_id', data.userId); return { success: true,  r || null }; }
+      case 'adminSetBalance': {
+        if(!data.userId || (data.snow === undefined && data.tonBalance === undefined)) return { success: false, error: 'Invalid data' };
+        const user = await sb.single(env, 'users', 'user_id', data.userId, 'snow,ton_balance');
+        if (!user) return { success: false, error: 'Not found' };
+        await sb.rpc(env, 'admin_set_balance_safe', { 
+          p_uid: parseInt(data.userId), 
+          p_snow: data.snow !== undefined ? Math.max(0, parseFloat(data.snow)) : user.snow,
+          p_ton: data.tonBalance !== undefined ? Math.max(0, parseFloat(data.tonBalance)) : user.ton_balance
+        });
+        return { success: true };
+      }
+      case 'adminConfirmDeposit': {
+        const dep = await sb.single(env, 'deposits', 'id', data.depositId, `&user_id=eq.${data.userId}`);
+        if (!dep) return { success: false, error: 'Not found' };
+        const ton = parseFloat(data.amount || dep.amount);
+        await sb.update(env, 'deposits', { status: 'completed', completed_at: new Date().toISOString() }, `?id=eq.${data.depositId}`);
+        await sb.rpc(env, 'add_deposit_safe', { p_uid: parseInt(data.userId), p_amount: ton });
+        return { success: true,  {} };
+      }
+      case 'adminApproveWithdraw': { await sb.update(env, 'withdrawals', { status: 'approved', approved_at: new Date().toISOString() }, `?id=eq.${data.wdId}`); return { success: true }; }
+      case 'adminRejectWithdraw': {
+        const wd = await sb.single(env, 'withdrawals', 'id', data.wdId);
+        if (!wd) return { success: false, error: 'Not found' };
+        await sb.update(env, 'withdrawals', { status: 'rejected', rejected_at: new Date().toISOString() }, `?id=eq.${data.wdId}`);
+        if (data.refund) { await sb.rpc(env, 'add_deposit_safe', { p_uid: parseInt(data.userId), p_amount: wd.amount || 0 }); }
+        return { success: true };
+      }
+      case 'adminGetQueue': {
+        const w = await sb.select(env, 'withdrawals', '?status=eq.pending');
+        const d = await sb.select(env, 'deposits', '?status=eq.pending');
+        return { success: true,  { withdrawals: w || [], deposits: d || [] } };
+      }
+      default: return { success: false, error: 'Unknown admin action' };
+    }
+  } catch(e) { return { success: false, error: e.message }; }
+}
+
+export default {
+  async fetch(request, env) {
+    if (request.method === 'OPTIONS') return new Response(null, { headers: CORS });
+    const url = new URL(request.url); const path = url.pathname;
+    if (path === '/health') return ok({ status: 'ok', ts: Date.now(), env: env.ENVIRONMENT || 'production' });
+    if (path === '/tonconnect-manifest.json') return jRes({ url: 'https://YOUR_FRONTEND_URL', name: 'SantaSnowBot', iconUrl: 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png', description: 'Santa Snow' });
+    if (path !== '/api' || request.method !== 'POST') return fail('Not found', 404);
+
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (!rateOk(ip)) return fail('Rate limit exceeded', 429);
+
+    let body;
+    try { const raw = await request.text(); if (raw.length > 10240) return fail('Payload too large', 413); body = JSON.parse(sanitise(raw)); } catch (_) { return fail('Invalid JSON', 400); }
+
+    const authHeader = request.headers.get('Authorization') || '';
+    const action = request.headers.get('X-Action') || body.action;
+    const data = body.data || {};
+    if (!action) return fail('Missing action', 400);
+
+    const ADMIN_ACTIONS = new Set(['adminGetUser', 'adminSetBalance', 'adminConfirmDeposit', 'adminApproveWithdraw', 'adminRejectWithdraw', 'adminGetQueue']);
+    if (ADMIN_ACTIONS.has(action)) {
+      const v = await validateTg(authHeader.replace('Telegram ', ''), env.BOT_TOKEN);
+      if (!v.valid) return fail('Unauthorized', 401);
+      const adminIds = (env.ADMIN_IDS || '').split(',').map(s => s.trim());
+      if (!adminIds.includes(String(v.user?.id))) return fail('Forbidden', 403);
+      return jRes(await hAdmin(env, action, data));
+    }
+
+    if (!authHeader.startsWith('Telegram ')) return fail('Telegram authentication required', 401);
+    const v = await validateTg(authHeader.replace('Telegram ', ''), env.BOT_TOKEN);
+    if (!v.valid) {
+      console.error('TG validation failed:', v.error);
+      return jRes({ success: false, error: 'Invalid Telegram authentication', errorCode: 'INVALID_TELEGRAM_AUTH', debug: { hasInitData: !!authHeader, botTokenConfigured: !!env.BOT_TOKEN, environment: env.ENVIRONMENT || 'production', validationError: v.error } }, 401);
+    }
+
+    const uid = String(v.user.id);
+    const _meta = { ip, ua: request.headers.get('User-Agent') || '' };
+    console.log(`[${new Date().toISOString()}] User:${uid} Action:${action} IP:${ip}`);
+
+    switch (action) {
+      case 'getState': return jRes(await hGetState(env, uid, v.user, { ...data, _startParam: v.startParam || '', _initData: authHeader.replace('Telegram ', '') }));
+      case 'openWelcomeChest': return jRes(await hOpenWelcomeChest(env, uid, data, _meta));
+      case 'purchaseMachine': return jRes(await hPurchaseMachine(env, uid, data, _meta));
+      case 'collect': return jRes(await hCollect(env, uid, data, _meta));
+      case 'upgradeStorage': return jRes(await hUpgradeStorage(env, uid, data, _meta));
+      case 'exchange': return jRes(await hExchange(env, uid, data, _meta));
+      case 'withdraw': return jRes(await hWithdraw(env, uid, data, _meta));
+      case 'deposit': return jRes(await hDeposit(env, uid, data, _meta));
+      case 'verifyDeposit': return jRes(await hVerifyDeposit(env, uid, data, _meta));
+      case 'claimTask': return jRes(await hClaimTask(env, uid, data, _meta));
+      case 'verifyTask': return jRes(await hVerifyTask(env, uid, data, _meta));
+      case 'createTask': return jRes(await hCreateTask(env, uid, data, _meta));
+      default: return fail('Unknown action', 400);
+    }
+  }
+};
+
+
+              </script>
+                        </body>
+                        </html>
+                    
