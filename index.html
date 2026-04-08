@@ -11,7 +11,7 @@
 <script src="https://unpkg.com/tonweb/dist/tonweb.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--snow:#E8F0FF;--gold:#FFD966;--ice:#4DD0E1;--red:#EF5350;--blue:#42A5F5;--cyan:#26C6DA;--dk:#0A1428;--muted:rgba(255,255,255,.6);--border:rgba(255,255,255,.12);--purple:#9C27B0;--green:#4CAF50;--orange:#FF9800}
+:root{--snow:#E8F0FF;--gold:#FFD966;--ice:#4DD0E1;--red:#EF5350;--blue:#42A5F5;--cyan:#26C6DA;--dk:#0A1428;--muted:rgba(255,255,255,.6);--border:rgba(255,255,255,.12);--purple:#9C27B0;--pink:#FF4081}
 body{font-family:'Fredoka',cursive;font-weight:600;background:var(--dk);color:#fff;min-height:100vh;padding-bottom:80px;overflow-x:hidden;font-size:14px}
 .bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 20% 80%,rgba(77,208,225,.3) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(156,39,176,.25) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(255,217,102,.2) 0%,transparent 60%),url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ee3d15b9-4c4b-4a50-ba6e-5e0b9f526179.png') center/cover;animation:au 20s ease-in-out infinite}
 @keyframes au{0%,100%{background-size:200% 200%,200% 200%,200% 200%,cover}50%{background-size:250% 250%,250% 250%,250% 250%,cover}}
@@ -33,34 +33,6 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .mtitle{font-size:17px;font-weight:800;color:var(--ice)}
 .mclose{background:rgba(255,255,255,.1);border:none;border-radius:50%;width:32px;height:32px;color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
 
-/* Staking Cards - تصميم جديد */
-.staking-plans{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
-.staking-card{background:linear-gradient(135deg,rgba(25,45,70,.9),rgba(15,30,50,.95));border-radius:20px;padding:16px;border:1px solid rgba(77,208,225,.2);transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
-.staking-card:hover{transform:translateY(-3px);border-color:rgba(77,208,225,.5);box-shadow:0 8px 25px rgba(77,208,225,.2)}
-.staking-card.selected{border:2px solid var(--ice);background:linear-gradient(135deg,rgba(77,208,225,.15),rgba(15,30,50,.95))}
-.staking-card.p1{border-top:4px solid #FFD700}
-.staking-card.p2{border-top:4px solid #E91E63}
-.staking-card.p3{border-top:4px solid #9C27B0}
-.staking-icon{font-size:42px;margin-bottom:8px;text-align:center}
-.staking-name{font-size:16px;font-weight:800;color:var(--ice);margin-bottom:4px;text-align:center}
-.staking-details{display:flex;justify-content:space-between;margin:12px 0;flex-wrap:wrap;gap:8px}
-.staking-detail{flex:1;text-align:center;background:rgba(10,18,32,.5);border-radius:12px;padding:8px}
-.staking-detail span:first-child{font-size:9px;color:var(--muted);display:block}
-.staking-detail span:last-child{font-size:14px;font-weight:800;color:var(--gold);display:block}
-.staking-min{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
-.staking-actions{margin-top:12px;display:flex;gap:8px}
-.staking-amount-input{background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:12px;padding:10px;color:#fff;font-size:14px;font-weight:600;width:100%;font-family:inherit;text-align:center}
-.active-stake-card{background:linear-gradient(135deg,rgba(77,208,225,.2),rgba(156,39,176,.2));border-radius:20px;padding:16px;margin-bottom:16px;border:2px solid var(--ice);animation:gp 2s ease-in-out infinite}
-@keyframes gp{0%,100%{border-color:rgba(77,208,225,.4)}50%{border-color:rgba(77,208,225,.9)}}
-.active-stake-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.active-stake-icon{font-size:32px}
-.active-stake-info{flex:1}
-.active-stake-name{font-size:15px;font-weight:800;color:var(--ice)}
-.active-stake-progress{background:rgba(10,18,32,.5);border-radius:10px;height:8px;margin:10px 0;overflow:hidden}
-.active-stake-progress-fill{background:linear-gradient(90deg,#4DD0E1,#FFD966);height:100%;border-radius:10px;transition:width .3s}
-.active-stake-values{display:flex;justify-content:space-between;margin-top:10px;font-size:11px}
-.claim-btn{background:linear-gradient(135deg,#4CAF50,#2E7D32);border:none;border-radius:14px;padding:12px;color:#fff;font-weight:800;width:100%;cursor:pointer;margin-top:12px;font-size:14px}
-
 /* Welcome */
 .wm{position:fixed;inset:0;z-index:10000;background:radial-gradient(ellipse,rgba(77,208,225,.2),rgba(10,20,40,.95));backdrop-filter:blur(25px);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275)}
 .wm.active{visibility:visible;opacity:1}
@@ -80,11 +52,12 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .btn-ice{background:linear-gradient(135deg,#4DD0E1,#0097B2);box-shadow:0 0 0 2px rgba(77,208,225,.3),0 6px 20px rgba(77,208,225,.4)}
 .btn-gold{background:linear-gradient(135deg,#FFD966,#FF9800);color:#2C1A00;box-shadow:0 0 0 2px rgba(255,217,102,.3),0 6px 20px rgba(255,217,102,.35)}
 .btn-green{background:linear-gradient(135deg,#4CAF50,#2E7D32);box-shadow:0 0 0 2px rgba(76,175,80,.3),0 6px 20px rgba(76,175,80,.35)}
-.btn-purple{background:linear-gradient(135deg,#9C27B0,#6A1B9A);box-shadow:0 0 0 2px rgba(156,39,176,.3),0 6px 20px rgba(156,39,176,.35)}
 .btn-sm{padding:9px 14px;font-size:12px;border-radius:12px;width:auto;white-space:nowrap}
 .btn-pill{border-radius:50px}
 .btn-ready{animation:pr 2s infinite}
 @keyframes pr{0%,100%{box-shadow:0 0 0 2px rgba(77,208,225,.3),0 6px 20px rgba(77,208,225,.4)}50%{box-shadow:0 0 0 3px rgba(77,208,225,.6),0 6px 30px rgba(77,208,225,.8)}}
+.btn-stake{background:linear-gradient(135deg,#9C27B0,#6A1B9A);box-shadow:0 0 0 2px rgba(156,39,176,.3),0 6px 20px rgba(156,39,176,.4);animation:pulseStake 1.5s infinite}
+@keyframes pulseStake{0%,100%{box-shadow:0 0 0 2px rgba(156,39,176,.3),0 6px 20px rgba(156,39,176,.4)}50%{box-shadow:0 0 0 4px rgba(156,39,176,.6),0 6px 30px rgba(156,39,176,.8)}}
 
 /* Notif */
 .notif{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-80px);background:rgba(15,25,40,.95);border:1px solid var(--border);border-radius:20px;padding:11px 18px;font-size:13px;font-weight:700;z-index:1000;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:85vw;text-align:center;backdrop-filter:blur(16px);pointer-events:none}
@@ -154,6 +127,68 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .wchest-txt{margin-top:12px;font-size:13px;font-weight:800;color:var(--ice);background:rgba(15,25,45,.7);display:inline-block;padding:6px 16px;border-radius:28px;border:1px solid rgba(77,208,225,.3);animation:tg 1.2s ease-in-out infinite}
 @keyframes tg{0%,100%{opacity:.9}50%{opacity:1;text-shadow:0 0 18px rgba(77,208,225,.8)}}
 
+/* Staking Cards */
+.staking-plan, .stake-card {
+  background: linear-gradient(145deg, rgba(156,39,176,.15), rgba(25,42,65,.95));
+  border-radius: 28px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(156,39,176,.4);
+  transition: all 0.25s ease;
+  animation: fadeInUp 0.5s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.staking-plan:hover, .stake-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--purple);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+.plan-header {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.plan-detail {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 8px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.plan-highlight {
+  font-weight: 800;
+  color: var(--ice);
+}
+.stake-input-group {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+}
+.stake-input-group input {
+  flex: 1;
+  background: rgba(10,18,32,.6);
+  border: 1px solid rgba(156,39,176,.4);
+  border-radius: 14px;
+  padding: 12px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.active-stakes {
+  background: rgba(15,25,45,.6);
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
 /* Tasks */
 .tabs{display:flex;gap:6px;margin-bottom:12px;background:rgba(15,25,45,.5);padding:4px;border-radius:14px}
 .tab{flex:1;padding:9px 6px;text-align:center;background:transparent;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:all .25s;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:5px}
@@ -202,7 +237,6 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .wcard.dep{border-top:3px solid var(--ice)}
 .wcard.wd{border-top:3px solid var(--gold)}
 .wcard.exch{border-top:3px solid var(--cyan)}
-.wcard.staking{border-top:3px solid var(--purple)}
 .wcard-title{font-size:16px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .wcard-title i{font-size:20px}
 .winput{width:100%;background:rgba(10,18,32,.5);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;color:#fff;font-size:14px;font-weight:600;font-family:inherit;transition:all .2s}
@@ -406,14 +440,12 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
         <span id="claimBtnTxt">Claim Snow</span>
         <span style="font-size:11px;font-weight:800;background:rgba(0,0,0,.3);padding:2px 8px;border-radius:16px" id="claimPct">0%</span>
       </button>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <button class="btn btn-green" onclick="openMachineShop()" style="flex:1">
-          <i class="fas fa-microchip"></i> Upgrade
-        </button>
-        <button class="btn btn-purple" onclick="goToStaking()" style="flex:1">
-          <i class="fas fa-piggy-bank"></i> Staking
-        </button>
-      </div>
+      <button class="btn btn-green" onclick="openMachineShop()">
+        <i class="fas fa-microchip"></i> Upgrade Mining Machines <i class="fas fa-chevron-right"></i>
+      </button>
+      <button class="btn btn-stake" onclick="goToStaking()">
+        <i class="fas fa-chart-line"></i> 💰 Stake Snow & Earn Up to 50%
+      </button>
     </div>
   </div>
 </div>
@@ -463,6 +495,18 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 </div>
 <button id="floatAdd" class="btn btn-ice btn-sm" onclick="openModal('addTaskModal')">➕ <span data-i18n="floatAdd">Add Task</span></button>
 
+<!-- STAKING -->
+<div class="sec" id="secStaking">
+  <div style="font-size: 20px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+    <i class="fas fa-chart-line" style="color: var(--gold);"></i> <span data-i18n="stakingTitle">❄️ Snow Staking</span>
+  </div>
+  <div id="stakingPlansContainer" class="staking-plans"></div>
+  <div id="activeStakesContainer" class="active-stakes">
+    <div class="hdr"><i class="fas fa-hourglass-half"></i> <span data-i18n="activeStakes">Your Active Stakes</span></div>
+    <div id="activeStakesList"><div class="hempty">No active stakes</div></div>
+  </div>
+</div>
+
 <!-- WALLET -->
 <div class="sec" id="secWallet">
   <div class="wallet">
@@ -470,7 +514,6 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
       <div class="tab active" onclick="switchWT(this,'dep')"><i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit</span></div>
       <div class="tab" onclick="switchWT(this,'wd')"><i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw</span></div>
       <div class="tab" onclick="switchWT(this,'ex')"><i class="fas fa-exchange-alt"></i> <span data-i18n="exchangeNow">Exchange</span></div>
-      <div class="tab" onclick="switchWT(this,'stake')"><i class="fas fa-piggy-bank"></i> <span data-i18n="stakingBtn">Staking</span></div>
     </div>
     <!-- Deposit -->
     <div class="tcont active" id="wt-dep">
@@ -517,13 +560,6 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
       </div>
       <div class="hbox"><div class="hdr" data-i18n="exchangeHist">📋 Exchange History</div><div id="exchHist"><div class="hempty" data-i18n="noConversions">No conversions yet</div></div></div>
     </div>
-    <!-- Staking (جديد) -->
-    <div class="tcont" id="wt-stake">
-      <div class="wcard staking">
-        <div class="wcard-title"><i class="fas fa-piggy-bank" style="color:var(--purple)"></i> <span>❄️ Snow Staking ❄️</span></div>
-        <div id="stakingContent"></div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -535,6 +571,7 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
   <div class="ni active" data-s="secHome" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div><div class="ni-lbl" data-i18n="Home">Home</div></div>
   <div class="ni" data-s="secTasks" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div><div class="ni-lbl" data-i18n="Tasks">Tasks</div></div>
   <div class="ni" data-s="secFriends" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div><div class="ni-lbl" data-i18n="Friends">Friends</div></div>
+  <div class="ni" data-s="secStaking" onclick="goNav(this)"><div class="ni-icon"><i class="fas fa-chart-line" style="font-size:32px;color:var(--gold)"></i></div><div class="ni-lbl" data-i18n="Staking">Staking</div></div>
   <div class="ni" data-s="secWallet" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div><div class="ni-lbl" data-i18n="Wallet">Wallet</div></div>
 </nav>
 
@@ -553,7 +590,7 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
     </div>
     <div style="background:rgba(15,25,45,.6);border:1px solid var(--border);border-radius:14px;padding:12px">
       <div style="font-size:13px;font-weight:800;color:var(--ice);margin-bottom:6px">💡 Main Concept</div>
-      <div style="font-size:11px;color:var(--muted);font-weight:600;line-height:1.8">Virtual Snow Factory ❄️<br>🔹 Buy Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>🔹 Basic(1TON):300/h • Advanced(2TON):650/h • Elite(3TON):1000/h<br>🔹 Exchange Snow→TON (4% fee) • Withdraw 💎<br>🔹 1 TON = 100,000 Snow<br>🔹 Stake Snow for passive income: 10-50% profit!</div>
+      <div style="font-size:11px;color:var(--muted);font-weight:600;line-height:1.8">Virtual Snow Factory ❄️<br>🔹 Buy Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>🔹 Basic(1TON):300/h • Advanced(2TON):650/h • Elite(3TON):1000/h<br>🔹 Exchange Snow→TON (4% fee) • Withdraw 💎<br>🔹 1 TON = 100,000 Snow</div>
     </div>
   </div>
 </div>
@@ -604,11 +641,7 @@ const CFG={
   T2S:100000,S2T:0.00001,MIN_WD:0.02,REF_PCT:20,
   MACH:{1:{cost:1,rate:300,name:"Basic Machine",img:"https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png"},2:{cost:2,rate:650,name:"Advanced Machine",img:"https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png"},3:{cost:3,rate:1000,name:"Elite Machine",img:"https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png"}},
   EXCH_FEE:4,BOT:'SANTASNOWBOT_BOT',APP_LINK:'https://t.me/SANTASNOWBOT_BOT/santasnow',
-  STAKING_PLANS:{
-    1:{minAmount:5000,durationDays:4,profitPercent:10,name:"⭐ 4 Days Plan",icon:"⭐"},
-    2:{minAmount:10000,durationDays:7,profitPercent:20,name:"💎 7 Days Plan",icon:"💎"},
-    3:{minAmount:20000,durationDays:14,profitPercent:50,name:"👑 14 Days Plan",icon:"👑"}
-  }
+  STAKING_PLANS:{1:{min:5000,days:4,interest:10,name:"4 Days - 10%"},2:{min:10000,days:7,interest:20,name:"7 Days - 20%"},3:{min:20000,days:14,interest:50,name:"14 Days - 50%"}}
 };
 const REF_TASKS=[{id:'ref_10',n:10,snow:600,name:"🎁 Invite 10 Friends"},{id:'ref_20',n:20,snow:1500,name:"🎁 Invite 20 Friends"},{id:'ref_50',n:50,snow:4000,name:"🎁 Invite 50 Friends"},{id:'ref_100',n:100,snow:10000,name:"🎁 Invite 100 Friends"},{id:'ref_200',n:200,snow:20000,name:"🎁 Invite 200 Friends"},{id:'ref_500',n:500,snow:50000,name:"🎁 Invite 500 Friends"}];
 const SOC_TASKS=[{id:'tg_payouts',name:'Join Payouts Channel',icon:'💰',link:'https://t.me/SantaSnowPayouts',snow:100},{id:'tg_news',name:'Join News Channel',icon:'📰',link:'https://t.me/SantaSnowNews',snow:50},{id:'tg_ch',name:'Join Telegram Channel',icon:'📢',link:'https://t.me/SantaSnowChannel',snow:100},{id:'tg_grp',name:'Join Telegram Group',icon:'👥',link:'https://t.me/SantaSnowGroup',snow:50},{id:'tg_bot',name:'Start our Bot',icon:'🤖',link:`https://t.me/${CFG.BOT}`,snow:30}];
@@ -616,8 +649,8 @@ const STOR={1:{cap:300,cost:500,lbl:'Gift Box'},2:{cap:900,cost:2000,lbl:'Snow P
 const SI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
 const RI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
-const U={userId:null,startParam:'',user:{snow:0,miningRate:0,miningMachines:{1:0,2:0,3:0},storageLevel:1,tonBalance:0,referralCount:0,welcomeChestOpened:false,hasWelcomeMachine:false},refs:[],exchHist:[],wdHist:[],doneTasks:[],tasks:{partner:[],community:[]},storageProgress:0,storageInt:null,tg:null,tonUI:null,wallet:null,depCheckInt:null,_cc:false,isNew:false,activeStaking:null,stakingPlans:null};
-let _lc=0,_af=0,_nt=null,_tif=new Set(),_atType='channel',_stab='partner',_selectedPlan=1,_stakingAmount=0;
+const U={userId:null,startParam:'',user:{snow:0,miningRate:0,miningMachines:{1:0,2:0,3:0},storageLevel:1,tonBalance:0,referralCount:0,welcomeChestOpened:false,hasWelcomeMachine:false},refs:[],exchHist:[],wdHist:[],doneTasks:[],tasks:{partner:[],community:[]},activeStakes:[],storageProgress:0,storageInt:null,tg:null,tonUI:null,wallet:null,depCheckInt:null,_cc:false,isNew:false};
+let _lc=0,_af=0,_nt=null,_tif=new Set(),_atType='channel',_sf=false,_stab='partner';
 
 const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
@@ -630,18 +663,17 @@ function notify(m,t='i'){const e=$('notif');if(!e)return;if(_nt)clearTimeout(_nt
 
 async function loadState(){
   try{const d=await api('getState',{start_param:U.startParam||'',_initData:U.tg?.initData||''});
-  U.user={...U.user,...d.user};U.refs=d.referrals||[];U.exchHist=d.exchHistory||[];U.wdHist=d.wdHistory||[];U.doneTasks=d.completedTasks||[];U.tasks=d.tasks||{partner:[],community:[]};U.activeStaking=d.activeStaking;U.stakingPlans=d.stakingPlans||CFG.STAKING_PLANS;
+  U.user={...U.user,...d.user};U.refs=d.referrals||[];U.exchHist=d.exchHistory||[];U.wdHist=d.wdHistory||[];U.doneTasks=d.completedTasks||[];U.tasks=d.tasks||{partner:[],community:[]};U.activeStakes=d.activeStakes||[];
   if(d.user?.storageAccrued!==undefined)U.storageProgress=parseFloat(d.user.storageAccrued)||0;
   if(d.pendingDeposit)startDepVerify(d.pendingDeposit.depId,d.pendingDeposit.txHash);
   U.isNew=!U.user.welcomeChestOpened&&U.user.snow===0&&!U.user.hasWelcomeMachine;
   if(!U.isNew){const c=$('welcomeChest');if(c&&!U.user.welcomeChestOpened)c.style.display='block';else if(c)c.style.display='none';}
-  updateRefUI();renderStaking();}catch(e){console.warn('loadState:',e.message);notify('Failed to load data','e');}
+  updateRefUI();renderStakingPlans();renderActiveStakes();}catch(e){console.warn('loadState:',e.message);notify('Failed to load data','e');}
   updateUI();
 }
 
 function showRewards(snow,rate){
   let m=$('rewardsModal');if(!m){m=document.createElement('div');m.id='rewardsModal';m.className='modal';m.onclick=e=>{if(e.target===m)closeModal('rewardsModal')};document.body.appendChild(m);}
-  m.querySelector?.('.modal-box')?.remove?.();
   m.innerHTML=`<div class="modal-box" style="max-width:370px;border-radius:24px"><div style="text-align:center;padding:16px">
     <div style="font-size:50px;margin-bottom:14px">🎁✨🎄</div>
     <div style="font-size:22px;font-weight:800;color:var(--ice);margin-bottom:18px">🎉 CONGRATULATIONS! 🎉</div>
@@ -674,7 +706,7 @@ async function buyMachine(t){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!'
 function updateUI(){
   const u=U.user;$('tbSnow').textContent=fmt(u.snow||0);$('tbTON').textContent=fmtTon(u.tonBalance||0);
   $('heroRateDay').textContent=fmt(Math.round((u.miningRate||0)*24));$('wdTonBal').textContent=fmtTon(u.tonBalance||0)+' TON';
-  updSwapBals();updateRefUI();renderExchHist();renderWdHist();renderTasks();
+  updSwapBals();updateRefUI();renderExchHist();renderWdHist();renderTasks();renderStakingPlans();renderActiveStakes();
   const cb=$('collectBtn');if(cb){if(U.storageProgress>=1)cb.classList.add('btn-ready');else cb.classList.remove('btn-ready');}
   const db=$('dailyBonusCard');if(db){const last=localStorage.getItem('santa_db'),now=Date.now(),next=last?parseInt(last)+86400000:0;if(now>=next&&!db.classList.contains('claimed'))db.style.display='flex';}
 }
@@ -697,8 +729,27 @@ function buildUpgradeContent(){const u=U.user,lv=u.storageLevel||1,cur=STOR[lv],
 async function upgradeStorage(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const lv=U.user.storageLevel||1,next=STOR[lv+1];if(!next){notify('Already max!','e');return;}if((U.user.snow||0)<next.cost){notify(`Need ${fmt(next.cost)} Snow!`,'e');return;}U.user.snow-=next.cost;U.user.storageLevel=lv+1;api('upgradeStorage',{newLevel:lv+1}).catch(()=>{});buildUpgradeContent();updateUI();snowfall(30);notify(`✅ Storage → Level ${lv+1}!`,'s');}
 
 function goNav(el){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));el.classList.add('active');$(el.dataset.s).classList.add('active');$('floatAdd').style.display='none';}
+function goToStaking(){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.querySelector('.ni[data-s="secStaking"]').classList.add('active');$('secStaking').classList.add('active');renderStakingPlans();renderActiveStakes();}
 
-function goToStaking(){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.querySelector('.ni[data-s="secWallet"]').classList.add('active');$('secWallet').classList.add('active');switchWT(document.querySelector('#wt-stake'),'stake');}
+// STAKING FUNCTIONS
+function renderStakingPlans(){
+  let h='';for(let pid in CFG.STAKING_PLANS){const p=CFG.STAKING_PLANS[pid];h+=`<div class="staking-plan"><div class="plan-header"><span>💰 ${p.name}</span><span class="plan-highlight">+${p.interest}%</span></div><div class="plan-detail"><span>Min amount:</span><span class="plan-highlight">${fmt(p.min)} Snow</span></div><div class="plan-detail"><span>Duration:</span><span>${p.days} days</span></div><div class="stake-input-group"><input type="number" id="stakeAmount_${pid}" placeholder="Amount" min="${p.min}" step="1000" value="${p.min}"><button class="btn btn-stake btn-sm" onclick="stakeSnow(${pid})">Stake</button></div></div>`;}$('stakingPlansContainer').innerHTML=h||'<div class="hempty">Loading plans...</div>';
+}
+async function stakeSnow(planId){
+  const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;
+  const amt=parseInt($(`stakeAmount_${planId}`).value)||0;const plan=CFG.STAKING_PLANS[planId];
+  if(!plan){notify('Invalid plan','e');return;}if(amt<plan.min){notify(`Min ${plan.min} Snow`,'e');return;}
+  if(amt>(U.user.snow||0)){notify(`You have only ${fmt(U.user.snow)} Snow`,'e');return;}
+  try{const r=await api('stake',{planId,amount:amt});U.user.snow=r.data.newSnow;updateUI();notify(`✅ Staked ${fmt(amt)} Snow for ${plan.days} days!`,'s');snowfall(20);spawnP();loadState();}catch(e){notify(`❌ ${e.message}`,'e');}
+}
+function renderActiveStakes(){
+  const list=$('activeStakesList');if(!U.activeStakes.length){list.innerHTML='<div class="hempty">No active stakes</div>';return;}
+  list.innerHTML=U.activeStakes.map(s=>{const plan=CFG.STAKING_PLANS[s.planId]||{interest:s.interestPercent,days:s.durationDays};const end=new Date(s.endDate),now=new Date(),remaining=Math.max(0,end-now),daysLeft=Math.ceil(remaining/(1000*60*60*24));return `<div class="stake-card"><div class="plan-header"><span>📦 ${fmt(s.amount)} Snow</span><span class="plan-highlight">+${plan.interest}%</span></div><div class="plan-detail"><span>Started:</span><span>${new Date(s.startDate).toLocaleDateString()}</span></div><div class="plan-detail"><span>Ends:</span><span>${end.toLocaleDateString()}</span></div><div class="plan-detail"><span>Time left:</span><span class="${daysLeft<=1?'glow-gold':''}">${daysLeft>0?daysLeft+' days':'<span class="glow-gold">Ready to claim!</span>'}</span></div>${daysLeft<=0?`<button class="btn btn-gold btn-sm" onclick="unstakeSnow(${s.id})">💰 Claim & Unstake</button>`:'<button class="btn btn-ice btn-sm" disabled>⏳ Staking...</button>'}</div>`;}).join('');
+}
+async function unstakeSnow(stakeId){
+  const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;
+  try{const r=await api('unstake',{stakeId});U.user.snow=r.data.newSnow;updateUI();notify(`🎉 You received ${fmt(r.data.reward)} Snow reward! Total: ${fmt(r.data.total)} Snow`,'s');snowfall(40);spawnP();loadState();}catch(e){notify(`❌ ${e.message}`,'e');}
+}
 
 function renderTasks(){const rc=U.user.referralCount||0;let rh='';for(const t of REF_TASKS){const done=U.doneTasks.includes(t.id),can=rc>=t.n&&!done,p=Math.min(100,Math.round(rc/t.n*100));rh+=`<div class="titem"><div class="ticon"><img src="${RI}"></div><div class="tinfo"><div class="tname">${t.name}</div><div class="trew"><img src="${SI}"> <span style="font-weight:800;color:var(--snow)">${fmt(t.snow)} Snow</span></div><div class="pbar"><div style="width:${p}%"></div></div><div class="tstat">${rc}/${t.n} (${p}%)</div></div><div>${done?'<button class="tbtn done">✅ Done</button>':can?`<button class="tbtn claim" onclick="claimRefTask('${t.id}')">🎁 Claim</button>`:`<button class="tbtn go" disabled>🔒 ${t.n}</button>`}</div></div>`;}$('referralTasksList').innerHTML=rh||'<div class="hempty" style="text-align:center;padding:25px">✨ Invite friends to unlock rewards! ✨</div>';renderSocTasks();}
 
@@ -737,20 +788,9 @@ function goToPartner(){document.querySelectorAll('.ni').forEach(n=>n.classList.r
 
 function renderWdHist(){const el=$('wdHist');if(!U.wdHist.length){el.innerHTML='<div class="hempty">No withdrawals yet</div>';return;}el.innerHTML=U.wdHist.slice(0,20).map(h=>{const sc={approved:'sb-a',pending:'sb-p',rejected:'sb-r'}[h.status||'pending'];return`<div class="hrow" style="flex-direction:column;gap:3px;align-items:flex-start"><div style="display:flex;justify-content:space-between;width:100%"><span style="font-size:12px;font-weight:800;color:var(--ice)">${h.tonAmt.toFixed(6)} TON</span><span class="sbadge ${sc}">${esc(h.status||'Pending')}</span></div><div style="font-size:9px;color:var(--muted)">${esc(h.d||'')} · ${esc((h.addr||'').substring(0,12))}...</div></div>`;}).join('');}
 
-function switchWT(el,t){el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));$('wt-'+t).parentElement.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');$('wt-'+t).classList.add('active');if(t==='stake')renderStaking();}
+function switchWT(el,t){el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));$('wt-'+t).parentElement.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');$('wt-'+t).classList.add('active');}
 
-// Staking Functions
-function renderStaking(){if(!U.stakingPlans)U.stakingPlans=CFG.STAKING_PLANS;let html='';if(U.activeStaking){const s=U.activeStaking;const now=Date.now();const totalTime=s.durationDays*24*60*60*1000;const elapsed=now-s.startTime;const progress=Math.min(100,Math.max(0,(elapsed/totalTime)*100));const remaining=Math.max(0,s.endTime-now);const remainingHours=Math.ceil(remaining/(1000*60*60));const canClaim=now>=s.endTime;html+=`<div class="active-stake-card"><div class="active-stake-header"><div class="active-stake-icon">${s.icon||'❄️'}</div><div class="active-stake-info"><div class="active-stake-name">${s.planName}</div><div class="active-stake-progress"><div class="active-stake-progress-fill" style="width:${progress}%"></div></div></div></div><div class="active-stake-values"><span>Staked: ${fmt(s.amount)} Snow</span><span>Profit: ${fmt(s.profit)} Snow (${s.profitPercent}%)</span></div><div class="active-stake-values"><span>Started: ${new Date(s.startTime).toLocaleDateString()}</span><span>Ends: ${new Date(s.endTime).toLocaleDateString()}</span></div>${canClaim?`<button class="claim-btn" onclick="claimStaking()"><i class="fas fa-gift"></i> Claim ${fmt(s.amount+s.profit)} Snow!</button>`:`<div style="text-align:center;font-size:11px;color:var(--muted);margin-top:8px">⏳ ${remainingHours} hours remaining</div>`}</div>`;}else{html+=`<div style="margin-bottom:16px;padding:12px;background:rgba(77,208,225,.1);border-radius:14px;text-align:center"><div style="font-size:13px;font-weight:800;color:var(--ice)">💰 Stake Your Snow! 💰</div><div style="font-size:11px;color:var(--muted);margin-top:6px">Earn up to 50% profit in 14 days!</div></div>`;html+=`<div class="staking-plans">`;for(let i=1;i<=3;i++){const p=U.stakingPlans[i];if(!p)continue;const selectedClass=_selectedPlan===i?' selected':'';html+=`<div class="staking-card p${i}${selectedClass}" onclick="selectStakingPlan(${i})"><div class="staking-icon">${p.icon}</div><div class="staking-name">${p.name}</div><div class="staking-details"><div class="staking-detail"><span>Min Amount</span><span>${fmt(p.minAmount)} Snow</span></div><div class="staking-detail"><span>Duration</span><span>${p.durationDays} Days</span></div><div class="staking-detail"><span>Profit</span><span>+${p.profitPercent}%</span></div></div><div class="staking-min">💰 Earn ~${fmt(Math.floor(p.minAmount*p.profitPercent/100))} Snow</div></div>`;}html+=`</div>`;html+=`<div style="margin-top:16px"><label class="wlabel">Amount to Stake (Min ${fmt(U.stakingPlans[_selectedPlan]?.minAmount||5000)} Snow)</label><input type="number" id="stakeAmount" class="winput" placeholder="Enter amount" oninput="updateStakePreview()" value="${_stakingAmount||''}"><div id="stakePreview" style="margin:12px 0;padding:12px;background:rgba(10,18,32,.4);border-radius:12px;text-align:center"><div style="font-size:11px;color:var(--muted)">You will receive:</div><div style="font-size:18px;font-weight:800;color:var(--gold)" id="stakePreviewProfit">0 Snow</div></div><button class="btn btn-purple" onclick="startStaking()"><i class="fas fa-piggy-bank"></i> Start Staking</button></div>`;}$('stakingContent').innerHTML=html;updateStakePreview();}
-
-function selectStakingPlan(planId){_selectedPlan=planId;renderStaking();}
-
-function updateStakePreview(){const amount=parseInt($('stakeAmount')?.value)||0;const plan=U.stakingPlans[_selectedPlan];if(plan&&amount>=plan.minAmount){const profit=Math.floor(amount*plan.profitPercent/100);$('stakePreviewProfit').textContent=`+${fmt(profit)} Snow (Total: ${fmt(amount+profit)} Snow)`;}else{$('stakePreviewProfit').textContent='Enter valid amount';}}
-
-async function startStaking(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const plan=U.stakingPlans[_selectedPlan];if(!plan){notify('Select a plan','e');return;}const amount=parseInt($('stakeAmount')?.value)||0;if(amount<plan.minAmount){notify(`Minimum ${fmt(plan.minAmount)} Snow required`,'e');return;}if(amount>(U.user.snow||0)){notify(`Not enough Snow! You have ${fmt(U.user.snow)}`,'e');return;}try{const r=await api('startStaking',{planId:_selectedPlan,amount});U.user.snow=r.newSnowBalance;U.activeStaking=r.staking;updateUI();notify(`✅ Staked ${fmt(amount)} Snow! +${fmt(r.profit)} Snow profit after ${plan.durationDays} days!`,'s');snowfall(40);renderStaking();}catch(e){notify(`❌ ${e.message}`,'e');}}
-
-async function claimStaking(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;try{const r=await api('claimStaking',{});U.user.snow=r.newSnowBalance;U.activeStaking=null;updateUI();snowfall(50);notify(`🎉 Claimed ${fmt(r.totalReward)} Snow! (${fmt(r.profit)} profit) 🎉`,'s');renderStaking();}catch(e){notify(`❌ ${e.message}`,'e');}}
-
-function updateRefUI(){if(!U.userId)return;const link=`${CFG.APP_LINK}?startapp=${U.userId}`;$('refLinkInp').value=link;$('depUidDisp').textContent=esc(U.userId);const ce=$('totalRefsDisp');if(ce)ce.textContent=`${U.refs.length} Friends`;const le=$('recentRefsList');if(le){if(!U.refs.length){le.innerHTML='<div class="hempty">No referrals yet</div>';}else{le.innerHTML=U.refs.slice(0,20).map(r=>`<div class="ref-list-item"><div class="rli-av">${r.photo?`<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">`:'🎅'}</div><div class="rli-info"><div class="rli-name">${esc(r.name||'Friend')}</div><div class="rli-date">${esc(r.date||'Joined')}</div>${r.totalSpentSnow?`<div style="font-size:9px;color:var(--gold)">💰 Spent: ${fmt(r.totalSpentSnow)} Snow</div>`:''}${r.totalCommissionEarned?`<div class="commission-badge"><img src="${SI}" style="width:12px;height:12px">+${fmt(r.totalCommissionEarned)} Snow</div>`:'<div style="font-size:9px;color:var(--muted)">⏳ Waiting</div>'}</div><div class="rli-earn">${r.totalCommissionEarned?`+${fmt(r.totalCommissionEarned)}`:'0'}</div></div>`).join('');}}}
+function updateRefUI(){if(!U.userId)return;const link=`${CFG.APP_LINK}?startapp=${U.userId}`;$('refLinkInp').value=link;$('depUidDisp').textContent=esc(U.userId);const ce=$('totalRefsDisp');if(ce)ce.textContent=`${U.refs.length} Friends`;const le=$('recentRefsList');if(le){if(!U.refs.length){le.innerHTML='<div class="hempty">No referrals yet</div>';}else{le.innerHTML=U.refs.slice(0,20).map(r=>`<div class="ref-list-item"><div class="rli-av">${r.photo?`<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">`:'🎅'}</div><div class="rli-info"><div class="rli-name">${esc(r.name||'Friend')}</div><div class="rli-date">${esc(r.date||'Joined')}</div>${r.totalSpentTon?`<div style="font-size:9px;color:var(--gold)">💰 Spent: ${r.totalSpentTon} TON</div>`:''}${r.totalCommissionEarnedSnow?`<div class="commission-badge"><img src="${SI}" style="width:12px;height:12px">+${fmt(r.totalCommissionEarnedSnow)} Snow</div>`:'<div style="font-size:9px;color:var(--muted)">⏳ Waiting</div>'}</div><div class="rli-earn">${r.totalCommissionEarnedSnow?`+${fmt(r.totalCommissionEarnedSnow)}`:'0'}</div></div>`).join('');}}}
 
 function copyRefLink(){navigator.clipboard.writeText($('refLinkInp').value).then(()=>notify('✅ Copied!','s')).catch(()=>{$('refLinkInp').select();document.execCommand('copy');notify('✅ Copied!','s');});}
 
@@ -779,11 +819,11 @@ function ldAnimTo(tgt,msg,dur=600){const start=parseFloat($('iceFill')?.style.wi
 
 async function claimDailyBonus(){const c=$('dailyBonusCard');if(!c||c.classList.contains('claimed'))return;const now=Date.now(),last=localStorage.getItem('santa_db'),next=last?parseInt(last)+86400000:0;if(now<next){notify('🕐 Come back tomorrow!','w');return;}try{U.user.snow+=50;localStorage.setItem('santa_db',now.toString());c.classList.add('claimed');c.innerHTML=`<div class="dbonus-icon">✅</div><div style="flex:1"><div style="font-size:13px;font-weight:800;color:var(--ice)">Claimed!</div><div style="font-size:10px;color:var(--muted)">Next in 24h</div></div><div style="font-size:15px;font-weight:800;color:var(--gold)">+50 ❄️</div>`;updateUI();snowfall(25);notify('🎁 +50 Snow!','s');spawnP();}catch(e){notify('❌ Failed','e');}}
 
-const TR={en:{labelSnow:'Snow',labelTON:'TON',statAccrued:'Accrued',statRateDay:'Rate/Day',statSnowDay:'Snow/day',friendsTitle:'Friends & Referrals',copyBtn:'Copy',refNote:'📤 Share link. 20% commission in SNOW!',recentRefs:'Recent Referrals',noReferrals:'No referrals yet',labelWallet:'Wallet',notConnected:'Not connected',connectBtn:'Connect',important:'IMPORTANT:',depositWarning1:'Your User ID',depositWarning2:'must be the ONLY comment.',amountTON:'Amount (TON)',depositBtn:'Deposit TON',processingDeposit:'Processing...',tonWalletAddr:'TON Wallet Address',withdrawBtn:'Withdraw TON',withdrawHist:'📋 Withdrawal History',noWithdrawals:'No withdrawals yet',youGet:'You get:',swapRate:'1 TON = 100,000 Snow',exchangeNow:'Exchange',exchangeHist:'📋 Exchange History',noConversions:'No conversions yet',helpTitle:'🎅 Santa Snow Guide',addTaskTitle:'➕ Add Community Task',taskLinkLabel:'Telegram Link',taskTargetLabel:'Target Users (min 100)',taskCreateBtn:'✅ Create Task',upgTitle:'⬆️ Upgrade Storage',tabSocialTxt:'Social',tabReferralTxt:'Referral',floatAdd:'Add Task',Home:'Home',Tasks:'Tasks',Friends:'Friends',Wallet:'Wallet',maxBtn:'MAX',stakingBtn:'Staking'},ru:{labelSnow:'Снег',labelTON:'TON',statAccrued:'Накоплено',statRateDay:'Ставка/День',statSnowDay:'Снег/день',friendsTitle:'Друзья и Рефералы',copyBtn:'Копировать',refNote:'📤 Поделитесь ссылкой. 20% комиссии в СНЕГЕ!',recentRefs:'Недавние рефералы',noReferrals:'Пока нет рефералов',labelWallet:'Кошелек',notConnected:'Не подключен',connectBtn:'Подключить',important:'ВАЖНО:',depositWarning1:'Ваш ID',depositWarning2:'должен быть ЕДИНСТВЕННЫМ комментарием.',amountTON:'Сумма (TON)',depositBtn:'Внести TON',processingDeposit:'Обработка...',tonWalletAddr:'TON адрес кошелька',withdrawBtn:'Вывести TON',withdrawHist:'📋 История выводов',noWithdrawals:'Пока нет выводов',youGet:'Вы получите:',swapRate:'1 TON = 100,000 Снега',exchangeNow:'Обменять',exchangeHist:'📋 История обменов',noConversions:'Пока нет обменов',helpTitle:'🎅 Руководство Santa Snow',addTaskTitle:'➕ Добавить задачу',taskLinkLabel:'Ссылка Telegram',taskTargetLabel:'Целевые пользователи (мин. 100)',taskCreateBtn:'✅ Создать',upgTitle:'⬆️ Улучшить хранилище',tabSocialTxt:'Соц. сети',tabReferralTxt:'Рефералы',floatAdd:'Добавить',Home:'Главная',Tasks:'Задачи',Friends:'Друзья',Wallet:'Кошелек',maxBtn:'МАКС',stakingBtn:'Стейкинг'}};
+const TR={en:{labelSnow:'Snow',labelTON:'TON',statAccrued:'Accrued',statRateDay:'Rate/Day',statSnowDay:'Snow/day',friendsTitle:'Friends & Referrals',copyBtn:'Copy',refNote:'📤 Share link. 20% commission in SNOW!',recentRefs:'Recent Referrals',noReferrals:'No referrals yet',labelWallet:'Wallet',notConnected:'Not connected',connectBtn:'Connect',important:'IMPORTANT:',depositWarning1:'Your User ID',depositWarning2:'must be the ONLY comment.',amountTON:'Amount (TON)',depositBtn:'Deposit TON',processingDeposit:'Processing...',tonWalletAddr:'TON Wallet Address',withdrawBtn:'Withdraw TON',withdrawHist:'📋 Withdrawal History',noWithdrawals:'No withdrawals yet',youGet:'You get:',swapRate:'1 TON = 100,000 Snow',exchangeNow:'Exchange',exchangeHist:'📋 Exchange History',noConversions:'No conversions yet',helpTitle:'🎅 Santa Snow Guide',addTaskTitle:'➕ Add Community Task',taskLinkLabel:'Telegram Link',taskTargetLabel:'Target Users (min 100)',taskCreateBtn:'✅ Create Task',upgTitle:'⬆️ Upgrade Storage',tabSocialTxt:'Social',tabReferralTxt:'Referral',floatAdd:'Add Task',Home:'Home',Tasks:'Tasks',Friends:'Friends',Wallet:'Wallet',maxBtn:'MAX',stakingTitle:'❄️ Snow Staking',activeStakes:'Your Active Stakes',Staking:'Staking'},ru:{labelSnow:'Снег',labelTON:'TON',statAccrued:'Накоплено',statRateDay:'Ставка/День',statSnowDay:'Снег/день',friendsTitle:'Друзья и Рефералы',copyBtn:'Копировать',refNote:'📤 Поделитесь ссылкой. 20% комиссии в СНЕГЕ!',recentRefs:'Недавние рефералы',noReferrals:'Пока нет рефералов',labelWallet:'Кошелек',notConnected:'Не подключен',connectBtn:'Подключить',important:'ВАЖНО:',depositWarning1:'Ваш ID',depositWarning2:'должен быть ЕДИНСТВЕННЫМ комментарием.',amountTON:'Сумма (TON)',depositBtn:'Внести TON',processingDeposit:'Обработка...',tonWalletAddr:'TON адрес кошелька',withdrawBtn:'Вывести TON',withdrawHist:'📋 История выводов',noWithdrawals:'Пока нет выводов',youGet:'Вы получите:',swapRate:'1 TON = 100,000 Снега',exchangeNow:'Обменять',exchangeHist:'📋 История обменов',noConversions:'Пока нет обменов',helpTitle:'🎅 Руководство Santa Snow',addTaskTitle:'➕ Добавить задачу',taskLinkLabel:'Ссылка Telegram',taskTargetLabel:'Целевые пользователи (мин. 100)',taskCreateBtn:'✅ Создать',upgTitle:'⬆️ Улучшить хранилище',tabSocialTxt:'Соц. сети',tabReferralTxt:'Рефералы',floatAdd:'Добавить',Home:'Главная',Tasks:'Задачи',Friends:'Друзья',Wallet:'Кошелек',maxBtn:'МАКС',stakingTitle:'❄️ Стейкинг Снега',activeStakes:'Ваши активные стейки',Staking:'Стейкинг'}};
 
 function toggleLangMenu(){const m=$('langMenu');m.style.display=m.style.display==='none'?'block':'none';if(m.style.display==='block')setTimeout(()=>document.addEventListener('click',e=>{const m2=$('langMenu'),b=$('langFlag').parentElement;if(m2&&!m2.contains(e.target)&&!b.contains(e.target))m2.style.display='none';},{once:true}),10);}
 function setLang(l,f,c){localStorage.setItem('santaLang',l);applyLang(l,f,c);$('langMenu').style.display='none';}
-function applyLang(l,f,c){const t=TR[l]||TR.en;$('langFlag').textContent=f;$('langCode').textContent=c;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.innerHTML=t[k];});const nav=$$('.ni .ni-lbl'),keys=['Home','Tasks','Friends','Wallet'];nav.forEach((el,i)=>{if(keys[i]&&t[keys[i]])el.textContent=t[keys[i]];});}
+function applyLang(l,f,c){const t=TR[l]||TR.en;$('langFlag').textContent=f;$('langCode').textContent=c;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.innerHTML=t[k];});const nav=$$('.ni .ni-lbl'),keys=['Home','Tasks','Friends','Staking','Wallet'];nav.forEach((el,i)=>{if(keys[i]&&t[keys[i]])el.textContent=t[keys[i]];});}
 
 function $(id){return document.getElementById(id);}
 function $$(sel){return document.querySelectorAll(sel);}
