@@ -58,7 +58,7 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 @keyframes pr{0%,100%{box-shadow:0 0 0 2px rgba(77,208,225,.3),0 6px 20px rgba(77,208,225,.4)}50%{box-shadow:0 0 0 3px rgba(77,208,225,.6),0 6px 30px rgba(77,208,225,.8)}}
 
 /* Notif */
-.notif{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-80px);background:rgba(15,25,40,.95);border:1px solid var(--border);border-radius:20px;padding:11px 18px;font-size:13px;font-weight:700;z-index:10001;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:85vw;text-align:center;backdrop-filter:blur(16px);pointer-events:none}
+.notif{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-80px);background:rgba(15,25,40,.95);border:1px solid var(--border);border-radius:20px;padding:11px 18px;font-size:13px;font-weight:700;z-index:1000;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:85vw;text-align:center;backdrop-filter:blur(16px);pointer-events:none}
 .notif.show{transform:translateX(-50%) translateY(0)}
 .notif.s{border-color:var(--ice);color:var(--ice);background:rgba(77,208,225,.15)}
 .notif.e{border-color:var(--red);color:#FF8A80;background:rgba(239,83,80,.15)}
@@ -267,7 +267,7 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 #ldScreen.hidden{opacity:0;pointer-events:none}
 .ld-logo{width:130px;height:130px;animation:lb 1.8s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(77,208,225,.7))}
 @keyframes lb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-16px) scale(1.06)}}
-.ld-title{font-size:24px;font-weight:800;letter-spacing:1px;text-shadow:0 0 15px rgba(77,208,225,.5)}
+.ld-title{font-size:24px;font-weight:800;letter-spacing:1px;glow-ice}
 .ld-sub{font-size:13px;color:rgba(255,255,255,.8);font-weight:600;min-height:18px}
 .ld-bar{width:260px}
 .ice-track{width:100%;height:12px;background:rgba(15,25,45,.6);border-radius:20px;overflow:hidden;border:2px solid rgba(77,208,225,.3);box-shadow:inset 0 2px 8px rgba(0,0,0,.4)}
@@ -295,15 +295,14 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
     <img class="wm-img" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Chest">
     <div class="wm-title">🎄 Santa's Gift! 🎄</div>
     <div class="wm-sub">Open to receive your rewards!</div>
-    <button class="btn btn-ice btn-pill" onclick="openWelcomeChestFromModal()" style="padding:15px 36px;font-size:16px">🎁 Open Chest! 🎁</button>
-    <div id="wmErr" style="margin-top:12px;font-size:11px;color:#FF8A80;text-align:center;max-width:90%;line-height:1.4;display:none;"></div>
+    <button class="btn btn-ice btn-pill" id="welcomeChestBtn" style="padding:15px 36px;font-size:16px">🎁 Open Chest! 🎁</button>
   </div>
 </div>
 
 <!-- Loading -->
 <div id="ldScreen">
   <img class="ld-logo" src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/d1d987fb-c961-412c-96f4-249ce3896614.png" alt="Santa">
-  <div class="ld-title">Santa Snow ❄️</div>
+  <div class="ld-title glow-ice">Santa Snow ❄️</div>
   <div class="ld-sub" id="ldStatus">Initializing...</div>
   <div class="ld-bar">
     <div class="ice-track"><div class="ice-fill" id="iceFill"></div></div>
@@ -586,15 +585,14 @@ async function loadState(){
   U.user={...U.user,...d.user};U.refs=d.referrals||[];U.exchHist=d.exchHistory||[];U.wdHist=d.wdHistory||[];U.doneTasks=d.completedTasks||[];U.tasks=d.tasks||{partner:[],community:[]};
   if(d.user?.storageAccrued!==undefined)U.storageProgress=parseFloat(d.user.storageAccrued)||0;
   if(d.pendingDeposit)startDepVerify(d.pendingDeposit.depId,d.pendingDeposit.txHash);
-  U.isNew=!U.user.welcomeChestOpened&&U.user.snow===0&&!U.user.hasWelcomeMachine;
+  U.isNew=!U.user.welcomeChestOpened && (U.user.snow===0 || !U.user.hasWelcomeMachine);
   if(!U.isNew){const c=$('welcomeChest');if(c&&!U.user.welcomeChestOpened)c.style.display='block';else if(c)c.style.display='none';}
   updateRefUI();}catch(e){console.warn('loadState:',e.message);notify('Failed to load data','e');}
   updateUI();
 }
 
-function showRewards(snow,rate){
+function showRewardsModal(snow,rate){
   let m=$('rewardsModal');if(!m){m=document.createElement('div');m.id='rewardsModal';m.className='modal';m.onclick=e=>{if(e.target===m)closeModal('rewardsModal')};document.body.appendChild(m);}
-  m.querySelector?.('.modal-box')?.remove?.();
   m.innerHTML=`<div class="modal-box" style="max-width:370px;border-radius:24px"><div style="text-align:center;padding:16px">
     <div style="font-size:50px;margin-bottom:14px">🎁✨🎄</div>
     <div style="font-size:22px;font-weight:800;color:var(--ice);margin-bottom:18px">🎉 CONGRATULATIONS! 🎉</div>
@@ -613,43 +611,67 @@ function showRewards(snow,rate){
       </div>
     </div>
     <button class="btn btn-ice" onclick="closeModal('rewardsModal')" style="margin-top:14px">🎄 Start Mining! 🎄</button>
-  </div></div>`;openModal('rewardsModal');setTimeout(()=>closeModal('rewardsModal'),6000);
+  </div></div>`;
+  openModal('rewardsModal');
+  setTimeout(()=>{if($('rewardsModal')?.classList?.contains('active'))closeModal('rewardsModal');},5000);
 }
 
 async function openWelcomeChestFromModal(){
-  const n=Date.now();if(n-_lc<3000){showWmErr('Wait 3s!');return;}_lc=n;
-  const btn=document.querySelector('.wm-box .btn');
-  if(btn){btn.disabled=true;btn.innerHTML='⏳ جاري الفتح...';}
+  const n=Date.now();
+  if(window._lastClick && n-window._lastClick<3000){notify('Wait 3s!','w');return;}
+  window._lastClick=n;
+  const btn=document.querySelector('#welcomeModal .btn');
+  if(btn){btn.disabled=true;btn.textContent='⏳ Opening...';}
   try{
-    const r=await api('openWelcomeCest',{});
-    const snowGot = r.snowReward || 0;
-    const rateGot = r.miningRate || 0;
-    U.user.welcomeChestOpened=true;U.user.snow+=snowGot;U.user.hasWelcomeMachine=true;U.user.miningRate+=rateGot;
-    $('welcomeModal').classList.remove('active');
-    const c=$('welcomeChest');if(c)c.style.display='none';
-    updateUI();snowfall(50);notify(`🎁 +${fmt(snowGot)} Snow!`,'s');spawnP();showRewards(snowGot,rateGot);
+    const r=await api('openWelcomeChest',{});
+    U.user.welcomeChestOpened=true;
+    U.user.snow=(U.user.snow||0)+r.snow;
+    U.user.hasWelcomeMachine=true;
+    U.user.miningRate=r.miningRate;
+    const modal=document.getElementById('welcomeModal');
+    if(modal)modal.classList.remove('active');
+    const chest=document.getElementById('welcomeChest');
+    if(chest)chest.style.display='none';
+    updateUI();
+    snowfall(50);
+    notify(`🎁 +${fmt(r.snow)} Snow! +1 Machine`,'s');
+    spawnP();
+    showRewardsModal(r.snow,r.miningRate);
   }catch(e){
-    showWmErr(e.message || 'Connection error');
-    if(btn){btn.disabled=false;btn.innerHTML='🎁 Open Chest! 🎁';}
+    console.error('Error opening chest:',e);
+    notify(`❌ ${e.message || 'Failed to open chest'}`,'e');
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='🎁 Open Chest! 🎁';}
   }
 }
 
-function showWmErr(msg){
-  const d=document.getElementById('wmErr');
-  if(d){d.style.display='block';d.textContent='❌ ' + msg;}
-}
-
 async function openWelcomeChest(){
-  const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;
-  try{const r=await api('openWelcomeChest',{});const snowGot = r.snowReward || 0;const rateGot = r.miningRate || 0;
-  U.user.welcomeChestOpened=true;U.user.snow+=snowGot;U.user.hasWelcomeMachine=true;U.user.miningRate+=rateGot;
-  $('welcomeChest').style.display='none';updateUI();snowfall(50);notify(`🎁 +${fmt(snowGot)} Snow!`,'s');spawnP();showRewards(snowGot,rateGot);}catch(e){notify(`❌ ${e.message}`,'e');}
+  const n=Date.now();
+  if(window._lastClick && n-window._lastClick<3000){notify('Wait 3s!','w');return;}
+  window._lastClick=n;
+  try{
+    const r=await api('openWelcomeChest',{});
+    U.user.welcomeChestOpened=true;
+    U.user.snow=(U.user.snow||0)+r.snow;
+    U.user.hasWelcomeMachine=true;
+    U.user.miningRate=r.miningRate;
+    const chestDiv=document.getElementById('welcomeChest');
+    if(chestDiv)chestDiv.style.display='none';
+    updateUI();
+    snowfall(50);
+    notify(`🎁 +${fmt(r.snow)} Snow!`,'s');
+    spawnP();
+    showRewardsModal(r.snow,r.miningRate);
+  }catch(e){
+    console.error('Error opening chest:',e);
+    notify(`❌ ${e.message || 'Failed to open chest'}`,'e');
+  }
 }
 
 function openMachineShop(){buildShop();openModal('machineShopModal');}
 function buildShop(){let h='';for(let i=1;i<=3;i++){const m=CFG.MACH[i],c=U.user.miningMachines?.[i]||0,ok=(U.user.tonBalance||0)>=m.cost;h+=`<div class="mcard"><img src="${m.img}" class="mcard-img"><div class="mcard-info"><div class="mcard-name">${m.name}</div><div class="mcard-rate">⚡ <span>${m.rate}</span> Snow/hour</div><div class="mcard-cost">💰 ${m.cost} TON each</div><span class="mcount">Owned: ${c}</span></div><div class="mqty"><input type="number" id="qty_${i}" value="1" min="1" max="99"><span>pcs</span></div><button class="btn btn-ice btn-sm" onclick="buyMachine(${i})" ${!ok?'disabled':''}>${ok?'Buy':'Need '+m.cost+' TON'}</button></div>`;}$('machineShopContent').innerHTML=h;}
 
-async function buyMachine(t){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const m=CFG.MACH[t],q=parseInt($('qty_'+t)?.value)||1,cost=m.cost*q;if((U.user.tonBalance||0)<cost){notify(`❌ Need ${cost} TON`,'e');return;}try{const r=await api('purchaseMachine',{machineType:t,quantity:q});U.user.tonBalance=r.tonBalance;U.user.miningRate=r.miningRate;U.user.miningMachines=r.miningMachines;updateUI();buildShop();snowfall(30);notify(`🎉 ${q}x ${m.name} purchased!`,'s');spawnP();}catch(e){notify(`❌ ${e.message}`,'e');}}
+async function buyMachine(t){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const m=CFG.MACH[t],q=parseInt($(('qty_'+t))?.value)||1,cost=m.cost*q;if((U.user.tonBalance||0)<cost){notify(`❌ Need ${cost} TON`,'e');return;}try{const r=await api('purchaseMachine',{machineType:t,quantity:q});U.user.tonBalance=r.tonBalance;U.user.miningRate=r.miningRate;U.user.miningMachines=r.miningMachines;updateUI();buildShop();snowfall(30);notify(`🎉 ${q}x ${m.name} purchased!`,'s');spawnP();}catch(e){notify(`❌ ${e.message}`,'e');}}
 
 function updateUI(){
   const u=U.user;$('tbSnow').textContent=fmt(u.snow||0);$('tbTON').textContent=fmtTon(u.tonBalance||0);
@@ -670,14 +692,128 @@ function snowfall(c=40){for(let i=0;i<c;i++)setTimeout(()=>{const s=document.cre
 function startSnowLoop(){setInterval(()=>{if(Math.random()>.4){const s=document.createElement('div');s.classList.add('snowflake');s.innerHTML='❄️';s.style.left=Math.random()*100+'%';s.style.fontSize=Math.random()*14+8+'px';s.style.animationDuration=Math.random()*5+3+'s';s.style.opacity=Math.random()*.5+.3;document.body.appendChild(s);setTimeout(()=>s.remove(),6000);}},500);}
 function spawnP(){const p=document.createElement('div');p.className='sptc';p.innerHTML=`<img src="${SI}">`;p.style.cssText=`left:${30+Math.random()*40}%;top:36%`;document.body.appendChild(p);setTimeout(()=>p.remove(),1000);}
 
-async function collectSnow(){
-  if(U._cc)return;const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;
-  const amt=Math.floor(U.storageProgress);if(amt<1){notify('Storage empty!','e');return;}
-  U._cc=true;setTimeout(()=>U._cc=false,3000);
-  const oldSnow = U.user.snow;const oldProgress = U.storageProgress;
-  U.user.snow+=amt;U.user.totalEarned=(U.user.totalEarned||0)+amt;U.storageProgress=0;
-  updateUI();updStorUI();spawnP();snowfall(30);notify(`+${fmt(amt)} Snow collected!`,'s');
-  try{await api('collect',{amount:amt});}catch(e){U.user.snow=oldSnow;U.user.totalEarned-=amt;U.storageProgress=oldProgress;updateUI();updStorUI();notify('Collection failed!','e');}
+async function collectSnow(){if(U._cc)return;const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const amt=Math.floor(U.storageProgress);if(amt<1){notify('Storage empty!','e');return;}U._cc=true;setTimeout(()=>U._cc=false,3000);U.user.snow+=amt;U.user.totalEarned=(U.user.totalEarned||0)+amt;U.storageProgress=0;updateUI();updStorUI();spawnP();snowfall(30);notify(`+${fmt(amt)} Snow collected!`,'s');api('collect',{amount:amt}).catch(()=>{});}
+
+function buildUpgradeContent(){const u=U.user,lv=u.storageLevel||1,cur=STOR[lv],next=STOR[lv+1];let h=`<div style="background:rgba(10,18,32,.4);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:12px;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--ice)">Lv.${lv}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${esc(cur.lbl)}</div><div style="font-size:9px;color:var(--muted);margin-top:2px">Cap: ${fmt(cur.cap)}</div></div><div style="font-size:20px;color:var(--ice)">→</div>`;if(next){h+=`<div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--ice);border-radius:12px;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--gold)">Lv.${lv+1}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${esc(next.lbl)}</div><div style="font-size:9px;color:var(--muted);margin-top:2px">Cap: ${fmt(next.cap)}</div></div>`;}else{h+=`<div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:12px;text-align:center"><div style="font-size:16px">MAX</div></div>`;}h+=`</div>`;if(next){h+=`<div style="font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:10px;padding:8px;background:rgba(10,18,32,.4);border-radius:10px">📦 Capacity: <span style="color:#fff;font-weight:800">${fmt(cur.cap)} → ${fmt(next.cap)}</span><br>💰 Cost: <span style="color:#fff;font-weight:800">${fmt(next.cost)} Snow</span></div><button class="btn btn-ice" onclick="upgradeStorage()">⬆️ Upgrade for ${fmt(next.cost)} Snow</button>`;}else{h+=`<div style="text-align:center;padding:12px;color:var(--ice);font-weight:800">🏆 Maximum Level!</div>`;}$('upgradeContent').innerHTML=h;}
+
+async function upgradeStorage(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const lv=U.user.storageLevel||1,next=STOR[lv+1];if(!next){notify('Already max!','e');return;}if((U.user.snow||0)<next.cost){notify(`Need ${fmt(next.cost)} Snow!`,'e');return;}U.user.snow-=next.cost;U.user.storageLevel=lv+1;api('upgradeStorage',{newLevel:lv+1}).catch(()=>{});buildUpgradeContent();updateUI();snowfall(30);notify(`✅ Storage → Level ${lv+1}!`,'s');}
+
+function goNav(el){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));el.classList.add('active');$(el.dataset.s).classList.add('active');$('floatAdd').style.display='none';}
+
+function renderTasks(){const rc=U.user.referralCount||0;let rh='';for(const t of REF_TASKS){const done=U.doneTasks.includes(t.id),can=rc>=t.n&&!done,p=Math.min(100,Math.round(rc/t.n*100));rh+=`<div class="titem"><div class="ticon"><img src="${RI}"></div><div class="tinfo"><div class="tname">${t.name}</div><div class="trew"><img src="${SI}"> <span style="font-weight:800;color:var(--snow)">${fmt(t.snow)} Snow</span></div><div class="pbar"><div style="width:${p}%"></div></div><div class="tstat">${rc}/${t.n} (${p}%)</div></div><div>${done?'<button class="tbtn done">✅ Done</button>':can?`<button class="tbtn claim" onclick="claimRefTask('${t.id}')">🎁 Claim</button>`:`<button class="tbtn go" disabled>🔒 ${t.n}</button>`}</div></div>`;}$('referralTasksList').innerHTML=rh||'<div class="hempty" style="text-align:center;padding:25px">✨ Invite friends to unlock rewards! ✨</div>';renderSocTasks();}
+
+async function claimRefTask(id){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;try{const r=await api('claimTask',{taskId:id});U.user.snow=r.snow;U.doneTasks.push(id);updateUI();renderTasks();snowfall(30);notify(`🎉 +${fmt(r.snowReward)} Snow!`,'s');spawnP();}catch(e){notify(`❌ ${e.message}`,'e');}}
+
+function taskCard(t,cat){const tid=t.id,done=U.doneTasks.includes(tid),fly=_tif.has(tid),icon=t.type==='channel'?'📢':'🤖',name=esc(t.name||('@'+(t.link?.split('t.me/')[1]?.split('/')[0]||'Task'))),snow=t.snow_reward||50,link=esc(t.link||'');return`<div class="titem"><div class="ticon" style="font-size:26px">${icon}</div><div class="tinfo"><div class="tname">${name}</div><div class="trew"><img src="${SI}"> ${fmt(snow)} Snow</div>${t.completions!==undefined?`<div class="tstat">${t.completions||0}/${t.targetUsers||0} done</div>`:''}</div><div>${done?'<button class="tbtn done">✅ Done</button>':fly?'<button class="tbtn done" style="opacity:.6">⏳</button>':`<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type||'bot'}','${cat}')">Go →</button>`}</div></div>`;}
+
+function renderSocTasks(){const p=U.tasks?.partner||[],c=U.tasks?.community||[];$('socPartnerList').innerHTML=p.length?p.map(t=>taskCard(t,'partner')).join(''):'<div class="hempty">No partner tasks yet</div>';$('socCommunityList').innerHTML=c.length?c.map(t=>taskCard(t,'community')).join(''):'<div class="hempty">No community tasks yet</div>';}
+
+function switchTTab(el,t){el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');$('tc'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');$('floatAdd').style.display='none';}
+function switchSocTab(t){_stab=t;$('stab-p').className='tab'+(t==='partner'?' active':'');$('stab-c').className='tab'+(t==='community'?' active':'');$('socPartnerList').style.display=t==='partner'?'block':'none';$('socCommunityList').style.display=t==='community'?'block':'none';$('floatAdd').style.display=t==='community'?'flex':'none';}
+
+async function doDbTask(tid,link,type,cat){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;if(_tif.has(tid)){notify('⏳ Processing...','w');return;}_tif.add(tid);renderSocTasks();if(link&&link.startsWith('https://t.me/'))window.open(link,'_blank','noopener');notify('⏳ Verifying...','i');setTimeout(async()=>{try{const r=await api('verifyTask',{taskId:tid,taskType:type,taskCategory:cat});if(!U.doneTasks.includes(tid))U.doneTasks.push(tid);if(r.snowAdded){U.user.snow+=r.snowAdded;updateUI();snowfall(30);notify(`🎉 +${fmt(r.snowAdded)} Snow!`,'s');spawnP();}else notify('✅ Task done!','s');renderTasks();}catch(e){notify(`❌ ${e.message.includes('member')?'Join the channel first!':e.message}`,'e');}finally{_tif.delete(tid);renderSocTasks();}},3000);}
+
+function setTaskType(t){_atType=t;$('atCh').className='at-type'+(t==='channel'?' active':'');$('atBot').className='at-type'+(t==='bot'?' active':'');$('atLink').closest('.modal-box').querySelector('.at-hint').style.display=t==='channel'?'block':'none';updAtCost();}
+function setAtTarget(v){$('atTarget').value=v;updAtCost();}
+function updAtCost(){const t=parseInt($('atTarget').value)||0;$('atCostPrev').textContent=fmt(t*60)+' Snow';}
+
+async function submitAddTask(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;if(_sf)return;const link=($('atLink').value||'').trim(),target=parseInt($('atTarget').value)||0,st=$('atStatus');st.style.display='block';st.style.color='var(--muted)';st.textContent='⏳ Creating...';if(!link.includes('t.me/')){st.style.color='#ff8a80';st.textContent='❌ Invalid link';return;}if(target<100){st.style.color='#ff8a80';st.textContent='❌ Min 100 users';return;}const cost=target*60;if((U.user.snow||0)<cost){st.style.color='#ff8a80';st.textContent=`❌ Need ${fmt(cost)} Snow`;return;}_sf=true;try{await api('createTask',{type:_atType,link,targetUsers:target});U.user.snow-=cost;st.style.color='var(--ice)';st.textContent='✅ Created!';updateUI();snowfall(30);notify(`✅ Task created! -${fmt(cost)} Snow`,'s');setTimeout(()=>{closeModal('addTaskModal');loadState();},1500);}catch(e){st.style.color='#ff8a80';st.textContent=`❌ ${e.message}`;}finally{_sf=false;}}
+
+function updSwapBals(){$('swapBal').innerHTML=`Balance: ${fmt(U.user.snow||0)} Snow`;}
+function swapMax(){$('swapSnowAmt').value=Math.floor(U.user.snow||0);updSwap();}
+function updSwap(){const s=parseInt($('swapSnowAmt').value)||0,fee=Math.floor(s*CFG.EXCH_FEE/100),after=s-fee,ton=after*CFG.S2T;$('swapTonOut').textContent=ton.toFixed(6);$('feeDisp').textContent=fmt(fee);}
+
+let _ef=false;
+async function swapSnowToTon(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;if(_ef)return;const s=parseInt($('swapSnowAmt').value)||0;if(s<100){notify('Min 100 Snow!','e');return;}if(s>(U.user.snow||0)){notify('Not enough Snow!','e');return;}_ef=true;try{const r=await api('exchange',{snowAmount:s});U.user.snow=r.snow;U.user.tonBalance=r.tonBalance;const fee=r.fee||Math.floor(s*CFG.EXCH_FEE/100),ton=(s-fee)*CFG.S2T;U.exchHist.unshift({snow:s,fee,ton,dir:'S→T',ts:Date.now()});$('swapSnowAmt').value='';$('swapTonOut').textContent='0';$('feeDisp').textContent='0';updateUI();renderExchHist();snowfall(30);notify(`⚡ ${fmt(s)} Snow → ${ton.toFixed(6)} TON`,'s');spawnP();}catch(e){notify(`❌ ${e.message}`,'e');}finally{_ef=false;}}
+
+function renderExchHist(){const el=$('exchHist');if(!U.exchHist.length){el.innerHTML='<div class="hempty">No conversions yet</div>';return;}el.innerHTML=U.exchHist.slice(0,25).map(h=>`<div class="hrow" style="flex-direction:column;align-items:flex-start;gap:2px"><div style="display:flex;justify-content:space-between;width:100%"><span class="hl">${h.dir} · ${h.ts?new Date(h.ts).toLocaleDateString():''}</span><span style="font-size:11px;font-weight:800;color:var(--gold)">${h.ton.toFixed(6)} TON</span></div><span style="font-size:10px;color:var(--muted)">From: ${fmt(h.snow)} Snow${h.fee?' (Fee: '+fmt(h.fee)+')':''}</span></div>`).join('');}
+
+function setDepAmt(v){$('depAmtInp').value=v;}
+function setWdAmt(v){$('wdAmt').value=v;}
+
+async function doWithdraw(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const addr=($('wdAddr').value||'').trim(),amt=parseFloat($('wdAmt').value)||0,u=U.user;if(!addr||addr.length<10){notify('Invalid address!','e');return;}if(amt<CFG.MIN_WD){notify(`Min ${CFG.MIN_WD} TON!`,'e');return;}if(amt>(u.tonBalance||0)){notify('Not enough TON!','e');return;}const pt=U.tasks?.partner||[],miss=pt.filter(t=>t.status==='active'&&!U.doneTasks.includes(t.id));if(miss.length>0){notify('❌ Complete all Partner tasks first','e');setTimeout(goToPartner,4000);return;}try{const r=await api('withdraw',{address:addr,amount:amt});u.tonBalance-=amt;U.wdHist.unshift({tonAmt:amt,addr,d:new Date().toLocaleDateString(),status:'pending'});$('wdAddr').value='';$('wdAmt').value='';updateUI();renderWdHist();snowfall(30);notify(`✅ Withdrawal: ${amt.toFixed(6)} TON`,'s');}catch(e){notify(`❌ ${e.message}`,'e');if(e.message.includes('partner'))setTimeout(goToPartner,4000);}}
+
+function goToPartner(){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.querySelector('.ni[data-s="secTasks"]').classList.add('active');$('secTasks').classList.add('active');switchTTab(document.querySelector('.tab'),'social');switchSocTab('partner');}
+
+function renderWdHist(){const el=$('wdHist');if(!U.wdHist.length){el.innerHTML='<div class="hempty">No withdrawals yet</div>';return;}el.innerHTML=U.wdHist.slice(0,20).map(h=>{const sc={approved:'sb-a',pending:'sb-p',rejected:'sb-r'}[h.status||'pending'];return`<div class="hrow" style="flex-direction:column;gap:3px;align-items:flex-start"><div style="display:flex;justify-content:space-between;width:100%"><span style="font-size:12px;font-weight:800;color:var(--ice)">${h.tonAmt.toFixed(6)} TON</span><span class="sbadge ${sc}">${esc(h.status||'Pending')}</span></div><div style="font-size:9px;color:var(--muted)">${esc(h.d||'')} · ${esc((h.addr||'').substring(0,12))}...</div></div>`;}).join('');}
+
+function switchWT(el,t){el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));$('wt-'+t).parentElement.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');$('wt-'+t).classList.add('active');}
+
+function updateRefUI(){if(!U.userId)return;const link=`${CFG.APP_LINK}?startapp=${U.userId}`;$('refLinkInp').value=link;$('depUidDisp').textContent=esc(U.userId);const ce=$('totalRefsDisp');if(ce)ce.textContent=`${U.refs.length} Friends`;const le=$('recentRefsList');if(le){if(!U.refs.length){le.innerHTML='<div class="hempty">No referrals yet</div>';}else{le.innerHTML=U.refs.slice(0,20).map(r=>`<div class="ref-list-item"><div class="rli-av">${r.photo?`<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">`:'🎅'}</div><div class="rli-info"><div class="rli-name">${esc(r.name||'Friend')}</div><div class="rli-date">${esc(r.date||'Joined')}</div>${r.totalSpentTon?`<div style="font-size:9px;color:var(--gold)">💰 Spent: ${r.totalSpentTon} TON</div>`:''}${r.totalCommissionEarned?`<div class="commission-badge"><i class="fas fa-coins" style="font-size:9px"></i>+${fmtTon(r.totalCommissionEarned)} TON</div>`:'<div style="font-size:9px;color:var(--muted)">⏳ Waiting</div>'}</div><div class="rli-earn">${r.totalCommissionEarned?`+${fmtTon(r.totalCommissionEarned)}`:'0'}</div></div>`).join('');}}}
+
+function copyRefLink(){navigator.clipboard.writeText($('refLinkInp').value).then(()=>notify('✅ Copied!','s')).catch(()=>{$('refLinkInp').select();document.execCommand('copy');notify('✅ Copied!','s');});}
+
+async function initTON(){try{if(window.TON_CONNECT_UI){U.tonUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:`${CFG.API}/tonconnect-manifest.json`,uiPreferences:{theme:'DARK'}});U.tonUI.onStatusChange(w=>w?onWConn(w):onWDisc());setTimeout(()=>{if(U.tonUI.connected)U.tonUI.getWallets();},500);}}catch(e){console.error('TON:',e);}}
+
+function onWConn(w){U.wallet={address:w.account.address,appName:w.device.appName};const sh=`${U.wallet.address.substring(0,6)}...${U.wallet.address.slice(-4)}`;$('walletAddrDisp').textContent=`${sh} · ${U.wallet.appName}`;const b=$('connBtn');b.innerHTML='<i class="fas fa-unlink"></i> Disconnect';b.onclick=disconnectWallet;$('subDepBtn').disabled=false;}
+function onWDisc(){U.wallet=null;$('walletAddrDisp').textContent='Not connected';const b=$('connBtn');b.innerHTML='<i class="fas fa-plug"></i> Connect';b.onclick=connectWallet;$('subDepBtn').disabled=true;}
+async function connectWallet(){if(U.tonUI)await U.tonUI.openModal();}
+async function disconnectWallet(){if(U.tonUI)await U.tonUI.disconnect();}
+
+window.initiateDeposit=async function(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;if(!U.wallet){alert('Connect wallet first');return;}const amt=parseFloat($('depAmtInp').value);if(!amt||amt<1){alert('Min 1 TON');return;}try{const comment=String(U.userId),nano=String(Math.floor(amt*1e9));if(!window.TonWeb)throw new Error('TonWeb not loaded');const TW=window.TonWeb;new TW();const cell=new TW.boc.Cell();cell.bits.writeUint(0,32);cell.bits.writeString(comment);const boc=await cell.toBoc(false),payload=TW.utils.bytesToBase64(boc);const tx={validUntil:Math.floor(Date.now()/1000)+600,messages:[{address:CFG.DEP_WALLET,amount:nano,payload}]};const result=await U.tonUI.sendTransaction(tx);const sd=$('depStatus');sd.classList.add('visible');sd.querySelector('div').innerHTML='⏳';sd.querySelectorAll('div')[1].innerHTML='Transaction sent!';$('depStatusDetail').textContent='Balance will be added within 3 min.';snowfall(30);notify('✅ Transaction sent!','s');api('deposit',{amount:amt,txHash:result.boc,comment}).catch(()=>{});}catch(e){const sd=$('depStatus');sd.classList.add('visible');sd.querySelector('div').innerHTML='❌';sd.querySelectorAll('div')[1].innerHTML=e.message?.includes('rejected')?'Rejected':'Failed';$('depStatusDetail').textContent=e.message||'Try again';}};
+
+function startDepVerify(id,hash){if(U.depCheckInt)clearInterval(U.depCheckInt);if(!id||!hash)return;let a=0;U.depCheckInt=setInterval(async()=>{a++;try{const r=await api('verifyDeposit',{depositId:id,txHash:hash});if(r.status==='completed'){clearInterval(U.depCheckInt);const sd=$('depStatus');sd.querySelector('div').innerHTML='✅';sd.querySelectorAll('div')[1].innerHTML='Deposit confirmed!';$('depStatusDetail').textContent=`${r.amount} TON added`;snowfall(30);notify(`💰 ${r.amount} TON deposited!`,'s');U.user.hasDeposited=true;U.user.tonBalance=(U.user.tonBalance||0)+(r.amount||0);loadState();setTimeout(()=>sd.classList.remove('visible'),3000);}}catch(e){if(a>=18)clearInterval(U.depCheckInt);}},10000);}
+
+function openModal(id){if(id==='upgradeModal')buildUpgradeContent();$(id).classList.add('active');}
+function closeModal(id){$(id).classList.remove('active');}
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active');}));
+
+function santaClick(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;const p=$('santaChar');if(p){p.style.transform='scale(.9) rotate(6deg)';setTimeout(()=>p.style.transform='',200);}spawnP();snowfall(20);}
+function openSupport(){window.open('https://t.me/Santa_1_Snow','_blank');}
+
+function ldProg(p,m){$('iceFill').style.width=p+'%';$('ldPct').textContent=Math.round(p)+'%';$('ldStatus').textContent=m;}
+function ldHide(){const s=$('ldScreen');s.classList.add('hidden');setTimeout(()=>s.remove(),700);}
+function preloadImgs(){const urls=[SI,RI,'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png','https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',CFG.MACH[1].img,CFG.MACH[2].img,CFG.MACH[3].img];return Promise.all(urls.map(u=>new Promise(r=>{const img=new Image();img.onload=img.onerror=r;img.src=u;})));}
+function ldAnimTo(tgt,msg,dur=600){const start=parseFloat($('iceFill')?.style.width)||0,steps=25,st=dur/steps;let s=0;return new Promise(res=>{const iv=setInterval(()=>{s++;const p=start+(tgt-start)*(s/steps);ldProg(p,msg);if(s>=steps){clearInterval(iv);ldProg(tgt,msg);res();}},st);});}
+
+async function claimDailyBonus(){const c=$('dailyBonusCard');if(!c||c.classList.contains('claimed'))return;const now=Date.now(),last=localStorage.getItem('santa_db'),next=last?parseInt(last)+86400000:0;if(now<next){notify('🕐 Come back tomorrow!','w');return;}try{U.user.snow+=50;localStorage.setItem('santa_db',now.toString());c.classList.add('claimed');c.innerHTML=`<div class="dbonus-icon">✅</div><div style="flex:1"><div style="font-size:13px;font-weight:800;color:var(--ice)">Claimed!</div><div style="font-size:10px;color:var(--muted)">Next in 24h</div></div><div style="font-size:15px;font-weight:800;color:var(--gold)">+50 ❄️</div>`;updateUI();snowfall(25);notify('🎁 +50 Snow!','s');spawnP();}catch(e){notify('❌ Failed','e');}}
+
+const TR={en:{labelSnow:'Snow',labelTON:'TON',statAccrued:'Accrued',statRateDay:'Rate/Day',statSnowDay:'Snow/day',friendsTitle:'Friends & Referrals',copyBtn:'Copy',refNote:'📤 Share link. 20% commission in TON!',recentRefs:'Recent Referrals',noReferrals:'No referrals yet',labelWallet:'Wallet',notConnected:'Not connected',connectBtn:'Connect',important:'IMPORTANT:',depositWarning1:'Your User ID',depositWarning2:'must be the ONLY comment.',amountTON:'Amount (TON)',depositBtn:'Deposit TON',processingDeposit:'Processing...',tonWalletAddr:'TON Wallet Address',withdrawBtn:'Withdraw TON',withdrawHist:'📋 Withdrawal History',noWithdrawals:'No withdrawals yet',youGet:'You get:',swapRate:'1 TON = 100,000 Snow',exchangeNow:'Exchange',exchangeHist:'📋 Exchange History',noConversions:'No conversions yet',helpTitle:'🎅 Santa Snow Guide',addTaskTitle:'➕ Add Community Task',taskLinkLabel:'Telegram Link',taskTargetLabel:'Target Users (min 100)',taskCreateBtn:'✅ Create Task',upgTitle:'⬆️ Upgrade Storage',tabSocialTxt:'Social',tabReferralTxt:'Referral',floatAdd:'Add Task',Home:'Home',Tasks:'Tasks',Friends:'Friends',Wallet:'Wallet',maxBtn:'MAX'},ru:{labelSnow:'Снег',labelTON:'TON',statAccrued:'Накоплено',statRateDay:'Ставка/День',statSnowDay:'Снег/день',friendsTitle:'Друзья и Рефералы',copyBtn:'Копировать',refNote:'📤 Поделитесь ссылкой. 20% комиссии в TON!',recentRefs:'Недавние рефералы',noReferrals:'Пока нет рефералов',labelWallet:'Кошелек',notConnected:'Не подключен',connectBtn:'Подключить',important:'ВАЖНО:',depositWarning1:'Ваш ID',depositWarning2:'должен быть ЕДИНСТВЕННЫМ комментарием.',amountTON:'Сумма (TON)',depositBtn:'Внести TON',processingDeposit:'Обработка...',tonWalletAddr:'TON адрес кошелька',withdrawBtn:'Вывести TON',withdrawHist:'📋 История выводов',noWithdrawals:'Пока нет выводов',youGet:'Вы получите:',swapRate:'1 TON = 100,000 Снега',exchangeNow:'Обменять',exchangeHist:'📋 История обменов',noConversions:'Пока нет обменов',helpTitle:'🎅 Руководство Santa Snow',addTaskTitle:'➕ Добавить задачу',taskLinkLabel:'Ссылка Telegram',taskTargetLabel:'Целевые пользователи (мин. 100)',taskCreateBtn:'✅ Создать',upgTitle:'⬆️ Улучшить хранилище',tabSocialTxt:'Соц. сети',tabReferralTxt:'Рефералы',floatAdd:'Добавить',Home:'Главная',Tasks:'Задачи',Friends:'Друзья',Wallet:'Кошелек',maxBtn:'МАКС'}};
+
+function toggleLangMenu(){const m=$('langMenu');m.style.display=m.style.display==='none'?'block':'none';if(m.style.display==='block')setTimeout(()=>document.addEventListener('click',e=>{const m2=$('langMenu'),b=$('langFlag').parentElement;if(m2&&!m2.contains(e.target)&&!b.contains(e.target))m2.style.display='none';},{once:true}),10);}
+function setLang(l,f,c){localStorage.setItem('santaLang',l);applyLang(l,f,c);$('langMenu').style.display='none';}
+function applyLang(l,f,c){const t=TR[l]||TR.en;$('langFlag').textContent=f;$('langCode').textContent=c;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.innerHTML=t[k];});const nav=$$('.ni .ni-lbl'),keys=['Home','Tasks','Friends','Wallet'];nav.forEach((el,i)=>{if(keys[i]&&t[keys[i]])el.textContent=t[keys[i]];});}
+
+function $(id){return document.getElementById(id);}
+function $$(sel){return document.querySelectorAll(sel);}
+
+async function init(){
+  const t0=Date.now(),MIN_LD=2500;startSnowLoop();ldProg(0,'Starting...');
+  for(let i=0;i<20;i++)setTimeout(()=>{const p=document.createElement('div');p.className='pt';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*8+'s';p.style.animationDuration=(Math.random()*4+6)+'s';document.body.appendChild(p);},i*150);
+
+  if(window.Telegram?.WebApp){U.tg=window.Telegram.WebApp;U.tg.ready();U.tg.expand();const u=U.tg.initDataUnsafe?.user;if(u){U.userId=String(u.id);if(u.photo_url){const av=$('uavatar');if(av)av.innerHTML=`<img src="${esc(u.photo_url)}" onerror="this.parentElement.innerHTML='<div class=ap>🎅</div>'">`;}}let sp='';if(U.tg.initDataUnsafe?.start_param)sp=String(U.tg.initDataUnsafe.start_param);else if(U.tg.initDataUnsafe?.startParam)sp=String(U.tg.initDataUnsafe.startParam);U.startParam=sp.replace(/\D/g,'');}
+
+  await ldAnimTo(12,'Connecting...',700);await new Promise(r=>setTimeout(r,300));
+  await ldAnimTo(25,'Loading assets...',600);await Promise.all([preloadImgs().catch(()=>{}),new Promise(r=>setTimeout(r,700))]);
+  await ldAnimTo(45,'Assets loaded! ✨',500);await new Promise(r=>setTimeout(r,250));
+  await ldAnimTo(55,'Loading account...',600);
+
+  let ok=false,att=0;while(!ok&&att<5){att++;try{await loadState();if(U.user&&U.userId)ok=true;else throw new Error('No data');}catch(e){if(att<5){ldProg(55,`Retry ${att}/5`);await new Promise(r=>setTimeout(r,1200*att));}}}
+  if(!ok){ldProg(100,'Connection failed.');return;}
+
+  await ldAnimTo(72,'Account loaded! 🎅',500);await new Promise(r=>setTimeout(r,250));
+  await ldAnimTo(85,'Building UI...',400);renderTasks();await new Promise(r=>setTimeout(r,250));
+  await ldAnimTo(95,'Setting up wallet...',400);setTimeout(()=>initTON(),500);startStorage();
+  setInterval(()=>loadState(),30000);await new Promise(r=>setTimeout(r,350));
+  await ldAnimTo(100,'Ready! ❄️',500);
+
+  const el=Date.now()-t0;if(el<MIN_LD)await new Promise(r=>setTimeout(r,MIN_LD-el));ldHide();
+  
+  // Attach event listener to welcome chest button
+  const welcomeBtn = document.getElementById('welcomeChestBtn');
+  if(welcomeBtn){
+    welcomeBtn.removeEventListener('click', openWelcomeChestFromModal);
+    welcomeBtn.addEventListener('click', openWelcomeChestFromModal);
+  }
+  
+  if(U.isNew){
+    const welcomeModal = document.getElementById('welcomeModal');
+    if(welcomeModal) welcomeModal.classList.add('active');
+  }
+  const sl=localStorage.getItem('santaLang');if(sl==='en'||sl==='ru'){const m={en:['🇬🇧','EN'],ru:['🇷🇺','RU']};applyLang(sl,m[sl][0],m[sl][1]);}else applyLang('ru','🇷🇺','RU');
 }
 
-function buildUpgradeContent(){const u=U.user,lv=u.storageLevel||1,cur=STOR[lv],next=STOR[lv+1];let h=`<div style="background:rgba(10,18,32,.4);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:12px;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--ice)">Lv.${lv}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${esc(cur.lbl)}</div><div style="font-size:9px;color:var(--muted);margin-top:2px">Cap: ${fmt(cur.cap)}</div></div><div style="font-size:20px;color:var(--ice)">→</div>`;if(next){h+=`<div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--ice);border-radius:12px;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--gold)">Lv.${lv+1}</div><div style="font-size:
+window.addEventListener('load',init);
+</script>
+</body>
+</html>
