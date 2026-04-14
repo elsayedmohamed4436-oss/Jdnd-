@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Santa Snow ❄️</title>
+<title>Santa Snow ❄️ | لعبة تعدين الثلج</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -11,51 +11,28 @@
 <script src="https://unpkg.com/tonweb/dist/tonweb.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--snow:#E8F0FF;--gold:#FFD966;--ice:#4DD0E1;--red:#EF5350;--blue:#42A5F5;--cyan:#26C6DA;--dk:#0A1428;--muted:rgba(255,255,255,.6);--border:rgba(255,255,255,.12);--success:#4CAF50;--warning:#FFC107}
+:root{--snow:#E8F0FF;--gold:#FFD966;--ice:#4DD0E1;--red:#EF5350;--blue:#42A5F5;--cyan:#26C6DA;--purple:#AB47BC;--dk:#0A1428;--card:linear-gradient(145deg,rgba(25,42,65,.9),rgba(18,32,52,.95));--muted:rgba(255,255,255,.6);--border:rgba(255,255,255,.12)}
 body{font-family:'Fredoka',cursive;font-weight:600;background:var(--dk);color:#fff;min-height:100vh;padding-bottom:80px;overflow-x:hidden;font-size:14px}
 .bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 20% 80%,rgba(77,208,225,.3) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(156,39,176,.25) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(255,217,102,.2) 0%,transparent 60%),url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ee3d15b9-4c4b-4a50-ba6e-5e0b9f526179.png') center/cover;animation:au 20s ease-in-out infinite}
 @keyframes au{0%,100%{background-size:200% 200%,200% 200%,200% 200%,cover}50%{background-size:250% 250%,250% 250%,250% 250%,cover}}
 body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,rgba(10,20,40,.6),rgba(10,20,40,.95));z-index:-1}
-.pt{position:fixed;width:3px;height:3px;background:var(--ice);border-radius:50%;pointer-events:none;animation:pf 8s ease-in-out infinite;opacity:.7;z-index:0;box-shadow:0 0 8px rgba(77,208,225,.4)}
-@keyframes pf{0%,100%{transform:translateY(100vh) rotate(0);opacity:0}10%{opacity:.7}90%{opacity:.7}100%{transform:translateY(-30vh) rotate(720deg);opacity:0}}
-.snowflake{position:fixed;color:#fff;user-select:none;pointer-events:none;z-index:999;font-size:1.3rem;animation:fall linear forwards;text-shadow:0 0 8px rgba(77,208,225,.6);opacity:.8}
-@keyframes fall{0%{transform:translateY(-10vh) rotate(0);opacity:.8}100%{transform:translateY(100vh) rotate(360deg);opacity:0}}
 .glass{background:rgba(15,25,45,.85);backdrop-filter:blur(20px);border:1px solid rgba(77,208,225,.2)}
 .glow-ice{text-shadow:0 0 15px rgba(77,208,225,.5)}
 .glow-gold{text-shadow:0 0 15px rgba(255,217,102,.5)}
-.modal{display:none;position:fixed;inset:0;background:rgba(5,12,25,.85);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(12px)}
-.modal.active{display:flex}
-.modal-box{background:linear-gradient(160deg,#0A1428,#0A1A2A);border:1px solid var(--border);border-radius:24px;padding:20px;width:92%;max-width:460px;max-height:85vh;overflow-y:auto;animation:scIn .35s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 20px 60px rgba(0,0,0,.6)}
-@keyframes scIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
-.mhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08)}
-.mtitle{font-size:17px;font-weight:800;color:var(--ice)}
-.mclose{background:rgba(255,255,255,.1);border:none;border-radius:50%;width:32px;height:32px;color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
-.wm{position:fixed;inset:0;z-index:10000;background:radial-gradient(ellipse,rgba(77,208,225,.2),rgba(10,20,40,.95));backdrop-filter:blur(25px);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275)}
-.wm.active{visibility:visible;opacity:1}
-.wm-box{background:linear-gradient(145deg,rgba(26,42,58,.95),rgba(15,26,36,.95));border-radius:32px;padding:30px 26px;max-width:330px;width:90%;text-align:center;border:2px solid rgba(77,208,225,.5);box-shadow:0 0 60px rgba(77,208,225,.4);animation:mp .5s cubic-bezier(.175,.885,.32,1.275)}
-@keyframes mp{0%{transform:scale(.85) translateY(20px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
-.wm-img{width:120px;height:120px;margin:0 auto 18px;animation:cf 2s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(77,208,225,.6))}
-@keyframes cf{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
-.wm-title{font-size:24px;font-weight:800;color:var(--ice);margin-bottom:10px}
-.wm-sub{font-size:13px;color:var(--gold);margin-bottom:20px}
 .btn{border:none;border-radius:16px;padding:13px 20px;color:#fff;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;width:100%}
 .btn:active{transform:scale(.97)}
-.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:bs 2.5s infinite}
-@keyframes bs{0%{left:-100%}100%{left:100%}}
-.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;animation:none}
 .btn-ice{background:linear-gradient(135deg,#4DD0E1,#0097B2);box-shadow:0 0 0 2px rgba(77,208,225,.3),0 6px 20px rgba(77,208,225,.4)}
 .btn-gold{background:linear-gradient(135deg,#FFD966,#FF9800);color:#2C1A00;box-shadow:0 0 0 2px rgba(255,217,102,.3),0 6px 20px rgba(255,217,102,.35)}
 .btn-green{background:linear-gradient(135deg,#4CAF50,#2E7D32);box-shadow:0 0 0 2px rgba(76,175,80,.3),0 6px 20px rgba(76,175,80,.35)}
+.btn-purple{background:linear-gradient(135deg,#AB47BC,#7B1FA2);box-shadow:0 0 0 2px rgba(171,71,188,.3),0 6px 20px rgba(171,71,188,.35)}
 .btn-sm{padding:9px 14px;font-size:12px;border-radius:12px;width:auto;white-space:nowrap}
 .btn-pill{border-radius:50px}
-.btn-ready{animation:pr 2s infinite}
-@keyframes pr{0%,100%{box-shadow:0 0 0 2px rgba(77,208,225,.3),0 6px 20px rgba(77,208,225,.4)}50%{box-shadow:0 0 0 3px rgba(77,208,225,.6),0 6px 30px rgba(77,208,225,.8)}}
-.toast-notification{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(15,25,40,.98);border:1px solid var(--border);border-radius:20px;padding:12px 20px;font-size:13px;font-weight:700;z-index:1000;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:85vw;text-align:center;backdrop-filter:blur(16px);display:flex;align-items:center;gap:10px}
-.toast-notification.show{transform:translateX(-50%) translateY(0)}
-.toast-notification.success{border-color:var(--success);color:#81C784;background:rgba(76,175,80,.15)}
-.toast-notification.error{border-color:var(--red);color:#FF8A80;background:rgba(239,83,80,.15)}
-.toast-notification.info{border-color:var(--blue);color:#90CAF9;background:rgba(66,165,245,.15)}
-.toast-notification.warning{border-color:var(--gold);color:#FFD740;background:rgba(255,193,7,.15)}
+.notif{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-80px);background:rgba(15,25,40,.95);border:1px solid var(--border);border-radius:20px;padding:11px 18px;font-size:13px;font-weight:700;z-index:1000;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:85vw;text-align:center;backdrop-filter:blur(16px);pointer-events:none}
+.notif.show{transform:translateX(-50%) translateY(0)}
+.notif.s{border-color:var(--ice);color:var(--ice);background:rgba(77,208,225,.15)}
+.notif.e{border-color:var(--red);color:#FF8A80;background:rgba(239,83,80,.15)}
+.notif.i{border-color:var(--blue);color:#90CAF9;background:rgba(66,165,245,.15)}
+.notif.w{border-color:var(--gold);color:#FFD740;background:rgba(255,193,7,.15)}
 .topbar{display:flex;align-items:center;gap:10px;padding:10px 14px 8px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(77,208,225,.2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .avatar{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(77,208,225,.2),rgba(156,39,176,.2));overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;position:relative}
 .avatar::before{content:'';position:absolute;inset:-2px;border-radius:16px;background:conic-gradient(from 0deg,var(--ice),var(--purple),var(--gold),var(--ice));animation:ar 4s linear infinite;z-index:-1;opacity:.6}
@@ -67,40 +44,16 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .chip.ton{color:var(--gold);border-color:rgba(255,217,102,.3)}
 .chip-num{font-size:13px;font-weight:800;overflow:hidden;text-overflow:ellipsis}
 .chip-lbl{font-size:8px;opacity:.7;font-weight:600;text-transform:uppercase}
-.lang-btn{background:linear-gradient(135deg,rgba(77,208,225,.2),rgba(0,0,0,.4));border:1px solid rgba(77,208,225,.4);border-radius:28px;padding:6px 12px;color:var(--ice);font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:5px}
-#langMenu{display:none;position:fixed;top:66px;right:12px;z-index:300;background:rgba(15,25,45,.95);border:1px solid rgba(77,208,225,.3);border-radius:16px;overflow:hidden;min-width:140px;backdrop-filter:blur(20px);box-shadow:0 12px 40px rgba(0,0,0,.6)}
-.lang-opt{padding:11px 14px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.05);transition:all .15s}
-.lang-opt:last-child{border-bottom:none}
-.lang-opt:hover,.lang-opt.active{background:rgba(77,208,225,.15);color:var(--ice)}
 .sec{display:none;padding:12px 14px 24px;animation:fi .3s ease}
 .sec.active{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* Balance Big Style */
-.balance-section{text-align:center;margin-bottom:20px;padding:20px;background:linear-gradient(145deg,rgba(25,42,65,.9),rgba(18,32,52,.95));border-radius:32px;border:1px solid rgba(77,208,225,.2)}
-.balance-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1.2;margin-bottom:5px;text-shadow:0 0 20px rgba(255,217,102,.3)}
-.balance-usd{font-size:14px;color:var(--muted);font-weight:600}
-.balance-label{font-size:11px;color:var(--ice);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
-
-/* Bottom Navigation */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(10,20,40,.95);backdrop-filter:blur(20px);border-top:1px solid rgba(77,208,225,.2);padding:8px 12px 20px;justify-content:space-around;z-index:200}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(255,255,255,.5);transition:all .2s;cursor:pointer;flex:1}
-.nav-item i{font-size:22px}
-.nav-item span{font-size:10px;font-weight:600}
-.nav-item.active{color:#4DD0E1;transform:translateY(-2px)}
-.nav-item.active i{text-shadow:0 0 10px rgba(77,208,225,.6)}
-
-/* Hero Section */
-.hero{width:100%;max-width:420px;margin:0 auto;padding:22px 16px;border-radius:28px;background:linear-gradient(145deg,rgba(25,42,65,.9),rgba(18,32,52,.95));box-shadow:0 10px 40px rgba(0,0,0,.5),0 0 0 1px rgba(77,208,225,.2);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(77,208,225,.08),transparent 50%);border-radius:28px;pointer-events:none}
-.hero>*{position:relative;z-index:1}
-.santa-wrap{position:relative;width:190px;height:190px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.hero{width:100%;max-width:420px;margin:0 auto;padding:22px 16px;border-radius:28px;background:var(--card);box-shadow:0 10px 40px rgba(0,0,0,.5),0 0 0 1px rgba(77,208,225,.2);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
+.santa-wrap{position:relative;width:190px;height:190px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
 .santa-wrap::before{content:'';position:absolute;inset:-8px;background:url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/6dd8b258-c54d-4334-b8bc-48d1bfd1d672.png') center/contain no-repeat;z-index:0;filter:drop-shadow(0 0 18px rgba(77,208,225,.4));animation:fg 3s ease-in-out infinite}
 @keyframes fg{0%,100%{filter:drop-shadow(0 0 18px rgba(77,208,225,.4))}50%{filter:drop-shadow(0 0 30px rgba(77,208,225,.7))}}
-.santa-inner{position:relative;z-index:1;width:150px;height:150px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,.1);box-shadow:inset 0 0 25px rgba(0,0,0,.3)}
-#santaChar{user-select:none;width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .1s ease-out}
-#santaChar:active{transform:scale(.92) rotate(5deg)}
-#santaChar img{width:140px;object-fit:contain;animation:sf 3.5s ease-in-out infinite;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5)) drop-shadow(0 0 20px rgba(77,208,225,.3))}
+.santa-inner{position:relative;z-index:1;width:150px;height:150px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,.1);box-shadow:inset 0 0 25px rgba(0,0,0,.3);cursor:pointer;transition:transform .15s}
+.santa-inner:active{transform:scale(.92) rotate(5deg)}
+.santa-inner img{width:140px;object-fit:contain;animation:sf 3.5s ease-in-out infinite;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5)) drop-shadow(0 0 20px rgba(77,208,225,.3))}
 @keyframes sf{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
 .stats{display:flex;width:100%;background:rgba(15,25,45,.6);border:1px solid rgba(77,208,225,.2);border-radius:18px;overflow:hidden;margin-bottom:14px}
 .stat-box{flex:1;padding:12px 10px;text-align:center}
@@ -108,158 +61,109 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .stat-lbl{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
 .stat-val{font-size:18px;font-weight:800;line-height:1.1;margin-bottom:2px}
 .stat-unit{font-size:9px;color:var(--snow);font-weight:700}
-
-/* Tap Particle */
-.tap-particle{position:fixed;pointer-events:none;z-index:1000;animation:floatUp 0.6s ease-out forwards;font-size:20px}
-@keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-80px) scale(0.3);opacity:0}}
-
-/* Daily Bonus & Streak */
-.dbonus{width:100%;background:linear-gradient(135deg,rgba(255,217,102,.15),rgba(77,208,225,.1));border:2px solid rgba(255,217,102,.4);border-radius:18px;padding:12px 16px;margin:10px 0;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .3s}
-.dbonus:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,217,102,.3)}
-.dbonus.claimed{opacity:.6;cursor:default;border-style:dashed}
-.dbonus-icon{font-size:26px;animation:bn 2s infinite}
-@keyframes bn{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.streak-badge{background:linear-gradient(135deg,rgba(77,208,225,.2),rgba(0,0,0,.3));border-radius:20px;padding:5px 12px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;margin-top:8px}
-.streak-fire{color:#FF9800;animation:firePulse 1s ease-in-out infinite}
-@keyframes firePulse{0%,100%{text-shadow:0 0 5px #FF9800}50%{text-shadow:0 0 15px #FF5722}}
-
-/* Welcome Chest */
-.wchest{position:relative;margin:10px auto 20px;cursor:pointer;text-align:center;animation:cp 2s ease-in-out infinite}
-@keyframes cp{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
-.wchest img{width:110px;height:110px;filter:drop-shadow(0 0 25px rgba(77,208,225,.7));animation:cb 1.5s ease-in-out infinite}
-@keyframes cb{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.wchest:active img{transform:scale(.93)}
-.wchest-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:130px;height:130px;background:radial-gradient(circle,rgba(77,208,225,.4),transparent 70%);border-radius:50%;animation:gp 1.8s ease-in-out infinite;pointer-events:none}
-@keyframes gp{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
-.wchest-txt{margin-top:12px;font-size:13px;font-weight:800;color:var(--ice);background:rgba(15,25,45,.7);display:inline-block;padding:6px 16px;border-radius:28px;border:1px solid rgba(77,208,225,.3);animation:tg 1.2s ease-in-out infinite}
-@keyframes tg{0%,100%{opacity:.9}50%{opacity:1;text-shadow:0 0 18px rgba(77,208,225,.8)}}
-
-/* Tasks Cards */
-.titem{background:linear-gradient(135deg,rgba(25,40,62,.7),rgba(18,30,48,.8));border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:8px;transition:all .2s;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+/* 🎁 Daily Bonus Card - New Design */
+.daily-card{background:linear-gradient(135deg,rgba(77,208,225,.2),rgba(171,71,188,.15));border:2px solid rgba(77,208,225,.5);border-radius:20px;padding:16px;margin:12px 0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .3s;animation:dp 2s ease-in-out infinite}
+@keyframes dp{0%,100%{box-shadow:0 0 0 0 rgba(77,208,225,.4)}50%{box-shadow:0 0 0 6px rgba(77,208,225,.2)}}
+.daily-left{display:flex;align-items:center;gap:12px}
+.daily-icon{font-size:42px;animation:dr 1s ease-in-out infinite}
+@keyframes dr{0%,100%{transform:rotate(0deg)}25%{transform:rotate(15deg)}75%{transform:rotate(-15deg)}}
+.daily-info h3{font-size:16px;font-weight:800;color:var(--gold)}
+.daily-info p{font-size:11px;color:var(--muted);margin-top:3px}
+.daily-streak{display:flex;gap:4px;margin-top:6px}
+.streak-day{width:32px;height:32px;background:rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--muted);transition:all .3s}
+.streak-day.active{background:linear-gradient(135deg,#4DD0E1,#0097B2);color:#fff;box-shadow:0 0 10px rgba(77,208,225,.5)}
+.streak-day.claimed{background:rgba(76,175,80,.3);color:#4CAF50;border:1px solid #4CAF50}
+.daily-reward{text-align:right}
+.daily-reward .reward-amount{font-size:28px;font-weight:800;color:var(--gold)}
+.daily-reward .reward-label{font-size:10px;color:var(--muted)}
+.daily-card.claimed{opacity:.5;animation:none;cursor:default}
+/* 🏆 Storage Milestones */
+.milestones-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:15px 0}
+.milestone-card{background:rgba(15,25,45,.7);border:1px solid var(--border);border-radius:16px;padding:12px;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+.milestone-card.reached{border-color:var(--gold);background:linear-gradient(135deg,rgba(255,217,102,.15),rgba(255,152,0,.1))}
+.milestone-card.claimed{opacity:.5;border-color:var(--ice)}
+.milestone-card:not(.claimed).reached{cursor:pointer;animation:mp 1.5s ease-in-out infinite}
+@keyframes mp{0%,100%{transform:scale(1)}50%{transform:scale(1.02);box-shadow:0 0 20px rgba(255,217,102,.4)}}
+.milestone-amount{font-size:20px;font-weight:800;color:var(--gold)}
+.milestone-reward{font-size:14px;font-weight:800;color:var(--ice);margin:6px 0}
+.milestone-status{font-size:10px;padding:4px 8px;border-radius:12px;display:inline-block}
+.status-reached{background:rgba(255,217,102,.2);color:var(--gold)}
+.status-claimed{background:rgba(76,175,80,.2);color:#4CAF50}
+.status-locked{background:rgba(255,255,255,.1);color:var(--muted)}
+/* Welcome Modal */
+.wm{position:fixed;inset:0;z-index:10000;background:radial-gradient(ellipse,rgba(77,208,225,.2),rgba(10,20,40,.95));backdrop-filter:blur(25px);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275)}
+.wm.active{visibility:visible;opacity:1}
+.wm-box{background:var(--card);border-radius:32px;padding:30px 26px;max-width:330px;width:90%;text-align:center;border:2px solid rgba(77,208,225,.5);box-shadow:0 0 60px rgba(77,208,225,.4);animation:mp  .5s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes mp{0%{transform:scale(.85) translateY(20px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
+.wm-img{width:120px;height:120px;margin:0 auto 18px;animation:cf 2s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(77,208,225,.6))}
+@keyframes cf{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+.wm-title{font-size:24px;font-weight:800;color:var(--ice);margin-bottom:10px}
+/* Modal */
+.modal{display:none;position:fixed;inset:0;background:rgba(5,12,25,.85);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(12px)}
+.modal.active{display:flex}
+.modal-box{background:linear-gradient(160deg,#0A1428,#0A1A2A);border:1px solid var(--border);border-radius:24px;padding:20px;width:92%;max-width:460px;max-height:85vh;overflow-y:auto;animation:scIn .35s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 20px 60px rgba(0,0,0,.6)}
+@keyframes scIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.mhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.mtitle{font-size:17px;font-weight:800;color:var(--ice)}
+.mclose{background:rgba(255,255,255,.1);border:none;border-radius:50%;width:32px;height:32px;color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+/* Tabs */
+.tabs{display:flex;gap:6px;margin-bottom:12px;background:rgba(15,25,45,.5);padding:4px;border-radius:14px}
+.tab{flex:1;padding:9px 6px;text-align:center;background:transparent;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:all .25s;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:5px}
+.tab.active{background:linear-gradient(135deg,rgba(77,208,225,.25),rgba(77,208,225,.1));border:1px solid rgba(77,208,225,.4);color:var(--ice);box-shadow:0 4px 12px rgba(77,208,225,.2)}
+.tcont{display:none;animation:fi .3s ease}
+.tcont.active{display:block}
+/* Items */
+.titem{background:linear-gradient(135deg,rgba(25,40,62,.7),rgba(18,30,48,.8));border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:8px;transition:all .2s}
 .titem:hover{transform:translateY(-2px);border-color:rgba(77,208,225,.3)}
 .ticon{font-size:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:rgba(77,208,225,.1);border-radius:12px;border:1px solid rgba(77,208,225,.2)}
-.ticon img{width:44px;height:44px;object-fit:contain;border-radius:12px}
 .tinfo{flex:1;min-width:0}
 .tname{font-weight:800;font-size:13px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.trew{font-size:11px;color:var(--snow);font-weight:700;display:flex;align-items:center;gap:4px;margin:3px 0}
-.trew img{width:16px;height:16px}
-.tstat{font-size:9px;color:var(--muted);margin-top:3px}
-.pbar{background:rgba(10,18,32,.5);border-radius:8px;height:6px;margin-top:5px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
-.pbar>div{transition:width .4s ease;background:linear-gradient(90deg,#4DD0E1,#80DEEA);height:100%;border-radius:8px}
+.trew{font-size:11px;color:var(--snow);font-weight:700;display:flex;align-items:center;gap:4px}
 .tbtn{border:none;border-radius:10px;padding:7px 12px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s}
 .tbtn:active{transform:scale(.96)}
 .tbtn.go{background:linear-gradient(135deg,#1976D2,#0D47A1);color:#fff}
-.tbtn.claim{background:linear-gradient(135deg,#4DD0E1,#00ACC1);color:#fff;animation:clp 2s ease-in-out infinite}
-@keyframes clp{0%,100%{box-shadow:0 4px 12px rgba(77,208,225,.4)}50%{box-shadow:0 4px 20px rgba(77,208,225,.8)}}
+.tbtn.claim{background:linear-gradient(135deg,#4DD0E1,#00ACC1);color:#fff}
 .tbtn.done{background:rgba(255,255,255,.08);color:var(--muted);cursor:default}
-
-/* Achievements Section */
-.achievements-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
-.achievement-card{background:linear-gradient(135deg,rgba(25,40,62,.7),rgba(18,30,48,.8));border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px;text-align:center;transition:all .2s}
-.achievement-card.claimed{opacity:.6;border-color:rgba(76,175,80,.3)}
-.achievement-card:not(.claimed){cursor:pointer}
-.achievement-card:not(.claimed):active{transform:scale(.97)}
-.ach-icon{font-size:32px;margin-bottom:8px}
-.ach-name{font-size:12px;font-weight:800;margin-bottom:4px}
-.ach-reward{font-size:10px;color:var(--gold);font-weight:700}
-.ach-progress{font-size:9px;color:var(--muted);margin-top:5px}
-
-/* Referral System */
-.ref-card{background:linear-gradient(145deg,rgba(25,42,65,.8),rgba(18,32,52,.9));border:1px solid rgba(77,208,225,.2);border-radius:20px;padding:14px;margin-bottom:12px}
-.ref-badge{display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(77,208,225,.1);border:1px solid rgba(77,208,225,.2);border-radius:12px;padding:12px;margin-bottom:12px;animation:bg 3s ease-in-out infinite}
-@keyframes bg{0%,100%{border-color:rgba(77,208,225,.2)}50%{border-color:rgba(77,208,225,.5)}}
-.ref-pct{font-size:32px;font-weight:800;color:var(--ice);line-height:1}
-.ref-txt{font-size:11px;color:var(--muted);font-weight:600;line-height:1.5}
-.ref-row{display:flex;gap:8px;margin-bottom:6px}
-.ref-inp{flex:1;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:11px;font-weight:600;font-family:inherit}
-.ref-list-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
-.ref-list-item:last-child{border-bottom:none}
-.rli-av{width:36px;height:36px;border-radius:50%;background:rgba(77,208,225,.15);border:2px solid var(--ice);display:flex;align-items:center;justify-content:center;font-size:16px;overflow:hidden;flex-shrink:0}
-.rli-av img{width:100%;height:100%;object-fit:cover}
-.rli-info{flex:1;min-width:0}
-.rli-name{font-size:13px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rli-date{font-size:9px;color:var(--muted);font-weight:600;margin-top:1px}
-.rli-earn{font-size:12px;font-weight:800;color:var(--snow);white-space:nowrap}
-.commission-badge{background:linear-gradient(135deg,rgba(255,217,102,.2),rgba(255,152,0,.15));border:1px solid rgba(255,217,102,.3);border-radius:10px;padding:3px 8px;font-size:10px;font-weight:800;color:var(--gold);display:inline-flex;align-items:center;gap:3px;margin-top:2px}
-.ref-count{background:rgba(0,242,122,.15);border:1px solid rgba(0,242,122,.3);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:800;color:#00F27A}
-.ref-level-progress{background:rgba(10,18,32,.5);border-radius:10px;padding:8px;margin-top:10px}
-.ref-level-bar{height:6px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden;margin-top:5px}
-.ref-level-fill{height:100%;background:linear-gradient(90deg,#4DD0E1,#80DEEA);border-radius:10px;transition:width .3s}
-
-/* Wallet Section */
-.wallet{background:linear-gradient(135deg,rgba(25,40,62,.85),rgba(18,30,48,.9));border-radius:24px;padding:16px;border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 30px rgba(0,0,0,.4)}
-.wcard{background:linear-gradient(145deg,rgba(20,35,55,.9),rgba(15,25,45,.95));border-radius:20px;padding:18px;border:1px solid rgba(255,255,255,.1);margin-bottom:14px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+/* Wallet */
+.wallet{background:linear-gradient(135deg,rgba(25,40,62,.85),rgba(18,30,48,.9));border-radius:24px;padding:16px;border:1px solid rgba(255,255,255,.1)}
+.wcard{background:rgba(15,25,45,.7);border-radius:20px;padding:18px;border:1px solid rgba(255,255,255,.1);margin-bottom:14px}
 .wcard.dep{border-top:3px solid var(--ice)}
 .wcard.wd{border-top:3px solid var(--gold)}
 .wcard.exch{border-top:3px solid var(--cyan)}
-.wcard-title{font-size:16px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.wcard-title i{font-size:20px}
-.winput{width:100%;background:rgba(10,18,32,.5);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;color:#fff;font-size:14px;font-weight:600;font-family:inherit;transition:all .2s}
-.winput:focus{outline:none;border-color:var(--ice);box-shadow:0 0 0 3px rgba(77,208,225,.2)}
+.winput{width:100%;background:rgba(10,18,32,.5);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;color:#fff;font-size:14px;font-weight:600;font-family:inherit}
 .wlabel{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:6px;display:block}
 .presets{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.preset{flex:1;min-width:45px;padding:8px;text-align:center;background:rgba(77,208,225,.12);border:1px solid rgba(77,208,225,.25);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ice);transition:all .2s}
-.preset:active{transform:scale(.96);background:rgba(77,208,225,.3)}
-.wal-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;padding:10px 12px;background:rgba(10,18,32,.4);border:1px solid var(--border);border-radius:12px}
-.wl-label{font-size:9px;color:var(--muted);font-weight:600;margin-bottom:3px}
-.wl-addr{font-size:12px;font-weight:700;color:var(--cyan);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dep-warn{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;background:rgba(255,193,7,.1);border:1px solid rgba(255,193,7,.2);border-radius:10px;margin-bottom:12px;font-size:11px;color:#FFD740;font-weight:600}
-.swap-row{background:rgba(10,18,32,.4);border-radius:18px;padding:16px;border:1px solid rgba(255,255,255,.1)}
-.swap-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.swap-cur{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px}
-.swap-cur img{width:30px;height:30px}
-.swap-bal{font-size:11px;color:var(--muted)}
-.swap-area{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.swap-area input{flex:1;min-width:80px;background:transparent;border:none;font-size:24px;font-weight:800;color:#fff;text-align:right;outline:none;font-family:inherit}
-.swap-max{cursor:pointer;background:rgba(77,208,225,.2);border:1px solid rgba(77,208,225,.4);border-radius:12px;padding:8px 16px;font-size:12px;font-weight:800;color:var(--ice);white-space:nowrap}
-.swap-max:active{transform:scale(.96)}
-.fee-info{font-size:10px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:5px}
+.preset{flex:1;min-width:45px;padding:8px;text-align:center;background:rgba(77,208,225,.12);border:1px solid rgba(77,208,225,.25);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ice)}
+.swap-row{background:rgba(10,18,32,.4);border-radius:18px;padding:16px}
+.swap-area{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.swap-area input{flex:1;background:transparent;border:none;font-size:24px;font-weight:800;color:#fff;text-align:right;outline:none}
+.swap-max{cursor:pointer;background:rgba(77,208,225,.2);border:1px solid rgba(77,208,225,.4);border-radius:12px;padding:8px 16px;font-size:12px;font-weight:800;color:var(--ice)}
 .swap-out{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:12px}
 .swap-val{font-size:28px;font-weight:800;color:var(--gold)}
-.fee-badge{background:rgba(255,217,102,.15);border-radius:8px;padding:3px 8px;font-size:9px;color:var(--gold);font-weight:700;border:1px solid rgba(255,217,102,.3);margin-left:8px}
-.rate-info{background:rgba(10,18,32,.4);border-radius:14px;padding:11px;margin-bottom:14px;text-align:center;border:1px solid rgba(255,255,255,.06)}
-.rate-val{font-size:18px;font-weight:800;color:var(--gold)}
-.tx-status{display:none;margin-top:10px;padding:11px;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:12px;text-align:center}
-.tx-status.visible{display:block}
-.hbox{background:rgba(15,25,45,.7);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:14px}
-.hdr{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.06);font-weight:800;font-size:13px;display:flex;align-items:center;gap:6px}
-.hrow{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center}
-.hrow:last-child{border-bottom:none}
-.hl{font-size:11px;color:var(--muted)}.hr{font-size:12px;font-weight:800;color:var(--gold)}
-.hempty{padding:20px;text-align:center;color:var(--muted);font-size:12px}
-.sbadge{padding:2px 9px;border-radius:20px;font-size:9px;font-weight:800}
-.sb-p{background:rgba(255,202,40,.15);color:#FFD740;border:1px solid rgba(255,202,40,.3)}
-.sb-a{background:rgba(0,242,122,.15);color:#00F27A;border:1px solid rgba(0,242,122,.3)}
-.sb-r{background:rgba(239,83,80,.15);color:#FF8A80;border:1px solid rgba(239,83,80,.3)}
-.mcard{background:rgba(10,18,32,.4);border-radius:18px;padding:12px;display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.1);margin-bottom:12px;transition:all .25s;flex-wrap:wrap}
-.mcard:hover{transform:translateY(-2px);border-color:rgba(77,208,225,.4)}
-.mcard-img{width:56px;height:56px;border-radius:12px;object-fit:contain;background:rgba(0,0,0,.3);padding:5px}
-.mcard-info{flex:1;min-width:100px}
-.mcard-name{font-size:14px;font-weight:800;color:var(--ice)}
-.mcard-rate{font-size:11px;color:var(--snow);margin-top:3px}
-.mcard-rate span{font-weight:800;color:var(--gold)}
-.mcard-cost{font-size:12px;font-weight:800;color:var(--gold);margin-top:3px}
-.mqty{display:flex;align-items:center;gap:6px;background:rgba(10,18,32,.4);border-radius:12px;padding:5px 10px}
-.mqty input{width:55px;background:transparent;border:1px solid rgba(77,208,225,.3);border-radius:8px;padding:6px;color:#fff;text-align:center;font-weight:700;font-size:13px;font-family:inherit}
-.mqty span{font-size:11px;color:var(--muted)}
-.mcount{background:rgba(77,208,225,.2);border-radius:18px;padding:2px 8px;font-size:9px;color:var(--ice);margin-left:8px;font-weight:700}
-.hlink{text-decoration:none;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);border-radius:12px;padding:10px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s}
-.hlink:hover{background:rgba(0,212,255,.18);transform:translateY(-2px)}
-.hlink.n{background:rgba(77,208,225,.1);border-color:rgba(77,208,225,.3)}
-.hlink.s{background:rgba(255,217,102,.1);border-color:rgba(255,217,102,.3)}
-.at-type{flex:1;padding:9px;border-radius:10px;border:2px solid transparent;background:rgba(10,18,32,.4);color:var(--muted);font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px;font-family:inherit}
-.at-type.active{border-color:var(--ice);background:rgba(77,208,225,.15);color:var(--ice)}
-.at-hint{background:rgba(255,193,7,.1);border:1px solid rgba(255,193,7,.2);border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11px;color:#FFD740;font-weight:600}
-.flabel{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:5px;display:block}
-.finput{width:100%;background:rgba(10,18,32,.4);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;font-weight:600;margin-bottom:7px;font-family:inherit}
-.finput:focus{outline:none;border-color:var(--ice)}
-#supportBtn{position:fixed;bottom:100px;right:14px;z-index:190;width:48px;height:48px;cursor:pointer;transition:transform .25s;filter:drop-shadow(0 4px 12px rgba(77,208,225,.5))}
-#supportBtn:active{transform:scale(.9)}
-#supportBtn img{width:100%;height:100%;object-fit:contain}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--ice),var(--cyan));border-radius:2px}
+/* Bottom Nav */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:linear-gradient(180deg,rgba(15,25,45,.95),rgba(10,18,32,.98));border-top:1px solid rgba(77,208,225,.2);display:flex;backdrop-filter:blur(25px);padding-bottom:env(safe-area-inset-bottom,0)}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 10px;cursor:pointer;transition:all .3s;gap:3px}
+.ni-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+.ni-icon img{width:40px;height:40px;object-fit:contain;transition:all .3s}
+.ni.active .ni-icon img{filter:drop-shadow(0 0 10px rgba(77,208,225,.8))}
+.ni-lbl{font-size:10px;font-weight:700;color:var(--muted)}
+.ni.active .ni-lbl{color:var(--ice);text-shadow:0 0 8px rgba(77,208,225,.6)}
+/* Loading */
+#ldScreen{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse,rgba(10,20,40,.95),rgba(5,12,25,.98));backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .7s ease}
+#ldScreen.hidden{opacity:0;pointer-events:none}
+.ld-logo{width:130px;height:130px;animation:lb 1.8s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(77,208,225,.7))}
+@keyframes lb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-16px) scale(1.06)}}
+.ld-bar{width:260px}
+.ice-track{width:100%;height:12px;background:rgba(15,25,45,.6);border-radius:20px;overflow:hidden;border:2px solid rgba(77,208,225,.3)}
+.ice-fill{width:0%;height:100%;background:linear-gradient(90deg,#4DD0E1,#80DEEA,#B2EBF2);border-radius:18px;transition:width .4s ease}
+/* Animations */
+.snowflake{position:fixed;color:#fff;user-select:none;pointer-events:none;z-index:999;font-size:1.3rem;animation:fall linear forwards;opacity:.8}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0);opacity:.8}100%{transform:translateY(100vh) rotate(360deg);opacity:0}}
+.sptc{position:fixed;pointer-events:none;z-index:400;animation:spu .95s ease-out forwards}
+@keyframes spu{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-80px) scale(.3);opacity:0}}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--ice),var(--cyan));border-radius:2px}
 .hidden{display:none!important}
-.skeleton{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.1),rgba(255,255,255,.05));background-size:200% 100%;animation:skeletonLoad 1.5s ease-in-out infinite;border-radius:12px}
-@keyframes skeletonLoad{0%{background-position:200% 0}100%{background-position:-200% 0}}
 </style>
 </head>
 <body>
@@ -291,354 +195,208 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
   <div class="avatar" id="uavatar"><div class="ap">🎅</div></div>
   <div class="chips">
     <div class="chip snow">
-      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:20px;height:20px;object-fit:contain">
-      <div style="display:flex;flex-direction:column;line-height:1.1">
-        <span class="chip-lbl" data-i18n="labelSnow">Snow</span>
-        <span class="chip-num" id="tbSnow">0</span>
-      </div>
+      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:20px;height:20px">
+      <div><span class="chip-lbl">Snow</span><span class="chip-num" id="tbSnow">0</span></div>
     </div>
     <div class="chip ton">
       <i class="fas fa-coins" style="font-size:18px;color:var(--gold)"></i>
-      <div style="display:flex;flex-direction:column;line-height:1.1">
-        <span class="chip-lbl" data-i18n="labelTON">TON</span>
-        <span class="chip-num" id="tbTON">0</span>
-      </div>
+      <div><span class="chip-lbl">TON</span><span class="chip-num" id="tbTON">0</span></div>
     </div>
   </div>
-  <button class="lang-btn" onclick="toggleLangMenu()"><span id="langFlag">🇷🇺</span><span id="langCode">RU</span></button>
-</div>
-<div id="langMenu">
-  <div class="lang-opt" onclick="setLang('en','🇬🇧','EN')">🇬🇧 English</div>
-  <div class="lang-opt" onclick="setLang('ru','🇷🇺','RU')">🇷🇺 Русский</div>
 </div>
 
-<!-- HOME SECTION -->
+<!-- HOME -->
 <div class="sec active" id="secHome">
-  <div id="welcomeChest" class="wchest" style="display:none">
-    <div class="wchest-glow"></div>
-    <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" alt="Gift" id="welcomeChestImg">
-    <div class="wchest-txt">🎁 OPEN YOUR WELCOME GIFT! 🎁</div>
-    <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:6px">⭐ 1000 Snow + 1 Mining Machine (10 Snow/hour) ⭐</div>
+  <div id="welcomeChest" class="wchest" style="display:none;text-align:center;margin-bottom:15px;cursor:pointer" onclick="openWelcomeChest()">
+    <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png" style="width:80px;height:80px;filter:drop-shadow(0 0 20px rgba(77,208,225,.7));animation:bounce 1s ease-in-out infinite">
+    <div style="font-size:12px;font-weight:800;color:var(--gold);margin-top:5px">🎁 OPEN WELCOME GIFT! 🎁</div>
   </div>
   
-  <!-- Balance Section - BIG -->
-  <div class="balance-section">
-    <div class="balance-label">💰 YOUR BALANCE</div>
-    <div class="balance-big" id="balanceBig">0 TON</div>
-    <div class="balance-usd" id="balanceUsd">≈ $0.00</div>
+  <!-- 🎁 Daily Bonus Card -->
+  <div id="dailyBonusCard" class="daily-card" onclick="claimDailyBonus()" style="display:none">
+    <div class="daily-left">
+      <div class="daily-icon">🎁</div>
+      <div class="daily-info">
+        <h3>Daily Reward!</h3>
+        <p>Claim your free Snow every day</p>
+        <div class="daily-streak" id="streakContainer"></div>
+      </div>
+    </div>
+    <div class="daily-reward">
+      <div class="reward-amount" id="dailyRewardAmount">+50</div>
+      <div class="reward-label">Snow</div>
+    </div>
   </div>
   
   <div class="hero">
     <div class="santa-wrap">
-      <div class="santa-inner">
-        <div id="santaChar">
-          <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" draggable="false">
-        </div>
+      <div class="santa-inner" onclick="santaClick()">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png" draggable="false">
       </div>
     </div>
-    
-    <!-- Streak Badge -->
-    <div class="streak-badge" id="streakBadge">
-      <i class="fas fa-fire streak-fire"></i>
-      <span id="streakDays">0</span> day streak
-    </div>
-    
     <div class="stats">
       <div class="stat-box">
-        <div class="stat-lbl" data-i18n="statAccrued">Accrued</div>
+        <div class="stat-lbl">Accrued</div>
         <div class="stat-val" id="heroAccrued">0.000000</div>
         <div class="stat-unit">Snow</div>
       </div>
       <div class="stat-sep"></div>
       <div class="stat-box">
-        <div class="stat-lbl" data-i18n="statRateDay">Rate/Day</div>
+        <div class="stat-lbl">Rate/Day</div>
         <div class="stat-val" id="heroRateDay">0</div>
-        <div class="stat-unit" data-i18n="statSnowDay">Snow/day</div>
+        <div class="stat-unit">Snow/day</div>
       </div>
     </div>
-    
-    <div id="dailyBonusCard" class="dbonus" onclick="claimDailyBonus()" style="display:none">
-      <div class="dbonus-icon">🎁</div>
-      <div style="flex:1"><div style="font-size:13px;font-weight:800;color:var(--gold)">Daily Bonus!</div><div style="font-size:10px;color:var(--muted)">Claim your free reward</div></div>
-      <div style="font-size:15px;font-weight:800;color:var(--ice)">+50 ❄️</div>
-    </div>
-    
-    <div class="claim-wrap">
-      <button class="btn btn-ice" id="collectBtn" onclick="collectSnow()" disabled>
-        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:22px;height:22px;object-fit:contain">
+    <div class="claim-wrap" style="display:flex;gap:10px;width:100%">
+      <button class="btn btn-ice" id="collectBtn" onclick="collectSnow()" disabled style="flex:2">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:22px;height:22px">
         <span id="claimBtnTxt">Claim Snow</span>
-        <span style="font-size:11px;font-weight:800;background:rgba(0,0,0,.3);padding:2px 8px;border-radius:16px" id="claimPct">0%</span>
+        <span style="font-size:11px;background:rgba(0,0,0,.3);padding:2px 8px;border-radius:16px" id="claimPct">0%</span>
       </button>
-      <button class="btn btn-green" onclick="openMachineShop()">
-        <i class="fas fa-microchip"></i> Upgrade Mining Machines <i class="fas fa-chevron-right"></i>
+      <button class="btn btn-green" onclick="openMachineShop()" style="flex:1">
+        <i class="fas fa-microchip"></i>
       </button>
     </div>
-  </div>
-</div>
-
-<!-- REWARDS SECTION (New) -->
-<div class="sec" id="secRewards">
-  <div style="font-size:17px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px">
-    <i class="fas fa-trophy" style="color:var(--gold)"></i>
-    <span>Achievements</span>
-  </div>
-  <div class="achievements-grid" id="achievementsGrid">
-    <div class="skeleton" style="height:100px"></div>
   </div>
   
-  <div style="font-size:17px;font-weight:800;margin:20px 0 12px;display:flex;align-items:center;gap:8px">
-    <i class="fas fa-calendar-alt" style="color:var(--ice)"></i>
-    <span>Daily Streak</span>
-  </div>
-  <div class="ref-card" id="streakCard">
-    <div style="text-align:center;padding:10px">
-      <div style="font-size:48px;font-weight:800;color:var(--ice)" id="streakCountDisplay">0</div>
-      <div style="font-size:12px;color:var(--muted)">days in a row</div>
-      <div class="streak-bonus" id="streakBonusDisplay" style="margin-top:10px;font-size:13px;color:var(--gold)">+50 Snow daily</div>
-      <button class="btn btn-ice btn-sm" style="margin-top:12px;width:auto;padding:8px 20px" onclick="claimDailyStreak()">Claim Daily Reward</button>
+  <!-- 🏆 Storage Milestones Section -->
+  <div style="margin-top:20px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+      <i class="fas fa-trophy" style="color:var(--gold);font-size:20px"></i>
+      <span style="font-weight:800;font-size:15px">Storage Achievements</span>
     </div>
+    <div id="milestonesContainer" class="milestones-grid"></div>
   </div>
 </div>
 
-<!-- FRIENDS SECTION -->
+<!-- FRIENDS -->
 <div class="sec" id="secFriends">
   <div style="font-size:17px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px">
     <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png" style="width:28px;height:28px">
-    <span data-i18n="friendsTitle">Friends & Referrals</span>
+    <span>Friends & Referrals</span>
   </div>
-  
-  <!-- Referral Level Progress -->
-  <div class="ref-level-progress">
-    <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px">
-      <span>👥 Referral Level</span>
-      <span id="refLevelText">Bronze</span>
+  <div class="ref-card" style="background:var(--card);border-radius:20px;padding:14px;margin-bottom:12px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <span style="font-size:32px;font-weight:800;color:var(--ice)">20%</span>
+      <span style="font-size:11px;color:var(--muted)">Commission from friends' machine purchases in TON!</span>
     </div>
-    <div class="ref-level-bar">
-      <div class="ref-level-fill" id="refLevelFill" style="width:0%"></div>
-    </div>
-    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-top:5px">
-      <span>0</span>
-      <span>5</span>
-      <span>20</span>
-      <span>50</span>
-      <span>100+</span>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <input class="ref-inp" id="refLinkInp" readonly style="flex:1;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:11px">
+      <button class="btn btn-ice btn-sm" onclick="copyRefLink()"><i class="fas fa-copy"></i> Copy</button>
     </div>
   </div>
-  
-  <div class="ref-card">
-    <div class="ref-badge">
-      <span class="ref-pct">20%</span>
-      <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:26px;height:26px">
-      <span class="ref-txt">💰 <strong style="color:var(--gold)">20% commission</strong> from friends' machine purchases!<br>Earn <strong style="color:var(--gold)">TON directly</strong> when they buy machines!</span>
-    </div>
-    <div class="ref-row">
-      <input class="ref-inp" id="refLinkInp" readonly placeholder="Your referral link...">
-      <button class="btn btn-ice btn-sm" onclick="copyRefLink()"><i class="fas fa-copy"></i> <span data-i18n="copyBtn">Copy</span></button>
-    </div>
-    <div style="font-size:10px;color:var(--muted);margin-top:5px" data-i18n="refNote">📤 Share this link. When friends buy machines, you get 20% in TON!</div>
-  </div>
-  <div class="hbox">
-    <div class="hdr" style="justify-content:space-between">
-      <span><i class="fas fa-history"></i> <span data-i18n="recentRefs">Recent Referrals</span></span>
+  <div class="hbox" style="background:var(--card);border-radius:16px;overflow:hidden">
+    <div class="hdr" style="padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between">
+      <span><i class="fas fa-history"></i> Recent Referrals</span>
       <span class="ref-count" id="totalRefsDisp">0 Friends</span>
     </div>
-    <div id="recentRefsList"><div class="hempty" data-i18n="noReferrals">No referrals yet</div></div>
+    <div id="recentRefsList"><div class="hempty" style="padding:20px;text-align:center;color:var(--muted)">No referrals yet</div></div>
   </div>
 </div>
 
-<!-- TASKS SECTION -->
+<!-- TASKS -->
 <div class="sec" id="secTasks">
   <div class="tabs">
-    <div class="tab active" onclick="switchTTab(this,'social')">📢 <span data-i18n="tabSocialTxt">Social</span></div>
-    <div class="tab" onclick="switchTTab(this,'referral')">👥 <span data-i18n="tabReferralTxt">Referral</span></div>
+    <div class="tab active" onclick="switchTTab(this,'social')">📢 Social</div>
+    <div class="tab" onclick="switchTTab(this,'referral')">👥 Referral</div>
   </div>
   <div class="tcont active" id="tcSocial">
     <div style="display:flex;gap:6px;margin-bottom:10px">
-      <div class="tab active" id="stab-p" style="flex:1;font-size:11px" onclick="switchSocTab('partner')">⭐ Partner</div>
-      <div class="tab" id="stab-c" style="flex:1;font-size:11px" onclick="switchSocTab('community')">🌍 Community</div>
+      <div class="tab active" id="stab-p" style="flex:1" onclick="switchSocTab('partner')">⭐ Partner</div>
+      <div class="tab" id="stab-c" style="flex:1" onclick="switchSocTab('community')">🌍 Community</div>
     </div>
     <div id="socPartnerList"></div>
     <div id="socCommunityList" style="display:none"></div>
   </div>
   <div class="tcont" id="tcReferral"><div id="referralTasksList"></div></div>
 </div>
-<button id="floatAdd" class="btn btn-ice btn-sm" onclick="openModal('addTaskModal')">➕ <span data-i18n="floatAdd">Add Task</span></button>
 
-<!-- WALLET SECTION -->
+<!-- WALLET -->
 <div class="sec" id="secWallet">
   <div class="wallet">
     <div class="tabs">
-      <div class="tab active" onclick="switchWT(this,'dep')"><i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit</span></div>
-      <div class="tab" onclick="switchWT(this,'wd')"><i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw</span></div>
-      <div class="tab" onclick="switchWT(this,'ex')"><i class="fas fa-exchange-alt"></i> <span data-i18n="exchangeNow">Exchange</span></div>
+      <div class="tab active" onclick="switchWT(this,'dep')"><i class="fas fa-arrow-down"></i> Deposit</div>
+      <div class="tab" onclick="switchWT(this,'wd')"><i class="fas fa-arrow-up"></i> Withdraw</div>
+      <div class="tab" onclick="switchWT(this,'ex')"><i class="fas fa-exchange-alt"></i> Exchange</div>
     </div>
-    <!-- Deposit -->
     <div class="tcont active" id="wt-dep">
       <div class="wcard dep">
-        <div class="wcard-title"><i class="fas fa-coins" style="color:var(--ice)"></i> <span data-i18n="depositBtn">Deposit TON</span></div>
-        <div class="wal-row">
-          <div><div class="wl-label" data-i18n="labelWallet">Wallet</div><div class="wl-addr" id="walletAddrDisp" data-i18n="notConnected">Not connected</div></div>
-          <button class="btn btn-ice btn-sm" id="connBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> <span data-i18n="connectBtn">Connect</span></button>
+        <div class="wcard-title"><i class="fas fa-coins" style="color:var(--ice)"></i> Deposit TON</div>
+        <div class="wal-row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div><div class="wl-label">Wallet</div><div class="wl-addr" id="walletAddrDisp">Not connected</div></div>
+          <button class="btn btn-ice btn-sm" id="connBtn" onclick="connectWallet()"><i class="fas fa-plug"></i> Connect</button>
         </div>
-        <div class="dep-warn"><i class="fas fa-exclamation-triangle"></i><div><strong data-i18n="important">IMPORTANT:</strong> <span data-i18n="depositWarning1">Your User ID</span> <span id="depUidDisp" style="background:rgba(255,255,255,.15);padding:1px 6px;border-radius:8px;font-weight:800;margin:0 3px"></span> <span data-i18n="depositWarning2">must be the ONLY comment.</span></div></div>
-        <div style="margin-bottom:14px"><label class="wlabel" data-i18n="amountTON">Amount (TON)</label><input type="number" id="depAmtInp" class="winput" placeholder="1" step="0.1" min="1"></div>
+        <div class="dep-warn" style="background:rgba(255,193,7,.1);border:1px solid rgba(255,193,7,.2);border-radius:10px;padding:9px 11px;margin-bottom:12px;font-size:11px;color:#FFD740">
+          <i class="fas fa-exclamation-triangle"></i> Your User ID <span id="depUidDisp" style="background:rgba(255,255,255,.15);padding:1px 6px;border-radius:8px">---</span> must be the ONLY comment.
+        </div>
+        <div style="margin-bottom:14px"><label class="wlabel">Amount (TON)</label><input type="number" id="depAmtInp" class="winput" placeholder="1" step="0.1" min="1"></div>
         <div class="presets"><span class="preset" onclick="setDepAmt(1)">1</span><span class="preset" onclick="setDepAmt(2)">2</span><span class="preset" onclick="setDepAmt(5)">5</span><span class="preset" onclick="setDepAmt(10)">10</span></div>
-        <button class="btn btn-ice" id="subDepBtn" disabled onclick="initiateDeposit()"><i class="fas fa-arrow-down"></i> <span data-i18n="depositBtn">Deposit TON</span></button>
-        <div class="tx-status" id="depStatus"><div>⏳</div><div data-i18n="processingDeposit">Processing...</div><div id="depStatusDetail"></div></div>
+        <button class="btn btn-ice" id="subDepBtn" disabled onclick="initiateDeposit()"><i class="fas fa-arrow-down"></i> Deposit TON</button>
       </div>
     </div>
-    <!-- Withdraw -->
     <div class="tcont" id="wt-wd">
       <div class="wcard wd">
-        <div class="wcard-title"><i class="fas fa-arrow-up" style="color:var(--gold)"></i> <span data-i18n="withdrawBtn">Withdraw TON</span></div>
-        <div style="margin-bottom:14px"><label class="wlabel" data-i18n="tonWalletAddr">TON Wallet Address</label><input type="text" class="winput" id="wdAddr" placeholder="UQ..."></div>
-        <div style="margin-bottom:14px"><label class="wlabel" data-i18n="amountTON">Amount (TON)</label><input type="number" class="winput" id="wdAmt" placeholder="0.02" min="0.02" step="0.01"></div>
+        <div class="wcard-title"><i class="fas fa-arrow-up" style="color:var(--gold)"></i> Withdraw TON</div>
+        <div style="margin-bottom:14px"><label class="wlabel">TON Wallet Address</label><input type="text" class="winput" id="wdAddr" placeholder="UQ..."></div>
+        <div style="margin-bottom:14px"><label class="wlabel">Amount (TON)</label><input type="number" class="winput" id="wdAmt" placeholder="0.02" min="0.02" step="0.01"></div>
         <div class="presets"><span class="preset" onclick="setWdAmt(.02)">0.02</span><span class="preset" onclick="setWdAmt(.05)">0.05</span><span class="preset" onclick="setWdAmt(.1)">0.1</span><span class="preset" onclick="setWdAmt(.5)">0.5</span></div>
-        <div class="rate-info"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">💰 Your TON Balance</div><div class="rate-val" id="wdTonBal">0 TON</div></div>
-        <button class="btn btn-gold" onclick="doWithdraw()"><i class="fas fa-arrow-up"></i> <span data-i18n="withdrawBtn">Withdraw TON</span></button>
+        <div class="rate-info" style="background:rgba(10,18,32,.4);border-radius:14px;padding:11px;margin-bottom:14px;text-align:center">
+          <div style="font-size:11px;color:var(--muted)">💰 Your TON Balance</div>
+          <div class="rate-val" id="wdTonBal">0 TON</div>
+        </div>
+        <button class="btn btn-gold" onclick="doWithdraw()"><i class="fas fa-arrow-up"></i> Withdraw TON</button>
       </div>
-      <div class="hbox"><div class="hdr" data-i18n="withdrawHist">📋 Withdrawal History</div><div id="wdHist"><div class="hempty" data-i18n="noWithdrawals">No withdrawals yet</div></div></div>
     </div>
-    <!-- Exchange -->
     <div class="tcont" id="wt-ex">
       <div class="wcard exch">
-        <div class="wcard-title"><i class="fas fa-exchange-alt" style="color:var(--ice)"></i> <span data-i18n="exchangeNow">Exchange Snow → TON</span><span class="fee-badge">Fee: 4%</span></div>
+        <div class="wcard-title"><i class="fas fa-exchange-alt" style="color:var(--ice)"></i> Exchange Snow → TON <span class="fee-badge" style="background:rgba(255,217,102,.15);border-radius:8px;padding:3px 8px;font-size:9px;color:var(--gold);margin-left:8px">Fee: 4%</span></div>
         <div class="swap-row">
-          <div class="swap-hdr">
-            <div class="swap-cur"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png"><span>Snow → TON</span></div>
+          <div class="swap-hdr" style="display:flex;justify-content:space-between;margin-bottom:12px">
+            <div class="swap-cur"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:30px;height:30px"><span>Snow → TON</span></div>
             <div class="swap-bal" id="swapBal">0 Snow</div>
           </div>
-          <div class="swap-area"><input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwap()"><span class="swap-max" onclick="swapMax()" data-i18n="maxBtn">MAX</span></div>
-          <div class="fee-info"><i class="fas fa-info-circle"></i> Fee: 4% (<span id="feeDisp">0</span> Snow)</div>
-          <div class="swap-out"><span data-i18n="youGet">You get:</span><div class="swap-val" id="swapTonOut">0</div><span>TON</span></div>
+          <div class="swap-area"><input type="number" id="swapSnowAmt" placeholder="0" oninput="updSwap()"><span class="swap-max" onclick="swapMax()">MAX</span></div>
+          <div class="fee-info" style="font-size:10px;color:var(--muted);margin-top:8px"><i class="fas fa-info-circle"></i> Fee: 4% (<span id="feeDisp">0</span> Snow)</div>
+          <div class="swap-out"><span>You get:</span><div class="swap-val" id="swapTonOut">0</div><span>TON</span></div>
         </div>
-        <div class="rate-info">📊 <span data-i18n="swapRate">1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON</span></div>
+        <div class="rate-info" style="background:rgba(10,18,32,.4);border-radius:14px;padding:11px;margin-bottom:14px;text-align:center">📊 1 TON = 100,000 Snow | 1,000 Snow = 0.01 TON</div>
         <button class="btn btn-ice" onclick="swapSnowToTon()"><i class="fas fa-exchange-alt"></i> Exchange Snow → TON</button>
       </div>
-      <div class="hbox"><div class="hdr" data-i18n="exchangeHist">📋 Exchange History</div><div id="exchHist"><div class="hempty" data-i18n="noConversions">No conversions yet</div></div></div>
     </div>
   </div>
 </div>
 
-<!-- Support Button -->
-<div id="supportBtn" onclick="openSupport()"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/bc2add0d-e706-49cb-81b2-a9d8b707a708.png" alt="Support"></div>
-
-<!-- Bottom Navigation -->
-<nav class="bottom-nav">
-  <div class="nav-item active" data-page="secHome" onclick="goToPage(this)">
-    <i class="fas fa-home"></i>
-    <span data-i18n="Home">Home</span>
-  </div>
-  <div class="nav-item" data-page="secTasks" onclick="goToPage(this)">
-    <i class="fas fa-tasks"></i>
-    <span data-i18n="Tasks">Tasks</span>
-  </div>
-  <div class="nav-item" data-page="secRewards" onclick="goToPage(this)">
-    <i class="fas fa-gift"></i>
-    <span>Rewards</span>
-  </div>
-  <div class="nav-item" data-page="secFriends" onclick="goToPage(this)">
-    <i class="fas fa-users"></i>
-    <span data-i18n="Friends">Friends</span>
-  </div>
-  <div class="nav-item" data-page="secWallet" onclick="goToPage(this)">
-    <i class="fas fa-wallet"></i>
-    <span data-i18n="Wallet">Wallet</span>
-  </div>
+<!-- Nav -->
+<nav class="bnav">
+  <div class="ni active" data-s="secHome" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b6aa027c-7d3c-4385-8cd2-c3722ddc0d6a.png"></div><div class="ni-lbl">Home</div></div>
+  <div class="ni" data-s="secTasks" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/ec953c89-11e9-4635-862c-bea19872dc67.png"></div><div class="ni-lbl">Tasks</div></div>
+  <div class="ni" data-s="secFriends" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png"></div><div class="ni-lbl">Friends</div></div>
+  <div class="ni" data-s="secWallet" onclick="goNav(this)"><div class="ni-icon"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/09e76dd3-88ad-41a5-9164-682e2eb1ba6f.png"></div><div class="ni-lbl">Wallet</div></div>
 </nav>
 
-<!-- MODALS -->
-<div class="modal" id="helpModal">
-  <div class="modal-box">
-    <div class="mhdr"><div class="mtitle" data-i18n="helpTitle">🎅 Santa Snow Guide</div><button class="mclose" onclick="closeModal('helpModal')"><i class="fas fa-times"></i></button></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:14px">
-      <a href="https://t.me/SantaSnowPayouts" target="_blank" class="hlink"><span style="font-size:20px">💸</span><span style="font-size:9px;font-weight:800;color:#00D4FF">Payouts</span></a>
-      <a href="https://t.me/SantaSnowNews" target="_blank" class="hlink n"><span style="font-size:20px">📢</span><span style="font-size:9px;font-weight:800;color:var(--ice)">News</span></a>
-      <a href="https://t.me/Santa_1_Snow" target="_blank" class="hlink s"><span style="font-size:20px">🛟</span><span style="font-size:9px;font-weight:800;color:var(--gold)">Support</span></a>
-    </div>
-    <div style="background:rgba(77,208,225,.1);border:1px solid rgba(77,208,225,.2);border-radius:14px;padding:12px;margin-bottom:10px">
-      <div style="font-size:13px;font-weight:800;color:var(--ice);margin-bottom:6px">🎁 Free Welcome Gift</div>
-      <div style="font-size:11px;color:var(--muted);font-weight:600;line-height:1.7"><span style="color:#fff;font-weight:800">• 1000 Snow</span> — main currency<br><span style="color:#fff;font-weight:800">• 1 Mining Machine (10 Snow/hour)</span> — free mining</div>
-    </div>
-    <div style="background:rgba(15,25,45,.6);border:1px solid var(--border);border-radius:14px;padding:12px">
-      <div style="font-size:13px;font-weight:800;color:var(--ice);margin-bottom:6px">💡 Main Concept</div>
-      <div style="font-size:11px;color:var(--muted);font-weight:600;line-height:1.8">Virtual Snow Factory ❄️<br>🔹 Buy Machines with <span style="color:var(--gold);font-weight:800">TON</span><br>🔹 Basic(1TON):300/h • Advanced(2TON):650/h • Elite(3TON):1000/h<br>🔹 Exchange Snow→TON (4% fee) • Withdraw 💎<br>🔹 1 TON = 100,000 Snow</div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="upgradeModal">
-  <div class="modal-box">
-    <div class="mhdr"><div class="mtitle" data-i18n="upgTitle">⬆️ Upgrade Storage</div><button class="mclose" onclick="closeModal('upgradeModal')"><i class="fas fa-times"></i></button></div>
-    <div id="upgradeContent"></div>
-  </div>
-</div>
-
-<div class="modal" id="machineShopModal">
-  <div class="modal-box">
-    <div class="mhdr"><div class="mtitle">🤖 Machine Shop</div><button class="mclose" onclick="closeModal('machineShopModal')"><i class="fas fa-times"></i></button></div>
-    <div id="machineShopContent"></div>
-  </div>
-</div>
-
-<div class="modal" id="addTaskModal">
-  <div class="modal-box" style="max-width:400px">
-    <div class="mhdr"><div class="mtitle" data-i18n="addTaskTitle">➕ Add Community Task</div><button class="mclose" onclick="closeModal('addTaskModal')"><i class="fas fa-times"></i></button></div>
-    <div style="background:rgba(77,208,225,.1);border:1px solid rgba(77,208,225,.2);border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:11px;color:var(--muted);font-weight:600">💡 Cost = <strong style="color:var(--ice)">Target Users × 60 Snow</strong><br><span style="font-size:10px">Min: 100 users = 6,000 Snow</span></div>
-    <div style="display:flex;gap:7px;margin-bottom:10px">
-      <button class="at-type active" id="atCh" onclick="setTaskType('channel')">📢 Channel</button>
-      <button class="at-type" id="atBot" onclick="setTaskType('bot')">🤖 Bot</button>
-    </div>
-    <div class="at-hint">⚠️ Add our bot as admin first: <span style="color:#fff;font-weight:800">@SANTASNOWBOT_BOT</span></div>
-    <label class="flabel" data-i18n="taskLinkLabel">Telegram Link</label>
-    <input type="text" id="atLink" class="finput" placeholder="https://t.me/yourchannel">
-    <label class="flabel" data-i18n="taskTargetLabel">Target Users (min 100)</label>
-    <input type="number" id="atTarget" class="finput" placeholder="100" min="100" oninput="updAtCost()">
-    <div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap"><span class="preset" onclick="setAtTarget(100)">100</span><span class="preset" onclick="setAtTarget(500)">500</span><span class="preset" onclick="setAtTarget(1000)">1K</span><span class="preset" onclick="setAtTarget(5000)">5K</span></div>
-    <div style="background:rgba(10,18,32,.4);border-radius:10px;padding:9px 12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:11px;color:var(--muted);font-weight:600">Total Cost:</span>
-      <span id="atCostPrev" style="font-size:16px;font-weight:800;color:var(--ice)">0 Snow</span>
-    </div>
-    <button class="btn btn-ice" onclick="submitAddTask()" data-i18n="taskCreateBtn">✅ Create Task</button>
-    <div id="atStatus" style="margin-top:8px;font-size:12px;text-align:center;display:none"></div>
-  </div>
-</div>
-
-<!-- Toast Notification -->
-<div id="toastNotif" class="toast-notification"></div>
+<div id="notif"></div>
 
 <script>
-// Configuration
 const CFG={
   API:'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev',
   DEP_WALLET:'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
   T2S:100000,S2T:0.00001,MIN_WD:0.02,REF_PCT:20,
   MACH:{1:{cost:1,rate:300,name:"Basic Machine",img:"https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a8dafa1d-0d14-4f6a-b1c8-4194f3371678.png"},2:{cost:2,rate:650,name:"Advanced Machine",img:"https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/e92fb041-e4f5-4305-80f2-f0564fb85427.png"},3:{cost:3,rate:1000,name:"Elite Machine",img:"https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/9496ca90-d31c-4003-8ad2-edcf4be12989.png"}},
   EXCH_FEE:4,BOT:'SANTASNOWBOT_BOT',APP_LINK:'https://t.me/SANTASNOWBOT_BOT/santasnow',
-  TON_PRICE_USD:5.2
+  // 🏆 Storage Milestones
+  STORAGE_MILESTONES:[
+    {amount:10000,reward:1000,name:"Storage Master I"},
+    {amount:50000,reward:7000,name:"Storage Master II"},
+    {amount:100000,reward:15000,name:"Storage Master III"},
+    {amount:250000,reward:40000,name:"Storage Master IV"},
+    {amount:1000000,reward:200000,name:"Storage Legend 🔥"}
+  ],
+  // 🎁 Daily Rewards
+  DAILY_REWARDS:[50,75,100,150,200,300,500]
 };
-const REF_TASKS=[{id:'ref_10',n:10,snow:600,name:"🎁 Invite 10 Friends"},{id:'ref_20',n:20,snow:1500,name:"🎁 Invite 20 Friends"},{id:'ref_50',n:50,snow:4000,name:"🎁 Invite 50 Friends"},{id:'ref_100',n:100,snow:10000,name:"🎁 Invite 100 Friends"},{id:'ref_200',n:200,snow:20000,name:"🎁 Invite 200 Friends"},{id:'ref_500',n:500,snow:50000,name:"🎁 Invite 500 Friends"}];
-const SOC_TASKS=[{id:'tg_payouts',name:'Join Payouts Channel',icon:'💰',link:'https://t.me/SantaSnowPayouts',snow:100},{id:'tg_news',name:'Join News Channel',icon:'📰',link:'https://t.me/SantaSnowNews',snow:50},{id:'tg_ch',name:'Join Telegram Channel',icon:'📢',link:'https://t.me/SantaSnowChannel',snow:100},{id:'tg_grp',name:'Join Telegram Group',icon:'👥',link:'https://t.me/SantaSnowGroup',snow:50},{id:'tg_bot',name:'Start our Bot',icon:'🤖',link:`https://t.me/${CFG.BOT}`,snow:30}];
-const STOR={1:{cap:300,cost:500,lbl:'Gift Box'},2:{cap:900,cost:2000,lbl:'Snow Pile'},3:{cap:2400,cost:8000,lbl:'Ice Block'},4:{cap:6000,cost:25000,lbl:'Snowman'},5:{cap:18000,cost:80000,lbl:'Ice Castle'},6:{cap:60000,cost:250000,lbl:'Frozen Palace'},7:{cap:120000,cost:500000,lbl:'North Pole'},8:{cap:210000,cost:900000,lbl:'Arctic Base'},9:{cap:330000,cost:1500000,lbl:'Glacier'},10:{cap:480000,cost:2500000,lbl:'Iceberg'}};
-const SI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
-const RI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
-// Global State
-const U={userId:null,startParam:'',user:{snow:0,miningRate:0,miningMachines:{1:0,2:0,3:0},storageLevel:1,tonBalance:0,referralCount:0,welcomeChestOpened:false,hasWelcomeMachine:false,streakDays:0,totalTaps:0},refs:[],exchHist:[],wdHist:[],doneTasks:[],tasks:{partner:[],community:[]},achievements:[],storageProgress:0,storageInt:null,tg:null,tonUI:null,wallet:null,depCheckInt:null,_cc:false,isNew:false};
-let _lc=0,_af=0,_nt=null,_tif=new Set(),_atType='channel',_sf=false,_stab='partner';
-
-// Helper Functions
-function showToast(message, type='info'){
-  const toast=document.getElementById('toastNotif');
-  if(!toast)return;
-  if(_nt)clearTimeout(_nt);
-  toast.classList.remove('show','success','error','info','warning');
-  toast.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':type==='warning'?'fa-exclamation-triangle':'fa-info-circle'}"></i> ${message}`;
-  toast.classList.add('show',type);
-  _nt=setTimeout(()=>{toast.classList.remove('show');_nt=null;},3000);
-}
-
-const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const U={userId:null,startParam:'',user:{snow:0,miningRate:0,miningMachines:{1:0,2:0,3:0},storageLevel:1,tonBalance:0,referralCount:0,welcomeChestOpened:false,hasWelcomeMachine:false,totalEarned:0,dailyStreak:0,canClaimDaily:true,storageMilestonesClaimed:[]},refs:[],exchHist:[],wdHist:[],doneTasks:[],tasks:{partner:[],community:[]},storageProgress:0,storageInt:null,tg:null,tonUI:null,wallet:null,isNew:false};
+let _lc=0,_af=0,_nt=null,_tif=new Set();
 
 async function api(a,d={}){
   if(_af>8)throw new Error('Too many requests');_af++;
@@ -652,6 +410,17 @@ async function api(a,d={}){
   }finally{_af--;}
 }
 
+function notify(m,t='i'){
+  const e=document.getElementById('notif');
+  if(!e)return;
+  if(_nt)clearTimeout(_nt);
+  e.classList.remove('show');
+  e.innerHTML=m;
+  e.className='notif '+t;
+  setTimeout(()=>e.classList.add('show'),10);
+  _nt=setTimeout(()=>{e.classList.remove('show');_nt=null;},3000);
+}
+
 async function loadState(){
   try{
     const d=await api('getState',{start_param:U.startParam||'',_initData:U.tg?.initData||''});
@@ -661,105 +430,16 @@ async function loadState(){
     U.wdHist=d.wdHistory||[];
     U.doneTasks=d.completedTasks||[];
     U.tasks=d.tasks||{partner:[],community:[]};
-    U.achievements=d.achievements||[];
     if(d.user?.storageAccrued!==undefined)U.storageProgress=parseFloat(d.user.storageAccrued)||0;
-    if(d.pendingDeposit)startDepVerify(d.pendingDeposit.depId,d.pendingDeposit.txHash);
-    
     U.isNew=!U.user.welcomeChestOpened && U.user.snow===0 && !U.user.hasWelcomeMachine;
-    const welcomeChestDiv=document.getElementById('welcomeChest');
-    if(welcomeChestDiv){
-      if(!U.user.welcomeChestOpened && U.isNew){
-        welcomeChestDiv.style.display='block';
-      }else{
-        welcomeChestDiv.style.display='none';
-      }
-    }
-    
+    const welcomeDiv=document.getElementById('welcomeChest');
+    if(welcomeDiv) welcomeDiv.style.display=(!U.user.welcomeChestOpened && U.isNew)?'block':'none';
     updateRefUI();
-    updateAchievementsUI();
-    updateStreakUI();
-  }catch(e){
-    console.warn('loadState:',e.message);
-    showToast('Failed to load data','error');
-  }
+    renderMilestones();
+    updateDailyUI();
+  }catch(e){console.warn('loadState:',e.message);notify('Failed to load data','e');}
   updateUI();
 }
-
-function showRewards(snow,rate){
-  let m=document.getElementById('rewardsModal');
-  if(!m){
-    m=document.createElement('div');
-    m.id='rewardsModal';
-    m.className='modal';
-    m.onclick=e=>{if(e.target===m)closeModal('rewardsModal')};
-    document.body.appendChild(m);
-  }
-  m.querySelector?.('.modal-box')?.remove?.();
-  m.innerHTML=`<div class="modal-box" style="max-width:370px;border-radius:24px"><div style="text-align:center;padding:16px">
-    <div style="font-size:50px;margin-bottom:14px">🎁✨🎄</div>
-    <div style="font-size:22px;font-weight:800;color:var(--ice);margin-bottom:18px">🎉 CONGRATULATIONS! 🎉</div>
-    <div style="background:linear-gradient(135deg,rgba(77,208,225,.15),rgba(15,25,45,.8));border-radius:18px;padding:16px;margin:14px 0;border:1px solid rgba(77,208,225,.3)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.1)">
-        <div style="display:flex;align-items:center;gap:10px"><img src="${SI}" style="width:36px;height:36px"><span style="font-size:13px;color:var(--muted)">Snow:</span></div>
-        <span style="font-size:24px;font-weight:800;color:var(--gold)">+${fmt(snow)}</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.1)">
-        <div style="display:flex;align-items:center;gap:10px"><i class="fas fa-microchip" style="font-size:36px;color:var(--ice)"></i><span style="font-size:13px;color:var(--muted)">Machine:</span></div>
-        <span style="font-size:24px;font-weight:800;color:var(--snow)">+1</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="display:flex;align-items:center;gap:10px"><i class="fas fa-bolt" style="font-size:36px;color:var(--gold)"></i><span style="font-size:13px;color:var(--muted)">Rate:</span></div>
-        <span style="font-size:20px;font-weight:800;color:var(--ice)">+${rate}/h</span>
-      </div>
-    </div>
-    <button class="btn btn-ice" onclick="closeModal('rewardsModal')" style="margin-top:14px">🎄 Start Mining! 🎄</button>
-  </div></div>`;
-  openModal('rewardsModal');
-  setTimeout(()=>closeModal('rewardsModal'),6000);
-}
-
-async function openWelcomeChest(){
-  const n=Date.now();
-  if(n-_lc<3000){
-    showToast('Please wait 3 seconds!','warning');
-    return;
-  }
-  _lc=n;
-  try{
-    showToast('Opening chest...','info');
-    const result=await api('openWelcomeChest',{});
-    if(result && result.snow!==undefined){
-      U.user.welcomeChestOpened=true;
-      U.user.snow+=result.snow;
-      U.user.hasWelcomeMachine=true;
-      U.user.miningRate=result.miningRate;
-      const chestDiv=document.getElementById('welcomeChest');
-      if(chestDiv) chestDiv.style.display='none';
-      updateUI();
-      updateRefUI();
-      snowfall(50);
-      spawnParticles();
-      showToast(`🎁 Congratulations! +${fmt(result.snow)} Snow!`,'success');
-      showRewards(result.snow,result.miningRate);
-    }else{
-      throw new Error('Invalid response from server');
-    }
-  }catch(e){
-    console.error('openWelcomeChest error:',e);
-    showToast(`❌ Failed to open chest: ${e.message}`,'error');
-  }
-}
-
-async function openWelcomeChestFromModal(){
-  await openWelcomeChest();
-  const modal=document.getElementById('welcomeModal');
-  if(modal) modal.classList.remove('active');
-}
-
-function openMachineShop(){buildShop();openModal('machineShopModal');}
-function buildShop(){let h='';for(let i=1;i<=3;i++){const m=CFG.MACH[i],c=U.user.miningMachines?.[i]||0,ok=(U.user.tonBalance||0)>=m.cost;h+=`<div class="mcard"><img src="${m.img}" class="mcard-img"><div class="mcard-info"><div class="mcard-name">${m.name}</div><div class="mcard-rate">⚡ <span>${m.rate}</span> Snow/hour</div><div class="mcard-cost">💰 ${m.cost} TON each</div><span class="mcount">Owned: ${c}</span></div><div class="mqty"><input type="number" id="qty_${i}" value="1" min="1" max="99"><span>pcs</span></div><button class="btn btn-ice btn-sm" onclick="buyMachine(${i})" ${!ok?'disabled':''}>${ok?'Buy':'Need '+m.cost+' TON'}</button></div>`;}document.getElementById('machineShopContent').innerHTML=h;}
-
-async function buyMachine(t){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;const m=CFG.MACH[t],q=parseInt((document.getElementById('qty_'+t))?.value)||1,cost=m.cost*q;if((U.user.tonBalance||0)<cost){showToast(`❌ Need ${cost} TON`,'error');return;}try{const r=await api('purchaseMachine',{machineType:t,quantity:q});U.user.tonBalance=r.tonBalance;U.user.miningRate=r.miningRate;U.user.miningMachines=r.miningMachines;updateUI();buildShop();snowfall(30);showToast(`🎉 ${q}x ${m.name} purchased!`,'success');spawnParticles();}catch(e){showToast(`❌ ${e.message}`,'error');}}
 
 function updateUI(){
   const u=U.user;
@@ -767,257 +447,456 @@ function updateUI(){
   document.getElementById('tbTON').textContent=fmtTon(u.tonBalance||0);
   document.getElementById('heroRateDay').textContent=fmt(Math.round((u.miningRate||0)*24));
   document.getElementById('wdTonBal').textContent=fmtTon(u.tonBalance||0)+' TON';
-  
-  // Update Big Balance
-  const tonBalance=u.tonBalance||0;
-  document.getElementById('balanceBig').textContent=fmtTon(tonBalance)+' TON';
-  document.getElementById('balanceUsd').textContent=`≈ $${(tonBalance*CFG.TON_PRICE_USD).toFixed(2)}`;
-  
   updSwapBals();
   updateRefUI();
-  renderExchHist();
-  renderWdHist();
   renderTasks();
-  updateStreakUI();
-  const cb=document.getElementById('collectBtn');if(cb){if(U.storageProgress>=1)cb.classList.add('btn-ready');else cb.classList.remove('btn-ready');}
-  const db=document.getElementById('dailyBonusCard');if(db){const last=localStorage.getItem('santa_db'),now=Date.now(),next=last?parseInt(last)+86400000:0;if(now>=next&&!db.classList.contains('claimed'))db.style.display='flex';}
+  const cb=document.getElementById('collectBtn');
+  if(cb) cb.disabled=U.storageProgress<1;
+  document.getElementById('claimPct').textContent=Math.min(100,Math.round(U.storageProgress/(STOR[U.user.storageLevel]?.cap||300)*100))+'%';
+  document.getElementById('heroAccrued').textContent=U.storageProgress.toFixed(6);
+  document.getElementById('claimBtnTxt').innerHTML=U.storageProgress>=1?`<img src="${SI}" style="width:22px;height:22px"> Claim ${fmt(Math.floor(U.storageProgress))} Snow`:`<img src="${SI}" style="width:22px;height:22px"> Storage Empty...`;
 }
 
-function fmtTon(n){if(!n)return'0';if(n>=1000)return(n/1000).toFixed(1)+'K';if(n>=1)return n.toFixed(3);if(n>0)return n.toFixed(5);return'0';}
+function fmtTon(n){if(!n)return'0';if(n>=1000)return(n/1000).toFixed(1)+'K';if(n>=1)return n.toFixed(3);return n.toFixed(5);}
 function fmt(n){n=Math.floor(n||0);if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n.toString();}
 
-function startStorage(){if(U.storageInt)clearInterval(U.storageInt);U.storageInt=setInterval(()=>{const u=U.user,lv=u.storageLevel||1,cfg=STOR[lv]||STOR[1],rate=u.miningRate||0;if(rate<=0){updStorUI();return;}U.storageProgress+=rate/3600;if(U.storageProgress>cfg.cap)U.storageProgress=cfg.cap;updStorUI();},1000);}
+const STOR={1:{cap:300,cost:500},2:{cap:900,cost:2000},3:{cap:2400,cost:8000},4:{cap:6000,cost:25000},5:{cap:18000,cost:80000},6:{cap:60000,cost:250000},7:{cap:120000,cost:500000},8:{cap:210000,cost:900000},9:{cap:330000,cost:1500000},10:{cap:480000,cost:2500000}};
+const SI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
+const RI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
-function updStorUI(){const u=U.user,lv=u.storageLevel||1,cfg=STOR[lv]||STOR[1],pct=Math.min(100,Math.round(U.storageProgress/cfg.cap*100));document.getElementById('heroAccrued').textContent=U.storageProgress.toFixed(6);const btn=document.getElementById('collectBtn'),pe=document.getElementById('claimPct'),te=document.getElementById('claimBtnTxt'),has=U.storageProgress>=1;btn.disabled=!has;if(pe)pe.textContent=pct+'%';if(te)te.innerHTML=has?`<img src="${SI}" style="width:22px;height:22px;object-fit:contain"> Claim ${fmt(Math.floor(U.storageProgress))} Snow`:`<img src="${SI}" style="width:22px;height:22px;object-fit:contain"> Storage Empty...`;}
+function startStorage(){
+  if(U.storageInt)clearInterval(U.storageInt);
+  U.storageInt=setInterval(()=>{
+    const u=U.user,lv=u.storageLevel||1,cfg=STOR[lv]||STOR[1],rate=u.miningRate||0;
+    if(rate<=0)return;
+    U.storageProgress+=rate/3600;
+    if(U.storageProgress>cfg.cap)U.storageProgress=cfg.cap;
+    updateUI();
+  },1000);
+}
 
-function snowfall(c=40){for(let i=0;i<c;i++)setTimeout(()=>{const s=document.createElement('div');s.classList.add('snowflake');s.innerHTML='❄️';s.style.left=Math.random()*100+'%';s.style.fontSize=Math.random()*16+10+'px';s.style.animationDuration=Math.random()*4+3+'s';s.style.opacity=Math.random()*.6+.3;document.body.appendChild(s);setTimeout(()=>s.remove(),6000);},i*60);}
-function startSnowLoop(){setInterval(()=>{if(Math.random()>.4){const s=document.createElement('div');s.classList.add('snowflake');s.innerHTML='❄️';s.style.left=Math.random()*100+'%';s.style.fontSize=Math.random()*14+8+'px';s.style.animationDuration=Math.random()*5+3+'s';s.style.opacity=Math.random()*.5+.3;document.body.appendChild(s);setTimeout(()=>s.remove(),6000);}},500);}
-function spawnParticles(){for(let i=0;i<15;i++){const p=document.createElement('div');p.className='tap-particle';p.innerHTML='❄️';p.style.left=(30+Math.random()*40)+'%';p.style.top='36%';document.body.appendChild(p);setTimeout(()=>p.remove(),600);}}
+function snowfall(c=40){for(let i=0;i<c;i++)setTimeout(()=>{const s=document.createElement('div');s.classList.add('snowflake');s.innerHTML='❄️';s.style.left=Math.random()*100+'%';s.style.fontSize=Math.random()*16+10+'px';s.style.animationDuration=Math.random()*4+3+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),6000);},i*60);}
+function spawnP(){const p=document.createElement('div');p.className='sptc';p.innerHTML=`<img src="${SI}">`;p.style.cssText=`left:${30+Math.random()*40}%;top:36%`;document.body.appendChild(p);setTimeout(()=>p.remove(),1000);}
 
-async function collectSnow(){if(U._cc)return;const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;const amt=Math.floor(U.storageProgress);if(amt<1){showToast('Storage empty!','error');return;}U._cc=true;setTimeout(()=>U._cc=false,3000);U.user.snow+=amt;U.user.totalEarned=(U.user.totalEarned||0)+amt;U.storageProgress=0;updateUI();updStorUI();spawnParticles();snowfall(30);showToast(`+${fmt(amt)} Snow collected!`,'success');api('collect',{amount:amt}).catch(()=>{});}
+async function collectSnow(){
+  if(U._cc)return;
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  const amt=Math.floor(U.storageProgress);
+  if(amt<1){notify('Storage empty!','e');return;}
+  U._cc=true;setTimeout(()=>U._cc=false,3000);
+  U.user.snow+=amt;
+  U.user.totalEarned=(U.user.totalEarned||0)+amt;
+  U.storageProgress=0;
+  updateUI();
+  spawnP();
+  snowfall(30);
+  notify(`+${fmt(amt)} Snow collected!`,'s');
+  api('collect',{amount:amt}).catch(()=>{});
+  // التحقق من مهام التخزين بعد التجميع
+  setTimeout(()=>renderMilestones(),500);
+}
 
-function buildUpgradeContent(){const u=U.user,lv=u.storageLevel||1,cur=STOR[lv],next=STOR[lv+1];let h=`<div style="background:rgba(10,18,32,.4);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:12px;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--ice)">Lv.${lv}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${esc(cur.lbl)}</div><div style="font-size:9px;color:var(--muted);margin-top:2px">Cap: ${fmt(cur.cap)}</div></div><div style="font-size:20px;color:var(--ice)">→</div>`;if(next){h+=`<div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--ice);border-radius:12px;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--gold)">Lv.${lv+1}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${esc(next.lbl)}</div><div style="font-size:9px;color:var(--muted);margin-top:2px">Cap: ${fmt(next.cap)}</div></div>`;}else{h+=`<div style="flex:1;padding:10px;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:12px;text-align:center"><div style="font-size:16px">MAX</div></div>`;}h+=`</div>`;if(next){h+=`<div style="font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:10px;padding:8px;background:rgba(10,18,32,.4);border-radius:10px">📦 Capacity: <span style="color:#fff;font-weight:800">${fmt(cur.cap)} → ${fmt(next.cap)}</span><br>💰 Cost: <span style="color:#fff;font-weight:800">${fmt(next.cost)} Snow</span></div><button class="btn btn-ice" onclick="upgradeStorage()">⬆️ Upgrade for ${fmt(next.cost)} Snow</button>`;}else{h+=`<div style="text-align:center;padding:12px;color:var(--ice);font-weight:800">🏆 Maximum Level!</div>`;}document.getElementById('upgradeContent').innerHTML=h;}
+async function openWelcomeChest(){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Please wait 3 seconds!','w');return;}
+  _lc=n;
+  try{
+    notify('Opening chest...','i');
+    const result=await api('openWelcomeChest',{});
+    if(result && result.snow!==undefined){
+      U.user.welcomeChestOpened=true;
+      U.user.snow+=result.snow;
+      U.user.hasWelcomeMachine=true;
+      U.user.miningRate=result.miningRate;
+      document.getElementById('welcomeChest').style.display='none';
+      updateUI();
+      snowfall(50);
+      spawnP();
+      notify(`🎁 Congratulations! +${fmt(result.snow)} Snow!`,'s');
+      showRewards(result.snow,result.miningRate);
+    }
+  }catch(e){notify(`❌ Failed: ${e.message}`,'e');}
+}
 
-async function upgradeStorage(){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;const lv=U.user.storageLevel||1,next=STOR[lv+1];if(!next){showToast('Already max!','error');return;}if((U.user.snow||0)<next.cost){showToast(`Need ${fmt(next.cost)} Snow!`,'error');return;}U.user.snow-=next.cost;U.user.storageLevel=lv+1;api('upgradeStorage',{newLevel:lv+1}).catch(()=>{});buildUpgradeContent();updateUI();snowfall(30);showToast(`✅ Storage → Level ${lv+1}!`,'success');}
+function showRewards(snow,rate){
+  let m=document.getElementById('rewardsModal');
+  if(!m){m=document.createElement('div');m.id='rewardsModal';m.className='modal';document.body.appendChild(m);}
+  m.innerHTML=`<div class="modal-box" style="max-width:370px"><div style="text-align:center;padding:16px"><div style="font-size:50px">🎁✨🎄</div><div style="font-size:22px;font-weight:800;color:var(--ice)">🎉 CONGRATULATIONS!</div><div style="background:linear-gradient(135deg,rgba(77,208,225,.15),rgba(15,25,45,.8));border-radius:18px;padding:16px;margin:14px 0"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><div><img src="${SI}" style="width:36px;height:36px"> Snow:</div><span style="font-size:24px;font-weight:800;color:var(--gold)">+${fmt(snow)}</span></div><div style="display:flex;justify-content:space-between"><div><i class="fas fa-microchip"></i> Machine:</div><span style="font-size:20px;font-weight:800;color:var(--ice)">+${rate}/h</span></div></div><button class="btn btn-ice" onclick="closeModal('rewardsModal')">Start Mining!</button></div></div>`;
+  openModal('rewardsModal');
+  setTimeout(()=>closeModal('rewardsModal'),5000);
+}
 
-function goToPage(el){
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(el.dataset.page).classList.add('active');
-  document.getElementById('floatAdd').style.display='none';
-  if(el.dataset.page==='secRewards'){
-    updateAchievementsUI();
-    updateStreakUI();
+// 🎁 Daily Bonus Functions
+async function claimDailyBonus(){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  if(!U.user.canClaimDaily){notify('Already claimed today!','w');return;}
+  try{
+    const result=await api('claimDaily',{});
+    if(result && result.streak!==undefined){
+      U.user.snow+=result.reward;
+      U.user.dailyStreak=result.streak;
+      U.user.canClaimDaily=false;
+      updateUI();
+      updateDailyUI();
+      snowfall(30);
+      spawnP();
+      notify(`🎁 Daily reward! +${fmt(result.reward)} Snow (Day ${result.streak})`,'s');
+      if(result.maxStreak) notify('🔥 Amazing! 7-day streak completed!','s');
+    }
+  }catch(e){notify(`❌ ${e.message}`,'e');}
+}
+
+function updateDailyUI(){
+  const card=document.getElementById('dailyBonusCard');
+  if(!card)return;
+  if(!U.user.canClaimDaily && U.user.dailyStreak>0){
+    card.classList.add('claimed');
+    card.style.opacity='0.5';
+    card.style.cursor='default';
+  }else{
+    card.classList.remove('claimed');
+    card.style.opacity='1';
+    card.style.cursor='pointer';
+  }
+  const reward=CFG.DAILY_REWARDS[Math.min(U.user.dailyStreak,6)]||50;
+  document.getElementById('dailyRewardAmount').innerHTML='+'+reward;
+  // Streak days
+  const container=document.getElementById('streakContainer');
+  if(container){
+    let html='';
+    for(let i=0;i<7;i++){
+      let status='';
+      if(i<U.user.dailyStreak) status='active';
+      else if(i===U.user.dailyStreak && !U.user.canClaimDaily && U.user.dailyStreak>0) status='claimed';
+      html+=`<div class="streak-day ${status}">${i+1}</div>`;
+    }
+    container.innerHTML=html;
+  }
+  card.style.display='flex';
+}
+
+// 🏆 Storage Milestones Functions
+function renderMilestones(){
+  const container=document.getElementById('milestonesContainer');
+  if(!container)return;
+  const totalEarned=U.user.totalEarned||0;
+  const claimed=U.user.storageMilestonesClaimed||[];
+  let html='';
+  for(const m of CFG.STORAGE_MILESTONES){
+    const reached=totalEarned>=m.amount;
+    const isClaimed=claimed.includes(String(m.amount));
+    let statusClass='',statusText='',canClaim=false;
+    if(isClaimed){
+      statusClass='claimed';
+      statusText='✅ Claimed';
+    }else if(reached){
+      statusClass='reached';
+      statusText='🎁 Ready!';
+      canClaim=true;
+    }else{
+      statusClass='locked';
+      statusText='🔒 Locked';
+    }
+    html+=`<div class="milestone-card ${statusClass}" onclick="${canClaim?`claimStorageMilestone(${m.amount})`:'void(0)'}">
+      <div class="milestone-amount">${fmt(m.amount)}</div>
+      <div class="milestone-reward">+${fmt(m.reward)} Snow</div>
+      <div class="milestone-status status-${statusClass.split(' ')[0]}">${statusText}</div>
+    </div>`;
+  }
+  container.innerHTML=html;
+}
+
+async function claimStorageMilestone(amount){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  try{
+    const result=await api('claimStorageMilestone',{milestone:amount});
+    if(result && result.reward){
+      U.user.snow+=result.reward;
+      if(!U.user.storageMilestonesClaimed) U.user.storageMilestonesClaimed=[];
+      U.user.storageMilestonesClaimed.push(String(amount));
+      updateUI();
+      renderMilestones();
+      snowfall(30);
+      spawnP();
+      notify(`🏆 Milestone achieved! +${fmt(result.reward)} Snow`,'s');
+    }
+  }catch(e){notify(`❌ ${e.message}`,'e');}
+}
+
+// Machine Shop
+function openMachineShop(){buildShop();openModal('machineShopModal');}
+function buildShop(){
+  let h='';
+  for(let i=1;i<=3;i++){
+    const m=CFG.MACH[i],c=U.user.miningMachines?.[i]||0,ok=(U.user.tonBalance||0)>=m.cost;
+    h+=`<div class="titem"><div class="ticon"><img src="${m.img}" style="width:44px;height:44px;border-radius:12px"></div><div class="tinfo"><div class="tname">${m.name}</div><div class="trew">⚡ ${m.rate} Snow/hour</div><div class="tstat">💰 ${m.cost} TON each | Owned: ${c}</div></div><div class="mqty" style="display:flex;gap:6px"><input type="number" id="qty_${i}" value="1" min="1" max="99" style="width:55px;background:rgba(10,18,32,.5);border:1px solid var(--border);border-radius:8px;padding:6px;color:#fff;text-align:center"><button class="btn btn-ice btn-sm" onclick="buyMachine(${i})" ${!ok?'disabled':''}>${ok?'Buy':'Need '+m.cost+' TON'}</button></div></div>`;
+  }
+  document.getElementById('machineShopContent').innerHTML=h;
+}
+
+async function buyMachine(t){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  const m=CFG.MACH[t],q=parseInt(document.getElementById('qty_'+t)?.value)||1,cost=m.cost*q;
+  if((U.user.tonBalance||0)<cost){notify(`Need ${cost} TON`,'e');return;}
+  try{
+    const r=await api('purchaseMachine',{machineType:t,quantity:q});
+    U.user.tonBalance=r.tonBalance;
+    U.user.miningRate=r.miningRate;
+    U.user.miningMachines=r.miningMachines;
+    updateUI();
+    buildShop();
+    snowfall(30);
+    notify(`🎉 ${q}x ${m.name} purchased!`,'s');
+    spawnP();
+  }catch(e){notify(`❌ ${e.message}`,'e');}
+}
+
+function updateRefUI(){
+  if(!U.userId)return;
+  const link=`${CFG.APP_LINK}?startapp=${U.userId}`;
+  document.getElementById('refLinkInp').value=link;
+  document.getElementById('depUidDisp').textContent=U.userId;
+  document.getElementById('totalRefsDisp').textContent=`${U.refs.length} Friends`;
+  const le=document.getElementById('recentRefsList');
+  if(le){
+    if(!U.refs.length) le.innerHTML='<div class="hempty">No referrals yet</div>';
+    else le.innerHTML=U.refs.slice(0,20).map(r=>`<div class="ref-list-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05)"><div class="rli-av" style="width:36px;height:36px;border-radius:50%;background:rgba(77,208,225,.15);display:flex;align-items:center;justify-content:center">🎅</div><div class="rli-info" style="flex:1"><div class="rli-name" style="font-size:13px;font-weight:800">${escapeHtml(r.name||'Friend')}</div><div class="rli-date" style="font-size:9px;color:var(--muted)">${r.date||'Joined'}</div></div><div class="rli-earn" style="font-size:12px;font-weight:800;color:var(--snow)">${r.totalCommissionEarned?`+${fmtTon(r.totalCommissionEarned)} TON`:'0'}</div></div>`).join('');
   }
 }
 
-function renderTasks(){const rc=U.user.referralCount||0;let rh='';for(const t of REF_TASKS){const done=U.doneTasks.includes(t.id),can=rc>=t.n&&!done,p=Math.min(100,Math.round(rc/t.n*100));rh+=`<div class="titem"><div class="ticon"><img src="${RI}"></div><div class="tinfo"><div class="tname">${t.name}</div><div class="trew"><img src="${SI}"> <span style="font-weight:800;color:var(--snow)">${fmt(t.snow)} Snow</span></div><div class="pbar"><div style="width:${p}%"></div></div><div class="tstat">${rc}/${t.n} (${p}%)</div></div><div>${done?'<button class="tbtn done">✅ Done</button>':can?`<button class="tbtn claim" onclick="claimRefTask('${t.id}')">🎁 Claim</button>`:`<button class="tbtn go" disabled>🔒 ${t.n}</button>`}</div></div>`;}document.getElementById('referralTasksList').innerHTML=rh||'<div class="hempty" style="text-align:center;padding:25px">✨ Invite friends to unlock rewards! ✨</div>';renderSocTasks();}
+function copyRefLink(){
+  navigator.clipboard.writeText(document.getElementById('refLinkInp').value);
+  notify('✅ Copied!','s');
+}
 
-async function claimRefTask(id){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;try{const r=await api('claimTask',{taskId:id});U.user.snow+=r.snowAdded;U.doneTasks.push(id);updateUI();renderTasks();snowfall(30);showToast(`🎉 +${fmt(r.snowAdded)} Snow!`,'success');spawnParticles();}catch(e){showToast(`❌ ${e.message}`,'error');}}
+function renderTasks(){
+  // Referral tasks
+  const rc=U.user.referralCount||0;
+  const REF_TASKS=[
+    {id:'ref_10',n:10,snow:600,name:"Invite 10 Friends"},
+    {id:'ref_20',n:20,snow:1500,name:"Invite 20 Friends"},
+    {id:'ref_50',n:50,snow:4000,name:"Invite 50 Friends"},
+    {id:'ref_100',n:100,snow:10000,name:"Invite 100 Friends"},
+    {id:'ref_200',n:200,snow:20000,name:"Invite 200 Friends"},
+    {id:'ref_500',n:500,snow:50000,name:"Invite 500 Friends"}
+  ];
+  let rh='';
+  for(const t of REF_TASKS){
+    const done=U.doneTasks.includes(t.id),can=rc>=t.n&&!done,p=Math.min(100,Math.round(rc/t.n*100));
+    rh+=`<div class="titem"><div class="ticon">👥</div><div class="tinfo"><div class="tname">${t.name}</div><div class="trew"><img src="${SI}"> ${fmt(t.snow)} Snow</div><div class="pbar" style="background:rgba(10,18,32,.5);border-radius:8px;height:6px;margin-top:5px;overflow:hidden"><div style="width:${p}%;background:linear-gradient(90deg,#4DD0E1,#80DEEA);height:100%"></div></div><div class="tstat">${rc}/${t.n} (${p}%)</div></div><div>${done?'<button class="tbtn done">✅ Done</button>':can?`<button class="tbtn claim" onclick="claimRefTask('${t.id}')">🎁 Claim</button>`:`<button class="tbtn go" disabled>🔒 ${t.n}</button>`}</div></div>`;
+  }
+  document.getElementById('referralTasksList').innerHTML=rh||'<div class="hempty">Invite friends to unlock rewards!</div>';
+  // Social tasks
+  const SOC_TASKS=[
+    {id:'tg_payouts',name:'Join Payouts Channel',link:'https://t.me/SantaSnowPayouts',snow:100},
+    {id:'tg_news',name:'Join News Channel',link:'https://t.me/SantaSnowNews',snow:50},
+    {id:'tg_ch',name:'Join Telegram Channel',link:'https://t.me/SantaSnowChannel',snow:100},
+    {id:'tg_grp',name:'Join Telegram Group',link:'https://t.me/SantaSnowGroup',snow:50},
+    {id:'tg_bot',name:'Start our Bot',link:`https://t.me/${CFG.BOT}`,snow:30}
+  ];
+  let sh='';
+  for(const t of SOC_TASKS){
+    const done=U.doneTasks.includes(t.id);
+    sh+=`<div class="titem"><div class="ticon">📢</div><div class="tinfo"><div class="tname">${t.name}</div><div class="trew"><img src="${SI}"> ${fmt(t.snow)} Snow</div></div><div>${done?'<button class="tbtn done">✅ Done</button>':`<button class="tbtn go" onclick="verifySocialTask('${t.id}','${t.link}')">Go →</button>`}</div></div>`;
+  }
+  document.getElementById('socPartnerList').innerHTML=sh;
+}
 
-function taskCard(t,cat){const tid=t.id,done=U.doneTasks.includes(tid),fly=_tif.has(tid),icon=t.type==='channel'?'📢':'🤖',name=esc(t.name||('@'+(t.link?.split('t.me/')[1]?.split('/')[0]||'Task'))),snow=t.snow_reward||50,link=esc(t.link||'');return`<div class="titem"><div class="ticon" style="font-size:26px">${icon}</div><div class="tinfo"><div class="tname">${name}</div><div class="trew"><img src="${SI}"> ${fmt(snow)} Snow</div>${t.completions!==undefined?`<div class="tstat">${t.completions||0}/${t.targetUsers||0} done</div>`:''}</div><div>${done?'<button class="tbtn done">✅ Done</button>':fly?'<button class="tbtn done" style="opacity:.6">⏳</button>':`<button class="tbtn go" onclick="doDbTask('${tid}','${link}','${t.type||'bot'}','${cat}')">Go →</button>`}</div></div>`;}
+async function claimRefTask(id){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  try{
+    const r=await api('claimTask',{taskId:id});
+    U.user.snow+=r.snowAdded;
+    U.doneTasks.push(id);
+    updateUI();
+    renderTasks();
+    snowfall(30);
+    notify(`🎉 +${fmt(r.snowAdded)} Snow!`,'s');
+    spawnP();
+  }catch(e){notify(`❌ ${e.message}`,'e');}
+}
 
-function renderSocTasks(){const p=U.tasks?.partner||[],c=U.tasks?.community||[];document.getElementById('socPartnerList').innerHTML=p.length?p.map(t=>taskCard(t,'partner')).join(''):'<div class="hempty">No partner tasks yet</div>';document.getElementById('socCommunityList').innerHTML=c.length?c.map(t=>taskCard(t,'community')).join(''):'<div class="hempty">No community tasks yet</div>';}
+async function verifySocialTask(id,link){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  if(_tif.has(id)){notify('Processing...','w');return;}
+  _tif.add(id);
+  window.open(link,'_blank');
+  notify('Verifying...','i');
+  setTimeout(async()=>{
+    try{
+      const r=await api('verifyTask',{taskId:id,taskCategory:'partner'});
+      if(!U.doneTasks.includes(id))U.doneTasks.push(id);
+      if(r.snowAdded){
+        U.user.snow+=r.snowAdded;
+        updateUI();
+        snowfall(30);
+        notify(`🎉 +${fmt(r.snowAdded)} Snow!`,'s');
+        spawnP();
+      }
+      renderTasks();
+    }catch(e){notify(`❌ ${e.message}`,'e');}
+    finally{_tif.delete(id);renderTasks();}
+  },3000);
+}
 
-function switchTTab(el,t){el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('tc'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');document.getElementById('floatAdd').style.display='none';}
-function switchSocTab(t){_stab=t;document.getElementById('stab-p').className='tab'+(t==='partner'?' active':'');document.getElementById('stab-c').className='tab'+(t==='community'?' active':'');document.getElementById('socPartnerList').style.display=t==='partner'?'block':'none';document.getElementById('socCommunityList').style.display=t==='community'?'block':'none';document.getElementById('floatAdd').style.display=t==='community'?'flex':'none';}
-
-async function doDbTask(tid,link,type,cat){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;if(_tif.has(tid)){showToast('⏳ Processing...','warning');return;}_tif.add(tid);renderSocTasks();if(link&&link.startsWith('https://t.me/'))window.open(link,'_blank','noopener');showToast('⏳ Verifying...','info');setTimeout(async()=>{try{const r=await api('verifyTask',{taskId:tid,taskType:type,taskCategory:cat});if(!U.doneTasks.includes(tid))U.doneTasks.push(tid);if(r.snowAdded){U.user.snow+=r.snowAdded;updateUI();snowfall(30);showToast(`🎉 +${fmt(r.snowAdded)} Snow!`,'success');spawnParticles();}else showToast('✅ Task done!','success');renderTasks();}catch(e){showToast(`❌ ${e.message.includes('member')?'Join the channel first!':e.message}`,'error');}finally{_tif.delete(tid);renderSocTasks();}},3000);}
-
-function setTaskType(t){_atType=t;document.getElementById('atCh').className='at-type'+(t==='channel'?' active':'');document.getElementById('atBot').className='at-type'+(t==='bot'?' active':'');document.getElementById('atLink').closest('.modal-box').querySelector('.at-hint').style.display=t==='channel'?'block':'none';updAtCost();}
-function setAtTarget(v){document.getElementById('atTarget').value=v;updAtCost();}
-function updAtCost(){const t=parseInt(document.getElementById('atTarget').value)||0;document.getElementById('atCostPrev').textContent=fmt(t*60)+' Snow';}
-
-async function submitAddTask(){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;if(_sf)return;const link=(document.getElementById('atLink').value||'').trim(),target=parseInt(document.getElementById('atTarget').value)||0,st=document.getElementById('atStatus');st.style.display='block';st.style.color='var(--muted)';st.textContent='⏳ Creating...';if(!link.includes('t.me/')){st.style.color='#ff8a80';st.textContent='❌ Invalid link';return;}if(target<100){st.style.color='#ff8a80';st.textContent='❌ Min 100 users';return;}const cost=target*60;if((U.user.snow||0)<cost){st.style.color='#ff8a80';st.textContent=`❌ Need ${fmt(cost)} Snow`;return;}_sf=true;try{await api('createTask',{type:_atType,link,targetUsers:target});U.user.snow-=cost;st.style.color='var(--ice)';st.textContent='✅ Created!';updateUI();snowfall(30);showToast(`✅ Task created! -${fmt(cost)} Snow`,'success');setTimeout(()=>{closeModal('addTaskModal');loadState();},1500);}catch(e){st.style.color='#ff8a80';st.textContent=`❌ ${e.message}`;}finally{_sf=false;}}
-
+// Exchange functions
 function updSwapBals(){document.getElementById('swapBal').innerHTML=`Balance: ${fmt(U.user.snow||0)} Snow`;}
 function swapMax(){document.getElementById('swapSnowAmt').value=Math.floor(U.user.snow||0);updSwap();}
-function updSwap(){const s=parseInt(document.getElementById('swapSnowAmt').value)||0,fee=Math.floor(s*CFG.EXCH_FEE/100),after=s-fee,ton=after*CFG.S2T;document.getElementById('swapTonOut').textContent=ton.toFixed(6);document.getElementById('feeDisp').textContent=fmt(fee);}
+function updSwap(){
+  const s=parseInt(document.getElementById('swapSnowAmt').value)||0,fee=Math.floor(s*CFG.EXCH_FEE/100),after=s-fee,ton=after*CFG.S2T;
+  document.getElementById('swapTonOut').textContent=ton.toFixed(6);
+  document.getElementById('feeDisp').textContent=fmt(fee);
+}
 
-let _ef=false;
-async function swapSnowToTon(){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;if(_ef)return;const s=parseInt(document.getElementById('swapSnowAmt').value)||0;if(s<100){showToast('Min 100 Snow!','error');return;}if(s>(U.user.snow||0)){showToast('Not enough Snow!','error');return;}_ef=true;try{const r=await api('exchange',{snowAmount:s});U.user.snow=r.snow;U.user.tonBalance=r.tonBalance;const fee=r.fee||Math.floor(s*CFG.EXCH_FEE/100),ton=(s-fee)*CFG.S2T;U.exchHist.unshift({snow:s,fee,ton,dir:'S→T',ts:Date.now()});document.getElementById('swapSnowAmt').value='';document.getElementById('swapTonOut').textContent='0';document.getElementById('feeDisp').textContent='0';updateUI();renderExchHist();snowfall(30);showToast(`⚡ ${fmt(s)} Snow → ${ton.toFixed(6)} TON`,'success');spawnParticles();}catch(e){showToast(`❌ ${e.message}`,'error');}finally{_ef=false;}}
+async function swapSnowToTon(){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  const s=parseInt(document.getElementById('swapSnowAmt').value)||0;
+  if(s<100){notify('Min 100 Snow!','e');return;}
+  if(s>(U.user.snow||0)){notify('Not enough Snow!','e');return;}
+  try{
+    const r=await api('exchange',{snowAmount:s});
+    U.user.snow=r.snow;
+    U.user.tonBalance=r.tonBalance;
+    updateUI();
+    document.getElementById('swapSnowAmt').value='';
+    updSwap();
+    snowfall(30);
+    notify(`⚡ ${fmt(s)} Snow → ${((s-Math.floor(s*CFG.EXCH_FEE/100))*CFG.S2T).toFixed(6)} TON`,'s');
+    spawnP();
+  }catch(e){notify(`❌ ${e.message}`,'e');}
+}
 
-function renderExchHist(){const el=document.getElementById('exchHist');if(!U.exchHist.length){el.innerHTML='<div class="hempty">No conversions yet</div>';return;}el.innerHTML=U.exchHist.slice(0,25).map(h=>`<div class="hrow" style="flex-direction:column;align-items:flex-start;gap:2px"><div style="display:flex;justify-content:space-between;width:100%"><span class="hl">${h.dir} · ${h.ts?new Date(h.ts).toLocaleDateString():''}</span><span style="font-size:11px;font-weight:800;color:var(--gold)">${h.ton.toFixed(6)} TON</span></div><span style="font-size:10px;color:var(--muted)">From: ${fmt(h.snow)} Snow${h.fee?' (Fee: '+fmt(h.fee)+')':''}</span></div>`).join('');}
+// Withdraw
+async function doWithdraw(){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  const addr=document.getElementById('wdAddr').value.trim(),amt=parseFloat(document.getElementById('wdAmt').value)||0;
+  if(!addr||addr.length<10){notify('Invalid address!','e');return;}
+  if(amt<CFG.MIN_WD){notify(`Min ${CFG.MIN_WD} TON!`,'e');return;}
+  if(amt>(U.user.tonBalance||0)){notify('Not enough TON!','e');return;}
+  try{
+    await api('withdraw',{address:addr,amount:amt});
+    U.user.tonBalance-=amt;
+    updateUI();
+    document.getElementById('wdAddr').value='';
+    document.getElementById('wdAmt').value='';
+    snowfall(30);
+    notify(`✅ Withdrawal: ${amt.toFixed(6)} TON`,'s');
+  }catch(e){notify(`❌ ${e.message}`,'e');}
+}
 
+// Deposit
 function setDepAmt(v){document.getElementById('depAmtInp').value=v;}
 function setWdAmt(v){document.getElementById('wdAmt').value=v;}
 
-async function doWithdraw(){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;const addr=(document.getElementById('wdAddr').value||'').trim(),amt=parseFloat(document.getElementById('wdAmt').value)||0,u=U.user;if(!addr||addr.length<10){showToast('Invalid address!','error');return;}if(amt<CFG.MIN_WD){showToast(`Min ${CFG.MIN_WD} TON!`,'error');return;}if(amt>(u.tonBalance||0)){showToast('Not enough TON!','error');return;}const pt=U.tasks?.partner||[],miss=pt.filter(t=>t.status==='active'&&!U.doneTasks.includes(t.id));if(miss.length>0){showToast('❌ Complete all Partner tasks first','error');setTimeout(goToPartner,4000);return;}try{const r=await api('withdraw',{address:addr,amount:amt});u.tonBalance-=amt;U.wdHist.unshift({tonAmt:amt,addr,d:new Date().toLocaleDateString(),status:'pending'});document.getElementById('wdAddr').value='';document.getElementById('wdAmt').value='';updateUI();renderWdHist();snowfall(30);showToast(`✅ Withdrawal: ${amt.toFixed(6)} TON`,'success');}catch(e){showToast(`❌ ${e.message}`,'error');if(e.message.includes('partner'))setTimeout(goToPartner,4000);}}
-
-function goToPartner(){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.querySelector('.nav-item[data-page="secTasks"]').classList.add('active');document.getElementById('secTasks').classList.add('active');switchTTab(document.querySelector('.tab'),'social');switchSocTab('partner');}
-
-function renderWdHist(){const el=document.getElementById('wdHist');if(!U.wdHist.length){el.innerHTML='<div class="hempty">No withdrawals yet</div>';return;}el.innerHTML=U.wdHist.slice(0,20).map(h=>{const sc={approved:'sb-a',pending:'sb-p',rejected:'sb-r'}[h.status||'pending'];return`<div class="hrow" style="flex-direction:column;gap:3px;align-items:flex-start"><div style="display:flex;justify-content:space-between;width:100%"><span style="font-size:12px;font-weight:800;color:var(--ice)">${h.tonAmt.toFixed(6)} TON</span><span class="sbadge ${sc}">${esc(h.status||'Pending')}</span></div><div style="font-size:9px;color:var(--muted)">${esc(h.d||'')} · ${esc((h.addr||'').substring(0,12))}...</div></div>`;}).join('');}
-
-function switchWT(el,t){el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById('wt-'+t).parentElement.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('wt-'+t).classList.add('active');}
-
-function updateRefUI(){if(!U.userId)return;const link=`${CFG.APP_LINK}?startapp=${U.userId}`;document.getElementById('refLinkInp').value=link;document.getElementById('depUidDisp').textContent=esc(U.userId);const ce=document.getElementById('totalRefsDisp');if(ce)ce.textContent=`${U.refs.length} Friends`;const le=document.getElementById('recentRefsList');if(le){if(!U.refs.length){le.innerHTML='<div class="hempty">No referrals yet</div>';}else{le.innerHTML=U.refs.slice(0,20).map(r=>`<div class="ref-list-item"><div class="rli-av">${r.photo?`<img src="${esc(r.photo)}" onerror="this.parentElement.innerHTML='🎅'">`:'🎅'}</div><div class="rli-info"><div class="rli-name">${esc(r.name||'Friend')}</div><div class="rli-date">${esc(r.date||'Joined')}</div>${r.totalSpentTon?`<div style="font-size:9px;color:var(--gold)">💰 Spent: ${r.totalSpentTon} TON</div>`:''}${r.totalCommissionEarned?`<div class="commission-badge"><i class="fas fa-coins" style="font-size:9px"></i>+${fmtTon(r.totalCommissionEarned)} TON</div>`:'<div style="font-size:9px;color:var(--muted)">⏳ Waiting</div>'}</div><div class="rli-earn">${r.totalCommissionEarned?`+${fmtTon(r.totalCommissionEarned)}`:'0'}</div></div>`).join('');}}
-  
-  // Update referral level
-  const refCount=U.refs.length;
-  let levelText='Bronze',levelFill=0;
-  if(refCount>=100){levelText='Diamond';levelFill=100;}
-  else if(refCount>=50){levelText='Platinum';levelFill=((refCount-50)/50)*100;}
-  else if(refCount>=20){levelText='Gold';levelFill=((refCount-20)/30)*100;}
-  else if(refCount>=5){levelText='Silver';levelFill=((refCount-5)/15)*100;}
-  else{levelFill=(refCount/5)*100;}
-  document.getElementById('refLevelText').textContent=levelText;
-  document.getElementById('refLevelFill').style.width=Math.min(100,levelFill)+'%';
+async function initTON(){
+  try{
+    if(window.TON_CONNECT_UI){
+      U.tonUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:`${CFG.API}/tonconnect-manifest.json`,uiPreferences:{theme:'DARK'}});
+      U.tonUI.onStatusChange(w=>w?onWConn(w):onWDisc());
+    }
+  }catch(e){console.error('TON:',e);}
 }
 
-function copyRefLink(){navigator.clipboard.writeText(document.getElementById('refLinkInp').value).then(()=>showToast('✅ Copied!','success')).catch(()=>{document.getElementById('refLinkInp').select();document.execCommand('copy');showToast('✅ Copied!','success');});}
-
-async function initTON(){try{if(window.TON_CONNECT_UI){U.tonUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:`${CFG.API}/tonconnect-manifest.json`,uiPreferences:{theme:'DARK'}});U.tonUI.onStatusChange(w=>w?onWConn(w):onWDisc());setTimeout(()=>{if(U.tonUI.connected)U.tonUI.getWallets();},500);}}catch(e){console.error('TON:',e);}}
-
-function onWConn(w){U.wallet={address:w.account.address,appName:w.device.appName};const sh=`${U.wallet.address.substring(0,6)}...${U.wallet.address.slice(-4)}`;document.getElementById('walletAddrDisp').textContent=`${sh} · ${U.wallet.appName}`;const b=document.getElementById('connBtn');b.innerHTML='<i class="fas fa-unlink"></i> Disconnect';b.onclick=disconnectWallet;document.getElementById('subDepBtn').disabled=false;}
-function onWDisc(){U.wallet=null;document.getElementById('walletAddrDisp').textContent='Not connected';const b=document.getElementById('connBtn');b.innerHTML='<i class="fas fa-plug"></i> Connect';b.onclick=connectWallet;document.getElementById('subDepBtn').disabled=true;}
+function onWConn(w){
+  U.wallet={address:w.account.address};
+  const sh=`${U.wallet.address.substring(0,6)}...${U.wallet.address.slice(-4)}`;
+  document.getElementById('walletAddrDisp').textContent=sh;
+  document.getElementById('connBtn').innerHTML='<i class="fas fa-unlink"></i> Disconnect';
+  document.getElementById('connBtn').onclick=disconnectWallet;
+  document.getElementById('subDepBtn').disabled=false;
+}
+function onWDisc(){
+  U.wallet=null;
+  document.getElementById('walletAddrDisp').textContent='Not connected';
+  document.getElementById('connBtn').innerHTML='<i class="fas fa-plug"></i> Connect';
+  document.getElementById('connBtn').onclick=connectWallet;
+  document.getElementById('subDepBtn').disabled=true;
+}
 async function connectWallet(){if(U.tonUI)await U.tonUI.openModal();}
 async function disconnectWallet(){if(U.tonUI)await U.tonUI.disconnect();}
 
-window.initiateDeposit=async function(){const n=Date.now();if(n-_lc<3000){showToast('Wait 3s!','warning');return;}_lc=n;if(!U.wallet){alert('Connect wallet first');return;}const amt=parseFloat(document.getElementById('depAmtInp').value);if(!amt||amt<1){alert('Min 1 TON');return;}try{const comment=String(U.userId),nano=String(Math.floor(amt*1e9));if(!window.TonWeb)throw new Error('TonWeb not loaded');const TW=window.TonWeb;new TW();const cell=new TW.boc.Cell();cell.bits.writeUint(0,32);cell.bits.writeString(comment);const boc=await cell.toBoc(false),payload=TW.utils.bytesToBase64(boc);const tx={validUntil:Math.floor(Date.now()/1000)+600,messages:[{address:CFG.DEP_WALLET,amount:nano,payload}]};const result=await U.tonUI.sendTransaction(tx);const sd=document.getElementById('depStatus');sd.classList.add('visible');sd.querySelector('div').innerHTML='⏳';sd.querySelectorAll('div')[1].innerHTML='Transaction sent!';document.getElementById('depStatusDetail').textContent='Balance will be added within 3 min.';snowfall(30);showToast('✅ Transaction sent!','success');api('deposit',{amount:amt,txHash:result.boc,comment}).catch(()=>{});}catch(e){const sd=document.getElementById('depStatus');sd.classList.add('visible');sd.querySelector('div').innerHTML='❌';sd.querySelectorAll('div')[1].innerHTML=e.message?.includes('rejected')?'Rejected':'Failed';document.getElementById('depStatusDetail').textContent=e.message||'Try again';}};
+window.initiateDeposit=async function(){
+  const n=Date.now();
+  if(n-_lc<3000){notify('Wait 3s!','w');return;}
+  _lc=n;
+  if(!U.wallet){alert('Connect wallet first');return;}
+  const amt=parseFloat(document.getElementById('depAmtInp').value);
+  if(!amt||amt<1){alert('Min 1 TON');return;}
+  try{
+    const comment=String(U.userId),nano=String(Math.floor(amt*1e9));
+    const tx={validUntil:Math.floor(Date.now()/1000)+600,messages:[{address:CFG.DEP_WALLET,amount:nano,payload:comment}]};
+    const result=await U.tonUI.sendTransaction(tx);
+    notify('✅ Transaction sent!','s');
+    api('deposit',{amount:amt,txHash:result.boc,comment}).catch(()=>{});
+  }catch(e){notify(`❌ ${e.message}`,'e');}
+};
 
-function startDepVerify(id,hash){if(U.depCheckInt)clearInterval(U.depCheckInt);if(!id||!hash)return;let a=0;U.depCheckInt=setInterval(async()=>{a++;try{const r=await api('verifyDeposit',{depositId:id,txHash:hash});if(r.status==='completed'){clearInterval(U.depCheckInt);const sd=document.getElementById('depStatus');sd.querySelector('div').innerHTML='✅';sd.querySelectorAll('div')[1].innerHTML='Deposit confirmed!';document.getElementById('depStatusDetail').textContent=`${r.amount} TON added`;snowfall(30);showToast(`💰 ${r.amount} TON deposited!`,'success');U.user.hasDeposited=true;U.user.tonBalance=(U.user.tonBalance||0)+(r.amount||0);loadState();setTimeout(()=>sd.classList.remove('visible'),3000);}}catch(e){if(a>=18)clearInterval(U.depCheckInt);}},10000);}
-
-function openModal(id){if(id==='upgradeModal')buildUpgradeContent();document.getElementById(id).classList.add('active');}
+// Navigation
+function goNav(el){
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(el.dataset.s).classList.add('active');
+}
+function switchTTab(el,t){
+  el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tc'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');
+}
+function switchSocTab(t){
+  document.getElementById('stab-p').className='tab'+(t==='partner'?' active':'');
+  document.getElementById('stab-c').className='tab'+(t==='community'?' active':'');
+  document.getElementById('socPartnerList').style.display=t==='partner'?'block':'none';
+  document.getElementById('socCommunityList').style.display=t==='community'?'block':'none';
+}
+function switchWT(el,t){
+  el.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById('wt-'+t).parentElement.querySelectorAll('.tcont').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('wt-'+t).classList.add('active');
+}
+function openModal(id){document.getElementById(id).classList.add('active');}
 function closeModal(id){document.getElementById(id).classList.remove('active');}
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active');}));
 
-function santaClick(){
-  const n=Date.now();
-  if(n-_lc<300){return;}_lc=n;
-  
-  // Haptic feedback
-  if(window.Telegram?.WebApp?.HapticFeedback){
-    Telegram.WebApp.HapticFeedback.impactOccurred("medium");
-  }
-  
-  const p=document.getElementById('santaChar');
-  if(p){
-    p.style.transform='scale(.92) rotate(6deg)';
-    setTimeout(()=>p.style.transform='',150);
-  }
-  
-  // Particle effect
-  for(let i=0;i<12;i++){
-    const particle=document.createElement('div');
-    particle.className='tap-particle';
-    particle.innerHTML='❄️';
-    const x=30+Math.random()*40;
-    const y=30+Math.random()*20;
-    particle.style.left=x+'%';
-    particle.style.top=y+'%';
-    document.body.appendChild(particle);
-    setTimeout(()=>particle.remove(),600);
-  }
-  
-  spawnParticles();
-  snowfall(15);
-  // Show +0.001 floating text
-  const floatText=document.createElement('div');
-  floatText.className='tap-particle';
-  floatText.innerHTML='+0.001 TON';
-  floatText.style.color='#FFD966';
-  floatText.style.fontWeight='800';
-  floatText.style.fontSize='18px';
-  floatText.style.left='50%';
-  floatText.style.top='45%';
-  floatText.style.transform='translateX(-50%)';
-  document.body.appendChild(floatText);
-  setTimeout(()=>floatText.remove(),600);
-}
+function santaClick(){spawnP();snowfall(20);notify('+1 Snow!','s');U.user.snow+=1;updateUI();}
+function escapeHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-function openSupport(){window.open('https://t.me/Santa_1_Snow','_blank');}
-
+// Loading animation
 function ldProg(p,m){document.getElementById('iceFill').style.width=p+'%';document.getElementById('ldPct').textContent=Math.round(p)+'%';document.getElementById('ldStatus').textContent=m;}
-function ldHide(){const s=document.getElementById('ldScreen');s.classList.add('hidden');setTimeout(()=>s.remove(),700);}
-function preloadImgs(){const urls=[SI,RI,'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png','https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',CFG.MACH[1].img,CFG.MACH[2].img,CFG.MACH[3].img];return Promise.all(urls.map(u=>new Promise(r=>{const img=new Image();img.onload=img.onerror=r;img.src=u;})));}
-function ldAnimTo(tgt,msg,dur=600){const start=parseFloat(document.getElementById('iceFill')?.style.width)||0,steps=25,st=dur/steps;let s=0;return new Promise(res=>{const iv=setInterval(()=>{s++;const p=start+(tgt-start)*(s/steps);ldProg(p,msg);if(s>=steps){clearInterval(iv);ldProg(tgt,msg);res();}},st);});}
-
-async function claimDailyBonus(){const c=document.getElementById('dailyBonusCard');if(!c||c.classList.contains('claimed'))return;const now=Date.now(),last=localStorage.getItem('santa_db'),next=last?parseInt(last)+86400000:0;if(now<next){showToast('🕐 Come back tomorrow!','warning');return;}try{U.user.snow+=50;localStorage.setItem('santa_db',now.toString());c.classList.add('claimed');c.innerHTML=`<div class="dbonus-icon">✅</div><div style="flex:1"><div style="font-size:13px;font-weight:800;color:var(--ice)">Claimed!</div><div style="font-size:10px;color:var(--muted)">Next in 24h</div></div><div style="font-size:15px;font-weight:800;color:var(--gold)">+50 ❄️</div>`;updateUI();snowfall(25);showToast('🎁 +50 Snow!','success');spawnParticles();}catch(e){showToast('❌ Failed','error');}}
-
-function updateAchievementsUI(){
-  const grid=document.getElementById('achievementsGrid');
-  if(!grid)return;
-  if(!U.achievements.length){
-    grid.innerHTML='<div class="hempty" style="grid-column:span 2">No achievements yet. Keep playing!</div>';
-    return;
-  }
-  grid.innerHTML=U.achievements.map(ach=>{
-    const claimed=U.user.achievements?.includes(ach.id);
-    return `<div class="achievement-card ${claimed?'claimed':''}" onclick="${!claimed?`claimAchievement('${ach.id}')`:''}">
-      <div class="ach-icon">${ach.icon}</div>
-      <div class="ach-name">${ach.name}</div>
-      <div class="ach-reward">+${fmt(ach.snowReward)} Snow</div>
-      ${!claimed?'<div class="ach-progress">Click to claim!</div>':'<div class="ach-progress">✅ Claimed</div>'}
-    </div>`;
-  }).join('');
+function ldHide(){document.getElementById('ldScreen').classList.add('hidden');}
+function preloadImgs(){
+  const urls=[SI,RI,'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/a9766ba6-6596-4f0a-9ccc-72dacaa7922e.png','https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/0b427d78-febb-4fba-8101-808ea9b823e3.png',CFG.MACH[1].img,CFG.MACH[2].img,CFG.MACH[3].img];
+  return Promise.all(urls.map(u=>new Promise(r=>{const img=new Image();img.onload=img.onerror=r;img.src=u;})));
 }
-
-async function claimAchievement(id){
-  const n=Date.now();
-  if(n-_lc<3000){showToast('Wait 3s!','warning');return;}
-  _lc=n;
-  try{
-    const r=await api('claimAchievement',{achievementId:id});
-    U.user.snow=r.newSnow;
-    if(!U.user.achievements)U.user.achievements=[];
-    U.user.achievements.push(id);
-    updateUI();
-    updateAchievementsUI();
-    snowfall(25);
-    showToast(`🎉 Achievement unlocked! +${fmt(r.snowReward)} Snow!`,'success');
-    spawnParticles();
-  }catch(e){
-    showToast(`❌ ${e.message}`,'error');
-  }
+async function ldAnimTo(tgt,msg,dur=600){
+  const start=parseFloat(document.getElementById('iceFill')?.style.width)||0,steps=25,st=dur/steps;
+  let s=0;
+  return new Promise(res=>{
+    const iv=setInterval(()=>{s++;const p=start+(tgt-start)*(s/steps);ldProg(p,msg);if(s>=steps){clearInterval(iv);ldProg(tgt,msg);res();}},st);
+  });
 }
-
-function updateStreakUI(){
-  const streakDays=U.user.streakDays||0;
-  document.getElementById('streakDays').textContent=streakDays;
-  document.getElementById('streakCountDisplay').textContent=streakDays;
-  let bonus=50;
-  let multiplier=1;
-  if(streakDays>=7){multiplier=3;bonus=150;}
-  else if(streakDays>=3){multiplier=2;bonus=100;}
-  document.getElementById('streakBonusDisplay').innerHTML=`+${bonus} Snow daily ${multiplier>1?`(x${multiplier} bonus!)`:''}`;
-}
-
-async function claimDailyStreak(){
-  const n=Date.now();
-  if(n-_lc<3000){showToast('Wait 3s!','warning');return;}
-  _lc=n;
-  try{
-    const r=await api('claimDailyStreak',{});
-    if(r.bonus>0){
-      U.user.snow=(U.user.snow||0)+r.bonus;
-      U.user.streakDays=r.streak;
-      updateUI();
-      updateStreakUI();
-      snowfall(25);
-      showToast(`🔥 ${r.streak} day streak! +${r.bonus} Snow ${r.multiplier>1?`(x${r.multiplier} bonus!)`:''}`,'success');
-      spawnParticles();
-    }else{
-      showToast('Already claimed today! Come back tomorrow','warning');
-    }
-  }catch(e){
-    showToast(`❌ ${e.message}`,'error');
-  }
-}
-
-const TR={en:{labelSnow:'Snow',labelTON:'TON',statAccrued:'Accrued',statRateDay:'Rate/Day',statSnowDay:'Snow/day',friendsTitle:'Friends & Referrals',copyBtn:'Copy',refNote:'📤 Share link. 20% commission in TON!',recentRefs:'Recent Referrals',noReferrals:'No referrals yet',labelWallet:'Wallet',notConnected:'Not connected',connectBtn:'Connect',important:'IMPORTANT:',depositWarning1:'Your User ID',depositWarning2:'must be the ONLY comment.',amountTON:'Amount (TON)',depositBtn:'Deposit TON',processingDeposit:'Processing...',tonWalletAddr:'TON Wallet Address',withdrawBtn:'Withdraw TON',withdrawHist:'📋 Withdrawal History',noWithdrawals:'No withdrawals yet',youGet:'You get:',swapRate:'1 TON = 100,000 Snow',exchangeNow:'Exchange',exchangeHist:'📋 Exchange History',noConversions:'No conversions yet',helpTitle:'🎅 Santa Snow Guide',addTaskTitle:'➕ Add Community Task',taskLinkLabel:'Telegram Link',taskTargetLabel:'Target Users (min 100)',taskCreateBtn:'✅ Create Task',upgTitle:'⬆️ Upgrade Storage',tabSocialTxt:'Social',tabReferralTxt:'Referral',floatAdd:'Add Task',Home:'Home',Tasks:'Tasks',Friends:'Friends',Wallet:'Wallet',maxBtn:'MAX'},ru:{labelSnow:'Снег',labelTON:'TON',statAccrued:'Накоплено',statRateDay:'Ставка/День',statSnowDay:'Снег/день',friendsTitle:'Друзья и Рефералы',copyBtn:'Копировать',refNote:'📤 Поделитесь ссылкой. 20% комиссии в TON!',recentRefs:'Недавние рефералы',noReferrals:'Пока нет рефералов',labelWallet:'Кошелек',notConnected:'Не подключен',connectBtn:'Подключить',important:'ВАЖНО:',depositWarning1:'Ваш ID',depositWarning2:'должен быть ЕДИНСТВЕННЫМ комментарием.',amountTON:'Сумма (TON)',depositBtn:'Внести TON',processingDeposit:'Обработка...',tonWalletAddr:'TON адрес кошелька',withdrawBtn:'Вывести TON',withdrawHist:'📋 История выводов',noWithdrawals:'Пока нет выводов',youGet:'Вы получите:',swapRate:'1 TON = 100,000 Снега',exchangeNow:'Обменять',exchangeHist:'📋 История обменов',noConversions:'Пока нет обменов',helpTitle:'🎅 Руководство Santa Snow',addTaskTitle:'➕ Добавить задачу',taskLinkLabel:'Ссылка Telegram',taskTargetLabel:'Целевые пользователи (мин. 100)',taskCreateBtn:'✅ Создать',upgTitle:'⬆️ Улучшить хранилище',tabSocialTxt:'Соц. сети',tabReferralTxt:'Рефералы',floatAdd:'Добавить',Home:'Главная',Tasks:'Задачи',Friends:'Друзья',Wallet:'Кошелек',maxBtn:'МАКС'}};
-
-function toggleLangMenu(){const m=document.getElementById('langMenu');m.style.display=m.style.display==='none'?'block':'none';if(m.style.display==='block')setTimeout(()=>document.addEventListener('click',e=>{const m2=document.getElementById('langMenu'),b=document.getElementById('langFlag').parentElement;if(m2&&!m2.contains(e.target)&&!b.contains(e.target))m2.style.display='none';},{once:true}),10);}
-function setLang(l,f,c){localStorage.setItem('santaLang',l);applyLang(l,f,c);document.getElementById('langMenu').style.display='none';}
-function applyLang(l,f,c){const t=TR[l]||TR.en;document.getElementById('langFlag').textContent=f;document.getElementById('langCode').textContent=c;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.innerHTML=t[k];});const nav=document.querySelectorAll('.nav-item span'),keys=['Home','Tasks','Friends','Wallet'];nav.forEach((el,i)=>{if(keys[i]&&t[keys[i]])el.textContent=t[keys[i]];});}
 
 async function init(){
-  const t0=Date.now(),MIN_LD=2500;
-  startSnowLoop();
+  const MIN_LD=2500,t0=Date.now();
   ldProg(0,'Starting...');
-  
-  for(let i=0;i<20;i++)setTimeout(()=>{const p=document.createElement('div');p.className='pt';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*8+'s';p.style.animationDuration=(Math.random()*4+6)+'s';document.body.appendChild(p);},i*150);
-
   if(window.Telegram?.WebApp){
     U.tg=window.Telegram.WebApp;
     U.tg.ready();
@@ -1025,79 +904,43 @@ async function init(){
     const u=U.tg.initDataUnsafe?.user;
     if(u){
       U.userId=String(u.id);
-      if(u.photo_url){
-        const av=document.getElementById('uavatar');
-        if(av)av.innerHTML=`<img src="${esc(u.photo_url)}" onerror="this.parentElement.innerHTML='<div class=ap>🎅</div>'">`;
-      }
+      if(u.photo_url)document.getElementById('uavatar').innerHTML=`<img src="${escapeHtml(u.photo_url)}">`;
     }
     let sp='';
     if(U.tg.initDataUnsafe?.start_param)sp=String(U.tg.initDataUnsafe.start_param);
     else if(U.tg.initDataUnsafe?.startParam)sp=String(U.tg.initDataUnsafe.startParam);
     U.startParam=sp.replace(/\D/g,'');
   }
-
   await ldAnimTo(12,'Connecting...',700);
   await new Promise(r=>setTimeout(r,300));
   await ldAnimTo(25,'Loading assets...',600);
   await Promise.all([preloadImgs().catch(()=>{}),new Promise(r=>setTimeout(r,700))]);
-  await ldAnimTo(45,'Assets loaded! ✨',500);
-  await new Promise(r=>setTimeout(r,250));
+  await ldAnimTo(45,'Assets loaded!',500);
   await ldAnimTo(55,'Loading account...',600);
-
   let ok=false,att=0;
   while(!ok&&att<5){
     att++;
-    try{
-      await loadState();
-      if(U.user&&U.userId)ok=true;
-      else throw new Error('No data');
-    }catch(e){
-      if(att<5){
-        ldProg(55,`Retry ${att}/5`);
-        await new Promise(r=>setTimeout(r,1200*att));
-      }
-    }
+    try{await loadState();if(U.user&&U.userId)ok=true;else throw new Error('No data');}
+    catch(e){if(att<5){ldProg(55,`Retry ${att}/5`);await new Promise(r=>setTimeout(r,1200*att));}}
   }
-  if(!ok){
-    ldProg(100,'Connection failed.');
-    return;
-  }
-
-  await ldAnimTo(72,'Account loaded! 🎅',500);
-  await new Promise(r=>setTimeout(r,250));
+  if(!ok){ldProg(100,'Connection failed.');return;}
+  await ldAnimTo(72,'Account loaded!',500);
   await ldAnimTo(85,'Building UI...',400);
   renderTasks();
-  await new Promise(r=>setTimeout(r,250));
   await ldAnimTo(95,'Setting up wallet...',400);
   setTimeout(()=>initTON(),500);
   startStorage();
   setInterval(()=>loadState(),30000);
   await new Promise(r=>setTimeout(r,350));
   await ldAnimTo(100,'Ready! ❄️',500);
-
-  const el=Date.now()-t0;
-  if(el<MIN_LD)await new Promise(r=>setTimeout(r,MIN_LD-el));
+  const elapsed=Date.now()-t0;
+  if(elapsed<MIN_LD)await new Promise(r=>setTimeout(r,MIN_LD-elapsed));
   ldHide();
-  
-  if(U.isNew){
-    const welcomeModal=document.getElementById('welcomeModal');
-    if(welcomeModal) welcomeModal.classList.add('active');
-  }
-  
-  const sl=localStorage.getItem('santaLang');
-  if(sl==='en'||sl==='ru'){
-    const m={en:['🇬🇧','EN'],ru:['🇷🇺','RU']};
-    applyLang(sl,m[sl][0],m[sl][1]);
-  }else{
-    applyLang('ru','🇷🇺','RU');
-  }
+  if(U.isNew)document.getElementById('welcomeModal').classList.add('active');
 }
 
-// Event Listeners
-window.addEventListener('load', init);
-document.getElementById('openChestModalBtn')?.addEventListener('click', openWelcomeChestFromModal);
-document.getElementById('welcomeChestImg')?.addEventListener('click', openWelcomeChest);
-document.getElementById('santaChar')?.addEventListener('click', santaClick);
+window.addEventListener('load',init);
+document.getElementById('openChestModalBtn')?.addEventListener('click',()=>{document.getElementById('welcomeModal').classList.remove('active');openWelcomeChest();});
 </script>
 </body>
 </html>
