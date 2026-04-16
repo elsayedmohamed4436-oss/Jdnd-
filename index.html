@@ -93,21 +93,15 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .stat-lbl{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
 .stat-val{font-size:18px;font-weight:800;line-height:1.1;margin-bottom:2px}
 .stat-unit{font-size:9px;color:var(--snow);font-weight:700}
-/* Daily Streak Card */
-.streak-card{background:linear-gradient(135deg,rgba(77,208,225,.15),rgba(255,217,102,.1));border:2px solid var(--ice);border-radius:18px;padding:12px 16px;margin:10px 0;cursor:pointer;transition:all .3s}
-.streak-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(77,208,225,.3)}
-.streak-card.claimed{opacity:.6;cursor:default;border-style:dashed}
-.streak-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.streak-icon{font-size:28px;animation:bn 2s infinite}
+.daily-card{background:linear-gradient(135deg,rgba(77,208,225,.15),rgba(255,217,102,.1));border:2px solid rgba(77,208,225,.4);border-radius:18px;padding:12px 16px;margin:10px 0;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .3s}
+.daily-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(77,208,225,.3)}
+.daily-card.disabled{opacity:.5;cursor:not-allowed}
+.daily-card-icon{font-size:32px;animation:bn 2s infinite}
 @keyframes bn{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.streak-title{font-size:14px;font-weight:800;color:var(--gold)}
-.streak-days{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.streak-day{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;transition:all .2s}
-.streak-day.active{background:linear-gradient(135deg,#4DD0E1,#0097B2);border-color:var(--ice);box-shadow:0 0 10px rgba(77,208,225,.5)}
-.streak-day.completed{background:linear-gradient(135deg,#FFD966,#FF9800);border-color:var(--gold);color:#2C1A00}
-.streak-day.today{animation:pd 1s ease-in-out infinite}
-@keyframes pd{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.streak-reward{font-size:11px;color:var(--muted);margin-top:8px}
+.daily-streak{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+.streak-day{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.streak-day.active{background:linear-gradient(135deg,#4DD0E1,#0097B2);border-color:var(--ice);color:#fff}
+.streak-day.claimed{background:rgba(77,208,225,.3);border-color:var(--ice);color:var(--ice)}
 .wchest{position:relative;margin:10px auto 20px;cursor:pointer;text-align:center;animation:cp 2s ease-in-out infinite}
 @keyframes cp{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
 .wchest img{width:110px;height:110px;filter:drop-shadow(0 0 25px rgba(77,208,225,.7));animation:cb 1.5s ease-in-out infinite}
@@ -267,14 +261,9 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .stake-stat-item{text-align:center;flex:1}
 .stake-stat-label{font-size:9px;color:var(--muted)}
 .stake-stat-value{font-size:14px;font-weight:800;color:var(--ice)}
-/* Mission card styles */
-.mission-card{background:linear-gradient(135deg,rgba(156,39,176,.1),rgba(77,208,225,.05));border:1px solid rgba(156,39,176,.3);border-radius:16px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
-.mission-icon{font-size:28px}
-.mission-info{flex:1}
-.mission-name{font-size:13px;font-weight:800;color:var(--ice)}
-.mission-reward{font-size:11px;color:var(--gold);margin-top:3px}
-.mission-progress{font-size:10px;color:var(--muted);margin-top:3px}
-.mission-badge{background:rgba(0,242,122,.15);border:1px solid rgba(0,242,122,.3);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:800;color:#00F27A}
+.task-card{background:linear-gradient(135deg,rgba(25,40,62,.7),rgba(18,30,48,.8));border-radius:16px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.1)}
+.task-progress{background:rgba(10,18,32,.5);border-radius:8px;height:6px;margin-top:8px;overflow:hidden}
+.task-progress-fill{background:linear-gradient(90deg,#4DD0E1,#80DEEA);height:100%;border-radius:8px;transition:width .3s ease}
 </style>
 </head>
 <body>
@@ -335,25 +324,6 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
     <div class="wchest-txt">🎁 OPEN YOUR WELCOME GIFT! 🎁</div>
     <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:6px">⭐ 1000 Snow + 1 Mining Machine (10 Snow/hour) ⭐</div>
   </div>
-  
-  <!-- Daily Streak Card -->
-  <div id="dailyStreakCard" class="streak-card" onclick="claimDailyStreak()">
-    <div class="streak-header">
-      <div class="streak-icon">🔥</div>
-      <div class="streak-title" id="streakTitle">Daily Streak - Day 1</div>
-    </div>
-    <div class="streak-days" id="streakDays">
-      <div class="streak-day">1</div>
-      <div class="streak-day">2</div>
-      <div class="streak-day">3</div>
-      <div class="streak-day">4</div>
-      <div class="streak-day">5</div>
-      <div class="streak-day">6</div>
-      <div class="streak-day">7</div>
-    </div>
-    <div class="streak-reward" id="streakReward">🎁 Today's reward: +50 Snow</div>
-  </div>
-  
   <div class="hero">
     <div class="santa-wrap">
       <div class="santa-inner">
@@ -375,6 +345,18 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
         <div class="stat-unit" data-i18n="statSnowDay">Snow/day</div>
       </div>
     </div>
+    
+    <!-- Daily Streak Card -->
+    <div class="daily-card" id="dailyCard" onclick="claimDailyReward()">
+      <div class="daily-card-icon">📅</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:800;color:var(--gold)" id="dailyTitle">Daily Reward</div>
+        <div style="font-size:10px;color:var(--muted)" id="dailyDesc">Claim your daily bonus!</div>
+        <div class="daily-streak" id="dailyStreak"></div>
+      </div>
+      <div style="font-size:18px;font-weight:800;color:var(--ice)" id="dailyAmount">+50 ❄️</div>
+    </div>
+    
     <div class="claim-wrap">
       <button class="btn btn-ice" id="collectBtn" onclick="collectSnow()" disabled>
         <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png" style="width:22px;height:22px;object-fit:contain">
@@ -423,7 +405,7 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
   <div class="tabs">
     <div class="tab active" onclick="switchTTab(this,'social')">📢 <span data-i18n="tabSocialTxt">Social</span></div>
     <div class="tab" onclick="switchTTab(this,'referral')">👥 <span data-i18n="tabReferralTxt">Referral</span></div>
-    <div class="tab" onclick="switchTTab(this,'missions')">🎯 <span>Missions</span></div>
+    <div class="tab" onclick="switchTTab(this,'stakingTasks')">💎 <span>Staking Tasks</span></div>
   </div>
   <div class="tcont active" id="tcSocial">
     <div style="display:flex;gap:6px;margin-bottom:10px">
@@ -434,14 +416,7 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
     <div id="socCommunityList" style="display:none"></div>
   </div>
   <div class="tcont" id="tcReferral"><div id="referralTasksList"></div></div>
-  <div class="tcont" id="tcMissions">
-    <div style="font-size:14px;font-weight:800;margin-bottom:10px">🎯 Staking Missions</div>
-    <div id="stakingMissionsList"></div>
-    <div class="hbox" style="margin-top:12px">
-      <div class="hdr">📊 Your Staking Stats</div>
-      <div class="hrow"><span class="hl">Total Staked All Time:</span><span class="hr" id="totalStakedAllTime">0 Snow</span></div>
-    </div>
-  </div>
+  <div class="tcont" id="tcStakingTasks"><div id="stakingTasksList"></div></div>
 </div>
 <button id="floatAdd" class="btn btn-ice btn-sm" onclick="openModal('addTaskModal')">➕ <span data-i18n="floatAdd">Add Task</span></button>
 
@@ -613,13 +588,15 @@ const CFG={
     2:{profit:20,minAmount:10000,durationDays:7,name:"Gold Plan",icon:"🥇",color:"#FFD700"},
     3:{profit:50,minAmount:20000,durationDays:14,name:"Diamond Plan",icon:"💎",color:"#00FFFF"}
   },
-  DAILY_STREAK_REWARDS:{1:50,2:75,3:100,4:150,5:200,6:300,7:500},
-  STAKING_MISSIONS:{
-    10000:{reward:1000,name:"Stake 10,000 Snow"},
-    50000:{reward:7000,name:"Stake 50,000 Snow"},
-    100000:{reward:15000,name:"Stake 100,000 Snow"},
-    250000:{reward:40000,name:"Stake 250,000 Snow"},
-    1000000:{reward:200000,name:"Stake 1,000,000 Snow"}
+  DAILY_REWARDS:{
+    1:50,2:75,3:100,4:150,5:200,6:300,7:500
+  },
+  STAKING_TASKS:{
+    10000:{reward:1000,name:"Stake 10,000 Snow",minAmount:10000},
+    50000:{reward:7000,name:"Stake 50,000 Snow",minAmount:50000},
+    100000:{reward:15000,name:"Stake 100,000 Snow",minAmount:100000},
+    250000:{reward:40000,name:"Stake 250,000 Snow",minAmount:250000},
+    1000000:{reward:200000,name:"Stake 1,000,000 Snow",minAmount:1000000}
   }
 };
 const REF_TASKS=[{id:'ref_10',n:10,snow:600,name:"🎁 Invite 10 Friends"},{id:'ref_20',n:20,snow:1500,name:"🎁 Invite 20 Friends"},{id:'ref_50',n:50,snow:4000,name:"🎁 Invite 50 Friends"},{id:'ref_100',n:100,snow:10000,name:"🎁 Invite 100 Friends"},{id:'ref_200',n:200,snow:20000,name:"🎁 Invite 200 Friends"},{id:'ref_500',n:500,snow:50000,name:"🎁 Invite 500 Friends"}];
@@ -628,7 +605,7 @@ const STOR={1:{cap:300,cost:500,lbl:'Gift Box'},2:{cap:900,cost:2000,lbl:'Snow P
 const SI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png';
 const RI='https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b33b9f52-ad12-4797-a50d-b71b81f595fa.png';
 
-const U={userId:null,startParam:'',user:{snow:0,miningRate:0,miningMachines:{1:0,2:0,3:0},storageLevel:1,tonBalance:0,referralCount:0,welcomeChestOpened:false,hasWelcomeMachine:false},refs:[],exchHist:[],wdHist:[],doneTasks:[],tasks:{partner:[],community:[]},storageProgress:0,storageInt:null,tg:null,tonUI:null,wallet:null,depCheckInt:null,_cc:false,isNew:false,stakings:[],activeStakings:[],completedStakings:[],totalStaked:0,totalPendingProfit:0,dailyStreak:{currentDay:0,canClaimToday:true,todayReward:50,streakRewards:CFG.DAILY_STREAK_REWARDS},stakingMissions:[],totalStakedAllTime:0};
+const U={userId:null,startParam:'',user:{snow:0,miningRate:0,miningMachines:{1:0,2:0,3:0},storageLevel:1,tonBalance:0,referralCount:0,welcomeChestOpened:false,hasWelcomeMachine:false},refs:[],exchHist:[],wdHist:[],doneTasks:[],tasks:{partner:[],community:[]},storageProgress:0,storageInt:null,tg:null,tonUI:null,wallet:null,depCheckInt:null,_cc:false,isNew:false,stakings:[],activeStakings:[],completedStakings:[],totalStaked:0,totalPendingProfit:0,dailyStreak:0,canClaimDaily:false,nextDailyReward:50,stakingTasksCompleted:[]};
 let _lc=0,_af=0,_nt=null,_tif=new Set(),_atType='channel',_stab='partner',_sf=false;
 
 const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -670,21 +647,12 @@ async function loadState(){
     U.completedStakings=d.completedStakings||[];
     U.totalStaked=d.totalStaked||0;
     U.totalPendingProfit=d.totalPendingProfit||0;
+    U.dailyStreak=d.dailyStreak||0;
+    U.canClaimDaily=d.canClaimDaily||false;
+    U.nextDailyReward=d.nextDailyReward||50;
+    U.stakingTasksCompleted=d.completedStakingTasks||[];
     if(d.user?.storageAccrued!==undefined)U.storageProgress=parseFloat(d.user.storageAccrued)||0;
     if(d.pendingDeposit)startDepVerify(d.pendingDeposit.depId,d.pendingDeposit.txHash);
-    
-    // Daily streak data
-    if(d.dailyStreak){
-      U.dailyStreak=d.dailyStreak;
-      updateDailyStreakUI();
-    }
-    
-    // Staking missions data
-    if(d.stakingMissions){
-      U.stakingMissions=d.stakingMissions.missions||[];
-      U.totalStakedAllTime=d.stakingMissions.totalStakedAllTime||0;
-      renderStakingMissions();
-    }
     
     U.isNew=!U.user.welcomeChestOpened && U.user.snow===0 && !U.user.hasWelcomeMachine;
     const welcomeChestDiv=document.getElementById('welcomeChest');
@@ -698,6 +666,8 @@ async function loadState(){
     
     updateRefUI();
     renderStakingUI();
+    renderDailyUI();
+    renderStakingTasksUI();
   }catch(e){
     console.warn('loadState:',e.message);
     notify('Failed to load data','e');
@@ -705,125 +675,89 @@ async function loadState(){
   updateUI();
 }
 
-function updateDailyStreakUI(){
-  const card=document.getElementById('dailyStreakCard');
-  const title=document.getElementById('streakTitle');
-  const rewardSpan=document.getElementById('streakReward');
-  const daysContainer=document.getElementById('streakDays');
+function renderDailyUI(){
+  const card=document.getElementById('dailyCard');
+  const title=document.getElementById('dailyTitle');
+  const desc=document.getElementById('dailyDesc');
+  const amountSpan=document.getElementById('dailyAmount');
+  const streakContainer=document.getElementById('dailyStreak');
   
-  if(!U.dailyStreak){
-    if(card)card.style.display='none';
-    return;
-  }
-  
-  if(card)card.style.display='block';
-  const currentDay=U.dailyStreak.currentDay||0;
-  const canClaim=U.dailyStreak.canClaimToday;
-  const todayReward=U.dailyStreak.todayReward||50;
-  const nextDay=currentDay+1;
-  
-  if(title){
-    if(canClaim){
-      title.innerHTML=`🔥 Daily Streak - Day ${nextDay} (Claim now!)`;
-    }else{
-      title.innerHTML=`✅ Daily Streak - Day ${currentDay} (Claimed today)`;
-    }
-  }
-  
-  if(rewardSpan){
-    if(canClaim){
-      rewardSpan.innerHTML=`🎁 Today's reward: +${todayReward} Snow`;
-    }else{
-      rewardSpan.innerHTML=`⏰ Come back tomorrow for Day ${nextDay} reward: +${todayReward} Snow`;
-    }
-  }
-  
-  // Update streak days display
-  if(daysContainer){
-    const days=daysContainer.querySelectorAll('.streak-day');
-    for(let i=0;i<days.length;i++){
-      const dayNum=i+1;
-      days[i].classList.remove('active','completed','today');
-      if(dayNum<=currentDay){
-        days[i].classList.add('completed');
-      }else if(dayNum===nextDay && canClaim){
-        days[i].classList.add('active','today');
-      }else if(dayNum===nextDay){
-        days[i].classList.add('active');
-      }
-    }
-  }
-  
-  if(!canClaim){
-    card.classList.add('claimed');
+  if(U.canClaimDaily){
+    card.classList.remove('disabled');
+    title.innerHTML='🎄 Daily Reward Available! 🎄';
+    desc.innerHTML=`Day ${U.dailyStreak} streak! Claim now!`;
+    amountSpan.innerHTML=`+${U.nextDailyReward} ❄️`;
   }else{
-    card.classList.remove('claimed');
+    card.classList.add('disabled');
+    title.innerHTML='📅 Daily Reward';
+    desc.innerHTML=`Streak: ${U.dailyStreak}/7 days`;
+    amountSpan.innerHTML=`+${CFG.DAILY_REWARDS[Math.min(U.dailyStreak+1,7)]||50} ❄️ tomorrow`;
   }
+  
+  let streakHtml='';
+  for(let i=1;i<=7;i++){
+    let status='';
+    if(i<U.dailyStreak) status='claimed';
+    else if(i===U.dailyStreak && !U.canClaimDaily) status='claimed';
+    else if(i===U.dailyStreak && U.canClaimDaily) status='active';
+    streakHtml+=`<div class="streak-day ${status}">${i}</div>`;
+  }
+  streakContainer.innerHTML=streakHtml;
 }
 
-async function claimDailyStreak(){
+async function claimDailyReward(){
   const n=Date.now();
   if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;
   
-  if(!U.dailyStreak?.canClaimToday){
-    notify('Already claimed today! Come back tomorrow.','w');
+  if(!U.canClaimDaily){
+    notify('Daily reward not available yet!','w');
     return;
   }
   
   try{
-    notify('Claiming daily streak...','i');
-    const result=await api('claimDailyStreak',{});
-    U.user.snow+=result.reward;
-    U.dailyStreak.currentDay=result.streakDay;
-    U.dailyStreak.canClaimToday=false;
-    updateDailyStreakUI();
+    notify('Claiming daily reward...','i');
+    const result=await api('claimDaily',{});
+    U.user.snow=result.snow;
+    U.dailyStreak=result.streak;
+    U.canClaimDaily=false;
+    U.nextDailyReward=result.nextStreak===7?CFG.DAILY_REWARDS[7]:CFG.DAILY_REWARDS[result.nextStreak];
     updateUI();
+    renderDailyUI();
     snowfall(30);
-    notify(`🎉 ${result.message}! 🎉`,'s');
+    notify(`🎁 Daily reward claimed! +${result.reward} Snow (Day ${result.streak} streak!)`,'s');
     spawnP();
   }catch(e){
     notify(`❌ ${e.message}`,'e');
   }
 }
 
-function renderStakingMissions(){
-  const container=document.getElementById('stakingMissionsList');
-  if(!container)return;
-  
-  if(!U.stakingMissions || U.stakingMissions.length===0){
-    container.innerHTML='<div class="hempty">No missions available. Stake Snow to complete missions!</div>';
-    return;
-  }
-  
-  const totalStakedSpan=document.getElementById('totalStakedAllTime');
-  if(totalStakedSpan){
-    totalStakedSpan.textContent=fmt(U.totalStakedAllTime)+' Snow';
-  }
-  
+function renderStakingTasksUI(){
+  const container=document.getElementById('stakingTasksList');
   let html='';
-  for(const mission of U.stakingMissions){
-    const isCompleted=mission.completed;
-    const amount=mission.amount;
-    const reward=mission.reward;
-    const name=mission.name;
+  
+  for(const [amount,task] of Object.entries(CFG.STAKING_TASKS)){
+    const completed=U.stakingTasksCompleted.includes(`staking_${amount}`);
+    const progress=U.activeStakings.reduce((sum,s)=>s.amount>=task.minAmount?sum+1:sum,0);
+    const hasStake=U.activeStakings.some(s=>s.amount>=task.minAmount);
     
     html+=`
-      <div class="mission-card">
-        <div class="mission-icon">🎯</div>
-        <div class="mission-info">
-          <div class="mission-name">${name}</div>
-          <div class="mission-reward">🏆 Reward: +${fmt(reward)} Snow</div>
-          <div class="mission-progress">📊 Required: ${fmt(amount)} Snow staked</div>
+      <div class="task-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:800;color:var(--ice)">💰 ${task.name}</div>
+            <div style="font-size:11px;color:var(--gold);margin-top:4px">Reward: +${task.reward} Snow</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px">Requirement: Stake ${amount.toLocaleString()} Snow or more</div>
+          </div>
+          <div>
+            ${completed?'<span class="sbadge sb-completed">✅ Completed</span>':hasStake?'<span class="sbadge sb-active">⏳ In Progress</span>':'<span class="sbadge sb-p">🔒 Locked</span>'}
+          </div>
         </div>
-        <div>
-          ${isCompleted ? '<span class="mission-badge">✅ Completed</span>' : 
-            (U.totalStakedAllTime >= amount ? '<span class="mission-badge" style="background:rgba(77,208,225,.15);color:#4DD0E1">⏳ Will unlock after claiming</span>' : 
-            `<span class="mission-badge" style="background:rgba(255,255,255,.1);color:var(--muted)">🔒 ${Math.floor((U.totalStakedAllTime/amount)*100)}%</span>`)}
-        </div>
+        ${!completed && hasStake?'<div class="task-progress"><div class="task-progress-fill" style="width:100%"></div></div>':''}
       </div>
     `;
   }
-  container.innerHTML=html;
+  
+  container.innerHTML=html||'<div class="hempty">No staking tasks available</div>';
 }
 
 function showRewards(snow,rate){
@@ -920,7 +854,8 @@ function updateUI(){
   renderWdHist();
   renderTasks();
   renderStakingUI();
-  updateDailyStreakUI();
+  renderDailyUI();
+  renderStakingTasksUI();
   const cb=document.getElementById('collectBtn');if(cb){if(U.storageProgress>=1)cb.classList.add('btn-ready');else cb.classList.remove('btn-ready');}
 }
 
@@ -1103,6 +1038,16 @@ async function createStaking(planId, minAmount){
     notify('Creating stake...','i');
     const result=await api('createStaking',{planId,amount});
     U.user.snow=result.snow;
+    
+    // Check for task rewards
+    if(result.taskRewards && result.taskRewards.length>0){
+      for(const reward of result.taskRewards){
+        notify(`🎉 Staking Task Completed! +${reward.reward} Snow for staking ${reward.amount.toLocaleString()} Snow! 🎉`,'s');
+        U.user.snow+=reward.reward;
+      }
+      snowfall(50);
+    }
+    
     await loadState();
     updateUI();
     snowfall(30);
@@ -1122,15 +1067,10 @@ async function claimStaking(stakingId){
     notify('Claiming reward...','i');
     const result=await api('claimStaking',{stakingId});
     U.user.snow=result.snow;
-    // Update total staked all time and missions
     await loadState();
     updateUI();
     snowfall(40);
-    let msg=`🎉 Claimed ${fmt(result.reward)} Snow! (${fmt(result.profit)} profit) 🎉`;
-    if(result.missionRewards && result.missionRewards.length>0){
-      msg+=`\n🎯 Bonus missions: +${fmt(result.totalMissionReward)} Snow!`;
-    }
-    notify(msg,'s');
+    notify(`🎉 Claimed ${fmt(result.reward)} Snow! (${fmt(result.profit)} profit) 🎉`,'s');
     spawnP();
   }catch(e){
     notify(`❌ ${e.message}`,'e');
