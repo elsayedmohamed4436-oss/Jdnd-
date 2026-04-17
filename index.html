@@ -360,26 +360,23 @@ body {
   color: var(--success);
 }
 
-.wallet-connected {
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid var(--success);
-  border-radius: 12px;
-  padding: 8px 12px;
-  display: inline-flex;
+.wallet-status {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  justify-content: space-between;
+  padding: 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.wallet-connected {
+  color: var(--success);
 }
 
 .wallet-disconnected {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid var(--danger);
-  border-radius: 12px;
-  padding: 8px 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  color: var(--warning);
 }
 
 .text-primary { color: var(--primary); }
@@ -425,7 +422,7 @@ body {
   </div>
   <div class="nav-item" data-section="invest">
     <i class="fas fa-chart-line"></i>
-    <span>استثمر</span>
+    <span>استثمار</span>
   </div>
   <div class="nav-item" data-section="friends">
     <i class="fas fa-users"></i>
@@ -449,7 +446,7 @@ body {
       <span class="text-warning" id="pendingProfit">0.00 TON</span>
     </div>
     <button class="btn btn-primary" id="claimBtn" onclick="claimProfit()">
-      <i class="fas fa-hand-holding-usd"></i> سحب الأرباح الآن
+      <i class="fas fa-hand-holding-usd"></i> جني الأرباح
     </button>
   </div>
   
@@ -466,6 +463,16 @@ body {
 
 <!-- Invest Section -->
 <div class="section" id="investSection">
+  <div class="wallet-status" id="walletStatusCard">
+    <div>
+      <i class="fas fa-wallet"></i>
+      <span id="walletStatusText">المحفظة غير متصلة</span>
+    </div>
+    <button id="connectWalletBtn" class="btn-primary" style="padding: 8px 16px; width: auto; font-size: 12px;">
+      <i class="fas fa-link"></i> ربط المحفظة
+    </button>
+  </div>
+  
   <div class="flex justify-between items-center mb-3">
     <h3><i class="fas fa-gem"></i> مستويات الاستثمار</h3>
     <button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="reinvestModal()">
@@ -492,18 +499,18 @@ body {
   
   <div class="card">
     <div class="flex justify-between items-center mb-3">
-      <h3><i class="fas fa-users"></i> المدعوون لديك</h3>
+      <h3><i class="fas fa-users"></i> الأصدقاء المدعوين</h3>
       <span id="referralsCount">0</span>
     </div>
     <div id="referralsList">
-      <div class="text-secondary text-center" style="padding: 20px;">لا يوجد مدعوون حتى الآن</div>
+      <div class="text-secondary text-center" style="padding: 20px;">لا يوجد أصدقاء بعد</div>
     </div>
   </div>
   
   <div class="card">
     <h3 class="mb-2"><i class="fas fa-coins"></i> أرباح الإحالات</h3>
     <div id="referralEarningsList">
-      <div class="text-secondary text-center" style="padding: 20px;">لا توجد أرباح حتى الآن</div>
+      <div class="text-secondary text-center" style="padding: 20px;">لا توجد أرباح بعد</div>
     </div>
   </div>
 </div>
@@ -516,20 +523,7 @@ body {
 <!-- Wallet Section -->
 <div class="section" id="walletSection">
   <div class="card">
-    <div class="flex justify-between items-center mb-3">
-      <h3><i class="fas fa-link"></i> ربط المحفظة</h3>
-      <div id="walletStatus" class="wallet-disconnected">
-        <i class="fas fa-times-circle"></i> غير مرتبطة
-      </div>
-    </div>
-    <button id="connectWalletBtn" class="btn btn-primary" onclick="connectWallet()">
-      <i class="fas fa-plug"></i> ربط محفظة TON
-    </button>
-    <p class="text-secondary text-center mt-2" style="font-size: 11px;">يجب ربط المحفظة للشراء</p>
-  </div>
-  
-  <div class="card">
-    <h3 class="mb-2"><i class="fas fa-arrow-down"></i> سحب الأرباح</h3>
+    <h3 class="mb-2"><i class="fas fa-arrow-down"></i> سحب الأموال</h3>
     <p class="text-secondary" style="font-size: 12px; margin-bottom: 12px;">
       الحد الأدنى: 0.05 TON | العمولة: 5%
     </p>
@@ -543,7 +537,7 @@ body {
   <div class="card">
     <h3 class="mb-2"><i class="fas fa-history"></i> سجل السحوبات</h3>
     <div id="withdrawalsList">
-      <div class="text-secondary text-center" style="padding: 20px;">لا توجد سحوبات حتى الآن</div>
+      <div class="text-secondary text-center" style="padding: 20px;">لا توجد سحوبات بعد</div>
     </div>
   </div>
 </div>
@@ -596,13 +590,13 @@ body {
 
 <script>
 // ================================================================
-// TON INVESTMENT APP - FRONTEND v2.0
+// TON INVESTMENT APP - FRONTEND V2.0
 // ================================================================
 
-const API_URL = 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev';
+const API_URL = 'https://YOUR_WORKER_URL.workers.dev'; // غيّر هذا إلى رابط السيرفر الخاص بك
 const BOT_USERNAME = 'SANTASNOWBOT_BOT';
+const BOT_LINK = `https://t.me/${BOT_USERNAME}`;
 const APP_LINK = `https://t.me/${BOT_USERNAME}/app`;
-const RECEIVING_WALLET = 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k';
 
 let appState = {
   user: null,
@@ -677,6 +671,12 @@ async function init() {
       tg.ready();
       tg.expand();
       tg.enableClosingConfirmation();
+      
+      // التحقق من معامل البدء للإحالات
+      const startParam = tg.initDataUnsafe?.start_param;
+      if (startParam && startParam !== '') {
+        localStorage.setItem('referrer_id', startParam);
+      }
     }
     
     await login();
@@ -704,13 +704,19 @@ async function login() {
     throw new Error('لا يوجد مستخدم Telegram');
   }
   
-  const startParam = tg.initDataUnsafe?.start_param || '';
+  let referrerCode = localStorage.getItem('referrer_id') || tg.initDataUnsafe?.start_param || '';
   
   const result = await apiCall('login', {
-    referrerCode: startParam
+    referrerCode: referrerCode
   });
   
   appState.user = result.data;
+  
+  // مسح رمز الإحالة بعد الاستخدام
+  if (referrerCode) {
+    localStorage.removeItem('referrer_id');
+  }
+  
   return result;
 }
 
@@ -729,30 +735,14 @@ async function loadState() {
     appState.pendingProfit = state.pendingProfit;
     appState.levels = state.levels;
     
-    if (appState.user?.wallet_address) {
+    if (state.user.wallet_address) {
       appState.walletConnected = true;
-      appState.walletAddress = appState.user.wallet_address;
-      updateWalletUI();
+      appState.walletAddress = state.user.wallet_address;
     }
     
     updateUI();
   } catch (error) {
     console.error('Load state error:', error);
-  }
-}
-
-function updateWalletUI() {
-  const walletStatus = document.getElementById('walletStatus');
-  const connectBtn = document.getElementById('connectWalletBtn');
-  
-  if (appState.walletConnected && appState.walletAddress) {
-    walletStatus.className = 'wallet-connected';
-    walletStatus.innerHTML = `<i class="fas fa-check-circle"></i> مرتبطة: ${appState.walletAddress.substring(0, 6)}...${appState.walletAddress.substring(-4)}`;
-    if (connectBtn) connectBtn.style.display = 'none';
-  } else {
-    walletStatus.className = 'wallet-disconnected';
-    walletStatus.innerHTML = '<i class="fas fa-times-circle"></i> غير مرتبطة';
-    if (connectBtn) connectBtn.style.display = 'block';
   }
 }
 
@@ -764,13 +754,31 @@ function updateUI() {
   document.getElementById('pendingProfit').textContent = formatNumber(appState.pendingProfit, 4) + ' TON';
   document.getElementById('investmentsCount').textContent = appState.activeInvestments.length;
   
+  updateWalletStatus();
   updateActiveInvestments();
   updateLevelsList();
   updateReferrals();
   updateTasks();
   updateWithdrawals();
   updateReferralLink();
-  updateWalletUI();
+}
+
+function updateWalletStatus() {
+  const statusCard = document.getElementById('walletStatusCard');
+  const statusText = document.getElementById('walletStatusText');
+  const connectBtn = document.getElementById('connectWalletBtn');
+  
+  if (appState.walletConnected && appState.walletAddress) {
+    statusText.innerHTML = `<i class="fas fa-check-circle text-success"></i> المحفظة متصلة: ${appState.walletAddress.substring(0, 6)}...${appState.walletAddress.substring(appState.walletAddress.length - 4)}`;
+    connectBtn.textContent = 'تم الربط';
+    connectBtn.disabled = true;
+    connectBtn.style.opacity = '0.6';
+  } else {
+    statusText.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i> المحفظة غير متصلة - يرجى الربط للاستثمار';
+    connectBtn.textContent = 'ربط المحفظة';
+    connectBtn.disabled = false;
+    connectBtn.style.opacity = '1';
+  }
 }
 
 function updateActiveInvestments() {
@@ -793,7 +801,7 @@ function updateActiveInvestments() {
           <span class="text-success">+${formatNumber(inv.daily_profit, 4)} TON/يوم</span>
         </div>
         <div class="flex justify-between text-secondary" style="font-size: 12px;">
-          <span>الاستثمار: ${formatNumber(inv.amount, 2)} TON</span>
+          <span>المستثمر: ${formatNumber(inv.amount, 2)} TON</span>
           <span>الأيام المتبقية: ${daysLeft}</span>
         </div>
         <div class="flex justify-between text-secondary" style="font-size: 12px;">
@@ -842,7 +850,7 @@ function updateReferrals() {
   
   const refContainer = document.getElementById('referralsList');
   if (!appState.referrals.length) {
-    refContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا يوجد مدعوون حتى الآن</div>';
+    refContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا يوجد أصدقاء بعد</div>';
   } else {
     refContainer.innerHTML = appState.referrals.slice(0, 20).map(ref => `
       <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
@@ -857,12 +865,12 @@ function updateReferrals() {
   
   const earningsContainer = document.getElementById('referralEarningsList');
   if (!appState.referralEarnings.length) {
-    earningsContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا توجد أرباح حتى الآن</div>';
+    earningsContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا توجد أرباح بعد</div>';
   } else {
     earningsContainer.innerHTML = appState.referralEarnings.slice(0, 20).map(earning => `
       <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
         <div>
-          <div>${earning.type === 'signup' ? '🎉 مكافأة تسجيل' : '💎 عمولة استثمار'}</div>
+          <div>${earning.type === 'signup' ? '🎉 مكافأة التسجيل' : '💎 عمولة الاستثمار'}</div>
           <div class="text-secondary" style="font-size: 11px;">${new Date(earning.created_at).toLocaleDateString('ar')}</div>
         </div>
         <div class="text-success">+${formatNumber(earning.amount, 4)} TON</div>
@@ -906,14 +914,14 @@ function updateWithdrawals() {
   const container = document.getElementById('withdrawalsList');
   
   if (!appState.withdrawals.length) {
-    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا توجد سحوبات حتى الآن</div>';
+    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا توجد سحوبات بعد</div>';
     return;
   }
   
   container.innerHTML = appState.withdrawals.slice(0, 20).map(wd => {
     const statusText = {
       'pending': '⏳ قيد المراجعة',
-      'approved': '✅ تمت الموافقة',
+      'approved': '✅ تم الموافقة',
       'rejected': '❌ مرفوض'
     }[wd.status] || wd.status;
     
@@ -938,17 +946,17 @@ function updateWithdrawals() {
 function updateReferralLink() {
   const userId = appState.user?.telegram_id;
   if (userId) {
-    const link = `${APP_LINK}?startapp=${userId}`;
+    const link = `${BOT_LINK}?startapp=${userId}`;
     document.getElementById('refLinkInput').value = link;
   }
 }
 
 async function claimProfit() {
   try {
-    showNotification('جاري سحب الأرباح...', 'success');
+    showNotification('جاري جني الأرباح...', 'success');
     const result = await apiCall('claimProfit');
     await loadState();
-    showNotification(`تم سحب ${formatNumber(result.claimed_amount, 4)} TON!`, 'success');
+    showNotification(`تم جني ${formatNumber(result.claimed_amount, 4)} TON!`, 'success');
   } catch (error) {
     showNotification(error.message, 'error');
   }
@@ -956,10 +964,7 @@ async function claimProfit() {
 
 function showBuyModal(levelId) {
   if (!appState.walletConnected) {
-    showNotification('الرجاء ربط محفظتك أولاً', 'error');
-    document.getElementById('walletSection').classList.add('active');
-    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-    document.querySelector('[data-section="wallet"]').classList.add('active');
+    showNotification('يرجى ربط محفظة TON أولاً', 'error');
     return;
   }
   
@@ -983,19 +988,19 @@ async function buyLevel(levelId) {
     if (!level) throw new Error('مستوى غير صالح');
     
     if (!appState.walletConnected || !appState.walletAddress) {
-      showNotification('الرجاء ربط محفظتك أولاً', 'error');
+      showNotification('يرجى ربط محفظة TON أولاً', 'error');
       return;
     }
     
     showNotification('جاري معالجة المعاملة...', 'success');
     
     const amountNano = Math.floor(level.price * 1e9);
-    const comment = `شراء المستوى ${levelId}`;
+    const comment = `Buy Level ${levelId}`;
     
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 600,
       messages: [{
-        address: RECEIVING_WALLET,
+        address: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
         amount: amountNano.toString(),
         payload: comment
       }]
@@ -1036,7 +1041,7 @@ async function doReinvest() {
     const levelId = parseInt(document.getElementById('reinvestLevel').value);
     
     if (!amount || !levelId) {
-      showNotification('الرجاء ملء جميع الحقول', 'error');
+      showNotification('يرجى ملء جميع الحقول', 'error');
       return;
     }
     
@@ -1066,7 +1071,7 @@ async function withdraw() {
     const amount = parseFloat(document.getElementById('withdrawAmount').value);
     
     if (!wallet) {
-      showNotification('الرجاء إدخال عنوان المحفظة', 'error');
+      showNotification('يرجى إدخال عنوان المحفظة', 'error');
       return;
     }
     
@@ -1119,20 +1124,6 @@ async function connectWallet() {
     }
     
     await appState.tonUI.connectWallet();
-    
-    appState.tonUI.onStatusChange(async (wallet) => {
-      if (wallet) {
-        const walletAddress = wallet.account.address;
-        
-        await apiCall('connectWallet', { walletAddress });
-        
-        appState.walletConnected = true;
-        appState.walletAddress = walletAddress;
-        updateWalletUI();
-        await loadState();
-        showNotification('تم ربط المحفظة بنجاح!', 'success');
-      }
-    });
   } catch (error) {
     console.error('Connect wallet error:', error);
     showNotification('فشل ربط المحفظة: ' + error.message, 'error');
@@ -1141,10 +1132,26 @@ async function connectWallet() {
 
 function initTONConnect() {
   try {
-    if (typeof TON_CONNECT_UI !== 'undefined') {
+    if (window.TON_CONNECT_UI && !appState.tonUI) {
       appState.tonUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: `${API_URL}/tonconnect-manifest.json`,
         uiPreferences: { theme: 'DARK' }
+      });
+      
+      appState.tonUI.onStatusChange(async (wallet) => {
+        if (wallet) {
+          appState.walletConnected = true;
+          appState.walletAddress = wallet.account.address;
+          
+          await apiCall('connectWallet', { walletAddress: wallet.account.address });
+          await loadState();
+          
+          showNotification('تم ربط المحفظة بنجاح!', 'success');
+        } else {
+          appState.walletConnected = false;
+          appState.walletAddress = null;
+          updateWalletStatus();
+        }
       });
     }
   } catch (error) {
@@ -1163,6 +1170,8 @@ document.querySelectorAll('.nav-item').forEach(item => {
     document.getElementById(sectionId + 'Section').classList.add('active');
   });
 });
+
+document.getElementById('connectWalletBtn')?.addEventListener('click', connectWallet);
 
 init();
 </script>
