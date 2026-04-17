@@ -38,7 +38,6 @@ body {
   padding-bottom: 80px;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -50,11 +49,57 @@ body {
   border-radius: 4px;
 }
 
-/* Glass Effect */
-.glass {
-  background: rgba(17, 24, 39, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+/* Header Styles */
+.app-header {
+  background: var(--card);
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.user-balance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(99, 102, 241, 0.15);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.user-balance i {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.user-balance span {
+  font-weight: 700;
+  font-size: 14px;
 }
 
 /* Loading Screen */
@@ -149,33 +194,34 @@ body {
   border: 1px solid var(--border);
 }
 
-/* Balance Card */
-.balance-card {
+/* Stats Card */
+.stats-card {
   background: var(--gradient);
   border-radius: 24px;
   padding: 20px;
   margin-bottom: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
   text-align: center;
 }
 
-.balance-label {
-  font-size: 14px;
-  opacity: 0.9;
-  margin-bottom: 8px;
+.stat-item {
+  text-align: center;
 }
 
-.balance-amount {
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+.stat-label {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 4px;
 }
 
-.balance-stats {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.2);
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
 }
 
 /* Buttons */
@@ -209,6 +255,11 @@ body {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text);
+}
+
+.btn-warning {
+  background: var(--warning);
+  color: white;
 }
 
 /* Level Cards */
@@ -250,7 +301,7 @@ body {
 /* Notifications */
 #notification {
   position: fixed;
-  top: 16px;
+  top: 70px;
   left: 50%;
   transform: translateX(-50%) translateY(-100px);
   background: var(--card);
@@ -370,10 +421,30 @@ body {
   color: var(--success);
 }
 
+/* Wallet Connect Button */
+.wallet-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.wallet-connected {
+  color: var(--success);
+}
+
+.wallet-disconnected {
+  color: var(--danger);
+}
+
 /* Utilities */
 .text-primary { color: var(--primary); }
 .text-success { color: var(--success); }
 .text-warning { color: var(--warning); }
+.text-danger { color: var(--danger); }
 .text-secondary { color: var(--text-secondary); }
 .flex { display: flex; }
 .justify-between { justify-content: space-between; }
@@ -399,14 +470,17 @@ body {
 <!-- Main Content -->
 <div id="app" style="display: none;">
 
-<!-- Balance Card -->
-<div class="balance-card" style="margin: 16px 16px 0 16px;">
-  <div class="balance-label">Your Balance</div>
-  <div class="balance-amount" id="balanceAmount">0.00</div>
-  <div class="balance-stats">
-    <div><small>Invested</small><br><strong id="totalInvested">0</strong></div>
-    <div><small>Earned</small><br><strong id="totalEarned">0</strong></div>
-    <div><small>Daily</small><br><strong id="dailyProfit">0</strong></div>
+<!-- Header with User Info -->
+<div class="app-header">
+  <div class="user-info">
+    <img id="userAvatar" class="user-avatar" src="" alt="Avatar">
+    <div class="user-details">
+      <div class="user-name" id="userName">Loading...</div>
+      <div class="user-balance">
+        <i class="fas fa-coins"></i>
+        <span id="headerBalance">0.00 TON</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -438,6 +512,23 @@ body {
 
 <!-- Home Section -->
 <div class="section active" id="homeSection">
+  <div class="stats-card">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-label">Invested</div>
+        <div class="stat-value" id="totalInvested">0 TON</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Earned</div>
+        <div class="stat-value" id="totalEarned">0 TON</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Daily</div>
+        <div class="stat-value" id="dailyProfit">0 TON</div>
+      </div>
+    </div>
+  </div>
+  
   <div class="card">
     <div class="flex justify-between items-center mb-2">
       <span><i class="fas fa-chart-simple"></i> Pending Profit</span>
@@ -511,12 +602,23 @@ body {
 <!-- Wallet Section -->
 <div class="section" id="walletSection">
   <div class="card">
+    <h3 class="mb-2"><i class="fas fa-link"></i> Wallet Connection</h3>
+    <div class="wallet-status" id="walletStatus">
+      <span><i class="fas fa-circle"></i> <span id="walletStatusText">Not Connected</span></span>
+      <button id="walletConnectBtn" class="btn-primary" style="padding: 8px 16px; width: auto;" onclick="connectWallet()">
+        <i class="fas fa-plug"></i> Connect
+      </button>
+    </div>
+    <div id="walletAddressDisplay" class="text-secondary" style="font-size: 12px; word-break: break-all;"></div>
+  </div>
+  
+  <div class="card">
     <h3 class="mb-2"><i class="fas fa-arrow-down"></i> Withdraw Funds</h3>
     <p class="text-secondary" style="font-size: 12px; margin-bottom: 12px;">
-      Min: 0.05 TON | Fee: 5%
+      Min: 0.01 TON | Fee: 5%
     </p>
-    <input type="text" id="walletAddress" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="TON Wallet Address">
-    <input type="number" id="withdrawAmount" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="Amount (TON)" step="0.01" min="0.05">
+    <input type="text" id="withdrawWallet" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="TON Wallet Address">
+    <input type="number" id="withdrawAmount" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="Amount (TON)" step="0.01" min="0.01">
     <button class="btn btn-primary" onclick="withdraw()">
       <i class="fas fa-paper-plane"></i> Withdraw
     </button>
@@ -579,7 +681,7 @@ body {
 
 <script>
 // ================================================================
-// TON INVESTMENT APP - FRONTEND
+// TON INVESTMENT APP - FRONTEND v2.0
 // ================================================================
 
 // Configuration
@@ -636,6 +738,11 @@ function openModal(modalId) {
   document.getElementById(modalId).classList.add('active');
 }
 
+function validateTonAddress(address) {
+  const tonRegex = /^[E|U]Q[A-Za-z0-9_-]{46}$/;
+  return tonRegex.test(address);
+}
+
 // ================================================================
 // API Functions
 // ================================================================
@@ -668,7 +775,6 @@ async function apiCall(action, data = {}) {
 
 async function init() {
   try {
-    // Initialize Telegram WebApp
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
@@ -676,20 +782,26 @@ async function init() {
       tg.enableClosingConfirmation();
     }
     
-    // Login
     await login();
-    
-    // Load state
     await loadState();
-    
-    // Initialize TON Connect
     initTONConnect();
     
-    // Hide loading, show app
+    // Update header with user info
+    if (appState.user) {
+      document.getElementById('userName').textContent = `${appState.user.first_name || ''} ${appState.user.last_name || ''}`.trim() || 'User';
+      document.getElementById('headerBalance').textContent = formatNumber(appState.user.balance, 4) + ' TON';
+      
+      const avatarImg = document.getElementById('userAvatar');
+      if (appState.user.photo_url) {
+        avatarImg.src = appState.user.photo_url;
+      } else {
+        avatarImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(appState.user.first_name || 'U')}&background=6366f1&color=fff`;
+      }
+    }
+    
     document.getElementById('loadingScreen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     
-    // Start periodic refresh
     setInterval(() => {
       loadState();
     }, 30000);
@@ -715,6 +827,11 @@ async function login() {
   });
   
   appState.user = result.data;
+  
+  if (result.isNew) {
+    showNotification(`🎉 Welcome! You received ${result.welcomeBonus} TON bonus!`, 'success');
+  }
+  
   return result;
 }
 
@@ -744,17 +861,13 @@ async function loadState() {
 // ================================================================
 
 function updateUI() {
-  // Balance
-  document.getElementById('balanceAmount').textContent = formatNumber(appState.user?.balance, 4) + ' TON';
+  document.getElementById('headerBalance').textContent = formatNumber(appState.user?.balance, 4) + ' TON';
   document.getElementById('totalInvested').textContent = formatNumber(appState.user?.total_invested, 2) + ' TON';
   document.getElementById('totalEarned').textContent = formatNumber(appState.user?.total_earned, 2) + ' TON';
   document.getElementById('dailyProfit').textContent = formatNumber(appState.totalDailyProfit, 3) + ' TON';
   document.getElementById('pendingProfit').textContent = formatNumber(appState.pendingProfit, 4) + ' TON';
-  
-  // Investments count
   document.getElementById('investmentsCount').textContent = appState.activeInvestments.length;
   
-  // Update all sections
   updateActiveInvestments();
   updateLevelsList();
   updateReferrals();
@@ -828,10 +941,8 @@ function updateLevelsList() {
 }
 
 function updateReferrals() {
-  // Referrals count
   document.getElementById('referralsCount').textContent = appState.referrals.length;
   
-  // Referrals list
   const refContainer = document.getElementById('referralsList');
   if (!appState.referrals.length) {
     refContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No referrals yet</div>';
@@ -847,7 +958,6 @@ function updateReferrals() {
     `).join('');
   }
   
-  // Referral earnings
   const earningsContainer = document.getElementById('referralEarningsList');
   if (!appState.referralEarnings.length) {
     earningsContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No earnings yet</div>';
@@ -955,6 +1065,11 @@ function showBuyModal(levelId) {
   selectedLevel = appState.levels[levelId];
   if (!selectedLevel) return;
   
+  if (!appState.walletConnected) {
+    showNotification('Please connect your TON wallet first!', 'error');
+    return;
+  }
+  
   const total30 = selectedLevel.price + (selectedLevel.daily * 30);
   
   document.getElementById('buyLevelName').textContent = `${selectedLevel.icon} Level ${levelId} - ${selectedLevel.name}`;
@@ -971,7 +1086,6 @@ async function buyLevel(levelId) {
     const level = appState.levels[levelId];
     if (!level) throw new Error('Invalid level');
     
-    // Check if wallet connected
     if (!appState.walletConnected || !appState.walletAddress) {
       showNotification('Please connect your TON wallet first', 'error');
       return;
@@ -979,14 +1093,13 @@ async function buyLevel(levelId) {
     
     showNotification('Processing transaction...', 'success');
     
-    // Send TON transaction
     const amountNano = Math.floor(level.price * 1e9);
     const comment = `Buy Level ${levelId}`;
     
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 600,
       messages: [{
-        address: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k', // Your receiving wallet
+        address: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
         amount: amountNano.toString(),
         payload: comment
       }]
@@ -994,10 +1107,10 @@ async function buyLevel(levelId) {
     
     const result = await appState.tonUI.sendTransaction(transaction);
     
-    // Verify on backend
     const buyResult = await apiCall('buyLevel', {
       levelId: levelId,
-      txHash: result.boc
+      txHash: result.boc,
+      walletAddress: appState.walletAddress
     });
     
     await loadState();
@@ -1011,7 +1124,6 @@ async function buyLevel(levelId) {
 }
 
 function reinvestModal() {
-  // Populate levels select
   const select = document.getElementById('reinvestLevel');
   select.innerHTML = '<option value="">Select Level</option>';
   
@@ -1054,7 +1166,7 @@ async function doReinvest() {
 
 async function withdraw() {
   try {
-    const wallet = document.getElementById('walletAddress').value.trim();
+    const wallet = document.getElementById('withdrawWallet').value.trim();
     const amount = parseFloat(document.getElementById('withdrawAmount').value);
     
     if (!wallet) {
@@ -1062,8 +1174,18 @@ async function withdraw() {
       return;
     }
     
-    if (!amount || amount < 0.05) {
-      showNotification('Minimum withdrawal is 0.05 TON', 'error');
+    if (!validateTonAddress(wallet)) {
+      showNotification('Invalid TON wallet address', 'error');
+      return;
+    }
+    
+    if (!amount || amount < 0.01) {
+      showNotification('Minimum withdrawal is 0.01 TON', 'error');
+      return;
+    }
+    
+    if (amount > (appState.user?.balance || 0)) {
+      showNotification('Insufficient balance', 'error');
       return;
     }
     
@@ -1113,19 +1235,52 @@ function initTONConnect() {
         uiPreferences: { theme: 'DARK' }
       });
       
-      appState.tonUI.onStatusChange(wallet => {
+      appState.tonUI.onStatusChange(async wallet => {
         if (wallet) {
           appState.walletConnected = true;
           appState.walletAddress = wallet.account.address;
-          showNotification('Wallet connected!', 'success');
+          document.getElementById('walletStatusText').textContent = 'Connected';
+          document.getElementById('walletAddressDisplay').textContent = `Address: ${wallet.account.address.substring(0, 10)}...${wallet.account.address.substring(-10)}`;
+          document.getElementById('walletConnectBtn').innerHTML = '<i class="fas fa-trash"></i> Disconnect';
+          document.getElementById('walletConnectBtn').onclick = disconnectWallet;
+          
+          // Save wallet to backend
+          try {
+            await apiCall('connectWallet', { walletAddress: wallet.account.address });
+          } catch (e) {
+            console.error('Failed to save wallet:', e);
+          }
+          
+          showNotification('Wallet connected successfully!', 'success');
         } else {
           appState.walletConnected = false;
           appState.walletAddress = null;
+          document.getElementById('walletStatusText').textContent = 'Not Connected';
+          document.getElementById('walletAddressDisplay').textContent = '';
+          document.getElementById('walletConnectBtn').innerHTML = '<i class="fas fa-plug"></i> Connect';
+          document.getElementById('walletConnectBtn').onclick = connectWallet;
         }
       });
     }
   } catch (error) {
     console.error('TON Connect init error:', error);
+  }
+}
+
+async function connectWallet() {
+  try {
+    await appState.tonUI.connectWallet();
+  } catch (error) {
+    showNotification('Failed to connect wallet: ' + error.message, 'error');
+  }
+}
+
+async function disconnectWallet() {
+  try {
+    await appState.tonUI.disconnect();
+    showNotification('Wallet disconnected', 'success');
+  } catch (error) {
+    console.error('Disconnect error:', error);
   }
 }
 
@@ -1137,7 +1292,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', () => {
     const sectionId = item.dataset.section;
     
-    // Update active states
     document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
     document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
     
