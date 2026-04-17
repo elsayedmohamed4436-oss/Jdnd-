@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>TON Investment 💎</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
@@ -31,7 +31,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cairo', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -49,7 +49,12 @@ body {
   border-radius: 4px;
 }
 
-/* Loading Screen */
+.glass {
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
 #loadingScreen {
   position: fixed;
   inset: 0;
@@ -76,75 +81,6 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* User Profile Header */
-.user-header {
-  background: var(--card);
-  padding: 16px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-}
-
-.user-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.user-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.user-avatar i {
-  font-size: 24px;
-  color: white;
-}
-
-.user-details {
-  flex: 1;
-}
-
-.user-name {
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.user-balance {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.balance-small {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-.balance-value {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-/* Navigation Bar */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -184,7 +120,6 @@ body {
   font-weight: 500;
 }
 
-/* Sections */
 .section {
   display: none;
   padding: 16px;
@@ -200,7 +135,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Cards */
 .card {
   background: var(--card);
   border-radius: 20px;
@@ -209,7 +143,34 @@ body {
   border: 1px solid var(--border);
 }
 
-/* Buttons */
+.balance-card {
+  background: var(--gradient);
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.balance-label {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.balance-amount {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.balance-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
 .btn {
   padding: 14px 20px;
   border: none;
@@ -247,7 +208,6 @@ body {
   color: white;
 }
 
-/* Level Cards */
 .level-card {
   background: var(--card);
   border-radius: 16px;
@@ -257,11 +217,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.2s;
-}
-
-.level-card:active {
-  transform: scale(0.98);
 }
 
 .level-info h4 {
@@ -279,7 +234,6 @@ body {
   color: var(--primary);
 }
 
-/* Investment Card */
 .investment-card {
   background: rgba(17, 24, 39, 0.6);
   border-radius: 14px;
@@ -288,10 +242,9 @@ body {
   border-left: 3px solid var(--primary);
 }
 
-/* Notifications */
 #notification {
   position: fixed;
-  top: 70px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%) translateY(-100px);
   background: var(--card);
@@ -321,7 +274,6 @@ body {
   color: var(--danger);
 }
 
-/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -346,7 +298,6 @@ body {
   border: 1px solid var(--border);
 }
 
-/* Progress Bar */
 .progress-bar {
   height: 6px;
   background: var(--border);
@@ -362,7 +313,6 @@ body {
   transition: width 0.3s;
 }
 
-/* Referral Link */
 .referral-link {
   background: rgba(0,0,0,0.3);
   border-radius: 12px;
@@ -382,7 +332,6 @@ body {
   outline: none;
 }
 
-/* Tasks */
 .task-item {
   display: flex;
   justify-content: space-between;
@@ -411,26 +360,28 @@ body {
   color: var(--success);
 }
 
-/* Wallet Connect Button */
-.wallet-btn {
-  background: var(--gradient);
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  color: white;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .wallet-connected {
-  background: var(--success);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--success);
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
 }
 
-/* Utilities */
+.wallet-disconnected {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--danger);
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
 .text-primary { color: var(--primary); }
 .text-success { color: var(--success); }
 .text-warning { color: var(--warning); }
@@ -449,105 +400,66 @@ body {
 </head>
 <body>
 
-<!-- Loading Screen -->
 <div id="loadingScreen">
   <div class="loader"></div>
   <div style="font-size: 18px; font-weight: 600;">TON Investment</div>
-  <div id="loadingStatus" style="font-size: 13px; color: var(--text-secondary);">Loading...</div>
+  <div id="loadingStatus" style="font-size: 13px; color: var(--text-secondary);">جاري التحميل...</div>
 </div>
 
-<!-- Main Content -->
 <div id="app" style="display: none;">
 
-<!-- User Profile Header -->
-<div class="user-header">
-  <div class="user-info">
-    <div class="user-avatar" id="userAvatar">
-      <i class="fas fa-user"></i>
-    </div>
-    <div class="user-details">
-      <div class="user-name" id="userName">Loading...</div>
-      <div class="user-balance">
-        <span class="balance-small">Balance:</span>
-        <span class="balance-value" id="headerBalance">0.00 TON</span>
-      </div>
-    </div>
+<div class="balance-card" style="margin: 16px 16px 0 16px;">
+  <div class="balance-label">رصيدك</div>
+  <div class="balance-amount" id="balanceAmount">0.00</div>
+  <div class="balance-stats">
+    <div><small>إجمالي الاستثمار</small><br><strong id="totalInvested">0</strong></div>
+    <div><small>إجمالي الأرباح</small><br><strong id="totalEarned">0</strong></div>
+    <div><small>الربح اليومي</small><br><strong id="dailyProfit">0</strong></div>
   </div>
-  <button class="wallet-btn" id="walletBtn" onclick="toggleWallet()">
-    <i class="fas fa-link"></i>
-    <span id="walletBtnText">Connect</span>
-  </button>
 </div>
 
-<!-- Navigation -->
 <div class="bottom-nav">
   <div class="nav-item active" data-section="home">
     <i class="fas fa-home"></i>
-    <span>Home</span>
+    <span>الرئيسية</span>
   </div>
   <div class="nav-item" data-section="invest">
     <i class="fas fa-chart-line"></i>
-    <span>Invest</span>
+    <span>استثمر</span>
   </div>
   <div class="nav-item" data-section="friends">
     <i class="fas fa-users"></i>
-    <span>Friends</span>
+    <span>الأصدقاء</span>
   </div>
   <div class="nav-item" data-section="tasks">
     <i class="fas fa-tasks"></i>
-    <span>Tasks</span>
+    <span>المهام</span>
   </div>
   <div class="nav-item" data-section="wallet">
     <i class="fas fa-wallet"></i>
-    <span>Withdraw</span>
+    <span>المحفظة</span>
   </div>
 </div>
-
-<!-- Sections -->
 
 <!-- Home Section -->
 <div class="section active" id="homeSection">
   <div class="card">
     <div class="flex justify-between items-center mb-2">
-      <span><i class="fas fa-chart-simple"></i> Daily Profit</span>
-      <span class="text-success" id="dailyProfitHeader">0 TON/day</span>
-    </div>
-    <div class="flex justify-between items-center mb-3">
-      <span><i class="fas fa-clock"></i> Pending Profit</span>
+      <span><i class="fas fa-chart-simple"></i> الأرباح المعلقة</span>
       <span class="text-warning" id="pendingProfit">0.00 TON</span>
     </div>
     <button class="btn btn-primary" id="claimBtn" onclick="claimProfit()">
-      <i class="fas fa-hand-holding-usd"></i> Claim Now
+      <i class="fas fa-hand-holding-usd"></i> سحب الأرباح الآن
     </button>
   </div>
   
   <div class="card">
     <div class="flex justify-between items-center mb-3">
-      <h3><i class="fas fa-clock"></i> Active Investments</h3>
+      <h3><i class="fas fa-clock"></i> استثماراتك النشطة</h3>
       <span id="investmentsCount" class="text-secondary">0</span>
     </div>
     <div id="activeInvestmentsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No active investments</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="flex justify-between items-center">
-      <div>
-        <h3><i class="fas fa-chart-line"></i> Stats</h3>
-      </div>
-    </div>
-    <div class="flex justify-between mt-2">
-      <span class="text-secondary">Total Invested:</span>
-      <span id="totalInvested">0 TON</span>
-    </div>
-    <div class="flex justify-between mt-2">
-      <span class="text-secondary">Total Earned:</span>
-      <span id="totalEarned" class="text-success">0 TON</span>
-    </div>
-    <div class="flex justify-between mt-2">
-      <span class="text-secondary">Total Withdrawn:</span>
-      <span id="totalWithdrawn">0 TON</span>
+      <div class="text-secondary text-center" style="padding: 20px;">لا توجد استثمارات نشطة</div>
     </div>
   </div>
 </div>
@@ -555,9 +467,9 @@ body {
 <!-- Invest Section -->
 <div class="section" id="investSection">
   <div class="flex justify-between items-center mb-3">
-    <h3><i class="fas fa-gem"></i> Investment Levels</h3>
+    <h3><i class="fas fa-gem"></i> مستويات الاستثمار</h3>
     <button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="reinvestModal()">
-      <i class="fas fa-sync-alt"></i> Reinvest
+      <i class="fas fa-sync-alt"></i> إعادة استثمار
     </button>
   </div>
   <div id="levelsList"></div>
@@ -566,9 +478,9 @@ body {
 <!-- Friends Section -->
 <div class="section" id="friendsSection">
   <div class="card">
-    <h3 class="mb-2"><i class="fas fa-gift"></i> Referral Program</h3>
+    <h3 class="mb-2"><i class="fas fa-gift"></i> برنامج الإحالات</h3>
     <p class="text-secondary" style="font-size: 13px; margin-bottom: 12px;">
-      Earn 0.01 TON per friend + 15% of their investments!
+      اكسب 0.01 TON لكل صديق + 15% من استثماراتهم!
     </p>
     <div class="referral-link">
       <input type="text" id="refLinkInput" readonly>
@@ -580,18 +492,18 @@ body {
   
   <div class="card">
     <div class="flex justify-between items-center mb-3">
-      <h3><i class="fas fa-users"></i> Your Referrals</h3>
+      <h3><i class="fas fa-users"></i> المدعوون لديك</h3>
       <span id="referralsCount">0</span>
     </div>
     <div id="referralsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No referrals yet</div>
+      <div class="text-secondary text-center" style="padding: 20px;">لا يوجد مدعوون حتى الآن</div>
     </div>
   </div>
   
   <div class="card">
-    <h3 class="mb-2"><i class="fas fa-coins"></i> Referral Earnings</h3>
+    <h3 class="mb-2"><i class="fas fa-coins"></i> أرباح الإحالات</h3>
     <div id="referralEarningsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No earnings yet</div>
+      <div class="text-secondary text-center" style="padding: 20px;">لا توجد أرباح حتى الآن</div>
     </div>
   </div>
 </div>
@@ -601,24 +513,37 @@ body {
   <div id="tasksList"></div>
 </div>
 
-<!-- Wallet/Withdraw Section -->
+<!-- Wallet Section -->
 <div class="section" id="walletSection">
   <div class="card">
-    <h3 class="mb-2"><i class="fas fa-arrow-down"></i> Withdraw Funds</h3>
+    <div class="flex justify-between items-center mb-3">
+      <h3><i class="fas fa-link"></i> ربط المحفظة</h3>
+      <div id="walletStatus" class="wallet-disconnected">
+        <i class="fas fa-times-circle"></i> غير مرتبطة
+      </div>
+    </div>
+    <button id="connectWalletBtn" class="btn btn-primary" onclick="connectWallet()">
+      <i class="fas fa-plug"></i> ربط محفظة TON
+    </button>
+    <p class="text-secondary text-center mt-2" style="font-size: 11px;">يجب ربط المحفظة للشراء</p>
+  </div>
+  
+  <div class="card">
+    <h3 class="mb-2"><i class="fas fa-arrow-down"></i> سحب الأرباح</h3>
     <p class="text-secondary" style="font-size: 12px; margin-bottom: 12px;">
-      Min: 0.01 TON | Fee: 5%
+      الحد الأدنى: 0.05 TON | العمولة: 5%
     </p>
-    <input type="text" id="walletAddress" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="TON Wallet Address">
-    <input type="number" id="withdrawAmount" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="Amount (TON)" step="0.01" min="0.01">
+    <input type="text" id="walletAddress" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="عنوان محفظة TON">
+    <input type="number" id="withdrawAmount" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="المبلغ (TON)" step="0.01" min="0.05">
     <button class="btn btn-primary" onclick="withdraw()">
-      <i class="fas fa-paper-plane"></i> Withdraw
+      <i class="fas fa-paper-plane"></i> سحب
     </button>
   </div>
   
   <div class="card">
-    <h3 class="mb-2"><i class="fas fa-history"></i> Withdrawal History</h3>
+    <h3 class="mb-2"><i class="fas fa-history"></i> سجل السحوبات</h3>
     <div id="withdrawalsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No withdrawals yet</div>
+      <div class="text-secondary text-center" style="padding: 20px;">لا توجد سحوبات حتى الآن</div>
     </div>
   </div>
 </div>
@@ -626,15 +551,15 @@ body {
 <!-- Reinvest Modal -->
 <div id="reinvestModal" class="modal">
   <div class="modal-content">
-    <h3 class="mb-2">Reinvest</h3>
-    <p class="text-secondary mb-3">Choose amount and level</p>
-    <input type="number" id="reinvestAmount" class="card" style="width: 100%; margin-bottom: 12px;" placeholder="Amount (TON)">
+    <h3 class="mb-2">إعادة استثمار</h3>
+    <p class="text-secondary mb-3">اختر المبلغ والمستوى</p>
+    <input type="number" id="reinvestAmount" class="card" style="width: 100%; margin-bottom: 12px;" placeholder="المبلغ (TON)">
     <select id="reinvestLevel" class="card" style="width: 100%; margin-bottom: 12px; background: var(--card);">
-      <option value="">Select Level</option>
+      <option value="">اختر المستوى</option>
     </select>
     <div class="flex gap-2">
-      <button class="btn-outline" style="flex: 1;" onclick="closeModal('reinvestModal')">Cancel</button>
-      <button class="btn-primary" style="flex: 1;" onclick="doReinvest()">Reinvest</button>
+      <button class="btn-outline" style="flex: 1;" onclick="closeModal('reinvestModal')">إلغاء</button>
+      <button class="btn-primary" style="flex: 1;" onclick="doReinvest()">إعادة استثمار</button>
     </div>
   </div>
 </div>
@@ -642,30 +567,29 @@ body {
 <!-- Buy Modal -->
 <div id="buyModal" class="modal">
   <div class="modal-content">
-    <h3 class="mb-2" id="buyLevelName">Buy Level</h3>
+    <h3 class="mb-2" id="buyLevelName">شراء المستوى</h3>
     <p class="text-secondary mb-3" id="buyLevelInfo"></p>
     <div class="card" style="margin-bottom: 12px; background: rgba(0,0,0,0.3);">
       <div class="flex justify-between">
-        <span>Price:</span>
+        <span>السعر:</span>
         <span class="text-primary" id="buyLevelPrice">0 TON</span>
       </div>
       <div class="flex justify-between mt-2">
-        <span>Daily Profit:</span>
+        <span>الربح اليومي:</span>
         <span class="text-success" id="buyLevelDaily">0 TON</span>
       </div>
       <div class="flex justify-between mt-2">
-        <span>30-Day Total:</span>
+        <span>إجمالي 30 يوم:</span>
         <span class="text-warning" id="buyLevelTotal">0 TON</span>
       </div>
     </div>
     <button class="btn btn-primary" id="confirmBuyBtn" onclick="confirmBuy()">
-      <i class="fas fa-rocket"></i> Buy Now
+      <i class="fas fa-rocket"></i> شراء الآن
     </button>
-    <button class="btn-outline" style="margin-top: 8px;" onclick="closeModal('buyModal')">Cancel</button>
+    <button class="btn-outline" style="margin-top: 8px;" onclick="closeModal('buyModal')">إلغاء</button>
   </div>
 </div>
 
-<!-- Notification -->
 <div id="notification"></div>
 
 </div>
@@ -675,13 +599,11 @@ body {
 // TON INVESTMENT APP - FRONTEND v2.0
 // ================================================================
 
-// Configuration
 const API_URL = 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev';
 const BOT_USERNAME = 'SANTASNOWBOT_BOT';
 const APP_LINK = `https://t.me/${BOT_USERNAME}/app`;
 const RECEIVING_WALLET = 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k';
 
-// Global state
 let appState = {
   user: null,
   investments: [],
@@ -701,11 +623,7 @@ let appState = {
 
 let selectedLevel = null;
 
-// ================================================================
-// Utility Functions
-// ================================================================
-
-function formatNumber(num, decimals = 4) {
+function formatNumber(num, decimals = 2) {
   if (num === undefined || num === null) return '0.00';
   return parseFloat(num).toFixed(decimals);
 }
@@ -730,10 +648,6 @@ function openModal(modalId) {
   document.getElementById(modalId).classList.add('active');
 }
 
-// ================================================================
-// API Functions
-// ================================================================
-
 async function apiCall(action, data = {}) {
   const headers = {
     'Content-Type': 'application/json'
@@ -756,13 +670,8 @@ async function apiCall(action, data = {}) {
   return result.data;
 }
 
-// ================================================================
-// Main Functions
-// ================================================================
-
 async function init() {
   try {
-    // Initialize Telegram WebApp
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
@@ -770,32 +679,20 @@ async function init() {
       tg.enableClosingConfirmation();
     }
     
-    // Login
     await login();
-    
-    // Load state
     await loadState();
-    
-    // Initialize TON Connect
     initTONConnect();
     
-    // Hide loading, show app
     document.getElementById('loadingScreen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     
-    // Show welcome message for new users
-    if (window.isNewUser && window.welcomeBonus > 0) {
-      showNotification(`🎉 Welcome! You received ${window.welcomeBonus} TON bonus!`, 'success');
-    }
-    
-    // Start periodic refresh
     setInterval(() => {
       loadState();
     }, 30000);
     
   } catch (error) {
     console.error('Init error:', error);
-    document.getElementById('loadingStatus').textContent = 'Failed to load. Please refresh.';
+    document.getElementById('loadingStatus').textContent = 'فشل التحميل. يرجى التحديث.';
   }
 }
 
@@ -804,7 +701,7 @@ async function login() {
   const user = tg.initDataUnsafe?.user;
   
   if (!user) {
-    throw new Error('No Telegram user');
+    throw new Error('لا يوجد مستخدم Telegram');
   }
   
   const startParam = tg.initDataUnsafe?.start_param || '';
@@ -814,9 +711,6 @@ async function login() {
   });
   
   appState.user = result.data;
-  window.isNewUser = result.isNew || false;
-  window.welcomeBonus = result.welcomeBonus || 0;
-  
   return result;
 }
 
@@ -835,62 +729,55 @@ async function loadState() {
     appState.pendingProfit = state.pendingProfit;
     appState.levels = state.levels;
     
+    if (appState.user?.wallet_address) {
+      appState.walletConnected = true;
+      appState.walletAddress = appState.user.wallet_address;
+      updateWalletUI();
+    }
+    
     updateUI();
   } catch (error) {
     console.error('Load state error:', error);
   }
 }
 
-// ================================================================
-// UI Updates
-// ================================================================
+function updateWalletUI() {
+  const walletStatus = document.getElementById('walletStatus');
+  const connectBtn = document.getElementById('connectWalletBtn');
+  
+  if (appState.walletConnected && appState.walletAddress) {
+    walletStatus.className = 'wallet-connected';
+    walletStatus.innerHTML = `<i class="fas fa-check-circle"></i> مرتبطة: ${appState.walletAddress.substring(0, 6)}...${appState.walletAddress.substring(-4)}`;
+    if (connectBtn) connectBtn.style.display = 'none';
+  } else {
+    walletStatus.className = 'wallet-disconnected';
+    walletStatus.innerHTML = '<i class="fas fa-times-circle"></i> غير مرتبطة';
+    if (connectBtn) connectBtn.style.display = 'block';
+  }
+}
 
 function updateUI() {
-  // Header
-  const firstName = appState.user?.first_name || 'User';
-  const lastName = appState.user?.last_name || '';
-  document.getElementById('userName').textContent = `${firstName} ${lastName}`.trim();
-  document.getElementById('headerBalance').textContent = formatNumber(appState.user?.balance, 4) + ' TON';
-  
-  // Update user avatar
-  if (appState.user?.photo_url) {
-    document.getElementById('userAvatar').innerHTML = `<img src="${appState.user.photo_url}" alt="avatar">`;
-  } else {
-    document.getElementById('userAvatar').innerHTML = '<i class="fas fa-user"></i>';
-  }
-  
-  // Home section
-  document.getElementById('dailyProfitHeader').textContent = formatNumber(appState.totalDailyProfit, 3) + ' TON/day';
-  document.getElementById('pendingProfit').textContent = formatNumber(appState.pendingProfit, 4) + ' TON';
-  document.getElementById('investmentsCount').textContent = appState.activeInvestments.length;
+  document.getElementById('balanceAmount').textContent = formatNumber(appState.user?.balance, 4) + ' TON';
   document.getElementById('totalInvested').textContent = formatNumber(appState.user?.total_invested, 2) + ' TON';
   document.getElementById('totalEarned').textContent = formatNumber(appState.user?.total_earned, 2) + ' TON';
-  document.getElementById('totalWithdrawn').textContent = formatNumber(appState.user?.total_withdrawn, 2) + ' TON';
+  document.getElementById('dailyProfit').textContent = formatNumber(appState.totalDailyProfit, 3) + ' TON';
+  document.getElementById('pendingProfit').textContent = formatNumber(appState.pendingProfit, 4) + ' TON';
+  document.getElementById('investmentsCount').textContent = appState.activeInvestments.length;
   
-  // Update wallet button
-  const walletBtnText = document.getElementById('walletBtnText');
-  if (appState.walletConnected && appState.walletAddress) {
-    walletBtnText.textContent = appState.walletAddress.slice(0, 6) + '...' + appState.walletAddress.slice(-4);
-    document.getElementById('walletBtn').classList.add('wallet-connected');
-  } else {
-    walletBtnText.textContent = 'Connect';
-    document.getElementById('walletBtn').classList.remove('wallet-connected');
-  }
-  
-  // Update all sections
   updateActiveInvestments();
   updateLevelsList();
   updateReferrals();
   updateTasks();
   updateWithdrawals();
   updateReferralLink();
+  updateWalletUI();
 }
 
 function updateActiveInvestments() {
   const container = document.getElementById('activeInvestmentsList');
   
   if (!appState.activeInvestments.length) {
-    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No active investments</div>';
+    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا توجد استثمارات نشطة</div>';
     return;
   }
   
@@ -898,21 +785,20 @@ function updateActiveInvestments() {
     const level = appState.levels[inv.level_id];
     const daysLeft = Math.max(0, Math.ceil((new Date(inv.end_date) - new Date()) / (1000 * 60 * 60 * 24)));
     const totalReturn = inv.amount + (inv.daily_profit * 30);
-    const roi = ((totalReturn - inv.amount) / inv.amount * 100).toFixed(0);
     
     return `
       <div class="investment-card">
         <div class="flex justify-between items-center mb-1">
-          <span><strong>${level?.icon || '💎'} Level ${inv.level_id} - ${level?.name || ''}</strong></span>
-          <span class="text-success">+${formatNumber(inv.daily_profit, 4)} TON/day</span>
+          <span><strong>${level?.icon || '💎'} المستوى ${inv.level_id}</strong></span>
+          <span class="text-success">+${formatNumber(inv.daily_profit, 4)} TON/يوم</span>
         </div>
         <div class="flex justify-between text-secondary" style="font-size: 12px;">
-          <span>Invested: ${formatNumber(inv.amount, 2)} TON</span>
-          <span>ROI: +${roi}%</span>
+          <span>الاستثمار: ${formatNumber(inv.amount, 2)} TON</span>
+          <span>الأيام المتبقية: ${daysLeft}</span>
         </div>
         <div class="flex justify-between text-secondary" style="font-size: 12px;">
-          <span>Claimed: ${formatNumber(inv.total_claimed, 4)} TON</span>
-          <span>Days left: ${daysLeft}</span>
+          <span>تم السحب: ${formatNumber(inv.total_claimed, 4)} TON</span>
+          <span>متوقع: ${formatNumber(totalReturn, 2)} TON</span>
         </div>
         <div class="progress-bar mt-2">
           <div class="progress-fill" style="width: ${Math.min(100, (inv.total_claimed / totalReturn) * 100)}%"></div>
@@ -926,7 +812,7 @@ function updateLevelsList() {
   const container = document.getElementById('levelsList');
   
   if (!appState.levels || Object.keys(appState.levels).length === 0) {
-    container.innerHTML = '<div class="text-secondary text-center">No levels available</div>';
+    container.innerHTML = '<div class="text-secondary text-center">لا توجد مستويات متاحة</div>';
     return;
   }
   
@@ -935,16 +821,15 @@ function updateLevelsList() {
     const roi = ((total30 - level.price) / level.price * 100).toFixed(0);
     
     return `
-      <div class="level-card" onclick="showBuyModal(${id})">
+      <div class="level-card">
         <div class="level-info">
-          <h4>${level.icon} Level ${id} - ${level.name}</h4>
-          <p>💰 Invest: ${level.price} TON | 📈 Daily: ${formatNumber(level.daily, 4)} TON | ROI: +${roi}%</p>
-          <p class="text-secondary" style="font-size: 11px;">🎯 Total in 30 days: ${formatNumber(total30, 2)} TON</p>
+          <h4>${level.icon} المستوى ${id} - ${level.name}</h4>
+          <p>يومي: ${formatNumber(level.daily, 4)} TON | عائد: +${roi}%</p>
         </div>
         <div>
-          <div class="level-price">${level.price} TON</div>
-          <button class="btn-primary" style="padding: 8px 16px; font-size: 12px; margin-top: 8px;">
-            Buy
+          <div class="level-price mb-1">${level.price} TON</div>
+          <button class="btn-primary" style="padding: 8px 16px; font-size: 12px;" onclick="showBuyModal(${id})">
+            شراء
           </button>
         </div>
       </div>
@@ -957,13 +842,13 @@ function updateReferrals() {
   
   const refContainer = document.getElementById('referralsList');
   if (!appState.referrals.length) {
-    refContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No referrals yet</div>';
+    refContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا يوجد مدعوون حتى الآن</div>';
   } else {
     refContainer.innerHTML = appState.referrals.slice(0, 20).map(ref => `
       <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
         <div>
-          <div>${ref.first_name || 'User'} ${ref.last_name || ''}</div>
-          <div class="text-secondary" style="font-size: 11px;">Joined: ${new Date(ref.created_at).toLocaleDateString()}</div>
+          <div>${ref.first_name || 'مستخدم'} ${ref.last_name || ''}</div>
+          <div class="text-secondary" style="font-size: 11px;">انضم: ${new Date(ref.created_at).toLocaleDateString('ar')}</div>
         </div>
         <div class="text-success">+0.01 TON</div>
       </div>
@@ -972,28 +857,17 @@ function updateReferrals() {
   
   const earningsContainer = document.getElementById('referralEarningsList');
   if (!appState.referralEarnings.length) {
-    earningsContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No earnings yet</div>';
+    earningsContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا توجد أرباح حتى الآن</div>';
   } else {
-    earningsContainer.innerHTML = appState.referralEarnings.slice(0, 20).map(earning => {
-      let icon = '💰';
-      if (earning.type === 'signup') icon = '🎉';
-      if (earning.type === 'investment') icon = '💎';
-      if (earning.type === 'welcome_bonus') icon = '🎁';
-      
-      let text = earning.type === 'signup' ? 'Signup Bonus' : 
-                 earning.type === 'investment' ? 'Investment Commission' : 
-                 'Welcome Bonus';
-      
-      return `
-        <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
-          <div>
-            <div>${icon} ${text}</div>
-            <div class="text-secondary" style="font-size: 11px;">${new Date(earning.created_at).toLocaleDateString()}</div>
-          </div>
-          <div class="text-success">+${formatNumber(earning.amount, 4)} TON</div>
+    earningsContainer.innerHTML = appState.referralEarnings.slice(0, 20).map(earning => `
+      <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+        <div>
+          <div>${earning.type === 'signup' ? '🎉 مكافأة تسجيل' : '💎 عمولة استثمار'}</div>
+          <div class="text-secondary" style="font-size: 11px;">${new Date(earning.created_at).toLocaleDateString('ar')}</div>
         </div>
-      `;
-    }).join('');
+        <div class="text-success">+${formatNumber(earning.amount, 4)} TON</div>
+      </div>
+    `).join('');
   }
 }
 
@@ -1001,7 +875,7 @@ function updateTasks() {
   const container = document.getElementById('tasksList');
   
   if (!appState.tasks.length) {
-    container.innerHTML = '<div class="card"><div class="text-secondary text-center">No tasks available</div></div>';
+    container.innerHTML = '<div class="card"><div class="text-secondary text-center">لا توجد مهام متاحة</div></div>';
     return;
   }
   
@@ -1017,9 +891,9 @@ function updateTasks() {
         </div>
         <div>
           ${isCompleted ? 
-            '<span class="text-success"><i class="fas fa-check-circle"></i> Completed</span>' : 
+            '<span class="text-success"><i class="fas fa-check-circle"></i> تم</span>' : 
             `<button class="btn-primary" style="padding: 8px 16px; font-size: 12px;" onclick="completeTask('${task.id}', '${task.link || ''}')">
-              <i class="fas fa-play"></i> Start
+              <i class="fas fa-play"></i> ابدأ
             </button>`
           }
         </div>
@@ -1032,15 +906,15 @@ function updateWithdrawals() {
   const container = document.getElementById('withdrawalsList');
   
   if (!appState.withdrawals.length) {
-    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No withdrawals yet</div>';
+    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">لا توجد سحوبات حتى الآن</div>';
     return;
   }
   
   container.innerHTML = appState.withdrawals.slice(0, 20).map(wd => {
     const statusText = {
-      'pending': '⏳ Pending',
-      'approved': '✅ Approved',
-      'rejected': '❌ Rejected'
+      'pending': '⏳ قيد المراجعة',
+      'approved': '✅ تمت الموافقة',
+      'rejected': '❌ مرفوض'
     }[wd.status] || wd.status;
     
     const statusClass = {
@@ -1053,7 +927,7 @@ function updateWithdrawals() {
       <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
         <div>
           <div>${formatNumber(wd.amount, 4)} TON</div>
-          <div class="text-secondary" style="font-size: 11px;">${new Date(wd.created_at).toLocaleDateString()}</div>
+          <div class="text-secondary" style="font-size: 11px;">${new Date(wd.created_at).toLocaleDateString('ar')}</div>
         </div>
         <div class="${statusClass}">${statusText}</div>
       </div>
@@ -1069,28 +943,32 @@ function updateReferralLink() {
   }
 }
 
-// ================================================================
-// Actions
-// ================================================================
-
 async function claimProfit() {
   try {
-    showNotification('Claiming profits...', 'success');
+    showNotification('جاري سحب الأرباح...', 'success');
     const result = await apiCall('claimProfit');
     await loadState();
-    showNotification(`✅ Claimed ${formatNumber(result.claimed_amount, 4)} TON!`, 'success');
+    showNotification(`تم سحب ${formatNumber(result.claimed_amount, 4)} TON!`, 'success');
   } catch (error) {
     showNotification(error.message, 'error');
   }
 }
 
 function showBuyModal(levelId) {
+  if (!appState.walletConnected) {
+    showNotification('الرجاء ربط محفظتك أولاً', 'error');
+    document.getElementById('walletSection').classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+    document.querySelector('[data-section="wallet"]').classList.add('active');
+    return;
+  }
+  
   selectedLevel = appState.levels[levelId];
   if (!selectedLevel) return;
   
   const total30 = selectedLevel.price + (selectedLevel.daily * 30);
   
-  document.getElementById('buyLevelName').textContent = `${selectedLevel.icon} Level ${levelId} - ${selectedLevel.name}`;
+  document.getElementById('buyLevelName').textContent = `${selectedLevel.icon} المستوى ${levelId} - ${selectedLevel.name}`;
   document.getElementById('buyLevelPrice').textContent = selectedLevel.price + ' TON';
   document.getElementById('buyLevelDaily').textContent = selectedLevel.daily + ' TON';
   document.getElementById('buyLevelTotal').textContent = total30.toFixed(2) + ' TON';
@@ -1102,19 +980,17 @@ function showBuyModal(levelId) {
 async function buyLevel(levelId) {
   try {
     const level = appState.levels[levelId];
-    if (!level) throw new Error('Invalid level');
+    if (!level) throw new Error('مستوى غير صالح');
     
-    // Check if wallet connected
     if (!appState.walletConnected || !appState.walletAddress) {
-      showNotification('⚠️ Please connect your TON wallet first', 'error');
+      showNotification('الرجاء ربط محفظتك أولاً', 'error');
       return;
     }
     
-    showNotification('🔄 Processing transaction...', 'success');
+    showNotification('جاري معالجة المعاملة...', 'success');
     
-    // Send TON transaction
     const amountNano = Math.floor(level.price * 1e9);
-    const comment = `Buy Level ${levelId} - ${level.name}`;
+    const comment = `شراء المستوى ${levelId}`;
     
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 600,
@@ -1127,7 +1003,6 @@ async function buyLevel(levelId) {
     
     const result = await appState.tonUI.sendTransaction(transaction);
     
-    // Verify on backend
     const buyResult = await apiCall('buyLevel', {
       levelId: levelId,
       txHash: result.boc,
@@ -1136,20 +1011,20 @@ async function buyLevel(levelId) {
     
     await loadState();
     closeModal('buyModal');
-    showNotification(`🎉 Successfully bought Level ${levelId}! 🎉`, 'success');
+    showNotification(`تم شراء المستوى ${levelId} بنجاح!`, 'success');
     
   } catch (error) {
     console.error('Buy level error:', error);
-    showNotification(error.message || 'Transaction failed', 'error');
+    showNotification(error.message || 'فشلت المعاملة', 'error');
   }
 }
 
 function reinvestModal() {
   const select = document.getElementById('reinvestLevel');
-  select.innerHTML = '<option value="">Select Level</option>';
+  select.innerHTML = '<option value="">اختر المستوى</option>';
   
   Object.entries(appState.levels).forEach(([id, level]) => {
-    select.innerHTML += `<option value="${id}">${level.icon} Level ${id} - ${level.price} TON (${level.daily} TON/day)</option>`;
+    select.innerHTML += `<option value="${id}">${level.icon} المستوى ${id} - ${level.price} TON (${level.daily} TON/يوم)</option>`;
   });
   
   openModal('reinvestModal');
@@ -1161,24 +1036,24 @@ async function doReinvest() {
     const levelId = parseInt(document.getElementById('reinvestLevel').value);
     
     if (!amount || !levelId) {
-      showNotification('Please fill all fields', 'error');
+      showNotification('الرجاء ملء جميع الحقول', 'error');
       return;
     }
     
     const level = appState.levels[levelId];
-    if (!level) throw new Error('Invalid level');
+    if (!level) throw new Error('مستوى غير صالح');
     
     if (amount < level.price) {
-      showNotification(`Minimum amount for this level is ${level.price} TON`, 'error');
+      showNotification(`الحد الأدنى لهذا المستوى هو ${level.price} TON`, 'error');
       return;
     }
     
-    showNotification('Processing reinvestment...', 'success');
+    showNotification('جاري إعادة الاستثمار...', 'success');
     const result = await apiCall('reinvest', { amount, levelId });
     await loadState();
     closeModal('reinvestModal');
     document.getElementById('reinvestAmount').value = '';
-    showNotification(`✅ Successfully reinvested ${amount} TON!`, 'success');
+    showNotification(`تم إعادة استثمار ${amount} TON بنجاح!`, 'success');
     
   } catch (error) {
     showNotification(error.message, 'error');
@@ -1191,25 +1066,20 @@ async function withdraw() {
     const amount = parseFloat(document.getElementById('withdrawAmount').value);
     
     if (!wallet) {
-      showNotification('Please enter wallet address', 'error');
+      showNotification('الرجاء إدخال عنوان المحفظة', 'error');
       return;
     }
     
-    if (!amount || amount < 0.01) {
-      showNotification('Minimum withdrawal is 0.01 TON', 'error');
+    if (!amount || amount < 0.05) {
+      showNotification('الحد الأدنى للسحب هو 0.05 TON', 'error');
       return;
     }
     
-    if (amount > (appState.user?.balance || 0)) {
-      showNotification('Insufficient balance', 'error');
-      return;
-    }
-    
-    showNotification('Processing withdrawal...', 'success');
+    showNotification('جاري معالجة طلب السحب...', 'success');
     const result = await apiCall('withdraw', { amount, wallet });
     await loadState();
     document.getElementById('withdrawAmount').value = '';
-    showNotification(`✅ Withdrawal request submitted! Amount: ${formatNumber(result.amount, 4)} TON`, 'success');
+    showNotification(`تم تقديم طلب السحب! المبلغ: ${formatNumber(result.amount, 4)} TON`, 'success');
     
   } catch (error) {
     showNotification(error.message, 'error');
@@ -1220,13 +1090,12 @@ async function completeTask(taskId, link) {
   try {
     if (link) {
       window.open(link, '_blank');
-      await new Promise(resolve => setTimeout(resolve, 3000));
     }
     
-    showNotification('Verifying task...', 'success');
+    showNotification('جاري التحقق من المهمة...', 'success');
     const result = await apiCall('completeTask', { taskId });
     await loadState();
-    showNotification(`✅ Task completed! +${formatNumber(result.reward, 4)} TON`, 'success');
+    showNotification(`تم إكمال المهمة! +${formatNumber(result.reward, 4)} TON`, 'success');
     
   } catch (error) {
     showNotification(error.message, 'error');
@@ -1237,59 +1106,51 @@ function copyReferralLink() {
   const input = document.getElementById('refLinkInput');
   input.select();
   document.execCommand('copy');
-  showNotification('Referral link copied! 📋', 'success');
+  showNotification('تم نسخ رابط الإحالة!', 'success');
 }
 
-// ================================================================
-// TON Connect
-// ================================================================
+async function connectWallet() {
+  try {
+    if (!appState.tonUI) {
+      showNotification('جاري تهيئة المحفظة...', 'success');
+      initTONConnect();
+      setTimeout(() => connectWallet(), 1000);
+      return;
+    }
+    
+    await appState.tonUI.connectWallet();
+    
+    appState.tonUI.onStatusChange(async (wallet) => {
+      if (wallet) {
+        const walletAddress = wallet.account.address;
+        
+        await apiCall('connectWallet', { walletAddress });
+        
+        appState.walletConnected = true;
+        appState.walletAddress = walletAddress;
+        updateWalletUI();
+        await loadState();
+        showNotification('تم ربط المحفظة بنجاح!', 'success');
+      }
+    });
+  } catch (error) {
+    console.error('Connect wallet error:', error);
+    showNotification('فشل ربط المحفظة: ' + error.message, 'error');
+  }
+}
 
 function initTONConnect() {
   try {
-    if (window.TON_CONNECT_UI) {
+    if (typeof TON_CONNECT_UI !== 'undefined') {
       appState.tonUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: `${API_URL}/tonconnect-manifest.json`,
         uiPreferences: { theme: 'DARK' }
-      });
-      
-      appState.tonUI.onStatusChange(async (wallet) => {
-        if (wallet) {
-          appState.walletConnected = true;
-          appState.walletAddress = wallet.account.address;
-          showNotification('✅ Wallet connected successfully!', 'success');
-          
-          // Save wallet to backend
-          try {
-            await apiCall('connectWallet', { walletAddress: appState.walletAddress });
-          } catch (e) {
-            console.error('Failed to save wallet:', e);
-          }
-        } else {
-          appState.walletConnected = false;
-          appState.walletAddress = null;
-        }
-        updateUI();
       });
     }
   } catch (error) {
     console.error('TON Connect init error:', error);
   }
 }
-
-async function toggleWallet() {
-  if (appState.walletConnected && appState.tonUI) {
-    await appState.tonUI.disconnect();
-    showNotification('Wallet disconnected', 'success');
-  } else if (appState.tonUI) {
-    await appState.tonUI.openModal();
-  } else {
-    showNotification('TON Connect not available', 'error');
-  }
-}
-
-// ================================================================
-// Navigation
-// ================================================================
 
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', () => {
@@ -1302,10 +1163,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
     document.getElementById(sectionId + 'Section').classList.add('active');
   });
 });
-
-// ================================================================
-// Start App
-// ================================================================
 
 init();
 </script>
