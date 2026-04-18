@@ -163,18 +163,19 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .wl-label{font-size:9px;color:var(--muted);font-weight:600;margin-bottom:3px}
 .wl-addr{font-size:12px;font-weight:700;color:var(--cyan);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dep-warn{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;background:rgba(255,193,7,.1);border:1px solid rgba(255,193,7,.2);border-radius:10px;margin-bottom:12px;font-size:11px;color:#FFD740;font-weight:600}
-.swap-row{background:rgba(10,18,32,.4);border-radius:18px;padding:16px;border:1px solid rgba(255,255,255,.1)}
+.swap-row{background:rgba(10,18,32,.4);border-radius:18px;padding:16px;border:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+.swap-row:last-child{margin-bottom:0}
 .swap-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .swap-cur{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px}
 .swap-cur img{width:30px;height:30px}
 .swap-bal{font-size:11px;color:var(--muted)}
 .swap-area{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.swap-area input{flex:1;min-width:80px;background:transparent;border:none;font-size:24px;font-weight:800;color:#fff;text-align:right;outline:none;font-family:inherit}
+.swap-area input{flex:1;min-width:80px;background:transparent;border:1px solid rgba(77,208,225,.3);border-radius:12px;padding:10px 12px;font-size:18px;font-weight:800;color:#fff;text-align:right;outline:none;font-family:inherit}
 .swap-max{cursor:pointer;background:rgba(77,208,225,.2);border:1px solid rgba(77,208,225,.4);border-radius:12px;padding:8px 16px;font-size:12px;font-weight:800;color:var(--ice);white-space:nowrap}
 .swap-max:active{transform:scale(.96)}
 .fee-info{font-size:10px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:5px}
-.swap-out{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:12px}
-.swap-val{font-size:28px;font-weight:800;color:var(--gold)}
+.swap-out{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)}
+.swap-val{font-size:24px;font-weight:800;color:var(--gold)}
 .fee-badge{background:rgba(255,217,102,.15);border-radius:8px;padding:3px 8px;font-size:9px;color:var(--gold);font-weight:700;border:1px solid rgba(255,217,102,.3);margin-left:8px}
 .rate-info{background:rgba(10,18,32,.4);border-radius:14px;padding:11px;margin-bottom:14px;text-align:center;border:1px solid rgba(255,255,255,.06)}
 .rate-val{font-size:18px;font-weight:800;color:var(--gold)}
@@ -253,6 +254,8 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
 .plan-profit{font-size:20px;font-weight:800;margin-bottom:6px}
 .plan-details{font-size:11px;color:var(--muted);margin-bottom:12px}
 .plan-details span{color:var(--gold);font-weight:800}
+.stake-input-area{display:flex;gap:8px;margin-top:10px}
+.stake-input-area input{flex:1}
 .stake-stats{background:rgba(10,18,32,.4);border-radius:12px;padding:10px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
 .stake-stat-item{text-align:center;flex:1}
 .stake-stat-label{font-size:9px;color:var(--muted)}
@@ -384,7 +387,7 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
   </div>
 </div>
 
-<!-- TASKS (Social Tasks Only - تم حذف Referral Tasks) -->
+<!-- TASKS -->
 <div class="sec" id="secTasks">
   <div class="tabs">
     <div class="tab active" onclick="switchTTab(this,'social')">📢 <span data-i18n="tabSocialTxt">Social</span></div>
@@ -436,13 +439,12 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
       </div>
       <div class="hbox"><div class="hdr" data-i18n="withdrawHist">📋 Withdrawal History</div><div id="wdHist"><div class="hempty" data-i18n="noWithdrawals">No withdrawals yet</div></div></div>
     </div>
-    <!-- Exchange (Two-way: Snow ↔ TON) -->
+    <!-- Exchange -->
     <div class="tcont" id="wt-ex">
       <div class="wcard exch">
         <div class="wcard-title"><i class="fas fa-exchange-alt" style="color:var(--ice)"></i> <span data-i18n="exchangeNow">Exchange Snow ↔ TON</span><span class="fee-badge">Fee: 4%</span></div>
         
-        <!-- Snow → TON -->
-        <div class="swap-row" style="margin-bottom:16px">
+        <div class="swap-row">
           <div class="swap-hdr">
             <div class="swap-cur"><img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/8e508aa3-9d0d-4eb3-a578-7cfbbae9ddc2.png"><span>Snow → TON</span></div>
             <div class="swap-bal" id="swapBal">0 Snow</div>
@@ -453,7 +455,6 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
           <button class="btn btn-ice" style="margin-top:12px" onclick="swapSnowToTon()"><i class="fas fa-exchange-alt"></i> Exchange Snow → TON</button>
         </div>
         
-        <!-- TON → Snow -->
         <div class="swap-row">
           <div class="swap-hdr">
             <div class="swap-cur"><i class="fas fa-coins" style="font-size:28px;color:var(--gold)"></i><span>TON → Snow</span></div>
@@ -488,7 +489,6 @@ body::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,
           </div>
         </div>
         
-        <!-- Staking Tasks Section -->
         <div id="stakingTasksSection" style="margin-bottom:16px"></div>
         
         <div id="stakingPlansList"></div>
@@ -804,7 +804,6 @@ function updAtCost(){const t=parseInt(document.getElementById('atTarget').value)
 
 async function submitAddTask(){const n=Date.now();if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;if(_sf)return;const link=(document.getElementById('atLink').value||'').trim(),target=parseInt(document.getElementById('atTarget').value)||0,st=document.getElementById('atStatus');st.style.display='block';st.style.color='var(--muted)';st.textContent='⏳ Creating...';if(!link.includes('t.me/')){st.style.color='#ff8a80';st.textContent='❌ Invalid link';return;}if(target<100){st.style.color='#ff8a80';st.textContent='❌ Min 100 users';return;}const cost=target*60;if((U.user.snow||0)<cost){st.style.color='#ff8a80';st.textContent=`❌ Need ${fmt(cost)} Snow`;return;}_sf=true;try{await api('createTask',{type:_atType,link,targetUsers:target});U.user.snow-=cost;st.style.color='var(--ice)';st.textContent='✅ Created!';updateUI();snowfall(30);notify(`✅ Task created! -${fmt(cost)} Snow`,'s');setTimeout(()=>{closeModal('addTaskModal');loadState();},1500);}catch(e){st.style.color='#ff8a80';st.textContent=`❌ ${e.message}`;}finally{_sf=false;}}
 
-// Exchange Functions (Two-way)
 function updSwapBals(){document.getElementById('swapBal').innerHTML=`Balance: ${fmt(U.user.snow||0)} Snow`;}
 function swapMax(){document.getElementById('swapSnowAmt').value=Math.floor(U.user.snow||0);updSwap();}
 function updSwap(){const s=parseInt(document.getElementById('swapSnowAmt').value)||0,fee=Math.floor(s*CFG.EXCH_FEE/100),after=s-fee,ton=after*CFG.S2T;document.getElementById('swapTonOut').textContent=ton.toFixed(6);document.getElementById('feeDisp').textContent=fmt(fee);}
@@ -836,8 +835,6 @@ function updateRefUI(){if(!U.userId)return;const link=`${CFG.APP_LINK}?startapp=
 
 function copyRefLink(){navigator.clipboard.writeText(document.getElementById('refLinkInp').value).then(()=>notify('✅ Copied!','s')).catch(()=>{document.getElementById('refLinkInp').select();document.execCommand('copy');notify('✅ Copied!','s');});}
 
-// ==================== STAKING FUNCTIONS ====================
-
 function renderStakingUI(){
   document.getElementById('totalStaked').textContent=fmt(U.totalStaked);
   document.getElementById('pendingProfit').textContent=fmt(U.totalPendingProfit);
@@ -858,7 +855,7 @@ function renderStakingUI(){
           ⏱️ Duration: ${plan.durationDays} days<br>
           💰 You get: ${fmt(plan.minAmount + (plan.minAmount * plan.profit / 100))} Snow total
         </div>
-        <div class="stake-input-area" style="display:flex;gap:8px;margin-top:10px">
+        <div class="stake-input-area">
           <input type="number" id="stakeAmt_${id}" class="winput" placeholder="Amount" min="${plan.minAmount}" step="100" style="flex:1">
           <button class="btn btn-purple btn-sm" onclick="createStaking(${id}, ${plan.minAmount})">Stake</button>
         </div>
@@ -892,7 +889,7 @@ function renderStakingUI(){
           <span class="hl" style="color:var(--ice)">${remainingDays} days</span>
         </div>
         ${canClaim?`<button class="btn btn-ice btn-sm" onclick="claimStaking('${s.id}')" style="margin-top:6px">🎁 Claim Reward (${fmt(s.amount+s.expectedProfit)} Snow)</button>`:''}
-        ${!cancelDisabled?`<button class="btn btn-sm" style="background:rgba(239,83,80,.2);color:#FF8A80;margin-top:4px" onclick="cancelStaking('${s.id}')">⚠️ Cancel (20% penalty)</button>`:`<div class="hl" style="color:var(--gold);font-size:10px;margin-top:4px">🔒 Cannot cancel - Staking task rewards claimed</div>`}
+        ${!cancelDisabled?`<button class="btn btn-sm" style="background:rgba(239,83,80,.2);color:#FF8A80;margin-top:4px" onclick="cancelStaking('${s.id}')">⚠️ Cancel (25% penalty)</button>`:`<div class="hl" style="color:var(--gold);font-size:10px;margin-top:4px">🔒 Cannot cancel - Staking task rewards claimed</div>`}
       </div>
     `;
   }
@@ -929,7 +926,7 @@ function renderStakingTasks(){
     section.innerHTML='';
     return;
   }
-  let tasksHtml='<div style="background:linear-gradient(135deg,rgba(156,39,176,.2),rgba(77,208,225,.1));border-radius:14px;padding:12px;margin-bottom:16px"><div style="font-size:13px;font-weight:800;color:var(--ice);margin-bottom:8px">🎯 Staking Achievement Rewards!</div>';
+  let tasksHtml='<div style="background:linear-gradient(135deg,rgba(156,39,176,.2),rgba(77,208,225,.1));border-radius:14px;padding:12px;margin-bottom:16px"><div style="font-size:13px;font-weight:800;color:var(--ice);margin-bottom:8px">🎯 Staking Achievement Rewards (Instant!)</div>';
   for(const task of U.availableStakingTasks){
     tasksHtml+=`
       <div class="staking-task-card">
@@ -939,12 +936,12 @@ function renderStakingTasks(){
         </div>
         <div style="display:flex;align-items:center;gap:10px">
           <div class="staking-task-reward">+${fmt(task.reward)} Snow</div>
-          <button class="btn btn-purple btn-sm" onclick="claimStakingTask('${task.id}')">Claim</button>
+          <button class="btn btn-purple btn-sm" onclick="claimStakingTask('${task.id}')">Claim Now!</button>
         </div>
       </div>
     `;
   }
-  tasksHtml+='<div class="hl" style="font-size:9px;margin-top:8px">💡 These rewards are based on your TOTAL staked amount across all stakes!</div></div>';
+  tasksHtml+='<div class="hl" style="font-size:9px;margin-top:8px">💡 These rewards are based on your TOTAL staked amount across all stakes! Claim them instantly when you reach the target!</div></div>';
   section.innerHTML=tasksHtml;
 }
 
@@ -982,9 +979,9 @@ async function createStaking(planId, minAmount){
     updateUI();
     snowfall(30);
     if(result.taskRewards>0){
-      notify(`✅ Staked ${fmt(amount)} Snow! +${result.taskRewards} Snow bonus from achievements!`,'s');
+      notify(`✅ Staked ${fmt(amount)} Snow! 🎉 +${fmt(result.taskRewards)} Snow bonus (instant reward)!`, 's');
     }else{
-      notify(`✅ Staked ${fmt(amount)} Snow in ${plan.name}! +${plan.profit}% profit after ${plan.durationDays} days`,'s');
+      notify(`✅ Staked ${fmt(amount)} Snow in ${plan.name}! +${plan.profit}% profit after ${plan.durationDays} days`, 's');
     }
     spawnP();
     if(amountInput)amountInput.value='';
@@ -1015,18 +1012,18 @@ async function cancelStaking(stakingId){
   const n=Date.now();
   if(n-_lc<3000){notify('Wait 3s!','w');return;}_lc=n;
   
-  if(!confirm('⚠️ Cancelling early will incur a 20% penalty! Are you sure?')){
+  if(!confirm('⚠️ Cancelling early will incur a 25% penalty! Are you sure?')){
     return;
   }
   
   try{
     notify('Cancelling stake...','i');
-    const result=await api('cancelStaking',{stakingId,penaltyPercent:20});
+    const result=await api('cancelStaking',{stakingId,penaltyPercent:25});
     U.user.snow=result.snow;
     await loadState();
     updateUI();
     snowfall(20);
-    notify(`⚠️ Stake cancelled. Refunded ${fmt(result.refunded)} Snow (20% penalty: -${fmt(result.penalty)} Snow)`,'w');
+    notify(`⚠️ Stake cancelled. Refunded ${fmt(result.refunded)} Snow (25% penalty: -${fmt(result.penalty)} Snow)`, 'w');
   }catch(e){
     notify(`❌ ${e.message}`,'e');
   }
@@ -1049,8 +1046,6 @@ async function claimStakingTask(taskId){
     notify(`❌ ${e.message}`,'e');
   }
 }
-
-// ==================== END STAKING FUNCTIONS ====================
 
 async function initTON(){try{if(window.TON_CONNECT_UI){U.tonUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:`${CFG.API}/tonconnect-manifest.json`,uiPreferences:{theme:'DARK'}});U.tonUI.onStatusChange(w=>w?onWConn(w):onWDisc());setTimeout(()=>{if(U.tonUI.connected)U.tonUI.getWallets();},500);}}catch(e){console.error('TON:',e);}}
 
@@ -1103,7 +1098,7 @@ async function init(){
     let sp='';
     if(U.tg.initDataUnsafe?.start_param)sp=String(U.tg.initDataUnsafe.start_param);
     else if(U.tg.initDataUnsafe?.startParam)sp=String(U.tg.initDataUnsafe.startParam);
-    U.startParam=sp.replace(/\D/g,'');
+    U.startParam=sp;
   }
 
   await ldAnimTo(12,'Connecting...',700);
