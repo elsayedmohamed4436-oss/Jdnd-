@@ -1,59 +1,393 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>سباق السيارات المحلي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>بوت سباق - المتفرج vs الذكاء الاصطناعي</title>
     <style>
-        body { text-align: center; font-family: sans-serif; background: #333; color: white; }
-        #track { width: 80%; height: 300px; background: #555; margin: 20px auto; position: relative; border: 5px solid #fff; overflow: hidden; }
-        .car { width: 80px; height: 50px; position: absolute; left: 0; background-size: contain; background-repeat: no-repeat; }
-        #player-car { top: 70px; background-image: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png'); }
-        #ai-car { top: 180px; background-image: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b2be5445-fcb1-4ac9-83a7-1e862e1a6490.png'); }
-        button { padding: 15px 30px; font-size: 20px; cursor: pointer; }
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1a472a 0%, #0e2a1a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .race-container {
+            background: #2c2c2c;
+            border-radius: 48px;
+            padding: 20px 20px 30px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffd966;
+            text-shadow: 0 2px 0 #8b5a2b;
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .sub {
+            text-align: center;
+            color: #ddd;
+            margin-top: -10px;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        /* مسار السباق */
+        .track {
+            background: #3a3f2e;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 0 2px #5e6b3e, 0 8px 15px rgba(0,0,0,0.3);
+        }
+
+        .lane {
+            background: #2a2f1f;
+            border-radius: 60px;
+            margin: 15px 0;
+            padding: 8px 12px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .car-area {
+            flex: 1;
+            position: relative;
+            height: 90px;
+            overflow-x: hidden;
+            border-radius: 40px;
+            background: repeating-linear-gradient(90deg, 
+                #4e5a2e 0px, #4e5a2e 40px, 
+                #6b7c3e 40px, #6b7c3e 80px);
+        }
+
+        .car {
+            position: absolute;
+            bottom: 8px;
+            width: 100px;
+            transition: left 0.03s linear;
+            will-change: left;
+            filter: drop-shadow(2px 4px 6px black);
+        }
+
+        .car img {
+            width: 100%;
+            display: block;
+            pointer-events: none;
+        }
+
+        .lane-label {
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+            color: #f9e0a0;
+            background: #1f2a0e;
+            padding: 6px 0;
+            border-radius: 60px;
+            margin-left: 12px;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 3px #00000055, 0 1px 2px #ffffff33;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: #1e1b13;
+            border-radius: 40px;
+            padding: 12px 20px;
+            margin: 10px 0 20px;
+            color: #f5e7c8;
+            font-weight: bold;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: #00000066;
+            padding: 5px 12px;
+            border-radius: 30px;
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .ai-difficulty {
+            background: #2f4858;
+            color: #c6e9ff;
+        }
+
+        button {
+            background: #e25822;
+            border: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 14px 28px;
+            width: 100%;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: 0.1s linear;
+            box-shadow: 0 7px 0 #853a0e;
+            font-family: inherit;
+            letter-spacing: 2px;
+        }
+
+        button:active {
+            transform: translateY(3px);
+            box-shadow: 0 4px 0 #853a0e;
+        }
+
+        .winner-message {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 15px;
+            font-weight: bold;
+            background: gold;
+            display: inline-block;
+            width: auto;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: #1e3c2c;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
+<div class="race-container">
+    <h1>🏁 بوت سباق 🏁</h1>
+    <div class="sub">متفرج فقط | الذكاء الاصطناعي يتفاوت قوته</div>
 
-    <h1>سباق البالي</h1>
-    <button id="startBtn" onclick="startRace()">بدء السباق</button>
-    <h2 id="status">اضغط للبدء</h2>
+    <div class="track">
+        <!-- المسار 1 : أنت -->
+        <div class="lane">
+            <div class="lane-label">🚗 عربيتي</div>
+            <div class="car-area" id="playerTrack">
+                <div class="car" id="playerCar" style="left: 0%;">
+                    <!-- صورتك (استبدل الرابط) -->
+                    <img id="playerImg" src="https://placehold.co/600x400/2c5e8c/white?text=🚗+سيارتي" alt="my car">
+                </div>
+            </div>
+        </div>
 
-    <div id="track">
-        <div id="player-car" class="car"></div>
-        <div id="ai-car" class="car"></div>
+        <!-- المسار 2 : الذكاء الاصطناعي -->
+        <div class="lane">
+            <div class="lane-label">🤖 AI</div>
+            <div class="car-area" id="aiTrack">
+                <div class="car" id="aiCar" style="left: 0%;">
+                    <img id="aiImg" src="https://placehold.co/600x400/b53c1c/white?text=🤖+AI" alt="ai car">
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="stats">
+        <div class="stat-card">⏱️ مدة السباق: <strong id="raceDuration">10</strong> ثواني</div>
+        <div class="stat-card">🚀 سرعتي: <strong id="playerSpeed">50</strong> كم/س</div>
+        <div class="stat-card ai-difficulty" id="aiStatCard">🤖 سرعة AI: <strong id="aiSpeed">??</strong> كم/س</div>
+    </div>
+
+    <button id="startBtn">▶️ ابدأ السباق ◀️</button>
+
+    <div id="winnerDiv" style="text-align: center; min-height: 80px;"></div>
+    <div class="footer">* AI أقوى منك بـ10% مرة، وأضعف بـ10% مرة أخرى (عشوائي). أنت متفرج فقط.</div>
+</div>
+
 <script>
-    function startRace() {
-        const pCar = document.getElementById('player-car');
-        const aCar = document.getElementById('ai-car');
-        const status = document.getElementById('status');
-        
-        status.innerText = "جاري البحث عن منافس...";
-        document.getElementById('startBtn').disabled = true;
+    // ---------------------- اعدادات الصور ----------------------
+    // 🔻 🔻 🔻 قم باستبدال الروابط أدناه بروابط عربيتك وعربية الذكاء الاصطناعي الحقيقية 🔻 🔻 🔻
+    const MY_CAR_IMG_URL = "https://placehold.co/600x400/2c5e8c/white?text=🚗+سيارتي";
+    const AI_CAR_IMG_URL = "https://placehold.co/600x400/b53c1c/white?text=🤖+AI";
+    
+    // تطبيق الصور
+    document.getElementById("playerImg").src = MY_CAR_IMG_URL;
+    document.getElementById("aiImg").src = AI_CAR_IMG_URL;
 
-        setTimeout(() => {
-            status.innerText = "السباق بدأ!";
-            let posP = 0, posA = 0;
-            let speedP = 5; // سرعة اللاعب الثابتة
-            let variation = Math.random() > 0.5 ? 1.10 : 0.90; // مرة أقوى أو أضعف بـ 10%
-            let speedA = speedP * variation;
+    // ---------------------- معطيات السباق ----------------------
+    let raceInterval = null;
+    let startTime = 0;
+    let raceDurationSec = 10;          // 10 ثواني
+    let playerBaseSpeed = 50;           // كم/س
+    let aiBaseSpeed = 50;               // سيتم تعديلها عشوائياً +/-10%
+    let aiSpeedMultiplier = 1.0;
+    let raceActive = false;
+    
+    // عرض العناصر
+    const playerCarDiv = document.getElementById("playerCar");
+    const aiCarDiv = document.getElementById("aiCar");
+    const startBtn = document.getElementById("startBtn");
+    const winnerDiv = document.getElementById("winnerDiv");
+    const playerSpeedSpan = document.getElementById("playerSpeed");
+    const aiSpeedSpan = document.getElementById("aiSpeed");
+    const aiStatCard = document.getElementById("aiStatCard");
 
-            let race = setInterval(() => {
-                posP += speedP;
-                posA += speedA;
-                
-                pCar.style.left = posP + 'px';
-                aCar.style.left = posA + 'px';
-
-                if (posP > 1000 || posA > 1000) {
-                    clearInterval(race);
-                    status.innerText = (posP > posA) ? "لقد فزت بالسباق!" : "لقد فاز الذكاء الاصطناعي!";
-                    document.getElementById('startBtn').disabled = false;
-                }
-            }, 50);
-        }, 2000); // تأخير المحاكاة لثانيتين كأنه بحث
+    // تحويل السرعة (كم/س) إلى نسبة مسافة مقطوعة خلال 10 ثواني
+    // المسافة الكلية = السرعة (كم/س) * (الزمن بالثواني / 3600) * 1000 متر → لكننا نهتم بالنسبة المئوية للمسار.
+    // المعادلة: النسبة المقطوعة = (السرعة كم/س * الزمن_الثواني) / (maxSpeedPossible * 10ث) مع افتراض أن السرعة القصوى 120 تعطي 100% من المسار خلال 10 ثواني.
+    // لكن لنجعل 100% المسار يعادل سرعة 120 كم/س خلال 10 ثواني.
+    const MAX_SPEED_FOR_FULL_TRACK = 120; // كم/س -> عندها تصل العربة للنهاية خلال 10 ثواني.
+    
+    function getDistancePercent(speedKmh, elapsedSeconds) {
+        // النسبة المئوية للمسار المقطوع = (speed / MAX_SPEED_FOR_FULL_TRACK) * (elapsedSeconds / raceDurationSec) بشكل خطي
+        // بافتراض أن raceDurationSec هي المدة الكلية.
+        let fractionOfRace = elapsedSeconds / raceDurationSec;
+        let speedRatio = speedKmh / MAX_SPEED_FOR_FULL_TRACK;
+        let percent = speedRatio * fractionOfRace * 100;
+        return Math.min(100, percent);
     }
+
+    function updateCarPositions(nowTimestamp) {
+        if (!raceActive) return;
+        const elapsed = (nowTimestamp - startTime) / 1000;
+        if (elapsed >= raceDurationSec) {
+            // نهاية السباق
+            finishRace();
+            return;
+        }
+        
+        // حساب نسبة كل عربية
+        let playerPercent = getDistancePercent(playerBaseSpeed, elapsed);
+        let aiPercent = getDistancePercent(aiBaseSpeed * aiSpeedMultiplier, elapsed);
+        
+        // تحديث الموضع left (0% إلى 100% من عرض الحاوية)
+        playerCarDiv.style.left = `min(${playerPercent}%, 96%)`;
+        aiCarDiv.style.left = `min(${aiPercent}%, 96%)`;
+    }
+    
+    let animationFrameId = null;
+    function animateRace(currentTime) {
+        if (!raceActive) return;
+        updateCarPositions(currentTime);
+        animationFrameId = requestAnimationFrame(animateRace);
+    }
+    
+    function finishRace() {
+        if (!raceActive) return;
+        raceActive = false;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        if (raceInterval) clearInterval(raceInterval);
+        
+        // تحديد الفائز بناءً على المسافة النهائية بعد 10 ثواني بالضبط
+        const finalPlayerPercent = getDistancePercent(playerBaseSpeed, raceDurationSec);
+        const finalAiPercent = getDistancePercent(aiBaseSpeed * aiSpeedMultiplier, raceDurationSec);
+        
+        let winnerText = "";
+        if (finalPlayerPercent > finalAiPercent) {
+            winnerText = "🎉 أنت الفائز! 🎉";
+        } else if (finalAiPercent > finalPlayerPercent) {
+            winnerText = "🤖 الذكاء الاصطناعي فاز! 🤖";
+        } else {
+            winnerText = "🤝 تعادل محكم! 🤝";
+        }
+        
+        winnerDiv.innerHTML = `<div class="winner-message">🏆 ${winnerText} 🏆</div>`;
+        startBtn.disabled = false;
+        startBtn.textContent = "🏁 ابدأ سباق جديد 🏁";
+    }
+    
+    function resetRaceUI() {
+        playerCarDiv.style.left = "0%";
+        aiCarDiv.style.left = "0%";
+        winnerDiv.innerHTML = "";
+        startBtn.disabled = false;
+        startBtn.textContent = "▶️ ابدأ السباق ◀️";
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        raceActive = false;
+    }
+    
+    function startRace() {
+        if (raceActive) return;
+        resetRaceUI();
+        
+        // 1. اختيار قوة AI: إما أقوى 10% أو أضعف 10%
+        const randomChoice = Math.random(); // 0..1
+        let aiModifier = 0;
+        let modText = "";
+        if (randomChoice < 0.5) {
+            // أقوى بنسبة 10%
+            aiModifier = 1.10;
+            modText = "🔥 أقوى منك بـ 10% 🔥";
+            aiStatCard.style.background = "#7a2e19";
+        } else {
+            // أضعف بنسبة 10%
+            aiModifier = 0.90;
+            modText = "🍃 أضعف منك بـ 10% 🍃";
+            aiStatCard.style.background = "#2f4858";
+        }
+        aiSpeedMultiplier = aiModifier;
+        const aiFinalSpeed = playerBaseSpeed * aiSpeedMultiplier;
+        aiSpeedSpan.innerText = aiFinalSpeed.toFixed(1);
+        
+        // عرض سرعتي
+        playerSpeedSpan.innerText = playerBaseSpeed;
+        
+        // إضافة رسالة عشوائية صغيرة في وحدة الإحصائيات
+        const existingHint = document.querySelector(".ai-difficulty small");
+        if(!existingHint) {
+            let smallHint = document.createElement("small");
+            smallHint.style.display = "block";
+            smallHint.style.fontSize = "0.7rem";
+            smallHint.style.marginTop = "4px";
+            smallHint.innerText = modText;
+            aiStatCard.appendChild(smallHint);
+        } else {
+            existingHint.innerText = modText;
+        }
+        
+        raceActive = true;
+        startTime = performance.now();
+        
+        // بدء الأنيميشن
+        animationFrameId = requestAnimationFrame(animateRace);
+        
+        // تأمين انتهاء السباق بعد 10 ثواني بالضبط
+        raceInterval = setTimeout(() => {
+            if (raceActive) finishRace();
+        }, raceDurationSec * 1000);
+        
+        startBtn.disabled = true;
+        startBtn.textContent = "⏳ السباق جارٍ ... ⏳";
+    }
+    
+    startBtn.addEventListener("click", startRace);
+    
+    // تحسينات إضافية: ضبط عرض الصور بشكل مناسب
+    const style = document.createElement('style');
+    style.textContent = `
+        .car img { width: 100%; border-radius: 12px; background: #00000044; }
+        .car { width: 90px; transition: left 0.02s linear; }
+        @media (max-width: 650px) { .car { width: 70px; } .lane-label { width: 70px; font-size: 0.8rem; } }
+    `;
+    document.head.appendChild(style);
+    
+    // عرض إعداد أولي
+    playerSpeedSpan.innerText = playerBaseSpeed;
+    // تعيين عشوائي أولي للـ AI (فقط للعرض قبل الضغط)
+    const initAi = (Math.random() < 0.5) ? 1.10 : 0.90;
+    aiSpeedSpan.innerText = (playerBaseSpeed * initAi).toFixed(1);
+    aiStatCard.style.background = (initAi === 1.10) ? "#7a2e19" : "#2f4858";
 </script>
 </body>
 </html>
