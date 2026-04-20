@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سباق الرالي - Bali Rally</title>
     <style>
         * {
@@ -14,272 +14,228 @@
 
         body {
             font-family: 'Segoe UI', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a472a 0%, #2d5a3b 50%, #1a472a 100%);
+            background: linear-gradient(180deg, #0a0a2a 0%, #1a1a3a 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
+            padding: 20px;
         }
 
         .game-container {
             max-width: 500px;
             width: 100%;
-            margin: 0 auto;
-            background: linear-gradient(180deg, #f5e6d3 0%, #e8d5b7 100%);
-            border-radius: 40px 40px 20px 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.5);
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3e 100%);
+            border-radius: 40px;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,215,0,0.3);
             position: relative;
-        }
-
-        /* تزيين الحواف */
-        .game-container::before {
-            content: "🏁";
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 30px;
-            opacity: 0.3;
-            z-index: 1;
-        }
-        
-        .game-container::after {
-            content: "🏁";
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 30px;
-            opacity: 0.3;
-            z-index: 1;
         }
 
         .header {
-            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-            color: white;
-            padding: 15px 10px;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            padding: 15px 20px;
             text-align: center;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .header h1 {
             font-size: 28px;
-            letter-spacing: 2px;
+            color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
         }
 
         .header p {
             font-size: 12px;
-            opacity: 0.9;
+            color: rgba(255,255,255,0.9);
         }
 
         .stats-bar {
             display: flex;
             justify-content: space-between;
-            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
-            color: white;
+            align-items: center;
+            background: rgba(0,0,0,0.8);
             padding: 12px 20px;
-            position: relative;
-            gap: 20px;
+            gap: 15px;
         }
 
         .player-stat {
             text-align: center;
             flex: 1;
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
+            background: rgba(255,255,255,0.1);
             padding: 8px;
+            border-radius: 15px;
         }
 
         .player-name {
             font-size: 14px;
-            margin-bottom: 5px;
+            color: #ffd700;
             font-weight: bold;
         }
 
         .player-speed {
             font-size: 32px;
             font-weight: bold;
-            font-family: monospace;
-            color: #f39c12;
-            text-shadow: 0 0 5px rgba(243,156,18,0.5);
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
         }
 
         .timer {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #f1c40f, #f39c12);
-            color: #2c3e50;
-            padding: 8px 20px;
-            border-radius: 50px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #1a1a2e;
+            padding: 10px 20px;
+            border-radius: 30px;
             font-size: 28px;
             font-weight: bold;
             font-family: monospace;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
-            border: 2px solid #fff;
-            letter-spacing: 3px;
+            box-shadow: 0 0 20px rgba(255,215,0,0.5);
+            min-width: 120px;
+            text-align: center;
         }
 
         .race-area {
             position: relative;
-            height: 480px;
+            height: 500px;
             overflow: hidden;
-            background: #2d5a3b;
-            cursor: pointer;
+            background: #2d5a2d;
         }
 
-        /* خلفية الطريق مع تأثير الحركة */
         .road {
             position: absolute;
             width: 100%;
-            height: 200%;
+            height: 100%;
             background: linear-gradient(90deg, 
-                #2c2c2c 0%, 
-                #2c2c2c 35%, 
-                #3d3d3d 35%, 
-                #3d3d3d 65%, 
-                #2c2c2c 65%, 
-                #2c2c2c 100%
+                #3a3a3a 0%, 
+                #3a3a3a 15%, 
+                #4a4a4a 15%, 
+                #4a4a4a 85%, 
+                #3a3a3a 85%, 
+                #3a3a3a 100%
             );
-            top: 0;
-            animation: moveRoad 0.8s linear infinite;
         }
 
-        @keyframes moveRoad {
-            from { transform: translateY(0); }
-            to { transform: translateY(50%); }
-        }
-
-        /* خطوط تقسيم المسار */
-        .lane-divider {
+        .road-lines {
             position: absolute;
             left: 50%;
             top: 0;
             transform: translateX(-50%);
             width: 6px;
-            height: 200%;
+            height: 100%;
             background: repeating-linear-gradient(
                 to bottom,
-                #ffd700 0px,
-                #ffd700 35px,
-                transparent 35px,
-                transparent 70px
+                #ffff00 0px,
+                #ffff00 30px,
+                transparent 30px,
+                transparent 60px
             );
-            animation: moveDivider 0.8s linear infinite;
-            z-index: 2;
+            animation: moveLines 0.3s linear infinite;
         }
 
-        @keyframes moveDivider {
+        @keyframes moveLines {
             from { transform: translateX(-50%) translateY(0); }
-            to { transform: translateX(-50%) translateY(50%); }
+            to { transform: translateX(-50%) translateY(60px); }
         }
 
-        /* خط النهاية - أكثر وضوحاً */
         .finish-line {
             position: absolute;
-            top: 25px;
+            top: 30px;
             left: 0;
             right: 0;
-            height: 20px;
+            height: 25px;
             background: repeating-linear-gradient(
                 90deg,
                 #fff 0px,
-                #fff 25px,
-                #000 25px,
-                #000 50px
+                #fff 20px,
+                #000 20px,
+                #000 40px
             );
-            z-index: 10;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            border-top: 3px solid gold;
-            border-bottom: 3px solid gold;
-        }
-        
-        /* نص خط النهاية */
-        .finish-line::after {
-            content: "🏁 FINISH 🏁";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
-            color: gold;
-            font-size: 10px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            white-space: nowrap;
-            font-weight: bold;
+            z-index: 5;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
-        /* السيارات */
+        .finish-text {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: gold;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 6;
+            white-space: nowrap;
+        }
+
         .car {
             position: absolute;
             width: 85px;
             height: 120px;
             transition: bottom 0.05s linear;
-            z-index: 20;
+            z-index: 10;
             filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4));
-            cursor: pointer;
         }
 
         .car img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            transition: transform 0.1s;
+        }
+
+        .car:hover img {
+            transform: scale(1.02);
         }
 
         .user-car {
-            left: 8%;
-            bottom: 30px;
+            left: 12%;
         }
 
         .ai-car {
-            right: 8%;
-            bottom: 30px;
+            right: 12%;
         }
 
-        /* مؤثرات الإطارات */
-        .car::before {
-            content: "💨";
+        .speed-indicator {
             position: absolute;
-            bottom: -5px;
-            left: 10px;
-            font-size: 20px;
-            opacity: 0;
-            transition: opacity 0.1s;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-weight: bold;
+            color: #ffd700;
+            background: rgba(0,0,0,0.7);
+            padding: 3px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            font-family: monospace;
         }
 
-        .car:hover::before {
-            opacity: 0.8;
-        }
-
-        /* أشجار النخيل المزخرفة */
         .palm-tree {
             position: absolute;
             font-size: 45px;
-            opacity: 0.9;
-            z-index: 3;
+            opacity: 0.7;
+            z-index: 2;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
         }
 
-        /* شاشات البداية والنتيجة */
+        /* Screens */
         .start-screen, .matching-screen, .result-screen {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.92);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 100;
             color: white;
-            border-radius: 20px;
+            border-radius: 40px;
         }
 
         .hidden {
@@ -287,7 +243,7 @@
         }
 
         .btn {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
             color: white;
             border: none;
             padding: 18px 50px;
@@ -295,40 +251,43 @@
             font-weight: bold;
             border-radius: 60px;
             cursor: pointer;
-            margin: 10px;
-            box-shadow: 0 8px 25px rgba(231,76,60,0.4);
-            transition: all 0.2s ease;
+            margin: 15px;
+            box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+            transition: all 0.3s ease;
             font-family: inherit;
-            letter-spacing: 1px;
         }
 
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 30px rgba(231,76,60,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255,107,53,0.6);
         }
 
         .btn:active {
-            transform: scale(0.98);
+            transform: translateY(2px);
         }
 
         .matching-text {
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 30px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffd700, #ff6b35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: pulse 1s infinite;
-            text-align: center;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-            50% { opacity: 0.6; text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
         }
 
         .loader {
-            border: 5px solid rgba(255,255,255,0.3);
-            border-top: 5px solid #e74c3c;
-            border-radius: 50%;
             width: 70px;
             height: 70px;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top: 5px solid #ff6b35;
+            border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
 
@@ -338,30 +297,29 @@
         }
 
         .result-text {
-            font-size: 52px;
-            margin-bottom: 25px;
+            font-size: 56px;
+            margin-bottom: 30px;
             text-align: center;
             font-weight: bold;
         }
 
         .winner {
-            color: #f1c40f;
-            text-shadow: 0 0 30px #f1c40f;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700;
         }
 
         .loser {
-            color: #e74c3c;
-            text-shadow: 0 0 20px #e74c3c;
+            color: #ff4444;
+            text-shadow: 0 0 10px #ff4444;
         }
 
         .stats {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(5px);
-            padding: 20px 30px;
-            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            padding: 25px 35px;
+            border-radius: 30px;
             margin: 20px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
         }
 
         .stats div {
@@ -369,104 +327,91 @@
             font-size: 20px;
         }
 
+        .stats span {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
         .total-wins {
-            background: linear-gradient(135deg, #1a252f, #2c3e50);
-            color: #f1c40f;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             padding: 12px;
             text-align: center;
-            font-size: 16px;
+            font-size: 14px;
+            color: #ffd700;
+            border-top: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .total-wins span {
             font-weight: bold;
-            border-top: 2px solid #e74c3c;
-        }
-
-        .speed-indicator {
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            font-weight: bold;
-            color: #f39c12;
-            background: rgba(0,0,0,0.8);
-            padding: 3px 10px;
-            border-radius: 20px;
-            white-space: nowrap;
-            font-family: monospace;
-        }
-
-        /* تأثيرات إضافية */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-2px); }
-            75% { transform: translateX(2px); }
-        }
-
-        .car-moving {
-            animation: shake 0.1s infinite;
+            font-size: 18px;
+            margin: 0 5px;
         }
     </style>
 </head>
 <body>
     <div class="game-container">
         <div class="header">
-            <h1>🏎️ بالي رالي 🏎️</h1>
-            <p>Bali Island Race</p>
+            <h1>🏁 بالي رالي 🏁</h1>
+            <p>Bali Rally Championship</p>
         </div>
 
         <div class="stats-bar">
             <div class="player-stat">
-                <div class="player-name">🚗 YOU</div>
+                <div class="player-name">🏎️ أنت</div>
                 <div class="player-speed" id="userSpeed">0</div>
-                <div>km/h</div>
+                <div style="font-size: 10px;">km/h</div>
             </div>
             <div class="timer" id="timer">00:10</div>
             <div class="player-stat">
-                <div class="player-name">🤖 AI</div>
+                <div class="player-name">🤖 الخصم</div>
                 <div class="player-speed" id="aiSpeed">0</div>
-                <div>km/h</div>
+                <div style="font-size: 10px;">km/h</div>
             </div>
         </div>
 
         <div class="race-area">
-            <div class="road"></div>
-            <div class="lane-divider"></div>
-            <div class="finish-line"></div>
-            
-            <!-- أشجار النخيل -->
-            <div class="palm-tree" style="left: -10px; top: 80px;">🌴</div>
-            <div class="palm-tree" style="right: -10px; top: 140px;">🌴</div>
-            <div class="palm-tree" style="left: -10px; top: 240px;">🌴</div>
-            <div class="palm-tree" style="right: -10px; top: 320px;">🌴</div>
-            <div class="palm-tree" style="left: -10px; top: 400px;">🌴</div>
-            <div class="palm-tree" style="right: -10px; top: 30px;">🌴</div>
-            <div class="palm-tree" style="left: -10px; top: 460px;">🌴</div>
+            <div class="road">
+                <div class="road-lines"></div>
+                <div class="finish-line"></div>
+                <div class="finish-text">🏁 FINISH 🏁</div>
+                
+                <!-- Palm trees decoration -->
+                <div class="palm-tree" style="left: 5px; top: 80px;">🌴</div>
+                <div class="palm-tree" style="right: 5px; top: 140px;">🌴</div>
+                <div class="palm-tree" style="left: 5px; top: 240px;">🌴</div>
+                <div class="palm-tree" style="right: 5px; top: 320px;">🌴</div>
+                <div class="palm-tree" style="left: 5px; top: 420px;">🌴</div>
+                <div class="palm-tree" style="right: 5px; top: 60px;">🌴</div>
+            </div>
 
             <div class="car user-car" id="userCar">
                 <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png" alt="Your Car">
-                <div class="speed-indicator" id="userSpeedIndicator">0 km/h</div>
+                <div class="speed-indicator" id="userSpeedIndicator">🚀 0 km/h</div>
             </div>
 
             <div class="car ai-car" id="aiCar">
                 <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b2be5445-fcb1-4ac9-83a7-1e862e1a6490.png" alt="AI Car">
-                <div class="speed-indicator" id="aiSpeedIndicator">0 km/h</div>
+                <div class="speed-indicator" id="aiSpeedIndicator">⚡ 0 km/h</div>
             </div>
         </div>
 
         <!-- Start Screen -->
         <div class="start-screen" id="startScreen">
-            <h1 style="font-size: 52px; margin-bottom: 15px;">🏁 سباق الرالي 🏁</h1>
-            <p style="font-size: 18px; margin-bottom: 35px; text-align: center; padding: 0 25px;">
-                ⚡ سباق 10 ثواني فقط ⚡<br>
-                أول من يصل إلى خط النهاية يفوز!
+            <h1 style="font-size: 52px; margin-bottom: 15px;">🏎️💨</h1>
+            <h2 style="margin-bottom: 20px;">سباق الرالي</h2>
+            <p style="font-size: 16px; margin-bottom: 30px; text-align: center; padding: 0 30px; color: #ccc;">
+                ⚡ سباق 10 ثواني ⚡<br>
+                أول من يصل لخط النهاية يفوز!
             </p>
-            <button class="btn" onclick="startMatching()">🏎️ بدء السباق 🏎️</button>
+            <button class="btn" onclick="startMatching()">🚦 ابدأ السباق 🚦</button>
         </div>
 
         <!-- Matching Screen -->
         <div class="matching-screen hidden" id="matchingScreen">
-            <div class="matching-text">🔍 جاري البحث عن منافس... 🔍</div>
+            <div class="matching-text">🔍 جاري البحث عن منافس...</div>
             <div class="loader"></div>
-            <p style="margin-top: 30px; font-size: 18px;">🤖 AI_Racer_Pro 🤖</p>
+            <p style="margin-top: 30px; font-size: 18px; color: #ffd700;">🏆 AI Champion 🏆</p>
         </div>
 
         <!-- Result Screen -->
@@ -474,21 +419,22 @@
             <div class="result-text" id="resultText"></div>
             <div class="stats">
                 <div>⏱️ الوقت المستغرق: <span id="resultTime">0</span> ثانية</div>
-                <div>🏎️ سرعتك القصوى: <span id="resultUserSpeed">0</span> كم/س</div>
-                <div>🤖 سرعة الخصم: <span id="resultAiSpeed">0</span> كم/س</div>
+                <div>🏁 سرعتك القصوى: <span id="resultUserSpeed">0</span> كم/س</div>
+                <div>🏁 سرعة الخصم: <span id="resultAiSpeed">0</span> كم/س</div>
             </div>
-            <button class="btn" onclick="resetGame()">🏁 سباق جديد 🏁</button>
+            <button class="btn" onclick="resetGame()">🔄 سباق جديد 🔄</button>
         </div>
 
-        <div class="total-wins" id="totalWins">
-            🏆 إجمالي الفوز: <span id="winsCount">0</span> 🏆 | 🏁 إجمالي السباقات: <span id="racesCount">0</span> 🏁
+        <div class="total-wins">
+            🏆 إجمالي الفوز: <span id="winsCount">0</span> 🏆 | 
+            🏁 إجمالي السباقات: <span id="racesCount">0</span> 🏁
         </div>
     </div>
 
     <script>
         // Game variables
-        let userPosition = 30;
-        let aiPosition = 30;
+        let userY = 0;
+        let aiY = 0;
         let userSpeed = 0;
         let aiSpeed = 0;
         let aiStrength = 1;
@@ -496,16 +442,13 @@
         let timerInterval;
         let timeLeft = 10;
         let raceActive = false;
-        let userFinished = false;
-        let aiFinished = false;
-        let winnerDeclared = false;
+        let raceFinished = false;
         
-        // Finish line position (top of race area)
-        const FINISH_LINE_TOP = 25;
-        const START_BOTTOM = 30;
-        const MAX_POSITION = 440;
+        // Positions: 0 = start (bottom), 440 = finish (top)
+        const FINISH_POSITION = 440;
+        const START_POSITION = 0;
 
-        // Load stats from localStorage
+        // Load stats
         function loadStats() {
             const wins = localStorage.getItem('rallyWins') || 0;
             const races = localStorage.getItem('rallyRaces') || 0;
@@ -513,7 +456,6 @@
             document.getElementById('racesCount').textContent = races;
         }
 
-        // Save stats to localStorage
         function saveStats(won) {
             let wins = parseInt(localStorage.getItem('rallyWins') || 0);
             let races = parseInt(localStorage.getItem('rallyRaces') || 0);
@@ -525,7 +467,11 @@
             document.getElementById('racesCount').textContent = races;
         }
 
-        // Start matching process
+        function updateCarPositions() {
+            document.getElementById('userCar').style.bottom = `${START_POSITION + userY}px`;
+            document.getElementById('aiCar').style.bottom = `${START_POSITION + aiY}px`;
+        }
+
         function startMatching() {
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('matchingScreen').classList.remove('hidden');
@@ -536,170 +482,132 @@
             }, 1500);
         }
 
-        // Start the race
         function startRace() {
-            // Reset positions
-            userPosition = START_BOTTOM;
-            aiPosition = START_BOTTOM;
+            // Reset race state
+            userY = 0;
+            aiY = 0;
             timeLeft = 10;
-            userFinished = false;
-            aiFinished = false;
             raceActive = true;
-            winnerDeclared = false;
-
-            // Random AI strength (±10-15%)
+            raceFinished = false;
+            
+            updateCarPositions();
+            
+            // Random AI strength (90% to 110%)
             const randomFactor = Math.random();
             if (randomFactor < 0.5) {
-                aiStrength = 0.85 + (Math.random() * 0.15);
+                aiStrength = 0.9 + (Math.random() * 0.1);
             } else {
-                aiStrength = 1.0 + (Math.random() * 0.15);
+                aiStrength = 1.0 + (Math.random() * 0.1);
             }
-
-            updateCarsPosition();
-
-            // Start timer
+            
+            // Timer
             timerInterval = setInterval(() => {
                 if (!raceActive) return;
-                timeLeft -= 0.1;
-                const displayTime = Math.max(0, timeLeft).toFixed(1);
-                document.getElementById('timer').textContent = `00:${displayTime.padStart(4, '0')}`;
                 
-                if (timeLeft <= 0 && !winnerDeclared) {
+                timeLeft -= 0.1;
+                const displayTime = Math.max(0, timeLeft).toFixed(2);
+                document.getElementById('timer').textContent = `00:${displayTime.padStart(5, '0')}`;
+                
+                if (timeLeft <= 0 && !raceFinished) {
                     endRace('timeout');
                 }
             }, 100);
-
-            // Start race animation
+            
+            // Race animation
             raceInterval = setInterval(() => {
-                if (!raceActive || winnerDeclared) return;
-
-                // Calculate speeds
-                const baseSpeed = 55;
-                const userVariation = (Math.random() * 20) - 10;
-                const aiVariation = (Math.random() * 20) - 10;
+                if (!raceActive || raceFinished) return;
                 
-                userSpeed = Math.floor(Math.max(30, baseSpeed + userVariation));
-                aiSpeed = Math.floor(Math.max(30, (baseSpeed + aiVariation) * aiStrength));
-
-                // Update speed displays
+                // Calculate speeds (50-100 km/h range)
+                const userVariation = Math.random() * 40 + 40;
+                const aiVariation = Math.random() * 40 + 40;
+                
+                userSpeed = Math.floor(userVariation);
+                aiSpeed = Math.floor(aiVariation * aiStrength);
+                
+                // Update displays
                 document.getElementById('userSpeed').textContent = userSpeed;
                 document.getElementById('aiSpeed').textContent = aiSpeed;
-                document.getElementById('userSpeedIndicator').textContent = `${userSpeed} km/h`;
-                document.getElementById('aiSpeedIndicator').textContent = `${aiSpeed} km/h`;
-
-                // Move cars (speed affects movement rate)
-                if (!userFinished && !winnerDeclared) {
-                    let moveAmount = userSpeed * 0.035;
-                    userPosition = Math.min(MAX_POSITION, userPosition + moveAmount);
-                    if (userPosition >= MAX_POSITION) {
-                        userPosition = MAX_POSITION;
-                        userFinished = true;
-                    }
-                }
-
-                if (!aiFinished && !winnerDeclared) {
-                    let moveAmount = aiSpeed * 0.035;
-                    aiPosition = Math.min(MAX_POSITION, aiPosition + moveAmount);
-                    if (aiPosition >= MAX_POSITION) {
-                        aiPosition = MAX_POSITION;
-                        aiFinished = true;
-                    }
-                }
-
-                updateCarsPosition();
-
-                // Check winner - أول من يصل يفوز فوراً
-                if (!winnerDeclared) {
-                    if (userFinished && !aiFinished) {
-                        winnerDeclared = true;
+                document.getElementById('userSpeedIndicator').textContent = `🚀 ${userSpeed} km/h`;
+                document.getElementById('aiSpeedIndicator').textContent = `⚡ ${aiSpeed} km/h`;
+                
+                // Move cars (speed affects movement)
+                let userMove = (userSpeed / 100) * 8;
+                let aiMove = (aiSpeed / 100) * 8;
+                
+                userY = Math.min(userY + userMove, FINISH_POSITION);
+                aiY = Math.min(aiY + aiMove, FINISH_POSITION);
+                
+                updateCarPositions();
+                
+                // Check winner - FIRST to reach finish line wins
+                if (!raceFinished) {
+                    if (userY >= FINISH_POSITION) {
+                        raceFinished = true;
                         endRace('user');
-                    } else if (aiFinished && !userFinished) {
-                        winnerDeclared = true;
+                    } else if (aiY >= FINISH_POSITION) {
+                        raceFinished = true;
                         endRace('ai');
-                    } else if (userFinished && aiFinished) {
-                        winnerDeclared = true;
-                        if (userPosition >= aiPosition) {
-                            endRace('user');
-                        } else {
-                            endRace('ai');
-                        }
                     }
                 }
             }, 50);
         }
-
-        function updateCarsPosition() {
-            document.getElementById('userCar').style.bottom = `${userPosition}px`;
-            document.getElementById('aiCar').style.bottom = `${aiPosition}px`;
-            
-            // Add/remove movement animation
-            if (userSpeed > 20) {
-                document.getElementById('userCar').classList.add('car-moving');
-            } else {
-                document.getElementById('userCar').classList.remove('car-moving');
-            }
-            
-            if (aiSpeed > 20) {
-                document.getElementById('aiCar').classList.add('car-moving');
-            } else {
-                document.getElementById('aiCar').classList.remove('car-moving');
-            }
-        }
-
+        
         function endRace(winner) {
             if (!raceActive) return;
+            
             raceActive = false;
-            winnerDeclared = true;
+            raceFinished = true;
             clearInterval(raceInterval);
             clearInterval(timerInterval);
-
+            
             const timeElapsed = (10 - timeLeft).toFixed(2);
             let resultText = '';
             let resultClass = '';
-            let won = false;
-
+            let userWon = false;
+            
             if (winner === 'user') {
-                resultText = '🎉 فوز! 🎉';
+                resultText = '🏆 فزت بالسباق! 🏆';
                 resultClass = 'winner';
-                won = true;
+                userWon = true;
             } else if (winner === 'ai') {
-                resultText = '😔 خسارة! 😔';
+                resultText = '💔 خسرت... جرب مرة ثانية 💔';
                 resultClass = 'loser';
-                won = false;
+                userWon = false;
             } else {
                 resultText = '⏰ انتهى الوقت!';
                 resultClass = '';
-                won = false;
+                userWon = false;
             }
-
+            
+            saveStats(userWon);
+            
             document.getElementById('resultText').textContent = resultText;
             document.getElementById('resultText').className = `result-text ${resultClass}`;
             document.getElementById('resultTime').textContent = timeElapsed;
             document.getElementById('resultUserSpeed').textContent = userSpeed;
             document.getElementById('resultAiSpeed').textContent = aiSpeed;
-
-            saveStats(won);
-
+            
             setTimeout(() => {
                 document.getElementById('resultScreen').classList.remove('hidden');
             }, 300);
         }
-
+        
         function resetGame() {
             document.getElementById('resultScreen').classList.add('hidden');
             document.getElementById('startScreen').classList.remove('hidden');
             
-            userPosition = START_BOTTOM;
-            aiPosition = START_BOTTOM;
-            updateCarsPosition();
+            userY = 0;
+            aiY = 0;
+            updateCarPositions();
             
             document.getElementById('userSpeed').textContent = '0';
             document.getElementById('aiSpeed').textContent = '0';
-            document.getElementById('userSpeedIndicator').textContent = '0 km/h';
-            document.getElementById('aiSpeedIndicator').textContent = '0 km/h';
             document.getElementById('timer').textContent = '00:10';
+            document.getElementById('userSpeedIndicator').textContent = '🚀 0 km/h';
+            document.getElementById('aiSpeedIndicator').textContent = '⚡ 0 km/h';
         }
-
+        
+        // Initialize
         loadStats();
     </script>
 </body>
