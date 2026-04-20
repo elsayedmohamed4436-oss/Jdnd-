@@ -105,7 +105,7 @@
             position: relative;
             height: 550px;
             overflow: hidden;
-            background: #1a3a28;
+            background: linear-gradient(180deg, #1a3a28 0%, #0d2818 100%);
             box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7);
         }
         .road {
@@ -170,6 +170,141 @@
             backdrop-filter: blur(4px);
         }
 
+        /* ========== نخيل واقعي جداً ========== */
+        .palm-tree {
+            position: absolute;
+            z-index: 4;
+            filter: drop-shadow(8px 12px 15px rgba(0, 0, 0, 0.4));
+        }
+        
+        /* الجذع */
+        .palm-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 100px;
+            background: linear-gradient(90deg, #5a3a1a, #7a5230, #5a3a1a);
+            border-radius: 9px;
+            box-shadow: inset -2px 0 5px rgba(0,0,0,0.3), inset 2px 0 5px rgba(255,255,200,0.2);
+        }
+        
+        /* نسيج الجذع (خطوط) */
+        .palm-trunk::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(180deg, 
+                transparent 0px, transparent 8px,
+                rgba(0,0,0,0.15) 8px, rgba(0,0,0,0.15) 12px);
+            border-radius: 9px;
+        }
+        
+        /* الأوراق - الطبقة الخارجية */
+        .palm-leaves {
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 70px;
+        }
+        
+        .leaf {
+            position: absolute;
+            width: 45px;
+            height: 8px;
+            background: linear-gradient(135deg, #2d6a1f, #1a4a10);
+            border-radius: 0 20px 20px 0;
+            transform-origin: 0% 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .leaf::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3d8a2f, #1a5a10);
+            border-radius: 0 20px 20px 0;
+            opacity: 0.6;
+        }
+        
+        /* الأوراق المتعددة بزوايا مختلفة */
+        .leaf1 { transform: rotate(-70deg) translateX(-5px); top: -5px; left: 35px; width: 55px; }
+        .leaf2 { transform: rotate(-45deg) translateX(-3px); top: 5px; left: 38px; width: 60px; }
+        .leaf3 { transform: rotate(-20deg); top: 15px; left: 40px; width: 58px; }
+        .leaf4 { transform: rotate(5deg); top: 22px; left: 40px; width: 55px; }
+        .leaf5 { transform: rotate(30deg); top: 20px; left: 38px; width: 52px; }
+        .leaf6 { transform: rotate(55deg); top: 12px; left: 35px; width: 48px; }
+        .leaf7 { transform: rotate(80deg); top: 0px; left: 32px; width: 45px; }
+        
+        /* أوراق علوية صغيرة */
+        .top-leaves {
+            position: absolute;
+            bottom: 95px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+        }
+        
+        .tleaf {
+            position: absolute;
+            width: 30px;
+            height: 6px;
+            background: linear-gradient(135deg, #4a9a30, #2a6a18);
+            border-radius: 0 15px 15px 0;
+            transform-origin: 0% 50%;
+        }
+        
+        .tleaf1 { transform: rotate(-50deg); top: 10px; left: 15px; }
+        .tleaf2 { transform: rotate(-15deg); top: 18px; left: 18px; }
+        .tleaf3 { transform: rotate(20deg); top: 18px; left: 15px; }
+        .tleaf4 { transform: rotate(55deg); top: 10px; left: 12px; }
+        
+        /* ثمار جوز الهند */
+        .coconut {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 18px;
+            background: radial-gradient(circle at 30% 30%, #8B5E3C, #5a3a1a);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .coconut::before {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 6px;
+            height: 6px;
+            background: #a07040;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        
+        /* ظل النخلة */
+        .palm-shadow {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 15px;
+            background: radial-gradient(ellipse, rgba(0,0,0,0.4), transparent);
+            border-radius: 50%;
+        }
+
+        /* السيارات */
         .car {
             position: absolute;
             width: 90px;
@@ -206,13 +341,6 @@
             border: 1px solid #ffaa55;
         }
 
-        .palm-tree {
-            position: absolute;
-            font-size: 60px;
-            opacity: 0.85;
-            z-index: 4;
-            filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.5));
-        }
         .dust-effect {
             position: absolute;
             bottom: 0;
@@ -336,25 +464,6 @@
             margin: 0 6px;
             color: #ffb347;
         }
-
-        /* عداد تنازلي جميل */
-        .countdown-timer {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 80px;
-            font-weight: 900;
-            color: #ffd966;
-            text-shadow: 0 0 30px #f39c12;
-            z-index: 150;
-            background: rgba(0,0,0,0.6);
-            padding: 20px 40px;
-            border-radius: 80px;
-            backdrop-filter: blur(8px);
-            font-family: 'Orbitron', monospace;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
@@ -381,11 +490,70 @@
                 <div class="road-lines"></div>
                 <div class="finish-line"></div>
                 <div class="finish-text">🏁 النهاية 🏁</div>
-                <div class="palm-tree" style="left: -12px; top: 50px;">🌴</div>
-                <div class="palm-tree" style="right: -12px; top: 130px;">🌴</div>
-                <div class="palm-tree" style="left: -10px; top: 260px;">🌴</div>
-                <div class="palm-tree" style="right: -10px; top: 380px;">🌴</div>
-                <div class="palm-tree" style="left: -8px; top: 490px;">🌴</div>
+                
+                <!-- نخيل واقعي - اليسار -->
+                <div class="palm-tree" style="left: 5px; bottom: 0; width: 80px; height: 140px;">
+                    <div class="palm-shadow"></div>
+                    <div class="palm-trunk" style="height: 110px;"></div>
+                    <div class="palm-leaves">
+                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
+                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
+                        <div class="leaf leaf7"></div>
+                    </div>
+                    <div class="top-leaves">
+                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
+                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
+                    </div>
+                    <div class="coconut"></div>
+                </div>
+
+                <!-- نخيل واقعي - اليمين 1 -->
+                <div class="palm-tree" style="right: 5px; bottom: 30px; width: 80px; height: 130px;">
+                    <div class="palm-shadow"></div>
+                    <div class="palm-trunk" style="height: 100px;"></div>
+                    <div class="palm-leaves">
+                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
+                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
+                        <div class="leaf leaf7"></div>
+                    </div>
+                    <div class="top-leaves">
+                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
+                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
+                    </div>
+                    <div class="coconut"></div>
+                </div>
+
+                <!-- نخيل واقعي - اليسار 2 -->
+                <div class="palm-tree" style="left: 5px; bottom: 200px; width: 70px; height: 120px;">
+                    <div class="palm-shadow"></div>
+                    <div class="palm-trunk" style="height: 95px;"></div>
+                    <div class="palm-leaves">
+                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
+                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
+                        <div class="leaf leaf7"></div>
+                    </div>
+                    <div class="top-leaves">
+                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
+                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
+                    </div>
+                    <div class="coconut"></div>
+                </div>
+
+                <!-- نخيل واقعي - اليمين 2 -->
+                <div class="palm-tree" style="right: 5px; bottom: 380px; width: 75px; height: 125px;">
+                    <div class="palm-shadow"></div>
+                    <div class="palm-trunk" style="height: 100px;"></div>
+                    <div class="palm-leaves">
+                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
+                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
+                        <div class="leaf leaf7"></div>
+                    </div>
+                    <div class="top-leaves">
+                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
+                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
+                    </div>
+                    <div class="coconut"></div>
+                </div>
             </div>
             <div class="dust-effect"></div>
 
@@ -437,7 +605,7 @@
         // ========== متغيرات السباق ==========
         let userFixedSpeed = 0;
         let aiFixedSpeed = 0;
-        let userDistance = 0;      // المسافة بالمتر (أو بالبكسل)
+        let userDistance = 0;
         let aiDistance = 0;
         let raceInterval;
         let timerInterval;
@@ -445,10 +613,9 @@
         let raceActive = false;
         let raceFinished = false;
         
-        const RACE_DURATION = 10;      // 10 ثواني بالضبط
-        const MAX_DISTANCE = 1000;     // أقصى مسافة افتراضية (للتحكم بالحركة)
+        const RACE_DURATION = 10;
+        const MAX_DISTANCE = 1000;
         
-        // تحميل الإحصائيات
         function loadStats() {
             const wins = localStorage.getItem('rallyWins') || 0;
             const races = localStorage.getItem('rallyRaces') || 0;
@@ -467,19 +634,16 @@
             document.getElementById('racesCount').textContent = races;
         }
         
-        // تحديث موضع السيارات بناءً على المسافة
         function updateCarPositions() {
-            // تحويل المسافة (0-1000) إلى بكسل (0-500)
             const userY = (userDistance / MAX_DISTANCE) * 500;
             const aiY = (aiDistance / MAX_DISTANCE) * 500;
             document.getElementById('userCar').style.bottom = `${userY}px`;
             document.getElementById('aiCar').style.bottom = `${aiY}px`;
         }
         
-        // توليد سرعات واقعية
         function generateFixedSpeed() {
-            const userSpd = Math.floor(Math.random() * 81) + 100;   // 100-180 كم/س
-            const aiSpd = Math.floor(Math.random() * 81) + 100;     // 100-180 كم/س
+            const userSpd = Math.floor(Math.random() * 81) + 100;
+            const aiSpd = Math.floor(Math.random() * 81) + 100;
             return { user: userSpd, ai: aiSpd };
         }
         
@@ -494,18 +658,15 @@
         }
         
         function startRace() {
-            // تحديد السرعات
             const speeds = generateFixedSpeed();
             userFixedSpeed = speeds.user;
             aiFixedSpeed = speeds.ai;
             
-            // عرض السرعات
             document.getElementById('userSpeed').textContent = userFixedSpeed;
             document.getElementById('aiSpeed').textContent = aiFixedSpeed;
             document.getElementById('userSpeedIndicator').textContent = `🚀 ${userFixedSpeed} كم/س`;
             document.getElementById('aiSpeedIndicator').textContent = `⚡ ${aiFixedSpeed} كم/س`;
             
-            // إعادة ضبط المسافات
             userDistance = 0;
             aiDistance = 0;
             updateCarPositions();
@@ -514,37 +675,27 @@
             raceFinished = false;
             startTime = performance.now();
             
-            // مؤقت العد التنازلي للـ 10 ثواني
             timerInterval = setInterval(() => {
                 if (!raceActive && raceFinished) return;
                 const elapsed = (performance.now() - startTime) / 1000;
                 const remaining = Math.max(0, RACE_DURATION - elapsed);
                 document.getElementById('timer').textContent = `${remaining.toFixed(2)}`;
                 
-                // نهاية السباق بعد 10 ثواني
                 if (remaining <= 0 && !raceFinished) {
                     endRace();
                 }
             }, 30);
             
-            // حلقة الحركة - تحديث المسافات بناءً على السرعة
             raceInterval = setInterval(() => {
                 if (!raceActive || raceFinished) return;
                 
-                const deltaTime = 0.038; // ~38ms بين كل تحديث
-                // معامل تحويل: السرعة (كم/س) -> مسافة لكل تحديث
-                // 1 كم/س = 1000 متر / 3600 ثانية = 0.2777 متر/ث
-                // المسافة = السرعة * 0.2777 * deltaTime
+                const deltaTime = 0.038;
                 const speedToDistance = 0.2777 * deltaTime;
                 
-                let userMove = userFixedSpeed * speedToDistance;
-                let aiMove = aiFixedSpeed * speedToDistance;
-                
-                userDistance = Math.min(userDistance + userMove, MAX_DISTANCE);
-                aiDistance = Math.min(aiDistance + aiMove, MAX_DISTANCE);
+                userDistance = Math.min(userDistance + (userFixedSpeed * speedToDistance), MAX_DISTANCE);
+                aiDistance = Math.min(aiDistance + (aiFixedSpeed * speedToDistance), MAX_DISTANCE);
                 
                 updateCarPositions();
-                
             }, 38);
         }
         
@@ -556,36 +707,24 @@
             clearInterval(raceInterval);
             clearInterval(timerInterval);
             
-            // تحديد الفائز (أكبر مسافة)
             const userWon = userDistance > aiDistance;
             const isTie = Math.abs(userDistance - aiDistance) < 0.1;
             
-            let finalWinner = false;
             let resultMsg = '';
             
             if (isTie) {
                 resultMsg = '🤝 تعادل مثير! 🤝';
-                finalWinner = false; // لا نحسب فوز لأحد في التعادل
-            } else if (userWon) {
-                resultMsg = '🏆 فوز! أنت الأسرع 🏆';
-                finalWinner = true;
-                saveStats(true);
-            } else {
-                resultMsg = '💥 خسارة... الخصم كان أسرع 💥';
-                finalWinner = false;
-                saveStats(false);
-            }
-            
-            if (!isTie && finalWinner === false && userWon === false) {
-                saveStats(false);
-            } else if (isTie) {
-                // لا نحفظ فوز أو خسارة في التعادل
-                let wins = parseInt(localStorage.getItem('rallyWins') || 0);
                 let races = parseInt(localStorage.getItem('rallyRaces') || 0);
                 races++;
                 localStorage.setItem('rallyRaces', races);
-                document.getElementById('winsCount').textContent = wins;
+                document.getElementById('winsCount').textContent = localStorage.getItem('rallyWins') || 0;
                 document.getElementById('racesCount').textContent = races;
+            } else if (userWon) {
+                resultMsg = '🏆 فوز! أنت الأسرع 🏆';
+                saveStats(true);
+            } else {
+                resultMsg = '💥 خسارة... الخصم كان أسرع 💥';
+                saveStats(false);
             }
             
             document.getElementById('resultText').textContent = resultMsg;
@@ -622,7 +761,6 @@
             document.getElementById('aiSpeedIndicator').textContent = '⚡ 0 كم/س';
         }
         
-        // بدء التشغيل
         loadStats();
     </script>
 </body>
