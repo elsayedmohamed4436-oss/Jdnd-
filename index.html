@@ -1,489 +1,791 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>سباق السيارات - أنت ضد الذكاء الاصطناعي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سباق السيارات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            user-select: none; /* منع تحديد النصوص أثناء السباق */
+        :root {
+            --bg: #08080e;
+            --fg: #f0f0f0;
+            --muted: #6b7280;
+            --accent: #e63946;
+            --accent2: #f4a261;
+            --card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --gold: #ffd700;
         }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(145deg, #1a472a 0%, #0e2a1a 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+            font-family:'Cairo',sans-serif;
+            background:var(--bg);
+            color:var(--fg);
+            height:100vh;
+            overflow:hidden;
+            -webkit-user-select:none;
+            user-select:none;
+        }
+        .screen {
+            position:fixed; inset:0;
+            display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            transition: opacity .45s ease, transform .45s ease;
+            z-index:10;
+        }
+        .screen.hidden {
+            opacity:0; pointer-events:none;
+            transform:scale(0.92); z-index:-1;
+        }
+        canvas#bgCanvas {
+            position:fixed; inset:0;
+            pointer-events:none; z-index:0;
         }
 
-        /* صندوق اللعبة الرئيسي */
-        .race-container {
-            background: #2c2c2c;
-            border-radius: 60px 60px 40px 40px;
-            padding: 20px 20px 30px;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,255,255,0.2);
-            border-bottom: 8px solid #f5c542;
+        /* === الرئيسية === */
+        #home-screen {
+            background:
+                radial-gradient(ellipse at 50% 20%, rgba(230,57,70,.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 30% 80%, rgba(244,162,97,.07) 0%, transparent 45%),
+                var(--bg);
+        }
+        .home-title {
+            font-size:clamp(2.4rem,8vw,4.8rem);
+            font-weight:900; letter-spacing:-2px;
+            background:linear-gradient(135deg,var(--accent),var(--accent2));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .home-sub { color:var(--muted); font-size:1.05rem; margin:.3rem 0 1.8rem; }
+        .car-showcase {
+            width:clamp(200px,50vw,300px); height:clamp(100px,25vw,160px);
+            margin-bottom:1.8rem; position:relative;
+        }
+        .car-showcase img {
+            width:100%; height:100%; object-fit:contain;
+            filter:drop-shadow(0 8px 30px rgba(230,57,70,.35));
+            animation:carFloat 3s ease-in-out infinite;
+        }
+        .car-showcase::after {
+            content:''; position:absolute; bottom:-5px; left:10%; right:10%;
+            height:20px; border-radius:50%;
+            background:radial-gradient(ellipse, rgba(230,57,70,.25), transparent 70%);
+            filter:blur(8px);
+        }
+        @keyframes carFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .stats-bar { display:flex; gap:1.2rem; margin-bottom:2rem; flex-wrap:wrap; justify-content:center; }
+        .stat-item {
+            text-align:center; padding:.7rem 1.4rem;
+            background:var(--card); border:1px solid var(--border);
+            border-radius:14px; backdrop-filter:blur(12px);
+            min-width:90px;
+        }
+        .stat-num { font-size:1.7rem; font-weight:900; }
+        .stat-num.w { color:var(--gold); }
+        .stat-num.l { color:var(--accent); }
+        .stat-num.t { color:var(--accent2); }
+        .stat-lbl { font-size:.75rem; color:var(--muted); }
+        .btn-primary {
+            padding:1rem 2.8rem; font-size:1.15rem; font-weight:700;
+            font-family:'Cairo',sans-serif;
+            background:linear-gradient(135deg,var(--accent),#b91c28);
+            color:#fff; border:none; border-radius:50px; cursor:pointer;
+            box-shadow:0 4px 30px rgba(230,57,70,.4);
+            transition:all .3s;
+        }
+        .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 40px rgba(230,57,70,.55); }
+        .btn-primary:active { transform:translateY(0); }
+        .btn-secondary {
+            padding:.8rem 2rem; font-size:1rem; font-weight:700;
+            font-family:'Cairo',sans-serif;
+            background:var(--card); color:var(--fg);
+            border:1px solid var(--border); border-radius:50px;
+            cursor:pointer; backdrop-filter:blur(12px);
+            transition:all .3s;
+        }
+        .btn-secondary:hover { background:rgba(255,255,255,.08); transform:translateY(-2px); }
+
+        /* === البحث === */
+        #search-screen { background:var(--bg); }
+        .search-wrap { position:relative; width:130px; height:130px; margin-bottom:2rem; }
+        .search-ring {
+            position:absolute; inset:0;
+            border:3px solid var(--border); border-top-color:var(--accent);
+            border-radius:50%; animation:spin 1s linear infinite;
+        }
+        .search-ring2 {
+            position:absolute; inset:18px;
+            border:3px solid var(--border); border-bottom-color:var(--accent2);
+            border-radius:50%; animation:spin .7s linear infinite reverse;
+        }
+        .search-dot {
+            position:absolute; inset:42px;
+            background:radial-gradient(circle,var(--accent),transparent 70%);
+            border-radius:50%; animation:spulse 1.5s ease-in-out infinite;
+        }
+        @keyframes spin { to{transform:rotate(360deg)} }
+        @keyframes spulse { 0%,100%{opacity:.3;transform:scale(.8)} 50%{opacity:.8;transform:scale(1.1)} }
+        .search-text {
+            font-size:1.2rem; color:var(--muted);
+            animation:txtPulse 1.5s ease-in-out infinite;
+            transition:all .3s;
+        }
+        .search-text.found { color:var(--accent2); animation:none; opacity:1; }
+        @keyframes txtPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+        /* === المطابقة === */
+        #match-screen { background:var(--bg); }
+        .match-box {
+            display:flex; align-items:center; gap:clamp(1rem,4vw,2.5rem);
+            animation:matchIn .5s cubic-bezier(.17,.67,.35,1.2);
+        }
+        @keyframes matchIn { from{transform:scale(.4);opacity:0} to{transform:scale(1);opacity:1} }
+        .match-side { text-align:center; }
+        .match-side img {
+            width:clamp(140px,35vw,210px); height:clamp(75px,19vw,115px);
+            object-fit:contain;
+        }
+        .match-side.p img { filter:drop-shadow(0 5px 20px rgba(244,162,97,.35)); }
+        .match-side.a img { filter:drop-shadow(0 5px 20px rgba(230,57,70,.35)); }
+        .match-name { margin-top:.6rem; font-weight:700; font-size:1.1rem; }
+        .vs-txt {
+            font-size:clamp(2rem,6vw,3.5rem); font-weight:900;
+            background:linear-gradient(135deg,var(--accent),var(--accent2));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text;
+            animation:vsPulse 1s ease-in-out infinite;
+        }
+        @keyframes vsPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+
+        /* === العد التنازلي === */
+        #countdown-screen { background:rgba(8,8,14,.92); }
+        .cd-num {
+            font-size:clamp(7rem,22vw,14rem); font-weight:900;
+            color:var(--accent);
+            animation:cdPop .75s cubic-bezier(.17,.67,.35,1.2);
+        }
+        .cd-go {
+            font-size:clamp(4rem,14vw,9rem); font-weight:900;
+            background:linear-gradient(135deg,var(--gold),var(--accent2));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text;
+            animation:cdPop .75s cubic-bezier(.17,.67,.35,1.2);
+        }
+        @keyframes cdPop { 0%{transform:scale(2.5);opacity:0} 60%{transform:scale(.9);opacity:1} 100%{transform:scale(1)} }
+
+        /* === السباق === */
+        #race-screen {
+            background:var(--bg);
+            justify-content:flex-start; padding:.6rem;
+        }
+        .race-hud {
+            display:flex; justify-content:space-between; align-items:center;
+            width:100%; max-width:960px;
+            padding:.4rem .8rem; margin-bottom:.3rem;
+        }
+        .hud-side { display:flex; align-items:center; gap:.5rem; }
+        .hud-side img { width:44px; height:26px; object-fit:contain; }
+        .hud-name { font-weight:700; font-size:.85rem; }
+        .hud-pos {
+            font-size:.7rem; font-weight:900; padding:2px 8px;
+            border-radius:20px; margin-right:4px;
+        }
+        .hud-pos.first { background:var(--gold); color:#000; }
+        .hud-pos.second { background:rgba(255,255,255,.15); color:var(--muted); }
+        .hud-timer {
+            font-size:1.4rem; font-weight:900;
+            font-variant-numeric:tabular-nums; color:var(--accent);
+            background:var(--card); padding:.2rem .8rem;
+            border-radius:20px; border:1px solid var(--border);
+        }
+        .canvas-wrap {
+            width:100%; max-width:960px; flex:1;
+            min-height:0; display:flex;
+            align-items:center; justify-content:center;
+        }
+        #raceCanvas {
+            width:100%; height:100%;
+            border-radius:14px;
+            box-shadow:0 0 50px rgba(230,57,70,.12);
         }
 
-        /* مسار السباق (طريقان جنباً لجنب) */
-        .track {
-            background: #3e3e3e;
-            border-radius: 30px;
-            padding: 20px 10px;
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 0 3px #ffd966, 0 10px 20px rgba(0,0,0,0.3);
+        /* === النتيجة === */
+        #result-screen { background:rgba(8,8,14,.94); }
+        .res-icon { font-size:4.5rem; margin-bottom:.8rem; }
+        .res-title {
+            font-size:clamp(2rem,6vw,3.8rem); font-weight:900; margin-bottom:.3rem;
+        }
+        .res-title.win {
+            background:linear-gradient(135deg,var(--gold),var(--accent2));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .res-title.lose { color:var(--accent); }
+        .res-detail { font-size:1.1rem; color:var(--muted); margin-bottom:2rem; }
+        .res-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+
+        /* === كونفيتي === */
+        @keyframes confettiFall {
+            0%{ transform:translateY(0) rotate(0deg); opacity:1; }
+            100%{ transform:translateY(110vh) rotate(720deg); opacity:0; }
+        }
+        .confetti-piece {
+            position:fixed; top:-12px; z-index:200;
+            pointer-events:none; border-radius:2px;
         }
 
-        .lane {
-            background: #2b2b2b;
-            margin: 15px 0;
-            padding: 15px 10px;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 2px 3px rgba(255,255,255,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* خطوط منتصف الطريق (متقطعة) */
-        .lane::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: repeating-linear-gradient(90deg, #ffdd99 0px, #ffdd99 20px, #5a5a5a 20px, #5a5a5a 45px);
-            opacity: 0.25;
-            pointer-events: none;
-        }
-
-        /* منطقة اسم المتسابق والعربية */
-        .racer-info {
-            width: 140px;
-            text-align: center;
-            z-index: 2;
-            background: rgba(0,0,0,0.6);
-            padding: 8px;
-            border-radius: 50px;
-            backdrop-filter: blur(4px);
-        }
-
-        .racer-name {
-            font-weight: bold;
-            color: #ffd966;
-            text-shadow: 1px 1px 0 #5a3e00;
-            margin-bottom: 5px;
-        }
-
-        .car-img {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-            filter: drop-shadow(2px 4px 6px black);
-            transition: all 0.05s linear;
-        }
-
-        /* مساحة حركة السيارة */
-        .race-area {
-            flex: 1;
-            height: 90px;
-            position: relative;
-            background: #202020;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: inset 0 0 0 2px #888;
-        }
-
-        .car-mover {
-            position: absolute;
-            bottom: 8px;
-            right: 0; /* البداية من جهة اليمين (لأن السباق من اليمين لليسار أو العكس؟ طلبك "عربيتي علي طريق وعربية AI علي طريق جنبي" سنحرك من اليسار إلى اليمين أو العكس؟ الأفضل أن تكون النهاية جهة اليمين بداية من اليسار) */
-            /* لكن المستخدم يريد "عربيتي علي طريق وعربية AI علي طريق جنبي ومده السباق 10 ثواني" سأجعل الحركة من اليسار (خط البداية) إلى اليمين (خط النهاية) */
-            left: 0%;
-            right: auto;
-            transition: left 0.05s linear;
-        }
-        
-        /* تعديل لجعل الحركة من اليسار إلى اليمين مع صورة السيارات */
-        .car-mover {
-            left: 0%;
-            transform: translateX(-50%);
-            bottom: 5px;
-        }
-        
-        .car-mover img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px black);
-        }
-
-        /* خط النهاية (على اليمين) */
-        .finish-line {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 12px;
-            background: repeating-linear-gradient(45deg, #fff, #fff 10px, #000 10px, #000 20px);
-            box-shadow: -2px 0 0 gold;
-            z-index: 5;
-        }
-
-        /* لوحة التحكم والنتيجة */
-        .controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        button {
-            background: #f5a623;
-            border: none;
-            font-size: 28px;
-            font-weight: bold;
-            padding: 12px 35px;
-            border-radius: 60px;
-            color: #2c2c2c;
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: inherit;
-            box-shadow: 0 6px 0 #a05e15;
-            width: 220px;
-        }
-
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0 3px 0 #a05e15;
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            transform: none;
-            cursor: not-allowed;
-        }
-
-        .result-box {
-            background: #1e1e1e;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-size: 22px;
-            font-weight: bold;
-            color: #ffd966;
-            text-align: center;
-            min-width: 250px;
-            border: 1px solid gold;
-        }
-
-        .difficulty {
-            background: #000000aa;
-            border-radius: 30px;
-            padding: 6px 15px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .timer {
-            font-size: 32px;
-            font-weight: bold;
-            background: #010101aa;
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 40px;
-            letter-spacing: 2px;
-        }
-
-        footer {
-            font-size: 12px;
-            text-align: center;
-            margin-top: 20px;
-            color: #bbbbbb;
-        }
-        
-        @media (max-width: 700px) {
-            .racer-info { width: 100px; }
-            .car-mover img { width: 60px; height: 60px; }
-            .race-area { height: 70px; }
-            button { font-size: 22px; padding: 8px 20px; width: 180px; }
+        @media(max-width:500px){
+            .match-box { flex-direction:column; gap:.8rem; }
+            .vs-txt { font-size:2rem; }
+            .race-hud { padding:.3rem .4rem; }
+            .hud-side img { width:32px; height:20px; }
+            .hud-name { font-size:.75rem; }
         }
     </style>
 </head>
 <body>
-<div class="race-container">
-    <div class="track">
-        <!-- حارة اللاعب (أنت) -->
-        <div class="lane">
-            <div class="racer-info">
-                <div class="racer-name">🚗 عربيتي (أنت)</div>
-                <img class="car-img" id="playerCarStatic" src="https://cdn-icons-png.flaticon.com/512/2933/3933256.png" alt="عربيتي">
-            </div>
-            <div class="race-area" id="playerTrack">
-                <div class="car-mover" id="playerCarMover">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2933/3933256.png" alt="سيارة اللاعب">
-                </div>
-                <div class="finish-line"></div>
-            </div>
-        </div>
+<canvas id="bgCanvas"></canvas>
 
-        <!-- حارة الذكاء الاصطناعي -->
-        <div class="lane">
-            <div class="racer-info">
-                <div class="racer-name">🤖 الذكاء الاصطناعي</div>
-                <img class="car-img" id="aiCarStatic" src="https://cdn-icons-png.flaticon.com/512/4712/4712036.png" alt="سيارة AI">
-            </div>
-            <div class="race-area" id="aiTrack">
-                <div class="car-mover" id="aiCarMover">
-                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712036.png" alt="سيارة AI">
-                </div>
-                <div class="finish-line"></div>
-            </div>
+<!-- الشاشة الرئيسية -->
+<div id="home-screen" class="screen">
+    <h1 class="home-title">سباق السيارات</h1>
+    <p class="home-sub">تحدَّ الذكاء الاصطناعي في سباق لا يُنسى</p>
+    <div class="car-showcase">
+        <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png" alt="عربيتي">
+    </div>
+    <div class="stats-bar">
+        <div class="stat-item"><div class="stat-num w" id="sW">0</div><div class="stat-lbl">انتصارات</div></div>
+        <div class="stat-item"><div class="stat-num l" id="sL">0</div><div class="stat-lbl">هزائم</div></div>
+        <div class="stat-item"><div class="stat-num t" id="sT">0</div><div class="stat-lbl">إجمالي</div></div>
+    </div>
+    <button class="btn-primary" id="btnStart"><i class="fas fa-flag-checkered"></i>&nbsp; بدء السباق</button>
+</div>
+
+<!-- شاشة البحث -->
+<div id="search-screen" class="screen hidden">
+    <div class="search-wrap">
+        <div class="search-ring"></div>
+        <div class="search-ring2"></div>
+        <div class="search-dot"></div>
+    </div>
+    <p class="search-text" id="searchTxt">جاري البحث عن منافس...</p>
+</div>
+
+<!-- شاشة المطابقة -->
+<div id="match-screen" class="screen hidden">
+    <div class="match-box">
+        <div class="match-side p">
+            <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png" alt="أنت">
+            <div class="match-name" style="color:var(--accent2)">أنت</div>
+        </div>
+        <div class="vs-txt">VS</div>
+        <div class="match-side a">
+            <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b2be5445-fcb1-4ac9-83a7-1e862e1a6490.png" alt="الذكاء">
+            <div class="match-name" style="color:var(--accent)">الذكاء الاصطناعي</div>
         </div>
     </div>
+</div>
 
-    <div class="controls">
-        <div class="difficulty" id="difficultyDisplay">⚡ جارٍ التحضير ⚡</div>
-        <button id="startBtn">🏁 بدء السباق 🏁</button>
-        <div class="result-box" id="resultMessage">اضغط بدء السباق</div>
-        <div class="timer" id="timerDisplay">0.00</div>
+<!-- العد التنازلي -->
+<div id="countdown-screen" class="screen hidden">
+    <div id="cdContent"></div>
+</div>
+
+<!-- السباق -->
+<div id="race-screen" class="screen hidden">
+    <div class="race-hud">
+        <div class="hud-side">
+            <span class="hud-pos second" id="posP">2</span>
+            <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png" alt="">
+            <span class="hud-name">أنت</span>
+        </div>
+        <div class="hud-timer" id="hudTimer">0.0</div>
+        <div class="hud-side">
+            <span class="hud-name">الذكاء</span>
+            <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b2be5445-fcb1-4ac9-83a7-1e862e1a6490.png" alt="">
+            <span class="hud-pos second" id="posA">2</span>
+        </div>
     </div>
-    <footer>※ سباق 10 ثوانٍ | الذكاء الاصطناعي أقوى منك بنسبة 10% مرة وأقل منك بنسبة 10% مرة ※</footer>
+    <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="raceCanvas"></canvas>
+    </div>
+</div>
+
+<!-- النتيجة -->
+<div id="result-screen" class="screen hidden">
+    <div class="res-icon" id="resIcon"></div>
+    <h2 class="res-title" id="resTitle"></h2>
+    <p class="res-detail" id="resDetail"></p>
+    <div class="res-btns">
+        <button class="btn-secondary" id="btnHome"><i class="fas fa-home"></i>&nbsp; الرئيسية</button>
+        <button class="btn-primary" id="btnAgain" style="padding:.8rem 2rem;font-size:1rem;"><i class="fas fa-redo"></i>&nbsp; سباق آخر</button>
+    </div>
 </div>
 
 <script>
-    // ---------- إعدادات اللعبة ----------
-    const RACE_DURATION = 10; // 10 ثواني
-    const TRACK_DISTANCE = 100; // 100% من العرض (من left:0% إلى left:100%)
-    
-    // عناصر DOM
-    const startBtn = document.getElementById('startBtn');
-    const resultDiv = document.getElementById('resultMessage');
-    const timerDisplay = document.getElementById('timerDisplay');
-    const difficultySpan = document.getElementById('difficultyDisplay');
-    
-    const playerMover = document.getElementById('playerCarMover');
-    const aiMover = document.getElementById('aiCarMover');
-    
-    // متغيرات السباق
-    let raceInterval = null;
-    let startTime = 0;
-    let animationFrame = null;
-    let raceActive = false;
-    
-    // سرعة كل متسابق (نسبة المسافة لكل ثانية) - القيمة القصوى 100%/sec يعني يقطع المسافة كاملة خلال ثانية واحدة
-    // لكن المدة 10 ثواني، لذا السرعة الطبيعية 10%/sec لتقطع 100% خلال 10 ثوانٍ
-    const BASE_SPEED = 10; // % في الثانية (100%/10sec)
-    
-    let playerSpeed = BASE_SPEED;      // %/sec
-    let aiSpeed = BASE_SPEED;
-    
-    // المتغيرات الخاصة بالجري
-    let playerDistance = 0;   // 0% إلى 100%
-    let aiDistance = 0;
-    let raceResult = null;     // 'player', 'ai', 'tie'
-    
-    // ---- دالة تحديث صعوبة الذكاء الاصطناعي (أقوى 10% أو أضعف 10%) ----
-    function setRandomDifficulty() {
-        // 50% فرصة يكون AI أقوى منك بنسبة 10%، 50% أضعف منك بنسبة 10%
-        const isStronger = Math.random() < 0.5; 
-        if (isStronger) {
-            // AI أقوى: سرعته = سرعة اللاعب + 10% من سرعة اللاعب
-            aiSpeed = playerSpeed * 1.10;
-            difficultySpan.innerHTML = "🔥 الذكاء الاصطناعي أقوى منك بنسبة 10% 🔥";
-            difficultySpan.style.color = "#ff8888";
+/* ============================================
+   ثوابت وصور
+============================================ */
+const P_URL = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png';
+const A_URL = 'https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b2be5445-fcb1-4ac9-83a7-1e862e1a6490.png';
+
+const pImg = new Image(); pImg.crossOrigin = 'anonymous'; pImg.src = P_URL;
+const aImg = new Image(); aImg.crossOrigin = 'anonymous'; aImg.src = A_URL;
+
+/* ============================================
+   التخزين المحلي
+============================================ */
+let stats = JSON.parse(localStorage.getItem('raceStats')) || { w:0, l:0, t:0 };
+function saveStats(){
+    localStorage.setItem('raceStats', JSON.stringify(stats));
+    document.getElementById('sW').textContent = stats.w;
+    document.getElementById('sL').textContent = stats.l;
+    document.getElementById('sT').textContent = stats.t;
+}
+saveStats();
+
+/* ============================================
+   إدارة الشاشات
+============================================ */
+function show(id){
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+}
+
+/* ============================================
+   خلفية الجسيمات
+============================================ */
+const bgC = document.getElementById('bgCanvas');
+const bgX = bgC.getContext('2d');
+let dots = [];
+function rsBg(){ bgC.width=innerWidth; bgC.height=innerHeight; }
+rsBg(); addEventListener('resize', rsBg);
+for(let i=0;i<60;i++) dots.push({
+    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    r:Math.random()*1.8+.4, vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
+    o:Math.random()*.4+.08
+});
+(function animBg(){
+    bgX.clearRect(0,0,bgC.width,bgC.height);
+    dots.forEach(d=>{
+        d.x+=d.vx; d.y+=d.vy;
+        if(d.x<0)d.x=bgC.width; if(d.x>bgC.width)d.x=0;
+        if(d.y<0)d.y=bgC.height; if(d.y>bgC.height)d.y=0;
+        bgX.beginPath(); bgX.arc(d.x,d.y,d.r,0,Math.PI*2);
+        bgX.fillStyle=`rgba(230,57,70,${d.o})`; bgX.fill();
+    });
+    requestAnimationFrame(animBg);
+})();
+
+/* ============================================
+   الصوت (Web Audio API)
+============================================ */
+let actx = null;
+function initAudio(){ if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)(); }
+function beep(freq,dur,vol=.18){
+    if(!actx)return;
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.connect(g); g.connect(actx.destination);
+    o.frequency.value=freq; o.type='sine';
+    g.gain.setValueAtTime(vol,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+dur);
+    o.start(); o.stop(actx.currentTime+dur);
+}
+function sfxCount(n){
+    beep(n>0?440:880, .25, .2);
+}
+function sfxWin(){
+    beep(523,.15); setTimeout(()=>beep(659,.15),150);
+    setTimeout(()=>beep(784,.3),300);
+}
+function sfxLose(){
+    beep(400,.2); setTimeout(()=>beep(300,.3),200);
+}
+
+/* ============================================
+   منطق اللعبة
+============================================ */
+let raf = null;
+
+// أزرار
+document.getElementById('btnStart').onclick = startSearching;
+document.getElementById('btnHome').onclick = ()=>{ show('home-screen'); };
+document.getElementById('btnAgain').onclick = startSearching;
+
+function startSearching(){
+    initAudio();
+    show('search-screen');
+    const txt = document.getElementById('searchTxt');
+    txt.textContent = 'جاري البحث عن منافس...';
+    txt.classList.remove('found');
+
+    setTimeout(()=>{
+        txt.textContent = 'تم العثور على منافس!';
+        txt.classList.add('found');
+        setTimeout(()=>{
+            show('match-screen');
+            // إعادة تشغيل الأنيميشن
+            const mb = document.querySelector('.match-box');
+            mb.style.animation='none'; mb.offsetHeight;
+            mb.style.animation='matchIn .5s cubic-bezier(.17,.67,.35,1.2)';
+            setTimeout(startCountdown, 2500);
+        }, 1000);
+    }, 2500);
+}
+
+function startCountdown(){
+    show('countdown-screen');
+    const el = document.getElementById('cdContent');
+    let c = 3;
+    (function tick(){
+        if(c > 0){
+            sfxCount(c);
+            el.innerHTML = `<div class="cd-num">${c}</div>`;
+            c--;
+            setTimeout(tick, 900);
         } else {
-            // AI أضعف: سرعته = سرعة اللاعب - 10% من سرعة اللاعب
-            aiSpeed = playerSpeed * 0.90;
-            difficultySpan.innerHTML = "🍃 الذكاء الاصطناعي أضعف منك بنسبة 10% 🍃";
-            difficultySpan.style.color = "#aaffdd";
+            sfxCount(0);
+            el.innerHTML = `<div class="cd-go">انطلق!</div>`;
+            setTimeout(startRace, 750);
         }
-        // تقريب السرعات لأرقام مفهومة
-        aiSpeed = parseFloat(aiSpeed.toFixed(2));
-        console.log(`السرعة: اللاعب ${playerSpeed}%/sec, AI ${aiSpeed}%/sec`);
-    }
-    
-    // دالة إعادة ضبط مواقع السيارات والمتغيرات
-    function resetRace() {
-        if (raceInterval) {
-            clearInterval(raceInterval);
-            raceInterval = null;
+    })();
+}
+
+function startRace(){
+    show('race-screen');
+
+    const canvas = document.getElementById('raceCanvas');
+    const ctx = canvas.getContext('2d');
+    const wrap = document.getElementById('canvasWrap');
+
+    // تأخير إطار واحد لضبط الأبعاد
+    requestAnimationFrame(()=>{
+        canvas.width  = wrap.clientWidth  * devicePixelRatio;
+        canvas.height = wrap.clientHeight * devicePixelRatio;
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+        const W = wrap.clientWidth;
+        const H = wrap.clientHeight;
+
+        /* --- إعدادات المسار --- */
+        const margin = 8;
+        const gap = Math.max(16, H * 0.08);
+        const roadH1 = (H - margin*2 - gap) * 0.47; // الذكاء (أعلى)
+        const roadH2 = (H - margin*2 - gap) * 0.53; // المستخدم (أسفل) - أعرض
+        const y1 = margin;                           // بداية طريق الذكاء
+        const y2 = margin + roadH1 + gap;            // بداية طريق المستخدم
+
+        const startX  = Math.max(90, W * 0.1);
+        const finishX = W - Math.max(50, W * 0.06);
+        const trackLen = finishX - startX;
+
+        /* --- سرعات --- */
+        const baseSpeed = trackLen / 10;
+        const aiStronger = Math.random() > 0.5;
+        const aiBase = baseSpeed * (aiStronger ? 1.1 : 0.9);
+
+        const pSeed = Math.random() * 100;
+        const aSeed = Math.random() * 100;
+
+        let pX = startX, aX = startX;
+        let raceTime = 0, lastTs = 0, done = false;
+
+        // حجم العربية
+        const cW = Math.min(80, W * 0.09);
+        const cH = cW * 0.5;
+
+        // جسيمات العادم
+        let parts = [];
+        function addExhaust(x, cy){
+            for(let i=0;i<2;i++) parts.push({
+                x, y: cy + (Math.random()-.5)*cH*.6,
+                r: Math.random()*5+2,
+                vx: -(Math.random()*2.5+.8),
+                vy: (Math.random()-.5)*.8,
+                life:1, decay:Math.random()*.025+.018
+            });
         }
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-            animationFrame = null;
+
+        // خطوط الطريق
+        let lineOff = 0;
+
+        // عناصر الخلفية (أشجار)
+        let trees = [];
+        for(let i=0;i<12;i++) trees.push({
+            x: Math.random()*W, y1: y1-2, y2: y2+roadH2+2,
+            size: Math.random()*6+4, speed: Math.random()*.3+.1
+        });
+
+        /* --- رسم --- */
+        function drawTrack(y, h, isMain){
+            // عشب
+            ctx.fillStyle = isMain ? '#14291a' : '#0f2214';
+            ctx.fillRect(0, y, W, h);
+
+            // نمط العشب
+            ctx.fillStyle = isMain ? '#1a3320' : '#132a18';
+            for(let i=0; i<W; i+=18){
+                if((i + Math.floor(lineOff*.3))%36===0){
+                    ctx.fillRect(i, y+h-4, 9, 4);
+                }
+            }
+
+            // سطح الطريق
+            const rm = 4;
+            const ry = y+rm, rh = h-rm*2;
+            ctx.fillStyle = isMain ? '#252530' : '#1e1e28';
+            ctx.fillRect(0, ry, W, rh);
+
+            // حواف بيضاء
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath(); ctx.moveTo(0,ry); ctx.lineTo(W,ry); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0,ry+rh); ctx.lineTo(W,ry+rh); ctx.stroke();
+
+            // خط وسط متقطع
+            ctx.setLineDash([28,18]);
+            ctx.lineDashOffset = -lineOff;
+            ctx.strokeStyle = 'rgba(255,255,255,.3)';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0,ry+rh/2); ctx.lineTo(W,ry+rh/2); ctx.stroke();
+            ctx.setLineDash([]);
+
+            // خط البداية
+            ctx.strokeStyle = 'rgba(255,255,255,.25)';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(startX, ry); ctx.lineTo(startX, ry+rh); ctx.stroke();
+
+            // خط النهاية (مربعات)
+            const cs = Math.max(6, Math.floor(rh/10));
+            const cols = 3, rows = Math.ceil(rh/cs);
+            for(let r=0;r<rows;r++){
+                for(let c=0;c<cols;c++){
+                    ctx.fillStyle = (r+c)%2===0 ? '#ffffff' : '#111111';
+                    const dy = ry + r*cs;
+                    const dh = Math.min(cs, ry+rh-dy);
+                    if(dh>0) ctx.fillRect(finishX + c*cs, dy, cs, dh);
+                }
+            }
         }
-        raceActive = false;
-        playerDistance = 0;
-        aiDistance = 0;
-        updateCarPositions();
-        resultDiv.innerHTML = "⏳ اضغط بدء السباق ⏳";
-        timerDisplay.innerHTML = "0.00";
-        startBtn.disabled = false;
-        // تعيين الصعوبة بشكل عشوائي في كل سباق (الذكاء الاصطناعي يتغير)
-        setRandomDifficulty();
-    }
-    
-    // تحديث موقع السيارات بناءً على النسبة المقطوعة
-    function updateCarPositions() {
-        // نحد left كنسبة مئوية من عرض المسار (من left:0% إلى left:100%)
-        // لكن لأننا نريد السيارة تبدأ من الحافة اليسرى وتصل إلى اليمين (خط النهاية)
-        // نستخدم left: نسبه مئوية ولكن مع تحريك مركز الصورة (translateX(-50%)) حتى تلتصق الحافة.
-        let playerPercent = Math.min(playerDistance, 100);
-        let aiPercent = Math.min(aiDistance, 100);
-        
-        playerMover.style.left = playerPercent + '%';
-        aiMover.style.left = aiPercent + '%';
-        
-        // اذا وصل أي منهما إلى 100% أو تجاوزها نضبطها
-        if (playerPercent >= 100) playerMover.style.left = '100%';
-        if (aiPercent >= 100) aiMover.style.left = '100%';
-    }
-    
-    // دالة إنهاء السباق وعرض النتيجة
-    function finishRace(reason = 'timeout') {
-        if (!raceActive) return;
-        raceActive = false;
-        if (raceInterval) {
-            clearInterval(raceInterval);
-            raceInterval = null;
+
+        function drawCar(img, x, cy){
+            // ظل
+            ctx.fillStyle = 'rgba(0,0,0,.3)';
+            ctx.beginPath();
+            ctx.ellipse(x + cW/2, cy + cH/2 + 4, cW*.42, 4, 0, 0, Math.PI*2);
+            ctx.fill();
+
+            // توهج خلفي
+            const glow = ctx.createRadialGradient(x, cy, 0, x, cy, cW*.7);
+            glow.addColorStop(0, 'rgba(255,120,0,.12)');
+            glow.addColorStop(1, 'rgba(255,120,0,0)');
+            ctx.fillStyle = glow;
+            ctx.fillRect(x - cW*.5, cy - cH, cW*1.2, cH*3);
+
+            // العربية
+            ctx.drawImage(img, x, cy - cH/2, cW, cH);
         }
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-            animationFrame = null;
+
+        function drawParts(){
+            parts.forEach(p=>{
+                const r = Math.max(.1, p.r * p.life);
+                const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r);
+                g.addColorStop(0, `rgba(255,200,50,${p.life*.7})`);
+                g.addColorStop(1, `rgba(255,80,0,0)`);
+                ctx.fillStyle = g;
+                ctx.fillRect(p.x-r, p.y-r, r*2, r*2);
+            });
         }
-        
-        let winnerText = '';
-        // تحديد الفائز بناءً على المسافة المقطوعة
-        const playerFinal = Math.min(playerDistance, 100);
-        const aiFinal = Math.min(aiDistance, 100);
-        
-        if (playerFinal >= 100 && aiFinal >= 100) {
-            winnerText = '🤝 تعادل! 🤝';
-            raceResult = 'tie';
-        } else if (playerFinal >= 100) {
-            winnerText = '🎉 لقد فزت! عربيتك أسرع 🎉';
-            raceResult = 'player';
-        } else if (aiFinal >= 100) {
-            winnerText = '💀 الذكاء الاصطناعي فاز! 💀';
-            raceResult = 'ai';
-        } else {
-            // انتهى الوقت
-            if (playerFinal > aiFinal) {
-                winnerText = '🏆 فزت بفارق بسيط! (نهاية الوقت) 🏆';
-                raceResult = 'player';
-            } else if (aiFinal > playerFinal) {
-                winnerText = '🤖 AI تغلب عليك في النهاية 🤖';
-                raceResult = 'ai';
+
+        function drawSpeedLines(x, cy, speed){
+            const intensity = speed / baseSpeed;
+            const count = Math.floor(intensity * 4);
+            ctx.globalAlpha = .2;
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1;
+            for(let i=0;i<count;i++){
+                const lx = x - 5 - Math.random()*25;
+                const ly = cy + (Math.random()-.5)*cH*.8;
+                const ll = Math.random()*18+8;
+                ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(lx-ll,ly); ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawTrees(dt){
+            ctx.fillStyle = '#1a4a25';
+            trees.forEach(t=>{
+                t.x -= t.speed * baseSpeed * dt * .15;
+                if(t.x < -20) t.x = W + 20;
+                // شجرة صغيرة فوق الطريق الأول
+                ctx.beginPath(); ctx.arc(t.x, t.y1 - t.size*.5, t.size, 0, Math.PI*2); ctx.fill();
+                // شجرة صغيرة أسفل الطريق الثاني
+                ctx.beginPath(); ctx.arc(t.x, t.y2 + t.size*.5, t.size, 0, Math.PI*2); ctx.fill();
+            });
+        }
+
+        function updatePositions(){
+            const pp = document.getElementById('posP');
+            const ap = document.getElementById('posA');
+            if(pX >= aX){
+                pp.className='hud-pos first'; pp.textContent='1';
+                ap.className='hud-pos second'; ap.textContent='2';
             } else {
-                winnerText = 'تعادل في منتصف الطريق';
-                raceResult = 'tie';
+                pp.className='hud-pos second'; pp.textContent='2';
+                ap.className='hud-pos first'; ap.textContent='1';
             }
         }
-        
-        resultDiv.innerHTML = winnerText;
-        startBtn.disabled = false;
-    }
-    
-    // حلقة السباق (تحديث المسافات كل 0.02 ثانية للحصول على حركة سلسة)
-    function startRaceLoop() {
-        const startTimestamp = performance.now() / 1000;
-        let lastUpdate = startTimestamp;
-        
-        function step(nowMs) {
-            const nowSec = nowMs / 1000;
-            if (!raceActive) return;
-            
-            const delta = Math.min(0.05, nowSec - lastUpdate); // حد أقصى 0.05 ثانية
-            if (delta <= 0) {
-                animationFrame = requestAnimationFrame(step);
-                lastUpdate = nowSec;
+
+        /* --- حلقة اللعبة --- */
+        function loop(ts){
+            if(done) return;
+            if(lastTs===0) lastTs=ts;
+            const dt = Math.min((ts-lastTs)/1000, .05);
+            lastTs = ts;
+            raceTime += dt;
+
+            // تقلبات سلسة بالسرعة
+            const pSpd = baseSpeed * (1 + .07*Math.sin(ts*.003+pSeed) + .035*Math.sin(ts*.007+pSeed*2));
+            const aSpd = aiBase   * (1 + .07*Math.sin(ts*.0025+aSeed) + .035*Math.sin(ts*.006+aSeed*1.5));
+
+            pX += pSpd * dt;
+            aX += aSpd * dt;
+            if(pX > finishX) pX = finishX;
+            if(aX > finishX) aX = finishX;
+
+            // خطوط متحركة
+            lineOff += (pSpd + aSpd) * .25 * dt;
+
+            // عادم
+            if(Math.random()>.25){
+                addExhaust(pX, y2 + roadH2/2);
+                addExhaust(aX, y1 + roadH1/2);
+            }
+            parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; });
+            parts = parts.filter(p=>p.life>0);
+
+            // تحديث الواجهة
+            document.getElementById('hudTimer').textContent = raceTime.toFixed(1);
+            updatePositions();
+
+            /* --- رسم كامل --- */
+            ctx.clearRect(0, 0, W, H);
+
+            // أشجار خلفية
+            drawTrees(dt);
+
+            // الفاصل
+            ctx.fillStyle = '#0c0c14';
+            ctx.fillRect(0, y1+roadH1, W, gap);
+            ctx.setLineDash([12,8]); ctx.lineDashOffset=-lineOff;
+            ctx.strokeStyle='rgba(255,255,255,.08)'; ctx.lineWidth=1;
+            ctx.beginPath(); ctx.moveTo(0, y1+roadH1+gap/2); ctx.lineTo(W, y1+roadH1+gap/2); ctx.stroke();
+            ctx.setLineDash([]);
+
+            // الطريقين
+            drawTrack(y1, roadH1, false);
+            drawTrack(y2, roadH2, true);
+
+            // جسيمات
+            drawParts();
+
+            // خطوط سرعة
+            drawSpeedLines(pX, y2+roadH2/2, pSpd);
+            drawSpeedLines(aX, y1+roadH1/2, aSpd);
+
+            // العربيات
+            drawCar(aImg, aX, y1+roadH1/2);
+            drawCar(pImg, pX, y2+roadH2/2);
+
+            // أشرطة تقدم
+            drawProgressBar(y1+roadH1-6, aX, '#e63946');
+            drawProgressBar(y2+roadH2-6, pX, '#f4a261');
+
+            // فلاش عند خط النهاية
+            if(pX >= finishX || aX >= finishX){
+                ctx.fillStyle = 'rgba(255,255,255,.15)';
+                ctx.fillRect(0,0,W,H);
+            }
+
+            // التحقق من النهاية
+            if(pX >= finishX || aX >= finishX){
+                done = true;
+                const won = pX >= aX;
+                endRace(won, raceTime);
                 return;
             }
-            lastUpdate = nowSec;
-            
-            // تحديث المسافات بناءً على السرعة (%/sec)
-            playerDistance += playerSpeed * delta;
-            aiDistance += aiSpeed * delta;
-            
-            // منع تجاوز 100%
-            if (playerDistance > 100) playerDistance = 100;
-            if (aiDistance > 100) aiDistance = 100;
-            
-            updateCarPositions();
-            
-            // وقت السباق المتبقي
-            const elapsed = nowSec - startTime;
-            const remaining = Math.max(0, RACE_DURATION - elapsed);
-            timerDisplay.innerHTML = remaining.toFixed(2);
-            
-            // شروط النهاية: أحدهم يصل إلى 100% أو انتهاء الوقت
-            let shouldFinish = false;
-            if (playerDistance >= 100 || aiDistance >= 100) {
-                shouldFinish = true;
-            } else if (elapsed >= RACE_DURATION) {
-                shouldFinish = true;
-            }
-            
-            if (shouldFinish) {
-                finishRace();
+            if(raceTime >= 12){
+                done = true;
+                endRace(pX >= aX, raceTime);
                 return;
             }
-            
-            animationFrame = requestAnimationFrame(step);
+
+            raf = requestAnimationFrame(loop);
         }
-        
-        animationFrame = requestAnimationFrame(step);
+
+        function drawProgressBar(y, carX, color){
+            const barY = y;
+            const barH = 3;
+            const progress = Math.max(0, (carX - startX) / trackLen);
+            // خلفية
+            ctx.fillStyle = 'rgba(255,255,255,.06)';
+            ctx.fillRect(startX, barY, trackLen, barH);
+            // التقدم
+            ctx.fillStyle = color;
+            ctx.fillRect(startX, barY, trackLen * progress, barH);
+        }
+
+        raf = requestAnimationFrame(loop);
+    });
+}
+
+function endRace(won, time){
+    if(raf){ cancelAnimationFrame(raf); raf=null; }
+
+    stats.t++;
+    if(won) stats.w++; else stats.l++;
+    saveStats();
+
+    setTimeout(()=>{
+        show('result-screen');
+        const icon  = document.getElementById('resIcon');
+        const title = document.getElementById('resTitle');
+        const detail= document.getElementById('resDetail');
+
+        if(won){
+            icon.innerHTML = '<i class="fas fa-trophy" style="color:var(--gold)"></i>';
+            title.textContent = 'فزت بالسباق!';
+            title.className = 'res-title win';
+            sfxWin();
+            spawnConfetti();
+        } else {
+            icon.innerHTML = '<i class="fas fa-times-circle" style="color:var(--accent)"></i>';
+            title.textContent = 'خسرت السباق';
+            title.className = 'res-title lose';
+            sfxLose();
+        }
+        detail.textContent = `زمن السباق: ${time.toFixed(1)} ثانية`;
+    }, 600);
+}
+
+function spawnConfetti(){
+    const colors = ['#ffd700','#e63946','#f4a261','#ffffff','#06d6a0'];
+    for(let i=0;i<60;i++){
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        const s = Math.random()*8+4;
+        el.style.cssText = `
+            width:${s}px; height:${s*1.5}px;
+            background:${colors[Math.floor(Math.random()*colors.length)]};
+            left:${Math.random()*100}%;
+            animation:confettiFall ${Math.random()*2+2.5}s ease-in forwards;
+            animation-delay:${Math.random()*.6}s;
+            transform:rotate(${Math.random()*360}deg);
+        `;
+        document.body.appendChild(el);
+        setTimeout(()=>el.remove(), 5000);
     }
-    
-    // بدء السباق الجديد
-    function startRace() {
-        if (raceActive) return;
-        // إعادة ضبط كامل
-        resetRace();     // هذا يغير الصعوبة ويعيد ضبط المسافات ويمسح أي إنترفال
-        // الآن نجهز السباق
-        raceActive = true;
-        startBtn.disabled = true;
-        playerDistance = 0;
-        aiDistance = 0;
-        updateCarPositions();
-        startTime = performance.now() / 1000;
-        resultDiv.innerHTML = "🏎️ انطلق! 🏎️";
-        
-        // بدء الحلقة
-        startRaceLoop();
-        
-        // تأمين إضافي: في حال علقت الحلقة، نضع مؤقت احتياطي (لكن الrequestAnimationFrame كافي)
-    }
-    
-    // ربط زر البدء
-    startBtn.addEventListener('click', startRace);
-    
-    // تهيئة أولية: تحديد سرعة اللاعب الأساسية وسرعة AI عشوائية
-    playerSpeed = BASE_SPEED;   // 10%/sec
-    setRandomDifficulty();      // AI speed يتغير
-    
-    // ضبط المواضع الأولية
-    playerDistance = 0;
-    aiDistance = 0;
-    updateCarPositions();
-    timerDisplay.innerHTML = "0.00";
-    resultDiv.innerHTML = "جاهز! اضغط بدء السباق";
-    
-    // تذكير المستخدم: يمكنه تغيير صور السيارات عبر تعديل src للصور في HTML أو JS
-    // بما أن روابط الصور الأصلية لا تعمل، أضفت روابط توضيحية، لكن المستخدم يستطيع تعديلها:
-    // لاستخدام صورك: قم بتغيير الرابط في src للصور التالية:
-    // الصورة الثابتة للاعب: document.getElementById('playerCarStatic').src = "رابط عربيتك"
-    // الصورة المتحركة للاعب: document.querySelector('#playerCarMover img').src = "رابط عربيتك"
-    // وكذلك للذكاء الاصطناعي.
-    console.log("البوت جاهز - يمكنك تغيير صور السيارات عبر الكود أو من خلال خاصية فحص العنصر");
+}
 </script>
 </body>
 </html>
