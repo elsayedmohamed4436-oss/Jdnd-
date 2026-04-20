@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>رالي بالي | سباق 10 ثوانٍ</title>
+    <title>بالي رالي | سباق الواقع</title>
     <style>
         * {
             margin: 0;
@@ -14,304 +14,167 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
-            background: radial-gradient(circle at 30% 20%, #0a2f1f, #02080c);
+            font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
+            background: #0a0c12;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
         }
 
+        /* حاوية اللعبة - تصميم رياضي قاتم واقعي */
         .game-container {
-            max-width: 650px;
+            max-width: 550px;
             width: 100%;
-            background: linear-gradient(145deg, #0e1620, #070b10);
-            border-radius: 70px;
+            background: #0f1117;
+            border-radius: 48px;
             overflow: hidden;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 200, 80, 0.7), 0 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 100, 0, 0.3);
         }
 
+        /* رأس الشاشة */
         .header {
-            background: linear-gradient(115deg, #d45a1a, #f39c12, #e67e22);
+            background: #080b10;
             padding: 14px 20px;
             text-align: center;
-            border-bottom: 3px solid #ffdd99;
-            box-shadow: inset 0 1px 6px rgba(255, 245, 180, 0.7), 0 6px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid #ff3a00;
         }
         .header h1 {
-            font-size: 36px;
-            font-weight: 900;
-            color: #fff5e0;
-            text-shadow: 0 3px 10px #a33500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff5500;
+            letter-spacing: 1px;
         }
         .header p {
-            font-size: 13px;
-            font-weight: 700;
-            color: #fff0c0;
+            font-size: 11px;
+            color: #888;
+            margin-top: 4px;
         }
 
-        .stats-bar {
+        /* منطقة العدادات - زي الصورة بالضبط */
+        .dashboard {
+            background: #06080c;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(16px);
-            padding: 12px 18px;
-            gap: 15px;
-            border-bottom: 1px solid rgba(255, 180, 70, 0.6);
-        }
-        .player-stat {
-            text-align: center;
-            flex: 1;
-            background: radial-gradient(ellipse at 30% 20%, #1f2c3a, #0a1018);
-            border-radius: 50px;
-            padding: 10px 6px;
-            box-shadow: inset 0 1px 3px rgba(255, 215, 0, 0.3), 0 8px 18px rgba(0, 0, 0, 0.5);
-            border: 1px solid #ffbc5e;
-        }
-        .player-name {
-            font-size: 15px;
-            color: #ffe1a0;
-            font-weight: bold;
-        }
-        .player-speed {
-            font-size: 46px;
-            font-weight: 900;
-            font-family: 'Orbitron', monospace;
-            color: #4effc3;
-            text-shadow: 0 0 12px #00ffaa;
-            line-height: 1.1;
-        }
-        .timer {
-            background: radial-gradient(circle at 40% 30%, #1e1e2c, #07070f);
-            color: #ffcf6e;
-            padding: 10px 14px;
-            border-radius: 55px;
-            font-size: 42px;
-            font-weight: 900;
-            font-family: 'Orbitron', monospace;
-            min-width: 130px;
-            text-align: center;
-            letter-spacing: 3px;
-            box-shadow: 0 0 20px #ffaa33, inset 0 0 5px gold;
+            gap: 12px;
+            border-bottom: 1px solid #1f1f2a;
         }
 
+        .player-card {
+            flex: 1;
+            background: #0c0f16;
+            border-radius: 28px;
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #2a2a35;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.03), 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .player-name {
+            font-size: 13px;
+            color: #ffaa66;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .player-speed {
+            font-size: 42px;
+            font-weight: 800;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #ffaa44;
+            text-shadow: 0 0 8px #ff6600;
+            line-height: 1.1;
+        }
+
+        .player-speed small {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .timer-box {
+            background: #000000;
+            padding: 10px 18px;
+            border-radius: 40px;
+            text-align: center;
+            min-width: 110px;
+            border: 1px solid #ff5500;
+            box-shadow: 0 0 12px rgba(255,85,0,0.3);
+        }
+
+        .timer-label {
+            font-size: 10px;
+            color: #ffaa66;
+            letter-spacing: 1px;
+        }
+
+        .timer-value {
+            font-size: 40px;
+            font-weight: 800;
+            font-family: monospace;
+            color: #ffaa33;
+            line-height: 1;
+        }
+
+        /* حلبة السباق - أسلوب واقعي داكن */
         .race-area {
             position: relative;
-            height: 550px;
+            height: 480px;
             overflow: hidden;
-            background: linear-gradient(180deg, #1a3a28 0%, #0d2818 100%);
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7);
+            background: #0e1419;
         }
+
         .road {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 40%, #2e2e2e, #181818);
+            background: #1a1e26;
         }
-        .road::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle at 30% 40%, #555 1px, transparent 1px);
-            background-size: 16px 16px;
-            opacity: 0.4;
-            pointer-events: none;
-        }
+
+        /* خطوط الطريق */
         .road-lines {
             position: absolute;
             left: 50%;
             top: 0;
             transform: translateX(-50%);
-            width: 8px;
+            width: 6px;
             height: 100%;
-            background: repeating-linear-gradient(to bottom, #fff9c4 0px, #fff9c4 40px, transparent 40px, transparent 80px);
-            animation: dashReal 0.2s linear infinite;
-            filter: drop-shadow(0 0 6px #ffcc44);
-            opacity: 0.95;
-        }
-        @keyframes dashReal {
-            from { transform: translateX(-50%) translateY(0); }
-            to { transform: translateX(-50%) translateY(80px); }
-        }
-        .finish-line {
-            position: absolute;
-            top: 45px;
-            left: 0;
-            right: 0;
-            height: 32px;
-            background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 25px, #1a1a2e 25px, #1a1a2e 50px);
-            z-index: 12;
-            box-shadow: 0 0 18px cyan, inset 0 2px 5px rgba(255, 255, 200, 0.8);
-            border-top: 3px solid #ffd966;
-            border-bottom: 3px solid #ffd966;
-        }
-        .finish-text {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #000000dd, #2a2a2add);
-            color: #ffd966;
-            padding: 5px 22px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: bold;
-            z-index: 13;
-            white-space: nowrap;
-            border: 1px solid #ffaa44;
-            box-shadow: 0 0 15px rgba(255, 200, 0, 0.7);
-            backdrop-filter: blur(4px);
+            background: repeating-linear-gradient(to bottom, #ffcc77 0px, #ffcc77 35px, transparent 35px, transparent 70px);
+            animation: moveLines 0.3s linear infinite;
+            opacity: 0.7;
         }
 
-        /* ========== نخيل واقعي جداً ========== */
-        .palm-tree {
-            position: absolute;
-            z-index: 4;
-            filter: drop-shadow(8px 12px 15px rgba(0, 0, 0, 0.4));
+        @keyframes moveLines {
+            from { transform: translateX(-50%) translateY(0); }
+            to { transform: translateX(-50%) translateY(70px); }
         }
-        
-        /* الجذع */
-        .palm-trunk {
+
+        /* خط النهاية */
+        .finish-line {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 18px;
-            height: 100px;
-            background: linear-gradient(90deg, #5a3a1a, #7a5230, #5a3a1a);
-            border-radius: 9px;
-            box-shadow: inset -2px 0 5px rgba(0,0,0,0.3), inset 2px 0 5px rgba(255,255,200,0.2);
-        }
-        
-        /* نسيج الجذع (خطوط) */
-        .palm-trunk::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(180deg, 
-                transparent 0px, transparent 8px,
-                rgba(0,0,0,0.15) 8px, rgba(0,0,0,0.15) 12px);
-            border-radius: 9px;
-        }
-        
-        /* الأوراق - الطبقة الخارجية */
-        .palm-leaves {
-            position: absolute;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 70px;
-        }
-        
-        .leaf {
-            position: absolute;
-            width: 45px;
-            height: 8px;
-            background: linear-gradient(135deg, #2d6a1f, #1a4a10);
-            border-radius: 0 20px 20px 0;
-            transform-origin: 0% 50%;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-        
-        .leaf::after {
-            content: "";
-            position: absolute;
-            top: 0;
+            top: 30px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #3d8a2f, #1a5a10);
-            border-radius: 0 20px 20px 0;
-            opacity: 0.6;
-        }
-        
-        /* الأوراق المتعددة بزوايا مختلفة */
-        .leaf1 { transform: rotate(-70deg) translateX(-5px); top: -5px; left: 35px; width: 55px; }
-        .leaf2 { transform: rotate(-45deg) translateX(-3px); top: 5px; left: 38px; width: 60px; }
-        .leaf3 { transform: rotate(-20deg); top: 15px; left: 40px; width: 58px; }
-        .leaf4 { transform: rotate(5deg); top: 22px; left: 40px; width: 55px; }
-        .leaf5 { transform: rotate(30deg); top: 20px; left: 38px; width: 52px; }
-        .leaf6 { transform: rotate(55deg); top: 12px; left: 35px; width: 48px; }
-        .leaf7 { transform: rotate(80deg); top: 0px; left: 32px; width: 45px; }
-        
-        /* أوراق علوية صغيرة */
-        .top-leaves {
-            position: absolute;
-            bottom: 95px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-        }
-        
-        .tleaf {
-            position: absolute;
-            width: 30px;
-            height: 6px;
-            background: linear-gradient(135deg, #4a9a30, #2a6a18);
-            border-radius: 0 15px 15px 0;
-            transform-origin: 0% 50%;
-        }
-        
-        .tleaf1 { transform: rotate(-50deg); top: 10px; left: 15px; }
-        .tleaf2 { transform: rotate(-15deg); top: 18px; left: 18px; }
-        .tleaf3 { transform: rotate(20deg); top: 18px; left: 15px; }
-        .tleaf4 { transform: rotate(55deg); top: 10px; left: 12px; }
-        
-        /* ثمار جوز الهند */
-        .coconut {
-            position: absolute;
-            bottom: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 18px;
-            background: radial-gradient(circle at 30% 30%, #8B5E3C, #5a3a1a);
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-        
-        .coconut::before {
-            content: "";
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 6px;
-            height: 6px;
-            background: #a07040;
-            border-radius: 50%;
-            opacity: 0.5;
-        }
-        
-        /* ظل النخلة */
-        .palm-shadow {
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 15px;
-            background: radial-gradient(ellipse, rgba(0,0,0,0.4), transparent);
-            border-radius: 50%;
+            right: 0;
+            height: 24px;
+            background: repeating-linear-gradient(90deg, #fff 0px, #fff 20px, #222 20px, #222 40px);
+            z-index: 10;
+            border-top: 2px solid #ffaa44;
+            border-bottom: 2px solid #ffaa44;
         }
 
         /* السيارات */
         .car {
             position: absolute;
-            width: 90px;
-            height: 130px;
+            width: 80px;
+            height: 120px;
             transition: bottom 0.02s linear;
-            z-index: 25;
-            filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.6));
+            z-index: 20;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
         }
         .car img {
             width: 100%;
@@ -319,449 +182,327 @@
             object-fit: contain;
         }
         .user-car {
-            left: 6%;
+            left: 5%;
         }
         .ai-car {
-            right: 6%;
+            right: 5%;
         }
-        .speed-indicator {
+
+        /* مؤشر السرعة على السيارة */
+        .speed-tag {
             position: absolute;
-            bottom: -30px;
+            bottom: -26px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 12px;
+            background: #000000cc;
+            backdrop-filter: blur(4px);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: bold;
-            color: #ffdd99;
-            background: linear-gradient(135deg, #000000cc, #1a1a2ecc);
-            padding: 4px 12px;
-            border-radius: 35px;
+            color: #ffaa44;
+            font-family: monospace;
             white-space: nowrap;
-            font-family: 'Orbitron', monospace;
-            backdrop-filter: blur(5px);
-            border: 1px solid #ffaa55;
+            border: 1px solid #ff6600;
         }
 
-        .dust-effect {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: radial-gradient(ellipse at 50% 100%, rgba(100, 80, 50, 0.5) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 20;
-        }
-
-        /* الشاشات */
-        .start-screen, .matching-screen, .result-screen {
+        /* شاشات البداية والنتيجة */
+        .overlay-screen {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(3, 10, 18, 0.97);
-            backdrop-filter: blur(22px);
+            background: rgba(6, 8, 12, 0.98);
+            backdrop-filter: blur(12px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 200;
-            color: white;
-            border-radius: 70px;
+            z-index: 100;
+            border-radius: 48px;
         }
+
         .hidden {
             display: none !important;
         }
+
         .btn {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-            color: white;
+            background: linear-gradient(135deg, #ff5500, #cc3300);
             border: none;
-            padding: 16px 48px;
-            font-size: 24px;
+            padding: 14px 42px;
+            font-size: 22px;
             font-weight: bold;
+            color: white;
             border-radius: 60px;
             cursor: pointer;
             margin: 16px;
-            box-shadow: 0 12px 28px rgba(230, 126, 34, 0.6);
-            transition: all 0.2s ease;
-            border: 1px solid #ffdd99;
+            box-shadow: 0 8px 20px rgba(255,85,0,0.4);
+            transition: 0.2s;
         }
-        .btn:hover {
-            transform: translateY(-3px);
-            background: linear-gradient(135deg, #ffb347, #f39c12);
-            box-shadow: 0 16px 32px rgba(230, 126, 34, 0.8);
+        .btn:active {
+            transform: scale(0.96);
         }
-        .matching-text {
-            font-size: 34px;
-            margin-bottom: 30px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ffd966, #f39c12);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulseGlow 0.9s infinite;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 1; text-shadow: 0 0 0 gold; }
-            50% { opacity: 0.8; text-shadow: 0 0 12px orange; }
-        }
-        .loader {
-            width: 70px;
-            height: 70px;
-            border: 6px solid rgba(255, 200, 100, 0.2);
-            border-top: 6px solid #f39c12;
-            border-radius: 50%;
-            animation: spinLoader 0.7s linear infinite;
-        }
-        @keyframes spinLoader {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .result-text {
-            font-size: 52px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 800;
-        }
-        .winner {
-            color: #ffd966;
-            text-shadow: 0 0 28px #f39c12;
-        }
-        .loser {
-            color: #ff6e6e;
-            text-shadow: 0 0 15px #ff4444;
-        }
+
         .stats {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 22px 40px;
-            border-radius: 55px;
-            margin: 18px;
+            background: #0c0f16;
+            padding: 20px 32px;
+            border-radius: 40px;
             text-align: center;
-            backdrop-filter: blur(12px);
-            border: 1px solid #ffb347;
+            border: 1px solid #ff5500;
+            margin: 16px;
         }
         .stats div {
-            margin: 12px 0;
-            font-size: 20px;
-            font-weight: 500;
+            margin: 10px 0;
+            font-size: 18px;
+            color: #ddd;
         }
         .stats span {
-            color: #ffd966;
+            color: #ffaa44;
             font-weight: bold;
-            font-size: 26px;
+            font-size: 24px;
         }
+
         .total-wins {
-            background: linear-gradient(90deg, #0f172a, #1a1f33);
-            padding: 14px;
+            background: #06080c;
+            padding: 12px;
             text-align: center;
-            font-size: 16px;
-            color: #ffda88;
-            border-top: 2px solid #f39c12;
-            font-weight: bold;
+            font-size: 14px;
+            color: #ffaa66;
+            border-top: 1px solid #2a2a35;
         }
         .total-wins span {
-            font-weight: 800;
-            font-size: 22px;
-            margin: 0 6px;
-            color: #ffb347;
+            color: #ff5500;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #333;
+            border-top: 4px solid #ff5500;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <div class="header">
-            <h1>🏁 بالي رالي 🏁</h1>
-            <p>⚡ سباق سريع - 10 ثوانٍ فقط ⚡</p>
+<div class="game-container">
+    <div class="header">
+        <h1>🏁 بالي رالي 🏁</h1>
+        <p>RALLY BALI • سرعة ثابتة • 10 ثوان</p>
+    </div>
+
+    <div class="dashboard">
+        <div class="player-card">
+            <div class="player-name">🏎️ أنت</div>
+            <div class="player-speed" id="userSpeed">0<small>km/h</small></div>
         </div>
-
-        <div class="stats-bar">
-            <div class="player-stat">
-                <div class="player-name">🏎️ أنت</div>
-                <div class="player-speed" id="userSpeed">0</div>
-            </div>
-            <div class="timer" id="timer">10.00</div>
-            <div class="player-stat">
-                <div class="player-name">🤖 الخصم</div>
-                <div class="player-speed" id="aiSpeed">0</div>
-            </div>
+        <div class="timer-box">
+            <div class="timer-label">⏱️ الوقت</div>
+            <div class="timer-value" id="timer">10.00</div>
         </div>
-
-        <div class="race-area">
-            <div class="road">
-                <div class="road-lines"></div>
-                <div class="finish-line"></div>
-                <div class="finish-text">🏁 النهاية 🏁</div>
-                
-                <!-- نخيل واقعي - اليسار -->
-                <div class="palm-tree" style="left: 5px; bottom: 0; width: 80px; height: 140px;">
-                    <div class="palm-shadow"></div>
-                    <div class="palm-trunk" style="height: 110px;"></div>
-                    <div class="palm-leaves">
-                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
-                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
-                        <div class="leaf leaf7"></div>
-                    </div>
-                    <div class="top-leaves">
-                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
-                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
-                    </div>
-                    <div class="coconut"></div>
-                </div>
-
-                <!-- نخيل واقعي - اليمين 1 -->
-                <div class="palm-tree" style="right: 5px; bottom: 30px; width: 80px; height: 130px;">
-                    <div class="palm-shadow"></div>
-                    <div class="palm-trunk" style="height: 100px;"></div>
-                    <div class="palm-leaves">
-                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
-                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
-                        <div class="leaf leaf7"></div>
-                    </div>
-                    <div class="top-leaves">
-                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
-                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
-                    </div>
-                    <div class="coconut"></div>
-                </div>
-
-                <!-- نخيل واقعي - اليسار 2 -->
-                <div class="palm-tree" style="left: 5px; bottom: 200px; width: 70px; height: 120px;">
-                    <div class="palm-shadow"></div>
-                    <div class="palm-trunk" style="height: 95px;"></div>
-                    <div class="palm-leaves">
-                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
-                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
-                        <div class="leaf leaf7"></div>
-                    </div>
-                    <div class="top-leaves">
-                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
-                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
-                    </div>
-                    <div class="coconut"></div>
-                </div>
-
-                <!-- نخيل واقعي - اليمين 2 -->
-                <div class="palm-tree" style="right: 5px; bottom: 380px; width: 75px; height: 125px;">
-                    <div class="palm-shadow"></div>
-                    <div class="palm-trunk" style="height: 100px;"></div>
-                    <div class="palm-leaves">
-                        <div class="leaf leaf1"></div><div class="leaf leaf2"></div><div class="leaf leaf3"></div>
-                        <div class="leaf leaf4"></div><div class="leaf leaf5"></div><div class="leaf leaf6"></div>
-                        <div class="leaf leaf7"></div>
-                    </div>
-                    <div class="top-leaves">
-                        <div class="tleaf tleaf1"></div><div class="tleaf tleaf2"></div>
-                        <div class="tleaf tleaf3"></div><div class="tleaf tleaf4"></div>
-                    </div>
-                    <div class="coconut"></div>
-                </div>
-            </div>
-            <div class="dust-effect"></div>
-
-            <div class="car user-car" id="userCar">
-                <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png" alt="سيارتك">
-                <div class="speed-indicator" id="userSpeedIndicator">🚀 0 كم/س</div>
-            </div>
-
-            <div class="car ai-car" id="aiCar">
-                <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b2be5445-fcb1-4ac9-83a7-1e862e1a6490.png" alt="سيارة الخصم">
-                <div class="speed-indicator" id="aiSpeedIndicator">⚡ 0 كم/س</div>
-            </div>
-        </div>
-
-        <div class="start-screen" id="startScreen">
-            <h1 style="font-size: 60px; margin-bottom: 15px;">🏎️💨</h1>
-            <h2 style="margin-bottom: 20px;">سباق 10 ثوانٍ فقط!</h2>
-            <p style="font-size: 18px; margin-bottom: 30px; text-align: center; padding: 0 30px;">
-                ⏱️ كل سباق يستمر 10 ثوانٍ بالضبط<br>
-                صاحب أقصى مسافة يفوز!
-            </p>
-            <button class="btn" onclick="startMatching()">🚦 ابدأ السباق 🚦</button>
-        </div>
-
-        <div class="matching-screen hidden" id="matchingScreen">
-            <div class="matching-text">🏁 جاري البحث عن منافس...</div>
-            <div class="loader"></div>
-        </div>
-
-        <div class="result-screen hidden" id="resultScreen">
-            <div class="result-text" id="resultText"></div>
-            <div class="stats">
-                <div>⏱️ زمن السباق: <span id="resultTime">10.00</span> ثانية</div>
-                <div>📏 المسافة التي قطعتها: <span id="resultUserDist">0</span> متر</div>
-                <div>📏 مسافة الخصم: <span id="resultAiDist">0</span> متر</div>
-                <div>🏁 سرعتك: <span id="resultUserSpeed">0</span> كم/س</div>
-                <div>🏁 سرعة الخصم: <span id="resultAiSpeed">0</span> كم/س</div>
-            </div>
-            <button class="btn" onclick="resetGame()">🔄 سباق جديد 🔄</button>
-        </div>
-
-        <div class="total-wins">
-            🏆 إجمالي الانتصارات: <span id="winsCount">0</span> 🏆 | 
-            🏁 عدد السباقات: <span id="racesCount">0</span> 🏁
+        <div class="player-card">
+            <div class="player-name">🤖 الخصم</div>
+            <div class="player-speed" id="aiSpeed">0<small>km/h</small></div>
         </div>
     </div>
 
-    <script>
-        // ========== متغيرات السباق ==========
-        let userFixedSpeed = 0;
-        let aiFixedSpeed = 0;
-        let userDistance = 0;
-        let aiDistance = 0;
-        let raceInterval;
-        let timerInterval;
-        let startTime = 0;
-        let raceActive = false;
-        let raceFinished = false;
-        
-        const RACE_DURATION = 10;
-        const MAX_DISTANCE = 1000;
-        
-        function loadStats() {
-            const wins = localStorage.getItem('rallyWins') || 0;
-            const races = localStorage.getItem('rallyRaces') || 0;
-            document.getElementById('winsCount').textContent = wins;
-            document.getElementById('racesCount').textContent = races;
-        }
-        
-        function saveStats(won) {
-            let wins = parseInt(localStorage.getItem('rallyWins') || 0);
-            let races = parseInt(localStorage.getItem('rallyRaces') || 0);
-            races++;
-            if (won) wins++;
-            localStorage.setItem('rallyWins', wins);
-            localStorage.setItem('rallyRaces', races);
-            document.getElementById('winsCount').textContent = wins;
-            document.getElementById('racesCount').textContent = races;
-        }
-        
-        function updateCarPositions() {
-            const userY = (userDistance / MAX_DISTANCE) * 500;
-            const aiY = (aiDistance / MAX_DISTANCE) * 500;
-            document.getElementById('userCar').style.bottom = `${userY}px`;
-            document.getElementById('aiCar').style.bottom = `${aiY}px`;
-        }
-        
-        function generateFixedSpeed() {
-            const userSpd = Math.floor(Math.random() * 81) + 100;
-            const aiSpd = Math.floor(Math.random() * 81) + 100;
-            return { user: userSpd, ai: aiSpd };
-        }
-        
-        function startMatching() {
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('matchingScreen').classList.remove('hidden');
-            
-            setTimeout(() => {
-                document.getElementById('matchingScreen').classList.add('hidden');
-                startRace();
-            }, 1300);
-        }
-        
-        function startRace() {
-            const speeds = generateFixedSpeed();
-            userFixedSpeed = speeds.user;
-            aiFixedSpeed = speeds.ai;
-            
-            document.getElementById('userSpeed').textContent = userFixedSpeed;
-            document.getElementById('aiSpeed').textContent = aiFixedSpeed;
-            document.getElementById('userSpeedIndicator').textContent = `🚀 ${userFixedSpeed} كم/س`;
-            document.getElementById('aiSpeedIndicator').textContent = `⚡ ${aiFixedSpeed} كم/س`;
-            
-            userDistance = 0;
-            aiDistance = 0;
-            updateCarPositions();
-            
-            raceActive = true;
-            raceFinished = false;
-            startTime = performance.now();
-            
-            timerInterval = setInterval(() => {
-                if (!raceActive && raceFinished) return;
-                const elapsed = (performance.now() - startTime) / 1000;
-                const remaining = Math.max(0, RACE_DURATION - elapsed);
-                document.getElementById('timer').textContent = `${remaining.toFixed(2)}`;
-                
-                if (remaining <= 0 && !raceFinished) {
-                    endRace();
-                }
-            }, 30);
-            
-            raceInterval = setInterval(() => {
-                if (!raceActive || raceFinished) return;
-                
-                const deltaTime = 0.038;
-                const speedToDistance = 0.2777 * deltaTime;
-                
-                userDistance = Math.min(userDistance + (userFixedSpeed * speedToDistance), MAX_DISTANCE);
-                aiDistance = Math.min(aiDistance + (aiFixedSpeed * speedToDistance), MAX_DISTANCE);
-                
-                updateCarPositions();
-            }, 38);
-        }
-        
-        function endRace() {
-            if (raceFinished) return;
-            
-            raceFinished = true;
-            raceActive = false;
-            clearInterval(raceInterval);
-            clearInterval(timerInterval);
-            
-            const userWon = userDistance > aiDistance;
-            const isTie = Math.abs(userDistance - aiDistance) < 0.1;
-            
-            let resultMsg = '';
-            
-            if (isTie) {
-                resultMsg = '🤝 تعادل مثير! 🤝';
-                let races = parseInt(localStorage.getItem('rallyRaces') || 0);
-                races++;
-                localStorage.setItem('rallyRaces', races);
-                document.getElementById('winsCount').textContent = localStorage.getItem('rallyWins') || 0;
-                document.getElementById('racesCount').textContent = races;
-            } else if (userWon) {
-                resultMsg = '🏆 فوز! أنت الأسرع 🏆';
-                saveStats(true);
-            } else {
-                resultMsg = '💥 خسارة... الخصم كان أسرع 💥';
-                saveStats(false);
+    <div class="race-area">
+        <div class="road">
+            <div class="road-lines"></div>
+            <div class="finish-line"></div>
+        </div>
+
+        <div class="car user-car" id="userCar">
+            <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png" alt="سيارتك">
+            <div class="speed-tag" id="userTag">0 km/h</div>
+        </div>
+        <div class="car ai-car" id="aiCar">
+            <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/b2be5445-fcb1-4ac9-83a7-1e862e1a6490.png" alt="سيارة الخصم">
+            <div class="speed-tag" id="aiTag">0 km/h</div>
+        </div>
+    </div>
+
+    <!-- شاشة البداية -->
+    <div class="overlay-screen" id="startScreen">
+        <h1 style="font-size: 48px; margin-bottom: 10px;">🏎️💨</h1>
+        <p style="margin-bottom: 30px; text-align: center; padding: 0 30px;">سباق حقيقي • 10 ثوان فقط • السرعة ثابتة</p>
+        <button class="btn" onclick="startMatching()">🚦 انطلق 🚦</button>
+    </div>
+
+    <!-- شاشة البحث -->
+    <div class="overlay-screen hidden" id="matchingScreen">
+        <div class="loader"></div>
+        <p style="margin-top: 25px; color: #ffaa66;">جاري تجهيز المنافس...</p>
+    </div>
+
+    <!-- شاشة النتيجة -->
+    <div class="overlay-screen hidden" id="resultScreen">
+        <div id="resultText" style="font-size: 40px; font-weight: bold; margin-bottom: 20px;"></div>
+        <div class="stats">
+            <div>⏱️ الزمن: <span id="resultTime">10.00</span> ث</div>
+            <div>📏 مسافتك: <span id="resultUserDist">0</span> م</div>
+            <div>📏 مسافة الخصم: <span id="resultAiDist">0</span> م</div>
+            <div>🏁 سرعتك: <span id="resultUserSpeed">0</span> كم/س</div>
+            <div>🏁 سرعة الخصم: <span id="resultAiSpeed">0</span> كم/س</div>
+        </div>
+        <button class="btn" onclick="resetGame()">🔄 سباق جديد</button>
+    </div>
+
+    <div class="total-wins">
+        🏆 الانتصارات: <span id="winsCount">0</span> &nbsp;|&nbsp; 🏁 السباقات: <span id="racesCount">0</span>
+    </div>
+</div>
+
+<script>
+    // إعدادات السباق
+    let userSpeed = 0, aiSpeed = 0;
+    let userDist = 0, aiDist = 0;
+    let raceInterval, timerInterval;
+    let startTime = 0;
+    let raceActive = false, raceFinished = false;
+    const RACE_DURATION = 10;
+    const MAX_DIST = 1000;
+
+    function loadStats() {
+        let wins = localStorage.getItem('rallyWins') || 0;
+        let races = localStorage.getItem('rallyRaces') || 0;
+        document.getElementById('winsCount').innerText = wins;
+        document.getElementById('racesCount').innerText = races;
+    }
+
+    function saveStats(won) {
+        let wins = parseInt(localStorage.getItem('rallyWins') || 0);
+        let races = parseInt(localStorage.getItem('rallyRaces') || 0);
+        races++;
+        if (won) wins++;
+        localStorage.setItem('rallyWins', wins);
+        localStorage.setItem('rallyRaces', races);
+        document.getElementById('winsCount').innerText = wins;
+        document.getElementById('racesCount').innerText = races;
+    }
+
+    function updateCarPosition() {
+        let userY = (userDist / MAX_DIST) * 430;
+        let aiY = (aiDist / MAX_DIST) * 430;
+        document.getElementById('userCar').style.bottom = `${userY}px`;
+        document.getElementById('aiCar').style.bottom = `${aiY}px`;
+    }
+
+    function generateSpeed() {
+        let u = Math.floor(Math.random() * 70) + 90;   // 90-160
+        let a = Math.floor(Math.random() * 70) + 90;
+        return { user: u, ai: a };
+    }
+
+    function startMatching() {
+        document.getElementById('startScreen').classList.add('hidden');
+        document.getElementById('matchingScreen').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('matchingScreen').classList.add('hidden');
+            startRace();
+        }, 1200);
+    }
+
+    function startRace() {
+        let speeds = generateSpeed();
+        userSpeed = speeds.user;
+        aiSpeed = speeds.ai;
+
+        document.getElementById('userSpeed').innerHTML = userSpeed + '<small>km/h</small>';
+        document.getElementById('aiSpeed').innerHTML = aiSpeed + '<small>km/h</small>';
+        document.getElementById('userTag').innerText = userSpeed + ' km/h';
+        document.getElementById('aiTag').innerText = aiSpeed + ' km/h';
+
+        userDist = 0;
+        aiDist = 0;
+        updateCarPosition();
+        raceActive = true;
+        raceFinished = false;
+        startTime = performance.now();
+
+        // مؤقت العد التنازلي
+        timerInterval = setInterval(() => {
+            if (!raceActive && raceFinished) return;
+            let elapsed = (performance.now() - startTime) / 1000;
+            let remaining = Math.max(0, RACE_DURATION - elapsed);
+            document.getElementById('timer').innerText = remaining.toFixed(2);
+            if (remaining <= 0 && !raceFinished) {
+                endRace();
             }
-            
-            document.getElementById('resultText').textContent = resultMsg;
-            document.getElementById('resultText').className = `result-text ${userWon && !isTie ? 'winner' : (isTie ? '' : 'loser')}`;
-            document.getElementById('resultTime').textContent = RACE_DURATION.toFixed(2);
-            document.getElementById('resultUserDist').textContent = Math.floor(userDistance);
-            document.getElementById('resultAiDist').textContent = Math.floor(aiDistance);
-            document.getElementById('resultUserSpeed').textContent = userFixedSpeed;
-            document.getElementById('resultAiSpeed').textContent = aiFixedSpeed;
-            
-            setTimeout(() => {
-                document.getElementById('resultScreen').classList.remove('hidden');
-            }, 150);
+        }, 30);
+
+        // حركة السيارات
+        raceInterval = setInterval(() => {
+            if (!raceActive || raceFinished) return;
+            let delta = 0.038;
+            let factor = 0.2777 * delta;
+            userDist = Math.min(userDist + userSpeed * factor, MAX_DIST);
+            aiDist = Math.min(aiDist + aiSpeed * factor, MAX_DIST);
+            updateCarPosition();
+        }, 38);
+    }
+
+    function endRace() {
+        if (raceFinished) return;
+        raceFinished = true;
+        raceActive = false;
+        clearInterval(raceInterval);
+        clearInterval(timerInterval);
+
+        let userWon = userDist > aiDist;
+        let isTie = Math.abs(userDist - aiDist) < 0.5;
+        let resultMsg = '';
+        if (isTie) {
+            resultMsg = '🤝 تعادل!';
+            let races = parseInt(localStorage.getItem('rallyRaces') || 0) + 1;
+            localStorage.setItem('rallyRaces', races);
+            document.getElementById('winsCount').innerText = localStorage.getItem('rallyWins') || 0;
+            document.getElementById('racesCount').innerText = races;
+        } else if (userWon) {
+            resultMsg = '🏆 فوز! أنت الأسرع 🏆';
+            saveStats(true);
+        } else {
+            resultMsg = '💥 خسارة... سرعة الخصم أعلى 💥';
+            saveStats(false);
         }
-        
-        function resetGame() {
-            if (raceInterval) clearInterval(raceInterval);
-            if (timerInterval) clearInterval(timerInterval);
-            
-            raceActive = false;
-            raceFinished = true;
-            
-            document.getElementById('resultScreen').classList.add('hidden');
-            document.getElementById('startScreen').classList.remove('hidden');
-            
-            userDistance = 0;
-            aiDistance = 0;
-            updateCarPositions();
-            
-            document.getElementById('userSpeed').textContent = '0';
-            document.getElementById('aiSpeed').textContent = '0';
-            document.getElementById('timer').textContent = '10.00';
-            document.getElementById('userSpeedIndicator').textContent = '🚀 0 كم/س';
-            document.getElementById('aiSpeedIndicator').textContent = '⚡ 0 كم/س';
-        }
-        
-        loadStats();
-    </script>
+
+        let resultDiv = document.getElementById('resultText');
+        resultDiv.innerText = resultMsg;
+        resultDiv.style.color = userWon && !isTie ? '#ffaa44' : (isTie ? '#aaa' : '#ff6666');
+        document.getElementById('resultTime').innerText = RACE_DURATION.toFixed(2);
+        document.getElementById('resultUserDist').innerText = Math.floor(userDist);
+        document.getElementById('resultAiDist').innerText = Math.floor(aiDist);
+        document.getElementById('resultUserSpeed').innerText = userSpeed;
+        document.getElementById('resultAiSpeed').innerText = aiSpeed;
+
+        setTimeout(() => {
+            document.getElementById('resultScreen').classList.remove('hidden');
+        }, 100);
+    }
+
+    function resetGame() {
+        if (raceInterval) clearInterval(raceInterval);
+        if (timerInterval) clearInterval(timerInterval);
+        raceActive = false;
+        raceFinished = true;
+        document.getElementById('resultScreen').classList.add('hidden');
+        document.getElementById('startScreen').classList.remove('hidden');
+        userDist = 0; aiDist = 0;
+        updateCarPosition();
+        document.getElementById('userSpeed').innerHTML = '0<small>km/h</small>';
+        document.getElementById('aiSpeed').innerHTML = '0<small>km/h</small>';
+        document.getElementById('timer').innerText = '10.00';
+        document.getElementById('userTag').innerText = '0 km/h';
+        document.getElementById('aiTag').innerText = '0 km/h';
+    }
+
+    loadStats();
+</script>
 </body>
 </html>
