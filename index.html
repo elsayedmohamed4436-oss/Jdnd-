@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>بالي رالي | نظام سباق الواقع الليلي</title>
+    <title>بالي رالي | سباق أفقي | BALI RALLY</title>
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
             background: #03060b;
             min-height: 100vh;
             display: flex;
@@ -23,97 +23,82 @@
             padding: 16px;
         }
 
-        /* حاوية اللعبة الرئيسية - بنية السباق الحديثة */
         .game-container {
-            max-width: 540px;
+            max-width: 560px;
             width: 100%;
             background: #0a0f1a;
             border-radius: 48px;
             overflow: hidden;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 0 1px rgba(255, 85, 0, 0.25);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 0 1px rgba(255, 85, 0, 0.3);
             position: relative;
         }
 
-        /* شريط علوي أنيق */
         .header {
             background: rgba(8, 12, 20, 0.95);
             backdrop-filter: blur(10px);
-            padding: 14px 20px;
+            padding: 12px 16px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 100, 0, 0.4);
+            border-bottom: 1px solid #ff884d50;
         }
         .header h1 {
             font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffaa44, #ff5500);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffbb66, #ff5500);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 1px;
-        }
-        .header p {
-            font-size: 10px;
-            color: #ffaa77;
-            margin-top: 4px;
         }
 
-        /* منطقة البيانات العددية على غرار الصورة المرفقة */
+        /* لوحة الإحصائيات العليا */
         .stats-panel {
             background: #070b12;
-            padding: 14px 18px;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
             gap: 12px;
             border-bottom: 1px solid #1e2a3a;
         }
         .stat-block {
             background: #0f141f;
             border-radius: 28px;
-            padding: 8px 16px;
+            padding: 6px 12px;
             text-align: center;
             flex: 1;
             border: 1px solid #2a3548;
-            box-shadow: inset 0 1px 2px rgba(255,255,255,0.02), 0 5px 10px rgba(0,0,0,0.3);
         }
         .stat-label {
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: uppercase;
+            font-size: 10px;
             color: #8a9bb5;
             letter-spacing: 1px;
         }
         .stat-value {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
-            font-family: 'Monaco', 'Courier New', monospace;
+            font-family: monospace;
             color: #ffcc55;
-            text-shadow: 0 0 6px #ff6600;
+            text-shadow: 0 0 4px #ff6600;
             line-height: 1;
-            direction: ltr;
         }
         .stat-unit {
-            font-size: 12px;
+            font-size: 11px;
             color: #ffaa66;
         }
 
-        /* حاوية السباق بخلفية جبلية وطريق واقعي */
+        /* منطقة السباق - خلفية ثابتة */
         .race-area {
             position: relative;
-            height: 460px;
+            height: 400px;
             overflow: hidden;
-            background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/21b6e3b0-0db2-490e-bd9a-c1acd4b87e60.jpg') no-repeat center bottom;
+            background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/21b6e3b0-0db2-490e-bd9a-c1acd4b87e60.jpg') no-repeat center center;
             background-size: cover;
-            background-color: #0a121f;
         }
 
-        /* إخفاء العناصر القديمة غير المرغوبة */
+        /* إخفاء العناصر القديمة */
         .sky-background, .stars, .city-lights, .trees, .street-lights {
             display: none;
         }
 
-        /* الطريق شفاف مع خطوط سباق ديناميكية */
+        /* الطريق - شفاف */
         .road {
             position: absolute;
             width: 100%;
@@ -122,81 +107,85 @@
             z-index: 5;
         }
 
-        .road-lines {
+        /* خطوط أفقية متحركة لإحساس السرعة */
+        .moving-lines {
             position: absolute;
-            left: 50%;
             top: 0;
-            transform: translateX(-50%);
-            width: 4px;
+            right: 0;
+            width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(to bottom, #ffdd99 0px, #ffdd99 22px, transparent 22px, transparent 50px);
-            animation: moveLines 0.2s linear infinite;
-            opacity: 0.85;
+            background: repeating-linear-gradient(90deg, 
+                transparent, 
+                transparent 55px, 
+                rgba(255, 200, 100, 0.4) 55px, 
+                rgba(255, 200, 100, 0.4) 70px);
+            animation: slideLines 0.25s linear infinite;
+            pointer-events: none;
             z-index: 6;
         }
 
-        @keyframes moveLines {
-            from { transform: translateX(-50%) translateY(0); }
-            to { transform: translateX(-50%) translateY(50px); }
+        @keyframes slideLines {
+            from { transform: translateX(0); }
+            to { transform: translateX(-75px); }
         }
 
-        /* حواجز جانبية عصرية */
-        .barrier-left {
+        /* حواجز جانبية */
+        .barrier-left, .barrier-right {
             position: absolute;
-            left: 12px;
             top: 0;
-            width: 5px;
+            width: 8px;
             height: 100%;
-            background: repeating-linear-gradient(to bottom, #ffaa44, #ffaa44 18px, #b65f00 18px, #b65f00 36px);
-            z-index: 6;
-            opacity: 0.7;
-        }
-        .barrier-right {
-            position: absolute;
-            right: 12px;
-            top: 0;
-            width: 5px;
-            height: 100%;
-            background: repeating-linear-gradient(to bottom, #ffaa44, #ffaa44 18px, #b65f00 18px, #b65f00 36px);
+            background: repeating-linear-gradient(to bottom, #ffaa44, #ffaa44 20px, #b65f00 20px, #b65f00 40px);
             z-index: 6;
             opacity: 0.7;
         }
+        .barrier-left { left: 10px; }
+        .barrier-right { right: 10px; }
 
-        /* خط النهاية مع تأثير مضيء */
+        /* خط النهاية - عمودي على الجانب الأيسر */
         .finish-line {
             position: absolute;
-            top: 28px;
-            left: 0;
-            right: 0;
-            height: 18px;
-            background: repeating-linear-gradient(90deg, #fff 0px, #fff 18px, #111 18px, #111 36px);
+            top: 0;
+            left: 8%;
+            width: 10px;
+            height: 100%;
+            background: repeating-linear-gradient(180deg, #fff 0px, #fff 20px, #000 20px, #000 40px);
             z-index: 10;
-            border-top: 2px solid #ffaa44;
-            border-bottom: 2px solid #ffaa44;
-            box-shadow: 0 0 12px #ffaa44;
+            box-shadow: 0 0 15px #ffaa44;
         }
         .finish-text {
             position: absolute;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000000aa;
-            backdrop-filter: blur(8px);
-            padding: 2px 12px;
-            border-radius: 30px;
-            font-size: 9px;
+            top: 50%;
+            left: 8%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            background: #000000bb;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
             font-weight: bold;
             color: #ffcc66;
             white-space: nowrap;
-            z-index: 10;
+            z-index: 11;
         }
 
-        /* السيارات - حجم مناسب ومنظور جبلي */
+        /* نقطة البداية (يمين) */
+        .start-line {
+            position: absolute;
+            top: 0;
+            right: 5%;
+            width: 6px;
+            height: 100%;
+            background: #ffaa44aa;
+            z-index: 9;
+            border-right: 2px solid #ffcc66;
+        }
+
+        /* السيارات - تتحرك أفقياً من اليمين إلى اليسار باتجاه خط النهاية */
         .car {
             position: absolute;
-            width: 72px;
-            height: 110px;
-            transition: bottom 0.02s linear;
+            width: 70px;
+            height: 100px;
+            transition: left 0.02s linear;
             z-index: 20;
             filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
         }
@@ -205,39 +194,43 @@
             height: 100%;
             object-fit: contain;
         }
+        /* السيارة الأولى (أسفل الطريق) */
         .user-car {
-            left: 5%;
+            bottom: 50px;
+            right: 5%;
+            left: auto;
             z-index: 21;
         }
+        /* السيارة الثانية (أعلى قليلاً) */
         .ai-car {
+            bottom: 160px;
             right: 5%;
+            left: auto;
             z-index: 21;
         }
         .speed-tag {
             position: absolute;
-            bottom: -24px;
+            top: -28px;
             left: 50%;
             transform: translateX(-50%);
             background: #000000cc;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(6px);
             padding: 3px 10px;
             border-radius: 24px;
             font-size: 11px;
             font-weight: bold;
             color: #ffdd99;
-            font-family: monospace;
             white-space: nowrap;
             border: 1px solid #ff884d;
         }
 
-        /* العدادات السفلية بشكل DISTANCE / POSITION كما في الصورة */
+        /* المقاييس السفلية */
         .race-metrics {
             background: #060b12e0;
             backdrop-filter: blur(8px);
-            padding: 12px 20px;
+            padding: 10px 16px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             border-top: 1px solid #ff884d30;
             border-bottom: 1px solid #1e2a3a;
         }
@@ -246,21 +239,22 @@
             flex: 1;
         }
         .metric-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #9bb2d0;
-            letter-spacing: 1.5px;
-            font-weight: 500;
         }
         .metric-value {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 800;
             font-family: monospace;
             color: #ffcc66;
-            direction: ltr;
         }
-        .metric-unit {
-            font-size: 11px;
-            color: #ffaa66;
+
+        .total-wins {
+            background: #04080e;
+            text-align: center;
+            padding: 10px;
+            font-size: 13px;
+            color: #ffaa77;
         }
 
         /* شاشات البداية والنتيجة */
@@ -270,7 +264,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(3, 6, 12, 0.96);
+            background: rgba(3, 6, 12, 0.97);
             backdrop-filter: blur(20px);
             display: flex;
             flex-direction: column;
@@ -279,46 +273,32 @@
             z-index: 100;
             border-radius: 48px;
         }
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
         .btn {
             background: linear-gradient(145deg, #ff5500, #c53a00);
             border: none;
-            padding: 14px 40px;
-            font-size: 20px;
+            padding: 12px 36px;
+            font-size: 18px;
             font-weight: bold;
             color: white;
             border-radius: 60px;
             cursor: pointer;
-            margin: 12px;
-            box-shadow: 0 6px 18px #ff5500aa;
-            transition: 0.08s linear;
+            margin: 10px;
+            box-shadow: 0 5px 15px #ff5500aa;
         }
-        .btn:active {
-            transform: scale(0.96);
-        }
-        .stats {
+        .btn:active { transform: scale(0.96); }
+        .stats-box {
             background: #0b111ccc;
-            padding: 20px 26px;
-            border-radius: 48px;
+            padding: 16px 22px;
+            border-radius: 40px;
             border: 1px solid #ff884d;
-            width: 80%;
-            text-align: center;
+            width: 85%;
         }
-        .stats div {
+        .stats-box div {
             display: flex;
             justify-content: space-between;
-            margin: 8px 0;
+            margin: 6px 0;
             color: #ccdeff;
-        }
-        .total-wins {
-            background: #04080e;
-            text-align: center;
-            padding: 10px;
-            font-size: 13px;
-            color: #ffaa77;
-            border-top: 1px solid #2a3342;
         }
         .loader {
             width: 45px;
@@ -349,11 +329,10 @@
 <body>
 <div class="game-container" id="gameContainer">
     <div class="header">
-        <h1>🏁 BALI RALLY • NIGHT STAGE 🏁</h1>
-        <p>طريق الجبل • سباق الواقع</p>
+        <h1>🏁 BALI RALLY • DRAG RACE 🏁</h1>
     </div>
 
-    <!-- لوحة الأرقام الرئيسية KM/H و TIMER كما في التصميم -->
+    <!-- لوحة السرعة والوقت -->
     <div class="stats-panel">
         <div class="stat-block">
             <div class="stat-label">🏎️ SPEED</div>
@@ -369,9 +348,8 @@
         </div>
     </div>
 
-    <!-- منطقة السباق الرئيسية -->
+    <!-- منطقة السباق -->
     <div class="race-area">
-        <!-- العناصر القديمة مخفية تلقائياً بالـ CSS -->
         <div class="sky-background"></div>
         <div class="stars"></div>
         <div class="city-lights"></div>
@@ -381,9 +359,10 @@
         <div class="road">
             <div class="barrier-left"></div>
             <div class="barrier-right"></div>
-            <div class="road-lines"></div>
+            <div class="moving-lines"></div>
+            <div class="start-line"></div>
             <div class="finish-line"></div>
-            <div class="finish-text">🏁 TERMINAL  🏁</div>
+            <div class="finish-text">🏁 FINISH 🏁</div>
         </div>
 
         <div class="car user-car" id="userCar">
@@ -396,11 +375,11 @@
         </div>
     </div>
 
-    <!-- قسم المسافة والترتيب (مستوحى من الصورة: DISTANCE / POSITION) -->
+    <!-- المسافة المتبقية والمركز -->
     <div class="race-metrics">
         <div class="metric">
-            <div class="metric-label">DISTANCE</div>
-            <div class="metric-value" id="distanceMeters">0<span class="metric-unit">M</span></div>
+            <div class="metric-label">DISTANCE TO FINISH</div>
+            <div class="metric-value" id="distanceLeft">0<span class="stat-unit">m</span></div>
         </div>
         <div class="metric">
             <div class="metric-label">POSITION</div>
@@ -408,16 +387,19 @@
         </div>
         <div class="metric">
             <div class="metric-label">TOP SPEED</div>
-            <div class="metric-value" id="topSpeedDisplay">0<span class="metric-unit">km/h</span></div>
+            <div class="metric-value" id="topSpeedDisplay">0<span class="stat-unit">km/h</span></div>
         </div>
+    </div>
+
+    <div class="total-wins">
+        🏆 ANTON انتصارات: <span id="winsCount">0</span> &nbsp;|&nbsp; 🏁 سباقات: <span id="racesCount">0</span>
     </div>
 
     <!-- شاشات التفاعل -->
     <div class="overlay-screen" id="startScreen">
-        <h2 style="font-size: 34px; margin-bottom: 10px;">🏎️🌙</h2>
-        <p style="margin-bottom: 18px; text-align: center; padding: 0 30px; color: #ccddff;">بالي رالي • تحدٍ جبلي • 12 ثانية إثارة</p>
-        <button class="btn" onclick="startMatching()">🚦 انطلق الآن 🚦</button>
-        <p style="margin-top: 20px; font-size: 11px;">@Crypto_Pilot • طريق بالي</p>
+        <h2 style="font-size: 32px; margin-bottom: 10px;">🏎️💨</h2>
+        <p style="margin-bottom: 18px; text-align: center; padding: 0 30px; color: #ccddff;">سباق أفقي • أول من يصل لخط النهاية يفوز</p>
+        <button class="btn" onclick="startMatching()">🚦 ابدأ السباق 🚦</button>
     </div>
 
     <div class="overlay-screen hidden" id="matchingScreen">
@@ -427,32 +409,28 @@
 
     <div class="overlay-screen hidden" id="resultScreen">
         <div id="resultText" style="font-size: 32px; font-weight: bold; margin-bottom: 20px;"></div>
-        <div class="stats">
-            <div>⏱️ الزمن النهائي: <span id="resultTime">0.00</span> s</div>
-            <div>📏 المسافة المقطوعة ANTON: <span id="resultUserDist">0</span> m</div>
-            <div>📏 المسافة المقطوعة KILOROK: <span id="resultAiDist">0</span> m</div>
-            <div>⚡ سرعة ANTON القصوى: <span id="resultUserSpeed">0</span> km/h</div>
-            <div>⚡ سرعة KILOROK القصوى: <span id="resultAiSpeed">0</span> km/h</div>
+        <div class="stats-box">
+            <div>⏱️ الزمن: <span id="resultTime">0.00</span> ث</div>
+            <div>🏎️ سرعة ANTON: <span id="resultUserSpeed">0</span> كم/س</div>
+            <div>🤖 سرعة KILOROK: <span id="resultAiSpeed">0</span> كم/س</div>
         </div>
         <button class="btn" onclick="resetGame()">🔄 سباق جديد</button>
-    </div>
-
-    <div class="total-wins">
-        🏆 ANTON انتصارات: <span id="winsCount">0</span> &nbsp;|&nbsp; 🏁 سباقات: <span id="racesCount">0</span>
     </div>
 </div>
 
 <script>
     let userSpeed = 0, aiSpeed = 0;
-    let userDist = 0, aiDist = 0;
+    let userPos = 0, aiPos = 0;      // الموضع من اليمين (0 = البداية، 92% = خط النهاية)
     let raceInterval, timerInterval;
     let startTime = 0;
     let raceActive = false, raceFinished = false;
     let countdownInterval;
-    let maxUserSpeedReached = 0;
+    let maxUserSpeed = 0;
     
-    const RACE_DURATION = 12;
-    const MAX_DIST = 1000;
+    const RACE_DURATION = 12;          // حد أقصى 12 ثانية
+    const START_RIGHT = 5;             // نقطة البداية % من اليمين
+    const FINISH_LEFT = 8;             // خط النهاية % من اليسار
+    const TOTAL_DISTANCE = 87;          // المسافة الكلية % (من 5% إلى 92%)
 
     function loadStats() {
         let wins = localStorage.getItem('rallyWins') || 0;
@@ -472,36 +450,49 @@
         document.getElementById('racesCount').innerText = races;
     }
 
+    function updateCarPosition() {
+        // تحويل النسبة المئوية إلى قيمة left (من اليمين إلى اليسار)
+        // userPos و aiPos هي النسبة المقطوعة من المسافة الكلية (0 إلى 100%)
+        let userPercent = (userPos / TOTAL_DISTANCE) * 100;
+        let aiPercent = (aiPos / TOTAL_DISTANCE) * 100;
+        
+        // left = من اليمين إلى اليسار: البداية right:5% تعادل left:95%
+        let userLeft = 95 - userPercent;
+        let aiLeft = 95 - aiPercent;
+        
+        // حدود قصوى
+        userLeft = Math.min(Math.max(userLeft, FINISH_LEFT - 2), 95);
+        aiLeft = Math.min(Math.max(aiLeft, FINISH_LEFT - 2), 95);
+        
+        document.getElementById('userCar').style.left = userLeft + '%';
+        document.getElementById('userCar').style.right = 'auto';
+        document.getElementById('aiCar').style.left = aiLeft + '%';
+        document.getElementById('aiCar').style.right = 'auto';
+    }
+
     function updateUI() {
-        // تحديث السرعات على اللوحة الرئيسية
         document.getElementById('userSpeedMain').innerHTML = userSpeed + '<span class="stat-unit">km/h</span>';
         document.getElementById('aiSpeedMain').innerHTML = aiSpeed + '<span class="stat-unit">km/h</span>';
         document.getElementById('userTag').innerText = userSpeed + ' km/h';
         document.getElementById('aiTag').innerText = aiSpeed + ' km/h';
         
-        // تحديث المسافة بالأمتار
-        document.getElementById('distanceMeters').innerHTML = Math.floor(userDist) + '<span class="metric-unit">M</span>';
+        // المسافة المتبقية لخط النهاية
+        let remainingDist = Math.max(0, (TOTAL_DISTANCE - userPos) / TOTAL_DISTANCE * 100);
+        let remainingMeters = Math.floor(remainingDist * 4.2); // تحويل تقريبي لمتار وهمية
+        document.getElementById('distanceLeft').innerHTML = remainingMeters + '<span class="stat-unit">m</span>';
         
-        // تحديث المركز (POSITION) بناءً على التقدم
-        let positionText = (userDist > aiDist) ? '1st 🥇' : (aiDist > userDist ? '2nd 🥈' : '⚔️ EQUAL');
-        document.getElementById('positionStatus').innerHTML = positionText;
+        // المركز
+        if (userPos > aiPos) document.getElementById('positionStatus').innerHTML = '1st 🥇';
+        else if (aiPos > userPos) document.getElementById('positionStatus').innerHTML = '2nd 🥈';
+        else document.getElementById('positionStatus').innerHTML = '⚔️';
         
-        // تحديث أعلى سرعة وصل إليها المستخدم
-        if(userSpeed > maxUserSpeedReached) maxUserSpeedReached = userSpeed;
-        document.getElementById('topSpeedDisplay').innerHTML = maxUserSpeedReached + '<span class="metric-unit">km/h</span>';
-    }
-
-    function updateCarPosition() {
-        let maxBottom = 390;
-        let userY = Math.min((userDist / MAX_DIST) * maxBottom, maxBottom);
-        let aiY = Math.min((aiDist / MAX_DIST) * maxBottom, maxBottom);
-        document.getElementById('userCar').style.bottom = `${userY}px`;
-        document.getElementById('aiCar').style.bottom = `${aiY}px`;
+        if (userSpeed > maxUserSpeed) maxUserSpeed = userSpeed;
+        document.getElementById('topSpeedDisplay').innerHTML = maxUserSpeed + '<span class="stat-unit">km/h</span>';
     }
 
     function generateRealisticSpeed() {
-        let u = Math.floor(Math.random() * 85) + 105;  // 105-190 km/h
-        let a = Math.floor(Math.random() * 90) + 100;  // 100-190 km/h
+        let u = Math.floor(Math.random() * 85) + 110;  // 110-195 km/h
+        let a = Math.floor(Math.random() * 90) + 105;  // 105-195 km/h
         return { user: u, ai: a };
     }
 
@@ -536,39 +527,42 @@
         let speeds = generateRealisticSpeed();
         userSpeed = speeds.user;
         aiSpeed = speeds.ai;
-        maxUserSpeedReached = userSpeed;
+        maxUserSpeed = userSpeed;
         
-        updateUI();
-        userDist = 0;
-        aiDist = 0;
+        userPos = 0;
+        aiPos = 0;
         updateCarPosition();
+        updateUI();
         raceActive = true;
         raceFinished = false;
         startTime = performance.now();
         
-        // تحديث التايمر بشكل دوري
         timerInterval = setInterval(() => {
             if (!raceActive && raceFinished) return;
             let elapsed = (performance.now() - startTime) / 1000;
             let remaining = Math.max(0, RACE_DURATION - elapsed);
-            document.getElementById('timerMain').innerText = remaining.toFixed(2) + '<span class="stat-unit">s</span>';
-            document.getElementById('timer').innerText = remaining.toFixed(2);
-            if (remaining <= 0 && !raceFinished) endRace();
+            document.getElementById('timerMain').innerHTML = remaining.toFixed(2) + '<span class="stat-unit">s</span>';
+            if (remaining <= 0 && !raceFinished) endRace('timeout');
         }, 20);
         
         raceInterval = setInterval(() => {
             if (!raceActive || raceFinished) return;
-            let delta = 0.033;
-            let factor = 0.2777778 * delta;
-            userDist = Math.min(userDist + userSpeed * factor, MAX_DIST);
-            aiDist = Math.min(aiDist + aiSpeed * factor, MAX_DIST);
+            let delta = 0.033; // ~33ms
+            let factor = 0.55;  // سرعة التقدم بالنسبة للسرعة (معايرة)
+            userPos = Math.min(userPos + (userSpeed * factor * delta), TOTAL_DISTANCE);
+            aiPos = Math.min(aiPos + (aiSpeed * factor * delta), TOTAL_DISTANCE);
+            
             updateCarPosition();
             updateUI();
-            if (userDist >= MAX_DIST || aiDist >= MAX_DIST) endRace();
+            
+            // التحقق من الوصول لخط النهاية
+            if (userPos >= TOTAL_DISTANCE || aiPos >= TOTAL_DISTANCE) {
+                endRace('finish');
+            }
         }, 33);
     }
     
-    function endRace() {
+    function endRace(reason) {
         if (raceFinished) return;
         raceFinished = true;
         raceActive = false;
@@ -577,34 +571,43 @@
         
         let elapsed = (performance.now() - startTime) / 1000;
         let finalTime = Math.min(elapsed, RACE_DURATION);
-        let userWon = userDist > aiDist;
-        let isTie = Math.abs(userDist - aiDist) < 1.8;
+        
+        let userWon = userPos >= TOTAL_DISTANCE;
+        let aiWon = aiPos >= TOTAL_DISTANCE;
+        
+        // إذا وصل كلاهما معاً تقريباً
+        if (userWon && aiWon) userWon = false; // تعادل
+        else if (userPos >= TOTAL_DISTANCE && aiPos >= TOTAL_DISTANCE) userWon = false;
+        else if (userPos >= TOTAL_DISTANCE) userWon = true;
+        else if (aiPos >= TOTAL_DISTANCE) userWon = false;
+        else if (userPos > aiPos) userWon = true;
+        else userWon = false;
+        
+        let isTie = (Math.abs(userPos - aiPos) < 1.5) && (userPos >= TOTAL_DISTANCE - 1 || aiPos >= TOTAL_DISTANCE - 1);
         
         let resultMsg = '';
         let resultColor = '';
-        if (isTie) {
-            resultMsg = '🤝 تعادل مثير على طريق الجبل!';
+        
+        if (isTie || (userWon && aiWon)) {
+            resultMsg = '🤝 تعادل مثير! 🤝';
             resultColor = '#ffaa66';
             let races = parseInt(localStorage.getItem('rallyRaces') || 0) + 1;
             localStorage.setItem('rallyRaces', races);
             document.getElementById('winsCount').innerText = localStorage.getItem('rallyWins') || 0;
             document.getElementById('racesCount').innerText = races;
         } else if (userWon) {
-            resultMsg = '🏆 فوز عظيم! ANTON يتصدر الجبل 🏆';
+            resultMsg = '🏆 فوز! ANTON يصل أولاً لخط النهاية 🏆';
             resultColor = '#ffcc44';
             saveStats(true);
         } else {
-            resultMsg = '💥 خسارة... KILOROK سريع جداً 💥';
+            resultMsg = '💥 خسارة... KILOROK يصل أولاً 💥';
             resultColor = '#ff6666';
             saveStats(false);
         }
         
-        let resultDiv = document.getElementById('resultText');
-        resultDiv.innerText = resultMsg;
-        resultDiv.style.color = resultColor;
+        document.getElementById('resultText').innerText = resultMsg;
+        document.getElementById('resultText').style.color = resultColor;
         document.getElementById('resultTime').innerText = finalTime.toFixed(2);
-        document.getElementById('resultUserDist').innerText = Math.floor(userDist);
-        document.getElementById('resultAiDist').innerText = Math.floor(aiDist);
         document.getElementById('resultUserSpeed').innerText = userSpeed;
         document.getElementById('resultAiSpeed').innerText = aiSpeed;
         
@@ -621,17 +624,17 @@
         raceFinished = true;
         document.getElementById('resultScreen').classList.add('hidden');
         document.getElementById('startScreen').classList.remove('hidden');
-        userDist = 0; aiDist = 0;
-        maxUserSpeedReached = 0;
-        updateCarPosition();
+        userPos = 0; aiPos = 0;
         userSpeed = 0; aiSpeed = 0;
+        maxUserSpeed = 0;
+        updateCarPosition();
         updateUI();
         document.getElementById('timerMain').innerHTML = '0.00<span class="stat-unit">s</span>';
-        document.getElementById('distanceMeters').innerHTML = '0<span class="metric-unit">M</span>';
+        document.getElementById('distanceLeft').innerHTML = '0<span class="stat-unit">m</span>';
         document.getElementById('positionStatus').innerHTML = '🏁';
-        document.getElementById('topSpeedDisplay').innerHTML = '0<span class="metric-unit">km/h</span>';
-        let countdownElement = document.querySelector('.countdown');
-        if(countdownElement) countdownElement.remove();
+        document.getElementById('topSpeedDisplay').innerHTML = '0<span class="stat-unit">km/h</span>';
+        let cd = document.querySelector('.countdown');
+        if(cd) cd.remove();
     }
     
     loadStats();
