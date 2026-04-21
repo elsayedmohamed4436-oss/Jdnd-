@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>بالي رالي | سباق أفقي | BALI RALLY</title>
+    <title>بالي رالي | سباق منظور أمامي | BALI RALLY</title>
     <style>
         * {
             margin: 0;
@@ -84,13 +84,14 @@
             color: #ffaa66;
         }
 
-        /* منطقة السباق - خلفية ثابتة */
+        /* منطقة السباق - منظور أمامي */
         .race-area {
             position: relative;
-            height: 400px;
+            height: 460px;
             overflow: hidden;
-            background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/21b6e3b0-0db2-490e-bd9a-c1acd4b87e60.jpg') no-repeat center center;
+            background: url('https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/21b6e3b0-0db2-490e-bd9a-c1acd4b87e60.jpg') no-repeat center bottom;
             background-size: cover;
+            background-color: #0a121f;
         }
 
         /* إخفاء العناصر القديمة */
@@ -107,107 +108,96 @@
             z-index: 5;
         }
 
-        /* خطوط أفقية متحركة لإحساس السرعة */
+        /* خطوط الطريق المتحركة (من أسفل إلى أعلى) */
         .moving-lines {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
             height: 100%;
-            background: repeating-linear-gradient(90deg, 
-                transparent, 
-                transparent 55px, 
-                rgba(255, 200, 100, 0.4) 55px, 
-                rgba(255, 200, 100, 0.4) 70px);
-            animation: slideLines 0.25s linear infinite;
+            background: repeating-linear-gradient(to bottom, #ffdd99 0px, #ffdd99 18px, transparent 18px, transparent 40px);
+            animation: slideLinesUp 0.2s linear infinite;
             pointer-events: none;
             z-index: 6;
+            opacity: 0.7;
         }
 
-        @keyframes slideLines {
-            from { transform: translateX(0); }
-            to { transform: translateX(-75px); }
+        @keyframes slideLinesUp {
+            from { transform: translateX(-50%) translateY(0); }
+            to { transform: translateX(-50%) translateY(40px); }
         }
 
         /* حواجز جانبية */
         .barrier-left, .barrier-right {
             position: absolute;
             top: 0;
-            width: 8px;
+            width: 6px;
             height: 100%;
             background: repeating-linear-gradient(to bottom, #ffaa44, #ffaa44 20px, #b65f00 20px, #b65f00 40px);
             z-index: 6;
-            opacity: 0.7;
+            opacity: 0.6;
         }
-        .barrier-left { left: 10px; }
-        .barrier-right { right: 10px; }
+        .barrier-left { left: 15px; }
+        .barrier-right { right: 15px; }
 
-        /* خط النهاية - عمودي على الجانب الأيسر */
+        /* خط النهاية - أفقي في نهاية الطريق (قمة الخلفية) */
         .finish-line {
             position: absolute;
-            top: 0;
-            left: 8%;
-            width: 10px;
-            height: 100%;
-            background: repeating-linear-gradient(180deg, #fff 0px, #fff 20px, #000 20px, #000 40px);
+            top: 35px;
+            left: 10%;
+            right: 10%;
+            height: 8px;
+            background: repeating-linear-gradient(90deg, #fff 0px, #fff 18px, #000 18px, #000 36px);
             z-index: 10;
             box-shadow: 0 0 15px #ffaa44;
+            border-radius: 4px;
         }
         .finish-text {
             position: absolute;
-            top: 50%;
-            left: 8%;
-            transform: translate(-50%, -50%) rotate(90deg);
-            background: #000000bb;
-            padding: 4px 10px;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000aa;
+            backdrop-filter: blur(4px);
+            padding: 2px 10px;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 8px;
             font-weight: bold;
             color: #ffcc66;
             white-space: nowrap;
             z-index: 11;
         }
 
-        /* نقطة البداية (يمين) */
-        .start-line {
-            position: absolute;
-            top: 0;
-            right: 5%;
-            width: 6px;
-            height: 100%;
-            background: #ffaa44aa;
-            z-index: 9;
-            border-right: 2px solid #ffcc66;
-        }
-
-        /* السيارات - تتحرك أفقياً من اليمين إلى اليسار باتجاه خط النهاية */
+        /* السيارات - تتحرك من أسفل إلى أعلى وتصغر كلما اقتربت من خط النهاية */
         .car {
             position: absolute;
-            width: 70px;
-            height: 100px;
-            transition: left 0.02s linear;
+            transition: bottom 0.02s linear, width 0.02s linear, height 0.02s linear;
             z-index: 20;
-            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
         }
         .car img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-        /* السيارة الأولى (أسفل الطريق) */
+        
+        /* السيارة الأولى (ANTON) */
         .user-car {
-            bottom: 50px;
-            right: 5%;
-            left: auto;
+            left: 12%;
+            bottom: 15px;
+            width: 75px;
+            height: 105px;
             z-index: 21;
         }
-        /* السيارة الثانية (أعلى قليلاً) */
+        /* السيارة الثانية (KILOROK) */
         .ai-car {
-            bottom: 160px;
-            right: 5%;
-            left: auto;
+            right: 12%;
+            bottom: 15px;
+            width: 75px;
+            height: 105px;
             z-index: 21;
         }
+        
         .speed-tag {
             position: absolute;
             top: -28px;
@@ -215,9 +205,9 @@
             transform: translateX(-50%);
             background: #000000cc;
             backdrop-filter: blur(6px);
-            padding: 3px 10px;
-            border-radius: 24px;
-            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
             font-weight: bold;
             color: #ffdd99;
             white-space: nowrap;
@@ -232,7 +222,6 @@
             display: flex;
             justify-content: space-between;
             border-top: 1px solid #ff884d30;
-            border-bottom: 1px solid #1e2a3a;
         }
         .metric {
             text-align: center;
@@ -332,7 +321,6 @@
         <h1>🏁 BALI RALLY • DRAG RACE 🏁</h1>
     </div>
 
-    <!-- لوحة السرعة والوقت -->
     <div class="stats-panel">
         <div class="stat-block">
             <div class="stat-label">🏎️ SPEED</div>
@@ -348,19 +336,11 @@
         </div>
     </div>
 
-    <!-- منطقة السباق -->
     <div class="race-area">
-        <div class="sky-background"></div>
-        <div class="stars"></div>
-        <div class="city-lights"></div>
-        <div class="trees"></div>
-        <div class="street-lights"></div>
-        
         <div class="road">
             <div class="barrier-left"></div>
             <div class="barrier-right"></div>
             <div class="moving-lines"></div>
-            <div class="start-line"></div>
             <div class="finish-line"></div>
             <div class="finish-text">🏁 FINISH 🏁</div>
         </div>
@@ -375,7 +355,6 @@
         </div>
     </div>
 
-    <!-- المسافة المتبقية والمركز -->
     <div class="race-metrics">
         <div class="metric">
             <div class="metric-label">DISTANCE TO FINISH</div>
@@ -395,10 +374,9 @@
         🏆 ANTON انتصارات: <span id="winsCount">0</span> &nbsp;|&nbsp; 🏁 سباقات: <span id="racesCount">0</span>
     </div>
 
-    <!-- شاشات التفاعل -->
     <div class="overlay-screen" id="startScreen">
         <h2 style="font-size: 32px; margin-bottom: 10px;">🏎️💨</h2>
-        <p style="margin-bottom: 18px; text-align: center; padding: 0 30px; color: #ccddff;">سباق أفقي • أول من يصل لخط النهاية يفوز</p>
+        <p style="margin-bottom: 18px; text-align: center; padding: 0 30px; color: #ccddff;">سباق منظور أمامي • أول من يصل لخط النهاية يفوز</p>
         <button class="btn" onclick="startMatching()">🚦 ابدأ السباق 🚦</button>
     </div>
 
@@ -408,7 +386,7 @@
     </div>
 
     <div class="overlay-screen hidden" id="resultScreen">
-        <div id="resultText" style="font-size: 32px; font-weight: bold; margin-bottom: 20px;"></div>
+        <div id="resultText" style="font-size: 28px; font-weight: bold; margin-bottom: 20px; text-align: center;"></div>
         <div class="stats-box">
             <div>⏱️ الزمن: <span id="resultTime">0.00</span> ث</div>
             <div>🏎️ سرعة ANTON: <span id="resultUserSpeed">0</span> كم/س</div>
@@ -420,17 +398,15 @@
 
 <script>
     let userSpeed = 0, aiSpeed = 0;
-    let userPos = 0, aiPos = 0;      // الموضع من اليمين (0 = البداية، 92% = خط النهاية)
+    let userProgress = 0, aiProgress = 0;  // 0 = أسفل الطريق، 100 = خط النهاية
     let raceInterval, timerInterval;
     let startTime = 0;
     let raceActive = false, raceFinished = false;
     let countdownInterval;
     let maxUserSpeed = 0;
     
-    const RACE_DURATION = 12;          // حد أقصى 12 ثانية
-    const START_RIGHT = 5;             // نقطة البداية % من اليمين
-    const FINISH_LEFT = 8;             // خط النهاية % من اليسار
-    const TOTAL_DISTANCE = 87;          // المسافة الكلية % (من 5% إلى 92%)
+    const RACE_DURATION = 12;
+    const FINISH_TOP = 88;  // النسبة المئوية للوصول إلى خط النهاية
 
     function loadStats() {
         let wins = localStorage.getItem('rallyWins') || 0;
@@ -451,23 +427,30 @@
     }
 
     function updateCarPosition() {
-        // تحويل النسبة المئوية إلى قيمة left (من اليمين إلى اليسار)
-        // userPos و aiPos هي النسبة المقطوعة من المسافة الكلية (0 إلى 100%)
-        let userPercent = (userPos / TOTAL_DISTANCE) * 100;
-        let aiPercent = (aiPos / TOTAL_DISTANCE) * 100;
+        // تحويل التقدم (0-100) إلى bottom percentage (0% = أسفل، FINISH_TOP% = أعلى)
+        let userBottom = (userProgress / FINISH_TOP) * 100;
+        let aiBottom = (aiProgress / FINISH_TOP) * 100;
         
-        // left = من اليمين إلى اليسار: البداية right:5% تعادل left:95%
-        let userLeft = 95 - userPercent;
-        let aiLeft = 95 - aiPercent;
+        // الحد الأقصى للـ bottom هو 88% (قبل خط النهاية بقليل)
+        userBottom = Math.min(userBottom, FINISH_TOP);
+        aiBottom = Math.min(aiBottom, FINISH_TOP);
         
-        // حدود قصوى
-        userLeft = Math.min(Math.max(userLeft, FINISH_LEFT - 2), 95);
-        aiLeft = Math.min(Math.max(aiLeft, FINISH_LEFT - 2), 95);
+        // تغيير حجم السيارة كلما اقتربت من خط النهاية (تأثير المنظور)
+        let userScale = 1 - (userProgress / FINISH_TOP) * 0.6;
+        let aiScale = 1 - (aiProgress / FINISH_TOP) * 0.6;
+        userScale = Math.max(userScale, 0.4);
+        aiScale = Math.max(aiScale, 0.4);
         
-        document.getElementById('userCar').style.left = userLeft + '%';
-        document.getElementById('userCar').style.right = 'auto';
-        document.getElementById('aiCar').style.left = aiLeft + '%';
-        document.getElementById('aiCar').style.right = 'auto';
+        let userCar = document.getElementById('userCar');
+        let aiCar = document.getElementById('aiCar');
+        
+        userCar.style.bottom = userBottom + '%';
+        userCar.style.width = (75 * userScale) + 'px';
+        userCar.style.height = (105 * userScale) + 'px';
+        
+        aiCar.style.bottom = aiBottom + '%';
+        aiCar.style.width = (75 * aiScale) + 'px';
+        aiCar.style.height = (105 * aiScale) + 'px';
     }
 
     function updateUI() {
@@ -476,14 +459,14 @@
         document.getElementById('userTag').innerText = userSpeed + ' km/h';
         document.getElementById('aiTag').innerText = aiSpeed + ' km/h';
         
-        // المسافة المتبقية لخط النهاية
-        let remainingDist = Math.max(0, (TOTAL_DISTANCE - userPos) / TOTAL_DISTANCE * 100);
-        let remainingMeters = Math.floor(remainingDist * 4.2); // تحويل تقريبي لمتار وهمية
+        // المسافة المتبقية
+        let remaining = Math.max(0, FINISH_TOP - userProgress);
+        let remainingMeters = Math.floor(remaining * 5.5);
         document.getElementById('distanceLeft').innerHTML = remainingMeters + '<span class="stat-unit">m</span>';
         
         // المركز
-        if (userPos > aiPos) document.getElementById('positionStatus').innerHTML = '1st 🥇';
-        else if (aiPos > userPos) document.getElementById('positionStatus').innerHTML = '2nd 🥈';
+        if (userProgress > aiProgress) document.getElementById('positionStatus').innerHTML = '1st 🥇';
+        else if (aiProgress > userProgress) document.getElementById('positionStatus').innerHTML = '2nd 🥈';
         else document.getElementById('positionStatus').innerHTML = '⚔️';
         
         if (userSpeed > maxUserSpeed) maxUserSpeed = userSpeed;
@@ -491,8 +474,8 @@
     }
 
     function generateRealisticSpeed() {
-        let u = Math.floor(Math.random() * 85) + 110;  // 110-195 km/h
-        let a = Math.floor(Math.random() * 90) + 105;  // 105-195 km/h
+        let u = Math.floor(Math.random() * 80) + 110;
+        let a = Math.floor(Math.random() * 85) + 105;
         return { user: u, ai: a };
     }
 
@@ -529,8 +512,8 @@
         aiSpeed = speeds.ai;
         maxUserSpeed = userSpeed;
         
-        userPos = 0;
-        aiPos = 0;
+        userProgress = 0;
+        aiProgress = 0;
         updateCarPosition();
         updateUI();
         raceActive = true;
@@ -547,16 +530,15 @@
         
         raceInterval = setInterval(() => {
             if (!raceActive || raceFinished) return;
-            let delta = 0.033; // ~33ms
-            let factor = 0.55;  // سرعة التقدم بالنسبة للسرعة (معايرة)
-            userPos = Math.min(userPos + (userSpeed * factor * delta), TOTAL_DISTANCE);
-            aiPos = Math.min(aiPos + (aiSpeed * factor * delta), TOTAL_DISTANCE);
+            let delta = 0.033;
+            let factor = 0.42;
+            userProgress = Math.min(userProgress + (userSpeed * factor * delta), FINISH_TOP);
+            aiProgress = Math.min(aiProgress + (aiSpeed * factor * delta), FINISH_TOP);
             
             updateCarPosition();
             updateUI();
             
-            // التحقق من الوصول لخط النهاية
-            if (userPos >= TOTAL_DISTANCE || aiPos >= TOTAL_DISTANCE) {
+            if (userProgress >= FINISH_TOP || aiProgress >= FINISH_TOP) {
                 endRace('finish');
             }
         }, 33);
@@ -572,23 +554,15 @@
         let elapsed = (performance.now() - startTime) / 1000;
         let finalTime = Math.min(elapsed, RACE_DURATION);
         
-        let userWon = userPos >= TOTAL_DISTANCE;
-        let aiWon = aiPos >= TOTAL_DISTANCE;
+        let userWon = userProgress >= FINISH_TOP;
+        let aiWon = aiProgress >= FINISH_TOP;
         
-        // إذا وصل كلاهما معاً تقريباً
-        if (userWon && aiWon) userWon = false; // تعادل
-        else if (userPos >= TOTAL_DISTANCE && aiPos >= TOTAL_DISTANCE) userWon = false;
-        else if (userPos >= TOTAL_DISTANCE) userWon = true;
-        else if (aiPos >= TOTAL_DISTANCE) userWon = false;
-        else if (userPos > aiPos) userWon = true;
-        else userWon = false;
-        
-        let isTie = (Math.abs(userPos - aiPos) < 1.5) && (userPos >= TOTAL_DISTANCE - 1 || aiPos >= TOTAL_DISTANCE - 1);
+        let isTie = (userWon && aiWon) || (Math.abs(userProgress - aiProgress) < 1.5 && userProgress >= FINISH_TOP - 2);
         
         let resultMsg = '';
         let resultColor = '';
         
-        if (isTie || (userWon && aiWon)) {
+        if (isTie) {
             resultMsg = '🤝 تعادل مثير! 🤝';
             resultColor = '#ffaa66';
             let races = parseInt(localStorage.getItem('rallyRaces') || 0) + 1;
@@ -605,7 +579,7 @@
             saveStats(false);
         }
         
-        document.getElementById('resultText').innerText = resultMsg;
+        document.getElementById('resultText').innerHTML = resultMsg;
         document.getElementById('resultText').style.color = resultColor;
         document.getElementById('resultTime').innerText = finalTime.toFixed(2);
         document.getElementById('resultUserSpeed').innerText = userSpeed;
@@ -624,7 +598,7 @@
         raceFinished = true;
         document.getElementById('resultScreen').classList.add('hidden');
         document.getElementById('startScreen').classList.remove('hidden');
-        userPos = 0; aiPos = 0;
+        userProgress = 0; aiProgress = 0;
         userSpeed = 0; aiSpeed = 0;
         maxUserSpeed = 0;
         updateCarPosition();
