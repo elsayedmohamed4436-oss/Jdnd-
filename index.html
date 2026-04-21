@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>بالي رالي | سباق الواقع الليلي</title>
+    <title>بالي رالي | الواقع الليلي الكامل</title>
     <style>
         * {
             margin: 0;
@@ -38,6 +38,8 @@
             padding: 12px 20px;
             text-align: center;
             border-bottom: 2px solid #ff3a00;
+            position: relative;
+            z-index: 10;
         }
         .header h1 {
             font-size: 22px;
@@ -60,6 +62,8 @@
             align-items: center;
             gap: 12px;
             border-bottom: 1px solid #1f2533;
+            position: relative;
+            z-index: 10;
         }
 
         .player-card {
@@ -122,320 +126,379 @@
             direction: ltr;
         }
 
-        /* حلبة السباق - خلفية واقعية كاملة */
+        /* حلبة السباق - كل العناصر الواقعية هتظهر هنا */
         .race-area {
             position: relative;
             height: 520px;
             overflow: hidden;
-            background: linear-gradient(180deg, #0a0f1a 0%, #0d1420 100%);
+            background: #0a0f1a;
         }
 
-        /* خلفية ليلية مع سماء ونجوم */
-        .sky-background {
+        /* ===== الخلفية الواقعية الكاملة ===== */
+        
+        /* 1. السماء مع نجوم */
+        .real-sky {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 200px;
-            background: radial-gradient(ellipse at top, #1a2a3a, #0a0f1a);
-            z-index: 0;
-        }
-
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 60px 80px, #ffd, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 120px 50px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 180px 120px, #ffd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 250px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 320px 150px, #ffd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 400px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 450px 30px, #ffd, rgba(0,0,0,0));
-            background-repeat: no-repeat;
-            background-size: 500px 200px;
-            opacity: 0.6;
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(180deg, #0a1525 0%, #0d1a2a 40%, #132035 100%);
             z-index: 1;
         }
-
-        /* أضواء المدينة في الخلفية */
-        .city-lights {
+        
+        /* النجوم المتلألئة */
+        .real-stars {
             position: absolute;
-            top: 140px;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 80px;
-            background: linear-gradient(to bottom, 
-                transparent 0%,
-                rgba(255,200,100,0.1) 30%,
-                rgba(255,150,50,0.15) 60%,
-                transparent 100%);
+            width: 100%;
+            height: 220px;
             z-index: 2;
         }
-
-        .city-lights::before {
-            content: "";
+        
+        .star {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 30px;
-            background: repeating-linear-gradient(90deg, 
-                #ffaa33 0px, #ffaa33 2px, 
-                transparent 2px, transparent 15px,
-                #ffcc66 15px, #ffcc66 17px,
-                transparent 17px, transparent 35px);
-            opacity: 0.4;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
         }
-
-        /* أشجار على جوانب الطريق */
-        .trees {
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* القمر */
+        .moon {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            pointer-events: none;
+            top: 20px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #ffeedd, #ffcc99);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255,200,150,0.5);
             z-index: 3;
         }
-
-        .tree-left {
+        
+        /* 2. أضواء مدينة بالي في الخلفية */
+        .bali-city {
             position: absolute;
-            left: -10px;
-            bottom: 0;
-            width: 60px;
-            height: 180px;
-            background: linear-gradient(135deg, #1a3a1a, #0d2a0d);
-            border-radius: 50% 50% 0 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            top: 160px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(180deg, 
+                rgba(255,200,100,0) 0%,
+                rgba(255,180,80,0.15) 30%,
+                rgba(255,150,50,0.2) 60%,
+                rgba(100,50,20,0.3) 100%);
+            z-index: 3;
         }
-        .tree-left::before {
-            content: "🌲";
+        
+        /* أضرار المباني */
+        .city-buildings {
             position: absolute;
-            font-size: 55px;
-            bottom: 20px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            z-index: 4;
+        }
+        
+        .building {
+            background: linear-gradient(180deg, #2a3a4a, #1a2535);
+            width: 20px;
+            margin: 0 2px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        
+        .building::before {
+            content: "🪟";
+            position: absolute;
+            font-size: 8px;
+            color: #ffcc66;
+            top: 5px;
             left: 5px;
             opacity: 0.7;
         }
-
-        .tree-right {
+        
+        /* 3. أشجار النخيل والأشجار */
+        .real-trees {
             position: absolute;
-            right: -10px;
             bottom: 0;
-            width: 60px;
-            height: 180px;
-            background: linear-gradient(225deg, #1a3a1a, #0d2a0d);
-            border-radius: 50% 50% 0 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
         }
-        .tree-right::before {
+        
+        .palm-tree {
+            position: absolute;
+            bottom: 0;
+            width: 55px;
+            height: 150px;
+        }
+        
+        .palm-left {
+            left: -15px;
+        }
+        
+        .palm-right {
+            right: -15px;
+        }
+        
+        .palm-trunk {
+            position: absolute;
+            bottom: 0;
+            width: 12px;
+            height: 100px;
+            background: linear-gradient(90deg, #5a3a2a, #4a2a1a);
+            border-radius: 6px;
+        }
+        
+        .palm-left .palm-trunk {
+            left: 20px;
+        }
+        
+        .palm-right .palm-trunk {
+            right: 20px;
+        }
+        
+        .palm-leaves {
+            position: absolute;
+            top: 20px;
+            width: 55px;
+            height: 55px;
+        }
+        
+        .palm-left .palm-leaves {
+            left: -5px;
+        }
+        
+        .palm-right .palm-leaves {
+            right: -5px;
+        }
+        
+        .palm-leaves::before {
+            content: "🌴";
+            position: absolute;
+            font-size: 50px;
+            top: -20px;
+        }
+        
+        .palm-left .palm-leaves::before {
+            left: 5px;
+        }
+        
+        .palm-right .palm-leaves::before {
+            right: 5px;
+        }
+        
+        /* أشجار عادية */
+        .normal-tree {
+            position: absolute;
+            bottom: -10px;
+            width: 40px;
+            height: 100px;
+        }
+        
+        .tree-left-1 {
+            left: 35px;
+        }
+        
+        .tree-left-2 {
+            left: 70px;
+        }
+        
+        .tree-right-1 {
+            right: 35px;
+        }
+        
+        .tree-right-2 {
+            right: 70px;
+        }
+        
+        .normal-tree::before {
             content: "🌲";
             position: absolute;
-            font-size: 55px;
-            bottom: 20px;
-            right: 5px;
-            opacity: 0.7;
-        }
-
-        .tree-left-2 {
-            position: absolute;
-            left: 30px;
-            bottom: -20px;
-            width: 45px;
-            height: 130px;
-            background: linear-gradient(135deg, #1e441e, #0f2a0f);
-            border-radius: 50% 50% 0 0;
-        }
-        .tree-left-2::before {
-            content: "🌴";
-            position: absolute;
-            font-size: 40px;
+            font-size: 45px;
             bottom: 10px;
+        }
+        
+        .tree-left-1::before, .tree-left-2::before {
             left: 0;
-            opacity: 0.6;
         }
-
-        .tree-right-2 {
-            position: absolute;
-            right: 30px;
-            bottom: -20px;
-            width: 45px;
-            height: 130px;
-            background: linear-gradient(225deg, #1e441e, #0f2a0f);
-            border-radius: 50% 50% 0 0;
-        }
-        .tree-right-2::before {
-            content: "🌴";
-            position: absolute;
-            font-size: 40px;
-            bottom: 10px;
+        
+        .tree-right-1::before, .tree-right-2::before {
             right: 0;
-            opacity: 0.6;
         }
-
-        /* الطريق */
-        .road {
+        
+        /* 4. أعمدة الإنارة */
+        .street-lamp {
+            position: absolute;
+            bottom: 0;
+            width: 8px;
+            height: 120px;
+            background: linear-gradient(90deg, #555, #333);
+            z-index: 6;
+        }
+        
+        .lamp-left {
+            left: 10px;
+        }
+        
+        .lamp-right {
+            right: 10px;
+        }
+        
+        .lamp-head {
+            position: absolute;
+            top: -8px;
+            width: 20px;
+            height: 16px;
+            background: #ffcc66;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 0 15px #ffaa44;
+        }
+        
+        .lamp-left .lamp-head {
+            left: -6px;
+        }
+        
+        .lamp-right .lamp-head {
+            right: -6px;
+        }
+        
+        .lamp-light {
+            position: absolute;
+            top: 8px;
+            width: 40px;
+            height: 80px;
+            background: radial-gradient(ellipse, rgba(255,200,100,0.3), transparent);
+            border-radius: 50%;
+        }
+        
+        .lamp-left .lamp-light {
+            left: -16px;
+        }
+        
+        .lamp-right .lamp-light {
+            right: -16px;
+        }
+        
+        /* 5. الطريق */
+        .real-road {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #1a212e;
-            z-index: 5;
+            background: #1a1e2a;
+            z-index: 7;
         }
-
-        /* تأثير اسفلت مع تفاصيل */
-        .road-texture {
+        
+        /* تفاصيل الاسفلت */
+        .asphalt-detail {
             position: absolute;
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 20% 40%, rgba(255,255,255,0.03) 1px, transparent 1px),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 30px 30px;
+                radial-gradient(circle at 15% 30%, rgba(255,255,255,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 85% 70%, rgba(255,255,255,0.03) 1px, transparent 1px),
+                radial-gradient(circle at 45% 50%, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 25px 25px;
             pointer-events: none;
         }
-
+        
+        /* الحواجز الجانبية */
+        .road-barrier {
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            background: repeating-linear-gradient(180deg, #ffaa44 0px, #ffaa44 20px, #cc8822 20px, #cc8822 40px);
+            z-index: 8;
+        }
+        
+        .barrier-left {
+            left: 12px;
+        }
+        
+        .barrier-right {
+            right: 12px;
+        }
+        
         /* خطوط الطريق المتحركة */
-        .road-lines {
+        .road-line {
             position: absolute;
             left: 50%;
             top: 0;
             transform: translateX(-50%);
             width: 5px;
             height: 100%;
-            background: repeating-linear-gradient(to bottom, #ffcc77 0px, #ffcc77 25px, transparent 25px, transparent 55px);
-            animation: moveLines 0.2s linear infinite;
-            opacity: 0.9;
-            z-index: 6;
+            background: repeating-linear-gradient(180deg, #ffdd88 0px, #ffdd88 25px, transparent 25px, transparent 55px);
+            animation: moveLine 0.25s linear infinite;
+            z-index: 9;
         }
-
-        @keyframes moveLines {
+        
+        @keyframes moveLine {
             from { transform: translateX(-50%) translateY(0); }
             to { transform: translateX(-50%) translateY(55px); }
         }
-
-        /* حواجز جانبية */
-        .barrier-left {
-            position: absolute;
-            left: 15px;
-            top: 0;
-            width: 8px;
-            height: 100%;
-            background: repeating-linear-gradient(to bottom, #ffaa44, #ffaa44 20px, #cc7722 20px, #cc7722 40px);
-            z-index: 6;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-        }
-
-        .barrier-right {
-            position: absolute;
-            right: 15px;
-            top: 0;
-            width: 8px;
-            height: 100%;
-            background: repeating-linear-gradient(to bottom, #ffaa44, #ffaa44 20px, #cc7722 20px, #cc7722 40px);
-            z-index: 6;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.5);
-        }
-
-        /* تأثير ضوء على الطريق */
-        .road-glow {
+        
+        /* تأثير الإضاءة على الطريق */
+        .road-glow-effect {
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
-            height: 150px;
-            background: linear-gradient(to top, rgba(255,68,0,0.2), transparent);
-            pointer-events: none;
-            z-index: 7;
-        }
-
-        /* أضواء الشوارع */
-        .street-lights {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            height: 100%;
-            pointer-events: none;
-            z-index: 4;
-        }
-
-        .light-left {
-            position: absolute;
-            left: -5px;
-            top: 80px;
-            width: 4px;
-            height: 200px;
-            background: linear-gradient(to bottom, #ffcc44, transparent);
-            opacity: 0.4;
-        }
-        .light-left::before {
-            content: "💡";
-            position: absolute;
-            top: -10px;
-            left: -8px;
-            font-size: 20px;
-            opacity: 0.7;
-        }
-
-        .light-right {
-            position: absolute;
-            right: -5px;
-            top: 80px;
-            width: 4px;
-            height: 200px;
-            background: linear-gradient(to bottom, #ffcc44, transparent);
-            opacity: 0.4;
-        }
-        .light-right::before {
-            content: "💡";
-            position: absolute;
-            top: -10px;
-            right: -8px;
-            font-size: 20px;
-            opacity: 0.7;
-        }
-
-        /* خط النهاية */
-        .finish-line {
-            position: absolute;
-            top: 25px;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: repeating-linear-gradient(90deg, #fff 0px, #fff 18px, #1a1a2e 18px, #1a1a2e 36px);
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,68,0,0.15) 100%);
             z-index: 10;
+            pointer-events: none;
+        }
+        
+        /* خط النهاية */
+        .finish-line-area {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            z-index: 15;
+        }
+        
+        .finish-line-strip {
+            height: 18px;
+            background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 18px, #222222 18px, #222222 36px);
             border-top: 2px solid #ffaa44;
             border-bottom: 2px solid #ffaa44;
-            box-shadow: 0 0 10px rgba(255,170,68,0.5);
         }
-
-        .finish-text {
-            position: absolute;
-            top: 45px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.85);
-            padding: 2px 12px;
-            border-radius: 20px;
+        
+        .finish-label {
+            text-align: center;
+            margin-top: 5px;
             font-size: 10px;
-            color: #ffaa44;
             font-weight: bold;
-            white-space: nowrap;
-            z-index: 10;
+            color: #ffaa44;
+            background: rgba(0,0,0,0.7);
+            display: inline-block;
+            width: 100%;
+            padding: 2px;
             font-family: monospace;
         }
-
+        
         /* السيارات */
         .car {
             position: absolute;
             width: 85px;
             height: 130px;
             transition: bottom 0.02s linear;
-            z-index: 20;
+            z-index: 30;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.7));
         }
         .car img {
@@ -445,14 +508,12 @@
         }
         .user-car {
             left: 8%;
-            z-index: 21;
         }
         .ai-car {
             right: 8%;
-            z-index: 21;
         }
-
-        /* مؤشر السرعة على السيارة */
+        
+        /* مؤشر السرعة */
         .speed-tag {
             position: absolute;
             bottom: -22px;
@@ -468,11 +529,27 @@
             font-family: monospace;
             white-space: nowrap;
             border: 1px solid #ff6600;
-            letter-spacing: 1px;
-            z-index: 22;
+            z-index: 31;
         }
-
-        /* شاشات البداية والنتيجة */
+        
+        /* دخان العادم */
+        .exhaust-smoke {
+            position: absolute;
+            bottom: 25px;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(150,150,150,0.5), transparent);
+            border-radius: 50%;
+            animation: smokeAnim 0.4s ease-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes smokeAnim {
+            0% { transform: translateX(0) scale(0.5); opacity: 0.6; }
+            100% { transform: translateX(-15px) scale(1.5); opacity: 0; }
+        }
+        
+        /* الشاشات */
         .overlay-screen {
             position: absolute;
             top: 0;
@@ -488,11 +565,11 @@
             z-index: 100;
             border-radius: 32px;
         }
-
+        
         .hidden {
             display: none !important;
         }
-
+        
         .btn {
             background: linear-gradient(135deg, #ff5500, #cc3300);
             border: none;
@@ -510,7 +587,7 @@
         .btn:active {
             transform: scale(0.97);
         }
-
+        
         .stats {
             background: rgba(12, 16, 26, 0.95);
             padding: 20px 28px;
@@ -535,7 +612,7 @@
             font-size: 20px;
             font-family: monospace;
         }
-
+        
         .total-wins {
             background: #060910;
             padding: 10px;
@@ -543,13 +620,15 @@
             font-size: 13px;
             color: #ffaa66;
             border-top: 1px solid #2a3342;
+            position: relative;
+            z-index: 10;
         }
         .total-wins span {
             color: #ff5500;
             font-weight: bold;
             font-size: 18px;
         }
-
+        
         .loader {
             width: 50px;
             height: 50px;
@@ -561,7 +640,7 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
+        
         .countdown {
             position: fixed;
             top: 50%;
@@ -576,30 +655,6 @@
             padding: 20px 40px;
             border-radius: 60px;
             font-family: monospace;
-        }
-
-        /* دخان العادم */
-        .exhaust {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            height: 30px;
-            pointer-events: none;
-            z-index: 19;
-        }
-        .exhaust-left {
-            left: -20px;
-            position: absolute;
-            bottom: 30px;
-            width: 30px;
-            height: 20px;
-            background: radial-gradient(ellipse, rgba(100,100,100,0.5), transparent);
-            border-radius: 50%;
-            animation: smoke 0.5s ease-out infinite;
-        }
-        @keyframes smoke {
-            0% { transform: translateX(0) scale(0.5); opacity: 0.6; }
-            100% { transform: translateX(-20px) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
@@ -626,33 +681,57 @@
     </div>
 
     <div class="race-area">
-        <!-- خلفية واقعية كاملة -->
-        <div class="sky-background"></div>
-        <div class="stars"></div>
-        <div class="city-lights"></div>
+        <!-- السماء والنجوم -->
+        <div class="real-sky"></div>
+        <div class="real-stars" id="starsContainer"></div>
+        <div class="moon"></div>
         
-        <div class="trees">
-            <div class="tree-left"></div>
-            <div class="tree-left-2"></div>
-            <div class="tree-right"></div>
-            <div class="tree-right-2"></div>
+        <!-- أضواء مدينة بالي -->
+        <div class="bali-city"></div>
+        <div class="city-buildings" id="cityBuildings"></div>
+        
+        <!-- الأشجار -->
+        <div class="real-trees">
+            <div class="palm-tree palm-left">
+                <div class="palm-trunk"></div>
+                <div class="palm-leaves"></div>
+            </div>
+            <div class="palm-tree palm-right">
+                <div class="palm-trunk"></div>
+                <div class="palm-leaves"></div>
+            </div>
+            <div class="normal-tree tree-left-1"></div>
+            <div class="normal-tree tree-left-2"></div>
+            <div class="normal-tree tree-right-1"></div>
+            <div class="normal-tree tree-right-2"></div>
         </div>
         
-        <div class="street-lights">
-            <div class="light-left"></div>
-            <div class="light-right"></div>
+        <!-- أعمدة الإنارة -->
+        <div class="street-lamp lamp-left">
+            <div class="lamp-head"></div>
+            <div class="lamp-light"></div>
+        </div>
+        <div class="street-lamp lamp-right">
+            <div class="lamp-head"></div>
+            <div class="lamp-light"></div>
         </div>
         
-        <div class="road">
-            <div class="road-texture"></div>
-            <div class="barrier-left"></div>
-            <div class="barrier-right"></div>
-            <div class="road-lines"></div>
-            <div class="road-glow"></div>
-            <div class="finish-line"></div>
-            <div class="finish-text">🏁 FINISH LINE 🏁</div>
+        <!-- الطريق -->
+        <div class="real-road">
+            <div class="asphalt-detail"></div>
+            <div class="road-barrier barrier-left"></div>
+            <div class="road-barrier barrier-right"></div>
+            <div class="road-line"></div>
+            <div class="road-glow-effect"></div>
+        </div>
+        
+        <!-- خط النهاية -->
+        <div class="finish-line-area">
+            <div class="finish-line-strip"></div>
+            <div class="finish-label">🏁 FINISH LINE 🏁</div>
         </div>
 
+        <!-- السيارات -->
         <div class="car user-car" id="userCar">
             <img src="https://i.supaimg.com/6da94571-9f1f-45c0-a629-23bfc48c3905/19185c38-4150-4c7f-aa97-56e33862464b.png" alt="سيارتك">
             <div class="speed-tag" id="userTag">0 km/h</div>
@@ -696,6 +775,38 @@
 </div>
 
 <script>
+    // إنشاء النجوم
+    function createStars() {
+        const starsContainer = document.getElementById('starsContainer');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 200 + 'px';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = Math.random() * 2 + 1 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+    
+    // إنشاء المباني
+    function createBuildings() {
+        const buildingsContainer = document.getElementById('cityBuildings');
+        for (let i = 0; i < 18; i++) {
+            const building = document.createElement('div');
+            building.className = 'building';
+            let height = Math.random() * 35 + 15;
+            building.style.height = height + 'px';
+            building.style.width = Math.random() * 15 + 12 + 'px';
+            buildingsContainer.appendChild(building);
+        }
+    }
+    
+    createStars();
+    createBuildings();
+    
     let userSpeed = 0, aiSpeed = 0;
     let userDist = 0, aiDist = 0;
     let raceInterval, timerInterval;
