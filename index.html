@@ -30,21 +30,12 @@
   --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
 }
 
-[data-theme="light"] {
-  --bg: #f3f4f6;
-  --card: #ffffff;
-  --border: #e5e7eb;
-  --text: #111827;
-  --text-secondary: #6b7280;
-}
-
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
   padding-bottom: 80px;
-  transition: background 0.3s, color 0.3s;
 }
 
 ::-webkit-scrollbar {
@@ -64,25 +55,17 @@ body {
   border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
-.theme-toggle {
+#loadingScreen {
   position: fixed;
-  top: 16px;
-  right: 16px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  inset: 0;
+  background: var(--bg);
+  z-index: 10000;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 1000;
-  transition: all 0.3s;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.1);
+  gap: 20px;
+  transition: opacity 0.5s;
 }
 
 .loader {
@@ -158,12 +141,6 @@ body {
   padding: 16px;
   margin-bottom: 12px;
   border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
 }
 
 .balance-card {
@@ -172,12 +149,11 @@ body {
   padding: 20px;
   margin-bottom: 20px;
   text-align: center;
-  animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+.bonus-card {
+  background: linear-gradient(135deg, #1e1b4b, #0f172a);
+  border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
 .balance-label {
@@ -241,11 +217,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s;
-}
-
-.level-card:hover {
-  border-color: var(--primary);
 }
 
 .level-info h4 {
@@ -271,9 +242,9 @@ body {
   border-left: 3px solid var(--primary);
 }
 
-.notification {
+#notification {
   position: fixed;
-  top: 20px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%) translateY(-100px);
   background: var(--card);
@@ -286,44 +257,21 @@ body {
   font-size: 14px;
   font-weight: 500;
   max-width: 90vw;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  white-space: nowrap;
 }
 
-.notification.show {
+#notification.show {
   transform: translateX(-50%) translateY(0);
 }
 
-.notification-success {
+#notification.success {
   border-color: var(--success);
   color: var(--success);
 }
 
-.notification-error {
+#notification.error {
   border-color: var(--danger);
   color: var(--danger);
-}
-
-.notification-warning {
-  border-color: var(--warning);
-  color: var(--warning);
-}
-
-.notification-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  background: var(--primary);
-  width: 100%;
-  animation: progress 3s linear forwards;
-  border-radius: 0 0 12px 12px;
-}
-
-@keyframes progress {
-  from { width: 100%; }
-  to { width: 0%; }
 }
 
 .modal {
@@ -412,109 +360,6 @@ body {
   color: var(--success);
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.stat-card {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 16px;
-  text-align: center;
-  border: 1px solid var(--border);
-}
-
-.stat-card i {
-  font-size: 24px;
-  color: var(--primary);
-  margin-bottom: 8px;
-}
-
-.stat-value {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.stat-label {
-  font-size: 11px;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-.welcome-screen {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  z-index: 20000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.5s ease;
-}
-
-.welcome-content {
-  text-align: center;
-  padding: 40px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(20px);
-  border-radius: 40px;
-  margin: 20px;
-  max-width: 400px;
-  animation: slideUp 0.6s ease;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.welcome-logo {
-  font-size: 80px;
-  color: white;
-  margin-bottom: 20px;
-  animation: bounce 1s ease-in-out;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-.welcome-content h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.welcome-message {
-  background: rgba(255,255,255,0.2);
-  border-radius: 20px;
-  padding: 20px;
-  margin: 20px 0;
-  color: white;
-}
-
-.welcome-message p {
-  margin: 10px 0;
-  font-size: 16px;
-}
-
-.welcome-bonus {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffd700;
-  animation: pulse 1s ease-in-out infinite;
-}
-
 .text-primary { color: var(--primary); }
 .text-success { color: var(--success); }
 .text-warning { color: var(--warning); }
@@ -533,23 +378,6 @@ body {
 </head>
 <body>
 
-<div id="welcomeScreen" class="welcome-screen" style="display: none;">
-  <div class="welcome-content">
-    <div class="welcome-logo">
-      <i class="fas fa-chart-line"></i>
-    </div>
-    <h1>TON Investment</h1>
-    <div id="welcomeMessage" class="welcome-message">
-      <p>Welcome to TON Investment!</p>
-      <p>Start earning daily profits with TON</p>
-      <p class="welcome-bonus">🎁 You've received 0.01 TON as a welcome bonus!</p>
-    </div>
-    <button class="btn btn-primary" onclick="closeWelcomeScreen()">
-      <i class="fas fa-rocket"></i> Start Investing
-    </button>
-  </div>
-</div>
-
 <div id="loadingScreen">
   <div class="loader"></div>
   <div style="font-size: 18px; font-weight: 600;">TON Investment</div>
@@ -557,216 +385,188 @@ body {
 </div>
 
 <div id="app" style="display: none;">
-  <div class="theme-toggle" onclick="toggleTheme()">
-    <i class="fas fa-moon"></i>
-  </div>
 
-  <div class="balance-card" style="margin: 16px 16px 0 16px;">
-    <div class="balance-label">Your Balance</div>
-    <div class="balance-amount" id="balanceAmount">0.00</div>
-    <div class="balance-stats">
-      <div><small>Invested</small><br><strong id="totalInvested">0</strong></div>
-      <div><small>Earned</small><br><strong id="totalEarned">0</strong></div>
-      <div><small>Daily</small><br><strong id="dailyProfit">0</strong></div>
-    </div>
+<div class="balance-card" style="margin: 16px 16px 0 16px;">
+  <div class="balance-label">Your Balance</div>
+  <div class="balance-amount" id="balanceAmount">0.00</div>
+  <div class="balance-stats">
+    <div><small>Invested</small><br><strong id="totalInvested">0</strong></div>
+    <div><small>Earned</small><br><strong id="totalEarned">0</strong></div>
+    <div><small>Daily</small><br><strong id="dailyProfit">0</strong></div>
   </div>
+</div>
 
-  <div class="bottom-nav">
-    <div class="nav-item active" data-section="home">
-      <i class="fas fa-home"></i>
-      <span>Home</span>
+<!-- NEW USER BONUS CARD -->
+<div class="card bonus-card" id="welcomeBonusCard" style="display: none;">
+  <div class="flex items-center gap-2">
+    <i class="fas fa-gift" style="font-size: 24px; color: var(--primary);"></i>
+    <div style="flex: 1;">
+      <strong>🎉 Welcome Bonus!</strong>
+      <div style="font-size: 12px; color: var(--text-secondary);">You received 0.01 TON for joining!</div>
     </div>
-    <div class="nav-item" data-section="invest">
-      <i class="fas fa-chart-line"></i>
-      <span>Invest</span>
-    </div>
-    <div class="nav-item" data-section="dashboard">
-      <i class="fas fa-chart-pie"></i>
-      <span>Stats</span>
-    </div>
-    <div class="nav-item" data-section="friends">
-      <i class="fas fa-users"></i>
-      <span>Friends</span>
-    </div>
-    <div class="nav-item" data-section="tasks">
-      <i class="fas fa-tasks"></i>
-      <span>Tasks</span>
-    </div>
-    <div class="nav-item" data-section="wallet">
-      <i class="fas fa-wallet"></i>
-      <span>Wallet</span>
-    </div>
+    <i class="fas fa-check-circle" style="color: var(--success); font-size: 20px;"></i>
   </div>
+</div>
 
-  <div class="section active" id="homeSection">
-    <div class="card">
-      <div class="flex justify-between items-center mb-2">
-        <span><i class="fas fa-chart-simple"></i> Pending Profit</span>
-        <span class="text-warning" id="pendingProfit">0.00 TON</span>
-      </div>
-      <button class="btn btn-primary" id="claimBtn" onclick="claimProfit()">
-        <i class="fas fa-hand-holding-usd"></i> Claim Now
-      </button>
-    </div>
-    
-    <div class="card">
-      <div class="flex justify-between items-center mb-3">
-        <h3><i class="fas fa-clock"></i> Active Investments</h3>
-        <span id="investmentsCount" class="text-secondary">0</span>
-      </div>
-      <div id="activeInvestmentsList">
-        <div class="text-secondary text-center" style="padding: 20px;">No active investments</div>
-      </div>
-    </div>
+<div class="bottom-nav">
+  <div class="nav-item active" data-section="home">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
   </div>
+  <div class="nav-item" data-section="invest">
+    <i class="fas fa-chart-line"></i>
+    <span>Invest</span>
+  </div>
+  <div class="nav-item" data-section="friends">
+    <i class="fas fa-users"></i>
+    <span>Friends</span>
+  </div>
+  <div class="nav-item" data-section="tasks">
+    <i class="fas fa-tasks"></i>
+    <span>Tasks</span>
+  </div>
+  <div class="nav-item" data-section="wallet">
+    <i class="fas fa-wallet"></i>
+    <span>Wallet</span>
+  </div>
+</div>
 
-  <div class="section" id="investSection">
+<div class="section active" id="homeSection">
+  <div class="card">
+    <div class="flex justify-between items-center mb-2">
+      <span><i class="fas fa-chart-simple"></i> Pending Profit</span>
+      <span class="text-warning" id="pendingProfit">0.00 TON</span>
+    </div>
+    <button class="btn btn-primary" id="claimBtn" onclick="claimProfit()">
+      <i class="fas fa-hand-holding-usd"></i> Claim Now
+    </button>
+  </div>
+  
+  <div class="card">
     <div class="flex justify-between items-center mb-3">
-      <h3><i class="fas fa-gem"></i> Investment Levels</h3>
-      <button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="reinvestModal()">
-        <i class="fas fa-sync-alt"></i> Reinvest
-      </button>
+      <h3><i class="fas fa-clock"></i> Active Investments</h3>
+      <span id="investmentsCount" class="text-secondary">0</span>
     </div>
-    <div id="levelsList"></div>
-  </div>
-
-  <div class="section" id="dashboardSection">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <i class="fas fa-chart-line"></i>
-        <div class="stat-value" id="roiPercent">0%</div>
-        <div class="stat-label">ROI</div>
-      </div>
-      <div class="stat-card">
-        <i class="fas fa-calendar-week"></i>
-        <div class="stat-value" id="totalInvestments">0</div>
-        <div class="stat-label">Investments</div>
-      </div>
-      <div class="stat-card">
-        <i class="fas fa-trophy"></i>
-        <div class="stat-value" id="rankLevel">Bronze</div>
-        <div class="stat-label">Your Rank</div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3 class="mb-2">Quick Stats</h3>
-      <div class="flex justify-between mb-2">
-        <span>Total Referrals:</span>
-        <strong id="dashboardReferrals">0</strong>
-      </div>
-      <div class="flex justify-between mb-2">
-        <span>Referral Earnings:</span>
-        <strong id="dashboardRefEarnings">0 TON</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Tasks Completed:</span>
-        <strong id="dashboardTasks">0</strong>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="friendsSection">
-    <div class="card">
-      <h3 class="mb-2"><i class="fas fa-gift"></i> Referral Program</h3>
-      <p class="text-secondary" style="font-size: 13px; margin-bottom: 12px;">
-        Earn 0.01 TON per friend + 15% of their investments!
-      </p>
-      <div class="referral-link">
-        <input type="text" id="refLinkInput" readonly>
-        <button class="btn-primary" style="padding: 8px 16px; width: auto;" onclick="copyReferralLink()">
-          <i class="fas fa-copy"></i>
-        </button>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="flex justify-between items-center mb-3">
-        <h3><i class="fas fa-users"></i> Your Referrals</h3>
-        <span id="referralsCount">0</span>
-      </div>
-      <div id="referralsList">
-        <div class="text-secondary text-center" style="padding: 20px;">No referrals yet</div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3 class="mb-2"><i class="fas fa-coins"></i> Referral Earnings</h3>
-      <div id="referralEarningsList">
-        <div class="text-secondary text-center" style="padding: 20px;">No earnings yet</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="tasksSection">
-    <div id="tasksList"></div>
-  </div>
-
-  <div class="section" id="walletSection">
-    <div class="card">
-      <h3 class="mb-2"><i class="fas fa-arrow-down"></i> Withdraw Funds</h3>
-      <p class="text-secondary" style="font-size: 12px; margin-bottom: 12px;">
-        Min: 0.05 TON | Fee: 5%
-      </p>
-      <input type="text" id="walletAddress" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="TON Wallet Address">
-      <input type="number" id="withdrawAmount" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="Amount (TON)" step="0.01" min="0.05">
-      <button class="btn btn-primary" onclick="withdraw()">
-        <i class="fas fa-paper-plane"></i> Withdraw
-      </button>
-    </div>
-    
-    <div class="card">
-      <h3 class="mb-2"><i class="fas fa-history"></i> Withdrawal History</h3>
-      <div id="withdrawalsList">
-        <div class="text-secondary text-center" style="padding: 20px;">No withdrawals yet</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="reinvestModal" class="modal">
-    <div class="modal-content">
-      <h3 class="mb-2">Reinvest</h3>
-      <p class="text-secondary mb-3">Choose amount and level</p>
-      <input type="number" id="reinvestAmount" class="card" style="width: 100%; margin-bottom: 12px;" placeholder="Amount (TON)">
-      <select id="reinvestLevel" class="card" style="width: 100%; margin-bottom: 12px; background: var(--card);">
-        <option value="">Select Level</option>
-      </select>
-      <div class="flex gap-2">
-        <button class="btn-outline" style="flex: 1;" onclick="closeModal('reinvestModal')">Cancel</button>
-        <button class="btn-primary" style="flex: 1;" onclick="doReinvest()">Reinvest</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="buyModal" class="modal">
-    <div class="modal-content">
-      <h3 class="mb-2" id="buyLevelName">Buy Level</h3>
-      <p class="text-secondary mb-3" id="buyLevelInfo"></p>
-      <div class="card" style="margin-bottom: 12px; background: rgba(0,0,0,0.3);">
-        <div class="flex justify-between">
-          <span>Price:</span>
-          <span class="text-primary" id="buyLevelPrice">0 TON</span>
-        </div>
-        <div class="flex justify-between mt-2">
-          <span>Daily Profit:</span>
-          <span class="text-success" id="buyLevelDaily">0 TON</span>
-        </div>
-        <div class="flex justify-between mt-2">
-          <span>30-Day Total:</span>
-          <span class="text-warning" id="buyLevelTotal">0 TON</span>
-        </div>
-      </div>
-      <button class="btn btn-primary" id="confirmBuyBtn" onclick="confirmBuy()">
-        <i class="fas fa-rocket"></i> Buy Now
-      </button>
-      <button class="btn-outline" style="margin-top: 8px;" onclick="closeModal('buyModal')">Cancel</button>
+    <div id="activeInvestmentsList">
+      <div class="text-secondary text-center" style="padding: 20px;">No active investments</div>
     </div>
   </div>
 </div>
 
+<div class="section" id="investSection">
+  <div class="flex justify-between items-center mb-3">
+    <h3><i class="fas fa-gem"></i> Investment Levels</h3>
+    <button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="reinvestModal()">
+      <i class="fas fa-sync-alt"></i> Reinvest
+    </button>
+  </div>
+  <div id="levelsList"></div>
+</div>
+
+<div class="section" id="friendsSection">
+  <div class="card">
+    <h3 class="mb-2"><i class="fas fa-gift"></i> Referral Program</h3>
+    <p class="text-secondary" style="font-size: 13px; margin-bottom: 12px;">
+      Earn 0.01 TON per friend + 15% of their investments!
+    </p>
+    <div class="referral-link">
+      <input type="text" id="refLinkInput" readonly>
+      <button class="btn-primary" style="padding: 8px 16px; width: auto;" onclick="copyReferralLink()">
+        <i class="fas fa-copy"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="flex justify-between items-center mb-3">
+      <h3><i class="fas fa-users"></i> Your Referrals</h3>
+      <span id="referralsCount">0</span>
+    </div>
+    <div id="referralsList">
+      <div class="text-secondary text-center" style="padding: 20px;">No referrals yet</div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h3 class="mb-2"><i class="fas fa-coins"></i> Referral Earnings</h3>
+    <div id="referralEarningsList">
+      <div class="text-secondary text-center" style="padding: 20px;">No earnings yet</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="tasksSection">
+  <div id="tasksList"></div>
+</div>
+
+<div class="section" id="walletSection">
+  <div class="card">
+    <h3 class="mb-2"><i class="fas fa-arrow-down"></i> Withdraw Funds</h3>
+    <p class="text-secondary" style="font-size: 12px; margin-bottom: 12px;">
+      Min: 0.05 TON | Fee: 5%
+    </p>
+    <input type="text" id="walletAddress" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="TON Wallet Address">
+    <input type="number" id="withdrawAmount" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="Amount (TON)" step="0.01" min="0.05">
+    <button class="btn btn-primary" onclick="withdraw()">
+      <i class="fas fa-paper-plane"></i> Withdraw
+    </button>
+  </div>
+  
+  <div class="card">
+    <h3 class="mb-2"><i class="fas fa-history"></i> Withdrawal History</h3>
+    <div id="withdrawalsList">
+      <div class="text-secondary text-center" style="padding: 20px;">No withdrawals yet</div>
+    </div>
+  </div>
+</div>
+
+<div id="reinvestModal" class="modal">
+  <div class="modal-content">
+    <h3 class="mb-2">Reinvest</h3>
+    <p class="text-secondary mb-3">Choose amount and level</p>
+    <input type="number" id="reinvestAmount" class="card" style="width: 100%; margin-bottom: 12px;" placeholder="Amount (TON)">
+    <select id="reinvestLevel" class="card" style="width: 100%; margin-bottom: 12px; background: var(--card);">
+      <option value="">Select Level</option>
+    </select>
+    <div class="flex gap-2">
+      <button class="btn-outline" style="flex: 1;" onclick="closeModal('reinvestModal')">Cancel</button>
+      <button class="btn-primary" style="flex: 1;" onclick="doReinvest()">Reinvest</button>
+    </div>
+  </div>
+</div>
+
+<div id="buyModal" class="modal">
+  <div class="modal-content">
+    <h3 class="mb-2" id="buyLevelName">Buy Level</h3>
+    <p class="text-secondary mb-3" id="buyLevelInfo"></p>
+    <div class="card" style="margin-bottom: 12px; background: rgba(0,0,0,0.3);">
+      <div class="flex justify-between">
+        <span>Price:</span>
+        <span class="text-primary" id="buyLevelPrice">0 TON</span>
+      </div>
+      <div class="flex justify-between mt-2">
+        <span>Daily Profit:</span>
+        <span class="text-success" id="buyLevelDaily">0 TON</span>
+      </div>
+      <div class="flex justify-between mt-2">
+        <span>30-Day Total:</span>
+        <span class="text-warning" id="buyLevelTotal">0 TON</span>
+      </div>
+    </div>
+    <button class="btn btn-primary" id="confirmBuyBtn" onclick="confirmBuy()">
+      <i class="fas fa-rocket"></i> Buy Now
+    </button>
+    <button class="btn-outline" style="margin-top: 8px;" onclick="closeModal('buyModal')">Cancel</button>
+  </div>
+</div>
+
+<div id="notification"></div>
+
+</div>
+
 <script>
 // ================================================================
-// TON INVESTMENT APP - FRONTEND v2.0
+// TON INVESTMENT APP - FRONTEND
 // ================================================================
 
 const API_URL = 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev';
@@ -787,63 +587,27 @@ let appState = {
   levels: {},
   walletConnected: false,
   walletAddress: null,
-  tonUI: null
+  tonUI: null,
+  isNewUser: false
 };
 
 let selectedLevel = null;
 
-class NotificationManager {
-  constructor() {
-    this.queue = [];
-    this.isShowing = false;
-  }
-  
-  show(message, type = 'success', duration = 3000) {
-    this.queue.push({ message, type, duration });
-    this.processQueue();
-  }
-  
-  async processQueue() {
-    if (this.isShowing || this.queue.length === 0) return;
-    
-    this.isShowing = true;
-    const { message, type, duration } = this.queue.shift();
-    
-    const notif = document.createElement('div');
-    notif.className = `notification notification-${type}`;
-    
-    const icons = {
-      success: 'fa-check-circle',
-      error: 'fa-exclamation-circle',
-      warning: 'fa-exclamation-triangle',
-      info: 'fa-info-circle'
-    };
-    
-    notif.innerHTML = `
-      <i class="fas ${icons[type] || icons.info}"></i>
-      <span>${message}</span>
-      <div class="notification-progress"></div>
-    `;
-    
-    document.body.appendChild(notif);
-    
-    setTimeout(() => notif.classList.add('show'), 10);
-    
-    await new Promise(resolve => setTimeout(resolve, duration));
-    notif.classList.remove('show');
-    await new Promise(resolve => setTimeout(resolve, 300));
-    notif.remove();
-    
-    this.isShowing = false;
-    this.processQueue();
-  }
-}
-
-const notifier = new NotificationManager();
-
 function formatNumber(num, decimals = 2) {
   if (num === undefined || num === null) return '0.00';
   return parseFloat(num).toFixed(decimals);
+}
+
+function showNotification(message, type = 'success') {
+  const notif = document.getElementById('notification');
+  if (!notif) return;
+  
+  notif.textContent = message;
+  notif.className = `show ${type}`;
+  
+  setTimeout(() => {
+    notif.classList.remove('show');
+  }, 3000);
 }
 
 function closeModal(modalId) {
@@ -888,7 +652,17 @@ async function init() {
     await login();
     await loadState();
     initTONConnect();
-    await checkAndShowWelcome();
+    
+    // Show welcome bonus card if new user
+    if (appState.isNewUser) {
+      document.getElementById('welcomeBonusCard').style.display = 'block';
+      showNotification('🎉 Welcome! You received 0.01 TON bonus!', 'success');
+      
+      // Hide bonus card after 5 seconds
+      setTimeout(() => {
+        document.getElementById('welcomeBonusCard').style.display = 'none';
+      }, 5000);
+    }
     
     document.getElementById('loadingScreen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
@@ -918,6 +692,7 @@ async function login() {
   });
   
   appState.user = result.data;
+  appState.isNewUser = result.isNew || false;
   return result;
 }
 
@@ -948,7 +723,6 @@ function updateUI() {
   document.getElementById('totalEarned').textContent = formatNumber(appState.user?.total_earned, 2) + ' TON';
   document.getElementById('dailyProfit').textContent = formatNumber(appState.totalDailyProfit, 3) + ' TON';
   document.getElementById('pendingProfit').textContent = formatNumber(appState.pendingProfit, 4) + ' TON';
-  
   document.getElementById('investmentsCount').textContent = appState.activeInvestments.length;
   
   updateActiveInvestments();
@@ -957,7 +731,6 @@ function updateUI() {
   updateTasks();
   updateWithdrawals();
   updateReferralLink();
-  updateDashboard();
 }
 
 function updateActiveInvestments() {
@@ -1130,84 +903,14 @@ function updateReferralLink() {
   }
 }
 
-function updateDashboard() {
-  const totalInvested = appState.user?.total_invested || 0;
-  const totalEarned = appState.user?.total_earned || 0;
-  const roi = totalInvested > 0 ? ((totalEarned / totalInvested) * 100).toFixed(0) : 0;
-  
-  document.getElementById('roiPercent').textContent = `${roi}%`;
-  document.getElementById('totalInvestments').textContent = appState.investments.length;
-  document.getElementById('dashboardReferrals').textContent = appState.referrals.length;
-  
-  const totalRefEarnings = appState.referralEarnings.reduce((sum, e) => sum + parseFloat(e.amount), 0);
-  document.getElementById('dashboardRefEarnings').textContent = formatNumber(totalRefEarnings, 2) + ' TON';
-  document.getElementById('dashboardTasks').textContent = appState.completedTaskIds.length;
-  
-  const totalInvestedForRank = appState.user?.total_invested || 0;
-  let rank = 'Bronze';
-  if (totalInvestedForRank >= 1000) rank = 'Crown 👑';
-  else if (totalInvestedForRank >= 500) rank = 'Jade 🟢';
-  else if (totalInvestedForRank >= 250) rank = 'Coral 🪸';
-  else if (totalInvestedForRank >= 100) rank = 'Amethyst 🟣';
-  else if (totalInvestedForRank >= 50) rank = 'Sapphire 🔵';
-  else if (totalInvestedForRank >= 20) rank = 'Diamond 💠';
-  document.getElementById('rankLevel').textContent = rank;
-}
-
-async function checkAndShowWelcome() {
-  try {
-    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
-    const hasReceivedBonus = localStorage.getItem('welcomeBonusReceived');
-    
-    if (!hasSeenWelcome || !hasReceivedBonus) {
-      if (!hasReceivedBonus && appState.user?.balance >= 0.01) {
-        localStorage.setItem('welcomeBonusReceived', 'true');
-      }
-      
-      const welcomeScreen = document.getElementById('welcomeScreen');
-      const welcomeMessage = document.getElementById('welcomeMessage');
-      
-      const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
-      if (user && user.first_name) {
-        welcomeMessage.innerHTML = `
-          <p>Welcome ${user.first_name}! 👋</p>
-          <p>You've joined TON Investment Platform</p>
-          <p class="welcome-bonus">🎁 You've received 0.01 TON as a welcome bonus!</p>
-        `;
-      }
-      
-      welcomeScreen.style.display = 'flex';
-      localStorage.setItem('hasSeenWelcome', 'true');
-    }
-  } catch (error) {
-    console.error('Welcome check error:', error);
-  }
-}
-
-function closeWelcomeScreen() {
-  const welcomeScreen = document.getElementById('welcomeScreen');
-  welcomeScreen.style.display = 'none';
-  notifier.show('Welcome to TON Investment! Start earning today!', 'success');
-}
-
-function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  
-  const icon = document.querySelector('.theme-toggle i');
-  icon.className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
-}
-
 async function claimProfit() {
   try {
-    notifier.show('Claiming profits...', 'info');
+    showNotification('Claiming profits...', 'success');
     const result = await apiCall('claimProfit');
     await loadState();
-    notifier.show(`Claimed ${formatNumber(result.claimed_amount, 4)} TON!`, 'success');
+    showNotification(`Claimed ${formatNumber(result.claimed_amount, 4)} TON!`, 'success');
   } catch (error) {
-    notifier.show(error.message, 'error');
+    showNotification(error.message, 'error');
   }
 }
 
@@ -1232,18 +935,21 @@ async function buyLevel(levelId) {
     if (!level) throw new Error('Invalid level');
     
     if (!appState.walletConnected || !appState.walletAddress) {
-      notifier.show('Please connect your TON wallet first', 'error');
+      showNotification('Please connect your TON wallet first', 'error');
       return;
     }
     
-    notifier.show('Processing transaction...', 'info');
+    showNotification('Processing transaction...', 'success');
+    
+    const amountNano = Math.floor(level.price * 1e9);
+    const comment = `Buy Level ${levelId}`;
     
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 600,
       messages: [{
-        address: 'YOUR_RECEIVING_WALLET_ADDRESS',
-        amount: Math.floor(level.price * 1e9).toString(),
-        payload: `Buy Level ${levelId}`
+        address: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
+        amount: amountNano.toString(),
+        payload: comment
       }]
     };
     
@@ -1256,11 +962,11 @@ async function buyLevel(levelId) {
     
     await loadState();
     closeModal('buyModal');
-    notifier.show(`Successfully bought Level ${levelId}!`, 'success');
+    showNotification(`Successfully bought Level ${levelId}!`, 'success');
     
   } catch (error) {
     console.error('Buy level error:', error);
-    notifier.show(error.message || 'Transaction failed', 'error');
+    showNotification(error.message || 'Transaction failed', 'error');
   }
 }
 
@@ -1281,7 +987,7 @@ async function doReinvest() {
     const levelId = parseInt(document.getElementById('reinvestLevel').value);
     
     if (!amount || !levelId) {
-      notifier.show('Please fill all fields', 'error');
+      showNotification('Please fill all fields', 'error');
       return;
     }
     
@@ -1289,19 +995,19 @@ async function doReinvest() {
     if (!level) throw new Error('Invalid level');
     
     if (amount < level.price) {
-      notifier.show(`Minimum amount for this level is ${level.price} TON`, 'error');
+      showNotification(`Minimum amount for this level is ${level.price} TON`, 'error');
       return;
     }
     
-    notifier.show('Processing reinvestment...', 'info');
+    showNotification('Processing reinvestment...', 'success');
     const result = await apiCall('reinvest', { amount, levelId });
     await loadState();
     closeModal('reinvestModal');
     document.getElementById('reinvestAmount').value = '';
-    notifier.show(`Successfully reinvested ${amount} TON!`, 'success');
+    showNotification(`Successfully reinvested ${amount} TON!`, 'success');
     
   } catch (error) {
-    notifier.show(error.message, 'error');
+    showNotification(error.message, 'error');
   }
 }
 
@@ -1311,23 +1017,23 @@ async function withdraw() {
     const amount = parseFloat(document.getElementById('withdrawAmount').value);
     
     if (!wallet) {
-      notifier.show('Please enter wallet address', 'error');
+      showNotification('Please enter wallet address', 'error');
       return;
     }
     
     if (!amount || amount < 0.05) {
-      notifier.show('Minimum withdrawal is 0.05 TON', 'error');
+      showNotification('Minimum withdrawal is 0.05 TON', 'error');
       return;
     }
     
-    notifier.show('Processing withdrawal...', 'info');
+    showNotification('Processing withdrawal...', 'success');
     const result = await apiCall('withdraw', { amount, wallet });
     await loadState();
     document.getElementById('withdrawAmount').value = '';
-    notifier.show(`Withdrawal request submitted! Amount: ${formatNumber(result.amount, 4)} TON`, 'success');
+    showNotification(`Withdrawal request submitted! Amount: ${formatNumber(result.amount, 4)} TON`, 'success');
     
   } catch (error) {
-    notifier.show(error.message, 'error');
+    showNotification(error.message, 'error');
   }
 }
 
@@ -1337,13 +1043,13 @@ async function completeTask(taskId, link) {
       window.open(link, '_blank');
     }
     
-    notifier.show('Verifying task...', 'info');
+    showNotification('Verifying task...', 'success');
     const result = await apiCall('completeTask', { taskId });
     await loadState();
-    notifier.show(`Task completed! +${formatNumber(result.reward, 4)} TON`, 'success');
+    showNotification(`Task completed! +${formatNumber(result.reward, 4)} TON`, 'success');
     
   } catch (error) {
-    notifier.show(error.message, 'error');
+    showNotification(error.message, 'error');
   }
 }
 
@@ -1351,13 +1057,13 @@ function copyReferralLink() {
   const input = document.getElementById('refLinkInput');
   input.select();
   document.execCommand('copy');
-  notifier.show('Referral link copied!', 'success');
+  showNotification('Referral link copied!', 'success');
 }
 
 function initTONConnect() {
   try {
-    if (window.TON_CONNECT_UI) {
-      appState.tonUI = new TON_CONNECT_UI.TonConnectUI({
+    if (window.TonConnectUI) {
+      appState.tonUI = new TonConnectUi.TonConnectUI({
         manifestUrl: `${API_URL}/tonconnect-manifest.json`,
         uiPreferences: { theme: 'DARK' }
       });
@@ -1366,7 +1072,7 @@ function initTONConnect() {
         if (wallet) {
           appState.walletConnected = true;
           appState.walletAddress = wallet.account.address;
-          notifier.show('Wallet connected!', 'success');
+          showNotification('Wallet connected!', 'success');
         } else {
           appState.walletConnected = false;
           appState.walletAddress = null;
@@ -1389,13 +1095,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
     document.getElementById(sectionId + 'Section').classList.add('active');
   });
 });
-
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  const icon = document.querySelector('.theme-toggle i');
-  if (icon) icon.className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
-}
 
 init();
 </script>
