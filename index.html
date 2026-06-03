@@ -1,1102 +1,495 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>TON Investment 💎</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>Island Empire - الأصدقاء</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-:root {
-  --bg: #0a0c15;
-  --card: #111827;
-  --border: #1f2937;
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --text: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-}
+        body {
+            background-color: #0a0e17;
+            font-family: 'Segoe UI', 'Tahoma', 'Roboto', system-ui, sans-serif;
+            color: #ffffff;
+            padding: 20px 16px 30px;
+        }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  padding-bottom: 80px;
-}
+        /* رأس الصفحة */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
 
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: var(--border);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffd966, #ffaa00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-.glass {
-  background: rgba(17, 24, 39, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-}
+        .close-btn {
+            background: #1e2434;
+            border: none;
+            color: #ffaa66;
+            font-size: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-#loadingScreen {
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  z-index: 10000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  transition: opacity 0.5s;
-}
+        /* التبويبات (Tabs) */
+        .tabs {
+            display: flex;
+            background: #0f1622;
+            border-radius: 48px;
+            padding: 4px;
+            margin-bottom: 24px;
+        }
 
-.loader {
-  width: 60px;
-  height: 60px;
-  border: 3px solid var(--border);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 0;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #8e9aaf;
+        }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+        .tab.active {
+            background: #ffaa00;
+            color: #0a0e17;
+            box-shadow: 0 2px 8px rgba(255,170,0,0.3);
+        }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--card);
-  border-top: 1px solid var(--border);
-  display: flex;
-  padding: 8px 16px 20px;
-  z-index: 100;
-}
+        /* محتوى التبويبات */
+        .tab-content {
+            display: none;
+        }
 
-.nav-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 8px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--text-secondary);
-}
+        .tab-content.active-content {
+            display: block;
+        }
 
-.nav-item.active {
-  background: rgba(99, 102, 241, 0.15);
-  color: var(--primary);
-}
+        /* البطاقات */
+        .card {
+            background: #131a28;
+            border-radius: 24px;
+            padding: 20px 16px;
+            margin-bottom: 20px;
+            border: 1px solid #2a2f3f;
+        }
 
-.nav-item i {
-  font-size: 22px;
-}
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-right: 4px solid #ffaa00;
+            padding-right: 12px;
+        }
 
-.nav-item span {
-  font-size: 11px;
-  font-weight: 500;
-}
+        /* مكافآت تصاعدية */
+        .reward-tier {
+            background: #0f1622;
+            border-radius: 18px;
+            padding: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.section {
-  display: none;
-  padding: 16px;
-  animation: fadeIn 0.3s ease;
-}
+        .reward-info {
+            display: flex;
+            flex-direction: column;
+        }
 
-.section.active {
-  display: block;
-}
+        .reward-title {
+            font-weight: bold;
+        }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+        .reward-amount {
+            font-size: 12px;
+            color: #ffaa66;
+        }
 
-.card {
-  background: var(--card);
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 12px;
-  border: 1px solid var(--border);
-}
+        .reward-status {
+            background: #1f2a3a;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+        }
 
-.balance-card {
-  background: var(--gradient);
-  border-radius: 24px;
-  padding: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-}
+        .status-completed {
+            background: #2a5a3a;
+            color: #aaffaa;
+        }
 
-.bonus-card {
-  background: linear-gradient(135deg, #1e1b4b, #0f172a);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-}
+        .status-pending {
+            background: #3a2a2a;
+            color: #ffaa66;
+        }
 
-.balance-label {
-  font-size: 14px;
-  opacity: 0.9;
-  margin-bottom: 8px;
-}
+        /* رابط الإحالة */
+        .referral-box {
+            background: #0c111b;
+            border-radius: 60px;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #2a3a4a;
+            margin-bottom: 16px;
+        }
 
-.balance-amount {
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
+        .link-text {
+            font-size: 12px;
+            color: #bbccff;
+            font-family: monospace;
+            overflow-x: auto;
+            white-space: nowrap;
+            direction: ltr;
+            text-align: left;
+        }
 
-.balance-stats {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.2);
-}
+        .copy-btn {
+            background: #ffaa00;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #0a0e17;
+            cursor: pointer;
+            font-size: 13px;
+        }
 
-.btn {
-  padding: 14px 20px;
-  border: none;
-  border-radius: 14px;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 100%;
-  font-family: inherit;
-}
+        .invite-btn {
+            width: 100%;
+            background: #ffaa00;
+            border: none;
+            padding: 14px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #0a0e17;
+            margin-top: 8px;
+            cursor: pointer;
+        }
 
-.btn:active {
-  transform: scale(0.97);
-}
+        /* إحصائيات My Referrals */
+        .stats-mini {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
 
-.btn-primary {
-  background: var(--gradient);
-  color: white;
-}
+        .stat-mini {
+            background: #0f1622;
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 20px;
+        }
 
-.btn-success {
-  background: var(--success);
-  color: white;
-}
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd966;
+        }
 
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-}
+        /* قائمة الأصدقاء */
+        .friend-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #1e2434;
+        }
 
-.level-card {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 12px;
-  border: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+        .friend-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.level-info h4 {
-  font-size: 16px;
-  margin-bottom: 4px;
-}
+        .avatar {
+            width: 38px;
+            height: 38px;
+            background: #2a3a55;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
 
-.level-info p {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
+        /* شريط سفلي */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0f1622e6;
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 20px;
+            border-top: 1px solid #2a2f3f;
+            z-index: 100;
+        }
 
-.level-price {
-  font-weight: 700;
-  color: var(--primary);
-}
+        .nav-item {
+            text-align: center;
+            color: #6c7a8e;
+            font-size: 12px;
+            transition: 0.2s;
+            cursor: pointer;
+            flex: 1;
+        }
 
-.investment-card {
-  background: rgba(17, 24, 39, 0.6);
-  border-radius: 14px;
-  padding: 14px;
-  margin-bottom: 10px;
-  border-left: 3px solid var(--primary);
-}
+        .nav-item.active {
+            color: #ffaa00;
+        }
 
-#notification {
-  position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100px);
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 20px;
-  z-index: 1000;
-  transition: transform 0.3s;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  max-width: 90vw;
-  white-space: nowrap;
-}
+        .nav-icon {
+            font-size: 24px;
+            display: block;
+        }
 
-#notification.show {
-  transform: translateX(-50%) translateY(0);
-}
+        .content-padding {
+            padding-bottom: 90px;
+        }
 
-#notification.success {
-  border-color: var(--success);
-  color: var(--success);
-}
-
-#notification.error {
-  border-color: var(--danger);
-  color: var(--danger);
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-
-.modal.active {
-  display: flex;
-}
-
-.modal-content {
-  background: var(--card);
-  border-radius: 24px;
-  padding: 24px;
-  width: 90%;
-  max-width: 400px;
-  border: 1px solid var(--border);
-}
-
-.progress-bar {
-  height: 6px;
-  background: var(--border);
-  border-radius: 3px;
-  overflow: hidden;
-  margin: 8px 0;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--gradient);
-  border-radius: 3px;
-  transition: width 0.3s;
-}
-
-.referral-link {
-  background: rgba(0,0,0,0.3);
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  gap: 8px;
-  margin: 12px 0;
-}
-
-.referral-link input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-size: 12px;
-  font-family: monospace;
-  outline: none;
-}
-
-.task-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px;
-  border-bottom: 1px solid var(--border);
-}
-
-.task-item:last-child {
-  border-bottom: none;
-}
-
-.task-info h4 {
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.task-info p {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.task-reward {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--success);
-}
-
-.text-primary { color: var(--primary); }
-.text-success { color: var(--success); }
-.text-warning { color: var(--warning); }
-.text-secondary { color: var(--text-secondary); }
-.flex { display: flex; }
-.justify-between { justify-content: space-between; }
-.items-center { align-items: center; }
-.gap-2 { gap: 8px; }
-.gap-3 { gap: 12px; }
-.mt-2 { margin-top: 8px; }
-.mt-3 { margin-top: 12px; }
-.mb-2 { margin-bottom: 8px; }
-.mb-3 { margin-bottom: 12px; }
-.text-center { text-align: center; }
-</style>
+        button {
+            font-family: inherit;
+        }
+    </style>
 </head>
 <body>
 
-<div id="loadingScreen">
-  <div class="loader"></div>
-  <div style="font-size: 18px; font-weight: 600;">TON Investment</div>
-  <div id="loadingStatus" style="font-size: 13px; color: var(--text-secondary);">Loading...</div>
+<div class="header">
+    <div class="logo">🏝 Island Empire</div>
+    <button class="close-btn" onclick="alert('رجوع')">✕</button>
 </div>
 
-<div id="app" style="display: none;">
-
-<div class="balance-card" style="margin: 16px 16px 0 16px;">
-  <div class="balance-label">Your Balance</div>
-  <div class="balance-amount" id="balanceAmount">0.00</div>
-  <div class="balance-stats">
-    <div><small>Invested</small><br><strong id="totalInvested">0</strong></div>
-    <div><small>Earned</small><br><strong id="totalEarned">0</strong></div>
-    <div><small>Daily</small><br><strong id="dailyProfit">0</strong></div>
-  </div>
+<!-- تبويبات Invite Friends / My Referrals -->
+<div class="tabs">
+    <div class="tab active" data-tab="invite">📢 Invite Friends</div>
+    <div class="tab" data-tab="referrals">👥 My Referrals</div>
 </div>
 
-<!-- NEW USER BONUS CARD -->
-<div class="card bonus-card" id="welcomeBonusCard" style="display: none;">
-  <div class="flex items-center gap-2">
-    <i class="fas fa-gift" style="font-size: 24px; color: var(--primary);"></i>
-    <div style="flex: 1;">
-      <strong>🎉 Welcome Bonus!</strong>
-      <div style="font-size: 12px; color: var(--text-secondary);">You received 0.01 TON for joining!</div>
+<div class="content-padding">
+    <!-- محتوى تبويب Invite Friends -->
+    <div id="inviteTab" class="tab-content active-content">
+        <div class="card">
+            <div class="section-title">
+                🎁 مكافآت دعوة الأصدقاء
+            </div>
+            <div class="reward-tier" id="reward1Friend">
+                <div class="reward-info">
+                    <span class="reward-title">👤 دعوة صديق واحد</span>
+                    <span class="reward-amount">900 Coins</span>
+                </div>
+                <div class="reward-status" id="status1">⏳ 0/1</div>
+            </div>
+            <div class="reward-tier" id="reward5Friend">
+                <div class="reward-info">
+                    <span class="reward-title">👥 دعوة 5 أصدقاء</span>
+                    <span class="reward-amount">2,200 Coins</span>
+                </div>
+                <div class="reward-status" id="status5">⏳ 0/5</div>
+            </div>
+            <div class="reward-tier" id="reward10Friend">
+                <div class="reward-info">
+                    <span class="reward-title">🌟 دعوة 10 أصدقاء</span>
+                    <span class="reward-amount">11,500 Coins</span>
+                </div>
+                <div class="reward-status" id="status10">⏳ 0/10</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">
+                🔗 رابط الإحالة الخاص بك
+            </div>
+            <div class="referral-box">
+                <span class="link-text" id="referralLink">https://t.me/islandKingBot?start=ISLAND123</span>
+                <button class="copy-btn" onclick="copyReferralLink()">نسخ 📋</button>
+            </div>
+            <button class="invite-btn" onclick="shareInvite()">📢 دعوة الأصدقاء</button>
+        </div>
     </div>
-    <i class="fas fa-check-circle" style="color: var(--success); font-size: 20px;"></i>
-  </div>
+
+    <!-- محتوى تبويب My Referrals -->
+    <div id="referralsTab" class="tab-content">
+        <div class="card">
+            <div class="section-title">
+                📊 إحصائيات الإحالات
+            </div>
+            <div class="stats-mini">
+                <div class="stat-mini">
+                    <div class="stat-number" id="totalFriends">0</div>
+                    <div>الأصدقاء</div>
+                </div>
+                <div class="stat-mini">
+                    <div class="stat-number" id="totalCoinsEarned">0</div>
+                    <div>مكافآت 💰</div>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 8px;">
+                👥 قائمة المدعوين
+            </div>
+            <div id="friendsListContainer">
+                <div style="text-align:center; padding:20px; color:#8e9aaf;">لا يوجد أصدقاء مدعوون بعد</div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- شريط سفلي (Friends هو الـ active) -->
 <div class="bottom-nav">
-  <div class="nav-item active" data-section="home">
-    <i class="fas fa-home"></i>
-    <span>Home</span>
-  </div>
-  <div class="nav-item" data-section="invest">
-    <i class="fas fa-chart-line"></i>
-    <span>Invest</span>
-  </div>
-  <div class="nav-item" data-section="friends">
-    <i class="fas fa-users"></i>
-    <span>Friends</span>
-  </div>
-  <div class="nav-item" data-section="tasks">
-    <i class="fas fa-tasks"></i>
-    <span>Tasks</span>
-  </div>
-  <div class="nav-item" data-section="wallet">
-    <i class="fas fa-wallet"></i>
-    <span>Wallet</span>
-  </div>
-</div>
-
-<div class="section active" id="homeSection">
-  <div class="card">
-    <div class="flex justify-between items-center mb-2">
-      <span><i class="fas fa-chart-simple"></i> Pending Profit</span>
-      <span class="text-warning" id="pendingProfit">0.00 TON</span>
+    <div class="nav-item" onclick="alert('الرئيسية')">
+        <span class="nav-icon">🏝</span>
+        <span>Home</span>
     </div>
-    <button class="btn btn-primary" id="claimBtn" onclick="claimProfit()">
-      <i class="fas fa-hand-holding-usd"></i> Claim Now
-    </button>
-  </div>
-  
-  <div class="card">
-    <div class="flex justify-between items-center mb-3">
-      <h3><i class="fas fa-clock"></i> Active Investments</h3>
-      <span id="investmentsCount" class="text-secondary">0</span>
+    <div class="nav-item active" onclick="alert('الأصدقاء')">
+        <span class="nav-icon">👥</span>
+        <span>Friends</span>
     </div>
-    <div id="activeInvestmentsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No active investments</div>
+    <div class="nav-item" onclick="alert('المهام')">
+        <span class="nav-icon">✅</span>
+        <span>Tasks</span>
     </div>
-  </div>
-</div>
-
-<div class="section" id="investSection">
-  <div class="flex justify-between items-center mb-3">
-    <h3><i class="fas fa-gem"></i> Investment Levels</h3>
-    <button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="reinvestModal()">
-      <i class="fas fa-sync-alt"></i> Reinvest
-    </button>
-  </div>
-  <div id="levelsList"></div>
-</div>
-
-<div class="section" id="friendsSection">
-  <div class="card">
-    <h3 class="mb-2"><i class="fas fa-gift"></i> Referral Program</h3>
-    <p class="text-secondary" style="font-size: 13px; margin-bottom: 12px;">
-      Earn 0.01 TON per friend + 15% of their investments!
-    </p>
-    <div class="referral-link">
-      <input type="text" id="refLinkInput" readonly>
-      <button class="btn-primary" style="padding: 8px 16px; width: auto;" onclick="copyReferralLink()">
-        <i class="fas fa-copy"></i>
-      </button>
+    <div class="nav-item" onclick="alert('المحفظة')">
+        <span class="nav-icon">👛</span>
+        <span>Wallet</span>
     </div>
-  </div>
-  
-  <div class="card">
-    <div class="flex justify-between items-center mb-3">
-      <h3><i class="fas fa-users"></i> Your Referrals</h3>
-      <span id="referralsCount">0</span>
-    </div>
-    <div id="referralsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No referrals yet</div>
-    </div>
-  </div>
-  
-  <div class="card">
-    <h3 class="mb-2"><i class="fas fa-coins"></i> Referral Earnings</h3>
-    <div id="referralEarningsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No earnings yet</div>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="tasksSection">
-  <div id="tasksList"></div>
-</div>
-
-<div class="section" id="walletSection">
-  <div class="card">
-    <h3 class="mb-2"><i class="fas fa-arrow-down"></i> Withdraw Funds</h3>
-    <p class="text-secondary" style="font-size: 12px; margin-bottom: 12px;">
-      Min: 0.05 TON | Fee: 5%
-    </p>
-    <input type="text" id="walletAddress" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="TON Wallet Address">
-    <input type="number" id="withdrawAmount" class="card" style="width: 100%; margin-bottom: 12px; background: rgba(0,0,0,0.3); border: none; padding: 12px;" placeholder="Amount (TON)" step="0.01" min="0.05">
-    <button class="btn btn-primary" onclick="withdraw()">
-      <i class="fas fa-paper-plane"></i> Withdraw
-    </button>
-  </div>
-  
-  <div class="card">
-    <h3 class="mb-2"><i class="fas fa-history"></i> Withdrawal History</h3>
-    <div id="withdrawalsList">
-      <div class="text-secondary text-center" style="padding: 20px;">No withdrawals yet</div>
-    </div>
-  </div>
-</div>
-
-<div id="reinvestModal" class="modal">
-  <div class="modal-content">
-    <h3 class="mb-2">Reinvest</h3>
-    <p class="text-secondary mb-3">Choose amount and level</p>
-    <input type="number" id="reinvestAmount" class="card" style="width: 100%; margin-bottom: 12px;" placeholder="Amount (TON)">
-    <select id="reinvestLevel" class="card" style="width: 100%; margin-bottom: 12px; background: var(--card);">
-      <option value="">Select Level</option>
-    </select>
-    <div class="flex gap-2">
-      <button class="btn-outline" style="flex: 1;" onclick="closeModal('reinvestModal')">Cancel</button>
-      <button class="btn-primary" style="flex: 1;" onclick="doReinvest()">Reinvest</button>
-    </div>
-  </div>
-</div>
-
-<div id="buyModal" class="modal">
-  <div class="modal-content">
-    <h3 class="mb-2" id="buyLevelName">Buy Level</h3>
-    <p class="text-secondary mb-3" id="buyLevelInfo"></p>
-    <div class="card" style="margin-bottom: 12px; background: rgba(0,0,0,0.3);">
-      <div class="flex justify-between">
-        <span>Price:</span>
-        <span class="text-primary" id="buyLevelPrice">0 TON</span>
-      </div>
-      <div class="flex justify-between mt-2">
-        <span>Daily Profit:</span>
-        <span class="text-success" id="buyLevelDaily">0 TON</span>
-      </div>
-      <div class="flex justify-between mt-2">
-        <span>30-Day Total:</span>
-        <span class="text-warning" id="buyLevelTotal">0 TON</span>
-      </div>
-    </div>
-    <button class="btn btn-primary" id="confirmBuyBtn" onclick="confirmBuy()">
-      <i class="fas fa-rocket"></i> Buy Now
-    </button>
-    <button class="btn-outline" style="margin-top: 8px;" onclick="closeModal('buyModal')">Cancel</button>
-  </div>
-</div>
-
-<div id="notification"></div>
-
 </div>
 
 <script>
-// ================================================================
-// TON INVESTMENT APP - FRONTEND
-// ================================================================
-
-const API_URL = 'https://plain-wildflower-9bd5.elsayedmohamed5848-c43.workers.dev';
-const BOT_USERNAME = 'SANTASNOWBOT_BOT';
-const APP_LINK = `https://t.me/${BOT_USERNAME}/app`;
-
-let appState = {
-  user: null,
-  investments: [],
-  activeInvestments: [],
-  withdrawals: [],
-  referrals: [],
-  referralEarnings: [],
-  tasks: [],
-  completedTaskIds: [],
-  totalDailyProfit: 0,
-  pendingProfit: 0,
-  levels: {},
-  walletConnected: false,
-  walletAddress: null,
-  tonUI: null,
-  isNewUser: false
-};
-
-let selectedLevel = null;
-
-function formatNumber(num, decimals = 2) {
-  if (num === undefined || num === null) return '0.00';
-  return parseFloat(num).toFixed(decimals);
-}
-
-function showNotification(message, type = 'success') {
-  const notif = document.getElementById('notification');
-  if (!notif) return;
-  
-  notif.textContent = message;
-  notif.className = `show ${type}`;
-  
-  setTimeout(() => {
-    notif.classList.remove('show');
-  }, 3000);
-}
-
-function closeModal(modalId) {
-  document.getElementById(modalId).classList.remove('active');
-}
-
-function openModal(modalId) {
-  document.getElementById(modalId).classList.add('active');
-}
-
-async function apiCall(action, data = {}) {
-  const headers = {
-    'Content-Type': 'application/json'
-  };
-  
-  if (window.Telegram?.WebApp?.initData) {
-    headers['Authorization'] = `Telegram ${window.Telegram.WebApp.initData}`;
-  }
-  
-  const response = await fetch(`${API_URL}/api`, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({ action, data })
-  });
-  
-  const result = await response.json();
-  if (!result.success) {
-    throw new Error(result.error || 'API Error');
-  }
-  return result.data;
-}
-
-async function init() {
-  try {
-    if (window.Telegram?.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();
-      tg.expand();
-      tg.enableClosingConfirmation();
-    }
-    
-    await login();
-    await loadState();
-    initTONConnect();
-    
-    // Show welcome bonus card if new user
-    if (appState.isNewUser) {
-      document.getElementById('welcomeBonusCard').style.display = 'block';
-      showNotification('🎉 Welcome! You received 0.01 TON bonus!', 'success');
-      
-      // Hide bonus card after 5 seconds
-      setTimeout(() => {
-        document.getElementById('welcomeBonusCard').style.display = 'none';
-      }, 5000);
-    }
-    
-    document.getElementById('loadingScreen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    
-    setInterval(() => {
-      loadState();
-    }, 30000);
-    
-  } catch (error) {
-    console.error('Init error:', error);
-    document.getElementById('loadingStatus').textContent = 'Failed to load. Please refresh.';
-  }
-}
-
-async function login() {
-  const tg = window.Telegram.WebApp;
-  const user = tg.initDataUnsafe?.user;
-  
-  if (!user) {
-    throw new Error('No Telegram user');
-  }
-  
-  const startParam = tg.initDataUnsafe?.start_param || '';
-  
-  const result = await apiCall('login', {
-    referrerCode: startParam
-  });
-  
-  appState.user = result.data;
-  appState.isNewUser = result.isNew || false;
-  return result;
-}
-
-async function loadState() {
-  try {
-    const state = await apiCall('getState');
-    appState.user = state.user;
-    appState.investments = state.investments;
-    appState.activeInvestments = state.activeInvestments;
-    appState.withdrawals = state.withdrawals;
-    appState.referrals = state.referrals;
-    appState.referralEarnings = state.referralEarnings;
-    appState.tasks = state.tasks;
-    appState.completedTaskIds = state.completedTaskIds;
-    appState.totalDailyProfit = state.totalDailyProfit;
-    appState.pendingProfit = state.pendingProfit;
-    appState.levels = state.levels;
-    
-    updateUI();
-  } catch (error) {
-    console.error('Load state error:', error);
-  }
-}
-
-function updateUI() {
-  document.getElementById('balanceAmount').textContent = formatNumber(appState.user?.balance, 4) + ' TON';
-  document.getElementById('totalInvested').textContent = formatNumber(appState.user?.total_invested, 2) + ' TON';
-  document.getElementById('totalEarned').textContent = formatNumber(appState.user?.total_earned, 2) + ' TON';
-  document.getElementById('dailyProfit').textContent = formatNumber(appState.totalDailyProfit, 3) + ' TON';
-  document.getElementById('pendingProfit').textContent = formatNumber(appState.pendingProfit, 4) + ' TON';
-  document.getElementById('investmentsCount').textContent = appState.activeInvestments.length;
-  
-  updateActiveInvestments();
-  updateLevelsList();
-  updateReferrals();
-  updateTasks();
-  updateWithdrawals();
-  updateReferralLink();
-}
-
-function updateActiveInvestments() {
-  const container = document.getElementById('activeInvestmentsList');
-  
-  if (!appState.activeInvestments.length) {
-    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No active investments</div>';
-    return;
-  }
-  
-  container.innerHTML = appState.activeInvestments.map(inv => {
-    const level = appState.levels[inv.level_id];
-    const daysLeft = Math.max(0, Math.ceil((new Date(inv.end_date) - new Date()) / (1000 * 60 * 60 * 24)));
-    const totalReturn = inv.amount + (inv.daily_profit * 30);
-    
-    return `
-      <div class="investment-card">
-        <div class="flex justify-between items-center mb-1">
-          <span><strong>${level?.icon || '💎'} Level ${inv.level_id}</strong></span>
-          <span class="text-success">+${formatNumber(inv.daily_profit, 4)} TON/day</span>
-        </div>
-        <div class="flex justify-between text-secondary" style="font-size: 12px;">
-          <span>Invested: ${formatNumber(inv.amount, 2)} TON</span>
-          <span>Days left: ${daysLeft}</span>
-        </div>
-        <div class="flex justify-between text-secondary" style="font-size: 12px;">
-          <span>Claimed: ${formatNumber(inv.total_claimed, 4)} TON</span>
-          <span>Expected: ${formatNumber(totalReturn, 2)} TON</span>
-        </div>
-        <div class="progress-bar mt-2">
-          <div class="progress-fill" style="width: ${Math.min(100, (inv.total_claimed / totalReturn) * 100)}%"></div>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function updateLevelsList() {
-  const container = document.getElementById('levelsList');
-  
-  if (!appState.levels || Object.keys(appState.levels).length === 0) {
-    container.innerHTML = '<div class="text-secondary text-center">No levels available</div>';
-    return;
-  }
-  
-  container.innerHTML = Object.entries(appState.levels).map(([id, level]) => {
-    const total30 = level.price + (level.daily * 30);
-    const roi = ((total30 - level.price) / level.price * 100).toFixed(0);
-    
-    return `
-      <div class="level-card">
-        <div class="level-info">
-          <h4>${level.icon} Level ${id} - ${level.name}</h4>
-          <p>Daily: ${formatNumber(level.daily, 4)} TON | ROI: +${roi}%</p>
-        </div>
-        <div>
-          <div class="level-price mb-1">${level.price} TON</div>
-          <button class="btn-primary" style="padding: 8px 16px; font-size: 12px;" onclick="showBuyModal(${id})">
-            Buy
-          </button>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function updateReferrals() {
-  document.getElementById('referralsCount').textContent = appState.referrals.length;
-  
-  const refContainer = document.getElementById('referralsList');
-  if (!appState.referrals.length) {
-    refContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No referrals yet</div>';
-  } else {
-    refContainer.innerHTML = appState.referrals.slice(0, 20).map(ref => `
-      <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
-        <div>
-          <div>${ref.first_name || 'User'} ${ref.last_name || ''}</div>
-          <div class="text-secondary" style="font-size: 11px;">Joined: ${new Date(ref.created_at).toLocaleDateString()}</div>
-        </div>
-        <div class="text-success">+0.01 TON</div>
-      </div>
-    `).join('');
-  }
-  
-  const earningsContainer = document.getElementById('referralEarningsList');
-  if (!appState.referralEarnings.length) {
-    earningsContainer.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No earnings yet</div>';
-  } else {
-    earningsContainer.innerHTML = appState.referralEarnings.slice(0, 20).map(earning => `
-      <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
-        <div>
-          <div>${earning.type === 'signup' ? '🎉 Signup Bonus' : '💎 Investment Commission'}</div>
-          <div class="text-secondary" style="font-size: 11px;">${new Date(earning.created_at).toLocaleDateString()}</div>
-        </div>
-        <div class="text-success">+${formatNumber(earning.amount, 4)} TON</div>
-      </div>
-    `).join('');
-  }
-}
-
-function updateTasks() {
-  const container = document.getElementById('tasksList');
-  
-  if (!appState.tasks.length) {
-    container.innerHTML = '<div class="card"><div class="text-secondary text-center">No tasks available</div></div>';
-    return;
-  }
-  
-  container.innerHTML = appState.tasks.map(task => {
-    const isCompleted = appState.completedTaskIds.includes(task.id);
-    
-    return `
-      <div class="task-item card" style="margin-bottom: 8px;">
-        <div class="task-info">
-          <h4>${task.icon || '📢'} ${task.name}</h4>
-          <p>${task.description || ''}</p>
-          <span class="task-reward">+${formatNumber(task.reward, 4)} TON</span>
-        </div>
-        <div>
-          ${isCompleted ? 
-            '<span class="text-success"><i class="fas fa-check-circle"></i> Done</span>' : 
-            `<button class="btn-primary" style="padding: 8px 16px; font-size: 12px;" onclick="completeTask('${task.id}', '${task.link || ''}')">
-              <i class="fas fa-play"></i> Start
-            </button>`
-          }
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function updateWithdrawals() {
-  const container = document.getElementById('withdrawalsList');
-  
-  if (!appState.withdrawals.length) {
-    container.innerHTML = '<div class="text-secondary text-center" style="padding: 20px;">No withdrawals yet</div>';
-    return;
-  }
-  
-  container.innerHTML = appState.withdrawals.slice(0, 20).map(wd => {
-    const statusText = {
-      'pending': '⏳ Pending',
-      'approved': '✅ Approved',
-      'rejected': '❌ Rejected'
-    }[wd.status] || wd.status;
-    
-    const statusClass = {
-      'pending': 'text-warning',
-      'approved': 'text-success',
-      'rejected': 'text-danger'
-    }[wd.status] || 'text-secondary';
-    
-    return `
-      <div class="flex justify-between items-center" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
-        <div>
-          <div>${formatNumber(wd.amount, 4)} TON</div>
-          <div class="text-secondary" style="font-size: 11px;">${new Date(wd.created_at).toLocaleDateString()}</div>
-        </div>
-        <div class="${statusClass}">${statusText}</div>
-      </div>
-    `;
-  }).join('');
-}
-
-function updateReferralLink() {
-  const userId = appState.user?.telegram_id;
-  if (userId) {
-    const link = `${APP_LINK}?startapp=${userId}`;
-    document.getElementById('refLinkInput').value = link;
-  }
-}
-
-async function claimProfit() {
-  try {
-    showNotification('Claiming profits...', 'success');
-    const result = await apiCall('claimProfit');
-    await loadState();
-    showNotification(`Claimed ${formatNumber(result.claimed_amount, 4)} TON!`, 'success');
-  } catch (error) {
-    showNotification(error.message, 'error');
-  }
-}
-
-function showBuyModal(levelId) {
-  selectedLevel = appState.levels[levelId];
-  if (!selectedLevel) return;
-  
-  const total30 = selectedLevel.price + (selectedLevel.daily * 30);
-  
-  document.getElementById('buyLevelName').textContent = `${selectedLevel.icon} Level ${levelId} - ${selectedLevel.name}`;
-  document.getElementById('buyLevelPrice').textContent = selectedLevel.price + ' TON';
-  document.getElementById('buyLevelDaily').textContent = selectedLevel.daily + ' TON';
-  document.getElementById('buyLevelTotal').textContent = total30.toFixed(2) + ' TON';
-  
-  document.getElementById('confirmBuyBtn').onclick = () => buyLevel(levelId);
-  openModal('buyModal');
-}
-
-async function buyLevel(levelId) {
-  try {
-    const level = appState.levels[levelId];
-    if (!level) throw new Error('Invalid level');
-    
-    if (!appState.walletConnected || !appState.walletAddress) {
-      showNotification('Please connect your TON wallet first', 'error');
-      return;
-    }
-    
-    showNotification('Processing transaction...', 'success');
-    
-    const amountNano = Math.floor(level.price * 1e9);
-    const comment = `Buy Level ${levelId}`;
-    
-    const transaction = {
-      validUntil: Math.floor(Date.now() / 1000) + 600,
-      messages: [{
-        address: 'UQA1c65zeiKZg4lpf4mwZeaSsNRyZhQ181M13brLTm2i_s5k',
-        amount: amountNano.toString(),
-        payload: comment
-      }]
+    // بيانات تجريبية (لاحقاً تجلب من API)
+    let userReferrals = {
+        code: "ISLAND123",
+        friendsList: [],   // كل صديق: { name: "Alex", coinsEarned: 450 }
+        totalFriends: 0,
+        totalRewardCoins: 0
     };
-    
-    const result = await appState.tonUI.sendTransaction(transaction);
-    
-    const buyResult = await apiCall('buyLevel', {
-      levelId: levelId,
-      txHash: result.boc
-    });
-    
-    await loadState();
-    closeModal('buyModal');
-    showNotification(`Successfully bought Level ${levelId}!`, 'success');
-    
-  } catch (error) {
-    console.error('Buy level error:', error);
-    showNotification(error.message || 'Transaction failed', 'error');
-  }
-}
 
-function reinvestModal() {
-  const select = document.getElementById('reinvestLevel');
-  select.innerHTML = '<option value="">Select Level</option>';
-  
-  Object.entries(appState.levels).forEach(([id, level]) => {
-    select.innerHTML += `<option value="${id}">${level.icon} Level ${id} - ${level.price} TON (${level.daily} TON/day)</option>`;
-  });
-  
-  openModal('reinvestModal');
-}
-
-async function doReinvest() {
-  try {
-    const amount = parseFloat(document.getElementById('reinvestAmount').value);
-    const levelId = parseInt(document.getElementById('reinvestLevel').value);
-    
-    if (!amount || !levelId) {
-      showNotification('Please fill all fields', 'error');
-      return;
+    // تحديث واجهة Invite Friends
+    function updateInviteUI() {
+        const count = userReferrals.totalFriends;
+        document.getElementById('status1').innerHTML = count >= 1 ? '✔️ مكتمل' : `⏳ ${count}/1`;
+        document.getElementById('status5').innerHTML = count >= 5 ? '✔️ مكتمل' : `⏳ ${count}/5`;
+        document.getElementById('status10').innerHTML = count >= 10 ? '✔️ مكتمل' : `⏳ ${count}/10`;
+        
+        // تغيير لون الحالة إذا اكتملت
+        document.getElementById('status1').className = count >=1 ? 'reward-status status-completed' : 'reward-status status-pending';
+        document.getElementById('status5').className = count >=5 ? 'reward-status status-completed' : 'reward-status status-pending';
+        document.getElementById('status10').className = count >=10 ? 'reward-status status-completed' : 'reward-status status-pending';
     }
-    
-    const level = appState.levels[levelId];
-    if (!level) throw new Error('Invalid level');
-    
-    if (amount < level.price) {
-      showNotification(`Minimum amount for this level is ${level.price} TON`, 'error');
-      return;
-    }
-    
-    showNotification('Processing reinvestment...', 'success');
-    const result = await apiCall('reinvest', { amount, levelId });
-    await loadState();
-    closeModal('reinvestModal');
-    document.getElementById('reinvestAmount').value = '';
-    showNotification(`Successfully reinvested ${amount} TON!`, 'success');
-    
-  } catch (error) {
-    showNotification(error.message, 'error');
-  }
-}
 
-async function withdraw() {
-  try {
-    const wallet = document.getElementById('walletAddress').value.trim();
-    const amount = parseFloat(document.getElementById('withdrawAmount').value);
-    
-    if (!wallet) {
-      showNotification('Please enter wallet address', 'error');
-      return;
-    }
-    
-    if (!amount || amount < 0.05) {
-      showNotification('Minimum withdrawal is 0.05 TON', 'error');
-      return;
-    }
-    
-    showNotification('Processing withdrawal...', 'success');
-    const result = await apiCall('withdraw', { amount, wallet });
-    await loadState();
-    document.getElementById('withdrawAmount').value = '';
-    showNotification(`Withdrawal request submitted! Amount: ${formatNumber(result.amount, 4)} TON`, 'success');
-    
-  } catch (error) {
-    showNotification(error.message, 'error');
-  }
-}
-
-async function completeTask(taskId, link) {
-  try {
-    if (link) {
-      window.open(link, '_blank');
-    }
-    
-    showNotification('Verifying task...', 'success');
-    const result = await apiCall('completeTask', { taskId });
-    await loadState();
-    showNotification(`Task completed! +${formatNumber(result.reward, 4)} TON`, 'success');
-    
-  } catch (error) {
-    showNotification(error.message, 'error');
-  }
-}
-
-function copyReferralLink() {
-  const input = document.getElementById('refLinkInput');
-  input.select();
-  document.execCommand('copy');
-  showNotification('Referral link copied!', 'success');
-}
-
-function initTONConnect() {
-  try {
-    if (window.TonConnectUI) {
-      appState.tonUI = new TonConnectUi.TonConnectUI({
-        manifestUrl: `${API_URL}/tonconnect-manifest.json`,
-        uiPreferences: { theme: 'DARK' }
-      });
-      
-      appState.tonUI.onStatusChange(wallet => {
-        if (wallet) {
-          appState.walletConnected = true;
-          appState.walletAddress = wallet.account.address;
-          showNotification('Wallet connected!', 'success');
+    // تحديث تبويب My Referrals
+    function updateReferralsUI() {
+        document.getElementById('totalFriends').innerText = userReferrals.totalFriends;
+        document.getElementById('totalCoinsEarned').innerText = userReferrals.totalRewardCoins;
+        
+        const container = document.getElementById('friendsListContainer');
+        if (userReferrals.friendsList.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding:20px; color:#8e9aaf;">🚫 لا يوجد أصدقاء مدعوون بعد</div>';
         } else {
-          appState.walletConnected = false;
-          appState.walletAddress = null;
+            container.innerHTML = userReferrals.friendsList.map(f => `
+                <div class="friend-row">
+                    <div class="friend-name">
+                        <div class="avatar">${f.name.charAt(0)}</div>
+                        <span>${f.name}</span>
+                    </div>
+                    <div style="color:#ffd966;">+${f.coinsEarned} 🪙</div>
+                </div>
+            `).join('');
         }
-      });
     }
-  } catch (error) {
-    console.error('TON Connect init error:', error);
-  }
-}
 
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const sectionId = item.dataset.section;
-    
-    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-    
-    item.classList.add('active');
-    document.getElementById(sectionId + 'Section').classList.add('active');
-  });
-});
+    // نسخ الرابط
+    function copyReferralLink() {
+        const link = document.getElementById('referralLink').innerText;
+        navigator.clipboard.writeText(link).then(() => {
+            alert('✅ تم نسخ رابط الإحالة! يمكنك مشاركته الآن.');
+        }).catch(() => alert('❌ حدث خطأ، حاول مجدداً'));
+    }
 
-init();
+    // مشاركة الدعوة
+    function shareInvite() {
+        const link = document.getElementById('referralLink').innerText;
+        if (navigator.share) {
+            navigator.share({
+                title: 'انضم إلى Island Empire',
+                text: 'تعال ابنِ جزيرتك واربح عملات TON!',
+                url: link
+            }).catch(() => alert('تم الإلغاء'));
+        } else {
+            copyReferralLink();
+            alert('تم نسخ الرابط، يمكنك إرساله لأصدقائك');
+        }
+    }
+
+    // محاكاة إضافة صديق جديد (للتجربة)
+    window.addMockFriend = function(friendName, earnedCoins) {
+        userReferrals.friendsList.push({ name: friendName, coinsEarned: earnedCoins });
+        userReferrals.totalFriends++;
+        userReferrals.totalRewardCoins += earnedCoins;
+        
+        updateInviteUI();
+        updateReferralsUI();
+        
+        // لو عدد الأصدقاء وصل لمكافأة معينة نحاكي منحها
+        if (userReferrals.totalFriends === 1) alert('🎉 كسبت 900 Coins! (دعوة صديق واحد)');
+        if (userReferrals.totalFriends === 5) alert('🎉 كسبت 2,200 Coins إضافية! (دعوة 5 أصدقاء)');
+        if (userReferrals.totalFriends === 10) alert('🏆 عمل رائع! ربحت 11,500 Coins (دعوة 10 أصدقاء)');
+    };
+
+    // === التبديل بين التبويبات ===
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            // إزالة active من كل التبويبات
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // إخفاء كل المحتويات
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active-content'));
+            
+            // إظهار المحتوى المطابق
+            const tabId = this.getAttribute('data-tab');
+            if (tabId === 'invite') {
+                document.getElementById('inviteTab').classList.add('active-content');
+            } else {
+                document.getElementById('referralsTab').classList.add('active-content');
+                updateReferralsUI(); // تحديث عند الدخول
+            }
+        });
+    });
+
+    // تهيئة البيانات التجريبية (لإظهار مثال: 3 أصدقاء)
+    addMockFriend("أحمد السيد", 450);
+    addMockFriend("نور علي", 780);
+    addMockFriend("كريم محمود", 620);
 </script>
 </body>
 </html>
